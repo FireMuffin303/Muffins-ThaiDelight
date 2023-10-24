@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "id": "muffins_thaidelight",
+  "version": "${version}",
+  "name": "Muffin's Thai Delight",
+  "description": "This is an example description! Tell everyone what your mod is about!",
+  "authors": [
+    "FireMuffin303!"
+  ],
+  "contact": {
+    "homepage": "https://fabricmc.net/",
+    "sources": "https://github.com/FabricMC/fabric-example-mod"
+  },
+  "license": "Insert License Here",
+  "icon": "assets/examplemod/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "fabric-datagen": [
+      "net.firemuffin303.thaidelight.fabric.datagen.ModDataGen"
+    ],
+    "main": [
+      "net.firemuffin303.thaidelight.fabric.ThaiDelightModFabric"
+    ],
+    "client": [
+      "net.firemuffin303.thaidelight.fabric.ThaiDelightModFabricClient"
+    ]
+  },
+  "mixins": [
+    "muffins_mobvote2023.mixins.json",
+    "muffins_mobvote2023-common.mixins.json"
+  ],
+  "depends": {
+    "fabric": "*",
+    "minecraft": ">=1.20"
+  }
+}

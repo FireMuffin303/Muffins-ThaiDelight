@@ -1,0 +1,25 @@
+{
+  "itemGroup.muffins_mobvote2023.main": "Muffin's Mob Vote 2023",
+  "item.muffins_mobvote2023.crab_claw": "Crab Claw",
+  "item.muffins_mobvote2023.crab_bucket": "Bucket of Crab",
+  "item.muffins_mobvote2023.crab_egg": "Crab Egg",
+  "item.muffins_mobvote2023.crab_spawn_egg": "Crab Spawn Egg",
+  "block.muffins_mobvote2023.crab_egg": "Crab Egg",
+  "item.muffins_mobvote2023.armadillo_spawn_egg": "Armadillo Spawn Egg",
+  "item.muffins_mobvote2023.armadillo_scute": "Armadillo Scute",
+  "item.muffins_mobvote2023.armadillo_wolf_armor": "Armadillo Wolf Armor",
+  "item.muffins_mobvote2023.turtle_armadillo_wolf_armor": "Turtle Armadillo Wolf Armor",
+
+  "item.muffins_mobvote2023.smithing_template.turtle_upgrade.additions_slot_description": "Add Turtle Scute",
+  "item.muffins_mobvote2023.smithing_template.turtle_upgrade.applies_to": "Armadillo Wolf Armor",
+  "item.muffins_mobvote2023.smithing_template.turtle_upgrade.base_slot_description": "Add Armadillo Wolf armor",
+  "item.muffins_mobvote2023.smithing_template.turtle_upgrade.ingredients": "Turtle Scute",
+  "update.muffins_mobvote2023.smithing_template.turtle_upgrade": "Turtle Upgrade",
+
+  "item.muffins_mobvote2023.penguin_spawn_egg": "Penguin Spawn Egg",
+  "item.muffins_mobvote2023.penguin_feather": "Penguin Feather",
+
+  "entity.muffins_mobvote2023.crab" : "Crab",
+  "entity.muffins_mobvote2023.armadillo" : "Crab",
+  "entity.muffins_mobvote2023.penguin" : "Penguin"
+}
