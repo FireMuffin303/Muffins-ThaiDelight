@@ -13,9 +13,6 @@ import net.minecraft.resources.ResourceLocation;
 import java.util.function.Supplier;
 
 public class ModEntityClient {
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(ThaiDelight.MOD_ID, "wolf_armor"), "main");
-
-
     public static void init(){
         ModPlatform.registerEntityRenderer(ModEntityTypes.FLOWER_CRAB, CrabRenderer::new);
         ModPlatform.registerEntityRenderer(ModEntityTypes.DRAGONFLY, DragonflyRenderer::new);

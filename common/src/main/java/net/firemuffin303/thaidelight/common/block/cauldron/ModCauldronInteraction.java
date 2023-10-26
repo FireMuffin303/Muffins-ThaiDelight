@@ -29,14 +29,14 @@ public class ModCauldronInteraction {
 
 
     static CauldronInteraction FILL_SEAFOOD = (blockState, level, blockPos, player, interactionHand, itemStack) -> {
-        return emptyBucket(level, blockPos, player, interactionHand, itemStack, ModBlocks.SEAFOOD_CAULDRON.get().defaultBlockState().setValue(LayeredCauldronBlock.LEVEL,3), SoundEvents.BUCKET_EMPTY);
+        return emptyBucket(level, blockPos, player, interactionHand, itemStack, ModBlocks.SEAFOOD_CAULDRON.defaultBlockState().setValue(LayeredCauldronBlock.LEVEL,3), SoundEvents.BUCKET_EMPTY);
     };
 
     static CauldronInteraction CRAB_MEAT = (blockState, level, blockPos, player, interactionHand, itemStack) -> {
-        if(itemStack.is(ModItems.COOKED_CRAB_MEAT.get()) && !level.isClientSide()){
+        if(itemStack.is(ModItems.COOKED_CRAB_MEAT) && !level.isClientSide()){
             if(!player.getAbilities().instabuild){
                 itemStack.shrink(1);
-                player.setItemInHand(interactionHand,ItemUtils.createFilledResult(itemStack,player,new ItemStack(ModItems.CRAB_MEAT_WITH_SEAFOOD.get()),level.isClientSide));
+                player.setItemInHand(interactionHand,ItemUtils.createFilledResult(itemStack,player,new ItemStack(ModItems.CRAB_MEAT_WITH_SEAFOOD),level.isClientSide));
                 player.awardStat(Stats.USE_CAULDRON);
                 LayeredCauldronBlock.lowerFillLevel(blockState,level,blockPos);
                 level.playSound((Player) null,blockPos,SoundEvents.HONEYCOMB_WAX_ON, SoundSource.BLOCKS,1.0f,1.0f);
@@ -49,14 +49,14 @@ public class ModCauldronInteraction {
 
     public static void init(){
         CauldronInteraction.addDefaultInteractions(SEAFOOD);
-        EMPTY.put(ModItems.SEAFOOD_BUCKET.get(),FILL_SEAFOOD);
-        WATER.put(ModItems.SEAFOOD_BUCKET.get(),FILL_SEAFOOD);
-        LAVA.put(ModItems.SEAFOOD_BUCKET.get(),FILL_SEAFOOD);
-        POWDER_SNOW.put(ModItems.SEAFOOD_BUCKET.get(),FILL_SEAFOOD);
+        EMPTY.put(ModItems.SEAFOOD_BUCKET,FILL_SEAFOOD);
+        WATER.put(ModItems.SEAFOOD_BUCKET,FILL_SEAFOOD);
+        LAVA.put(ModItems.SEAFOOD_BUCKET,FILL_SEAFOOD);
+        POWDER_SNOW.put(ModItems.SEAFOOD_BUCKET,FILL_SEAFOOD);
 
-        SEAFOOD.put(ModItems.COOKED_CRAB_MEAT.get(),CRAB_MEAT);
+        SEAFOOD.put(ModItems.COOKED_CRAB_MEAT,CRAB_MEAT);
         SEAFOOD.put(Items.BUCKET,(blockState, level, blockPos, player, interactionHand, itemStack) -> {
-            return fillBucket(blockState,level,blockPos,player,interactionHand,itemStack,new ItemStack(ModItems.SEAFOOD_BUCKET.get()),(blockState1 -> {
+            return fillBucket(blockState,level,blockPos,player,interactionHand,itemStack,new ItemStack(ModItems.SEAFOOD_BUCKET),(blockState1 -> {
               return (Integer)blockState1.getValue(LayeredCauldronBlock.LEVEL) == 3;
             }),SoundEvents.BUCKET_FILL);
         });

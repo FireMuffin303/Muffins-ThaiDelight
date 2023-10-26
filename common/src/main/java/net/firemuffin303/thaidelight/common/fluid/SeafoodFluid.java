@@ -27,12 +27,12 @@ import org.jetbrains.annotations.Nullable;
 public class SeafoodFluid extends FlowingFluid {
     @Override
     public Fluid getFlowing() {
-        return ModFluid.SEAFOOD_FLOWING.get();
+        return ModFluid.SEAFOOD_FLOWING;
     }
 
     @Override
     public Fluid getSource() {
-        return ModFluid.SEAFOOD.get();
+        return ModFluid.SEAFOOD;
     }
 
     @Override
@@ -73,7 +73,7 @@ public class SeafoodFluid extends FlowingFluid {
 
     @Override
     public Item getBucket() {
-        return ModItems.SEAFOOD_BUCKET.get();
+        return ModItems.SEAFOOD_BUCKET;
     }
 
     @Override
@@ -93,7 +93,7 @@ public class SeafoodFluid extends FlowingFluid {
 
     @Override
     protected BlockState createLegacyBlock(FluidState fluidState) {
-        return (BlockState) ModBlocks.SEAFOOD.get().defaultBlockState().setValue(LiquidBlock.LEVEL, getLegacyLevel(fluidState));
+        return (BlockState) ModBlocks.SEAFOOD.defaultBlockState().setValue(LiquidBlock.LEVEL, getLegacyLevel(fluidState));
     }
 
     @Override
@@ -103,7 +103,7 @@ public class SeafoodFluid extends FlowingFluid {
 
     @Override
     public boolean isSame(Fluid fluid) {
-        return fluid == ModFluid.SEAFOOD.get() || fluid == ModFluid.SEAFOOD_FLOWING.get();
+        return fluid == ModFluid.SEAFOOD || fluid == ModFluid.SEAFOOD_FLOWING;
     }
 
     @Override

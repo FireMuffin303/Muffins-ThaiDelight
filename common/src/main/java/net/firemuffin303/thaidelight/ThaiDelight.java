@@ -15,13 +15,13 @@ public class ThaiDelight {
     public static final AttributeModifier CRAB_REACH = new AttributeModifier(UUID.fromString("9b61c8ad-e259-4a36-b6f6-382ab3c509ea"),"Range Modifier",1.0d,AttributeModifier.Operation.ADDITION);
 
     public static void init() {
-        ModBlocks.ModBlockEntityTypes.BLOCK_ENTITY_TYPE.init();
-        ModBlocks.BLOCK.init();
-        ModEntityTypes.ENTITY_TYPE.init();
-        ModFluid.FLUID.init();
-        ModItems.ITEMS.init();
-        ModMobEffects.MOB_EFFECT.init();
-        ModPotions.POTION.init();
+        ModBlocks.ModBlockEntityTypes.init();
+        ModBlocks.init();
+        ModEntityTypes.init();
+        ModFluid.init();
+        ModItems.init();
+        ModMobEffects.init();
+        ModPotions.init();
     }
 
     public static void postInit(){

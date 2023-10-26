@@ -3,24 +3,49 @@ package net.firemuffin303.thaidelight.forge;
 import net.firemuffin303.thaidelight.ThaiDelight;
 import net.firemuffin303.thaidelight.common.entity.FlowerCrabEntity;
 import net.firemuffin303.thaidelight.common.registry.ModEntityTypes;
+import net.firemuffin303.thaidelight.utils.ModPlatform;
+import net.firemuffin303.thaidelight.utils.forge.ModPlatformImpl;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.SpawnPlacements;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.alchemy.Potion;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 
 @Mod(ThaiDelight.MOD_ID)
 public class MobVote2023ModForge {
+    public static DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES,ThaiDelight.MOD_ID);
+    public static DeferredRegister<Block> BLOCK = DeferredRegister.create(ForgeRegistries.BLOCKS,ThaiDelight.MOD_ID);
+    public static DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS,ThaiDelight.MOD_ID);
+    public static DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES,ThaiDelight.MOD_ID);
+    public static DeferredRegister<Fluid> FLUIDS = DeferredRegister.create(ForgeRegistries.FLUIDS,ThaiDelight.MOD_ID);
+    public static DeferredRegister<MobEffect> MOB_EFFECT = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS,ThaiDelight.MOD_ID);
+    public static DeferredRegister<Potion> POTION = DeferredRegister.create(ForgeRegistries.POTIONS,ThaiDelight.MOD_ID);
+
     public MobVote2023ModForge() {
-        // Submit our event bus to let architectury register our content on the right time
-        ThaiDelight.init();
-        //MobVote2023.postInit();
 
 
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        ThaiDelight.init();
+        BLOCK_ENTITY_TYPES.register(modEventBus);
+        BLOCK.register(modEventBus);
+        ENTITY_TYPES.register(modEventBus);
+        FLUIDS.register(modEventBus);
+        ITEMS.register(modEventBus);
+        MOB_EFFECT.register(modEventBus);
+        POTION.register(modEventBus);
+
         modEventBus.addListener(EventPriority.LOW,this::registerAttribute);
         modEventBus.addListener(EventPriority.LOW,this::registerEntitySpawn);
 
@@ -31,7 +56,7 @@ public class MobVote2023ModForge {
     }
 
     public void registerEntitySpawn(SpawnPlacementRegisterEvent spawnPlacements){
-        spawnPlacements.register(ModEntityTypes.FLOWER_CRAB.get(),SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, FlowerCrabEntity::checkSpawnRules, SpawnPlacementRegisterEvent.Operation.AND);
+        spawnPlacements.register(ModEntityTypes.FLOWER_CRAB,SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, FlowerCrabEntity::checkSpawnRules, SpawnPlacementRegisterEvent.Operation.AND);
 
     }
 

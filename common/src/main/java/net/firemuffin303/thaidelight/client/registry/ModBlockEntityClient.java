@@ -8,7 +8,7 @@ import software.bernie.geckolib.renderer.GeoBlockRenderer;
 
 public class ModBlockEntityClient {
     public static void init(){
-        ModPlatform.registerBlockEntityRenderer(ModBlocks.ModBlockEntityTypes.MORTAR_BLOCK_ENTITY.get(), MortarBlockRenderer::new);
+        ModPlatform.registerBlockEntityRenderer(ModBlocks.ModBlockEntityTypes.MORTAR_BLOCK_ENTITY, MortarBlockRenderer::new);
 
     }
 

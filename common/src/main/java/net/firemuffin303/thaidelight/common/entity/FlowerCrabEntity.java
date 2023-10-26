@@ -146,7 +146,7 @@ public class FlowerCrabEntity extends Animal implements Bucketable {
     @Nullable
     @Override
     public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
-        return ModEntityTypes.FLOWER_CRAB.get().create(serverLevel);
+        return ModEntityTypes.FLOWER_CRAB.create(serverLevel);
 
     }
 
@@ -186,7 +186,7 @@ public class FlowerCrabEntity extends Animal implements Bucketable {
 
     @Override
     public ItemStack getBucketItemStack() {
-        return new ItemStack(ModItems.CRAB_BUCKET.get());
+        return new ItemStack(ModItems.CRAB_BUCKET);
     }
 
     @Override
@@ -262,7 +262,7 @@ public class FlowerCrabEntity extends Animal implements Bucketable {
                     Level level = this.crab.level();
                     level.playSound((Player)null, blockPos, SoundEvents.TURTLE_LAY_EGG, SoundSource.BLOCKS, 0.3F, 0.9F + level.random.nextFloat() * 0.2F);
                     BlockPos blockPos2 = this.blockPos.above();
-                    BlockState blockState = (BlockState) ModBlocks.CRAB_EGG.get().defaultBlockState();
+                    BlockState blockState = (BlockState) ModBlocks.CRAB_EGG.defaultBlockState();
                     level.setBlock(blockPos2, blockState, 3);
                     level.gameEvent(GameEvent.BLOCK_PLACE, blockPos2, GameEvent.Context.of(this.crab, blockState));
                     this.crab.setHasEgg(false);

@@ -103,7 +103,7 @@ public class CrabEggBlock extends Block implements SimpleWaterloggedBlock {
     private void spawnCrabs(ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource) {
         int i = randomSource.nextInt(2, 6);
         for(int j = 0 ; j <= i;++j){
-            FlowerCrabEntity crabEntity = ModEntityTypes.FLOWER_CRAB.get().create(serverLevel);
+            FlowerCrabEntity crabEntity = ModEntityTypes.FLOWER_CRAB.create(serverLevel);
             if (crabEntity != null) {
                 double d = (double)blockPos.getX() + this.getRandomPositionOffset(randomSource);
                 double e = (double)blockPos.getZ() + this.getRandomPositionOffset(randomSource);

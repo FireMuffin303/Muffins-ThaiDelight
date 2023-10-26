@@ -25,7 +25,7 @@ public class MobVote2023ModForgeClient {
 
     @SubscribeEvent
     public static void registerBlockModel(EntityRenderersEvent.RegisterRenderers event){
-        event.registerBlockEntityRenderer(ModBlocks.ModBlockEntityTypes.MORTAR_BLOCK_ENTITY.get(), MortarBlockRenderer::new);
+        event.registerBlockEntityRenderer(ModBlocks.ModBlockEntityTypes.MORTAR_BLOCK_ENTITY, MortarBlockRenderer::new);
     }
 
 }

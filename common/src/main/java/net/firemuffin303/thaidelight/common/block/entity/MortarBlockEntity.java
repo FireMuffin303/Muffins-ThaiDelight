@@ -21,7 +21,7 @@ public class MortarBlockEntity extends BlockEntity implements GeoBlockEntity {
     protected static final RawAnimation SMASH = RawAnimation.begin().thenPlayAndHold("smash");
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     public MortarBlockEntity(BlockPos blockPos, BlockState blockState) {
-        super(ModBlocks.ModBlockEntityTypes.MORTAR_BLOCK_ENTITY.get(), blockPos, blockState);
+        super(ModBlocks.ModBlockEntityTypes.MORTAR_BLOCK_ENTITY, blockPos, blockState);
     }
 
 

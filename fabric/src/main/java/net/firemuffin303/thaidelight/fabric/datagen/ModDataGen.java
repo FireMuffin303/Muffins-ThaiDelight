@@ -1,6 +1,5 @@
 package net.firemuffin303.thaidelight.fabric.datagen;
 
-import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -8,6 +7,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementProvider;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableProvider;
 import net.firemuffin303.thaidelight.ThaiDelight;
+import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.FrameType;
@@ -43,14 +43,14 @@ public class ModDataGen implements DataGeneratorEntrypoint {
 
         @Override
         public void buildRecipes(Consumer<FinishedRecipe> exporter) {
-            cook(ModItems.CRAB_MEAT.get(), ModItems.COOKED_CRAB_MEAT, 0.35f, 200, exporter);
-            cook(ModItems.DRAGONFLY.get(), ModItems.COOKED_DRAGONFLY, 0.35f, 200, exporter);
+            cook("cooked_crab_meat",ModItems.CRAB_MEAT, ModItems.COOKED_CRAB_MEAT, 0.35f, 200, exporter);
+            cook("cooked_dragonfly",ModItems.DRAGONFLY, ModItems.COOKED_DRAGONFLY, 0.35f, 200, exporter);
         }
 
-        private void cook(ItemLike ingredient, RegistryEntry<Item> result, float exp, int cookTicks, Consumer<FinishedRecipe> exporter) {
-            SimpleCookingRecipeBuilder.smelting(Ingredient.of(ingredient), RecipeCategory.FOOD, result.get(), exp, cookTicks).unlockedBy(getHasName(ingredient), has(ingredient)).save(exporter, result.getId().withSuffix("_from_smelting"));
-            SimpleCookingRecipeBuilder.smoking(Ingredient.of(ingredient), RecipeCategory.FOOD, result.get(), exp, cookTicks / 2).unlockedBy(getHasName(ingredient), has(ingredient)).save(exporter, result.getId().withSuffix("_from_cooking"));
-            SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ingredient), RecipeCategory.FOOD, result.get(), exp, cookTicks * 3).unlockedBy(getHasName(ingredient), has(ingredient)).save(exporter, result.getId().withSuffix("_from_campfire"));
+        private void cook(String id,ItemLike ingredient, Item result, float exp, int cookTicks, Consumer<FinishedRecipe> exporter) {
+            SimpleCookingRecipeBuilder.smelting(Ingredient.of(ingredient), RecipeCategory.FOOD, result, exp, cookTicks).unlockedBy(getHasName(ingredient), has(ingredient)).save(exporter, id + ("_from_smelting"));
+            SimpleCookingRecipeBuilder.smoking(Ingredient.of(ingredient), RecipeCategory.FOOD, result, exp, cookTicks / 2).unlockedBy(getHasName(ingredient), has(ingredient)).save(exporter, id + ("_from_cooking"));
+            SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ingredient), RecipeCategory.FOOD, result, exp, cookTicks * 3).unlockedBy(getHasName(ingredient), has(ingredient)).save(exporter, id + ("_from_campfire"));
         }
     }
 
@@ -75,18 +75,38 @@ public class ModDataGen implements DataGeneratorEntrypoint {
             super(output);
         }
 
+        Advancement ROOT = Advancement.Builder.advancement()
+                .display(ModBlocks.MORTAR,
+                        Component.translatable("advancement.muffins_thaidelight.got_mortar"),
+                        Component.translatable("advancement.muffins_thaidelight.got_mortar.description"),
+                        new ResourceLocation("textures/gui/advancement/backgrounds/adventure.png"),
+                        FrameType.TASK,
+                        true,
+                        true,
+                        true)
+                .addCriterion("got_mortar",InventoryChangeTrigger.TriggerInstance.hasItems(ModBlocks.MORTAR)).build(new ResourceLocation(ThaiDelight.MOD_ID,"root"));
+
+        Advancement GOT_COOKED_DRAGONFLY = Advancement.Builder.advancement()
+                .display(
+                        ModItems.COOKED_DRAGONFLY,
+                        Component.translatable("advancement.muffins_thaidelight.cooked_dragonfly"),
+                        Component.empty(),
+                        new ResourceLocation("textures/gui/advancements/backgrounds/adventure.png"),
+                        FrameType.TASK,
+                        true,
+                        true,
+                        true)
+                .addCriterion("got_cooked_dragonfly",
+                        InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.COOKED_DRAGONFLY))
+                .parent(ROOT)
+                .build(new ResourceLocation(ThaiDelight.MOD_ID,"got_cooked_dragonfly"));
+
+
         @Override
         public void generateAdvancement(Consumer<Advancement> consumer) {
-            Advancement advancement = Advancement.Builder.advancement()
-                    .display(
-                            ModItems.COOKED_DRAGONFLY.get(),
-                            Component.translatable("advancement.%s.cooked_dragonfly",ThaiDelight.MOD_ID),
-                            Component.empty(),
-                            new ResourceLocation("textures/gui/advancements/backgrounds/adventure.png"),
-                            FrameType.TASK,
-                            true,
-                            true,
-                            true).addCriterion("got_cooked_dragonfly", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.COOKED_DRAGONFLY.get())).save(consumer,ThaiDelight.MOD_ID+"/root");
+            consumer.accept(ROOT);
+            consumer.accept(GOT_COOKED_DRAGONFLY);
+
         }
     }
 }
