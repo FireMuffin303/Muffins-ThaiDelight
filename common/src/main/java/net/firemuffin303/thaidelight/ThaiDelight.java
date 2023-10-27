@@ -15,9 +15,9 @@ public class ThaiDelight {
     public static final AttributeModifier CRAB_REACH = new AttributeModifier(UUID.fromString("9b61c8ad-e259-4a36-b6f6-382ab3c509ea"),"Range Modifier",1.0d,AttributeModifier.Operation.ADDITION);
 
     public static void init() {
-        ModBlocks.ModBlockEntityTypes.init();
-        ModBlocks.init();
         ModEntityTypes.init();
+        ModBlocks.init();
+        ModBlocks.ModBlockEntityTypes.init();
         ModFluid.init();
         ModItems.init();
         ModMobEffects.init();

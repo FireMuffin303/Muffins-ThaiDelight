@@ -1,0 +1,17 @@
+{
+  "type": "farmersdelight:cooking",
+  "container": {
+    "item": "minecraft:potion"
+  },
+  "cookingtime": 100,
+  "experience": 0.35,
+  "ingredients": [
+    {
+      "tag": "forge:raw_fishes"
+    }
+  ],
+  "recipe_book_tab": "drinks",
+  "result": {
+    "item": "muffins_thaidelight:fish_sauce_bottle"
+  }
+}

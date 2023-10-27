@@ -41,12 +41,11 @@ public class CrabEggBlock extends Block implements SimpleWaterloggedBlock {
 
     public CrabEggBlock(Properties properties) {
         super(properties);
-        this.registerDefaultState((BlockState)((BlockState)this.defaultBlockState().setValue(WATERLOGGED, false)));
-
+        this.registerDefaultState((BlockState) this.defaultBlockState().setValue(WATERLOGGED, false));
     }
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(new Property[]{WATERLOGGED});
+        builder.add(WATERLOGGED);
     }
 
     public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {

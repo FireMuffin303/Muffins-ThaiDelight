@@ -17,6 +17,16 @@ loom {
         mixinConfig "muffins_mobvote2023-common.mixins.json"
         mixinConfig "muffins_mobvote2023.mixins.json"
     }
+
+    runs {
+
+        data {
+            forgeTemplate("data")
+            environment "data"
+            programArgs "--mod=muffins_thaidelight", "--all", "--output=" + file("src/generated/resources/"), "--existing=" + project(":common").file("src/main/resources/")
+            name "Forge Data Generation"
+        }
+    }
 }
 
 configurations {
