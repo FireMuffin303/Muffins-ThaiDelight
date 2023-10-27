@@ -15,14 +15,13 @@ public class ModPotions {
     public static final Potion CRAB_REACH = new Potion("crab_reach",new MobEffectInstance(ModMobEffects.CRAB_REACH,3600));
     public static final Potion LONG_CRAB_REACH = new Potion("crab_reach",new MobEffectInstance(ModMobEffects.CRAB_REACH,9600));
     public static final Potion STRONG_CRAB_REACH = new Potion("crab_reach",new MobEffectInstance(ModMobEffects.CRAB_REACH,1800,1));
-    public static final Potion FISH_SAUCE = new Potion(new MobEffectInstance[0]);
+
 
 
     public static void init(){
         register("crab_reach",CRAB_REACH);
         register("long_crab_reach",LONG_CRAB_REACH);
         register("strong_crab_reach",STRONG_CRAB_REACH);
-        register("fish_sauce",FISH_SAUCE);
     }
 
     private static void register(String id,Potion potion){

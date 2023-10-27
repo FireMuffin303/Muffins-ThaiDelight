@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "muffins_thaidelight:cooked_flower_crab_meat_from_campfire"
+        "recipe": "minecraft:cooked_crab_meat_from_campfire"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "muffins_thaidelight:cooked_flower_crab_meat_from_campfire"
+      "minecraft:cooked_crab_meat_from_campfire"
     ]
   },
   "sends_telemetry_event": false

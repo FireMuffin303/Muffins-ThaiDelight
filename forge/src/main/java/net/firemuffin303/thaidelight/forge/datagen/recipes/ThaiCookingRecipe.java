@@ -16,7 +16,7 @@ import java.util.function.Consumer;
 
 public class ThaiCookingRecipe {
     public static void register(Consumer<FinishedRecipe> consumer){
-        CookingPotRecipeBuilder.cookingPotRecipe(ModItems.FISH_SAUCE_BOTTLE,1,CookingRecipes.FAST_COOKING,0.35f,
-                (ItemLike) PotionUtils.setPotion(new ItemStack(Items.POTION),Potions.WATER).getItem()).addIngredient(ForgeTags.RAW_FISHES).setRecipeBookTab(CookingPotRecipeBookTab.DRINKS).build(consumer);
+        CookingPotRecipeBuilder.cookingPotRecipe(ModItems.FISH_SAUCE_BUCKET,1,CookingRecipes.FAST_COOKING,0.35f,
+                Items.WATER_BUCKET).addIngredient(ForgeTags.RAW_FISHES).setRecipeBookTab(CookingPotRecipeBookTab.DRINKS).build(consumer);
     }
 }

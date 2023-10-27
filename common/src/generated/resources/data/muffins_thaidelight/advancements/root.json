@@ -1,11 +1,11 @@
 {
   "criteria": {
-    "got_cooked_dragonfly": {
+    "got_mortar": {
       "conditions": {
         "items": [
           {
             "items": [
-              "muffins_thaidelight:cooked_dragonfly"
+              "muffins_thaidelight:mortar"
             ]
           }
         ]
@@ -15,26 +15,23 @@
   },
   "display": {
     "announce_to_chat": true,
-    "background": "minecraft:textures/gui/advancements/backgrounds/adventure.png",
+    "background": "minecraft:textures/gui/advancement/backgrounds/adventure.png",
     "description": {
-      "text": ""
+      "translate": "advancement.muffins_thaidelight.got_mortar.description"
     },
     "frame": "task",
     "hidden": true,
     "icon": {
-      "item": "muffins_thaidelight:cooked_dragonfly"
+      "item": "muffins_thaidelight:mortar"
     },
     "show_toast": true,
     "title": {
-      "translate": "advancement.thai_delight.cooked_dragonfly",
-      "with": [
-        "muffins_thaidelight"
-      ]
+      "translate": "advancement.muffins_thaidelight.got_mortar"
     }
   },
   "requirements": [
     [
-      "got_cooked_dragonfly"
+      "got_mortar"
     ]
   ],
   "sends_telemetry_event": true

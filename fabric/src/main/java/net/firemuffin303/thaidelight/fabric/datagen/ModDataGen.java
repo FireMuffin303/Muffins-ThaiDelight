@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementProvider;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableProvider;
 import net.firemuffin303.thaidelight.ThaiDelight;
@@ -33,6 +34,8 @@ public class ModDataGen implements DataGeneratorEntrypoint {
         FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
         pack.addProvider(RecipeDataGen::new);
         pack.addProvider(AdvancementsDataGen::new);
+        pack.addProvider(LangDataGen::new);
+        pack.addProvider(ThaiLangDataGen::new);
     }
 
     private static class RecipeDataGen extends FabricRecipeProvider {
@@ -90,7 +93,7 @@ public class ModDataGen implements DataGeneratorEntrypoint {
                 .display(
                         ModItems.COOKED_DRAGONFLY,
                         Component.translatable("advancement.muffins_thaidelight.cooked_dragonfly"),
-                        Component.empty(),
+                        Component.translatable("advancement.muffins_thaidelight.cooked_dragonfly.description"),
                         new ResourceLocation("textures/gui/advancements/backgrounds/adventure.png"),
                         FrameType.TASK,
                         true,
@@ -107,6 +110,75 @@ public class ModDataGen implements DataGeneratorEntrypoint {
             consumer.accept(ROOT);
             consumer.accept(GOT_COOKED_DRAGONFLY);
 
+        }
+    }
+
+    static class LangDataGen extends FabricLanguageProvider {
+        protected LangDataGen(FabricDataOutput dataOutput) {
+            super(dataOutput);
+        }
+
+        @Override
+        public void generateTranslations(TranslationBuilder translationBuilder) {
+            translationBuilder.add("advancement.muffins_thaidelight.cooked_dragonfly","It's inedible!");
+            translationBuilder.add("advancement.muffins_thaidelight.cooked_dragonfly.description","Obtain Cooked Dragonfly.");
+
+            translationBuilder.add("itemGroup.muffins_thaidelight.main","Muffin's Thai Delight");
+            translationBuilder.add(ModBlocks.CRAB_EGG,"Flower Crab Egg");
+            translationBuilder.add(ModBlocks.SEAFOOD,"Seafood");
+            translationBuilder.add(ModBlocks.SEAFOOD_CAULDRON,"Seafood Cauldron");
+            translationBuilder.add(ModBlocks.LIME_BUSH,"Lime Bush");
+            translationBuilder.add(ModBlocks.MORTAR,"Mortar");
+
+            translationBuilder.add(ModItems.CRAB_SPAWN_EGG,"Flower Crab Spawn Egg");
+            translationBuilder.add(ModItems.CRAB_BUCKET,"Flower Crab in a Bucket");
+            translationBuilder.add(ModItems.CRAB_MEAT,"Raw Crab");
+            translationBuilder.add(ModItems.COOKED_CRAB_MEAT,"Cooked Crab");
+            translationBuilder.add(ModItems.CRAB_MEAT_WITH_SEAFOOD,"Seafooded Cooked Crab");
+
+
+            translationBuilder.add(ModItems.DRAGONFLY_SPAWN_EGG,"Dragonfly Spawn Egg");
+            translationBuilder.add(ModItems.DRAGONFLY,"Raw Dragonfly");
+            translationBuilder.add(ModItems.DRAGONFLY_BOTTLE,"Dragonfly in a Bottle");
+            translationBuilder.add(ModItems.COOKED_DRAGONFLY,"Cooked Dragonfly");
+
+            translationBuilder.add(ModItems.SEAFOOD_BUCKET,"Seafood Bucket");
+            translationBuilder.add(ModItems.FISH_SAUCE_BUCKET,"Fish Sauce Bucket");
+            translationBuilder.add(ModItems.FISH_SAUCE_BOTTLE,"Fish Sauce Bottle");
+
+            translationBuilder.add(ModItems.LIME,"Lime");
+        }
+    }
+
+    static class ThaiLangDataGen extends FabricLanguageProvider{
+
+        protected ThaiLangDataGen(FabricDataOutput dataOutput) {
+            super(dataOutput,"th_th");
+        }
+
+        @Override
+        public void generateTranslations(TranslationBuilder translationBuilder) {
+            translationBuilder.add("advancement.muffins_thaidelight.cooked_dragonfly","มันกินไม่ได้!");
+            translationBuilder.add("advancement.muffins_thaidelight.cooked_dragonfly.description","ได้แมลงปอทอด");
+
+            translationBuilder.add("itemGroup.muffins_thaidelight.main","Muffin's Thai Delight");
+            translationBuilder.add(ModItems.CRAB_SPAWN_EGG,"ไข่เกิดปูม้า");
+            translationBuilder.add(ModItems.CRAB_BUCKET,"Flower Crab in a Bucket");
+            translationBuilder.add(ModItems.CRAB_MEAT,"เนื้อปูสด");
+            translationBuilder.add(ModItems.COOKED_CRAB_MEAT,"เนื้อปูสุก");
+            translationBuilder.add(ModItems.CRAB_MEAT_WITH_SEAFOOD,"เนื้อปูสุกเคลือบซีฟู้ด");
+
+
+            translationBuilder.add(ModItems.DRAGONFLY_SPAWN_EGG,"ไข่เกิดแมลงปอ");
+            translationBuilder.add(ModItems.DRAGONFLY,"แมลงปอสด");
+            translationBuilder.add(ModItems.DRAGONFLY_BOTTLE,"แมลงปอในขวดแก้ว");
+            translationBuilder.add(ModItems.COOKED_DRAGONFLY,"แมลงปอทอด");
+
+            translationBuilder.add(ModItems.SEAFOOD_BUCKET,"ถังน้ำจิ้มซีฟู้ด");
+            translationBuilder.add(ModItems.FISH_SAUCE_BUCKET,"ถังน้ำปลา");
+            translationBuilder.add(ModItems.FISH_SAUCE_BOTTLE,"ขวดน้ำปลา");
+
+            translationBuilder.add(ModItems.LIME,"มะนาว");
         }
     }
 }

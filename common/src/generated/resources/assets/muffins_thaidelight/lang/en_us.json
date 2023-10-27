@@ -1,0 +1,17 @@
+{
+  "advancement.muffins_thaidelight.cooked_dragonfly": "It ain't edible!",
+  "advancement.muffins_thaidelight.cooked_dragonfly.description": "Obtain Cooked Dragonfly.",
+  "item.muffins_thaidelight.cooked_dragonfly": "Cooked Dragonfly",
+  "item.muffins_thaidelight.cooked_flower_crab_meat": "Cooked Crab",
+  "item.muffins_thaidelight.cooked_seafood_flower_crab_meat": "Seafooded Cooked Crab",
+  "item.muffins_thaidelight.dragonfly": "Raw Dragonfly",
+  "item.muffins_thaidelight.dragonfly_spawn_egg": "Dragonfly Spawn Egg",
+  "item.muffins_thaidelight.fish_sauce_bottle": "Fish Sauce Bottle",
+  "item.muffins_thaidelight.fish_sauce_bucket": "Fish Sauce Bucket",
+  "item.muffins_thaidelight.flower_crab_bucket": "Flower Crab in a Bucket",
+  "item.muffins_thaidelight.flower_crab_meat": "Raw Crab",
+  "item.muffins_thaidelight.flower_crab_spawn_egg": "Flower Crab Spawn Egg",
+  "item.muffins_thaidelight.lime": "Lime",
+  "item.muffins_thaidelight.seafood_bucket": "Seafood Bucket",
+  "itemGroup.muffins_thaidelight.main": "Muffin's Thai Delight"
+}
