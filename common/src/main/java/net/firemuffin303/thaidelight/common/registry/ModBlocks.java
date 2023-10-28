@@ -2,6 +2,9 @@ package net.firemuffin303.thaidelight.common.registry;
 
 import net.firemuffin303.thaidelight.common.block.CrabEggBlock;
 import net.firemuffin303.thaidelight.common.block.MortarBlock;
+import net.firemuffin303.thaidelight.common.block.crops.LimeCrop;
+import net.firemuffin303.thaidelight.common.block.crops.PapayaCrop;
+import net.firemuffin303.thaidelight.common.block.crops.PepperBlock;
 import net.firemuffin303.thaidelight.common.block.cauldron.SeafoodCauldronBlock;
 import net.firemuffin303.thaidelight.common.block.entity.MortarBlockEntity;
 import net.firemuffin303.thaidelight.common.fluid.ModLiquid;
@@ -22,17 +25,21 @@ public class ModBlocks {
     public static final Block SEAFOOD_CAULDRON = new SeafoodCauldronBlock(BlockBehaviour.Properties.copy(Blocks.CAULDRON));
 
     //Crops
-    public static final Block LIME_BUSH = new Block(BlockBehaviour.Properties.copy(Blocks.STONE));
+    public static final Block LIME_BUSH = new LimeCrop(BlockBehaviour.Properties.copy(Blocks.STONE));
+    public static final Block PEPPER_CROP = new PepperBlock(BlockBehaviour.Properties.copy(Blocks.POTATOES));
+    public static final Block PAPAYA_CROP = new PapayaCrop(BlockBehaviour.Properties.copy(Blocks.POTATOES));
 
     public static final Block MORTAR = new MortarBlock(BlockBehaviour.Properties.copy(Blocks.STONE).noOcclusion());
 
 
     public static void init(){
         registerWithItem("mortar",MORTAR);
+        register("pepper_crop",PEPPER_CROP);
         registerWithItem("crab_egg",CRAB_EGG);
         register("seafood",SEAFOOD);
         register("seafood_cauldron",SEAFOOD_CAULDRON);
         register("lime_bush",LIME_BUSH);
+        register("papaya_crop",PAPAYA_CROP);
     }
 
     public static void register(String id, Block block){

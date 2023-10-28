@@ -9,9 +9,11 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluids;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class ModItems {
     public static final ArrayList<Item> ITEMS = new ArrayList<>();
@@ -38,6 +40,29 @@ public class ModItems {
 
     //Crops
     public static final Item LIME = new Item(new Item.Properties());
+    public static final Item LIME_SEED = new ItemNameBlockItem(ModBlocks.LIME_BUSH,new Item.Properties()){
+        @Override
+        public void registerBlocks(Map<Block, Item> map, Item item) {
+            super.registerBlocks(map, item);
+            map.put(ModBlocks.LIME_BUSH,item);
+        }
+    };
+    public static final Item PEPPER_SEED = new ItemNameBlockItem(ModBlocks.PEPPER_CROP,new Item.Properties()){
+        @Override
+        public void registerBlocks(Map<Block, Item> map, Item item) {
+            super.registerBlocks(map, item);
+            map.put(ModBlocks.PEPPER_CROP,item);
+        }
+    };
+    public static final Item PEPPER = new Item(new Item.Properties());
+    public static final Item PAPAYA = new Item(new Item.Properties());
+    public static final Item PAPAYA_SEED = new ItemNameBlockItem(ModBlocks.PAPAYA_CROP,new Item.Properties()){
+        @Override
+        public void registerBlocks(Map<Block, Item> map, Item item) {
+            super.registerBlocks(map, item);
+            map.put(ModBlocks.PAPAYA_CROP,item);
+        }
+    };
 
     public static void init(){
         register("flower_crab_spawn_egg",CRAB_SPAWN_EGG);
@@ -56,7 +81,12 @@ public class ModItems {
         register("fish_sauce_bucket",FISH_SAUCE_BUCKET);
         register("fish_sauce_bottle",FISH_SAUCE_BOTTLE);
 
+        register("lime_seeds",LIME_SEED);
         register("lime",LIME);
+        register("pepper",PEPPER);
+        register("pepper_seeds",PEPPER_SEED);
+        register("papaya",PAPAYA);
+        register("papaya_seeds",PAPAYA_SEED);
     }
 
 
