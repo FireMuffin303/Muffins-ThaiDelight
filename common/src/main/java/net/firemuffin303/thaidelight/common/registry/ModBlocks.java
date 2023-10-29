@@ -20,12 +20,12 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class ModBlocks {
-    public static final Block CRAB_EGG = new CrabEggBlock(BlockBehaviour.Properties.copy(Blocks.FROGSPAWN).noOcclusion());
+    public static final Block CRAB_EGG = new CrabEggBlock(BlockBehaviour.Properties.copy(Blocks.FROGSPAWN));
     public static final Block SEAFOOD = new ModLiquid(ModFluid.SEAFOOD,BlockBehaviour.Properties.copy(Blocks.WATER));
     public static final Block SEAFOOD_CAULDRON = new SeafoodCauldronBlock(BlockBehaviour.Properties.copy(Blocks.CAULDRON));
 
     //Crops
-    public static final Block LIME_BUSH = new LimeCrop(BlockBehaviour.Properties.copy(Blocks.STONE));
+    public static final Block LIME_BUSH = new LimeCrop(BlockBehaviour.Properties.copy(Blocks.POTATOES));
     public static final Block PEPPER_CROP = new PepperBlock(BlockBehaviour.Properties.copy(Blocks.POTATOES));
     public static final Block PAPAYA_CROP = new PapayaCrop(BlockBehaviour.Properties.copy(Blocks.POTATOES));
 
