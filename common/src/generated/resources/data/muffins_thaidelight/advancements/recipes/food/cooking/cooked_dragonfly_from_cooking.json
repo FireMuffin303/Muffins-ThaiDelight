@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_dragonfly": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "muffins_thaidelight:dragonfly"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:cooking/cooked_dragonfly_from_cooking"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_dragonfly",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:cooking/cooked_dragonfly_from_cooking"
+    ]
+  },
+  "sends_telemetry_event": false
+}

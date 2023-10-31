@@ -8,19 +8,9 @@
   "pools": [
     {
       "bonus_rolls": 0.0,
-      "entries": [
-        {
-          "type": "minecraft:item",
-          "name": "muffins_thaidelight:papaya"
-        }
-      ],
-      "rolls": 1.0
-    },
-    {
-      "bonus_rolls": 0.0,
       "conditions": [
         {
-          "block": "muffins_thaidelight:pepper_crop",
+          "block": "muffins_thaidelight:papaya_crop",
           "condition": "minecraft:block_state_property",
           "properties": {
             "age": "7"
@@ -42,6 +32,36 @@
             }
           ],
           "name": "muffins_thaidelight:papaya"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "muffins_thaidelight:papaya_crop",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "age": "6"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "enchantment": "minecraft:fortune",
+              "formula": "minecraft:binomial_with_bonus_count",
+              "function": "minecraft:apply_bonus",
+              "parameters": {
+                "extra": 3,
+                "probability": 0.5714286
+              }
+            }
+          ],
+          "name": "muffins_thaidelight:unripe_papaya"
         }
       ],
       "rolls": 1.0

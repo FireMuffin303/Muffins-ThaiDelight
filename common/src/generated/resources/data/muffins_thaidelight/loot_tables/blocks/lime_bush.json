@@ -20,7 +20,7 @@
       "bonus_rolls": 0.0,
       "conditions": [
         {
-          "block": "muffins_thaidelight:pepper_crop",
+          "block": "muffins_thaidelight:lime_bush",
           "condition": "minecraft:block_state_property",
           "properties": {
             "age": "7"
