@@ -6,7 +6,7 @@ license = "Insert License Here"
 [[mods]]
 modId = "muffins_thaidelight"
 version = "${version}"
-displayName = "Muffin's Mob Vote 2023"
+displayName = "Muffin's Thai Delight"
 authors = "FireMuffin303"
 description = '''
 This is an example description! Tell everyone what your mod is about!

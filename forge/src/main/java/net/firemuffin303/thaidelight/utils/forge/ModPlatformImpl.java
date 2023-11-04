@@ -2,7 +2,7 @@ package net.firemuffin303.thaidelight.utils.forge;
 
 import net.firemuffin303.thaidelight.ThaiDelight;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
-import net.firemuffin303.thaidelight.forge.MobVote2023ModForge;
+import net.firemuffin303.thaidelight.forge.ThaiDelightForge;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.EntityRenderers;
@@ -31,10 +31,6 @@ import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.common.brewing.BrewingRecipe;
 import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.IForgeRegistry;
-import software.bernie.geckolib.renderer.GeoBlockRenderer;
 
 import java.util.ArrayList;
 import java.util.function.Supplier;
@@ -42,31 +38,31 @@ import java.util.function.Supplier;
 public class ModPlatformImpl {
 
     public static <T extends Block> void registryBlock(String id, Supplier<T> block) {
-        MobVote2023ModForge.BLOCK.register(id,block);
+        ThaiDelightForge.BLOCK.register(id,block);
     }
 
     public static <T extends Item> void registryItem(String id, Supplier<T> item) {
-        MobVote2023ModForge.ITEMS.register(id,item);
+        ThaiDelightForge.ITEMS.register(id,item);
     }
 
     public static <T extends Entity> void registerEntityType(String id, EntityType<T> entityType) {
-        MobVote2023ModForge.ENTITY_TYPES.register(id,()->entityType);
+        ThaiDelightForge.ENTITY_TYPES.register(id,()->entityType);
     }
 
     public static <T extends BlockEntity> void registerBlockEntity(String id,BlockEntityType<T> blockEntityType) {
-        MobVote2023ModForge.BLOCK_ENTITY_TYPES.register(id,()->blockEntityType);
+        ThaiDelightForge.BLOCK_ENTITY_TYPES.register(id,()->blockEntityType);
     }
 
     public static void registerFluid(String id, Fluid fluid) {
-        MobVote2023ModForge.FLUIDS.register(id,() -> fluid);
+        ThaiDelightForge.FLUIDS.register(id,() -> fluid);
     }
 
     public static void registerMobEffect(String id, MobEffect mobEffect) {
-        MobVote2023ModForge.MOB_EFFECT.register(id,() -> mobEffect);
+        ThaiDelightForge.MOB_EFFECT.register(id,() -> mobEffect);
     }
 
     public static void registerPotion(String id, Potion potion) {
-        MobVote2023ModForge.POTION.register(id,() -> potion);
+        ThaiDelightForge.POTION.register(id,() -> potion);
     }
 
 

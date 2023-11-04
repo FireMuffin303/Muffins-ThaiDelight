@@ -12,10 +12,8 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import software.bernie.example.registry.ItemRegistry;
 
-public class ModBlocks {
+public class ModBlocksFabric {
     public static Block SOMTAM_FEAST = new SomtamFeastBlock(FabricBlockSettings.copyOf(Blocks.CAKE), ItemsRegistry.SHEPHERDS_PIE.get(), true);
 
     public static void init(){

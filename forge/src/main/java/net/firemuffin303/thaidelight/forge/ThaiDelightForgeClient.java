@@ -12,7 +12,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 @Mod.EventBusSubscriber(modid = ThaiDelight.MOD_ID,value = Dist.CLIENT,bus = Mod.EventBusSubscriber.Bus.MOD)
-public class MobVote2023ModForgeClient {
+public class ThaiDelightForgeClient {
     @SubscribeEvent
     public static void clientSetup(FMLClientSetupEvent event){
         event.enqueueWork(ModEntityClient::init);
