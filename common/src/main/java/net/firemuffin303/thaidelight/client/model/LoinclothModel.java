@@ -9,7 +9,7 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.world.entity.LivingEntity;
 
 public class LoinclothModel extends HumanoidModel<LivingEntity> {
-    private final ModelPart loincloth = body.getChild("loincloth")
+    private final ModelPart loincloth = body.getChild("loincloth");
     public LoinclothModel(ModelPart modelPart) {
         super(modelPart);
     }

@@ -9,6 +9,7 @@ import net.firemuffin303.thaidelight.common.entity.Dragonfly;
 import net.firemuffin303.thaidelight.common.entity.FlowerCrabEntity;
 import net.firemuffin303.thaidelight.common.registry.ModEntityTypes;
 import net.firemuffin303.thaidelight.fabric.common.registry.ModBlocksFabric;
+import net.firemuffin303.thaidelight.fabric.common.registry.ModItemsFabric;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.biome.Biomes;
 
@@ -19,6 +20,7 @@ public class ThaiDelightModFabric implements ModInitializer {
         ThaiDelight.postInit();
 
         ModBlocksFabric.init();
+        ModItemsFabric.init();
 
         FabricDefaultAttributeRegistry.register(ModEntityTypes.FLOWER_CRAB, FlowerCrabEntity.createAttributes());
         FabricDefaultAttributeRegistry.register(ModEntityTypes.DRAGONFLY, Dragonfly.createAttributes());

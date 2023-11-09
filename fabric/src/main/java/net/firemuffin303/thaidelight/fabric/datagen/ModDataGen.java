@@ -7,6 +7,8 @@ import net.fabricmc.fabric.api.datagen.v1.provider.*;
 import net.firemuffin303.thaidelight.ThaiDelight;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
+import net.firemuffin303.thaidelight.fabric.common.registry.ModBlocksFabric;
+import net.firemuffin303.thaidelight.fabric.common.registry.ModItemsFabric;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.FrameType;
 import net.minecraft.advancements.critereon.EntityPredicate;
@@ -199,6 +201,7 @@ public class ModDataGen implements DataGeneratorEntrypoint {
             translationBuilder.add(ModBlocks.SEAFOOD_CAULDRON,"Seafood Cauldron");
             translationBuilder.add(ModBlocks.LIME_BUSH,"Lime Bush");
             translationBuilder.add(ModBlocks.MORTAR,"Mortar");
+            translationBuilder.add(ModBlocksFabric.SOMTAM_FEAST,"Somtam");
 
             translationBuilder.add(ModItems.CRAB_SPAWN_EGG,"Flower Crab Spawn Egg");
             translationBuilder.add(ModItems.CRAB_BUCKET,"Flower Crab in a Bucket");
@@ -215,6 +218,9 @@ public class ModDataGen implements DataGeneratorEntrypoint {
             translationBuilder.add(ModItems.SEAFOOD_BUCKET,"Seafood Bucket");
             translationBuilder.add(ModItems.FISH_SAUCE_BUCKET,"Fish Sauce Bucket");
             translationBuilder.add(ModItems.FISH_SAUCE_BOTTLE,"Fish Sauce Bottle");
+
+            translationBuilder.add(ModItemsFabric.SOMTAM,"Somtam");
+            translationBuilder.add(ModItemsFabric.CRAB_FRIED_RICE,"Crab Fried Rice");
 
             translationBuilder.add(ModItems.LIME,"Lime");
 
@@ -234,6 +240,14 @@ public class ModDataGen implements DataGeneratorEntrypoint {
             translationBuilder.add("advancement.muffins_thaidelight.cooked_dragonfly.description","ได้แมลงปอทอด");
 
             translationBuilder.add("itemGroup.muffins_thaidelight.main","Muffin's Thai Delight");
+
+            translationBuilder.add(ModBlocks.CRAB_EGG,"ไข่ปูม้า");
+            translationBuilder.add(ModBlocks.SEAFOOD,"ซีฟู้ด");
+            translationBuilder.add(ModBlocks.SEAFOOD_CAULDRON,"โอ่งซีฟู้ด");
+            translationBuilder.add(ModBlocks.LIME_BUSH,"ต้นมะนาว");
+            translationBuilder.add(ModBlocks.MORTAR,"ครก");
+            translationBuilder.add(ModBlocksFabric.SOMTAM_FEAST,"ส้มตำ");
+
             translationBuilder.add(ModItems.CRAB_SPAWN_EGG,"ไข่เกิดปูม้า");
             translationBuilder.add(ModItems.CRAB_BUCKET,"ปูม้าในถัง");
             translationBuilder.add(ModItems.CRAB_MEAT,"เนื้อปูสด");
@@ -250,6 +264,9 @@ public class ModDataGen implements DataGeneratorEntrypoint {
             translationBuilder.add(ModItems.FISH_SAUCE_BUCKET,"ถังน้ำปลา");
             translationBuilder.add(ModItems.FISH_SAUCE_BOTTLE,"ขวดน้ำปลา");
 
+            translationBuilder.add(ModItemsFabric.SOMTAM,"ส้มตำ");
+            translationBuilder.add(ModItemsFabric.CRAB_FRIED_RICE,"ข้าวผัดปู");
+
             translationBuilder.add(ModItems.LIME,"มะนาว");
 
             translationBuilder.add(ModItems.LOINCLOTH,"ผ้าขาวม้า");
@@ -263,6 +280,7 @@ public class ModDataGen implements DataGeneratorEntrypoint {
 
         @Override
         public void generateBlockStateModels(BlockModelGenerators blockStateModelGenerator) {
+
         }
 
         @Override
@@ -288,6 +306,10 @@ public class ModDataGen implements DataGeneratorEntrypoint {
             itemModelGenerator.generateFlatItem(ModItems.PAPAYA_SEED, ModelTemplates.FLAT_ITEM);
 
             itemModelGenerator.generateFlatItem(ModItems.LOINCLOTH, ModelTemplates.FLAT_ITEM);
+
+            itemModelGenerator.generateFlatItem(ModItemsFabric.SOMTAM, ModelTemplates.FLAT_ITEM);
+            itemModelGenerator.generateFlatItem(ModItemsFabric.CRAB_FRIED_RICE, ModelTemplates.FLAT_ITEM);
+
         }
     }
 }

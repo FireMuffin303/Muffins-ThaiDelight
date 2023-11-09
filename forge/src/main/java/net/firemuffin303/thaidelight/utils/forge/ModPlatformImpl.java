@@ -70,7 +70,7 @@ public class ModPlatformImpl {
         CreativeModeTab creativeModeTab = CreativeModeTab.builder()
                 .title(Component.translatable("itemGroup."+resourceLocation.getNamespace()+"."+resourceLocation.getPath()))
                 .icon(icon)
-                .displayItems((itemDisplayParameters, output) -> itemList.forEach(output::accept)).build();
+                .displayItems((itemDisplayParameters, output) -> ThaiDelightForge.ITEMS.getEntries().forEach(itemRegistryObject -> output.accept(itemRegistryObject.get()))).build();
         return Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB,resourceLocation,creativeModeTab);
     }
 

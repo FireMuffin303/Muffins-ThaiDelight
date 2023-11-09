@@ -6,7 +6,7 @@
         "items": [
           {
             "items": [
-              "minecraft:dirt"
+              "minecraft:glass_bottle"
             ]
           }
         ]
@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "farmersdelight:cooking/diamond"
+        "recipe": "muffins_thaidelight:fish_sauce_bottle"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "farmersdelight:cooking/diamond"
+      "muffins_thaidelight:fish_sauce_bottle"
     ]
   },
   "sends_telemetry_event": true

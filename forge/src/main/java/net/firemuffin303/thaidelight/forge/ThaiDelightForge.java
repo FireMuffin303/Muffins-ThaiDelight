@@ -4,6 +4,7 @@ import net.firemuffin303.thaidelight.ThaiDelight;
 import net.firemuffin303.thaidelight.common.entity.FlowerCrabEntity;
 import net.firemuffin303.thaidelight.common.registry.*;
 import net.firemuffin303.thaidelight.forge.common.registry.ModBlocksForge;
+import net.firemuffin303.thaidelight.forge.common.registry.ModItemsForge;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.SpawnPlacements;
@@ -66,10 +67,14 @@ public class ThaiDelightForge {
         registerEvent.register(ForgeRegistries.Keys.ENTITY_TYPES,helper -> ModEntityTypes.init());
         registerEvent.register(ForgeRegistries.Keys.BLOCKS,helper -> {
             ModBlocks.init();
+            ModBlocksForge.init();
         });
         registerEvent.register(ForgeRegistries.Keys.BLOCK_ENTITY_TYPES,helper -> ModBlocks.ModBlockEntityTypes.init());
         registerEvent.register(ForgeRegistries.Keys.FLUIDS,helper -> ModFluid.init());
-        registerEvent.register(ForgeRegistries.Keys.ITEMS,helper -> ModItems.init());
+        registerEvent.register(ForgeRegistries.Keys.ITEMS,helper -> {
+            ModItems.init();
+            ModItemsForge.init();
+        });
         registerEvent.register(ForgeRegistries.Keys.MOB_EFFECTS,helper -> ModMobEffects.init());
         registerEvent.register(ForgeRegistries.Keys.POTIONS,helper -> ModPotions.init());
     }

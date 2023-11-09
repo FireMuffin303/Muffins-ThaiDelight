@@ -1,9 +1,16 @@
 {
   "advancement.muffins_thaidelight.cooked_dragonfly": "มันกินไม่ได้!",
   "advancement.muffins_thaidelight.cooked_dragonfly.description": "ได้แมลงปอทอด",
+  "block.muffins_thaidelight.crab_egg": "ไข่ปูม้า",
+  "block.muffins_thaidelight.lime_bush": "ต้นมะนาว",
+  "block.muffins_thaidelight.mortar": "ครก",
+  "block.muffins_thaidelight.seafood": "ซีฟู้ด",
+  "block.muffins_thaidelight.seafood_cauldron": "โอ่งซีฟู้ด",
+  "block.muffins_thaidelight.somtam_block": "ส้มตำ",
   "item.muffins_thaidelight.cooked_dragonfly": "แมลงปอทอด",
   "item.muffins_thaidelight.cooked_flower_crab": "เนื้อปูสุก",
   "item.muffins_thaidelight.cooked_seafood_flower_crab": "เนื้อปูสุกเคลือบซีฟู้ด",
+  "item.muffins_thaidelight.crab_fried_rice": "ข้าวผัดปู",
   "item.muffins_thaidelight.dragonfly": "แมลงปอสด",
   "item.muffins_thaidelight.dragonfly_bottle": "แมลงปอในขวดแก้ว",
   "item.muffins_thaidelight.dragonfly_spawn_egg": "ไข่เกิดแมลงปอ",
@@ -15,5 +22,6 @@
   "item.muffins_thaidelight.lime": "มะนาว",
   "item.muffins_thaidelight.loincloth": "ผ้าขาวม้า",
   "item.muffins_thaidelight.seafood_bucket": "ถังน้ำจิ้มซีฟู้ด",
+  "item.muffins_thaidelight.somtam": "ส้มตำ",
   "itemGroup.muffins_thaidelight.main": "Muffin's Thai Delight"
 }

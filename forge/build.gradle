@@ -29,6 +29,12 @@ loom {
     }
 }
 
+sourceSets.main {
+    resources {
+        srcDirs += "src/generated/resources/"
+    }
+}
+
 configurations {
     common
     shadowCommon // Don't use shadow from the shadow plugin since it *excludes* files.
