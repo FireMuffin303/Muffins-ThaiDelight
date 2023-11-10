@@ -36,5 +36,15 @@ public class ThaiCookingRecipe {
                 .setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
                 .unlockedByAnyIngredient(ModItems.CRAB_MEAT)
                 .build(consumer,ForgeRegistries.ITEMS.getKey(ModItemsForge.CRAB_FRIED_RICE.get()));
+
+        CookingPotRecipeBuilder.cookingPotRecipe(ModItemsForge.SPICY_MINCED_PORK_SALAD_BLOCK.get(),1,CookingRecipes.NORMAL_COOKING,0.35f, Items.BOWL)
+                .addIngredient(Items.COOKED_PORKCHOP)
+                .addIngredient(Items.COOKED_PORKCHOP)
+                .addIngredient(ModItems.PEPPER)
+                .addIngredient(Items.SUGAR)
+                .addIngredient(ModItems.FISH_SAUCE_BOTTLE)
+                .setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
+                .unlockedByAnyIngredient(Items.COOKED_PORKCHOP)
+                .build(consumer,ForgeRegistries.ITEMS.getKey(ModItemsForge.SPICY_MINCED_PORK_SALAD_BLOCK.get()));
     }
 }
