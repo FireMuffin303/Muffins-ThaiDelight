@@ -1,0 +1,39 @@
+{
+  "parent": "muffins_thaidelight:root",
+  "criteria": {
+    "got_sauce_bowl": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "muffins_thaidelight:sauce_bowl"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "background": "minecraft:textures/gui/advancements/backgrounds/adventure.png",
+    "description": {
+      "translate": "advancement.muffins_thaidelight.sauce_bowl.description"
+    },
+    "frame": "task",
+    "hidden": true,
+    "icon": {
+      "item": "muffins_thaidelight:sauce_bowl"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.muffins_thaidelight.sauce_bowl"
+    }
+  },
+  "requirements": [
+    [
+      "got_sauce_bowl"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

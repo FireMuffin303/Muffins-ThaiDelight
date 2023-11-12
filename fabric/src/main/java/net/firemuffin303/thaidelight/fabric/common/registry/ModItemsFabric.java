@@ -20,11 +20,11 @@ public class ModItemsFabric {
     public static final Item SPICY_MINCED_PORK_SALAD = new ConsumableItem(foodBowl(ModFoodFabric.SPICY_MINCED_PORK_SALAD,Items.BOWL,16));
     public static final Item CRAB_FRIED_RICE = new ConsumableItem(foodBowl(ModFoodFabric.CRAB_FRIED_RICE,Items.BOWL,16));
 
-    public static final Item STONE_PASTLE = new PastleItem(Tiers.STONE,3,-2.0f,new Item.Properties().stacksTo(1));
-    public static final Item IRON_PASTLE = new PastleItem(Tiers.STONE,3,-2.0f,new Item.Properties().stacksTo(1));
-    public static final Item GOLD_PASTLE = new PastleItem(Tiers.STONE,3,-2.0f,new Item.Properties().stacksTo(1));
-    public static final Item DIAMOND_PASTLE = new PastleItem(Tiers.STONE,3,-2.0f,new Item.Properties().stacksTo(1));
-    public static final Item NETHERITE_PASTLE = new PastleItem(Tiers.STONE,3,-2.0f,new Item.Properties().stacksTo(1).fireResistant());
+    public static final Item STONE_PASTLE = new PastleItem(Tiers.STONE,3,-3.0f,new Item.Properties().stacksTo(1));
+    public static final Item IRON_PASTLE = new PastleItem(Tiers.STONE,3,-3.0f,new Item.Properties().stacksTo(1));
+    public static final Item GOLD_PASTLE = new PastleItem(Tiers.STONE,3,-3.0f,new Item.Properties().stacksTo(1));
+    public static final Item DIAMOND_PASTLE = new PastleItem(Tiers.STONE,3,-3.0f,new Item.Properties().stacksTo(1));
+    public static final Item NETHERITE_PASTLE = new PastleItem(Tiers.STONE,3,-3.0f,new Item.Properties().stacksTo(1).fireResistant());
 
     public static void init(){
         register("somtam",SOMTAM);

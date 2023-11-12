@@ -13,6 +13,7 @@ import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.FrameType;
 import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
+import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.data.models.BlockModelGenerators;
 import net.minecraft.data.models.ItemModelGenerators;
 import net.minecraft.data.models.model.*;
@@ -23,6 +24,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.ShapelessRecipe;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.CarrotBlock;
@@ -36,6 +38,7 @@ import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.functions.SmeltItemFunction;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
@@ -79,6 +82,7 @@ public class ModDataGen implements DataGeneratorEntrypoint {
 
         private void craft(Consumer<FinishedRecipe> exporter){
             ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS,ModItems.LOINCLOTH,1).define('A', ItemTags.WOOL).define('B', Items.WHITE_DYE).pattern("A").pattern("B").pattern("A").unlockedBy(getHasName(Items.WHITE_WOOL),has(ItemTags.WOOL)).save(exporter,"crafting/"+getItemName(ModItems.LOINCLOTH)+"_from_crafting");
+            ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD,ModItems.SEAFOOD_BOTTLE,1).requires(Items.KELP).requires(ModItems.PEPPER).requires(Items.SUGAR).unlockedBy(getHasName(ModItems.PEPPER),has(ModItems.PEPPER)).save(exporter,"crafting/"+getItemName(ModItems.SEAFOOD_BOTTLE)+"_from_crafting");
         }
 
         private void smithing(Consumer<FinishedRecipe> exporter){
@@ -94,11 +98,32 @@ public class ModDataGen implements DataGeneratorEntrypoint {
 
         @Override
         public void generate() {
-            net.minecraft.world.level.storage.loot.predicates.LootItemCondition.Builder checkPepperLevel = LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.PEPPER_CROP).setProperties(net.minecraft.advancements.critereon.StatePropertiesPredicate.Builder.properties().hasProperty(CarrotBlock.AGE, 7));
-            this.add(ModBlocks.PEPPER_CROP, (net.minecraft.world.level.storage.loot.LootTable.Builder)this.applyExplosionDecay(ModBlocks.PEPPER_CROP, LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.PEPPER))).withPool(LootPool.lootPool().when(checkPepperLevel).add(LootItem.lootTableItem(ModItems.PEPPER).apply(ApplyBonusCount.addBonusBinomialDistributionCount(Enchantments.BLOCK_FORTUNE, 0.5714286F, 3))))));
+            this.add(ModBlocks.MORTAR,this.applyExplosionDecay(ModBlocks.MORTAR,
+                    LootTable.lootTable()
+                            .withPool(LootPool.lootPool()
+                                    .add(LootItem.lootTableItem(ModBlocks.MORTAR)))));
+
+            net.minecraft.world.level.storage.loot.LootTable.Builder sauceBowl = this.applyExplosionDecay(ModBlocks.SAUCE_BOWL,
+                    LootTable.lootTable()
+                            .withPool(LootPool.lootPool()
+                                    .add(LootItem.lootTableItem(ModBlocks.SAUCE_BOWL))));
+
+            this.add(ModBlocks.SAUCE_BOWL,sauceBowl);
+            this.add(ModBlocks.SEAFOOD_SAUCE_BOWL,sauceBowl);
+            this.add(ModBlocks.FISH_SAUCE_SAUCE_BOWL,sauceBowl);
+            this.add(ModBlocks.HONEY_SAUCE_BOWL,sauceBowl);
+
+            this.add(ModBlocks.CRAB_EGG,this.applyExplosionDecay(ModBlocks.CRAB_EGG,
+                    LootTable.lootTable()
+                            .withPool(LootPool.lootPool()
+                                    .when(BlockLootSubProvider.HAS_SILK_TOUCH)
+                                    .add(LootItem.lootTableItem(ModBlocks.CRAB_EGG)))));
 
             net.minecraft.world.level.storage.loot.predicates.LootItemCondition.Builder checkLimeLevel = LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.LIME_BUSH).setProperties(net.minecraft.advancements.critereon.StatePropertiesPredicate.Builder.properties().hasProperty(CarrotBlock.AGE, 7));
             this.add(ModBlocks.LIME_BUSH, (net.minecraft.world.level.storage.loot.LootTable.Builder)this.applyExplosionDecay(ModBlocks.LIME_BUSH, LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.LIME))).withPool(LootPool.lootPool().when(checkLimeLevel).add(LootItem.lootTableItem(ModItems.LIME).apply(ApplyBonusCount.addBonusBinomialDistributionCount(Enchantments.BLOCK_FORTUNE, 0.5714286F, 3))))));
+
+            net.minecraft.world.level.storage.loot.predicates.LootItemCondition.Builder checkPepperLevel = LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.PEPPER_CROP).setProperties(net.minecraft.advancements.critereon.StatePropertiesPredicate.Builder.properties().hasProperty(CarrotBlock.AGE, 7));
+            this.add(ModBlocks.PEPPER_CROP, (net.minecraft.world.level.storage.loot.LootTable.Builder)this.applyExplosionDecay(ModBlocks.PEPPER_CROP, LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.PEPPER))).withPool(LootPool.lootPool().when(checkPepperLevel).add(LootItem.lootTableItem(ModItems.PEPPER).apply(ApplyBonusCount.addBonusBinomialDistributionCount(Enchantments.BLOCK_FORTUNE, 0.5714286F, 3))))));
 
             net.minecraft.world.level.storage.loot.predicates.LootItemCondition.Builder checkPapayaLevel = LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.PAPAYA_CROP).setProperties(net.minecraft.advancements.critereon.StatePropertiesPredicate.Builder.properties().hasProperty(CarrotBlock.AGE, 7));
             net.minecraft.world.level.storage.loot.predicates.LootItemCondition.Builder checkPapayaLevel6 = LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.PAPAYA_CROP).setProperties(net.minecraft.advancements.critereon.StatePropertiesPredicate.Builder.properties().hasProperty(CarrotBlock.AGE, 6));
@@ -116,15 +141,8 @@ public class ModDataGen implements DataGeneratorEntrypoint {
                                     )
                     ));
 
-            net.minecraft.world.level.storage.loot.LootTable.Builder sauceBowl = this.applyExplosionDecay(ModBlocks.SAUCE_BOWL,
-                    LootTable.lootTable()
-                            .withPool(LootPool.lootPool()
-                                    .add(LootItem.lootTableItem(ModBlocks.SAUCE_BOWL))));
 
-            this.add(ModBlocks.SAUCE_BOWL,sauceBowl);
-            this.add(ModBlocks.SEAFOOD_SAUCE_BOWL,sauceBowl);
-            this.add(ModBlocks.FISH_SAUCE_SAUCE_BOWL,sauceBowl);
-            this.add(ModBlocks.HONEY_SAUCE_BOWL,sauceBowl);
+
 
         }
     }
@@ -189,12 +207,27 @@ public class ModDataGen implements DataGeneratorEntrypoint {
                 .parent(ROOT)
                 .build(new ResourceLocation(ThaiDelight.MOD_ID,"got_cooked_dragonfly"));
 
+        Advancement GOT_SAUCE_BOWL = Advancement.Builder.advancement()
+                .display(
+                        ModBlocks.SAUCE_BOWL,
+                        Component.translatable("advancement.muffins_thaidelight.sauce_bowl"),
+                        Component.translatable("advancement.muffins_thaidelight.sauce_bowl.description"),
+                        new ResourceLocation("textures/gui/advancements/backgrounds/adventure.png"),
+                        FrameType.TASK,
+                        true,
+                        true,
+                        true)
+                .addCriterion("got_sauce_bowl",
+                        InventoryChangeTrigger.TriggerInstance.hasItems(ModBlocks.SAUCE_BOWL))
+                .parent(ROOT)
+                .build(new ResourceLocation(ThaiDelight.MOD_ID,"got_sauce_bowl"));
+
 
         @Override
         public void generateAdvancement(Consumer<Advancement> consumer) {
             consumer.accept(ROOT);
             consumer.accept(GOT_COOKED_DRAGONFLY);
-
+            consumer.accept(GOT_SAUCE_BOWL);
         }
     }
 
@@ -206,14 +239,22 @@ public class ModDataGen implements DataGeneratorEntrypoint {
         @Override
         public void generateTranslations(TranslationBuilder translationBuilder) {
             translationBuilder.add("advancement.muffins_thaidelight.cooked_dragonfly","It's inedible!");
-            translationBuilder.add("advancement.muffins_thaidelight.cooked_dragonfly.description","Obtain Cooked Dragonfly.");
+            translationBuilder.add("advancement.muffins_thaidelight.cooked_dragonfly.description","Obtains Cooked Dragonfly.");
+            translationBuilder.add("advancement.muffins_thaidelight.sauce_bowl","Where is the sauce?");
+            translationBuilder.add("advancement.muffins_thaidelight.sauce_bowl.description","Obtains Sauce Bowl");
 
             translationBuilder.add("itemGroup.muffins_thaidelight.main","Muffin's Thai Delight");
             translationBuilder.add(ModBlocks.CRAB_EGG,"Flower Crab Egg");
-            translationBuilder.add(ModBlocks.SEAFOOD_SAUCE_BOWL,"Seafood Sauce Bowl");
             translationBuilder.add(ModBlocks.LIME_BUSH,"Lime Bush");
             translationBuilder.add(ModBlocks.MORTAR,"Mortar");
+
+            translationBuilder.add(ModBlocks.SAUCE_BOWL,"Sauce Bowl");
+            translationBuilder.add(ModBlocks.SEAFOOD_SAUCE_BOWL,"Seafood Sauce Bowl");
+            translationBuilder.add(ModBlocks.FISH_SAUCE_SAUCE_BOWL,"Fish Sauce Bowl");
+            translationBuilder.add(ModBlocks.HONEY_SAUCE_BOWL,"Honey Sauce Bowl");
+
             translationBuilder.add(ModBlocksFabric.SOMTAM_FEAST,"Somtam");
+            translationBuilder.add(ModBlocksFabric.SPICY_MINCED_PORK_SALAD_FEAST,"Spicy Minced Pork Salad");
 
             translationBuilder.add(ModItems.CRAB_SPAWN_EGG,"Flower Crab Spawn Egg");
             translationBuilder.add(ModItems.CRAB_BUCKET,"Flower Crab in a Bucket");
@@ -230,18 +271,29 @@ public class ModDataGen implements DataGeneratorEntrypoint {
             translationBuilder.add(ModItems.SEAFOOD_BOTTLE,"Seafood Bucket");
             translationBuilder.add(ModItems.FISH_SAUCE_BOTTLE,"Fish Sauce Bottle");
 
-            translationBuilder.add(ModItemsFabric.SOMTAM,"Somtam");
-            translationBuilder.add(ModItemsFabric.CRAB_FRIED_RICE,"Crab Fried Rice");
-
             translationBuilder.add(ModItems.LIME,"Lime");
+            translationBuilder.add(ModItems.LIME_SEED,"Lime Seed");
+            translationBuilder.add(ModItems.PEPPER,"Pepper");
+            translationBuilder.add(ModItems.PEPPER_SEED,"Pepper Seed");
+            translationBuilder.add(ModItems.UNRIPE_PAPAYA,"Unripe Papaya");
+            translationBuilder.add(ModItems.PAPAYA,"Papaya");
+            translationBuilder.add(ModItems.PAPAYA_SEED,"Papaya Seed");
 
             translationBuilder.add(ModItems.LOINCLOTH,"Loincloth");
+
+            translationBuilder.add(ModItemsFabric.SOMTAM,"Plate of Somtam");
+            translationBuilder.add(ModItemsFabric.SPICY_MINCED_PORK_SALAD,"Plate of Spicy Minced Pork Salad");
+            translationBuilder.add(ModItemsFabric.CRAB_FRIED_RICE,"Crab Fried Rice");
+
+
 
             translationBuilder.add(ModItemsFabric.STONE_PASTLE,"Stone Pastle");
             translationBuilder.add(ModItemsFabric.IRON_PASTLE,"Iron Pastle");
             translationBuilder.add(ModItemsFabric.GOLD_PASTLE,"Gold Pastle");
             translationBuilder.add(ModItemsFabric.DIAMOND_PASTLE,"Diamond Pastle");
             translationBuilder.add(ModItemsFabric.NETHERITE_PASTLE,"Netherite Pastle");
+
+
         }
     }
 
@@ -254,15 +306,24 @@ public class ModDataGen implements DataGeneratorEntrypoint {
         @Override
         public void generateTranslations(TranslationBuilder translationBuilder) {
             translationBuilder.add("advancement.muffins_thaidelight.cooked_dragonfly","มันกินไม่ได้!");
-            translationBuilder.add("advancement.muffins_thaidelight.cooked_dragonfly.description","ได้แมลงปอทอด");
+            translationBuilder.add("advancement.muffins_thaidelight.cooked_dragonfly.description","ได้รับแมลงปอทอด");
+            translationBuilder.add("advancement.muffins_thaidelight.sauce_bowl","ไหนซอส?");
+            translationBuilder.add("advancement.muffins_thaidelight.sauce_bowl.description","ได้รับถ้วยน้ำจิ้ม");
 
             translationBuilder.add("itemGroup.muffins_thaidelight.main","Muffin's Thai Delight");
 
             translationBuilder.add(ModBlocks.CRAB_EGG,"ไข่ปูม้า");
-            translationBuilder.add(ModBlocks.SEAFOOD_SAUCE_BOWL,"ถ้วยน้ำจิ้มซีฟู้ด");
             translationBuilder.add(ModBlocks.LIME_BUSH,"ต้นมะนาว");
             translationBuilder.add(ModBlocks.MORTAR,"ครก");
+
+            translationBuilder.add(ModBlocks.SAUCE_BOWL,"ถ้วยน้ำจิ้ม");
+            translationBuilder.add(ModBlocks.SEAFOOD_SAUCE_BOWL,"ถ้วยน้ำจิ้มซีฟู้ด");
+            translationBuilder.add(ModBlocks.FISH_SAUCE_SAUCE_BOWL,"ถ้วยน้ำปลา");
+            translationBuilder.add(ModBlocks.HONEY_SAUCE_BOWL,"ถ้วยน้ำผึ้ง");
+
             translationBuilder.add(ModBlocksFabric.SOMTAM_FEAST,"ส้มตำ");
+            translationBuilder.add(ModBlocksFabric.SPICY_MINCED_PORK_SALAD_FEAST,"ลาบหมู");
+
 
             translationBuilder.add(ModItems.CRAB_SPAWN_EGG,"ไข่เกิดปูม้า");
             translationBuilder.add(ModItems.CRAB_BUCKET,"ปูม้าในถัง");
@@ -279,10 +340,17 @@ public class ModDataGen implements DataGeneratorEntrypoint {
             translationBuilder.add(ModItems.SEAFOOD_BOTTLE,"ขวดซีฟู้ด");
             translationBuilder.add(ModItems.FISH_SAUCE_BOTTLE,"ขวดน้ำปลา");
 
+            translationBuilder.add(ModItems.LIME,"มะนาว");
+            translationBuilder.add(ModItems.LIME_SEED,"เมล็ดมะนาว");
+            translationBuilder.add(ModItems.PEPPER,"พริก");
+            translationBuilder.add(ModItems.PEPPER_SEED,"เมล็ดพริก");
+            translationBuilder.add(ModItems.UNRIPE_PAPAYA,"มะละกอไม่สุก");
+            translationBuilder.add(ModItems.PAPAYA,"มะละกอ");
+            translationBuilder.add(ModItems.PAPAYA_SEED,"เมล็ดมะละกอ");
+
             translationBuilder.add(ModItemsFabric.SOMTAM,"ส้มตำ");
             translationBuilder.add(ModItemsFabric.CRAB_FRIED_RICE,"ข้าวผัดปู");
 
-            translationBuilder.add(ModItems.LIME,"มะนาว");
 
             translationBuilder.add(ModItems.LOINCLOTH,"ผ้าขาวม้า");
 
