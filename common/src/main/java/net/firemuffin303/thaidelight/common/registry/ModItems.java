@@ -1,8 +1,10 @@
 package net.firemuffin303.thaidelight.common.registry;
 
+import com.google.common.collect.Sets;
 import net.firemuffin303.thaidelight.ThaiDelight;
-import net.firemuffin303.thaidelight.common.item.FishSauceBottleItem;
+import net.firemuffin303.thaidelight.common.item.bottle.FishSauceBottleItem;
 import net.firemuffin303.thaidelight.common.item.LoinclothItem;
+import net.firemuffin303.thaidelight.common.item.bottle.SeafoodBottleItem;
 import net.firemuffin303.thaidelight.utils.ModPlatform;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
@@ -10,13 +12,17 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluids;
 
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Set;
 
 public class ModItems {
+    public static final Set<Enchantment> DISALLOW_PESTLE_ENCHANTMENT = Sets.newHashSet(Enchantments.SHARPNESS,Enchantments.SMITE,Enchantments.BANE_OF_ARTHROPODS,Enchantments.SWEEPING_EDGE);
     public static final ArrayList<Item> ITEMS = new ArrayList<>();
 
     //Crab
@@ -35,9 +41,8 @@ public class ModItems {
 
 
     //Bucket
-    public static final Item SEAFOOD_BUCKET = new BucketItem(ModFluid.SEAFOOD,new Item.Properties().stacksTo(1));
-    public static final Item FISH_SAUCE_BUCKET =  new BucketItem(ModFluid.SEAFOOD,new Item.Properties().stacksTo(1));
-    public static final Item FISH_SAUCE_BOTTLE =  new FishSauceBottleItem(new Item.Properties().food(ModFood.FISH_SAUCE).craftRemainder(Items.GLASS_BOTTLE));
+    public static final Item SEAFOOD_BOTTLE = new SeafoodBottleItem(new Item.Properties().stacksTo(16).craftRemainder(Items.GLASS_BOTTLE));
+    public static final Item FISH_SAUCE_BOTTLE =  new FishSauceBottleItem(new Item.Properties().stacksTo(16).craftRemainder(Items.GLASS_BOTTLE));
 
     //Crops
     public static final Item LIME = new Item(new Item.Properties());
@@ -81,8 +86,7 @@ public class ModItems {
         register("cooked_dragonfly",COOKED_DRAGONFLY);
 
 
-        register("seafood_bucket",SEAFOOD_BUCKET);
-        register("fish_sauce_bucket",FISH_SAUCE_BUCKET);
+        register("seafood_bottle", SEAFOOD_BOTTLE);
         register("fish_sauce_bottle",FISH_SAUCE_BOTTLE);
 
         register("lime_seeds",LIME_SEED);

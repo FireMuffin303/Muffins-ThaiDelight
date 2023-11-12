@@ -1,6 +1,6 @@
 package net.firemuffin303.thaidelight;
 
-import net.firemuffin303.thaidelight.common.block.cauldron.ModCauldronInteraction;
+import net.firemuffin303.thaidelight.common.block.saucebowl.SauceBowlInteraction;
 import net.firemuffin303.thaidelight.common.registry.*;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import org.slf4j.Logger;
@@ -27,6 +27,6 @@ public class ThaiDelight {
     public static void postInit(){
         ModEntityTypes.postInit();
         ModPotions.postInit();
-        ModCauldronInteraction.init();
+        SauceBowlInteraction.init();
     }
 }

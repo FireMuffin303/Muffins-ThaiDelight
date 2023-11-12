@@ -15,11 +15,8 @@ import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.data.models.BlockModelGenerators;
 import net.minecraft.data.models.ItemModelGenerators;
-import net.minecraft.data.models.model.ModelTemplates;
-import net.minecraft.data.recipes.FinishedRecipe;
-import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.ShapedRecipeBuilder;
-import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
+import net.minecraft.data.models.model.*;
+import net.minecraft.data.recipes.*;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
@@ -43,6 +40,7 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyC
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
+import java.util.Optional;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
@@ -68,6 +66,7 @@ public class ModDataGen implements DataGeneratorEntrypoint {
         @Override
         public void buildRecipes(Consumer<FinishedRecipe> exporter) {
             craft(exporter);
+            smithing(exporter);
             cook(ModItems.CRAB_MEAT, ModItems.COOKED_CRAB_MEAT, 0.35f, 200, exporter);
             cook(ModItems.DRAGONFLY, ModItems.COOKED_DRAGONFLY, 0.35f, 200, exporter);
         }
@@ -80,6 +79,10 @@ public class ModDataGen implements DataGeneratorEntrypoint {
 
         private void craft(Consumer<FinishedRecipe> exporter){
             ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS,ModItems.LOINCLOTH,1).define('A', ItemTags.WOOL).define('B', Items.WHITE_DYE).pattern("A").pattern("B").pattern("A").unlockedBy(getHasName(Items.WHITE_WOOL),has(ItemTags.WOOL)).save(exporter,"crafting/"+getItemName(ModItems.LOINCLOTH)+"_from_crafting");
+        }
+
+        private void smithing(Consumer<FinishedRecipe> exporter){
+            SmithingTransformRecipeBuilder.smithing(Ingredient.of(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE),Ingredient.of(ModItemsFabric.DIAMOND_PASTLE),Ingredient.of(Items.NETHERITE_INGOT),RecipeCategory.TOOLS,ModItemsFabric.NETHERITE_PASTLE).unlocks(getHasName(Items.NETHERITE_INGOT),has(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE)).save(exporter,"smithing/"+getItemName(ModItemsFabric.NETHERITE_PASTLE)+"_from_smithing");
         }
     }
 
@@ -112,6 +115,16 @@ public class ModDataGen implements DataGeneratorEntrypoint {
                                                     .apply(ApplyBonusCount.addBonusBinomialDistributionCount(Enchantments.BLOCK_FORTUNE,0.5714286F, 3)))
                                     )
                     ));
+
+            net.minecraft.world.level.storage.loot.LootTable.Builder sauceBowl = this.applyExplosionDecay(ModBlocks.SAUCE_BOWL,
+                    LootTable.lootTable()
+                            .withPool(LootPool.lootPool()
+                                    .add(LootItem.lootTableItem(ModBlocks.SAUCE_BOWL))));
+
+            this.add(ModBlocks.SAUCE_BOWL,sauceBowl);
+            this.add(ModBlocks.SEAFOOD_SAUCE_BOWL,sauceBowl);
+            this.add(ModBlocks.FISH_SAUCE_SAUCE_BOWL,sauceBowl);
+            this.add(ModBlocks.HONEY_SAUCE_BOWL,sauceBowl);
 
         }
     }
@@ -197,8 +210,7 @@ public class ModDataGen implements DataGeneratorEntrypoint {
 
             translationBuilder.add("itemGroup.muffins_thaidelight.main","Muffin's Thai Delight");
             translationBuilder.add(ModBlocks.CRAB_EGG,"Flower Crab Egg");
-            translationBuilder.add(ModBlocks.SEAFOOD,"Seafood");
-            translationBuilder.add(ModBlocks.SEAFOOD_CAULDRON,"Seafood Cauldron");
+            translationBuilder.add(ModBlocks.SEAFOOD_SAUCE_BOWL,"Seafood Sauce Bowl");
             translationBuilder.add(ModBlocks.LIME_BUSH,"Lime Bush");
             translationBuilder.add(ModBlocks.MORTAR,"Mortar");
             translationBuilder.add(ModBlocksFabric.SOMTAM_FEAST,"Somtam");
@@ -215,8 +227,7 @@ public class ModDataGen implements DataGeneratorEntrypoint {
             translationBuilder.add(ModItems.DRAGONFLY_BOTTLE,"Dragonfly in a Bottle");
             translationBuilder.add(ModItems.COOKED_DRAGONFLY,"Cooked Dragonfly");
 
-            translationBuilder.add(ModItems.SEAFOOD_BUCKET,"Seafood Bucket");
-            translationBuilder.add(ModItems.FISH_SAUCE_BUCKET,"Fish Sauce Bucket");
+            translationBuilder.add(ModItems.SEAFOOD_BOTTLE,"Seafood Bucket");
             translationBuilder.add(ModItems.FISH_SAUCE_BOTTLE,"Fish Sauce Bottle");
 
             translationBuilder.add(ModItemsFabric.SOMTAM,"Somtam");
@@ -225,6 +236,12 @@ public class ModDataGen implements DataGeneratorEntrypoint {
             translationBuilder.add(ModItems.LIME,"Lime");
 
             translationBuilder.add(ModItems.LOINCLOTH,"Loincloth");
+
+            translationBuilder.add(ModItemsFabric.STONE_PASTLE,"Stone Pastle");
+            translationBuilder.add(ModItemsFabric.IRON_PASTLE,"Iron Pastle");
+            translationBuilder.add(ModItemsFabric.GOLD_PASTLE,"Gold Pastle");
+            translationBuilder.add(ModItemsFabric.DIAMOND_PASTLE,"Diamond Pastle");
+            translationBuilder.add(ModItemsFabric.NETHERITE_PASTLE,"Netherite Pastle");
         }
     }
 
@@ -242,8 +259,7 @@ public class ModDataGen implements DataGeneratorEntrypoint {
             translationBuilder.add("itemGroup.muffins_thaidelight.main","Muffin's Thai Delight");
 
             translationBuilder.add(ModBlocks.CRAB_EGG,"ไข่ปูม้า");
-            translationBuilder.add(ModBlocks.SEAFOOD,"ซีฟู้ด");
-            translationBuilder.add(ModBlocks.SEAFOOD_CAULDRON,"โอ่งซีฟู้ด");
+            translationBuilder.add(ModBlocks.SEAFOOD_SAUCE_BOWL,"ถ้วยน้ำจิ้มซีฟู้ด");
             translationBuilder.add(ModBlocks.LIME_BUSH,"ต้นมะนาว");
             translationBuilder.add(ModBlocks.MORTAR,"ครก");
             translationBuilder.add(ModBlocksFabric.SOMTAM_FEAST,"ส้มตำ");
@@ -260,8 +276,7 @@ public class ModDataGen implements DataGeneratorEntrypoint {
             translationBuilder.add(ModItems.DRAGONFLY_BOTTLE,"แมลงปอในขวดแก้ว");
             translationBuilder.add(ModItems.COOKED_DRAGONFLY,"แมลงปอทอด");
 
-            translationBuilder.add(ModItems.SEAFOOD_BUCKET,"ถังน้ำจิ้มซีฟู้ด");
-            translationBuilder.add(ModItems.FISH_SAUCE_BUCKET,"ถังน้ำปลา");
+            translationBuilder.add(ModItems.SEAFOOD_BOTTLE,"ขวดซีฟู้ด");
             translationBuilder.add(ModItems.FISH_SAUCE_BOTTLE,"ขวดน้ำปลา");
 
             translationBuilder.add(ModItemsFabric.SOMTAM,"ส้มตำ");
@@ -270,10 +285,17 @@ public class ModDataGen implements DataGeneratorEntrypoint {
             translationBuilder.add(ModItems.LIME,"มะนาว");
 
             translationBuilder.add(ModItems.LOINCLOTH,"ผ้าขาวม้า");
+
+            translationBuilder.add(ModItemsFabric.STONE_PASTLE,"สากหิน");
+            translationBuilder.add(ModItemsFabric.IRON_PASTLE,"สากเหล็ก");
+            translationBuilder.add(ModItemsFabric.GOLD_PASTLE,"สากทอง");
+            translationBuilder.add(ModItemsFabric.DIAMOND_PASTLE,"สากเพชร");
+            translationBuilder.add(ModItemsFabric.NETHERITE_PASTLE,"สากเนเธอร์ไรต์");
         }
     }
 
     static class ItemModelData extends FabricModelProvider {
+        private static final ModelTemplate PASTLE_3D = createModItem("pastle_3d_template",TextureSlot.LAYER0);
         public ItemModelData(FabricDataOutput output) {
             super(output);
         }
@@ -294,8 +316,7 @@ public class ModDataGen implements DataGeneratorEntrypoint {
             itemModelGenerator.generateFlatItem(ModItems.DRAGONFLY_BOTTLE, ModelTemplates.FLAT_ITEM);
             itemModelGenerator.generateFlatItem(ModItems.COOKED_DRAGONFLY, ModelTemplates.FLAT_ITEM);
 
-            itemModelGenerator.generateFlatItem(ModItems.SEAFOOD_BUCKET, ModelTemplates.FLAT_ITEM);
-            itemModelGenerator.generateFlatItem(ModItems.FISH_SAUCE_BUCKET, ModelTemplates.FLAT_ITEM);
+            itemModelGenerator.generateFlatItem(ModItems.SEAFOOD_BOTTLE, ModelTemplates.FLAT_ITEM);
             itemModelGenerator.generateFlatItem(ModItems.FISH_SAUCE_BOTTLE, ModelTemplates.FLAT_ITEM);
 
             itemModelGenerator.generateFlatItem(ModItems.LIME, ModelTemplates.FLAT_ITEM);
@@ -310,6 +331,23 @@ public class ModDataGen implements DataGeneratorEntrypoint {
             itemModelGenerator.generateFlatItem(ModItemsFabric.SOMTAM, ModelTemplates.FLAT_ITEM);
             itemModelGenerator.generateFlatItem(ModItemsFabric.CRAB_FRIED_RICE, ModelTemplates.FLAT_ITEM);
 
+            itemModelGenerator.generateFlatItem(ModItemsFabric.STONE_PASTLE,"_3d",PASTLE_3D);
+            itemModelGenerator.generateFlatItem(ModItemsFabric.IRON_PASTLE,"_3d",PASTLE_3D);
+            itemModelGenerator.generateFlatItem(ModItemsFabric.GOLD_PASTLE,"_3d",PASTLE_3D);
+            itemModelGenerator.generateFlatItem(ModItemsFabric.DIAMOND_PASTLE,"_3d",PASTLE_3D);
+            itemModelGenerator.generateFlatItem(ModItemsFabric.NETHERITE_PASTLE,"_3d",PASTLE_3D);
+
+            itemModelGenerator.generateFlatItem(ModItemsFabric.STONE_PASTLE,"_2d",ModelTemplates.FLAT_ITEM);
+            itemModelGenerator.generateFlatItem(ModItemsFabric.IRON_PASTLE,"_2d",ModelTemplates.FLAT_ITEM);
+            itemModelGenerator.generateFlatItem(ModItemsFabric.GOLD_PASTLE,"_2d",ModelTemplates.FLAT_ITEM);
+            itemModelGenerator.generateFlatItem(ModItemsFabric.DIAMOND_PASTLE,"_2d",ModelTemplates.FLAT_ITEM);
+            itemModelGenerator.generateFlatItem(ModItemsFabric.NETHERITE_PASTLE,"_2d",ModelTemplates.FLAT_ITEM);
         }
+
+        private static ModelTemplate createModItem(String string, TextureSlot... textureSlots) {
+            return new ModelTemplate(Optional.of(new ResourceLocation(ThaiDelight.MOD_ID, "item/" + string)),Optional.empty(), textureSlots);
+        }
+
+
     }
 }

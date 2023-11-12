@@ -1,6 +1,7 @@
 package net.firemuffin303.thaidelight.forge;
 
 import net.firemuffin303.thaidelight.ThaiDelight;
+import net.firemuffin303.thaidelight.common.block.saucebowl.SauceBowlInteraction;
 import net.firemuffin303.thaidelight.common.entity.FlowerCrabEntity;
 import net.firemuffin303.thaidelight.common.registry.*;
 import net.firemuffin303.thaidelight.forge.common.registry.ModBlocksForge;
@@ -19,6 +20,7 @@ import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -51,6 +53,7 @@ public class ThaiDelightForge {
         modEventBus.addListener(EventPriority.HIGH,this::registerEvent);
         modEventBus.addListener(EventPriority.LOW,this::registerAttribute);
         modEventBus.addListener(EventPriority.LOW,this::registerEntitySpawn);
+        modEventBus.addListener(EventPriority.LOW,this::registerCommonSetup);
 
     }
 
@@ -60,7 +63,6 @@ public class ThaiDelightForge {
 
     public void registerEntitySpawn(SpawnPlacementRegisterEvent spawnPlacements){
         spawnPlacements.register(ModEntityTypes.FLOWER_CRAB,SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, FlowerCrabEntity::checkSpawnRules, SpawnPlacementRegisterEvent.Operation.AND);
-
     }
 
     public void registerEvent(RegisterEvent registerEvent){
@@ -77,6 +79,10 @@ public class ThaiDelightForge {
         });
         registerEvent.register(ForgeRegistries.Keys.MOB_EFFECTS,helper -> ModMobEffects.init());
         registerEvent.register(ForgeRegistries.Keys.POTIONS,helper -> ModPotions.init());
+    }
+
+    public void registerCommonSetup(FMLCommonSetupEvent event){
+        event.enqueueWork(SauceBowlInteraction::init);
     }
 
 

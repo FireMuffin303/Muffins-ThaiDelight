@@ -13,8 +13,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 
-public class FishSauceBottleItem extends Item {
-    public FishSauceBottleItem(Properties properties) {
+public class DrinkableItem extends Item {
+    public DrinkableItem(Properties properties) {
         super(properties);
     }
 
@@ -27,7 +27,7 @@ public class FishSauceBottleItem extends Item {
         }
 
         if (!level.isClientSide) {
-            livingEntity.removeEffect(MobEffects.POISON);
+            this.affectAfter(level,livingEntity);
         }
 
         if (itemStack.isEmpty()) {
@@ -63,5 +63,9 @@ public class FishSauceBottleItem extends Item {
 
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand interactionHand) {
         return ItemUtils.startUsingInstantly(level, player, interactionHand);
+    }
+
+    public void affectAfter(Level level, LivingEntity user){
+
     }
 }

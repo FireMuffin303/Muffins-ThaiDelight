@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "muffins_thaidelight:item/fish_sauce_bucket"
+    "layer0": "muffins_thaidelight:item/iron_pastle_2d"
   }
 }
