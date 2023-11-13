@@ -26,8 +26,8 @@
     ]
   },
   "mixins": [
-    "muffins_mobvote2023.mixins.json",
-    "muffins_mobvote2023-common.mixins.json"
+    "muffins_thaidelight.mixins.json",
+    "muffins_thaidelight-common.mixins.json"
   ],
   "depends": {
     "fabric": "*",
