@@ -17,18 +17,10 @@ import net.minecraft.world.entity.animal.FlyingAnimal;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.RawAnimation;
-import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.EnumSet;
 
-public class Dragonfly extends PathfinderMob implements FlyingAnimal, GeoEntity {
-    protected static final RawAnimation IDLE = RawAnimation.begin().thenLoop("idle");
-    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+public class Dragonfly extends PathfinderMob implements FlyingAnimal {
 
     public Dragonfly(EntityType<? extends PathfinderMob> entityType, Level level) {
         super(entityType, level);
@@ -63,15 +55,6 @@ public class Dragonfly extends PathfinderMob implements FlyingAnimal, GeoEntity 
         return !this.onGround();
     }
 
-    @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-        controllerRegistrar.add(new AnimationController<>(this,animationState -> animationState.setAndContinue(IDLE)));
-    }
-
-    @Override
-    public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return this.cache;
-    }
 
     class FlyWanderGoal extends Goal {
         private static final int WANDER_THRESHOLD = 22;

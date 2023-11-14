@@ -22,14 +22,12 @@ import org.jetbrains.annotations.Nullable;
 
 public class MortarBlock extends BaseEntityBlock {
     private static final VoxelShape SHAPE;
-    private static final short smashingTick = 5;
     public MortarBlock(Properties properties) {
         super(properties);
     }
 
     @Override
     public InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
-
         return super.use(blockState, level, blockPos, player, interactionHand, blockHitResult);
     }
 
@@ -37,7 +35,7 @@ public class MortarBlock extends BaseEntityBlock {
 
     @Override
     public RenderShape getRenderShape(BlockState blockState) {
-        return RenderShape.ENTITYBLOCK_ANIMATED;
+        return RenderShape.MODEL;
     }
 
     @Nullable

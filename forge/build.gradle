@@ -14,8 +14,8 @@ loom {
         convertAccessWideners = true
         extraAccessWideners.add loom.accessWidenerPath.get().asFile.name
 
-        mixinConfig "muffins_mobvote2023-common.mixins.json"
-        mixinConfig "muffins_mobvote2023.mixins.json"
+        mixinConfig "muffins_thaidelight-common.mixins.json"
+        mixinConfig "muffins_thaidelight.mixins.json"
     }
 
     runs {
@@ -49,7 +49,6 @@ dependencies {
 
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive = false }
-    modImplementation("software.bernie.geckolib:geckolib-forge-${rootProject.minecraft_version}:${rootProject.geckolib_version_forge}")
     modImplementation("maven.modrinth:farmers-delight:k7RoRFPF")
 }
 

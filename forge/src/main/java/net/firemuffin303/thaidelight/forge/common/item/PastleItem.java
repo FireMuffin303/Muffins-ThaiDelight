@@ -5,6 +5,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class PastleItem extends SwordItem {
     public PastleItem(Tier arg, int attackDamage, float attackSpeed, Properties arg2) {
@@ -14,5 +15,10 @@ public class PastleItem extends SwordItem {
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
         return !ModItems.DISALLOW_PESTLE_ENCHANTMENT.contains(enchantment) && enchantment.category.canEnchant(stack.getItem());
+    }
+
+    @Override
+    public float getDestroySpeed(ItemStack itemStack, BlockState blockState) {
+        return 1.0f;
     }
 }
