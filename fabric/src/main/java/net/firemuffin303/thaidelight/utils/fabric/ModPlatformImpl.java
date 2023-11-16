@@ -24,6 +24,9 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -47,6 +50,10 @@ public class ModPlatformImpl {
         Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE,id,blockEntityType);
     }
 
+    public static  <T extends Recipe<?>> void registerRecipeType(String id,RecipeType<T> recipeType) {
+        Registry.register(BuiltInRegistries.RECIPE_TYPE, new ResourceLocation(ThaiDelight.MOD_ID, id), recipeType);
+    }
+
     public static <T extends Entity> void registerEntityType(String id, EntityType<T> entityType) {
         Registry.register(BuiltInRegistries.ENTITY_TYPE,id,entityType);
     }
@@ -61,6 +68,10 @@ public class ModPlatformImpl {
 
     public static void registerPotion(String id, Potion potion) {
         Registry.register(BuiltInRegistries.POTION,id,potion);
+    }
+
+    public static <T extends Recipe<?>> void registerRecipeSerializer(String id, RecipeSerializer<T> recipeSerializer) {
+        Registry.register(BuiltInRegistries.RECIPE_SERIALIZER,id,recipeSerializer);
     }
 
     public static CreativeModeTab createCreativeModeTab(ResourceLocation resourceLocation, Supplier<ItemStack> icon, ArrayList<Item> itemList) {
@@ -120,6 +131,7 @@ public class ModPlatformImpl {
     public static <T extends BlockEntity> void registerBlockEntityRenderer(BlockEntityType<T> blockEntityTypeSupplier, BlockEntityRendererProvider<T> blockEntityRendererProvider) {
         BlockEntityRendererRegistry.register(blockEntityTypeSupplier,blockEntityRendererProvider::create);
     }
+
 
 
 

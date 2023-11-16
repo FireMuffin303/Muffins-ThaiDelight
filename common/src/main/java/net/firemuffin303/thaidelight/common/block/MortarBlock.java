@@ -7,6 +7,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
@@ -28,6 +29,13 @@ public class MortarBlock extends BaseEntityBlock {
 
     @Override
     public InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
+        BlockEntity blockEntity = level.getBlockEntity(blockPos);
+        if(blockEntity instanceof MortarBlockEntity mortarBlockEntity){
+            ItemStack mainStack = player.getItemInHand(interactionHand);
+            if(!mainStack.isEmpty()){
+            }
+        }
+
         return super.use(blockState, level, blockPos, player, interactionHand, blockHitResult);
     }
 

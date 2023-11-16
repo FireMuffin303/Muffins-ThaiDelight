@@ -22,6 +22,8 @@ public class ThaiDelight {
         ModItems.init();
         ModMobEffects.init();
         ModPotions.init();
+        ModRecipes.init();
+        ModRecipes.ModRecipeSerializer.init();
     }
 
     public static void postInit(){

@@ -22,6 +22,9 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -65,6 +68,13 @@ public class ModPlatformImpl {
         ThaiDelightForge.POTION.register(id,() -> potion);
     }
 
+    public static <T extends Recipe<?>> void registerRecipeType(String id,RecipeType<T> recipeType) {
+        ThaiDelightForge.RECIPE_TYPE.register(id,() -> recipeType);
+    }
+
+    public static <T extends Recipe<?>> void registerRecipeSerializer(String id, RecipeSerializer<T> recipeSerializer) {
+        ThaiDelightForge.RECIPE_SERIALIZER.register(id,() -> recipeSerializer);
+    }
 
     public static CreativeModeTab createCreativeModeTab(ResourceLocation resourceLocation, Supplier<ItemStack> icon, ArrayList<Item> itemList) {
         CreativeModeTab creativeModeTab = CreativeModeTab.builder()

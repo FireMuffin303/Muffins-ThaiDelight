@@ -17,6 +17,9 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.Potion;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -54,6 +57,16 @@ public class ModPlatform {
 
     @ExpectPlatform
     public static void registerPotion(String id, Potion potion) {
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static <T extends Recipe<?>> void registerRecipeType(String id, RecipeType<T> recipeType){
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static <T extends Recipe<?>> void registerRecipeSerializer(String id, RecipeSerializer<T> recipeSerializer){
         throw new AssertionError();
     }
 
