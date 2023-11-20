@@ -51,8 +51,8 @@ public class ModelDataGen extends FabricModelProvider {
 
         itemModelGenerator.generateFlatItem(ModItems.LOINCLOTH, ModelTemplates.FLAT_ITEM);
 
-        itemModelGenerator.generateFlatItem(ModItemsFabric.SOMTAM, ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItemsFabric.CRAB_FRIED_RICE, ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.SOMTAM, ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.CRAB_FRIED_RICE, ModelTemplates.FLAT_ITEM);
 
         itemModelGenerator.generateFlatItem(ModItemsFabric.STONE_PASTLE,"_3d",PASTLE_3D);
         itemModelGenerator.generateFlatItem(ModItemsFabric.IRON_PASTLE,"_3d",PASTLE_3D);

@@ -7,12 +7,14 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -130,6 +132,36 @@ public class ModPlatform {
 
     @ExpectPlatform
     public static <T extends BlockEntity> void registerBlockEntityRenderer(BlockEntityType<T> blockEntityTypeSupplier, BlockEntityRendererProvider<T> blockEntityRendererProvider) {
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static Block getSomtamBlock(){
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static Block getSpicyMincedPorkBlock(){
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static Item getConsumableItem(FoodProperties foodProperties, boolean effectTooltips){
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static Item getSomtamItem(FoodProperties foodProperties){
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static MobEffect getNourishment(){
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static MobEffect getComfort() {
         throw new AssertionError();
     }
 

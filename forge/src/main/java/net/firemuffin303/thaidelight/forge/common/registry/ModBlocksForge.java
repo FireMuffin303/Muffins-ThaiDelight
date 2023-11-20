@@ -9,8 +9,8 @@ import net.minecraftforge.registries.RegistryObject;
 import java.util.function.Supplier;
 
 public class ModBlocksForge {
-    public static final RegistryObject<Block> SOMTAM_BLOCK = register("somtam_block",SomtamFeastBlock::new);
-    public static final RegistryObject<Block> SPICY_MINCED_PORK_SALAD_BLOCK = register("spicy_minced_pork_salad_block", SpicyMincedPorkSaladFeastBlock::new);
+    public static final Block SOMTAM_BLOCK = new SomtamFeastBlock();
+    public static final Block SPICY_MINCED_PORK_SALAD_BLOCK = new SpicyMincedPorkSaladFeastBlock();
 
     public static void init(){
     }

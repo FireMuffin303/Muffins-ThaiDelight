@@ -16,9 +16,9 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Tiers;
 
 public class ModItemsFabric {
-    public static final Item SOMTAM = new SomtamItem(foodBowl(ModFoodFabric.SOMTAM,Items.BOWL,16));
-    public static final Item SPICY_MINCED_PORK_SALAD = new ConsumableItem(foodBowl(ModFoodFabric.SPICY_MINCED_PORK_SALAD,Items.BOWL,16));
-    public static final Item CRAB_FRIED_RICE = new ConsumableItem(foodBowl(ModFoodFabric.CRAB_FRIED_RICE,Items.BOWL,16));
+    //public static final Item SOMTAM = new SomtamItem(foodBowl(ModFoodFabric.SOMTAM));
+    //public static final Item SPICY_MINCED_PORK_SALAD = new ConsumableItem(foodBowl(ModFoodFabric.SPICY_MINCED_PORK_SALAD));
+    //public static final Item CRAB_FRIED_RICE = new ConsumableItem(foodBowl(ModFoodFabric.CRAB_FRIED_RICE));
 
     public static final Item STONE_PASTLE = new PastleItem(Tiers.STONE,3,-3.0f,new Item.Properties().stacksTo(1));
     public static final Item IRON_PASTLE = new PastleItem(Tiers.STONE,3,-3.0f,new Item.Properties().stacksTo(1));
@@ -27,9 +27,9 @@ public class ModItemsFabric {
     public static final Item NETHERITE_PASTLE = new PastleItem(Tiers.STONE,3,-3.0f,new Item.Properties().stacksTo(1).fireResistant());
 
     public static void init(){
-        register("somtam",SOMTAM);
-        register("spicy_minced_pork_salad",SPICY_MINCED_PORK_SALAD);
-        register("crab_fried_rice",CRAB_FRIED_RICE);
+        //register("somtam",SOMTAM);
+        //register("spicy_minced_pork_salad",SPICY_MINCED_PORK_SALAD);
+        //register("crab_fried_rice",CRAB_FRIED_RICE);
 
         register("stone_pastle",STONE_PASTLE);
         register("iron_pastle",IRON_PASTLE);
@@ -44,8 +44,8 @@ public class ModItemsFabric {
 
     }
 
-    private static Item.Properties foodBowl(FoodProperties foodProperties,Item item,int stackTo){
-        return new Item.Properties().food(foodProperties).craftRemainder(item).stacksTo(stackTo);
+    public static Item.Properties foodBowl(FoodProperties foodProperties){
+        return new Item.Properties().food(foodProperties).craftRemainder(Items.BOWL).stacksTo(16);
     }
 
     static class ModFoodFabric{

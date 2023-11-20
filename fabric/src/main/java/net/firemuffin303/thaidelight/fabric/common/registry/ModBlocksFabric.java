@@ -14,12 +14,12 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
 public class ModBlocksFabric {
-    public static Block SOMTAM_FEAST = new SomtamFeastBlock(FabricBlockSettings.copyOf(Blocks.CAKE), ModItemsFabric.SOMTAM, true);
-    public static Block SPICY_MINCED_PORK_SALAD_FEAST = new SomtamFeastBlock(FabricBlockSettings.copyOf(Blocks.CAKE), ModItemsFabric.SPICY_MINCED_PORK_SALAD, true);
+    public static Block SOMTAM_FEAST = new SomtamFeastBlock(FabricBlockSettings.copyOf(Blocks.CAKE), ModItems.SOMTAM, true);
+    public static Block SPICY_MINCED_PORK_SALAD_FEAST = new SomtamFeastBlock(FabricBlockSettings.copyOf(Blocks.CAKE), ModItems.SPICY_MINCED_PORK_SALAD, true);
 
     public static void init(){
-        register("somtam_block",SOMTAM_FEAST);
-        register("spicy_minced_pork_salad_block",SPICY_MINCED_PORK_SALAD_FEAST);
+    //    register("somtam_block",SOMTAM_FEAST);
+    //    register("spicy_minced_pork_salad_block",SPICY_MINCED_PORK_SALAD_FEAST);
     }
 
     private static void register(String id,Block block){

@@ -1,12 +1,18 @@
 package net.firemuffin303.thaidelight.utils.fabric;
 
 import com.jamieswhiteshirt.reachentityattributes.ReachEntityAttributes;
+import com.nhoryzon.mc.farmersdelight.item.ConsumableItem;
+import com.nhoryzon.mc.farmersdelight.registry.EffectsRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.registry.FabricBrewingRecipeRegistry;
 import net.firemuffin303.thaidelight.ThaiDelight;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
+import net.firemuffin303.thaidelight.common.registry.ModItems;
+import net.firemuffin303.thaidelight.fabric.common.item.SomtamItem;
+import net.firemuffin303.thaidelight.fabric.common.registry.ModBlocksFabric;
+import net.firemuffin303.thaidelight.fabric.common.registry.ModItemsFabric;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.core.Registry;
@@ -21,6 +27,7 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -132,7 +139,27 @@ public class ModPlatformImpl {
         BlockEntityRendererRegistry.register(blockEntityTypeSupplier,blockEntityRendererProvider::create);
     }
 
+    public static Block getSomtamBlock() {
+        return ModBlocksFabric.SOMTAM_FEAST;
+    }
 
+    public static Block getSpicyMincedPorkBlock() {
+        return ModBlocksFabric.SPICY_MINCED_PORK_SALAD_FEAST;
+    }
 
+    public static Item getConsumableItem(FoodProperties foodProperties, boolean effectTooltips) {
+        return new ConsumableItem(ModItemsFabric.foodBowl(foodProperties),effectTooltips);
+    }
 
+    public static MobEffect getNourishment() {
+        return EffectsRegistry.NOURISHMENT.get();
+    }
+
+    public static MobEffect getComfort() {
+        return EffectsRegistry.COMFORT.get();
+    }
+
+    public static Item getSomtamItem(FoodProperties foodProperties) {
+        return new SomtamItem(ModItemsFabric.foodBowl(foodProperties));
+    }
 }

@@ -33,6 +33,10 @@ public class MortarBlock extends BaseEntityBlock {
         if(blockEntity instanceof MortarBlockEntity mortarBlockEntity){
             ItemStack mainStack = player.getItemInHand(interactionHand);
             if(!mainStack.isEmpty()){
+                if(mortarBlockEntity.addItem(mainStack)){
+                    return InteractionResult.SUCCESS;
+                }
+
             }
         }
 

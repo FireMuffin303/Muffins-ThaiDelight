@@ -71,6 +71,14 @@ public class ModItems {
         }
     };
 
+    //Food
+    public static final Item SOMTAM = ModPlatform.getSomtamItem(ModFood.SOMTAM);
+    public static final Item SPICY_MINCED_PORK_SALAD = ModPlatform.getConsumableItem(ModFood.SPICY_MINCED_PORK_SALAD,true);
+    public static final Item CRAB_FRIED_RICE = ModPlatform.getConsumableItem(ModFood.CRAB_FRIED_RICE,true);
+
+
+
+    //Equipment
     public static final Item LOINCLOTH = new LoinclothItem(new Item.Properties());
 
     public static void init(){
@@ -99,6 +107,10 @@ public class ModItems {
         register("unripe_papaya",UNRIPE_PAPAYA);
         register("papaya_seeds",PAPAYA_SEED);
 
+        register("somtam",SOMTAM);
+        register("spicy_minced_pork_salad",SPICY_MINCED_PORK_SALAD);
+        register("crab_fried_rice",CRAB_FRIED_RICE);
+
         register("loincloth",LOINCLOTH);
 
 
@@ -121,8 +133,22 @@ public class ModItems {
         public static final FoodProperties CRAB_WITH_SEAFOOD = new FoodProperties.Builder().nutrition(5).saturationMod(0.3F).alwaysEat().effect(new MobEffectInstance(MobEffects.WATER_BREATHING,200,0),1.0f).meat().build();
 
         public static final FoodProperties COOKED_DRAGONFLY = new FoodProperties.Builder().nutrition(3).saturationMod(0.2f).alwaysEat().build();
-        public static final FoodProperties FISH_SAUCE = new FoodProperties.Builder().nutrition(4).saturationMod(0.1f).alwaysEat().effect(new MobEffectInstance(MobEffects.HUNGER,100,0),1.0f).build();
-        public static final FoodProperties SOMTAM = new FoodProperties.Builder().nutrition(12).saturationMod(0.6f).effect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE,500,0),1.0f).build();
+
+        public static final FoodProperties SOMTAM = new FoodProperties.Builder()
+                .nutrition(18)
+                .saturationMod(0.8F)
+                .effect(new MobEffectInstance(ModPlatform.getNourishment(),6000,0),1.0f).build();
+
+        public static final FoodProperties CRAB_FRIED_RICE = new FoodProperties.Builder()
+                .nutrition(16)
+                .saturationMod(0.8F)
+                .effect(new MobEffectInstance(ModPlatform.getComfort(),6000,0),1.0f).build();
+
+
+        public static final FoodProperties SPICY_MINCED_PORK_SALAD = new FoodProperties.Builder()
+                .nutrition(14)
+                .saturationMod(0.75F)
+                .effect(new MobEffectInstance(ModPlatform.getNourishment(),5000,0),1.0f).build();
     }
 
 

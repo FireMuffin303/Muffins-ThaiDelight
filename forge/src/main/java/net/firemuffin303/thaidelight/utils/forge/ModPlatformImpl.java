@@ -3,6 +3,9 @@ package net.firemuffin303.thaidelight.utils.forge;
 import net.firemuffin303.thaidelight.ThaiDelight;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.firemuffin303.thaidelight.forge.ThaiDelightForge;
+import net.firemuffin303.thaidelight.forge.common.item.SomtamItem;
+import net.firemuffin303.thaidelight.forge.common.registry.ModBlocksForge;
+import net.firemuffin303.thaidelight.forge.common.registry.ModItemsForge;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.EntityRenderers;
@@ -18,6 +21,7 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionUtils;
@@ -34,6 +38,9 @@ import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.common.brewing.BrewingRecipe;
 import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
+import vectorwing.farmersdelight.common.item.ConsumableItem;
+import vectorwing.farmersdelight.common.registry.ModEffects;
+import vectorwing.farmersdelight.common.registry.ModItems;
 
 import java.util.ArrayList;
 import java.util.function.Supplier;
@@ -43,6 +50,7 @@ public class ModPlatformImpl {
     public static <T extends Block> void registryBlock(String id, Supplier<T> block) {
         ThaiDelightForge.BLOCK.register(id,block);
     }
+
 
     public static <T extends Item> void registryItem(String id, Supplier<T> item) {
         ThaiDelightForge.ITEMS.register(id,item);
@@ -135,7 +143,27 @@ public class ModPlatformImpl {
 
     }
 
+    public static Block getSomtamBlock() {
+        return ModBlocksForge.SOMTAM_BLOCK;
+    }
 
+    public static Block getSpicyMincedPorkBlock() {
+        return ModBlocksForge.SPICY_MINCED_PORK_SALAD_BLOCK;
+    }
 
+    public static Item getConsumableItem(FoodProperties foodProperties,boolean effectTooltips) {
+        return new ConsumableItem(ModItems.bowlFoodItem(foodProperties),effectTooltips);
+    }
 
+    public static MobEffect getNourishment() {
+        return ModEffects.NOURISHMENT.get();
+    }
+
+    public static MobEffect getComfort() {
+        return ModEffects.COMFORT.get();
+    }
+
+    public static Item getSomtamItem(FoodProperties foodProperties) {
+        return new SomtamItem(ModItems.bowlFoodItem(foodProperties));
+    }
 }

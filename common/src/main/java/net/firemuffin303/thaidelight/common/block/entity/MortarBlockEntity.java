@@ -68,6 +68,18 @@ public class MortarBlockEntity extends BlockEntity implements WorldlyContainer {
         return true;
     }
 
+    public boolean addItem(ItemStack itemStack){
+        if(this.inventory.isEmpty() && !itemStack.isEmpty()){
+            for(int i = 0; i < this.inventory.size();i++){
+                if(this.inventory.get(i).isEmpty()){
+                    this.inventory.set(i,itemStack);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     @Override
     public void load(CompoundTag compoundTag) {
         super.load(compoundTag);
