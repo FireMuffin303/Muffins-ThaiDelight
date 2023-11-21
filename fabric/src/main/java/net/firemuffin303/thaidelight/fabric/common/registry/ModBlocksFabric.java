@@ -1,5 +1,6 @@
 package net.firemuffin303.thaidelight.fabric.common.registry;
 
+import com.nhoryzon.mc.farmersdelight.block.FeastBlock;
 import com.nhoryzon.mc.farmersdelight.registry.ItemsRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.firemuffin303.thaidelight.ThaiDelight;
@@ -14,8 +15,8 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
 public class ModBlocksFabric {
-    public static Block SOMTAM_FEAST = new SomtamFeastBlock(FabricBlockSettings.copyOf(Blocks.CAKE), ModItems.SOMTAM, true);
-    public static Block SPICY_MINCED_PORK_SALAD_FEAST = new SomtamFeastBlock(FabricBlockSettings.copyOf(Blocks.CAKE), ModItems.SPICY_MINCED_PORK_SALAD, true);
+    public static Block SOMTAM_FEAST = new SomtamFeastBlock(FabricBlockSettings.copyOf(Blocks.CAKE), ModItemsFabric.SOMTAM, true);
+    public static Block SPICY_MINCED_PORK_SALAD_FEAST = new FeastBlock(FabricBlockSettings.copyOf(Blocks.CAKE), ModItemsFabric.SPICY_MINCED_PORK_SALAD, true);
 
     public static void init(){
     //    register("somtam_block",SOMTAM_FEAST);

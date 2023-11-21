@@ -48,8 +48,8 @@ public class ThaiDelightForge {
         BLOCK.register(modEventBus);
         BLOCK_ENTITY_TYPES.register(modEventBus);
         FLUIDS.register(modEventBus);
-        ITEMS.register(modEventBus);
         MOB_EFFECT.register(modEventBus);
+        ITEMS.register(modEventBus);
         POTION.register(modEventBus);
         RECIPE_TYPE.register(modEventBus);
         RECIPE_SERIALIZER.register(modEventBus);
@@ -78,11 +78,11 @@ public class ThaiDelightForge {
         });
         registerEvent.register(ForgeRegistries.Keys.BLOCK_ENTITY_TYPES,helper -> ModBlocks.ModBlockEntityTypes.init());
         registerEvent.register(ForgeRegistries.Keys.FLUIDS,helper -> ModFluid.init());
+        registerEvent.register(ForgeRegistries.Keys.MOB_EFFECTS,helper -> ModMobEffects.init());
         registerEvent.register(ForgeRegistries.Keys.ITEMS,helper -> {
             ModItems.init();
             ModItemsForge.init();
         });
-        registerEvent.register(ForgeRegistries.Keys.MOB_EFFECTS,helper -> ModMobEffects.init());
         registerEvent.register(ForgeRegistries.Keys.POTIONS,helper -> ModPotions.init());
         registerEvent.register(ForgeRegistries.Keys.RECIPE_TYPES,helper -> ModRecipes.init());
         registerEvent.register(ForgeRegistries.Keys.RECIPE_SERIALIZERS,helper -> ModRecipes.ModRecipeSerializer.init());

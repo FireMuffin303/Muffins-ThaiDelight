@@ -16,26 +16,15 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Tiers;
 
 public class ModItemsFabric {
-    //public static final Item SOMTAM = new SomtamItem(foodBowl(ModFoodFabric.SOMTAM));
-    //public static final Item SPICY_MINCED_PORK_SALAD = new ConsumableItem(foodBowl(ModFoodFabric.SPICY_MINCED_PORK_SALAD));
-    //public static final Item CRAB_FRIED_RICE = new ConsumableItem(foodBowl(ModFoodFabric.CRAB_FRIED_RICE));
-
-    public static final Item STONE_PASTLE = new PastleItem(Tiers.STONE,3,-3.0f,new Item.Properties().stacksTo(1));
-    public static final Item IRON_PASTLE = new PastleItem(Tiers.STONE,3,-3.0f,new Item.Properties().stacksTo(1));
-    public static final Item GOLD_PASTLE = new PastleItem(Tiers.STONE,3,-3.0f,new Item.Properties().stacksTo(1));
-    public static final Item DIAMOND_PASTLE = new PastleItem(Tiers.STONE,3,-3.0f,new Item.Properties().stacksTo(1));
-    public static final Item NETHERITE_PASTLE = new PastleItem(Tiers.STONE,3,-3.0f,new Item.Properties().stacksTo(1).fireResistant());
+    public static final Item SOMTAM = new SomtamItem(foodBowl(ModFoodFabric.SOMTAM));
+    public static final Item SPICY_MINCED_PORK_SALAD = new ConsumableItem(foodBowl(ModFoodFabric.SPICY_MINCED_PORK_SALAD));
+    public static final Item CRAB_FRIED_RICE = new ConsumableItem(foodBowl(ModFoodFabric.CRAB_FRIED_RICE));
 
     public static void init(){
-        //register("somtam",SOMTAM);
-        //register("spicy_minced_pork_salad",SPICY_MINCED_PORK_SALAD);
-        //register("crab_fried_rice",CRAB_FRIED_RICE);
+        register("somtam",SOMTAM);
+        register("spicy_minced_pork_salad",SPICY_MINCED_PORK_SALAD);
+        register("crab_fried_rice",CRAB_FRIED_RICE);
 
-        register("stone_pastle",STONE_PASTLE);
-        register("iron_pastle",IRON_PASTLE);
-        register("golden_pastle",GOLD_PASTLE);
-        register("diamond_pastle",DIAMOND_PASTLE);
-        register("netherite_pastle",NETHERITE_PASTLE);
     }
 
     private static void register(String id, Item item){
@@ -48,7 +37,7 @@ public class ModItemsFabric {
         return new Item.Properties().food(foodProperties).craftRemainder(Items.BOWL).stacksTo(16);
     }
 
-    static class ModFoodFabric{
+    public static class ModFoodFabric{
         public static final FoodProperties SOMTAM = new FoodProperties.Builder().nutrition(18).saturationMod(0.8F).effect(new MobEffectInstance(EffectsRegistry.NOURISHMENT.get(),6000,0),1.0f).build();
         public static final FoodProperties CRAB_FRIED_RICE = new FoodProperties.Builder().nutrition(16).saturationMod(0.8F).effect(new MobEffectInstance(EffectsRegistry.COMFORT.get(),6000,0),1.0f).build();
         public static final FoodProperties SPICY_MINCED_PORK_SALAD = new FoodProperties.Builder()

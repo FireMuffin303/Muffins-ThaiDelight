@@ -51,20 +51,20 @@ public class ModelDataGen extends FabricModelProvider {
 
         itemModelGenerator.generateFlatItem(ModItems.LOINCLOTH, ModelTemplates.FLAT_ITEM);
 
-        itemModelGenerator.generateFlatItem(ModItems.SOMTAM, ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.CRAB_FRIED_RICE, ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItemsFabric.SOMTAM, ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItemsFabric.CRAB_FRIED_RICE, ModelTemplates.FLAT_ITEM);
 
-        itemModelGenerator.generateFlatItem(ModItemsFabric.STONE_PASTLE,"_3d",PASTLE_3D);
-        itemModelGenerator.generateFlatItem(ModItemsFabric.IRON_PASTLE,"_3d",PASTLE_3D);
-        itemModelGenerator.generateFlatItem(ModItemsFabric.GOLD_PASTLE,"_3d",PASTLE_3D);
-        itemModelGenerator.generateFlatItem(ModItemsFabric.DIAMOND_PASTLE,"_3d",PASTLE_3D);
-        itemModelGenerator.generateFlatItem(ModItemsFabric.NETHERITE_PASTLE,"_3d",PASTLE_3D);
+        itemModelGenerator.generateFlatItem(ModItems.STONE_PASTLE,"_3d",PASTLE_3D);
+        itemModelGenerator.generateFlatItem(ModItems.IRON_PASTLE,"_3d",PASTLE_3D);
+        itemModelGenerator.generateFlatItem(ModItems.GOLDEN_PASTLE,"_3d",PASTLE_3D);
+        itemModelGenerator.generateFlatItem(ModItems.DIAMOND_PASTLE,"_3d",PASTLE_3D);
+        itemModelGenerator.generateFlatItem(ModItems.NETHERITE_PASTLE,"_3d",PASTLE_3D);
 
-        itemModelGenerator.generateFlatItem(ModItemsFabric.STONE_PASTLE,"_2d",ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItemsFabric.IRON_PASTLE,"_2d",ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItemsFabric.GOLD_PASTLE,"_2d",ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItemsFabric.DIAMOND_PASTLE,"_2d",ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItemsFabric.NETHERITE_PASTLE,"_2d",ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.STONE_PASTLE,"_2d",ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.IRON_PASTLE,"_2d",ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.GOLDEN_PASTLE,"_2d",ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.DIAMOND_PASTLE,"_2d",ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.NETHERITE_PASTLE,"_2d",ModelTemplates.FLAT_ITEM);
     }
 
     private static ModelTemplate createModItem(String string, TextureSlot... textureSlots) {

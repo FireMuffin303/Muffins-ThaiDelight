@@ -16,6 +16,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -35,21 +36,21 @@ public class MortarRecipe implements Recipe<Container> {
 
     @Override
     public boolean matches(Container container, Level level) {
-        StackedContents stackedContents = new StackedContents();
+        //List<Ingredient> inputList = new ArrayList<>();
         int i =0;
-        for(int j = 0; j < container.getContainerSize(); ++j){
+        for(int j = 0; j < container.getContainerSize(); j++){
             ItemStack itemStack = container.getItem(j);
             if(!itemStack.isEmpty()){
                 ++i;
-                stackedContents.accountStack(itemStack,1);
+                //inputList.add(Ingredient.of(itemStack));
             }
         }
-        return i == this.ingredients.size() && stackedContents.canCraft(this, null);
+        return i == this.ingredients.size();
     }
 
     @Override
     public ItemStack assemble(Container container, RegistryAccess registryAccess) {
-        return this.result;
+        return this.result.copy();
     }
 
     @Override
@@ -59,7 +60,7 @@ public class MortarRecipe implements Recipe<Container> {
 
     @Override
     public ItemStack getResultItem(RegistryAccess registryAccess) {
-        return this.result;
+        return this.result.copy();
     }
 
     @Override
@@ -74,7 +75,7 @@ public class MortarRecipe implements Recipe<Container> {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return null;
+        return ModRecipes.ModRecipeSerializer.MORTAR_SERIALIZER;
     }
 
     @Override
@@ -91,8 +92,8 @@ public class MortarRecipe implements Recipe<Container> {
 
             if (inputItemsIn.isEmpty()) {
                 throw new JsonParseException("No ingredients for mortar recipe");
-            }else if(inputItemsIn.size() > 3){
-                throw new JsonParseException("Too many ingredients for mortar recipe. Maximum at 3");
+            }else if(inputItemsIn.size() > 4){
+                throw new JsonParseException("Too many ingredients for mortar recipe. Maximum at 4");
             }else{
                 ItemStack results = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(jsonObject, "result"));
                 return new MortarRecipe(resourceLocation,groupIn,inputItemsIn,results);

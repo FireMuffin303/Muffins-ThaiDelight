@@ -25,6 +25,13 @@ public class ModItems {
     public static final Set<Enchantment> DISALLOW_PESTLE_ENCHANTMENT = Sets.newHashSet(Enchantments.SHARPNESS,Enchantments.SMITE,Enchantments.BANE_OF_ARTHROPODS,Enchantments.SWEEPING_EDGE);
     public static final ArrayList<Item> ITEMS = new ArrayList<>();
 
+    //Pastle
+    public static final Item STONE_PASTLE = ModPlatform.createPastleItem(Tiers.STONE,3,-3.0f,new Item.Properties().stacksTo(1));
+    public static final Item IRON_PASTLE = ModPlatform.createPastleItem(Tiers.IRON,3,-3.0f,new Item.Properties().stacksTo(1));
+    public static final Item GOLDEN_PASTLE = ModPlatform.createPastleItem(Tiers.GOLD,3,-3.0f,new Item.Properties().stacksTo(1));
+    public static final Item DIAMOND_PASTLE = ModPlatform.createPastleItem(Tiers.DIAMOND,3,-3.0f,new Item.Properties().stacksTo(1));
+    public static final Item NETHERITE_PASTLE = ModPlatform.createPastleItem(Tiers.NETHERITE,3,-3.0f,new Item.Properties().stacksTo(1).fireResistant());
+
     //Crab
     public static final Item CRAB_SPAWN_EGG = ModPlatform.registerSpawnEgg(ModEntityTypes.FLOWER_CRAB,0x5c5dbc,0xf0784f,new Item.Properties());
 
@@ -72,9 +79,9 @@ public class ModItems {
     };
 
     //Food
-    public static final Item SOMTAM = ModPlatform.getSomtamItem(ModFood.SOMTAM);
-    public static final Item SPICY_MINCED_PORK_SALAD = ModPlatform.getConsumableItem(ModFood.SPICY_MINCED_PORK_SALAD,true);
-    public static final Item CRAB_FRIED_RICE = ModPlatform.getConsumableItem(ModFood.CRAB_FRIED_RICE,true);
+    //public static final Item SOMTAM = ModPlatform.getSomtamItem();
+    //public static final Item SPICY_MINCED_PORK_SALAD = ModPlatform.getConsumableItem(ModFood.SPICY_MINCED_PORK_SALAD,true);
+    //public static final Item CRAB_FRIED_RICE = ModPlatform.getConsumableItem(ModFood.CRAB_FRIED_RICE,true);
 
 
 
@@ -82,6 +89,12 @@ public class ModItems {
     public static final Item LOINCLOTH = new LoinclothItem(new Item.Properties());
 
     public static void init(){
+        register("stone_pastle",STONE_PASTLE);
+        register("iron_pastle",IRON_PASTLE);
+        register("golden_pastle",GOLDEN_PASTLE);
+        register("diamond_pastle",DIAMOND_PASTLE);
+        register("netherite_pastle",NETHERITE_PASTLE);
+
         register("flower_crab_spawn_egg",CRAB_SPAWN_EGG);
         register("flower_crab_bucket",CRAB_BUCKET);
         register("flower_crab",CRAB_MEAT);
@@ -107,9 +120,9 @@ public class ModItems {
         register("unripe_papaya",UNRIPE_PAPAYA);
         register("papaya_seeds",PAPAYA_SEED);
 
-        register("somtam",SOMTAM);
-        register("spicy_minced_pork_salad",SPICY_MINCED_PORK_SALAD);
-        register("crab_fried_rice",CRAB_FRIED_RICE);
+        //register("somtam",SOMTAM);
+        //register("spicy_minced_pork_salad",SPICY_MINCED_PORK_SALAD);
+        //register("crab_fried_rice",CRAB_FRIED_RICE);
 
         register("loincloth",LOINCLOTH);
 
@@ -137,18 +150,18 @@ public class ModItems {
         public static final FoodProperties SOMTAM = new FoodProperties.Builder()
                 .nutrition(18)
                 .saturationMod(0.8F)
-                .effect(new MobEffectInstance(ModPlatform.getNourishment(),6000,0),1.0f).build();
+                .effect(new MobEffectInstance(MobEffects.WATER_BREATHING,6000,0),1.0f).build();
 
         public static final FoodProperties CRAB_FRIED_RICE = new FoodProperties.Builder()
                 .nutrition(16)
                 .saturationMod(0.8F)
-                .effect(new MobEffectInstance(ModPlatform.getComfort(),6000,0),1.0f).build();
+                .effect(new MobEffectInstance(MobEffects.WATER_BREATHING,6000,0),1.0f).build();
 
 
         public static final FoodProperties SPICY_MINCED_PORK_SALAD = new FoodProperties.Builder()
                 .nutrition(14)
                 .saturationMod(0.75F)
-                .effect(new MobEffectInstance(ModPlatform.getNourishment(),5000,0),1.0f).build();
+                .effect(new MobEffectInstance(MobEffects.WATER_BREATHING,5000,0),1.0f).build();
     }
 
 

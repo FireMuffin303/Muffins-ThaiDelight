@@ -17,17 +17,14 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ItemUtils;
-import net.minecraft.world.item.crafting.AbstractCookingRecipe;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Optional;
-
 public class MortarBlockEntity extends BlockEntity implements WorldlyContainer {
     public NonNullList<ItemStack> inventory;
+    //public ItemStack result;
     private final RecipeManager.CachedCheck<Container, ? extends MortarRecipe> quickCheck;
 
     private ResourceLocation lastRecipeID;
@@ -35,6 +32,7 @@ public class MortarBlockEntity extends BlockEntity implements WorldlyContainer {
     public MortarBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlocks.ModBlockEntityTypes.MORTAR_BLOCK_ENTITY, blockPos, blockState);
         this.inventory = NonNullList.withSize(4,ItemStack.EMPTY);
+        //this.result = ItemStack.EMPTY;
         this.quickCheck = RecipeManager.createCheck(ModRecipes.MORTAR);
     }
 
@@ -69,7 +67,7 @@ public class MortarBlockEntity extends BlockEntity implements WorldlyContainer {
     }
 
     public boolean addItem(ItemStack itemStack){
-        if(this.inventory.isEmpty() && !itemStack.isEmpty()){
+        if(!itemStack.isEmpty()){
             for(int i = 0; i < this.inventory.size();i++){
                 if(this.inventory.get(i).isEmpty()){
                     this.inventory.set(i,itemStack);
@@ -80,11 +78,22 @@ public class MortarBlockEntity extends BlockEntity implements WorldlyContainer {
         return false;
     }
 
+    public boolean removeItem(){
+        for(int i = this.inventory.size()-1; i >= 0;i--){
+            if(!this.inventory.get(i).isEmpty()){
+                this.inventory.set(i,ItemStack.EMPTY);
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public void load(CompoundTag compoundTag) {
         super.load(compoundTag);
         this.inventory = NonNullList.withSize(this.getContainerSize(),ItemStack.EMPTY);
         ContainerHelper.loadAllItems(compoundTag,this.inventory);
+
     }
 
     @Override
@@ -99,12 +108,12 @@ public class MortarBlockEntity extends BlockEntity implements WorldlyContainer {
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return this.inventory.isEmpty();
     }
 
     @Override
     public ItemStack getItem(int i) {
-        return null;
+        return this.inventory.get(i);
     }
 
     @Override
@@ -119,7 +128,7 @@ public class MortarBlockEntity extends BlockEntity implements WorldlyContainer {
 
     @Override
     public void setItem(int i, ItemStack itemStack) {
-
+        this.inventory.set(i,itemStack);
     }
 
     @Override

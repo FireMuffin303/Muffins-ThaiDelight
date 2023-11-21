@@ -1,6 +1,7 @@
 package net.firemuffin303.thaidelight.utils.fabric;
 
 import com.jamieswhiteshirt.reachentityattributes.ReachEntityAttributes;
+import com.nhoryzon.mc.farmersdelight.block.FeastBlock;
 import com.nhoryzon.mc.farmersdelight.item.ConsumableItem;
 import com.nhoryzon.mc.farmersdelight.registry.EffectsRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
@@ -10,6 +11,7 @@ import net.fabricmc.fabric.api.registry.FabricBrewingRecipeRegistry;
 import net.firemuffin303.thaidelight.ThaiDelight;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
+import net.firemuffin303.thaidelight.fabric.common.item.PastleItem;
 import net.firemuffin303.thaidelight.fabric.common.item.SomtamItem;
 import net.firemuffin303.thaidelight.fabric.common.registry.ModBlocksFabric;
 import net.firemuffin303.thaidelight.fabric.common.registry.ModItemsFabric;
@@ -54,7 +56,7 @@ public class ModPlatformImpl {
     }
 
     public static <T extends BlockEntity> void registerBlockEntity(String id,BlockEntityType<T> blockEntityType) {
-        Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE,id,blockEntityType);
+        Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE,new ResourceLocation(ThaiDelight.MOD_ID,id),blockEntityType);
     }
 
     public static  <T extends Recipe<?>> void registerRecipeType(String id,RecipeType<T> recipeType) {
@@ -62,23 +64,23 @@ public class ModPlatformImpl {
     }
 
     public static <T extends Entity> void registerEntityType(String id, EntityType<T> entityType) {
-        Registry.register(BuiltInRegistries.ENTITY_TYPE,id,entityType);
+        Registry.register(BuiltInRegistries.ENTITY_TYPE,new ResourceLocation(ThaiDelight.MOD_ID,id) ,entityType);
     }
 
     public static void registerFluid(String id, Fluid fluid) {
-        Registry.register(BuiltInRegistries.FLUID,id,fluid);
+        Registry.register(BuiltInRegistries.FLUID,new ResourceLocation(ThaiDelight.MOD_ID,id),fluid);
     }
 
     public static void registerMobEffect(String id, MobEffect mobEffect) {
-        Registry.register(BuiltInRegistries.MOB_EFFECT,id,mobEffect);
+        Registry.register(BuiltInRegistries.MOB_EFFECT,new ResourceLocation(ThaiDelight.MOD_ID,id),mobEffect);
     }
 
     public static void registerPotion(String id, Potion potion) {
-        Registry.register(BuiltInRegistries.POTION,id,potion);
+        Registry.register(BuiltInRegistries.POTION,new ResourceLocation(ThaiDelight.MOD_ID,id),potion);
     }
 
     public static <T extends Recipe<?>> void registerRecipeSerializer(String id, RecipeSerializer<T> recipeSerializer) {
-        Registry.register(BuiltInRegistries.RECIPE_SERIALIZER,id,recipeSerializer);
+        Registry.register(BuiltInRegistries.RECIPE_SERIALIZER,new ResourceLocation(ThaiDelight.MOD_ID,id),recipeSerializer);
     }
 
     public static CreativeModeTab createCreativeModeTab(ResourceLocation resourceLocation, Supplier<ItemStack> icon, ArrayList<Item> itemList) {
@@ -159,7 +161,21 @@ public class ModPlatformImpl {
         return EffectsRegistry.COMFORT.get();
     }
 
-    public static Item getSomtamItem(FoodProperties foodProperties) {
-        return new SomtamItem(ModItemsFabric.foodBowl(foodProperties));
+    public static Item getSomtamItem() {
+        return new SomtamItem(ModItemsFabric.foodBowl(ModItemsFabric.ModFoodFabric.SOMTAM));
     }
+
+    public static FoodProperties getSomtamFood() {
+        return ModItemsFabric.ModFoodFabric.SOMTAM;
+    }
+
+    public static Item createPastleItem(Tier tier, int attackDamage, float attackSpeed, Item.Properties properties) {
+        return new PastleItem(tier,attackDamage,attackSpeed,properties);
+    }
+
+    public static Class<? extends Item> getPastleClass() {
+        return PastleItem.class;
+    }
+
+
 }

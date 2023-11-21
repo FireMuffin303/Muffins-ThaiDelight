@@ -1,0 +1,18 @@
+{
+  "type": "muffins_thaidelight:mortar",
+  "group": "food",
+  "ingredients": [
+    {
+      "item": "muffins_thaidelight:flower_crab"
+    },
+    {
+      "item": "muffins_thaidelight:unripe_papaya"
+    },
+    {
+      "item": "muffins_thaidelight:pepper"
+    }
+  ],
+  "result": {
+    "item": "muffins_thaidelight:somtam_feast"
+  }
+}

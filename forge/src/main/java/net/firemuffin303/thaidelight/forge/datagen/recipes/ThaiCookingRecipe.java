@@ -29,18 +29,15 @@ public class ThaiCookingRecipe {
                 .unlockedByAnyIngredient(Items.GLASS_BOTTLE)
                 .build(consumer,ForgeRegistries.ITEMS.getKey(ModItems.FISH_SAUCE_BOTTLE));
 
-        CookingPotRecipeBuilder.cookingPotRecipe(ModItems.CRAB_FRIED_RICE,1,CookingRecipes.NORMAL_COOKING,0.35f, Items.BOWL)
+        CookingPotRecipeBuilder.cookingPotRecipe(ModItemsForge.CRAB_FRIED_RICE.get(),1,CookingRecipes.NORMAL_COOKING,0.35f, Items.BOWL)
                 .addIngredient(ModItems.CRAB_MEAT)
-                .addIngredient(ModItems.CRAB_MEAT)
-                .addIngredient(vectorwing.farmersdelight.common.registry.ModItems.RICE.get())
                 .addIngredient(vectorwing.farmersdelight.common.registry.ModItems.RICE.get())
                 .addIngredient(ForgeTags.EGGS)
                 .setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
                 .unlockedByAnyIngredient(ModItems.CRAB_MEAT)
-                .build(consumer,ForgeRegistries.ITEMS.getKey(ModItems.CRAB_FRIED_RICE));
+                .build(consumer,ForgeRegistries.ITEMS.getKey(ModItemsForge.CRAB_FRIED_RICE.get()));
 
         CookingPotRecipeBuilder.cookingPotRecipe(ModBlocks.SPICY_MINCED_PORK_SALAD_FEAST,1,CookingRecipes.NORMAL_COOKING,0.35f, Items.BOWL)
-                .addIngredient(Items.COOKED_PORKCHOP)
                 .addIngredient(Items.COOKED_PORKCHOP)
                 .addIngredient(ModItems.PEPPER)
                 .addIngredient(Items.SUGAR)

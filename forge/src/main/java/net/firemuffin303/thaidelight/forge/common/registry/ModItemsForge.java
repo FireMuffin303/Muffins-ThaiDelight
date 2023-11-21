@@ -14,25 +14,15 @@ import vectorwing.farmersdelight.common.item.ConsumableItem;
 import vectorwing.farmersdelight.common.registry.ModEffects;
 
 public class ModItemsForge {
-    //public static final RegistryObject<Item> SOMTAM_BLOCK = ThaiDelightForge.ITEMS.register("somtam_block",() -> new BlockItem(ModBlocksForge.SOMTAM_BLOCK,new Item.Properties().stacksTo(1)));
-    //public static final RegistryObject<Item> SOMTAM = ThaiDelightForge.ITEMS.register("somtam",() -> new SomtamItem(vectorwing.farmersdelight.common.registry.ModItems.bowlFoodItem(ModFoodForge.SOMTAM)));
-
-    //public static final RegistryObject<Item> SPICY_MINCED_PORK_SALAD_BLOCK = ThaiDelightForge.ITEMS.register("spicy_minced_pork_salad_block",() -> new BlockItem(ModBlocksForge.SPICY_MINCED_PORK_SALAD_BLOCK.get(),new Item.Properties().stacksTo(1)));
-    //public static final RegistryObject<Item> SPICY_MINCED_PORK_SALAD = ThaiDelightForge.ITEMS.register("spicy_minced_pork_salad",() -> new ConsumableItem(vectorwing.farmersdelight.common.registry.ModItems.bowlFoodItem(ModFoodForge.SPICY_MINCED_PORK_SALAD),true));
-    //public static final RegistryObject<Item> CRAB_FRIED_RICE = ThaiDelightForge.ITEMS.register("crab_fried_rice",() -> new ConsumableItem(vectorwing.farmersdelight.common.registry.ModItems.bowlFoodItem(ModFoodForge.CRAB_FRIED_RICE),true));
-
-    //Pastle
-    public static final RegistryObject<Item> STONE_PASTLE = ThaiDelightForge.ITEMS.register("stone_pastle",() -> new PastleItem(Tiers.STONE,3,-3.0f,vectorwing.farmersdelight.common.registry.ModItems.basicItem().stacksTo(1)));
-    public static final RegistryObject<Item> IRON_PASTLE = ThaiDelightForge.ITEMS.register("iron_pastle",() -> new PastleItem(Tiers.IRON,3,-3.0f,vectorwing.farmersdelight.common.registry.ModItems.basicItem().stacksTo(1)));
-    public static final RegistryObject<Item> GOLD_PASTLE = ThaiDelightForge.ITEMS.register("golden_pastle",() -> new PastleItem(Tiers.GOLD,3,-3.0f,vectorwing.farmersdelight.common.registry.ModItems.basicItem().stacksTo(1)));
-    public static final RegistryObject<Item> DIAMOND_PASTLE = ThaiDelightForge.ITEMS.register("diamond_pastle",() -> new PastleItem(Tiers.DIAMOND,3,-3.0f,vectorwing.farmersdelight.common.registry.ModItems.basicItem().stacksTo(1)));
-    public static final RegistryObject<Item> NETHERITE_PASTLE = ThaiDelightForge.ITEMS.register("netherite_pastle",() -> new PastleItem(Tiers.NETHERITE,3,-3.0f,vectorwing.farmersdelight.common.registry.ModItems.basicItem().stacksTo(1).fireResistant()));
+    public static final RegistryObject<Item> SOMTAM = ThaiDelightForge.ITEMS.register("somtam",() -> new SomtamItem(vectorwing.farmersdelight.common.registry.ModItems.bowlFoodItem(ModFoodForge.SOMTAM)));
+    public static final RegistryObject<Item> SPICY_MINCED_PORK_SALAD = ThaiDelightForge.ITEMS.register("spicy_minced_pork_salad",() -> new ConsumableItem(vectorwing.farmersdelight.common.registry.ModItems.bowlFoodItem(ModFoodForge.SPICY_MINCED_PORK_SALAD),true));
+    public static final RegistryObject<Item> CRAB_FRIED_RICE = ThaiDelightForge.ITEMS.register("crab_fried_rice",() -> new ConsumableItem(vectorwing.farmersdelight.common.registry.ModItems.bowlFoodItem(ModFoodForge.CRAB_FRIED_RICE),true));
 
 
     public static void init(){
     }
 
-    static class ModFoodForge{
+    public static class ModFoodForge{
         public static final FoodProperties SOMTAM = new FoodProperties.Builder()
                 .nutrition(18)
                 .saturationMod(0.8F)

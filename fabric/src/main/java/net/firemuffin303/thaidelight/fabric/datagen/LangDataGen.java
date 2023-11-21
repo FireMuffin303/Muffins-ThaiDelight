@@ -57,17 +57,15 @@ public class LangDataGen extends FabricLanguageProvider {
 
         translationBuilder.add(ModItems.LOINCLOTH,"Loincloth");
 
-        translationBuilder.add(ModItems.SOMTAM,"Plate of Somtam");
-        translationBuilder.add(ModItems.SPICY_MINCED_PORK_SALAD,"Plate of Spicy Minced Pork Salad");
-        translationBuilder.add(ModItems.CRAB_FRIED_RICE,"Crab Fried Rice");
+        translationBuilder.add(ModItemsFabric.SOMTAM,"Plate of Somtam");
+        translationBuilder.add(ModItemsFabric.SPICY_MINCED_PORK_SALAD,"Plate of Spicy Minced Pork Salad");
+        translationBuilder.add(ModItemsFabric.CRAB_FRIED_RICE,"Crab Fried Rice");
 
-
-
-        translationBuilder.add(ModItemsFabric.STONE_PASTLE,"Stone Pastle");
-        translationBuilder.add(ModItemsFabric.IRON_PASTLE,"Iron Pastle");
-        translationBuilder.add(ModItemsFabric.GOLD_PASTLE,"Gold Pastle");
-        translationBuilder.add(ModItemsFabric.DIAMOND_PASTLE,"Diamond Pastle");
-        translationBuilder.add(ModItemsFabric.NETHERITE_PASTLE,"Netherite Pastle");
+        translationBuilder.add(ModItems.STONE_PASTLE,"Stone Pastle");
+        translationBuilder.add(ModItems.IRON_PASTLE,"Iron Pastle");
+        translationBuilder.add(ModItems.GOLDEN_PASTLE,"Golden Pastle");
+        translationBuilder.add(ModItems.DIAMOND_PASTLE,"Diamond Pastle");
+        translationBuilder.add(ModItems.NETHERITE_PASTLE,"Netherite Pastle");
 
 
     }
@@ -123,17 +121,17 @@ public class LangDataGen extends FabricLanguageProvider {
             translationBuilder.add(ModItems.PAPAYA,"มะละกอ");
             translationBuilder.add(ModItems.PAPAYA_SEED,"เมล็ดมะละกอ");
 
-            translationBuilder.add(ModItems.SOMTAM,"ส้มตำ");
-            translationBuilder.add(ModItems.CRAB_FRIED_RICE,"ข้าวผัดปู");
+            translationBuilder.add(ModItemsFabric.SOMTAM,"ส้มตำ");
+            translationBuilder.add(ModItemsFabric.CRAB_FRIED_RICE,"ข้าวผัดปู");
 
 
             translationBuilder.add(ModItems.LOINCLOTH,"ผ้าขาวม้า");
 
-            translationBuilder.add(ModItemsFabric.STONE_PASTLE,"สากหิน");
-            translationBuilder.add(ModItemsFabric.IRON_PASTLE,"สากเหล็ก");
-            translationBuilder.add(ModItemsFabric.GOLD_PASTLE,"สากทอง");
-            translationBuilder.add(ModItemsFabric.DIAMOND_PASTLE,"สากเพชร");
-            translationBuilder.add(ModItemsFabric.NETHERITE_PASTLE,"สากเนเธอร์ไรต์");
+            translationBuilder.add(ModItems.STONE_PASTLE,"สากหิน");
+            translationBuilder.add(ModItems.IRON_PASTLE,"สากเหล็ก");
+            translationBuilder.add(ModItems.GOLDEN_PASTLE,"สากทอง");
+            translationBuilder.add(ModItems.DIAMOND_PASTLE,"สากเพชร");
+            translationBuilder.add(ModItems.NETHERITE_PASTLE,"สากเนเธอร์ไรต์");
         }
     }
 }

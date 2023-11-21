@@ -18,6 +18,7 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -151,7 +152,7 @@ public class ModPlatform {
     }
 
     @ExpectPlatform
-    public static Item getSomtamItem(FoodProperties foodProperties){
+    public static Item getSomtamItem(){
         throw new AssertionError();
     }
 
@@ -162,6 +163,21 @@ public class ModPlatform {
 
     @ExpectPlatform
     public static MobEffect getComfort() {
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static FoodProperties getSomtamFood(){
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static Item createPastleItem(Tier tier, int attackDamage, float attackSpeed, Item.Properties properties){
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static Class<? extends Item> getPastleClass(){
         throw new AssertionError();
     }
 

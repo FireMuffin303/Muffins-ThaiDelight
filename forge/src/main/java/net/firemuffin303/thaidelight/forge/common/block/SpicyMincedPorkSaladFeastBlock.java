@@ -8,6 +8,6 @@ import vectorwing.farmersdelight.common.block.FeastBlock;
 
 public class SpicyMincedPorkSaladFeastBlock extends FeastBlock {
     public SpicyMincedPorkSaladFeastBlock() {
-        super(BlockBehaviour.Properties.copy(Blocks.CAKE), () -> ModItems.SPICY_MINCED_PORK_SALAD, true);
+        super(BlockBehaviour.Properties.copy(Blocks.CAKE), ModItemsForge.SPICY_MINCED_PORK_SALAD, true);
     }
 }

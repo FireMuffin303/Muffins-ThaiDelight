@@ -3,6 +3,7 @@ package net.firemuffin303.thaidelight.utils.forge;
 import net.firemuffin303.thaidelight.ThaiDelight;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.firemuffin303.thaidelight.forge.ThaiDelightForge;
+import net.firemuffin303.thaidelight.forge.common.item.PastleItem;
 import net.firemuffin303.thaidelight.forge.common.item.SomtamItem;
 import net.firemuffin303.thaidelight.forge.common.registry.ModBlocksForge;
 import net.firemuffin303.thaidelight.forge.common.registry.ModItemsForge;
@@ -163,7 +164,21 @@ public class ModPlatformImpl {
         return ModEffects.COMFORT.get();
     }
 
-    public static Item getSomtamItem(FoodProperties foodProperties) {
-        return new SomtamItem(ModItems.bowlFoodItem(foodProperties));
+    public static Item getSomtamItem() {
+        return new SomtamItem(ModItems.bowlFoodItem(ModItemsForge.ModFoodForge.SOMTAM));
     }
+
+    public static FoodProperties getSomtamFood() {
+        return ModItemsForge.ModFoodForge.SOMTAM;
+    }
+
+    public static Item createPastleItem(Tier tier, int attackDamage, float attackSpeed, Item.Properties properties) {
+        return new PastleItem(tier,attackDamage,attackSpeed,properties);
+    }
+
+    public static Class<? extends Item> getPastleClass() {
+        return PastleItem.class;
+    }
+
+
 }

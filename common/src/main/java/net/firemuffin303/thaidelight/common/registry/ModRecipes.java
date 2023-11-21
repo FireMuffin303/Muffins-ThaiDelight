@@ -14,35 +14,35 @@ import java.util.ArrayList;
 
 public class ModRecipes {
     public static ArrayList<RecipeType<?>> RECIPES = new ArrayList<>();
-    public static RecipeType<MortarRecipe> MORTAR = register("mortar");
+    public static RecipeType<MortarRecipe> MORTAR = new RecipeType<MortarRecipe>() {
+        @Override
+        public String toString() {
+            return "mortar";
+        }
+    };
 
-    public static void init(){}
+    public static void init(){
+        register("mortar",MORTAR);
+    }
 
-    private static <T extends Recipe<?>> RecipeType<T> register(String id){
-        RecipeType<T> recipeType = new RecipeType<T>() {
-            @Override
-            public String toString() {
-                return id;
-            }
-        };
-        ModPlatform.registerRecipeType("mortar",recipeType);
+    private static void register(String id,RecipeType<?> recipeType){
+        ModPlatform.registerRecipeType(id,recipeType);
         RECIPES.add(recipeType);
 
-        return recipeType;
     }
 
     public static class ModRecipeSerializer{
         public static ArrayList<RecipeSerializer<?>> RECIPE_SERIALIZERS = new ArrayList<>();
-        public static RecipeSerializer<MortarRecipe> MORTAR_SERIALIZER = register("mortar",new MortarRecipe.Serializer());
+        public static RecipeSerializer<MortarRecipe> MORTAR_SERIALIZER = new MortarRecipe.Serializer();
 
-        public static void init(){}
+        public static void init(){
+            register("mortar",new MortarRecipe.Serializer());
+        }
 
-        private static <T extends Recipe<?>> RecipeSerializer<T> register(String id,RecipeSerializer<T> recipeSerializer){
-
-            ModPlatform.registerRecipeSerializer("mortar",recipeSerializer);
+        private static void register(String id,RecipeSerializer<?> recipeSerializer){
+            ModPlatform.registerRecipeSerializer(id,recipeSerializer);
             RECIPE_SERIALIZERS.add(recipeSerializer);
 
-            return recipeSerializer;
         }
     }
 
