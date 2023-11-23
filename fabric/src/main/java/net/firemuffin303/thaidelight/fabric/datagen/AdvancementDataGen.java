@@ -59,7 +59,20 @@ public class AdvancementDataGen extends FabricAdvancementProvider {
             .parent(ROOT)
             .build(new ResourceLocation(ThaiDelight.MOD_ID,"got_sauce_bowl"));
 
-
+    Advancement GOT_SLICED_LIME = Advancement.Builder.advancement()
+            .display(
+                    ModItems.SLICED_LIME,
+                    Component.translatable("advancement.muffins_thaidelight.sliced_lime"),
+                    Component.translatable("advancement.muffins_thaidelight.sliced_lime.description"),
+                    new ResourceLocation("textures/gui/advancements/backgrounds/adventure.png"),
+                    FrameType.TASK,
+                    true,
+                    true,
+                    true)
+            .addCriterion("got_sliced_lime",
+                    InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.SLICED_LIME))
+            .parent(ROOT)
+            .build(new ResourceLocation(ThaiDelight.MOD_ID,"got_sliced_lime"));
 
 
     @Override
@@ -67,5 +80,6 @@ public class AdvancementDataGen extends FabricAdvancementProvider {
         consumer.accept(ROOT);
         consumer.accept(GOT_COOKED_DRAGONFLY);
         consumer.accept(GOT_SAUCE_BOWL);
+        consumer.accept(GOT_SLICED_LIME);
     }
 }

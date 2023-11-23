@@ -16,18 +16,27 @@ public class LangDataGen extends FabricLanguageProvider {
     public void generateTranslations(TranslationBuilder translationBuilder) {
         translationBuilder.add("advancement.muffins_thaidelight.cooked_dragonfly","It's inedible!");
         translationBuilder.add("advancement.muffins_thaidelight.cooked_dragonfly.description","Obtains Cooked Dragonfly.");
+
         translationBuilder.add("advancement.muffins_thaidelight.sauce_bowl","Where is the sauce?");
         translationBuilder.add("advancement.muffins_thaidelight.sauce_bowl.description","Obtains Sauce Bowl");
 
+        translationBuilder.add("advancement.muffins_thaidelight.sliced_lime","Is it snapshot day?");
+        translationBuilder.add("advancement.muffins_thaidelight.sliced_lime.description","Obtains Sliced Lime");
+
         translationBuilder.add("itemGroup.muffins_thaidelight.main","Muffin's Thai Delight");
         translationBuilder.add(ModBlocks.CRAB_EGG,"Flower Crab Egg");
-        translationBuilder.add(ModBlocks.LIME_BUSH,"Lime Bush");
+        translationBuilder.add(ModBlocks.LIME_CROP,"Lime Bush");
         translationBuilder.add(ModBlocks.MORTAR,"Mortar");
 
         translationBuilder.add(ModBlocks.SAUCE_BOWL,"Sauce Bowl");
         translationBuilder.add(ModBlocks.SEAFOOD_SAUCE_BOWL,"Seafood Sauce Bowl");
         translationBuilder.add(ModBlocks.FISH_SAUCE_SAUCE_BOWL,"Fish Sauce Bowl");
         translationBuilder.add(ModBlocks.HONEY_SAUCE_BOWL,"Honey Sauce Bowl");
+
+        translationBuilder.add(ModBlocks.LIME_CRATE,"Lime Crate");
+        translationBuilder.add(ModBlocks.PEPPER_CRATE,"Pepper Crate");
+        translationBuilder.add(ModBlocks.UNRIPE_PAPAYA_CRATE,"Unripe Papaya Crate");
+        translationBuilder.add(ModBlocks.PAPAYA_CRATE,"Papaya Crate");
 
         translationBuilder.add(ModBlocksFabric.SOMTAM_FEAST,"Somtam");
         translationBuilder.add(ModBlocksFabric.SPICY_MINCED_PORK_SALAD_FEAST,"Spicy Minced Pork Salad");
@@ -48,6 +57,7 @@ public class LangDataGen extends FabricLanguageProvider {
         translationBuilder.add(ModItems.FISH_SAUCE_BOTTLE,"Fish Sauce Bottle");
 
         translationBuilder.add(ModItems.LIME,"Lime");
+        translationBuilder.add(ModItems.SLICED_LIME,"Sliced Lime");
         translationBuilder.add(ModItems.LIME_SEED,"Lime Seed");
         translationBuilder.add(ModItems.PEPPER,"Pepper");
         translationBuilder.add(ModItems.PEPPER_SEED,"Pepper Seed");
@@ -80,13 +90,18 @@ public class LangDataGen extends FabricLanguageProvider {
         public void generateTranslations(TranslationBuilder translationBuilder) {
             translationBuilder.add("advancement.muffins_thaidelight.cooked_dragonfly","มันกินไม่ได้!");
             translationBuilder.add("advancement.muffins_thaidelight.cooked_dragonfly.description","ได้รับแมลงปอทอด");
+
             translationBuilder.add("advancement.muffins_thaidelight.sauce_bowl","ไหนซอส?");
             translationBuilder.add("advancement.muffins_thaidelight.sauce_bowl.description","ได้รับถ้วยน้ำจิ้ม");
+
+            translationBuilder.add("advancement.muffins_thaidelight.sliced_lime","วันนี้มี Snapshot หรอ?");
+            translationBuilder.add("advancement.muffins_thaidelight.sliced_lime.description","ได้รับมะนาวหั่น");
+
 
             translationBuilder.add("itemGroup.muffins_thaidelight.main","Muffin's Thai Delight");
 
             translationBuilder.add(ModBlocks.CRAB_EGG,"ไข่ปูม้า");
-            translationBuilder.add(ModBlocks.LIME_BUSH,"ต้นมะนาว");
+            translationBuilder.add(ModBlocks.LIME_CROP,"ต้นมะนาว");
             translationBuilder.add(ModBlocks.MORTAR,"ครก");
 
             translationBuilder.add(ModBlocks.SAUCE_BOWL,"ถ้วยน้ำจิ้ม");
@@ -114,6 +129,7 @@ public class LangDataGen extends FabricLanguageProvider {
             translationBuilder.add(ModItems.FISH_SAUCE_BOTTLE,"ขวดน้ำปลา");
 
             translationBuilder.add(ModItems.LIME,"มะนาว");
+            translationBuilder.add(ModItems.SLICED_LIME,"มะนาวหั่น");
             translationBuilder.add(ModItems.LIME_SEED,"เมล็ดมะนาว");
             translationBuilder.add(ModItems.PEPPER,"พริก");
             translationBuilder.add(ModItems.PEPPER_SEED,"เมล็ดพริก");

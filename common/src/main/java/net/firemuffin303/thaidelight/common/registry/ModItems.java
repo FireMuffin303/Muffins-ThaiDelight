@@ -10,10 +10,12 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluids;
 
@@ -53,14 +55,22 @@ public class ModItems {
 
     //Crops
     public static final Item LIME = new Item(new Item.Properties());
-    public static final Item LIME_SEED = new ItemNameBlockItem(ModBlocks.LIME_BUSH,new Item.Properties()){
+    public static final Item SLICED_LIME = new Item(new Item.Properties());
+    public static final Item LIME_SEED = new ItemNameBlockItem(ModBlocks.LIME_CROP,new Item.Properties()){
         @Override
         public void registerBlocks(Map<Block, Item> map, Item item) {
             super.registerBlocks(map, item);
-            map.put(ModBlocks.LIME_BUSH,item);
+            map.put(ModBlocks.LIME_CROP,item);
         }
     };
-    public static final Item PEPPER = new Item(new Item.Properties());
+
+    public static final Item PEPPER = new Item(new Item.Properties().food(ModFood.PEPPER)){
+        @Override
+        public ItemStack finishUsingItem(ItemStack itemStack, Level level, LivingEntity livingEntity) {
+            livingEntity.setTicksFrozen(0);
+            return super.finishUsingItem(itemStack, level, livingEntity);
+        }
+    };
     public static final Item PEPPER_SEED = new ItemNameBlockItem(ModBlocks.PEPPER_CROP,new Item.Properties()){
         @Override
         public void registerBlocks(Map<Block, Item> map, Item item) {
@@ -110,8 +120,9 @@ public class ModItems {
         register("seafood_bottle", SEAFOOD_BOTTLE);
         register("fish_sauce_bottle",FISH_SAUCE_BOTTLE);
 
-        register("lime_seeds",LIME_SEED);
         register("lime",LIME);
+        register("sliced_lime",SLICED_LIME);
+        register("lime_seeds",LIME_SEED);
 
         register("pepper",PEPPER);
         register("pepper_seeds",PEPPER_SEED);
@@ -146,6 +157,9 @@ public class ModItems {
         public static final FoodProperties CRAB_WITH_SEAFOOD = new FoodProperties.Builder().nutrition(5).saturationMod(0.3F).alwaysEat().effect(new MobEffectInstance(MobEffects.WATER_BREATHING,200,0),1.0f).meat().build();
 
         public static final FoodProperties COOKED_DRAGONFLY = new FoodProperties.Builder().nutrition(3).saturationMod(0.2f).alwaysEat().build();
+
+        public static final FoodProperties PEPPER = new FoodProperties.Builder().nutrition(1).saturationMod(0.1F).alwaysEat().fast().build();
+
 
         public static final FoodProperties SOMTAM = new FoodProperties.Builder()
                 .nutrition(18)

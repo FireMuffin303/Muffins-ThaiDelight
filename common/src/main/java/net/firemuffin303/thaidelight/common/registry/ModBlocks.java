@@ -11,10 +11,12 @@ import net.firemuffin303.thaidelight.common.block.saucebowl.SauceBowl;
 import net.firemuffin303.thaidelight.common.block.saucebowl.SauceBowlInteraction;
 import net.firemuffin303.thaidelight.utils.ModPlatform;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -23,6 +25,12 @@ import net.minecraft.world.level.block.state.BlockState;
 public class ModBlocks {
     //Functional Block
     public static final Block MORTAR = new MortarBlock(BlockBehaviour.Properties.copy(Blocks.STONE).noOcclusion());
+
+    //Crate
+    public static final Block LIME_CRATE = new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).destroyTime(2.0f).explosionResistance(3.0f).sound(SoundType.WOOD));
+    public static final Block PEPPER_CRATE = new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).destroyTime(2.0f).explosionResistance(3.0f).sound(SoundType.WOOD));
+    public static final Block UNRIPE_PAPAYA_CRATE = new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).destroyTime(2.0f).explosionResistance(3.0f).sound(SoundType.WOOD));
+    public static final Block PAPAYA_CRATE = new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).destroyTime(2.0f).explosionResistance(3.0f).sound(SoundType.WOOD));
 
     //Sauce Bowl
     public static final Block SAUCE_BOWL = new SauceBowl(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).instabreak());
@@ -33,8 +41,13 @@ public class ModBlocks {
     //Eggs
     public static final Block CRAB_EGG = new CrabEggBlock(BlockBehaviour.Properties.copy(Blocks.FROGSPAWN));
 
+    //Wild Crops
+    public static final Block WILD_LIME_CROP = ModPlatform.getWildCropBlock(MobEffects.CONFUSION,6,BlockBehaviour.Properties.copy(Blocks.TALL_GRASS));
+    public static final Block WILD_PEPPER_CROP = ModPlatform.getWildCropBlock(MobEffects.CONFUSION,6,BlockBehaviour.Properties.copy(Blocks.TALL_GRASS));
+    public static final Block WILD_PAPAYA_CROP = ModPlatform.getWildCropBlock(MobEffects.CONFUSION,6,BlockBehaviour.Properties.copy(Blocks.TALL_GRASS));
+
     //Crops
-    public static final Block LIME_BUSH = new LimeCrop(BlockBehaviour.Properties.copy(Blocks.POTATOES));
+    public static final Block LIME_CROP = new LimeCrop(BlockBehaviour.Properties.copy(Blocks.POTATOES));
     public static final Block PEPPER_CROP = new PepperBlock(BlockBehaviour.Properties.copy(Blocks.POTATOES));
     public static final Block PAPAYA_CROP = new PapayaCrop(BlockBehaviour.Properties.copy(Blocks.POTATOES));
 
@@ -45,6 +58,13 @@ public class ModBlocks {
     public static void init(){
         //Functional Block
         registerWithItem("mortar",MORTAR);
+
+        //Crate
+        registerWithItem("lime_crate",LIME_CRATE);
+        registerWithItem("pepper_crate",PEPPER_CRATE);
+        registerWithItem("unripe_papaya_crate",UNRIPE_PAPAYA_CRATE);
+        registerWithItem("papaya_crate",PAPAYA_CRATE);
+
         //Sauce Bowl
         registerWithItem("sauce_bowl",SAUCE_BOWL);
         register("seafood_sauce_bowl",SEAFOOD_SAUCE_BOWL);
@@ -54,9 +74,14 @@ public class ModBlocks {
         //Eggs
         registerWithItem("crab_egg",CRAB_EGG);
 
+        //Wild Crops
+        registerWithItem("wild_lime_crop",WILD_LIME_CROP);
+        registerWithItem("wild_pepper_crop",WILD_PEPPER_CROP);
+        registerWithItem("wild_papaya_crop",WILD_PAPAYA_CROP);
+
         //Crops
         register("pepper_crop",PEPPER_CROP);
-        register("lime_bush",LIME_BUSH);
+        register("lime_bush", LIME_CROP);
         register("papaya_crop",PAPAYA_CROP);
 
         //Feast

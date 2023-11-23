@@ -26,6 +26,7 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.material.Fluid;
 
@@ -181,5 +182,9 @@ public class ModPlatform {
         throw new AssertionError();
     }
 
+    @ExpectPlatform
+    public static Block getWildCropBlock(MobEffect mobEffect, int duration, BlockBehaviour.Properties properties){
+        throw new AssertionError();
+    }
 
 }

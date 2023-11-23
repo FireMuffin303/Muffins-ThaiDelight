@@ -1,0 +1,16 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "muffins_thaidelight:lime"
+    }
+  ],
+  "result": [
+    {
+      "item": "muffins_thaidelight:sliced_lime"
+    }
+  ],
+  "tool": {
+    "tag": "forge:tools/knives"
+  }
+}

@@ -3,16 +3,19 @@ package net.firemuffin303.thaidelight.fabric.datagen;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.firemuffin303.thaidelight.ThaiDelight;
+import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.firemuffin303.thaidelight.fabric.common.registry.ModItemsFabric;
 import net.minecraft.data.models.BlockModelGenerators;
 import net.minecraft.data.models.ItemModelGenerators;
-import net.minecraft.data.models.model.ModelTemplate;
-import net.minecraft.data.models.model.ModelTemplates;
-import net.minecraft.data.models.model.TextureSlot;
+import net.minecraft.data.models.model.*;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 
 import java.util.Optional;
+
+import static net.minecraft.data.models.model.TextureMapping.getBlockTexture;
 
 public class ModelDataGen extends FabricModelProvider {
     private static final ModelTemplate PASTLE_3D = createModItem("pastle_3d_template", TextureSlot.LAYER0);
@@ -23,7 +26,10 @@ public class ModelDataGen extends FabricModelProvider {
 
     @Override
     public void generateBlockStateModels(BlockModelGenerators blockStateModelGenerator) {
-
+        createCrateBlock(ModBlocks.LIME_CRATE,blockStateModelGenerator);
+        createCrateBlock(ModBlocks.PEPPER_CRATE,blockStateModelGenerator);
+        createCrateBlock(ModBlocks.UNRIPE_PAPAYA_CRATE,blockStateModelGenerator);
+        createCrateBlock(ModBlocks.PAPAYA_CRATE,blockStateModelGenerator);
     }
 
     @Override
@@ -43,9 +49,11 @@ public class ModelDataGen extends FabricModelProvider {
         itemModelGenerator.generateFlatItem(ModItems.FISH_SAUCE_BOTTLE, ModelTemplates.FLAT_ITEM);
 
         itemModelGenerator.generateFlatItem(ModItems.LIME, ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.SLICED_LIME, ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.LIME_SEED, ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.PEPPER, ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.PEPPER_SEED, ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.UNRIPE_PAPAYA,ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.PAPAYA, ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.PAPAYA_SEED, ModelTemplates.FLAT_ITEM);
 
@@ -65,6 +73,24 @@ public class ModelDataGen extends FabricModelProvider {
         itemModelGenerator.generateFlatItem(ModItems.GOLDEN_PASTLE,"_2d",ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.DIAMOND_PASTLE,"_2d",ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.NETHERITE_PASTLE,"_2d",ModelTemplates.FLAT_ITEM);
+    }
+
+    private static void createBlock(Block block,ModelTemplate modelTemplate,TextureMapping textureMapping, BlockModelGenerators blockModelGenerator){
+        blockModelGenerator.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block,modelTemplate.create(block,textureMapping, blockModelGenerator.modelOutput)));
+
+    }
+
+    private static void createCubeAll(Block block, BlockModelGenerators blockModelGenerator){
+        TextureMapping textureMapping = TextureMapping.cube(block);
+        createBlock(block,ModelTemplates.CUBE_ALL,textureMapping,blockModelGenerator);
+    }
+
+    private static void createCrateBlock(Block block, BlockModelGenerators blockModelGenerator){
+        TextureMapping textureMapping = new TextureMapping()
+                .put(TextureSlot.SIDE, getBlockTexture(block, "_side"))
+                .put(TextureSlot.TOP, getBlockTexture(block, "_top"))
+                .put(TextureSlot.BOTTOM, new ResourceLocation("farmersdelight:block/crate_bottom"));
+        createBlock(block,ModelTemplates.CUBE_BOTTOM_TOP,textureMapping,blockModelGenerator);
     }
 
     private static ModelTemplate createModItem(String string, TextureSlot... textureSlots) {

@@ -6,6 +6,7 @@ import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.CarrotBlock;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
@@ -20,10 +21,13 @@ public class BlockLootTableDataGen extends FabricBlockLootTableProvider {
 
     @Override
     public void generate() {
-        this.add(ModBlocks.MORTAR,this.applyExplosionDecay(ModBlocks.MORTAR,
-                LootTable.lootTable()
-                        .withPool(LootPool.lootPool()
-                                .add(LootItem.lootTableItem(ModBlocks.MORTAR)))));
+        this.createSimpleLoot(ModBlocks.MORTAR);
+
+        this.createSimpleLoot(ModBlocks.LIME_CRATE);
+        this.createSimpleLoot(ModBlocks.PEPPER_CRATE);
+        this.createSimpleLoot(ModBlocks.UNRIPE_PAPAYA_CRATE);
+        this.createSimpleLoot(ModBlocks.PAPAYA_CRATE);
+
 
         net.minecraft.world.level.storage.loot.LootTable.Builder sauceBowl = this.applyExplosionDecay(ModBlocks.SAUCE_BOWL,
                 LootTable.lootTable()
@@ -41,8 +45,8 @@ public class BlockLootTableDataGen extends FabricBlockLootTableProvider {
                                 .when(BlockLootSubProvider.HAS_SILK_TOUCH)
                                 .add(LootItem.lootTableItem(ModBlocks.CRAB_EGG)))));
 
-        net.minecraft.world.level.storage.loot.predicates.LootItemCondition.Builder checkLimeLevel = LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.LIME_BUSH).setProperties(net.minecraft.advancements.critereon.StatePropertiesPredicate.Builder.properties().hasProperty(CarrotBlock.AGE, 7));
-        this.add(ModBlocks.LIME_BUSH, (net.minecraft.world.level.storage.loot.LootTable.Builder)this.applyExplosionDecay(ModBlocks.LIME_BUSH, LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.LIME))).withPool(LootPool.lootPool().when(checkLimeLevel).add(LootItem.lootTableItem(ModItems.LIME).apply(ApplyBonusCount.addBonusBinomialDistributionCount(Enchantments.BLOCK_FORTUNE, 0.5714286F, 3))))));
+        net.minecraft.world.level.storage.loot.predicates.LootItemCondition.Builder checkLimeLevel = LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.LIME_CROP).setProperties(net.minecraft.advancements.critereon.StatePropertiesPredicate.Builder.properties().hasProperty(CarrotBlock.AGE, 7));
+        this.add(ModBlocks.LIME_CROP, (net.minecraft.world.level.storage.loot.LootTable.Builder)this.applyExplosionDecay(ModBlocks.LIME_CROP, LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.LIME))).withPool(LootPool.lootPool().when(checkLimeLevel).add(LootItem.lootTableItem(ModItems.LIME).apply(ApplyBonusCount.addBonusBinomialDistributionCount(Enchantments.BLOCK_FORTUNE, 0.5714286F, 3))))));
 
         net.minecraft.world.level.storage.loot.predicates.LootItemCondition.Builder checkPepperLevel = LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.PEPPER_CROP).setProperties(net.minecraft.advancements.critereon.StatePropertiesPredicate.Builder.properties().hasProperty(CarrotBlock.AGE, 7));
         this.add(ModBlocks.PEPPER_CROP, (net.minecraft.world.level.storage.loot.LootTable.Builder)this.applyExplosionDecay(ModBlocks.PEPPER_CROP, LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.PEPPER))).withPool(LootPool.lootPool().when(checkPepperLevel).add(LootItem.lootTableItem(ModItems.PEPPER).apply(ApplyBonusCount.addBonusBinomialDistributionCount(Enchantments.BLOCK_FORTUNE, 0.5714286F, 3))))));
@@ -62,5 +66,12 @@ public class BlockLootTableDataGen extends FabricBlockLootTableProvider {
                                                 .apply(ApplyBonusCount.addBonusBinomialDistributionCount(Enchantments.BLOCK_FORTUNE,0.5714286F, 3)))
                                 )
                 ));
+    }
+
+    private void createSimpleLoot(Block block){
+        this.add(block,this.applyExplosionDecay(block,
+                LootTable.lootTable()
+                        .withPool(LootPool.lootPool()
+                                .add(LootItem.lootTableItem(block)))));
     }
 }

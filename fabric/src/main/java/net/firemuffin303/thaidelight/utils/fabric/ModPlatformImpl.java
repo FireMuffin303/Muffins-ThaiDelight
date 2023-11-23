@@ -2,6 +2,7 @@ package net.firemuffin303.thaidelight.utils.fabric;
 
 import com.jamieswhiteshirt.reachentityattributes.ReachEntityAttributes;
 import com.nhoryzon.mc.farmersdelight.block.FeastBlock;
+import com.nhoryzon.mc.farmersdelight.block.WildCropBlock;
 import com.nhoryzon.mc.farmersdelight.item.ConsumableItem;
 import com.nhoryzon.mc.farmersdelight.registry.EffectsRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
@@ -39,6 +40,7 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.material.Fluid;
 
@@ -175,6 +177,10 @@ public class ModPlatformImpl {
 
     public static Class<? extends Item> getPastleClass() {
         return PastleItem.class;
+    }
+
+    public static Block getWildCropBlock(MobEffect mobEffect, int duration, BlockBehaviour.Properties properties) {
+        return new WildCropBlock();
     }
 
 

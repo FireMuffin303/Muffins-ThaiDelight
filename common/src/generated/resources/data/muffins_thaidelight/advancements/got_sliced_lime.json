@@ -1,0 +1,39 @@
+{
+  "parent": "muffins_thaidelight:root",
+  "criteria": {
+    "got_sliced_lime": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "muffins_thaidelight:sliced_lime"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "background": "minecraft:textures/gui/advancements/backgrounds/adventure.png",
+    "description": {
+      "translate": "advancement.muffins_thaidelight.sliced_lime.description"
+    },
+    "frame": "task",
+    "hidden": true,
+    "icon": {
+      "item": "muffins_thaidelight:sliced_lime"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.muffins_thaidelight.sliced_lime"
+    }
+  },
+  "requirements": [
+    [
+      "got_sliced_lime"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

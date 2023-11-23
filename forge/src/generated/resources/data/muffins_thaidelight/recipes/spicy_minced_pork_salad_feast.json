@@ -10,9 +10,6 @@
       "item": "minecraft:cooked_porkchop"
     },
     {
-      "item": "minecraft:cooked_porkchop"
-    },
-    {
       "item": "muffins_thaidelight:pepper"
     },
     {
@@ -24,6 +21,6 @@
   ],
   "recipe_book_tab": "meals",
   "result": {
-    "item": "muffins_thaidelight:spicy_minced_pork_salad_block"
+    "item": "muffins_thaidelight:spicy_minced_pork_salad_feast"
   }
 }

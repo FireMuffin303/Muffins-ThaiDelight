@@ -1,22 +1,17 @@
 package net.firemuffin303.thaidelight.forge.datagen.recipes;
 
-import net.firemuffin303.thaidelight.ThaiDelight;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.firemuffin303.thaidelight.forge.common.registry.ModItemsForge;
 import net.minecraft.data.recipes.FinishedRecipe;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.alchemy.PotionUtils;
-import net.minecraft.world.item.alchemy.Potions;
-import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.client.recipebook.CookingPotRecipeBookTab;
 import vectorwing.farmersdelight.common.tag.ForgeTags;
 import vectorwing.farmersdelight.data.builder.CookingPotRecipeBuilder;
+import vectorwing.farmersdelight.data.builder.CuttingBoardRecipeBuilder;
 import vectorwing.farmersdelight.data.recipe.CookingRecipes;
 
 import java.util.function.Consumer;
@@ -45,5 +40,7 @@ public class ThaiCookingRecipe {
                 .setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
                 .unlockedByAnyIngredient(Items.COOKED_PORKCHOP)
                 .build(consumer,ForgeRegistries.ITEMS.getKey(Item.byBlock(ModBlocks.SPICY_MINCED_PORK_SALAD_FEAST)));
+
+        CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.LIME), Ingredient.of(ForgeTags.TOOLS_KNIVES),ModItems.SLICED_LIME).build(consumer,ForgeRegistries.ITEMS.getKey(ModItems.SLICED_LIME));
     }
 }

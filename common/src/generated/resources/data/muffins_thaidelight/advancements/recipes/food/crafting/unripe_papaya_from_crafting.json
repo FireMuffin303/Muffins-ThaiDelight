@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:crafting/unripe_papaya_from_crafting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_unripe_papaya_crate": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "muffins_thaidelight:unripe_papaya_crate"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_unripe_papaya_crate",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:crafting/unripe_papaya_from_crafting"
+    ]
+  },
+  "sends_telemetry_event": false
+}

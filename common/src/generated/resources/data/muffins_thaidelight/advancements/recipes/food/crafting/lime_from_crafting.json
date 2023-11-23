@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_any_ingredient": {
+    "has_lime_crate": {
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:cooked_porkchop"
+              "muffins_thaidelight:lime_crate"
             ]
           }
         ]
@@ -15,21 +15,21 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "muffins_thaidelight:spicy_minced_pork_salad_block"
+        "recipe": "minecraft:crafting/lime_from_crafting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_any_ingredient",
+      "has_lime_crate",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "muffins_thaidelight:spicy_minced_pork_salad_block"
+      "minecraft:crafting/lime_from_crafting"
     ]
   },
-  "sends_telemetry_event": true
+  "sends_telemetry_event": false
 }
