@@ -118,7 +118,7 @@ public class MortarBlockEntity extends BlockEntity implements WorldlyContainer {
 
     @Override
     public ItemStack removeItem(int i, int j) {
-        return null;
+        return ContainerHelper.removeItem(this.inventory, i, j);
     }
 
     @Override
@@ -133,7 +133,7 @@ public class MortarBlockEntity extends BlockEntity implements WorldlyContainer {
 
     @Override
     public boolean stillValid(Player player) {
-        return false;
+        return Container.stillValidBlockEntity(this, player);
     }
 
     @Override

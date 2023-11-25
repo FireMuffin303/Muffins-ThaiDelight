@@ -40,12 +40,15 @@ import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.common.brewing.BrewingRecipe;
 import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
+import net.minecraftforge.common.util.RecipeMatcher;
 import vectorwing.farmersdelight.common.block.WildCropBlock;
 import vectorwing.farmersdelight.common.item.ConsumableItem;
 import vectorwing.farmersdelight.common.registry.ModEffects;
 import vectorwing.farmersdelight.common.registry.ModItems;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 public class ModPlatformImpl {
@@ -184,6 +187,14 @@ public class ModPlatformImpl {
 
     public static Block getWildCropBlock(MobEffect mobEffect, int duration, BlockBehaviour.Properties properties) {
         return new WildCropBlock(mobEffect,duration,properties);
+    }
+
+    public static <T> int[] getRecipeMatcher(List<T> inputs, List<? extends Predicate<T>> tests) {
+        return RecipeMatcher.findMatches(inputs,tests);
+    }
+
+    public static Block getCrabFriedRice() {
+        return ModBlocksForge.CRAB_FRIED_RICE;
     }
 
 

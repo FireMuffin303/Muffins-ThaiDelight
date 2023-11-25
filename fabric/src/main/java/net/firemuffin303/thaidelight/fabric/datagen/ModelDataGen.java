@@ -10,8 +10,8 @@ import net.minecraft.data.models.BlockModelGenerators;
 import net.minecraft.data.models.ItemModelGenerators;
 import net.minecraft.data.models.model.*;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 
 import java.util.Optional;
 
@@ -61,6 +61,11 @@ public class ModelDataGen extends FabricModelProvider {
 
         itemModelGenerator.generateFlatItem(ModItemsFabric.SOMTAM, ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItemsFabric.CRAB_FRIED_RICE, ModelTemplates.FLAT_ITEM);
+
+
+        itemModelGenerator.generateFlatItem(Item.byBlock(ModBlocks.SOMTAM_FEAST), ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(Item.byBlock(ModBlocks.SPICY_MINCED_PORK_SALAD_FEAST), ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(Item.byBlock(ModBlocks.CRAB_FRIED_RICE_FEAST), ModelTemplates.FLAT_ITEM);
 
         itemModelGenerator.generateFlatItem(ModItems.STONE_PASTLE,"_3d",PASTLE_3D);
         itemModelGenerator.generateFlatItem(ModItems.IRON_PASTLE,"_3d",PASTLE_3D);

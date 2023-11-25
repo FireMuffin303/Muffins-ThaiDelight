@@ -78,8 +78,10 @@ public class ModItems {
             map.put(ModBlocks.PEPPER_CROP,item);
         }
     };
+
     public static final Item PAPAYA = new Item(new Item.Properties());
     public static final Item UNRIPE_PAPAYA = new Item(new Item.Properties());
+    public static final Item SLICED_UNRIPE_PAPAYA = new Item(new Item.Properties().food(ModFood.SLICED_UNRIPE_PAPAYA));
     public static final Item PAPAYA_SEED = new ItemNameBlockItem(ModBlocks.PAPAYA_CROP,new Item.Properties()){
         @Override
         public void registerBlocks(Map<Block, Item> map, Item item) {
@@ -129,6 +131,7 @@ public class ModItems {
 
         register("papaya",PAPAYA);
         register("unripe_papaya",UNRIPE_PAPAYA);
+        register("sliced_unripe_papaya",SLICED_UNRIPE_PAPAYA);
         register("papaya_seeds",PAPAYA_SEED);
 
         //register("somtam",SOMTAM);
@@ -159,6 +162,8 @@ public class ModItems {
         public static final FoodProperties COOKED_DRAGONFLY = new FoodProperties.Builder().nutrition(3).saturationMod(0.2f).alwaysEat().build();
 
         public static final FoodProperties PEPPER = new FoodProperties.Builder().nutrition(1).saturationMod(0.1F).alwaysEat().fast().build();
+
+        public static final FoodProperties SLICED_UNRIPE_PAPAYA = new FoodProperties.Builder().nutrition(1).saturationMod(0.1F).alwaysEat().fast().build();
 
 
         public static final FoodProperties SOMTAM = new FoodProperties.Builder()

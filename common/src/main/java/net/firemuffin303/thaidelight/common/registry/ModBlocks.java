@@ -52,6 +52,7 @@ public class ModBlocks {
     public static final Block PAPAYA_CROP = new PapayaCrop(BlockBehaviour.Properties.copy(Blocks.POTATOES));
 
     //Feast
+    public static final Block CRAB_FRIED_RICE_FEAST = ModPlatform.getCrabFriedRice();
     public static final Block SOMTAM_FEAST = ModPlatform.getSomtamBlock();
     public static final Block SPICY_MINCED_PORK_SALAD_FEAST = ModPlatform.getSpicyMincedPorkBlock();
 
@@ -87,6 +88,7 @@ public class ModBlocks {
         //Feast
         registerWithItem("somtam_feast",SOMTAM_FEAST);
         registerWithItem("spicy_minced_pork_salad_feast",SPICY_MINCED_PORK_SALAD_FEAST);
+        registerWithItem("crab_fried_rice_feast", CRAB_FRIED_RICE_FEAST);
     }
 
     public static void register(String id, Block block){

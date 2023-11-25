@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import it.unimi.dsi.fastutil.ints.IntList;
 import net.firemuffin303.thaidelight.common.registry.ModRecipes;
+import net.firemuffin303.thaidelight.utils.ModPlatform;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
@@ -36,16 +37,16 @@ public class MortarRecipe implements Recipe<Container> {
 
     @Override
     public boolean matches(Container container, Level level) {
-        //List<Ingredient> inputList = new ArrayList<>();
+        List<ItemStack> inputList = new ArrayList<>();
         int i =0;
         for(int j = 0; j < container.getContainerSize(); j++){
             ItemStack itemStack = container.getItem(j);
             if(!itemStack.isEmpty()){
+                inputList.add(itemStack);
                 ++i;
-                //inputList.add(Ingredient.of(itemStack));
             }
         }
-        return i == this.ingredients.size();
+        return i == this.ingredients.size() && ModPlatform.getRecipeMatcher(inputList,this.ingredients) != null;
     }
 
     @Override

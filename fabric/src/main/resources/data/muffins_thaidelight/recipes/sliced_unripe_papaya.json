@@ -1,0 +1,16 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "muffins_thaidelight:unripe_papaya"
+    }
+  ],
+  "result": [
+    {
+      "item": "muffins_thaidelight:sliced_unripe_papaya"
+    }
+  ],
+  "tool": {
+    "tag": "c:tools/knives"
+  }
+}

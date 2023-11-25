@@ -15,6 +15,7 @@ import net.minecraft.world.entity.ai.util.AirAndWaterRandomPos;
 import net.minecraft.world.entity.ai.util.HoverRandomPos;
 import net.minecraft.world.entity.animal.FlyingAnimal;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
@@ -29,7 +30,7 @@ public class Dragonfly extends PathfinderMob implements FlyingAnimal {
     }
 
     public static AttributeSupplier.Builder createAttributes() {
-        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 10.0D).add(Attributes.FLYING_SPEED, 0.8000000238418579D).add(Attributes.MOVEMENT_SPEED, 0.40000001192092896D).add(Attributes.FOLLOW_RANGE, 48.0D);
+        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 4.0D).add(Attributes.FLYING_SPEED, 0.9000000238418579D).add(Attributes.MOVEMENT_SPEED, 0.50000001192092896D).add(Attributes.FOLLOW_RANGE, 48.0D);
     }
 
     protected void registerGoals() {
@@ -48,6 +49,10 @@ public class Dragonfly extends PathfinderMob implements FlyingAnimal {
         flyingPathNavigation.setCanFloat(false);
         flyingPathNavigation.setCanPassDoors(true);
         return flyingPathNavigation;
+    }
+
+    @Override
+    protected void checkFallDamage(double d, boolean bl, BlockState blockState, BlockPos blockPos) {
     }
 
     @Override
@@ -74,7 +79,7 @@ public class Dragonfly extends PathfinderMob implements FlyingAnimal {
         public void start() {
             Vec3 vec3 = this.findPos();
             if (vec3 != null) {
-                Dragonfly.this.navigation.moveTo(Dragonfly.this.navigation.createPath(BlockPos.containing(vec3), 1), 1.0D);
+                Dragonfly.this.navigation.moveTo(Dragonfly.this.navigation.createPath(BlockPos.containing(vec3), 1), 2.0D);
             }
 
         }

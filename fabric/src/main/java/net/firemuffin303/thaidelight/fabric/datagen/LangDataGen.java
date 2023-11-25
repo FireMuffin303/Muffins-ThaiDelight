@@ -40,6 +40,7 @@ public class LangDataGen extends FabricLanguageProvider {
 
         translationBuilder.add(ModBlocksFabric.SOMTAM_FEAST,"Somtam");
         translationBuilder.add(ModBlocksFabric.SPICY_MINCED_PORK_SALAD_FEAST,"Spicy Minced Pork Salad");
+        translationBuilder.add(ModBlocks.CRAB_FRIED_RICE_FEAST,"Crab Fried Rice");
 
         translationBuilder.add(ModItems.CRAB_SPAWN_EGG,"Flower Crab Spawn Egg");
         translationBuilder.add(ModItems.CRAB_BUCKET,"Flower Crab in a Bucket");
@@ -69,7 +70,7 @@ public class LangDataGen extends FabricLanguageProvider {
 
         translationBuilder.add(ModItemsFabric.SOMTAM,"Plate of Somtam");
         translationBuilder.add(ModItemsFabric.SPICY_MINCED_PORK_SALAD,"Plate of Spicy Minced Pork Salad");
-        translationBuilder.add(ModItemsFabric.CRAB_FRIED_RICE,"Crab Fried Rice");
+        translationBuilder.add(ModItemsFabric.CRAB_FRIED_RICE,"Plate of Crab Fried Rice");
 
         translationBuilder.add(ModItems.STONE_PASTLE,"Stone Pastle");
         translationBuilder.add(ModItems.IRON_PASTLE,"Iron Pastle");
@@ -111,6 +112,7 @@ public class LangDataGen extends FabricLanguageProvider {
 
             translationBuilder.add(ModBlocksFabric.SOMTAM_FEAST,"ส้มตำ");
             translationBuilder.add(ModBlocksFabric.SPICY_MINCED_PORK_SALAD_FEAST,"ลาบหมู");
+            translationBuilder.add(ModBlocks.CRAB_FRIED_RICE_FEAST,"ข้าวผัดปู");
 
 
             translationBuilder.add(ModItems.CRAB_SPAWN_EGG,"ไข่เกิดปูม้า");
@@ -137,8 +139,8 @@ public class LangDataGen extends FabricLanguageProvider {
             translationBuilder.add(ModItems.PAPAYA,"มะละกอ");
             translationBuilder.add(ModItems.PAPAYA_SEED,"เมล็ดมะละกอ");
 
-            translationBuilder.add(ModItemsFabric.SOMTAM,"ส้มตำ");
-            translationBuilder.add(ModItemsFabric.CRAB_FRIED_RICE,"ข้าวผัดปู");
+            translationBuilder.add(ModItemsFabric.SOMTAM,"ถ้วยส้มตำ");
+            translationBuilder.add(ModItemsFabric.CRAB_FRIED_RICE,"ถ้วยข้าวผัดปู");
 
 
             translationBuilder.add(ModItems.LOINCLOTH,"ผ้าขาวม้า");

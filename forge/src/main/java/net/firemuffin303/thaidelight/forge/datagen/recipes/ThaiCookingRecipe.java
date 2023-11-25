@@ -42,5 +42,6 @@ public class ThaiCookingRecipe {
                 .build(consumer,ForgeRegistries.ITEMS.getKey(Item.byBlock(ModBlocks.SPICY_MINCED_PORK_SALAD_FEAST)));
 
         CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.LIME), Ingredient.of(ForgeTags.TOOLS_KNIVES),ModItems.SLICED_LIME).build(consumer,ForgeRegistries.ITEMS.getKey(ModItems.SLICED_LIME));
+        CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.UNRIPE_PAPAYA), Ingredient.of(ForgeTags.TOOLS_KNIVES),ModItems.SLICED_UNRIPE_PAPAYA).build(consumer,ForgeRegistries.ITEMS.getKey(ModItems.SLICED_UNRIPE_PAPAYA));
     }
 }

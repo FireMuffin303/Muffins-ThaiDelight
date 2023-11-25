@@ -5,6 +5,7 @@ import com.nhoryzon.mc.farmersdelight.block.FeastBlock;
 import com.nhoryzon.mc.farmersdelight.block.WildCropBlock;
 import com.nhoryzon.mc.farmersdelight.item.ConsumableItem;
 import com.nhoryzon.mc.farmersdelight.registry.EffectsRegistry;
+import com.nhoryzon.mc.farmersdelight.util.RecipeMatcher;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
@@ -45,6 +46,8 @@ import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.material.Fluid;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 public class ModPlatformImpl {
@@ -151,6 +154,10 @@ public class ModPlatformImpl {
         return ModBlocksFabric.SPICY_MINCED_PORK_SALAD_FEAST;
     }
 
+    public static Block getCrabFriedRice() {
+        return ModBlocksFabric.CRAB_FRIED_RICE;
+    }
+
     public static Item getConsumableItem(FoodProperties foodProperties, boolean effectTooltips) {
         return new ConsumableItem(ModItemsFabric.foodBowl(foodProperties),effectTooltips);
     }
@@ -181,6 +188,10 @@ public class ModPlatformImpl {
 
     public static Block getWildCropBlock(MobEffect mobEffect, int duration, BlockBehaviour.Properties properties) {
         return new WildCropBlock();
+    }
+
+    public static <T> int[] getRecipeMatcher(List<T> inputs, List<? extends Predicate<T>> tests) {
+        return RecipeMatcher.findMatches(inputs,tests);
     }
 
 
