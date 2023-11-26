@@ -13,7 +13,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class SomtamFeastBlock extends FeastBlock {
     protected static final VoxelShape PLATE_SHAPE = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 2.0D, 15.0D);
-    protected static final VoxelShape PIE_SHAPE = Shapes.joinUnoptimized(PLATE_SHAPE, Block.box(2.0D, 2.0D, 2.0D, 14.0D, 8.0D, 14.0D), BooleanOp.OR);
+    protected static final VoxelShape PIE_SHAPE = Shapes.joinUnoptimized(PLATE_SHAPE, Block.box(2.0D, 2.0D, 2.0D, 14.0D, 7.0D, 14.0D), BooleanOp.OR);
 
     public SomtamFeastBlock(Properties settings, Item servingItem, boolean hasLeftovers) {
         super(settings, servingItem, hasLeftovers);

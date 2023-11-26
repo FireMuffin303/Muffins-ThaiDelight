@@ -1,0 +1,41 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"render_type": "minecraft:cutout",
+	"texture_size": [64, 64],
+	"textures": {
+		"tray_top": "muffins_thaidelight:block/somtam/somtam_tray_top",
+		"tray_side": "farmersdelight:block/tray_bottom",
+		"particle": "muffins_thaidelight:block/somtam/somtam"
+	},
+	"elements": [
+		{
+			"name": "plate",
+			"from": [1, 0, 1],
+			"to": [15, 2, 15],
+			"faces": {
+				"north": {"uv": [1, 11, 15, 13], "texture": "#tray_side"},
+				"east": {"uv": [1, 11, 15, 13], "texture": "#tray_side"},
+				"south": {"uv": [1, 11, 15, 13], "texture": "#tray_side"},
+				"west": {"uv": [1, 11, 15, 13], "texture": "#tray_side"},
+				"up": {"uv": [1, 1, 15, 15], "texture": "#tray_top"},
+				"down": {"uv": [1, 1, 15, 15], "texture": "#tray_side", "cullface": "down"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "somtam",
+			"origin": [8, 8, 8],
+			"color": 0,
+			"children": [
+				{
+					"name": "plate",
+					"origin": [8, 8, 8],
+					"color": 0,
+					"children": [0]
+				}
+			]
+		}
+	]
+}
