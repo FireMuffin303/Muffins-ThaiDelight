@@ -33,8 +33,6 @@ import org.jetbrains.annotations.Nullable;
 
 public class CrabEggBlock extends Block implements SimpleWaterloggedBlock {
     public static final BooleanProperty WATERLOGGED;
-    private static final int MIN_TADPOLES_SPAWN = 2;
-    private static final int MAX_TADPOLES_SPAWN = 5;
     private static int minHatchTickDelay = 3600;
     private static int maxHatchTickDelay = 12000;
     protected static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 1.5D, 16.0D);
@@ -61,7 +59,7 @@ public class CrabEggBlock extends Block implements SimpleWaterloggedBlock {
     }
 
     private static int getHatchDelay(RandomSource randomSource) {
-        return randomSource.nextInt(100, 120);
+        return randomSource.nextInt(minHatchTickDelay, maxHatchTickDelay);
     }
 
     public BlockState updateShape(BlockState blockState, Direction direction, BlockState blockState2, LevelAccessor levelAccessor, BlockPos blockPos, BlockPos blockPos2) {

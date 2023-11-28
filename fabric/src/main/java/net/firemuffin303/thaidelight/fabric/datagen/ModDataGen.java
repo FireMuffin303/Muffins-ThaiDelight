@@ -4,48 +4,15 @@ import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.*;
-import net.firemuffin303.thaidelight.ThaiDelight;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
-import net.firemuffin303.thaidelight.fabric.common.registry.ModBlocksFabric;
-import net.firemuffin303.thaidelight.fabric.common.registry.ModItemsFabric;
-import net.minecraft.advancements.Advancement;
-import net.minecraft.advancements.FrameType;
-import net.minecraft.advancements.critereon.EntityPredicate;
-import net.minecraft.advancements.critereon.InventoryChangeTrigger;
-import net.minecraft.data.loot.BlockLootSubProvider;
-import net.minecraft.data.models.BlockModelGenerators;
-import net.minecraft.data.models.ItemModelGenerators;
-import net.minecraft.data.models.model.*;
 import net.minecraft.data.recipes.*;
-import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.ShapedRecipe;
-import net.minecraft.world.item.crafting.ShapelessRecipe;
-import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.ItemLike;
-import net.minecraft.world.level.block.CarrotBlock;
-import net.minecraft.world.level.storage.loot.LootContext;
-import net.minecraft.world.level.storage.loot.LootPool;
-import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.level.storage.loot.entries.LootItem;
-import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
-import net.minecraft.world.level.storage.loot.functions.LootingEnchantFunction;
-import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
-import net.minecraft.world.level.storage.loot.functions.SmeltItemFunction;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
-import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
-import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
-import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyCondition;
-import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
-import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
-import java.util.Optional;
-import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 public class ModDataGen implements DataGeneratorEntrypoint {
@@ -59,6 +26,9 @@ public class ModDataGen implements DataGeneratorEntrypoint {
         pack.addProvider(LangDataGen.ThaiLangDataGen::new);
         pack.addProvider(ModelDataGen::new);
         pack.addProvider(LootTableDataGen::new);
+        pack.addProvider(LootTableDataGen.ChestDataGen::new);
+        pack.addProvider(ItemTagDataGen::new);
+        pack.addProvider(BlockTagDataGen::new);
     }
 
     private static class RecipeDataGen extends FabricRecipeProvider {
@@ -100,6 +70,10 @@ public class ModDataGen implements DataGeneratorEntrypoint {
             ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD,ModItems.UNRIPE_PAPAYA,9).requires(ModBlocks.UNRIPE_PAPAYA_CRATE).unlockedBy(getHasName(ModBlocks.UNRIPE_PAPAYA_CRATE),has(ModBlocks.UNRIPE_PAPAYA_CRATE)).save(exporter,"crafting/"+getItemName(ModItems.UNRIPE_PAPAYA)+"_from_crafting");
             ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD,ModItems.PAPAYA,9).requires(ModBlocks.PAPAYA_CRATE).unlockedBy(getHasName(ModBlocks.PAPAYA_CROP),has(ModBlocks.PAPAYA_CRATE)).save(exporter,"crafting/"+getItemName(ModItems.PAPAYA)+"_from_crafting");
 
+            ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,ModItems.PEPPER_SEED,4).requires(ModItems.PEPPER).unlockedBy(getHasName(ModItems.PEPPER),has(ModItems.PEPPER)).save(exporter,"crafting/"+getItemName(ModItems.PEPPER_SEED)+"_from_crafting");
+            ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,ModItems.LIME_SEED,4).requires(ModItems.LIME).unlockedBy(getHasName(ModItems.LIME),has(ModItems.LIME)).save(exporter,"crafting/"+getItemName(ModItems.LIME_SEED)+"_from_crafting");
+            ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,ModItems.PAPAYA_SEED,4).requires(ModItems.PAPAYA).unlockedBy(getHasName(ModItems.PAPAYA),has(ModItems.PAPAYA)).save(exporter,"crafting/"+getItemName(ModItems.PAPAYA_SEED)+"_by_papaya_from_crafting");
+            ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,ModItems.PAPAYA_SEED,4).requires(ModItems.UNRIPE_PAPAYA).unlockedBy(getHasName(ModItems.UNRIPE_PAPAYA),has(ModItems.UNRIPE_PAPAYA)).save(exporter,"crafting/"+getItemName(ModItems.PAPAYA_SEED)+"_by_unripe_papaya_from_crafting");
         }
 
         private void smithing(Consumer<FinishedRecipe> exporter){

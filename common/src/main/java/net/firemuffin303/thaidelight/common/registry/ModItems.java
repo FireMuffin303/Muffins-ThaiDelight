@@ -80,6 +80,7 @@ public class ModItems {
     };
 
     public static final Item PAPAYA = new Item(new Item.Properties());
+    public static final Item SLICED_PAPAYA = new Item(new Item.Properties().food(ModFood.SLICED_PAPAYA));
     public static final Item UNRIPE_PAPAYA = new Item(new Item.Properties());
     public static final Item SLICED_UNRIPE_PAPAYA = new Item(new Item.Properties().food(ModFood.SLICED_UNRIPE_PAPAYA));
     public static final Item PAPAYA_SEED = new ItemNameBlockItem(ModBlocks.PAPAYA_CROP,new Item.Properties()){
@@ -95,7 +96,9 @@ public class ModItems {
     //public static final Item SPICY_MINCED_PORK_SALAD = ModPlatform.getConsumableItem(ModFood.SPICY_MINCED_PORK_SALAD,true);
     //public static final Item CRAB_FRIED_RICE = ModPlatform.getConsumableItem(ModFood.CRAB_FRIED_RICE,true);
 
-
+    //Drinks
+    public static final Item PAPAYA_JUICE = new Item(new Item.Properties());
+    public static final Item LIME_JUICE = new Item(new Item.Properties());
 
     //Equipment
     public static final Item LOINCLOTH = new LoinclothItem(new Item.Properties());
@@ -130,9 +133,13 @@ public class ModItems {
         register("pepper_seeds",PEPPER_SEED);
 
         register("papaya",PAPAYA);
+        register("sliced_papaya",SLICED_PAPAYA);
         register("unripe_papaya",UNRIPE_PAPAYA);
         register("sliced_unripe_papaya",SLICED_UNRIPE_PAPAYA);
         register("papaya_seeds",PAPAYA_SEED);
+
+        register("papaya_juice",PAPAYA_JUICE);
+        register("lime_juice",LIME_JUICE);
 
         //register("somtam",SOMTAM);
         //register("spicy_minced_pork_salad",SPICY_MINCED_PORK_SALAD);
@@ -164,6 +171,7 @@ public class ModItems {
         public static final FoodProperties PEPPER = new FoodProperties.Builder().nutrition(1).saturationMod(0.1F).alwaysEat().fast().build();
 
         public static final FoodProperties SLICED_UNRIPE_PAPAYA = new FoodProperties.Builder().nutrition(1).saturationMod(0.1F).alwaysEat().fast().build();
+        public static final FoodProperties SLICED_PAPAYA = new FoodProperties.Builder().nutrition(5).saturationMod(0.2F).alwaysEat().fast().build();
 
 
         public static final FoodProperties SOMTAM = new FoodProperties.Builder()

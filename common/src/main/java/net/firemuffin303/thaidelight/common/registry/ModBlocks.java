@@ -73,7 +73,7 @@ public class ModBlocks {
         register("honey_sauce_bowl",HONEY_SAUCE_BOWL);
 
         //Eggs
-        registerWithItem("crab_egg",CRAB_EGG);
+        registerWithItem("flower_crab_egg",CRAB_EGG);
 
         //Wild Crops
         registerWithItem("wild_lime_crop",WILD_LIME_CROP);

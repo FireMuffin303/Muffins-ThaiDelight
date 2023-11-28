@@ -38,6 +38,10 @@ public class LangDataGen extends FabricLanguageProvider {
         translationBuilder.add(ModBlocks.UNRIPE_PAPAYA_CRATE,"Unripe Papaya Crate");
         translationBuilder.add(ModBlocks.PAPAYA_CRATE,"Papaya Crate");
 
+        translationBuilder.add(ModBlocks.WILD_PEPPER_CROP,"Wild Pepper");
+        translationBuilder.add(ModBlocks.WILD_PAPAYA_CROP,"Wild Papaya");
+        translationBuilder.add(ModBlocks.WILD_LIME_CROP,"Wild Lime");
+
         translationBuilder.add(ModBlocksFabric.SOMTAM_FEAST,"Somtam");
         translationBuilder.add(ModBlocksFabric.SPICY_MINCED_PORK_SALAD_FEAST,"Spicy Minced Pork Salad");
         translationBuilder.add(ModBlocks.CRAB_FRIED_RICE_FEAST,"Crab Fried Rice");
@@ -59,12 +63,19 @@ public class LangDataGen extends FabricLanguageProvider {
 
         translationBuilder.add(ModItems.LIME,"Lime");
         translationBuilder.add(ModItems.SLICED_LIME,"Sliced Lime");
-        translationBuilder.add(ModItems.LIME_SEED,"Lime Seed");
+        translationBuilder.add(ModItems.LIME_SEED,"Lime Seeds");
+
         translationBuilder.add(ModItems.PEPPER,"Pepper");
-        translationBuilder.add(ModItems.PEPPER_SEED,"Pepper Seed");
-        translationBuilder.add(ModItems.UNRIPE_PAPAYA,"Unripe Papaya");
+        translationBuilder.add(ModItems.PEPPER_SEED,"Pepper Seeds");
+
         translationBuilder.add(ModItems.PAPAYA,"Papaya");
-        translationBuilder.add(ModItems.PAPAYA_SEED,"Papaya Seed");
+        translationBuilder.add(ModItems.SLICED_PAPAYA,"Sliced Papaya");
+        translationBuilder.add(ModItems.UNRIPE_PAPAYA,"Unripe Papaya");
+        translationBuilder.add(ModItems.SLICED_UNRIPE_PAPAYA,"Sliced Unripe Papaya");
+        translationBuilder.add(ModItems.PAPAYA_SEED,"Papaya Seeds");
+
+        translationBuilder.add(ModItems.PAPAYA_JUICE,"Papaya Juice");
+        translationBuilder.add(ModItems.LIME_JUICE,"Lime Juice");
 
         translationBuilder.add(ModItems.LOINCLOTH,"Loincloth");
 
@@ -111,7 +122,7 @@ public class LangDataGen extends FabricLanguageProvider {
             translationBuilder.add(ModBlocks.HONEY_SAUCE_BOWL,"ถ้วยน้ำผึ้ง");
 
             translationBuilder.add(ModBlocksFabric.SOMTAM_FEAST,"ส้มตำ");
-            translationBuilder.add(ModBlocksFabric.SPICY_MINCED_PORK_SALAD_FEAST,"ลาบหมู");
+            translationBuilder.add(ModBlocksFabric.SPICY_MINCED_PORK_SALAD_FEAST,"ลาบ");
             translationBuilder.add(ModBlocks.CRAB_FRIED_RICE_FEAST,"ข้าวผัดปู");
 
 
@@ -133,15 +144,22 @@ public class LangDataGen extends FabricLanguageProvider {
             translationBuilder.add(ModItems.LIME,"มะนาว");
             translationBuilder.add(ModItems.SLICED_LIME,"มะนาวหั่น");
             translationBuilder.add(ModItems.LIME_SEED,"เมล็ดมะนาว");
+
             translationBuilder.add(ModItems.PEPPER,"พริก");
             translationBuilder.add(ModItems.PEPPER_SEED,"เมล็ดพริก");
-            translationBuilder.add(ModItems.UNRIPE_PAPAYA,"มะละกอไม่สุก");
+
             translationBuilder.add(ModItems.PAPAYA,"มะละกอ");
+            translationBuilder.add(ModItems.SLICED_PAPAYA,"มะละกอหั่น");
+            translationBuilder.add(ModItems.UNRIPE_PAPAYA,"มะละกอดิบ");
+            translationBuilder.add(ModItems.SLICED_UNRIPE_PAPAYA,"มะละกอดิบหั่น");
             translationBuilder.add(ModItems.PAPAYA_SEED,"เมล็ดมะละกอ");
 
             translationBuilder.add(ModItemsFabric.SOMTAM,"ถ้วยส้มตำ");
             translationBuilder.add(ModItemsFabric.CRAB_FRIED_RICE,"ถ้วยข้าวผัดปู");
+            translationBuilder.add(ModItemsFabric.SPICY_MINCED_PORK_SALAD,"ถ้วยลาบ");
 
+            translationBuilder.add(ModItems.PAPAYA_JUICE,"น้ำมะละกอ");
+            translationBuilder.add(ModItems.LIME_JUICE,"น้ำมะนาว");
 
             translationBuilder.add(ModItems.LOINCLOTH,"ผ้าขาวม้า");
 

@@ -49,4 +49,51 @@ public class LootTableDataGen extends SimpleFabricLootTableProvider {
                                 .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 3.0F)))
                         )));
     }
+
+    static class ChestDataGen extends SimpleFabricLootTableProvider{
+
+        public ChestDataGen(FabricDataOutput output) {
+            super(output, LootContextParamSets.CHEST);
+        }
+
+        @Override
+        public void generate(BiConsumer<ResourceLocation, LootTable.Builder> biConsumer) {
+            LootTable.Builder villageLoot = LootTable.lootTable().withPool(LootPool.lootPool()
+                    .setRolls(UniformGenerator.between(1,4))
+                    .add(LootItem.lootTableItem(ModItems.PEPPER_SEED)
+                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0f,4.0f))))
+                    .add(LootItem.lootTableItem(ModItems.LIME_SEED)
+                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0f,4.0f))))
+                    .add(LootItem.lootTableItem(ModItems.PAPAYA_SEED)
+                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0f,4.0f)))));
+
+            biConsumer.accept(new ResourceLocation(ThaiDelight.MOD_ID,"inject/chests/village/village_desert_house"),villageLoot);
+            biConsumer.accept(new ResourceLocation(ThaiDelight.MOD_ID,"inject/chests/village/village_plains_house"),villageLoot);
+            biConsumer.accept(new ResourceLocation(ThaiDelight.MOD_ID,"inject/chests/village/village_taiga_house"),villageLoot);
+            biConsumer.accept(new ResourceLocation(ThaiDelight.MOD_ID,"inject/chests/village/village_snowy_house"),villageLoot);
+            biConsumer.accept(new ResourceLocation(ThaiDelight.MOD_ID,"inject/chests/village/village_savanna_house"),villageLoot);
+
+            biConsumer.accept(new ResourceLocation(ThaiDelight.MOD_ID,"inject/chests/abandoned_mineshaft"),
+                    LootTable.lootTable().withPool(LootPool.lootPool()
+                            .setRolls(UniformGenerator.between(1,2))
+                            .add(LootItem.lootTableItem(ModItems.PEPPER_SEED)
+                                    .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f,3.0f))))
+                            .add(LootItem.lootTableItem(ModItems.LIME_SEED)
+                                    .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f,3.0f))))
+                            .add(LootItem.lootTableItem(ModItems.PAPAYA_SEED)
+                                    .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f,3.0f)))))
+            );
+
+            biConsumer.accept(new ResourceLocation(ThaiDelight.MOD_ID,"inject/chests/pillager_outpost"),
+                    LootTable.lootTable().withPool(LootPool.lootPool()
+                            .setRolls(UniformGenerator.between(1,2))
+                            .add(LootItem.lootTableItem(ModItems.PEPPER_SEED)
+                                    .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f,3.0f))))
+                            .add(LootItem.lootTableItem(ModItems.LIME_SEED)
+                                    .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f,3.0f))))
+                            .add(LootItem.lootTableItem(ModItems.PAPAYA_SEED)
+                                    .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f,3.0f)))))
+            );
+        }
+    }
 }
