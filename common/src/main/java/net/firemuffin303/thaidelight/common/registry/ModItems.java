@@ -51,7 +51,9 @@ public class ModItems {
 
     //Bucket
     public static final Item SEAFOOD_BOTTLE = new SeafoodBottleItem(new Item.Properties().stacksTo(16).craftRemainder(Items.GLASS_BOTTLE));
-    public static final Item FISH_SAUCE_BOTTLE =  new FishSauceBottleItem(new Item.Properties().stacksTo(16).craftRemainder(Items.GLASS_BOTTLE));
+    public static final Item FISH_SAUCE_BOTTLE =  ModPlatform.getDrinkable(drinkItem().food(ModFood.FISH_SAUCE),true,false);
+    public static final Item PAPAYA_JUICE = ModPlatform.getPapayaJuice(drinkItem().food(ModFood.PAPAYA_JUICE));
+    public static final Item LIME_JUICE = ModPlatform.getLimeJuice(drinkItem().food(ModFood.LIME_JUICE));
 
     //Crops
     public static final Item LIME = new Item(new Item.Properties());
@@ -91,15 +93,6 @@ public class ModItems {
         }
     };
 
-    //Food
-    //public static final Item SOMTAM = ModPlatform.getSomtamItem();
-    //public static final Item SPICY_MINCED_PORK_SALAD = ModPlatform.getConsumableItem(ModFood.SPICY_MINCED_PORK_SALAD,true);
-    //public static final Item CRAB_FRIED_RICE = ModPlatform.getConsumableItem(ModFood.CRAB_FRIED_RICE,true);
-
-    //Drinks
-    public static final Item PAPAYA_JUICE = new Item(new Item.Properties());
-    public static final Item LIME_JUICE = new Item(new Item.Properties());
-
     //Equipment
     public static final Item LOINCLOTH = new LoinclothItem(new Item.Properties());
 
@@ -124,6 +117,8 @@ public class ModItems {
 
         register("seafood_bottle", SEAFOOD_BOTTLE);
         register("fish_sauce_bottle",FISH_SAUCE_BOTTLE);
+        register("papaya_juice",PAPAYA_JUICE);
+        register("lime_juice",LIME_JUICE);
 
         register("lime",LIME);
         register("sliced_lime",SLICED_LIME);
@@ -138,8 +133,7 @@ public class ModItems {
         register("sliced_unripe_papaya",SLICED_UNRIPE_PAPAYA);
         register("papaya_seeds",PAPAYA_SEED);
 
-        register("papaya_juice",PAPAYA_JUICE);
-        register("lime_juice",LIME_JUICE);
+
 
         //register("somtam",SOMTAM);
         //register("spicy_minced_pork_salad",SPICY_MINCED_PORK_SALAD);
@@ -159,6 +153,10 @@ public class ModItems {
         ITEMS.add(item);
     }
 
+    public static Item.Properties drinkItem() {
+        return (new Item.Properties()).craftRemainder(Items.GLASS_BOTTLE).stacksTo(16);
+    }
+
 
 
     public static class ModFood{
@@ -173,22 +171,10 @@ public class ModItems {
         public static final FoodProperties SLICED_UNRIPE_PAPAYA = new FoodProperties.Builder().nutrition(1).saturationMod(0.1F).alwaysEat().fast().build();
         public static final FoodProperties SLICED_PAPAYA = new FoodProperties.Builder().nutrition(5).saturationMod(0.2F).alwaysEat().fast().build();
 
-
-        public static final FoodProperties SOMTAM = new FoodProperties.Builder()
-                .nutrition(18)
-                .saturationMod(0.8F)
-                .effect(new MobEffectInstance(MobEffects.WATER_BREATHING,6000,0),1.0f).build();
-
-        public static final FoodProperties CRAB_FRIED_RICE = new FoodProperties.Builder()
-                .nutrition(16)
-                .saturationMod(0.8F)
-                .effect(new MobEffectInstance(MobEffects.WATER_BREATHING,6000,0),1.0f).build();
-
-
-        public static final FoodProperties SPICY_MINCED_PORK_SALAD = new FoodProperties.Builder()
-                .nutrition(14)
-                .saturationMod(0.75F)
-                .effect(new MobEffectInstance(MobEffects.WATER_BREATHING,5000,0),1.0f).build();
+        public static final FoodProperties FISH_SAUCE = new FoodProperties.Builder().alwaysEat().effect(new MobEffectInstance(MobEffects.HUNGER,200,0),1.0f).build();
+        public static final FoodProperties SEAFOOD_SAUCE = new FoodProperties.Builder().alwaysEat().effect(new MobEffectInstance(MobEffects.WATER_BREATHING,200,0),1.0f).build();
+        public static final FoodProperties PAPAYA_JUICE = new FoodProperties.Builder().alwaysEat().build();
+        public static final FoodProperties LIME_JUICE = new FoodProperties.Builder().alwaysEat().build();
     }
 
 

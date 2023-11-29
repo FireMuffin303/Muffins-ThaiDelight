@@ -4,6 +4,7 @@ import com.jamieswhiteshirt.reachentityattributes.ReachEntityAttributes;
 import com.nhoryzon.mc.farmersdelight.block.FeastBlock;
 import com.nhoryzon.mc.farmersdelight.block.WildCropBlock;
 import com.nhoryzon.mc.farmersdelight.item.ConsumableItem;
+import com.nhoryzon.mc.farmersdelight.item.DrinkableItem;
 import com.nhoryzon.mc.farmersdelight.registry.EffectsRegistry;
 import com.nhoryzon.mc.farmersdelight.util.RecipeMatcher;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
@@ -13,6 +14,8 @@ import net.fabricmc.fabric.api.registry.FabricBrewingRecipeRegistry;
 import net.firemuffin303.thaidelight.ThaiDelight;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
+import net.firemuffin303.thaidelight.fabric.common.item.LimeJuiceItem;
+import net.firemuffin303.thaidelight.fabric.common.item.PapayaJuiceItem;
 import net.firemuffin303.thaidelight.fabric.common.item.PastleItem;
 import net.firemuffin303.thaidelight.fabric.common.item.SomtamItem;
 import net.firemuffin303.thaidelight.fabric.common.registry.ModBlocksFabric;
@@ -192,6 +195,18 @@ public class ModPlatformImpl {
 
     public static <T> int[] getRecipeMatcher(List<T> inputs, List<? extends Predicate<T>> tests) {
         return RecipeMatcher.findMatches(inputs,tests);
+    }
+
+    public static Item getDrinkable(Item.Properties properties, boolean hasFoodEffectTooltip, boolean hasCustomTooltip) {
+        return new DrinkableItem(properties, hasFoodEffectTooltip,hasCustomTooltip);
+    }
+
+    public static Item getPapayaJuice(Item.Properties properties) {
+        return new PapayaJuiceItem(properties);
+    }
+
+    public static Item getLimeJuice(Item.Properties properties) {
+        return new LimeJuiceItem(properties);
     }
 
 

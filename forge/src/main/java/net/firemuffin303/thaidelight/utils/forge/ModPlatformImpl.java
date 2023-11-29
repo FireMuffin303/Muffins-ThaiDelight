@@ -3,6 +3,8 @@ package net.firemuffin303.thaidelight.utils.forge;
 import net.firemuffin303.thaidelight.ThaiDelight;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.firemuffin303.thaidelight.forge.ThaiDelightForge;
+import net.firemuffin303.thaidelight.forge.common.item.LimeJuiceItem;
+import net.firemuffin303.thaidelight.forge.common.item.PapayaJuiceItem;
 import net.firemuffin303.thaidelight.forge.common.item.PastleItem;
 import net.firemuffin303.thaidelight.forge.common.item.SomtamItem;
 import net.firemuffin303.thaidelight.forge.common.registry.ModBlocksForge;
@@ -43,6 +45,7 @@ import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
 import net.minecraftforge.common.util.RecipeMatcher;
 import vectorwing.farmersdelight.common.block.WildCropBlock;
 import vectorwing.farmersdelight.common.item.ConsumableItem;
+import vectorwing.farmersdelight.common.item.DrinkableItem;
 import vectorwing.farmersdelight.common.registry.ModEffects;
 import vectorwing.farmersdelight.common.registry.ModItems;
 
@@ -195,6 +198,18 @@ public class ModPlatformImpl {
 
     public static Block getCrabFriedRice() {
         return ModBlocksForge.CRAB_FRIED_RICE;
+    }
+
+    public static Item getDrinkable(Item.Properties properties, boolean hasFoodEffectTooltip, boolean hasCustomTooltip) {
+        return new DrinkableItem(properties, hasFoodEffectTooltip,hasCustomTooltip);
+    }
+
+    public static Item getPapayaJuice(Item.Properties properties) {
+        return new PapayaJuiceItem(properties);
+    }
+
+    public static Item getLimeJuice(Item.Properties properties) {
+        return new LimeJuiceItem(properties);
     }
 
 

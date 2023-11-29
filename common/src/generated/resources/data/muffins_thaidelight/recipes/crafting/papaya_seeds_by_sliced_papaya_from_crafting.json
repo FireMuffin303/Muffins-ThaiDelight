@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "muffins_thaidelight:sliced_papaya"
+    }
+  ],
+  "result": {
+    "count": 2,
+    "item": "muffins_thaidelight:papaya_seeds"
+  }
+}

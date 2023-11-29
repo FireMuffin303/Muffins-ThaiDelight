@@ -32,6 +32,7 @@ import net.minecraft.world.level.material.Fluid;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
@@ -191,6 +192,21 @@ public class ModPlatform {
 
     @ExpectPlatform
     public static Block getWildCropBlock(MobEffect mobEffect, int duration, BlockBehaviour.Properties properties){
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static Item getDrinkable(Item.Properties properties,boolean hasFoodEffectTooltip, boolean hasCustomTooltip){
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static Item getPapayaJuice(Item.Properties properties){
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static Item getLimeJuice(Item.Properties properties){
         throw new AssertionError();
     }
 

@@ -7,6 +7,7 @@ import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.client.recipebook.CookingPotRecipeBookTab;
 import vectorwing.farmersdelight.common.tag.ForgeTags;
@@ -41,7 +42,23 @@ public class ThaiCookingRecipe {
                 .unlockedByAnyIngredient(Items.COOKED_PORKCHOP)
                 .build(consumer,ForgeRegistries.ITEMS.getKey(Item.byBlock(ModBlocks.SPICY_MINCED_PORK_SALAD_FEAST)));
 
-        CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.LIME), Ingredient.of(ForgeTags.TOOLS_KNIVES),ModItems.SLICED_LIME).build(consumer,ForgeRegistries.ITEMS.getKey(ModItems.SLICED_LIME));
-        CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.UNRIPE_PAPAYA), Ingredient.of(ForgeTags.TOOLS_KNIVES),ModItems.SLICED_UNRIPE_PAPAYA).build(consumer,ForgeRegistries.ITEMS.getKey(ModItems.SLICED_UNRIPE_PAPAYA));
+        CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.LIME), Ingredient.of(ForgeTags.TOOLS_KNIVES),ModItems.SLICED_LIME,2).build(consumer,ForgeRegistries.ITEMS.getKey(ModItems.SLICED_LIME));
+        CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.UNRIPE_PAPAYA), Ingredient.of(ForgeTags.TOOLS_KNIVES),ModItems.SLICED_UNRIPE_PAPAYA,4).build(consumer,ForgeRegistries.ITEMS.getKey(ModItems.SLICED_UNRIPE_PAPAYA));
+        CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.PAPAYA), Ingredient.of(ForgeTags.TOOLS_KNIVES),ModItems.SLICED_PAPAYA,2).build(consumer,ForgeRegistries.ITEMS.getKey(ModItems.SLICED_PAPAYA));
+
+        CookingPotRecipeBuilder.cookingPotRecipe(ModItems.PAPAYA_JUICE,1,CookingRecipes.NORMAL_COOKING,1.0f)
+                .addIngredient(ModItems.SLICED_PAPAYA)
+                .addIngredient(ModItems.SLICED_PAPAYA)
+                .addIngredient(Items.SUGAR)
+                .unlockedByItems("has_sliced_papaya", new ItemLike[]{ModItems.SLICED_PAPAYA})
+                .setRecipeBookTab(CookingPotRecipeBookTab.DRINKS)
+                .build(consumer,ForgeRegistries.ITEMS.getKey(ModItems.PAPAYA_JUICE));
+
+        CookingPotRecipeBuilder.cookingPotRecipe(ModItems.LIME_JUICE,1,CookingRecipes.NORMAL_COOKING,1.0f)
+                .addIngredient(ModItems.SLICED_LIME)
+                .addIngredient(Items.SUGAR)
+                .unlockedByItems("has_sliced_lime", new ItemLike[]{ModItems.SLICED_LIME})
+                .setRecipeBookTab(CookingPotRecipeBookTab.DRINKS)
+                .build(consumer,ForgeRegistries.ITEMS.getKey(ModItems.LIME_JUICE));
     }
 }

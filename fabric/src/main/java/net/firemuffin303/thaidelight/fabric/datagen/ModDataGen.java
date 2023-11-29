@@ -74,6 +74,7 @@ public class ModDataGen implements DataGeneratorEntrypoint {
             ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,ModItems.LIME_SEED,4).requires(ModItems.LIME).unlockedBy(getHasName(ModItems.LIME),has(ModItems.LIME)).save(exporter,"crafting/"+getItemName(ModItems.LIME_SEED)+"_from_crafting");
             ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,ModItems.PAPAYA_SEED,4).requires(ModItems.PAPAYA).unlockedBy(getHasName(ModItems.PAPAYA),has(ModItems.PAPAYA)).save(exporter,"crafting/"+getItemName(ModItems.PAPAYA_SEED)+"_by_papaya_from_crafting");
             ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,ModItems.PAPAYA_SEED,4).requires(ModItems.UNRIPE_PAPAYA).unlockedBy(getHasName(ModItems.UNRIPE_PAPAYA),has(ModItems.UNRIPE_PAPAYA)).save(exporter,"crafting/"+getItemName(ModItems.PAPAYA_SEED)+"_by_unripe_papaya_from_crafting");
+            ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,ModItems.PAPAYA_SEED,2).requires(ModItems.SLICED_PAPAYA).unlockedBy(getHasName(ModItems.SLICED_PAPAYA),has(ModItems.SLICED_PAPAYA)).save(exporter,"crafting/"+getItemName(ModItems.PAPAYA_SEED)+"_by_sliced_papaya_from_crafting");
         }
 
         private void smithing(Consumer<FinishedRecipe> exporter){
