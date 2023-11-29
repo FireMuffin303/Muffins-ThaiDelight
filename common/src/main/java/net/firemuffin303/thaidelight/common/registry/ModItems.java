@@ -121,16 +121,16 @@ public class ModItems {
         register("lime_juice",LIME_JUICE);
 
         register("lime",LIME);
-        register("sliced_lime",SLICED_LIME);
+        register("lime_slice",SLICED_LIME);
         register("lime_seeds",LIME_SEED);
 
         register("pepper",PEPPER);
         register("pepper_seeds",PEPPER_SEED);
 
         register("papaya",PAPAYA);
-        register("sliced_papaya",SLICED_PAPAYA);
+        register("papaya_slice",SLICED_PAPAYA);
         register("unripe_papaya",UNRIPE_PAPAYA);
-        register("sliced_unripe_papaya",SLICED_UNRIPE_PAPAYA);
+        register("unripe_papaya_slice",SLICED_UNRIPE_PAPAYA);
         register("papaya_seeds",PAPAYA_SEED);
 
 

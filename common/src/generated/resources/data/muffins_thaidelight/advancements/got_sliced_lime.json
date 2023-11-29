@@ -6,7 +6,7 @@
         "items": [
           {
             "items": [
-              "muffins_thaidelight:sliced_lime"
+              "muffins_thaidelight:lime_slice"
             ]
           }
         ]
@@ -23,7 +23,7 @@
     "frame": "task",
     "hidden": true,
     "icon": {
-      "item": "muffins_thaidelight:sliced_lime"
+      "item": "muffins_thaidelight:lime_slice"
     },
     "show_toast": true,
     "title": {

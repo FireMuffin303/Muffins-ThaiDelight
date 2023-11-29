@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_sliced_papaya": {
+    "has_papaya_slice": {
       "conditions": {
         "items": [
           {
             "items": [
-              "muffins_thaidelight:sliced_papaya"
+              "muffins_thaidelight:papaya_slice"
             ]
           }
         ]
@@ -22,7 +22,7 @@
   },
   "requirements": [
     [
-      "has_sliced_papaya",
+      "has_papaya_slice",
       "has_the_recipe"
     ]
   ],

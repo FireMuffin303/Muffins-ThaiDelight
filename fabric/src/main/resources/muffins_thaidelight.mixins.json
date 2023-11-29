@@ -10,7 +10,8 @@
   ],
   "mixins": [
     "ModEnchantmentHelperMixin",
-    "ModEnchantmentMixin"
+    "ModEnchantmentMixin",
+    "StructurePoolAccessorMixin"
   ],
   "injectors": {
     "defaultRequire": 1

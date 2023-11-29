@@ -23,6 +23,10 @@ public class LangDataGen extends FabricLanguageProvider {
         translationBuilder.add("advancement.muffins_thaidelight.sliced_lime","Is it snapshot day?");
         translationBuilder.add("advancement.muffins_thaidelight.sliced_lime.description","Obtains Sliced Lime");
 
+        translationBuilder.add("farmersdelight.tooltip.papaya_juice","Clear Hunger Effect");
+        translationBuilder.add("farmersdelight.tooltip.lime_juice","Clear Blindness and Darkness Effect");
+
+
         translationBuilder.add("itemGroup.muffins_thaidelight.main","Muffin's Thai Delight");
         translationBuilder.add(ModBlocks.CRAB_EGG,"Flower Crab Egg");
         translationBuilder.add(ModBlocks.LIME_CROP,"Lime Bush");
@@ -62,16 +66,16 @@ public class LangDataGen extends FabricLanguageProvider {
         translationBuilder.add(ModItems.FISH_SAUCE_BOTTLE,"Fish Sauce Bottle");
 
         translationBuilder.add(ModItems.LIME,"Lime");
-        translationBuilder.add(ModItems.SLICED_LIME,"Sliced Lime");
+        translationBuilder.add(ModItems.SLICED_LIME,"Lime Slice");
         translationBuilder.add(ModItems.LIME_SEED,"Lime Seeds");
 
         translationBuilder.add(ModItems.PEPPER,"Pepper");
         translationBuilder.add(ModItems.PEPPER_SEED,"Pepper Seeds");
 
         translationBuilder.add(ModItems.PAPAYA,"Papaya");
-        translationBuilder.add(ModItems.SLICED_PAPAYA,"Sliced Papaya");
+        translationBuilder.add(ModItems.SLICED_PAPAYA,"Papaya Slice");
         translationBuilder.add(ModItems.UNRIPE_PAPAYA,"Unripe Papaya");
-        translationBuilder.add(ModItems.SLICED_UNRIPE_PAPAYA,"Sliced Unripe Papaya");
+        translationBuilder.add(ModItems.SLICED_UNRIPE_PAPAYA,"Unripe Papaya Slice");
         translationBuilder.add(ModItems.PAPAYA_SEED,"Papaya Seeds");
 
         translationBuilder.add(ModItems.PAPAYA_JUICE,"Papaya Juice");
@@ -108,6 +112,9 @@ public class LangDataGen extends FabricLanguageProvider {
 
             translationBuilder.add("advancement.muffins_thaidelight.sliced_lime","วันนี้มี Snapshot หรอ?");
             translationBuilder.add("advancement.muffins_thaidelight.sliced_lime.description","ได้รับมะนาวหั่น");
+
+            translationBuilder.add("farmersdelight.tooltip.papaya_juice","ล้าง Hunger");
+            translationBuilder.add("farmersdelight.tooltip.lime_juice","ล้าง Blindness and Darkness Effect");
 
 
             translationBuilder.add("itemGroup.muffins_thaidelight.main","Muffin's Thai Delight");
