@@ -1,8 +1,9 @@
-// 1.20.1	2023-11-29T18:53:19.7315785	Muffin's Thai Delight/minecraft:chest Loot Table
+// 1.20.1	2023-12-01T10:57:00.9124531	Muffin's Thai Delight/minecraft:chest Loot Table
 0438f8bbddf75650fea2ef5ccec4122126b42c09 data\muffins_thaidelight\loot_tables\inject\chests\village\village_savanna_house.json
 965b8c7842ca3e1c933bc5f8615e70a472820632 data\muffins_thaidelight\loot_tables\inject\chests\abandoned_mineshaft.json
 0438f8bbddf75650fea2ef5ccec4122126b42c09 data\muffins_thaidelight\loot_tables\inject\chests\village\village_desert_house.json
 0438f8bbddf75650fea2ef5ccec4122126b42c09 data\muffins_thaidelight\loot_tables\inject\chests\village\village_taiga_house.json
 965b8c7842ca3e1c933bc5f8615e70a472820632 data\muffins_thaidelight\loot_tables\inject\chests\pillager_outpost.json
+95c81fde6f4ffff6f688b6298f113dfa55ecc489 data\muffins_thaidelight\loot_tables\chests\village\village_thai_house.json
 0438f8bbddf75650fea2ef5ccec4122126b42c09 data\muffins_thaidelight\loot_tables\inject\chests\village\village_snowy_house.json
 0438f8bbddf75650fea2ef5ccec4122126b42c09 data\muffins_thaidelight\loot_tables\inject\chests\village\village_plains_house.json

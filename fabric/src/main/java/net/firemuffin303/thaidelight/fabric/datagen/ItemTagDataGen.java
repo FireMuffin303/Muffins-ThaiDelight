@@ -27,7 +27,11 @@ public class ItemTagDataGen extends FabricTagProvider.ItemTagProvider {
 
         getOrCreateTagBuilder(TagKey.create(Registries.ITEM, new ResourceLocation("create","upright_on_belt")))
                 .add(ModItems.SEAFOOD_BOTTLE)
-                .add(ModItems.FISH_SAUCE_BOTTLE);
+                .add(ModItems.FISH_SAUCE_BOTTLE)
+                .add(ModItems.LIME_JUICE)
+                .add(ModItems.PAPAYA_JUICE);
+
+        getOrCreateTagBuilder(ItemTags.MUSIC_DISCS).add(ModItems.ESAN_MUSIC_DISC);
 
     }
 }

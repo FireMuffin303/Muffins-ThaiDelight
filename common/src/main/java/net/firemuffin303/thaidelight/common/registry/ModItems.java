@@ -2,6 +2,7 @@ package net.firemuffin303.thaidelight.common.registry;
 
 import com.google.common.collect.Sets;
 import net.firemuffin303.thaidelight.ThaiDelight;
+import net.firemuffin303.thaidelight.common.item.ModMusicDisc;
 import net.firemuffin303.thaidelight.common.item.bottle.FishSauceBottleItem;
 import net.firemuffin303.thaidelight.common.item.LoinclothItem;
 import net.firemuffin303.thaidelight.common.item.bottle.SeafoodBottleItem;
@@ -96,6 +97,9 @@ public class ModItems {
     //Equipment
     public static final Item LOINCLOTH = new LoinclothItem(new Item.Properties());
 
+    //Disc
+    public static final Item ESAN_MUSIC_DISC = new ModMusicDisc(3,SoundEvents.MUSIC_DISC_RELIC,new Item.Properties().stacksTo(1).rarity(Rarity.RARE),218);
+
     public static void init(){
         register("stone_pastle",STONE_PASTLE);
         register("iron_pastle",IRON_PASTLE);
@@ -140,6 +144,7 @@ public class ModItems {
         //register("crab_fried_rice",CRAB_FRIED_RICE);
 
         register("loincloth",LOINCLOTH);
+        register("music_disc_northeast",ESAN_MUSIC_DISC);
 
 
     }

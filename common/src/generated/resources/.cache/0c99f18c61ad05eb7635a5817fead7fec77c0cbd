@@ -1,4 +1,5 @@
-// 1.20.1	2023-11-29T18:53:19.7355947	Muffin's Thai Delight/Tags for minecraft:item
+// 1.20.1	2023-12-01T10:57:00.9147226	Muffin's Thai Delight/Tags for minecraft:item
 8936d16e9c531500c0d259804e58961ab3bf9c3a data\minecraft\tags\items\piglin_loved.json
-4a2919f7dae9352bc932c67d840882f9cab52b40 data\create\tags\items\upright_on_belt.json
+1ccd6b441737fb2512fc1367d5a0f41c4cc997ee data\create\tags\items\upright_on_belt.json
 507570f6349dde1accdb30a24d8ae61ee3642fbe data\origins\tags\items\meat.json
+1eaab4f0393486f26a4d8cc497c15cf33b9363b4 data\minecraft\tags\items\music_discs.json

@@ -1,7 +1,6 @@
 package net.firemuffin303.thaidelight.fabric;
 
 import com.mojang.datafixers.util.Pair;
-import net.firemuffin303.thaidelight.fabric.mixin.StructurePoolAccessorMixin;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
@@ -16,6 +15,7 @@ import net.firemuffin303.thaidelight.common.registry.ModEntityTypes;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.firemuffin303.thaidelight.fabric.common.registry.ModBlocksFabric;
 import net.firemuffin303.thaidelight.fabric.common.registry.ModItemsFabric;
+import net.firemuffin303.thaidelight.fabric.mixin.StructurePoolAccessorMixin;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -24,9 +24,6 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.npc.VillagerTrades;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.levelgen.structure.pools.SinglePoolElement;
 import net.minecraft.world.level.levelgen.structure.pools.StructurePoolElement;
@@ -51,7 +48,7 @@ public class ThaiDelightModFabric implements ModInitializer {
             LOGGER.info("Registering structure in village type of plains");
             this.addToStructurePool(server,
                     new ResourceLocation("minecraft","village/plains/houses"),
-                    new ResourceLocation(ThaiDelight.MOD_ID, "village/plains/houses/thai_house_1"),4);
+                    new ResourceLocation(ThaiDelight.MOD_ID, "village/plains/houses/small_thai_house_1"),4);
         });
         ThaiDelight.init();
         ThaiDelight.postInit();
@@ -115,12 +112,15 @@ public class ThaiDelightModFabric implements ModInitializer {
                 .getHolderOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, new ResourceLocation("minecraft", "empty")));
 
         server.registryAccess().registryOrThrow(Registries.TEMPLATE_POOL).getOptional(poolIdentifier).ifPresentOrElse((structurePool) -> {
-            SinglePoolElement compostPilePool = (SinglePoolElement) StructurePoolElement.single(nbtIdentifier.toString(), emptyProcessorList).apply(StructureTemplatePool.Projection.RIGID);
+            SinglePoolElement compostPilePool = (SinglePoolElement) StructurePoolElement.legacy(nbtIdentifier.toString(), emptyProcessorList).apply(StructureTemplatePool.Projection.RIGID);
+            LOGGER.info(compostPilePool.toString());
             List<Pair<StructurePoolElement, Integer>> elementCounts = new ArrayList(((StructurePoolAccessorMixin)structurePool).getRawTemplates());
             elementCounts.add(Pair.of(compostPilePool, weight));
             ((StructurePoolAccessorMixin)structurePool).setRawTemplates(elementCounts);
             IntStream.range(0, weight).forEach((value) -> {
                 ((StructurePoolAccessorMixin)structurePool).getTemplates().add(compostPilePool);
+                LOGGER.info(((StructurePoolAccessorMixin)structurePool).getTemplates().toString());
+
             });
         }, () -> {
             LOGGER.warn("No structure pool found for {}, no compost heaps will be added on it.", poolIdentifier);

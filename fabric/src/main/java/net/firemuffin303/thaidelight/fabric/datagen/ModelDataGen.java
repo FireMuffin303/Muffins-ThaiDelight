@@ -74,6 +74,7 @@ public class ModelDataGen extends FabricModelProvider {
 
 
         itemModelGenerator.generateFlatItem(ModItems.LOINCLOTH, ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.ESAN_MUSIC_DISC, ModelTemplates.FLAT_ITEM);
 
         itemModelGenerator.generateFlatItem(ModItemsFabric.SOMTAM, ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItemsFabric.SPICY_MINCED_PORK_SALAD, ModelTemplates.FLAT_ITEM);

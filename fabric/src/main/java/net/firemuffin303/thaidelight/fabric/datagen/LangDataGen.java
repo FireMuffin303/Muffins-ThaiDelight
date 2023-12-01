@@ -82,6 +82,8 @@ public class LangDataGen extends FabricLanguageProvider {
         translationBuilder.add(ModItems.LIME_JUICE,"Lime Juice");
 
         translationBuilder.add(ModItems.LOINCLOTH,"Loincloth");
+        translationBuilder.add(ModItems.ESAN_MUSIC_DISC,"Music Disc");
+        translationBuilder.add("item.muffins_thaidelight.music_disc_northeast.desc","FireMuffin303 - untitled");
 
         translationBuilder.add(ModItemsFabric.SOMTAM,"Plate of Somtam");
         translationBuilder.add(ModItemsFabric.SPICY_MINCED_PORK_SALAD,"Plate of Spicy Minced Pork Salad");
@@ -169,6 +171,8 @@ public class LangDataGen extends FabricLanguageProvider {
             translationBuilder.add(ModItems.LIME_JUICE,"น้ำมะนาว");
 
             translationBuilder.add(ModItems.LOINCLOTH,"ผ้าขาวม้า");
+            translationBuilder.add(ModItems.ESAN_MUSIC_DISC,"แผ่นเพลง");
+            translationBuilder.add("item.muffins_thaidelight.music_disc_northeast.desc","FireMuffin303 - untitled");
 
             translationBuilder.add(ModItems.STONE_PASTLE,"สากหิน");
             translationBuilder.add(ModItems.IRON_PASTLE,"สากเหล็ก");
