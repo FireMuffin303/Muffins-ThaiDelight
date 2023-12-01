@@ -14,7 +14,8 @@ public class VillageStructures {
     public static void addNewVillageBuilding(ServerAboutToStartEvent event) {
         Registry<StructureTemplatePool> templatePools = event.getServer().registryAccess().registry(Registries.TEMPLATE_POOL).get();
         Registry<StructureProcessorList> processorLists = event.getServer().registryAccess().registry(Registries.PROCESSOR_LIST).get();
-        addBuildingToPool(templatePools, processorLists, new ResourceLocation("minecraft:village/plains/houses"), "muffins_thaidelight:village/houses/thai_house_village", 4);
+        addBuildingToPool(templatePools, processorLists, new ResourceLocation("minecraft:village/plains/houses"),
+                "muffins_thaidelight:village/plains/houses/small_thai_house_1", 4);
 
     }
 }

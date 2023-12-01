@@ -11,6 +11,7 @@ import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.firemuffin303.thaidelight.ThaiDelight;
 import net.firemuffin303.thaidelight.common.entity.Dragonfly;
 import net.firemuffin303.thaidelight.common.entity.FlowerCrabEntity;
+import net.firemuffin303.thaidelight.common.event.ModVillagerTrades;
 import net.firemuffin303.thaidelight.common.registry.ModEntityTypes;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.firemuffin303.thaidelight.fabric.common.registry.ModBlocksFabric;
@@ -63,23 +64,21 @@ public class ThaiDelightModFabric implements ModInitializer {
         BiomeModifications.addSpawn(BiomeSelectors.includeByKey(Biomes.MANGROVE_SWAMP,Biomes.SWAMP), MobCategory.CREATURE,ModEntityTypes.FLOWER_CRAB,10,3,5);
         BiomeModifications.addSpawn(BiomeSelectors.includeByKey(Biomes.MANGROVE_SWAMP,Biomes.SWAMP,Biomes.RIVER), MobCategory.AMBIENT,ModEntityTypes.DRAGONFLY,5,1,3);
 
-       TradeOfferHelper.registerVillagerOffers(VillagerProfession.FARMER, 1, (factories) -> {
-           factories.add(new VillagerTrades.EmeraldForItems(ModItems.PEPPER,26,5,2));
-           factories.add(new VillagerTrades.EmeraldForItems(ModItems.LIME,26,5,2));
-           factories.add(new VillagerTrades.EmeraldForItems(ModItems.UNRIPE_PAPAYA,26,5,2));
 
 
-       });
-
-        TradeOfferHelper.registerVillagerOffers(VillagerProfession.FARMER, 2, (factories) -> {
-            factories.add(new VillagerTrades.EmeraldForItems(ModItems.PAPAYA,26,5,2));
+        ModVillagerTrades.farmerTrade().forEach(integerMerchantOfferPair -> {
+            TradeOfferHelper.registerVillagerOffers(VillagerProfession.FARMER,integerMerchantOfferPair.first,(factories) ->{
+                factories.add((entity, randomSource) -> integerMerchantOfferPair.second);
+            });
         });
 
 
+
+
         TradeOfferHelper.registerWanderingTraderOffers(1, (factories) -> {
-            factories.add(new VillagerTrades.ItemsForEmeralds(ModItems.PEPPER_SEED,1,2,1));
-            factories.add(new VillagerTrades.ItemsForEmeralds(ModItems.LIME_SEED,1,2,1));
-            factories.add(new VillagerTrades.ItemsForEmeralds(ModItems.PAPAYA_SEED,1,2,1));
+            ModVillagerTrades.wanderTrade().forEach(integerMerchantOfferPair -> {
+                factories.add((entity, randomSource) -> integerMerchantOfferPair.second);
+            });
         });
 
 
