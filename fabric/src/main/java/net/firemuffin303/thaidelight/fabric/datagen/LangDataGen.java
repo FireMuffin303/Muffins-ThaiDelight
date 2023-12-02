@@ -86,8 +86,9 @@ public class LangDataGen extends FabricLanguageProvider {
         translationBuilder.add("item.muffins_thaidelight.music_disc_northeast.desc","FireMuffin303 - untitled");
 
         translationBuilder.add(ModItemsFabric.SOMTAM,"Plate of Somtam");
-        translationBuilder.add(ModItemsFabric.SPICY_MINCED_PORK_SALAD,"Plate of Spicy Minced Pork Salad");
+        translationBuilder.add(ModItemsFabric.SPICY_MINCED_MEAT_SALAD,"Plate of Spicy Minced Pork Salad");
         translationBuilder.add(ModItemsFabric.CRAB_FRIED_RICE,"Plate of Crab Fried Rice");
+        translationBuilder.add(ModItemsFabric.STIR_FRIED_NOODLE,"Stir Fried Noodle");
 
         translationBuilder.add(ModItems.STONE_PASTLE,"Stone Pastle");
         translationBuilder.add(ModItems.IRON_PASTLE,"Iron Pastle");
@@ -165,7 +166,9 @@ public class LangDataGen extends FabricLanguageProvider {
 
             translationBuilder.add(ModItemsFabric.SOMTAM,"ถ้วยส้มตำ");
             translationBuilder.add(ModItemsFabric.CRAB_FRIED_RICE,"ถ้วยข้าวผัดปู");
-            translationBuilder.add(ModItemsFabric.SPICY_MINCED_PORK_SALAD,"ถ้วยลาบ");
+            translationBuilder.add(ModItemsFabric.SPICY_MINCED_MEAT_SALAD,"ถ้วยลาบ");
+            translationBuilder.add(ModItemsFabric.STIR_FRIED_NOODLE,"ผัดหมี่");
+
 
             translationBuilder.add(ModItems.PAPAYA_JUICE,"น้ำมะละกอ");
             translationBuilder.add(ModItems.LIME_JUICE,"น้ำมะนาว");

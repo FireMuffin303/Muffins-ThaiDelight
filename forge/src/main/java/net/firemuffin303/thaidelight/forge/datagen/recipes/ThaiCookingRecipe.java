@@ -33,14 +33,14 @@ public class ThaiCookingRecipe {
                 .unlockedByAnyIngredient(ModItems.CRAB_MEAT)
                 .build(consumer,ForgeRegistries.ITEMS.getKey(ModItemsForge.CRAB_FRIED_RICE.get()));
 
-        CookingPotRecipeBuilder.cookingPotRecipe(ModBlocks.SPICY_MINCED_PORK_SALAD_FEAST,1,CookingRecipes.NORMAL_COOKING,0.35f, Items.BOWL)
+        CookingPotRecipeBuilder.cookingPotRecipe(ModBlocks.SPICY_MINCED_MEAT_SALAD_FEAST,1,CookingRecipes.NORMAL_COOKING,0.35f, Items.BOWL)
                 .addIngredient(Items.COOKED_PORKCHOP)
                 .addIngredient(ModItems.PEPPER)
                 .addIngredient(Items.SUGAR)
                 .addIngredient(ModItems.FISH_SAUCE_BOTTLE)
                 .setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
                 .unlockedByAnyIngredient(Items.COOKED_PORKCHOP)
-                .build(consumer,ForgeRegistries.ITEMS.getKey(Item.byBlock(ModBlocks.SPICY_MINCED_PORK_SALAD_FEAST)));
+                .build(consumer,ForgeRegistries.ITEMS.getKey(Item.byBlock(ModBlocks.SPICY_MINCED_MEAT_SALAD_FEAST)));
 
         CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.LIME), Ingredient.of(ForgeTags.TOOLS_KNIVES),ModItems.SLICED_LIME,2).build(consumer,ForgeRegistries.ITEMS.getKey(ModItems.SLICED_LIME));
         CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.UNRIPE_PAPAYA), Ingredient.of(ForgeTags.TOOLS_KNIVES),ModItems.SLICED_UNRIPE_PAPAYA,4).build(consumer,ForgeRegistries.ITEMS.getKey(ModItems.SLICED_UNRIPE_PAPAYA));

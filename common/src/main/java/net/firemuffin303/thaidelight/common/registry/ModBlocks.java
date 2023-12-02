@@ -54,7 +54,7 @@ public class ModBlocks {
     //Feast
     public static final Block CRAB_FRIED_RICE_FEAST = ModPlatform.getCrabFriedRice();
     public static final Block SOMTAM_FEAST = ModPlatform.getSomtamBlock();
-    public static final Block SPICY_MINCED_PORK_SALAD_FEAST = ModPlatform.getSpicyMincedPorkBlock();
+    public static final Block SPICY_MINCED_MEAT_SALAD_FEAST = ModPlatform.getSpicyMincedPorkBlock();
 
     public static void init(){
         //Functional Block
@@ -87,7 +87,7 @@ public class ModBlocks {
 
         //Feast
         registerWithItem("somtam_feast",SOMTAM_FEAST);
-        registerWithItem("spicy_minced_pork_salad_feast",SPICY_MINCED_PORK_SALAD_FEAST);
+        registerWithItem("spicy_minced_meat_salad_feast", SPICY_MINCED_MEAT_SALAD_FEAST);
         registerWithItem("crab_fried_rice_feast", CRAB_FRIED_RICE_FEAST);
     }
 

@@ -77,12 +77,13 @@ public class ModelDataGen extends FabricModelProvider {
         itemModelGenerator.generateFlatItem(ModItems.ESAN_MUSIC_DISC, ModelTemplates.FLAT_ITEM);
 
         itemModelGenerator.generateFlatItem(ModItemsFabric.SOMTAM, ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItemsFabric.SPICY_MINCED_PORK_SALAD, ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItemsFabric.SPICY_MINCED_MEAT_SALAD, ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItemsFabric.CRAB_FRIED_RICE, ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItemsFabric.STIR_FRIED_NOODLE, ModelTemplates.FLAT_ITEM);
 
 
         itemModelGenerator.generateFlatItem(Item.byBlock(ModBlocks.SOMTAM_FEAST), ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(Item.byBlock(ModBlocks.SPICY_MINCED_PORK_SALAD_FEAST), ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(Item.byBlock(ModBlocks.SPICY_MINCED_MEAT_SALAD_FEAST), ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(Item.byBlock(ModBlocks.CRAB_FRIED_RICE_FEAST), ModelTemplates.FLAT_ITEM);
 
         itemModelGenerator.generateFlatItem(ModItems.STONE_PASTLE,"_3d",PASTLE_3D);

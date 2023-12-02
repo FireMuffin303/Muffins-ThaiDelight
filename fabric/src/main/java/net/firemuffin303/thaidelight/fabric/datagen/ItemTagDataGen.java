@@ -3,6 +3,7 @@ package net.firemuffin303.thaidelight.fabric.datagen;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
+import net.firemuffin303.thaidelight.fabric.common.registry.ModItemsFabric;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -23,7 +24,8 @@ public class ItemTagDataGen extends FabricTagProvider.ItemTagProvider {
                 .add(ModItems.CRAB_MEAT)
                 .add(ModItems.COOKED_CRAB_MEAT)
                 .add(ModItems.DRAGONFLY)
-                .add(ModItems.COOKED_DRAGONFLY);
+                .add(ModItems.COOKED_DRAGONFLY)
+                .add(ModItemsFabric.SPICY_MINCED_MEAT_SALAD);
 
         getOrCreateTagBuilder(TagKey.create(Registries.ITEM, new ResourceLocation("create","upright_on_belt")))
                 .add(ModItems.SEAFOOD_BOTTLE)
