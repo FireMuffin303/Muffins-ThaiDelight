@@ -8,13 +8,19 @@ import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.firemuffin303.thaidelight.fabric.common.registry.ModItemsFabric;
 import net.minecraft.data.models.BlockModelGenerators;
 import net.minecraft.data.models.ItemModelGenerators;
+import net.minecraft.data.models.blockstates.MultiVariantGenerator;
+import net.minecraft.data.models.blockstates.PropertyDispatch;
+import net.minecraft.data.models.blockstates.VariantProperties;
 import net.minecraft.data.models.model.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
 import java.util.Optional;
 
+import static net.minecraft.data.models.model.TextureMapping.cubeTop;
 import static net.minecraft.data.models.model.TextureMapping.getBlockTexture;
 
 public class ModelDataGen extends FabricModelProvider {
@@ -30,6 +36,8 @@ public class ModelDataGen extends FabricModelProvider {
         createCrateBlock(ModBlocks.PEPPER_CRATE,blockStateModelGenerator);
         createCrateBlock(ModBlocks.UNRIPE_PAPAYA_CRATE,blockStateModelGenerator);
         createCrateBlock(ModBlocks.PAPAYA_CRATE,blockStateModelGenerator);
+
+        createLimeCrop(blockStateModelGenerator);
     }
 
     @Override
@@ -50,7 +58,6 @@ public class ModelDataGen extends FabricModelProvider {
 
         itemModelGenerator.generateFlatItem(Item.byBlock(ModBlocks.WILD_PEPPER_CROP), ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(Item.byBlock(ModBlocks.WILD_PAPAYA_CROP), ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(Item.byBlock(ModBlocks.WILD_LIME_CROP), ModelTemplates.FLAT_ITEM);
 
 
         itemModelGenerator.generateFlatItem(ModItems.SEAFOOD_BOTTLE, ModelTemplates.FLAT_ITEM);
@@ -58,7 +65,6 @@ public class ModelDataGen extends FabricModelProvider {
 
         itemModelGenerator.generateFlatItem(ModItems.LIME, ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.SLICED_LIME, ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.LIME_SEED, ModelTemplates.FLAT_ITEM);
 
         itemModelGenerator.generateFlatItem(ModItems.PEPPER, ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.PEPPER_SEED, ModelTemplates.FLAT_ITEM);
@@ -102,6 +108,18 @@ public class ModelDataGen extends FabricModelProvider {
     private static void createBlock(Block block,ModelTemplate modelTemplate,TextureMapping textureMapping, BlockModelGenerators blockModelGenerator){
         blockModelGenerator.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block,modelTemplate.create(block,textureMapping, blockModelGenerator.modelOutput)));
 
+    }
+
+    private static void createLimeCrop( BlockModelGenerators blockModelGenerator){
+        blockModelGenerator.createCrossBlockWithDefaultItem(ModBlocks.LIME_SAPLING, BlockModelGenerators.TintState.NOT_TINTED);
+        blockModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.LIME_CROP).with(PropertyDispatch.property(BlockStateProperties.AGE_2).generate((integer) -> {
+
+            return net.minecraft.data.models.blockstates.Variant.variant().with(VariantProperties.MODEL,
+                    blockModelGenerator.createSuffixedVariant(ModBlocks.LIME_CROP, "_stage" + integer, ModelTemplates.AZALEA, (resourceLocation -> {
+                        return new TextureMapping().put(TextureSlot.SIDE, getBlockTexture(ModBlocks.LIME_CROP, "_side_stage" + integer))
+                                .put(TextureSlot.TOP, getBlockTexture(ModBlocks.LIME_CROP, "_top_stage" + integer));
+                    })));
+        })));
     }
 
     private static void createCubeAll(Block block, BlockModelGenerators blockModelGenerator){

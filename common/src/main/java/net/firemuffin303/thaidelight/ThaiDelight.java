@@ -3,6 +3,7 @@ package net.firemuffin303.thaidelight;
 import net.firemuffin303.thaidelight.common.block.saucebowl.SauceBowlInteraction;
 import net.firemuffin303.thaidelight.common.registry.*;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.ComposterBlock;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,7 +37,7 @@ public class ThaiDelight {
 
     public static void registerComposterBlock(){
         ComposterBlock.COMPOSTABLES.put(ModItems.PEPPER_SEED,0.3f);
-        ComposterBlock.COMPOSTABLES.put(ModItems.LIME_SEED,0.3f);
+        ComposterBlock.COMPOSTABLES.put(Item.byBlock(ModBlocks.LIME_SAPLING),0.3f);
         ComposterBlock.COMPOSTABLES.put(ModItems.PAPAYA_SEED,0.3f);
         ComposterBlock.COMPOSTABLES.put(ModItems.PEPPER,0.65f);
         ComposterBlock.COMPOSTABLES.put(ModItems.LIME,0.65f);

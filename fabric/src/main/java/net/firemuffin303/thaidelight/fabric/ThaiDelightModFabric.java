@@ -1,6 +1,7 @@
 package net.firemuffin303.thaidelight.fabric;
 
 import com.mojang.datafixers.util.Pair;
+import com.nhoryzon.mc.farmersdelight.registry.ConfiguredFeaturesRegistry;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
@@ -12,6 +13,7 @@ import net.firemuffin303.thaidelight.ThaiDelight;
 import net.firemuffin303.thaidelight.common.entity.Dragonfly;
 import net.firemuffin303.thaidelight.common.entity.FlowerCrabEntity;
 import net.firemuffin303.thaidelight.common.event.ModVillagerTrades;
+import net.firemuffin303.thaidelight.common.registry.ModConfiguredFeatures;
 import net.firemuffin303.thaidelight.common.registry.ModEntityTypes;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.firemuffin303.thaidelight.fabric.common.registry.ModBlocksFabric;
@@ -26,6 +28,7 @@ import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.level.biome.Biomes;
+import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.structure.pools.SinglePoolElement;
 import net.minecraft.world.level.levelgen.structure.pools.StructurePoolElement;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
@@ -64,25 +67,11 @@ public class ThaiDelightModFabric implements ModInitializer {
         BiomeModifications.addSpawn(BiomeSelectors.includeByKey(Biomes.MANGROVE_SWAMP,Biomes.SWAMP), MobCategory.CREATURE,ModEntityTypes.FLOWER_CRAB,10,3,5);
         BiomeModifications.addSpawn(BiomeSelectors.includeByKey(Biomes.MANGROVE_SWAMP,Biomes.SWAMP,Biomes.RIVER), MobCategory.AMBIENT,ModEntityTypes.DRAGONFLY,5,1,3);
 
+        BiomeModifications.addFeature((context) ->{
+            return BiomeSelectors.includeByKey(Biomes.FOREST, Biomes.BIRCH_FOREST, Biomes.FLOWER_FOREST).test(context);
+        }, GenerationStep.Decoration.VEGETAL_DECORATION, ModConfiguredFeatures.PATCH_LIME_BUSH);
 
-
-        ModVillagerTrades.farmerTrade().forEach(integerMerchantOfferPair -> {
-            TradeOfferHelper.registerVillagerOffers(VillagerProfession.FARMER,integerMerchantOfferPair.first,(factories) ->{
-                factories.add((entity, randomSource) -> integerMerchantOfferPair.second);
-            });
-        });
-
-
-
-
-        TradeOfferHelper.registerWanderingTraderOffers(1, (factories) -> {
-            ModVillagerTrades.wanderTrade().forEach(integerMerchantOfferPair -> {
-                factories.add((entity, randomSource) -> integerMerchantOfferPair.second);
-            });
-        });
-
-
-
+        this.addVillagersTrades();
 
         Set<ResourceLocation> chestsId = Set.of(
                 BuiltInLootTables.VILLAGE_PLAINS_HOUSE,
@@ -104,6 +93,23 @@ public class ThaiDelightModFabric implements ModInitializer {
         });
 
 
+    }
+
+    private void addVillagersTrades(){
+        ModVillagerTrades.farmerTrade().forEach(integerMerchantOfferPair -> {
+            TradeOfferHelper.registerVillagerOffers(VillagerProfession.FARMER,integerMerchantOfferPair.first,(factories) ->{
+                factories.add((entity, randomSource) -> integerMerchantOfferPair.second);
+            });
+        });
+
+
+
+
+        TradeOfferHelper.registerWanderingTraderOffers(1, (factories) -> {
+            ModVillagerTrades.wanderTrade().forEach(integerMerchantOfferPair -> {
+                factories.add((entity, randomSource) -> integerMerchantOfferPair.second);
+            });
+        });
     }
 
     protected void addToStructurePool(MinecraftServer server, ResourceLocation poolIdentifier, ResourceLocation nbtIdentifier, int weight) {

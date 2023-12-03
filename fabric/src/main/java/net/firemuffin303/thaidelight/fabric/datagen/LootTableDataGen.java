@@ -4,6 +4,7 @@ import com.nhoryzon.mc.farmersdelight.registry.ItemsRegistry;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableProvider;
 import net.firemuffin303.thaidelight.ThaiDelight;
+import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.resources.ResourceLocation;
@@ -62,7 +63,7 @@ public class LootTableDataGen extends SimpleFabricLootTableProvider {
                     .setRolls(UniformGenerator.between(1,4))
                     .add(LootItem.lootTableItem(ModItems.PEPPER_SEED)
                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0f,4.0f))))
-                    .add(LootItem.lootTableItem(ModItems.LIME_SEED)
+                    .add(LootItem.lootTableItem(ModBlocks.LIME_SAPLING)
                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0f,4.0f))))
                     .add(LootItem.lootTableItem(ModItems.PAPAYA_SEED)
                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0f,4.0f)))));
@@ -78,7 +79,7 @@ public class LootTableDataGen extends SimpleFabricLootTableProvider {
                             .setRolls(UniformGenerator.between(1,2))
                             .add(LootItem.lootTableItem(ModItems.PEPPER_SEED)
                                     .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f,3.0f))))
-                            .add(LootItem.lootTableItem(ModItems.LIME_SEED)
+                            .add(LootItem.lootTableItem(ModBlocks.LIME_SAPLING)
                                     .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f,3.0f))))
                             .add(LootItem.lootTableItem(ModItems.PAPAYA_SEED)
                                     .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f,3.0f)))))
@@ -89,7 +90,7 @@ public class LootTableDataGen extends SimpleFabricLootTableProvider {
                             .setRolls(UniformGenerator.between(1,2))
                             .add(LootItem.lootTableItem(ModItems.PEPPER_SEED)
                                     .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f,3.0f))))
-                            .add(LootItem.lootTableItem(ModItems.LIME_SEED)
+                            .add(LootItem.lootTableItem(ModBlocks.LIME_SAPLING)
                                     .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f,3.0f))))
                             .add(LootItem.lootTableItem(ModItems.PAPAYA_SEED)
                                     .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f,3.0f)))))
@@ -108,7 +109,7 @@ public class LootTableDataGen extends SimpleFabricLootTableProvider {
                                     .setRolls(UniformGenerator.between(1,6))
                                     .add(LootItem.lootTableItem(ModItems.PEPPER_SEED)
                                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f,3.0f))))
-                                    .add(LootItem.lootTableItem(ModItems.LIME_SEED)
+                                    .add(LootItem.lootTableItem(ModBlocks.LIME_SAPLING)
                                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f,3.0f))))
                                     .add(LootItem.lootTableItem(ModItems.PAPAYA_SEED)
                                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f,3.0f))))

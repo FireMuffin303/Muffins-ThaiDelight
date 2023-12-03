@@ -59,13 +59,7 @@ public class ModItems {
     //Crops
     public static final Item LIME = new Item(new Item.Properties());
     public static final Item SLICED_LIME = new Item(new Item.Properties());
-    public static final Item LIME_SEED = new ItemNameBlockItem(ModBlocks.LIME_CROP,new Item.Properties()){
-        @Override
-        public void registerBlocks(Map<Block, Item> map, Item item) {
-            super.registerBlocks(map, item);
-            map.put(ModBlocks.LIME_CROP,item);
-        }
-    };
+
 
     public static final Item PEPPER = new Item(new Item.Properties().food(ModFood.PEPPER)){
         @Override
@@ -126,7 +120,6 @@ public class ModItems {
 
         register("lime",LIME);
         register("lime_slice",SLICED_LIME);
-        register("lime_seeds",LIME_SEED);
 
         register("pepper",PEPPER);
         register("pepper_seeds",PEPPER_SEED);

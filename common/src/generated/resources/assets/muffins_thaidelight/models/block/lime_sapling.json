@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "muffins_thaidelight:block/lime_sapling"
+  }
+}

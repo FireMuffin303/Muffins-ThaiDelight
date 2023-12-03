@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "muffins_thaidelight:item/wild_lime_crop"
+    "layer0": "muffins_thaidelight:block/lime_sapling"
   }
 }
