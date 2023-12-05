@@ -2,10 +2,7 @@ package net.firemuffin303.thaidelight.common.registry;
 
 import net.firemuffin303.thaidelight.common.block.CrabEggBlock;
 import net.firemuffin303.thaidelight.common.block.MortarBlock;
-import net.firemuffin303.thaidelight.common.block.crops.LimeCrop;
-import net.firemuffin303.thaidelight.common.block.crops.LimeSapling;
-import net.firemuffin303.thaidelight.common.block.crops.PapayaCrop;
-import net.firemuffin303.thaidelight.common.block.crops.PepperBlock;
+import net.firemuffin303.thaidelight.common.block.crops.*;
 import net.firemuffin303.thaidelight.common.block.entity.MortarBlockEntity;
 import net.firemuffin303.thaidelight.common.block.saucebowl.LevelSauceBowl;
 import net.firemuffin303.thaidelight.common.block.saucebowl.SauceBowl;
@@ -51,8 +48,9 @@ public class ModBlocks {
     //Crops
     public static final Block LIME_CROP = new LimeCrop(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).randomTicks().sound(SoundType.SWEET_BERRY_BUSH).pushReaction(PushReaction.DESTROY));
     public static final Block LIME_SAPLING = new LimeSapling(BlockBehaviour.Properties.copy(ModBlocks.LIME_CROP).noCollission());
-    public static final Block PEPPER_CROP = new PepperBlock(BlockBehaviour.Properties.copy(Blocks.POTATOES));
-    public static final Block PAPAYA_CROP = new PapayaCrop(BlockBehaviour.Properties.copy(Blocks.POTATOES));
+    public static final Block PEPPER_CROP = new PepperCropBlock(BlockBehaviour.Properties.copy(Blocks.POTATOES));
+    public static final Block PAPAYA_SAPLING = new PapayaSapling(BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING));
+    public static final Block PAPAYA_CROP = new TallPapayaBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).randomTicks().instabreak().strength(1.0F).sound(SoundType.WOOD).ignitedByLava().pushReaction(PushReaction.DESTROY));
 
     //Feast
     public static final Block CRAB_FRIED_RICE_FEAST = ModPlatform.getCrabFriedRice();
@@ -79,14 +77,16 @@ public class ModBlocks {
         registerWithItem("flower_crab_egg",CRAB_EGG);
 
         //Wild Crops
-        registerWithItem("wild_pepper_crop",WILD_PEPPER_CROP);
-        registerWithItem("wild_papaya_crop",WILD_PAPAYA_CROP);
+        registerWithItem("wild_pepper",WILD_PEPPER_CROP);
+        registerWithItem("wild_papaya",WILD_PAPAYA_CROP);
 
         //Crops
         register("pepper_crop",PEPPER_CROP);
         register("lime_bush", LIME_CROP);
         registerWithItem("lime_sapling", LIME_SAPLING);
-        register("papaya_crop",PAPAYA_CROP);
+
+        registerWithItem("papaya_stem",PAPAYA_CROP);
+        registerWithItem("papaya_sapling",PAPAYA_SAPLING);
 
         //Feast
         registerWithItem("somtam_feast",SOMTAM_FEAST);

@@ -44,6 +44,10 @@ public class LimeCrop extends BushBlock implements BonemealableBlock {
         this.registerDefaultState((BlockState)((BlockState)this.stateDefinition.any()).setValue(AGE, 0));
     }
 
+    public boolean isRandomlyTicking(BlockState blockState) {
+       return blockState.getValue(AGE) < 2;
+    }
+
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(new Property[]{AGE});
     }

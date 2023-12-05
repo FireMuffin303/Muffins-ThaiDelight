@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "muffins_thaidelight:lime"
+          "name": "muffins_thaidelight:lime_sapling"
         }
       ],
       "rolls": 1.0
@@ -23,7 +23,7 @@
           "block": "muffins_thaidelight:lime_bush",
           "condition": "minecraft:block_state_property",
           "properties": {
-            "age": "7"
+            "age": "2"
           }
         }
       ],

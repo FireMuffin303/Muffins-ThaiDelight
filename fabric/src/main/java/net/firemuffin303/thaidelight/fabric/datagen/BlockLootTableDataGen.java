@@ -2,6 +2,7 @@ package net.firemuffin303.thaidelight.fabric.datagen;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
+import net.firemuffin303.thaidelight.common.block.crops.LimeCrop;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.minecraft.data.loot.BlockLootSubProvider;
@@ -45,8 +46,18 @@ public class BlockLootTableDataGen extends FabricBlockLootTableProvider {
                                 .when(BlockLootSubProvider.HAS_SILK_TOUCH)
                                 .add(LootItem.lootTableItem(ModBlocks.CRAB_EGG)))));
 
-        net.minecraft.world.level.storage.loot.predicates.LootItemCondition.Builder checkLimeLevel = LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.LIME_CROP).setProperties(net.minecraft.advancements.critereon.StatePropertiesPredicate.Builder.properties().hasProperty(CarrotBlock.AGE, 7));
-        this.add(ModBlocks.LIME_CROP, (net.minecraft.world.level.storage.loot.LootTable.Builder)this.applyExplosionDecay(ModBlocks.LIME_CROP, LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.LIME))).withPool(LootPool.lootPool().when(checkLimeLevel).add(LootItem.lootTableItem(ModItems.LIME).apply(ApplyBonusCount.addBonusBinomialDistributionCount(Enchantments.BLOCK_FORTUNE, 0.5714286F, 3))))));
+        net.minecraft.world.level.storage.loot.predicates.LootItemCondition.Builder checkLimeLevel = LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.LIME_CROP).setProperties(net.minecraft.advancements.critereon.StatePropertiesPredicate.Builder.properties().hasProperty(LimeCrop.AGE, 2));
+        this.add(ModBlocks.LIME_CROP, (net.minecraft.world.level.storage.loot.LootTable.Builder)
+                this.applyExplosionDecay(ModBlocks.LIME_SAPLING,
+                        LootTable.lootTable()
+                                .withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModBlocks.LIME_SAPLING)))
+                                .withPool(LootPool.lootPool().when(checkLimeLevel)
+                                        .add(LootItem.lootTableItem(ModItems.LIME)
+                                                .apply(ApplyBonusCount.addBonusBinomialDistributionCount(Enchantments.BLOCK_FORTUNE, 0.5714286F, 3))))));
+
+        this.add(ModBlocks.LIME_SAPLING,
+                this.applyExplosionDecay(ModBlocks.LIME_SAPLING,
+                        LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModBlocks.LIME_SAPLING)))));
 
         net.minecraft.world.level.storage.loot.predicates.LootItemCondition.Builder checkPepperLevel = LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.PEPPER_CROP).setProperties(net.minecraft.advancements.critereon.StatePropertiesPredicate.Builder.properties().hasProperty(CarrotBlock.AGE, 7));
         this.add(ModBlocks.PEPPER_CROP, (net.minecraft.world.level.storage.loot.LootTable.Builder)this.applyExplosionDecay(ModBlocks.PEPPER_CROP, LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.PEPPER))).withPool(LootPool.lootPool().when(checkPepperLevel).add(LootItem.lootTableItem(ModItems.PEPPER).apply(ApplyBonusCount.addBonusBinomialDistributionCount(Enchantments.BLOCK_FORTUNE, 0.5714286F, 3))))));

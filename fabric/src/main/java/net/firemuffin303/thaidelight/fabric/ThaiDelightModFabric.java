@@ -1,7 +1,6 @@
 package net.firemuffin303.thaidelight.fabric;
 
 import com.mojang.datafixers.util.Pair;
-import com.nhoryzon.mc.farmersdelight.registry.ConfiguredFeaturesRegistry;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
@@ -15,7 +14,6 @@ import net.firemuffin303.thaidelight.common.entity.FlowerCrabEntity;
 import net.firemuffin303.thaidelight.common.event.ModVillagerTrades;
 import net.firemuffin303.thaidelight.common.registry.ModConfiguredFeatures;
 import net.firemuffin303.thaidelight.common.registry.ModEntityTypes;
-import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.firemuffin303.thaidelight.fabric.common.registry.ModBlocksFabric;
 import net.firemuffin303.thaidelight.fabric.common.registry.ModItemsFabric;
 import net.firemuffin303.thaidelight.fabric.mixin.StructurePoolAccessorMixin;
@@ -26,7 +24,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.npc.VillagerProfession;
-import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.structure.pools.SinglePoolElement;
@@ -70,6 +67,10 @@ public class ThaiDelightModFabric implements ModInitializer {
         BiomeModifications.addFeature((context) ->{
             return BiomeSelectors.includeByKey(Biomes.FOREST, Biomes.BIRCH_FOREST, Biomes.FLOWER_FOREST).test(context);
         }, GenerationStep.Decoration.VEGETAL_DECORATION, ModConfiguredFeatures.PATCH_LIME_BUSH);
+
+        BiomeModifications.addFeature((context) ->{
+            return BiomeSelectors.includeByKey(Biomes.FOREST, Biomes.BIRCH_FOREST, Biomes.FLOWER_FOREST,Biomes.SAVANNA,Biomes.SAVANNA_PLATEAU).test(context);
+        }, GenerationStep.Decoration.VEGETAL_DECORATION, ModConfiguredFeatures.PATCH_WILD_PEPPER);
 
         this.addVillagersTrades();
 

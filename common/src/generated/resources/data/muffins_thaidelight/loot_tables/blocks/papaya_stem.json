@@ -10,7 +10,7 @@
       "bonus_rolls": 0.0,
       "conditions": [
         {
-          "block": "muffins_thaidelight:papaya_crop",
+          "block": "muffins_thaidelight:papaya_stem",
           "condition": "minecraft:block_state_property",
           "properties": {
             "age": "7"
@@ -40,7 +40,7 @@
       "bonus_rolls": 0.0,
       "conditions": [
         {
-          "block": "muffins_thaidelight:papaya_crop",
+          "block": "muffins_thaidelight:papaya_stem",
           "condition": "minecraft:block_state_property",
           "properties": {
             "age": "6"

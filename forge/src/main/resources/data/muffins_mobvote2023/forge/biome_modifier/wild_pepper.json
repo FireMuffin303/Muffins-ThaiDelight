@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": ["minecraft:forest","minecraft:birch_forest","minecraft:flower_forest","minecraft:savanna","minecraft:savanna_plateau"],
+  "features": "muffins_thaidelight:patch_wild_pepper",
+  "step": "vegetal_decoration"
+}
