@@ -115,7 +115,7 @@ public class ModelDataGen extends FabricModelProvider {
     private static void createPepperCrop(BlockModelGenerators blockModelGenerators){
         blockModelGenerators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.PEPPER_CROP).with(PropertyDispatch.property(BlockStateProperties.AGE_7).generate((integer) -> {
             return net.minecraft.data.models.blockstates.Variant.variant().with(VariantProperties.MODEL,
-                    blockModelGenerators.createSuffixedVariant(ModBlocks.PEPPER_CROP, "_stage" + integer, ModelTemplates.CROSS, TextureMapping::cross));
+                    blockModelGenerators.createSuffixedVariant(ModBlocks.PEPPER_CROP, "_stage" + integer, new ModelTemplate(Optional.of(new ResourceLocation(ThaiDelight.MOD_ID,"block/crop_cross")),Optional.empty(),TextureSlot.CROSS), TextureMapping::cross));
         })));
     }
 
