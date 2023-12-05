@@ -50,6 +50,11 @@ public class ThaiDelightModFabric implements ModInitializer {
             this.addToStructurePool(server,
                     new ResourceLocation("minecraft","village/plains/houses"),
                     new ResourceLocation(ThaiDelight.MOD_ID, "village/plains/houses/small_thai_house_1"),4);
+
+            LOGGER.info("Registering structure in village type of savanna");
+            this.addToStructurePool(server,
+                    new ResourceLocation("minecraft","village/savanna/houses"),
+                    new ResourceLocation(ThaiDelight.MOD_ID,"village/savanna/houses/savanna_small_thai_house_1"),4);
         });
         ThaiDelight.init();
         ThaiDelight.postInit();
@@ -59,7 +64,6 @@ public class ThaiDelightModFabric implements ModInitializer {
 
         FabricDefaultAttributeRegistry.register(ModEntityTypes.FLOWER_CRAB, FlowerCrabEntity.createAttributes());
         FabricDefaultAttributeRegistry.register(ModEntityTypes.DRAGONFLY, Dragonfly.createAttributes());
-
 
         BiomeModifications.addSpawn(BiomeSelectors.includeByKey(Biomes.MANGROVE_SWAMP,Biomes.SWAMP), MobCategory.CREATURE,ModEntityTypes.FLOWER_CRAB,10,3,5);
         BiomeModifications.addSpawn(BiomeSelectors.includeByKey(Biomes.MANGROVE_SWAMP,Biomes.SWAMP,Biomes.RIVER), MobCategory.AMBIENT,ModEntityTypes.DRAGONFLY,5,1,3);
@@ -104,8 +108,6 @@ public class ThaiDelightModFabric implements ModInitializer {
         });
 
 
-
-
         TradeOfferHelper.registerWanderingTraderOffers(1, (factories) -> {
             ModVillagerTrades.wanderTrade().forEach(integerMerchantOfferPair -> {
                 factories.add((entity, randomSource) -> integerMerchantOfferPair.second);
@@ -119,13 +121,12 @@ public class ThaiDelightModFabric implements ModInitializer {
 
         server.registryAccess().registryOrThrow(Registries.TEMPLATE_POOL).getOptional(poolIdentifier).ifPresentOrElse((structurePool) -> {
             SinglePoolElement compostPilePool = (SinglePoolElement) StructurePoolElement.legacy(nbtIdentifier.toString(), emptyProcessorList).apply(StructureTemplatePool.Projection.RIGID);
-            LOGGER.info(compostPilePool.toString());
             List<Pair<StructurePoolElement, Integer>> elementCounts = new ArrayList(((StructurePoolAccessorMixin)structurePool).getRawTemplates());
             elementCounts.add(Pair.of(compostPilePool, weight));
             ((StructurePoolAccessorMixin)structurePool).setRawTemplates(elementCounts);
             IntStream.range(0, weight).forEach((value) -> {
                 ((StructurePoolAccessorMixin)structurePool).getTemplates().add(compostPilePool);
-                LOGGER.info(((StructurePoolAccessorMixin)structurePool).getTemplates().toString());
+                //LOGGER.info( ((StructurePoolAccessorMixin)structurePool).getTemplates().toString());
 
             });
         }, () -> {

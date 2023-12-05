@@ -17,5 +17,7 @@ public class VillageStructures {
         addBuildingToPool(templatePools, processorLists, new ResourceLocation("minecraft:village/plains/houses"),
                 "muffins_thaidelight:village/plains/houses/small_thai_house_1", 4);
 
+        addBuildingToPool(templatePools, processorLists, new ResourceLocation("minecraft:village/savanna/houses"),
+                "muffins_thaidelight:village/savanna/houses/savanna_small_thai_house_1",4);
     }
 }

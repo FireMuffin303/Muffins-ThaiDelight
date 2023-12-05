@@ -39,6 +39,7 @@ public class ThaiDelightModFabricClient implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.LIME_SAPLING, RenderType.cutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.LIME_CROP, RenderType.cutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.WILD_PEPPER_CROP, RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.PEPPER_CROP, RenderType.cutout());
 
     }
 }

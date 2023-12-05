@@ -81,7 +81,7 @@ public class ModBlocks {
         registerWithItem("wild_papaya",WILD_PAPAYA_CROP);
 
         //Crops
-        register("pepper_crop",PEPPER_CROP);
+        register("pepper",PEPPER_CROP);
         register("lime_bush", LIME_CROP);
         registerWithItem("lime_sapling", LIME_SAPLING);
 

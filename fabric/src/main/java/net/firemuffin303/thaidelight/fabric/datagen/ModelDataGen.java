@@ -39,6 +39,7 @@ public class ModelDataGen extends FabricModelProvider {
 
         blockStateModelGenerator.createCrossBlockWithDefaultItem(ModBlocks.WILD_PEPPER_CROP, BlockModelGenerators.TintState.NOT_TINTED);
 
+        createPepperCrop(blockStateModelGenerator);
         createLimeCrop(blockStateModelGenerator);
     }
 
@@ -109,6 +110,13 @@ public class ModelDataGen extends FabricModelProvider {
     private static void createBlock(Block block,ModelTemplate modelTemplate,TextureMapping textureMapping, BlockModelGenerators blockModelGenerator){
         blockModelGenerator.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block,modelTemplate.create(block,textureMapping, blockModelGenerator.modelOutput)));
 
+    }
+
+    private static void createPepperCrop(BlockModelGenerators blockModelGenerators){
+        blockModelGenerators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.PEPPER_CROP).with(PropertyDispatch.property(BlockStateProperties.AGE_7).generate((integer) -> {
+            return net.minecraft.data.models.blockstates.Variant.variant().with(VariantProperties.MODEL,
+                    blockModelGenerators.createSuffixedVariant(ModBlocks.PEPPER_CROP, "_stage" + integer, ModelTemplates.CROSS, TextureMapping::cross));
+        })));
     }
 
     private static void createLimeCrop( BlockModelGenerators blockModelGenerator){
