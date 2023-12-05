@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "muffins_thaidelight:item/wild_pepper"
+    "layer0": "muffins_thaidelight:block/wild_pepper"
   }
 }

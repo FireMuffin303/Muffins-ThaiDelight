@@ -37,6 +37,8 @@ public class ModelDataGen extends FabricModelProvider {
         createCrateBlock(ModBlocks.UNRIPE_PAPAYA_CRATE,blockStateModelGenerator);
         createCrateBlock(ModBlocks.PAPAYA_CRATE,blockStateModelGenerator);
 
+        blockStateModelGenerator.createCrossBlockWithDefaultItem(ModBlocks.WILD_PEPPER_CROP, BlockModelGenerators.TintState.NOT_TINTED);
+
         createLimeCrop(blockStateModelGenerator);
     }
 
@@ -56,7 +58,6 @@ public class ModelDataGen extends FabricModelProvider {
         itemModelGenerator.generateFlatItem(Item.byBlock(ModBlocks.SAUCE_BOWL), ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(Item.byBlock(ModBlocks.CRAB_EGG), ModelTemplates.FLAT_ITEM);
 
-        itemModelGenerator.generateFlatItem(Item.byBlock(ModBlocks.WILD_PEPPER_CROP), ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(Item.byBlock(ModBlocks.WILD_PAPAYA_CROP), ModelTemplates.FLAT_ITEM);
 
 

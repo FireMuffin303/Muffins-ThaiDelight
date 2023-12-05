@@ -5,7 +5,10 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
 import net.firemuffin303.thaidelight.common.block.crops.LimeCrop;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
+import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.data.loot.BlockLootSubProvider;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.CarrotBlock;
@@ -14,6 +17,8 @@ import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
+import net.minecraft.world.level.storage.loot.predicates.MatchTool;
 
 public class BlockLootTableDataGen extends FabricBlockLootTableProvider {
     protected BlockLootTableDataGen(FabricDataOutput dataOutput) {
@@ -77,6 +82,27 @@ public class BlockLootTableDataGen extends FabricBlockLootTableProvider {
                                                 .apply(ApplyBonusCount.addBonusBinomialDistributionCount(Enchantments.BLOCK_FORTUNE,0.5714286F, 3)))
                                 )
                 ));
+
+        this.add(ModBlocks.WILD_PEPPER_CROP,this.applyExplosionDecay(ModBlocks.WILD_PEPPER_CROP,
+                LootTable.lootTable()
+                        .withPool(LootPool.lootPool()
+                                .when(HAS_SHEARS)
+                                .add(LootItem.lootTableItem(ModBlocks.WILD_PEPPER_CROP))
+
+                        )
+
+                        .withPool(LootPool.lootPool()
+                                .when(HAS_SHEARS.invert())
+                                .add(LootItem.lootTableItem(ModItems.PEPPER)
+                                        .apply(ApplyBonusCount.addBonusBinomialDistributionCount(Enchantments.BLOCK_FORTUNE, 0.5714286F, 3)))
+
+                        )
+                        .withPool(LootPool.lootPool()
+                                .when(HAS_SHEARS.invert())
+                                .add(LootItem.lootTableItem(ModItems.PEPPER_SEED)
+                                        .apply(ApplyBonusCount.addBonusBinomialDistributionCount(Enchantments.BLOCK_FORTUNE, 0.5714286F, 3)))
+                        )
+        ));
     }
 
     private void createSimpleLoot(Block block){
