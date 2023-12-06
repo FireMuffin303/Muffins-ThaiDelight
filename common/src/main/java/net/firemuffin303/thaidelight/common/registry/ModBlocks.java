@@ -49,8 +49,8 @@ public class ModBlocks {
     public static final Block LIME_CROP = new LimeCrop(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).randomTicks().sound(SoundType.SWEET_BERRY_BUSH).pushReaction(PushReaction.DESTROY));
     public static final Block LIME_SAPLING = new LimeSapling(BlockBehaviour.Properties.copy(ModBlocks.LIME_CROP).noCollission());
     public static final Block PEPPER_CROP = new PepperCropBlock(BlockBehaviour.Properties.copy(Blocks.POTATOES));
-    public static final Block PAPAYA_SAPLING = new PapayaSapling(BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING));
-    public static final Block PAPAYA_CROP = new TallPapayaBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).randomTicks().instabreak().strength(1.0F).sound(SoundType.WOOD).ignitedByLava().pushReaction(PushReaction.DESTROY));
+    public static final Block PAPAYA_STEM = new PapayaStem(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).randomTicks().instabreak().strength(1.0F).sound(SoundType.WOOD).ignitedByLava().pushReaction(PushReaction.DESTROY));
+    public static final Block PAPAYA_TOP_STEM = new UpperPapayaBlock(BlockBehaviour.Properties.copy(PAPAYA_STEM));
 
     //Feast
     public static final Block CRAB_FRIED_RICE_FEAST = ModPlatform.getCrabFriedRice();
@@ -85,8 +85,8 @@ public class ModBlocks {
         register("lime_bush", LIME_CROP);
         registerWithItem("lime_sapling", LIME_SAPLING);
 
-        registerWithItem("papaya_stem",PAPAYA_CROP);
-        registerWithItem("papaya_sapling",PAPAYA_SAPLING);
+        register("papaya_top_stem", PAPAYA_TOP_STEM);
+        register("papaya_stem", PAPAYA_STEM);
 
         //Feast
         registerWithItem("somtam_feast",SOMTAM_FEAST);

@@ -3,7 +3,6 @@ package net.firemuffin303.thaidelight.common.registry;
 import com.google.common.collect.Sets;
 import net.firemuffin303.thaidelight.ThaiDelight;
 import net.firemuffin303.thaidelight.common.item.ModMusicDisc;
-import net.firemuffin303.thaidelight.common.item.bottle.FishSauceBottleItem;
 import net.firemuffin303.thaidelight.common.item.LoinclothItem;
 import net.firemuffin303.thaidelight.common.item.bottle.SeafoodBottleItem;
 import net.firemuffin303.thaidelight.utils.ModPlatform;
@@ -80,11 +79,11 @@ public class ModItems {
     public static final Item SLICED_PAPAYA = new Item(new Item.Properties().food(ModFood.SLICED_PAPAYA));
     public static final Item UNRIPE_PAPAYA = new Item(new Item.Properties());
     public static final Item SLICED_UNRIPE_PAPAYA = new Item(new Item.Properties().food(ModFood.SLICED_UNRIPE_PAPAYA));
-    public static final Item PAPAYA_SEED = new ItemNameBlockItem(ModBlocks.PAPAYA_CROP,new Item.Properties()){
+    public static final Item PAPAYA_SEED = new ItemNameBlockItem(ModBlocks.PAPAYA_STEM,new Item.Properties()){
         @Override
         public void registerBlocks(Map<Block, Item> map, Item item) {
             super.registerBlocks(map, item);
-            map.put(ModBlocks.PAPAYA_CROP,item);
+            map.put(ModBlocks.PAPAYA_STEM,item);
         }
     };
 

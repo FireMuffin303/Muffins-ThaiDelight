@@ -17,7 +17,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.BonemealableBlock;
-import net.minecraft.world.level.block.DoublePlantBlock;
+import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -26,23 +26,24 @@ import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
 
-public class TallPapayaBlock extends DoublePlantBlock implements BonemealableBlock {
+public class UpperPapayaBlock extends BushBlock implements BonemealableBlock {
     public static final IntegerProperty AGE = BlockStateProperties.AGE_3;
 
-    public TallPapayaBlock(Properties properties) {
+    public UpperPapayaBlock(Properties properties) {
         super(properties);
         this.registerDefaultState((BlockState)((BlockState)this.stateDefinition.any()).setValue(AGE, 0));
     }
 
     @Override
     public ItemStack getCloneItemStack(BlockGetter blockGetter, BlockPos blockPos, BlockState blockState) {
-        return new ItemStack(ModBlocks.PAPAYA_SAPLING);
+        return new ItemStack(ModItems.PAPAYA_SEED);
     }
 
     @Override
-    public boolean canSurvive(BlockState blockState, LevelReader levelReader, BlockPos blockPos) {
-        return true;
+    protected boolean mayPlaceOn(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
+        return blockState.is(ModBlocks.PAPAYA_STEM);
     }
+
 
     public boolean isRandomlyTicking(BlockState arg) {
         return (Integer)arg.getValue(AGE) < 3;
@@ -65,7 +66,7 @@ public class TallPapayaBlock extends DoublePlantBlock implements BonemealableBlo
             return InteractionResult.PASS;
         } else if (i > 1) {
             int j = 1 + arg2.random.nextInt(2);
-            popResource(arg2, arg3, new ItemStack(i == 3 ? ModItems.PAPAYA : ModItems.UNRIPE_PAPAYA, j + (flag ? 1 : 0)));
+            popResource(arg2, arg3, new ItemStack(i == 3 ? ModItems.PAPAYA : ModItems.UNRIPE_PAPAYA, j));
             arg2.playSound((Player)null, arg3, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + arg2.random.nextFloat() * 0.4F);
             BlockState blockstate = (BlockState)arg.setValue(AGE, 1);
             arg2.setBlock(arg3, blockstate, 2);
@@ -79,7 +80,6 @@ public class TallPapayaBlock extends DoublePlantBlock implements BonemealableBlo
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(new Property[]{AGE});
-        super.createBlockStateDefinition(builder);
     }
 
     @Override
