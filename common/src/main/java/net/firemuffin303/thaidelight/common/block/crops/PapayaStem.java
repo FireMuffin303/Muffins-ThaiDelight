@@ -26,6 +26,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class PapayaStem extends BushBlock implements BonemealableBlock {
     private static final VoxelShape SAPLING_SHAPE = Block.box(3.0D, 0.0D, 3.0D, 13.0D, 8.0D, 13.0D);
+    private static final VoxelShape GROWTH_SHAPE = Block.box(3.0D, 0.0D, 3.0D, 13.0D, 16.0D, 13.0D);
     public static final BooleanProperty SUPPORTING = BooleanProperty.create("supporting");
     private static final IntegerProperty AGE = BlockStateProperties.AGE_3;
 
@@ -88,7 +89,7 @@ public class PapayaStem extends BushBlock implements BonemealableBlock {
 
     @Override
     public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
-        return SAPLING_SHAPE;
+        return blockState.getValue(AGE) > 0 ? GROWTH_SHAPE : SAPLING_SHAPE;
     }
 
     @Override
