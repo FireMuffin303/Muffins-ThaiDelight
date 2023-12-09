@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "muffins_thaidelight:block/papaya_stem_stage0"
+      "model": "muffins_thaidelight:block/papaya_stem_test"
     }
   }
 }

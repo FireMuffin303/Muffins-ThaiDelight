@@ -25,8 +25,11 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class UpperPapayaBlock extends BushBlock implements BonemealableBlock {
+    private static final VoxelShape GROWTH_SHAPE = Block.box(4.0D, 0.0D, 4.0D, 12.0D, 16.0D, 12.0D);
     public static final IntegerProperty AGE = BlockStateProperties.AGE_3;
 
     public UpperPapayaBlock(Properties properties) {
@@ -80,6 +83,11 @@ public class UpperPapayaBlock extends BushBlock implements BonemealableBlock {
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(new Property[]{AGE});
+    }
+
+    @Override
+    public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
+        return GROWTH_SHAPE;
     }
 
     @Override

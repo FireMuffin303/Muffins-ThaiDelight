@@ -1,0 +1,6 @@
+{
+  "parent": "muffins_thaidelight:block/papaya_top_stem_fruits",
+  "textures": {
+    "fruits": "muffins_thaidelight:block/papaya_fruit"
+  }
+}
