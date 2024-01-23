@@ -27,6 +27,7 @@ public class ThaiDelight {
         ModRecipes.init();
         ModConfiguredFeatures.init();
         ModRecipes.ModRecipeSerializer.init();
+        ModMenuType.init();
     }
 
     public static void postInit(){

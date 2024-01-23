@@ -3,16 +3,16 @@
   "group": "food",
   "ingredients": [
     {
-      "item": "muffins_thaidelight:flower_crab"
+      "item": "minecraft:beef"
     },
     {
-      "item": "muffins_thaidelight:unripe_papaya_slice"
+      "item": "farmersdelight:onion"
     },
     {
       "item": "muffins_thaidelight:pepper"
     }
   ],
   "result": {
-    "item": "muffins_thaidelight:somtam_feast"
+    "item": "muffins_thaidelight:spicy_minced_meat_salad_feast"
   }
 }

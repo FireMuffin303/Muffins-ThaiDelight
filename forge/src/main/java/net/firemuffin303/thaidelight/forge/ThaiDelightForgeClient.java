@@ -1,10 +1,8 @@
 package net.firemuffin303.thaidelight.forge;
 
 import net.firemuffin303.thaidelight.ThaiDelight;
-import net.firemuffin303.thaidelight.client.model.DragonflyModel;
-import net.firemuffin303.thaidelight.client.model.FlowerCrabModel;
 import net.firemuffin303.thaidelight.client.registry.ModEntityClient;
-import net.firemuffin303.thaidelight.common.registry.ModBlocks;
+import net.firemuffin303.thaidelight.client.registry.ModScreensClient;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraftforge.api.distmarker.Dist;
@@ -19,7 +17,10 @@ import java.util.function.Supplier;
 public class ThaiDelightForgeClient {
     @SubscribeEvent
     public static void clientSetup(FMLClientSetupEvent event){
-        event.enqueueWork(ModEntityClient::init);
+        event.enqueueWork(() -> {
+            ModEntityClient.init();
+            ModScreensClient.init();
+        });
     }
 
     @SubscribeEvent

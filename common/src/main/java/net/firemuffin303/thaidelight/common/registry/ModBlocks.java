@@ -106,10 +106,10 @@ public class ModBlocks {
     }
 
     public static class ModBlockEntityTypes{
-        public static BlockEntityType<MortarBlockEntity> MORTAR_BLOCK_ENTITY = ModPlatform.buildBlockEntity(MortarBlockEntity::new,ModBlocks.MORTAR).build(null);
+        //public static BlockEntityType<MortarBlockEntity> MORTAR_BLOCK_ENTITY = ModPlatform.buildBlockEntity(MortarBlockEntity::new,ModBlocks.MORTAR).build(null);
 
         public static void init(){
-            ModPlatform.registerBlockEntity("mortar",MORTAR_BLOCK_ENTITY);
+            //ModPlatform.registerBlockEntity("mortar",MORTAR_BLOCK_ENTITY);
         }
 
 

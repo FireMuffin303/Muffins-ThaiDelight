@@ -4,14 +4,12 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.firemuffin303.thaidelight.ThaiDelight;
-import net.firemuffin303.thaidelight.client.MobVote2023Client;
+import net.firemuffin303.thaidelight.client.ThaiDelightClient;
 import net.firemuffin303.thaidelight.client.registry.ModEntityClient;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.block.BlockRenderDispatcher;
-import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 
 import java.util.function.Supplier;
@@ -26,7 +24,7 @@ public class ThaiDelightModFabricClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        MobVote2023Client.init();
+        ThaiDelightClient.init();
 
         ModEntityClient.layerRegistry(new ModEntityClient.LayerDefinitionRegistry() {
             @Override

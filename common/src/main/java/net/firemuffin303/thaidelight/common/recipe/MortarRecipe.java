@@ -51,17 +51,17 @@ public class MortarRecipe implements Recipe<Container> {
 
     @Override
     public ItemStack assemble(Container container, RegistryAccess registryAccess) {
-        return this.result.copy();
+        return this.getResultItem(registryAccess).copy();
     }
 
     @Override
     public boolean canCraftInDimensions(int i, int j) {
-        return i * j >= 3;
+        return i * j >= this.ingredients.size();
     }
 
     @Override
     public ItemStack getResultItem(RegistryAccess registryAccess) {
-        return this.result.copy();
+        return this.result;
     }
 
     @Override

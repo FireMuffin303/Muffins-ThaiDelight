@@ -19,6 +19,7 @@ import net.minecraft.world.entity.animal.Parrot;
 import net.minecraft.world.entity.animal.Pig;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.npc.VillagerTrades;
+import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -63,6 +64,7 @@ public class ThaiDelightForge {
     public static final DeferredRegister<Potion> POTION = DeferredRegister.create(ForgeRegistries.POTIONS,ThaiDelight.MOD_ID);
     public static final DeferredRegister<RecipeType<?>> RECIPE_TYPE = DeferredRegister.create(ForgeRegistries.RECIPE_TYPES,ThaiDelight.MOD_ID);
     public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZER = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS,ThaiDelight.MOD_ID);
+    public static final DeferredRegister<MenuType<?>> MENU_TYPE = DeferredRegister.create(ForgeRegistries.MENU_TYPES,ThaiDelight.MOD_ID);
 
     public ThaiDelightForge() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -77,6 +79,7 @@ public class ThaiDelightForge {
         POTION.register(modEventBus);
         RECIPE_TYPE.register(modEventBus);
         RECIPE_SERIALIZER.register(modEventBus);
+        MENU_TYPE.register(modEventBus);
 
 
         modEventBus.addListener(EventPriority.HIGH,this::registerEvent);
@@ -115,6 +118,7 @@ public class ThaiDelightForge {
         registerEvent.register(ForgeRegistries.Keys.POTIONS,helper -> ModPotions.init());
         registerEvent.register(ForgeRegistries.Keys.RECIPE_TYPES,helper -> ModRecipes.init());
         registerEvent.register(ForgeRegistries.Keys.RECIPE_SERIALIZERS,helper -> ModRecipes.ModRecipeSerializer.init());
+        registerEvent.register(ForgeRegistries.Keys.MENU_TYPES,helper -> ModMenuType.init());
     }
 
     public void registerCommonSetup(FMLCommonSetupEvent event){

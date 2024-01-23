@@ -20,6 +20,10 @@ import net.firemuffin303.thaidelight.fabric.common.item.PastleItem;
 import net.firemuffin303.thaidelight.fabric.common.item.SomtamItem;
 import net.firemuffin303.thaidelight.fabric.common.registry.ModBlocksFabric;
 import net.firemuffin303.thaidelight.fabric.common.registry.ModItemsFabric;
+import net.firemuffin303.thaidelight.utils.ModPlatform;
+import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.gui.screens.inventory.MenuAccess;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.core.Registry;
@@ -34,7 +38,10 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -89,6 +96,10 @@ public class ModPlatformImpl {
 
     public static <T extends Recipe<?>> void registerRecipeSerializer(String id, RecipeSerializer<T> recipeSerializer) {
         Registry.register(BuiltInRegistries.RECIPE_SERIALIZER,new ResourceLocation(ThaiDelight.MOD_ID,id),recipeSerializer);
+    }
+
+    public static <M extends AbstractContainerMenu,U extends Screen & MenuAccess<M>> void registerScreen(MenuType<M> menuType, ModPlatform.ScreenConstructor<M, U> screen) {
+        MenuScreens.register(menuType,screen::create);
     }
 
     public static CreativeModeTab createCreativeModeTab(ResourceLocation resourceLocation, Supplier<ItemStack> icon, ArrayList<Item> itemList) {
@@ -208,6 +219,12 @@ public class ModPlatformImpl {
     public static Item getLimeJuice(Item.Properties properties) {
         return new LimeJuiceItem(properties);
     }
+
+    public static <T extends AbstractContainerMenu> MenuType<T> registryMenu(String id, ModPlatform.MenuSupplier<T> menu) {
+        return Registry.register(BuiltInRegistries.MENU,new ResourceLocation(ThaiDelight.MOD_ID,id),new MenuType(menu::create, FeatureFlags.VANILLA_SET));
+    }
+
+
 
 
 }
