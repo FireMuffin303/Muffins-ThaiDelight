@@ -82,6 +82,10 @@ public class ModPlatformImpl {
         Registry.register(BuiltInRegistries.ENTITY_TYPE,new ResourceLocation(ThaiDelight.MOD_ID,id) ,entityType);
     }
 
+    public static SoundEvent registerSoundEvent(String id,SoundEvent event) {
+        return Registry.register(BuiltInRegistries.SOUND_EVENT,new ResourceLocation(ThaiDelight.MOD_ID,id),event);
+    }
+
     public static void registerFluid(String id, Fluid fluid) {
         Registry.register(BuiltInRegistries.FLUID,new ResourceLocation(ThaiDelight.MOD_ID,id),fluid);
     }

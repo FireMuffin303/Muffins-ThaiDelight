@@ -13,8 +13,9 @@ import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
-import net.minecraft.world.level.storage.loot.functions.*;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParamSet;
+import net.minecraft.world.level.storage.loot.functions.LootingEnchantFunction;
+import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
+import net.minecraft.world.level.storage.loot.functions.SmeltItemFunction;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
@@ -97,10 +98,7 @@ public class LootTableDataGen extends SimpleFabricLootTableProvider {
             );
 
             biConsumer.accept(new ResourceLocation(ThaiDelight.MOD_ID,"chests/village/village_thai_house"),
-                    LootTable.lootTable().withPool(LootPool.lootPool()
-                            .setRolls(ConstantValue.exactly(1))
-                            .add(LootItem.lootTableItem(ModItems.IRON_PASTLE)
-                                    .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0f,1.0f)))))
+                    LootTable.lootTable()
                             .withPool(LootPool.lootPool()
                                     .setRolls(ConstantValue.exactly(1))
                                     .add(LootItem.lootTableItem(ModItems.ESAN_MUSIC_DISC)

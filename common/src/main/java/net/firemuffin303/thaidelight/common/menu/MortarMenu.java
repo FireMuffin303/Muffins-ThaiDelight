@@ -4,27 +4,30 @@ import net.firemuffin303.thaidelight.common.recipe.MortarRecipe;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.firemuffin303.thaidelight.common.registry.ModMenuType;
 import net.firemuffin303.thaidelight.common.registry.ModRecipes;
+import net.firemuffin303.thaidelight.common.registry.ModSoundEvents;
+import net.minecraft.core.NonNullList;
 import net.minecraft.network.protocol.game.ClientboundContainerSetSlotPacket;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.player.StackedContents;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
 public class MortarMenu extends RecipeBookMenu<Container> {
-    private final ResultContainer resultSlots = new ResultContainer();
+    private final ResultContainer resultContainer = new ResultContainer();
     private final CraftingContainer craftSlots = new TransientCraftingContainer(this, 2, 2);
     private final Player player;
     private final ContainerLevelAccess access;
+    long lastSoundTime;
 
     public MortarMenu(int i,Inventory inventory){
         this(i,inventory,ContainerLevelAccess.NULL);
@@ -35,7 +38,7 @@ public class MortarMenu extends RecipeBookMenu<Container> {
         this.player = inventory.player;
         this.access = containerLevelAccess;
 
-        this.addSlot(new ResultSlot(inventory.player, this.craftSlots, this.resultSlots, 0, 124, 35));
+        this.addSlot(new MortarResultSlot(this.player, this.craftSlots, this.resultContainer, 0, 124, 35));
 
 
         int j;
@@ -43,7 +46,7 @@ public class MortarMenu extends RecipeBookMenu<Container> {
 
         for(j = 0; j < 2; ++j) {
             for(k = 0; k < 2; ++k) {
-                this.addSlot(new Slot(this.craftSlots, k + j * 2, 30 + k * 18, 17 + j * 18));
+                this.addSlot(new Slot(this.craftSlots, k + j * 2, 39 + k * 18, 26 + j * 18));
             }
         }
 
@@ -67,7 +70,7 @@ public class MortarMenu extends RecipeBookMenu<Container> {
 
     public void slotsChanged(Container arg) {
         this.access.execute((argx, arg2) -> {
-            slotChangedCraftingGrid(this, argx, this.player, this.craftSlots, this.resultSlots);
+            slotChangedCraftingGrid(this, argx, this.player, this.craftSlots, this.resultContainer);
         });
     }
 
@@ -100,7 +103,7 @@ public class MortarMenu extends RecipeBookMenu<Container> {
     @Override
     public void clearCraftingContent() {
         this.craftSlots.clearContent();
-        this.resultSlots.clearContent();
+        this.resultContainer.clearContent();
     }
 
     @Override
@@ -190,5 +193,51 @@ public class MortarMenu extends RecipeBookMenu<Container> {
     @Override
     public boolean stillValid(Player player) {
         return stillValid(this.access,this.player, ModBlocks.MORTAR);
+    }
+
+    class MortarResultSlot extends ResultSlot{
+        protected CraftingContainer craftSlots;
+        protected Player player;
+        public MortarResultSlot(Player player, CraftingContainer craftingContainer, Container container, int i, int j, int k) {
+            super(player, craftingContainer, container, i, j, k);
+            this.craftSlots = craftingContainer;
+            this.player = player;
+        }
+
+        @Override
+        public void onTake(Player player, ItemStack itemStack) {
+
+            this.checkTakeAchievements(itemStack);
+            NonNullList<ItemStack> nonNullList = player.level().getRecipeManager().getRemainingItemsFor(ModRecipes.MORTAR, this.craftSlots, player.level());
+
+            for(int i = 0; i < nonNullList.size(); ++i) {
+                ItemStack itemStack2 = this.craftSlots.getItem(i);
+                ItemStack itemStack3 = (ItemStack)nonNullList.get(i);
+                if (!itemStack2.isEmpty()) {
+                    this.craftSlots.removeItem(i, 1);
+                    itemStack2 = this.craftSlots.getItem(i);
+                }
+
+                if (!itemStack3.isEmpty()) {
+                    if (itemStack2.isEmpty()) {
+                        this.craftSlots.setItem(i, itemStack3);
+                    } else if (ItemStack.isSameItemSameTags(itemStack2, itemStack3)) {
+                        itemStack3.grow(itemStack2.getCount());
+                        this.craftSlots.setItem(i, itemStack3);
+                    } else if (!this.player.getInventory().add(itemStack3)) {
+                        this.player.drop(itemStack3, false);
+                    }
+                }
+            }
+
+            MortarMenu.this.access.execute((level, blockPos) -> {
+                long l = level.getGameTime();
+                if (MortarMenu.this.lastSoundTime != l) {
+                    level.playSound((Player)null, blockPos, ModSoundEvents.MORTAR_CRAFT, SoundSource.BLOCKS, 1.0F, 1.0F);
+                    MortarMenu.this.lastSoundTime = l;
+                }
+
+            });
+        }
     }
 }

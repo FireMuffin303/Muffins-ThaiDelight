@@ -1,0 +1,8 @@
+{
+  "ui.mortar.take_result": {
+    "sounds": [
+      "muffins_thaidelight:mortar/take_result1"
+    ],
+    "subtitle": "subtitles.ui.mortar.take_result"
+  }
+}

@@ -7,6 +7,7 @@ import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.FlyingMoveControl;
+import net.minecraft.world.entity.ai.control.MoveControl;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
@@ -25,12 +26,12 @@ public class Dragonfly extends PathfinderMob implements FlyingAnimal {
 
     public Dragonfly(EntityType<? extends PathfinderMob> entityType, Level level) {
         super(entityType, level);
-        this.moveControl = new FlyingMoveControl(this, 20, true);
+        this.moveControl = new FlyingMoveControl(this, 1, true);
 
     }
 
     public static AttributeSupplier.Builder createAttributes() {
-        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 4.0D).add(Attributes.FLYING_SPEED, 0.9000000238418579D).add(Attributes.MOVEMENT_SPEED, 0.50000001192092896D).add(Attributes.FOLLOW_RANGE, 48.0D);
+        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 4.0D).add(Attributes.FLYING_SPEED, 0.9100000238418579D).add(Attributes.MOVEMENT_SPEED, 0.50000001192092896D).add(Attributes.FOLLOW_RANGE, 48.0D);
     }
 
     protected void registerGoals() {
@@ -61,6 +62,20 @@ public class Dragonfly extends PathfinderMob implements FlyingAnimal {
     }
 
 
+    class DragonflyMoveControl extends FlyingMoveControl{
+        private final Dragonfly dragonfly;
+
+        public DragonflyMoveControl(Dragonfly mob, int i, boolean bl) {
+            super(mob, i, bl);
+            this.dragonfly = mob;
+        }
+
+
+        public void tick(){
+
+        }
+    }
+
     class FlyWanderGoal extends Goal {
         private static final int WANDER_THRESHOLD = 22;
 
@@ -79,7 +94,7 @@ public class Dragonfly extends PathfinderMob implements FlyingAnimal {
         public void start() {
             Vec3 vec3 = this.findPos();
             if (vec3 != null) {
-                Dragonfly.this.navigation.moveTo(Dragonfly.this.navigation.createPath(BlockPos.containing(vec3), 1), 2.0D);
+                Dragonfly.this.navigation.moveTo(Dragonfly.this.navigation.createPath(BlockPos.containing(vec3), 1), 1.0D);
             }
 
         }

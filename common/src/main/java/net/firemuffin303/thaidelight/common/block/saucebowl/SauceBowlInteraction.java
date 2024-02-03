@@ -34,7 +34,7 @@ public interface SauceBowlInteraction {
     Map<Item, SauceBowlInteraction> FISH_SAUCE = newInteractionMap();
     Map<Item, SauceBowlInteraction> HONEY = newInteractionMap();
 
-
+/*
     SauceBowlInteraction FILL_SEAFOOD = ((blockState, level, blockPos, player, interactionHand, itemStack) -> {
         return emptyBottle(level,blockPos,player,interactionHand,itemStack, ModBlocks.SEAFOOD_SAUCE_BOWL.defaultBlockState().setValue(LevelSauceBowl.LEVEL,4), SoundEvents.BOTTLE_EMPTY);
     });
@@ -46,7 +46,7 @@ public interface SauceBowlInteraction {
     SauceBowlInteraction FILL_HONEY = ((blockState, level, blockPos, player, interactionHand, itemStack) -> {
         return emptyBottle(level,blockPos,player,interactionHand,itemStack,ModBlocks.HONEY_SAUCE_BOWL.defaultBlockState().setValue(LevelSauceBowl.LEVEL,4),SoundEvents.BOTTLE_EMPTY);
     });
-
+*/
 
     static InteractionResult emptyBottle(Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, ItemStack itemStack, BlockState blockState, SoundEvent soundEvent) {
         if (!level.isClientSide) {
@@ -61,7 +61,7 @@ public interface SauceBowlInteraction {
 
         return InteractionResult.sidedSuccess(level.isClientSide);
     }
-
+/*
     static InteractionResult fillGlass(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, ItemStack itemStack, ItemStack itemStack2, Predicate<BlockState> predicate, SoundEvent soundEvent) {
         if (!predicate.test(blockState)) {
             return InteractionResult.PASS;
@@ -79,7 +79,7 @@ public interface SauceBowlInteraction {
             return InteractionResult.sidedSuccess(level.isClientSide);
         }
     }
-
+*/
     static Object2ObjectOpenHashMap<Item, SauceBowlInteraction> newInteractionMap() {
         return Util.make(new Object2ObjectOpenHashMap<Item,SauceBowlInteraction>(), (object2ObjectOpenHashMap) -> {
             object2ObjectOpenHashMap.defaultReturnValue((blockState, level, blockPos, player, interactionHand, itemStack) -> {
@@ -93,6 +93,7 @@ public interface SauceBowlInteraction {
 
 
     static void init(){
+        /*
         EMPTY.put(ModItems.SEAFOOD_BOTTLE,FILL_SEAFOOD);
         EMPTY.put(ModItems.FISH_SAUCE_BOTTLE,FILL_FISH_SAUCE);
         EMPTY.put(Items.HONEY_BOTTLE,FILL_HONEY);
@@ -114,5 +115,6 @@ public interface SauceBowlInteraction {
                 return blockStatex.getValue(LevelSauceBowl.LEVEL) == 4;
             }),SoundEvents.BOTTLE_FILL);
         }));
+    */
     }
 }

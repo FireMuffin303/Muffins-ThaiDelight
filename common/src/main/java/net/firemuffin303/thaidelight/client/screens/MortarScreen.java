@@ -1,5 +1,6 @@
 package net.firemuffin303.thaidelight.client.screens;
 
+import net.firemuffin303.thaidelight.ThaiDelight;
 import net.firemuffin303.thaidelight.common.menu.MortarMenu;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ImageButton;
@@ -14,7 +15,7 @@ import net.minecraft.world.inventory.RecipeBookMenu;
 import net.minecraft.world.inventory.Slot;
 
 public class MortarScreen extends AbstractContainerScreen<MortarMenu> implements RecipeUpdateListener {
-    private static final ResourceLocation CRAFTING_TABLE_LOCATION = new ResourceLocation("textures/gui/container/crafting_table.png");
+    private static final ResourceLocation CRAFTING_TABLE_LOCATION = new ResourceLocation(ThaiDelight.MOD_ID,"textures/gui/mortar.png");
     private static final ResourceLocation RECIPE_BUTTON_LOCATION = new ResourceLocation("textures/gui/recipe_button.png");
 
     private final RecipeBookComponent recipeBookComponent = new RecipeBookComponent();

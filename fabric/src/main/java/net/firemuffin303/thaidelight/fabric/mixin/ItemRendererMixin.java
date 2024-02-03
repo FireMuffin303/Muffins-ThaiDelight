@@ -25,7 +25,7 @@ public abstract class ItemRendererMixin {
 
     @ModifyVariable(method = "render",at = @At("HEAD"),argsOnly = true)
     public BakedModel usePastleModel(BakedModel value, ItemStack itemStack, ItemDisplayContext itemDisplayContext, boolean bl, PoseStack poseStack, MultiBufferSource multiBufferSource, int i, int j, BakedModel bakedModel){
-        if(itemDisplayContext != ItemDisplayContext.GUI && itemDisplayContext != ItemDisplayContext.GROUND && itemDisplayContext !=ItemDisplayContext.FIXED){
+       /* if(itemDisplayContext != ItemDisplayContext.GUI && itemDisplayContext != ItemDisplayContext.GROUND && itemDisplayContext !=ItemDisplayContext.FIXED){
             if(itemStack.is(ModItems.STONE_PASTLE)){
                 return((ItemRendererAccessor)(Object)this).muffins$getModels().getModelManager().getModel(STONE_PASTLE_MODEL);
             }else if(itemStack.is(ModItems.IRON_PASTLE)){
@@ -37,7 +37,7 @@ public abstract class ItemRendererMixin {
             }else if(itemStack.is(ModItems.NETHERITE_PASTLE)){
                 return((ItemRendererAccessor)(Object)this).muffins$getModels().getModelManager().getModel(NETHERITE_PASTLE_MODEL);
             }
-        }
+        }*/
 
 
 

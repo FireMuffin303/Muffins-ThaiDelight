@@ -76,6 +76,11 @@ public class ModPlatformImpl {
         ThaiDelightForge.ENTITY_TYPES.register(id,()->entityType);
     }
 
+    public static SoundEvent registerSoundEvent(String id,SoundEvent event) {
+         ThaiDelightForge.SOUND_EVENT.register(id,() -> event);
+         return event;
+    }
+
     public static <T extends BlockEntity> void registerBlockEntity(String id,BlockEntityType<T> blockEntityType) {
         ThaiDelightForge.BLOCK_ENTITY_TYPES.register(id,()->blockEntityType);
     }

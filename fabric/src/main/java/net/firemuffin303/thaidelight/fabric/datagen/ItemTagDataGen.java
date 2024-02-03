@@ -19,7 +19,7 @@ public class ItemTagDataGen extends FabricTagProvider.ItemTagProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider arg) {
-        getOrCreateTagBuilder(ItemTags.PIGLIN_LOVED).add(ModItems.GOLDEN_PASTLE);
+       // getOrCreateTagBuilder(ItemTags.PIGLIN_LOVED).add(ModItems.GOLDEN_PASTLE);
         getOrCreateTagBuilder(TagKey.create(Registries.ITEM, new ResourceLocation("origins","meat")))
                 .add(ModItems.CRAB_MEAT)
                 .add(ModItems.COOKED_CRAB_MEAT)

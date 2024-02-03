@@ -44,6 +44,7 @@ public class AdvancementDataGen extends FabricAdvancementProvider {
             .parent(ROOT)
             .build(new ResourceLocation(ThaiDelight.MOD_ID,"got_cooked_dragonfly"));
 
+    /*
     Advancement GOT_SAUCE_BOWL = Advancement.Builder.advancement()
             .display(
                     ModBlocks.SAUCE_BOWL,
@@ -58,6 +59,7 @@ public class AdvancementDataGen extends FabricAdvancementProvider {
                     InventoryChangeTrigger.TriggerInstance.hasItems(ModBlocks.SAUCE_BOWL))
             .parent(ROOT)
             .build(new ResourceLocation(ThaiDelight.MOD_ID,"got_sauce_bowl"));
+*/
 
     Advancement GOT_SLICED_LIME = Advancement.Builder.advancement()
             .display(
@@ -79,7 +81,7 @@ public class AdvancementDataGen extends FabricAdvancementProvider {
     public void generateAdvancement(Consumer<Advancement> consumer) {
         consumer.accept(ROOT);
         consumer.accept(GOT_COOKED_DRAGONFLY);
-        consumer.accept(GOT_SAUCE_BOWL);
+        //consumer.accept(GOT_SAUCE_BOWL);
         consumer.accept(GOT_SLICED_LIME);
     }
 }

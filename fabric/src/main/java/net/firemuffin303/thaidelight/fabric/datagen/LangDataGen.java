@@ -32,10 +32,10 @@ public class LangDataGen extends FabricLanguageProvider {
         translationBuilder.add(ModBlocks.LIME_CROP,"Lime Bush");
         translationBuilder.add(ModBlocks.MORTAR,"Mortar");
 
-        translationBuilder.add(ModBlocks.SAUCE_BOWL,"Sauce Bowl");
-        translationBuilder.add(ModBlocks.SEAFOOD_SAUCE_BOWL,"Seafood Sauce Bowl");
-        translationBuilder.add(ModBlocks.FISH_SAUCE_SAUCE_BOWL,"Fish Sauce Bowl");
-        translationBuilder.add(ModBlocks.HONEY_SAUCE_BOWL,"Honey Sauce Bowl");
+        //translationBuilder.add(ModBlocks.SAUCE_BOWL,"Sauce Bowl");
+        //translationBuilder.add(ModBlocks.SEAFOOD_SAUCE_BOWL,"Seafood Sauce Bowl");
+        //translationBuilder.add(ModBlocks.FISH_SAUCE_SAUCE_BOWL,"Fish Sauce Bowl");
+        //translationBuilder.add(ModBlocks.HONEY_SAUCE_BOWL,"Honey Sauce Bowl");
 
         translationBuilder.add(ModBlocks.LIME_CRATE,"Lime Crate");
         translationBuilder.add(ModBlocks.PEPPER_CRATE,"Pepper Crate");
@@ -80,7 +80,7 @@ public class LangDataGen extends FabricLanguageProvider {
         translationBuilder.add(ModItems.PAPAYA_JUICE,"Papaya Juice");
         translationBuilder.add(ModItems.LIME_JUICE,"Lime Juice");
 
-        translationBuilder.add(ModItems.LOINCLOTH,"Loincloth");
+        //translationBuilder.add(ModItems.LOINCLOTH,"Loincloth");
         translationBuilder.add(ModItems.ESAN_MUSIC_DISC,"Music Disc");
         translationBuilder.add("item.muffins_thaidelight.music_disc_northeast.desc","FireMuffin303 - untitled");
 
@@ -89,11 +89,11 @@ public class LangDataGen extends FabricLanguageProvider {
         translationBuilder.add(ModItemsFabric.CRAB_FRIED_RICE,"Plate of Crab Fried Rice");
         translationBuilder.add(ModItemsFabric.STIR_FRIED_NOODLE,"Stir Fried Noodle");
 
-        translationBuilder.add(ModItems.STONE_PASTLE,"Stone Pastle");
-        translationBuilder.add(ModItems.IRON_PASTLE,"Iron Pastle");
-        translationBuilder.add(ModItems.GOLDEN_PASTLE,"Golden Pastle");
-        translationBuilder.add(ModItems.DIAMOND_PASTLE,"Diamond Pastle");
-        translationBuilder.add(ModItems.NETHERITE_PASTLE,"Netherite Pastle");
+        //translationBuilder.add(ModItems.STONE_PASTLE,"Stone Pastle");
+        //translationBuilder.add(ModItems.IRON_PASTLE,"Iron Pastle");
+        //translationBuilder.add(ModItems.GOLDEN_PASTLE,"Golden Pastle");
+        //translationBuilder.add(ModItems.DIAMOND_PASTLE,"Diamond Pastle");
+        //translationBuilder.add(ModItems.NETHERITE_PASTLE,"Netherite Pastle");
 
 
     }
@@ -125,10 +125,10 @@ public class LangDataGen extends FabricLanguageProvider {
             translationBuilder.add(ModBlocks.LIME_CROP,"ต้นมะนาว");
             translationBuilder.add(ModBlocks.MORTAR,"ครก");
 
-            translationBuilder.add(ModBlocks.SAUCE_BOWL,"ถ้วยน้ำจิ้ม");
-            translationBuilder.add(ModBlocks.SEAFOOD_SAUCE_BOWL,"ถ้วยน้ำจิ้มซีฟู้ด");
-            translationBuilder.add(ModBlocks.FISH_SAUCE_SAUCE_BOWL,"ถ้วยน้ำปลา");
-            translationBuilder.add(ModBlocks.HONEY_SAUCE_BOWL,"ถ้วยน้ำผึ้ง");
+            //translationBuilder.add(ModBlocks.SAUCE_BOWL,"ถ้วยน้ำจิ้ม");
+            //translationBuilder.add(ModBlocks.SEAFOOD_SAUCE_BOWL,"ถ้วยน้ำจิ้มซีฟู้ด");
+            //translationBuilder.add(ModBlocks.FISH_SAUCE_SAUCE_BOWL,"ถ้วยน้ำปลา");
+            //translationBuilder.add(ModBlocks.HONEY_SAUCE_BOWL,"ถ้วยน้ำผึ้ง");
 
             translationBuilder.add(ModBlocksFabric.SOMTAM_FEAST,"ส้มตำ");
             translationBuilder.add(ModBlocksFabric.SPICY_MINCED_PORK_SALAD_FEAST,"ลาบ");
@@ -172,15 +172,15 @@ public class LangDataGen extends FabricLanguageProvider {
             translationBuilder.add(ModItems.PAPAYA_JUICE,"น้ำมะละกอ");
             translationBuilder.add(ModItems.LIME_JUICE,"น้ำมะนาว");
 
-            translationBuilder.add(ModItems.LOINCLOTH,"ผ้าขาวม้า");
+            //translationBuilder.add(ModItems.LOINCLOTH,"ผ้าขาวม้า");
             translationBuilder.add(ModItems.ESAN_MUSIC_DISC,"แผ่นเพลง");
             translationBuilder.add("item.muffins_thaidelight.music_disc_northeast.desc","FireMuffin303 - untitled");
 
-            translationBuilder.add(ModItems.STONE_PASTLE,"สากหิน");
-            translationBuilder.add(ModItems.IRON_PASTLE,"สากเหล็ก");
-            translationBuilder.add(ModItems.GOLDEN_PASTLE,"สากทอง");
-            translationBuilder.add(ModItems.DIAMOND_PASTLE,"สากเพชร");
-            translationBuilder.add(ModItems.NETHERITE_PASTLE,"สากเนเธอร์ไรต์");
+            //translationBuilder.add(ModItems.STONE_PASTLE,"สากหิน");
+            //translationBuilder.add(ModItems.IRON_PASTLE,"สากเหล็ก");
+            //translationBuilder.add(ModItems.GOLDEN_PASTLE,"สากทอง");
+            //translationBuilder.add(ModItems.DIAMOND_PASTLE,"สากเพชร");
+            //translationBuilder.add(ModItems.NETHERITE_PASTLE,"สากเนเธอร์ไรต์");
         }
     }
 }

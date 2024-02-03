@@ -1,6 +1,0 @@
-{
-  "parent": "muffins_thaidelight:item/pastle_3d_template",
-  "textures": {
-    "layer0": "muffins_thaidelight:item/golden_pastle_3d"
-  }
-}

@@ -28,12 +28,13 @@ public class ThaiDelight {
         ModConfiguredFeatures.init();
         ModRecipes.ModRecipeSerializer.init();
         ModMenuType.init();
+        ModSoundEvents.init();
     }
 
     public static void postInit(){
         ModEntityTypes.postInit();
         ModPotions.postInit();
-        SauceBowlInteraction.init();
+        //SauceBowlInteraction.init();
         registerComposterBlock();
     }
 

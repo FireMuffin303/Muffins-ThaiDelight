@@ -24,49 +24,14 @@ import java.util.List;
 public class MortarRecipe implements Recipe<Container> {
     private final ResourceLocation id;
     private final String group;
-    private final List<Ingredient> ingredients;
+    private final NonNullList<Ingredient> ingredients;
     private final ItemStack result;
 
-    public MortarRecipe(ResourceLocation id,String group,List<Ingredient> ingredients,ItemStack result){
+    public MortarRecipe(ResourceLocation id,String group,NonNullList<Ingredient> ingredients,ItemStack result){
         this.id = id;
         this.group = group;
         this.ingredients = ingredients;
         this.result = result;
-    }
-
-
-    @Override
-    public boolean matches(Container container, Level level) {
-        List<ItemStack> inputList = new ArrayList<>();
-        int i =0;
-        for(int j = 0; j < container.getContainerSize(); j++){
-            ItemStack itemStack = container.getItem(j);
-            if(!itemStack.isEmpty()){
-                inputList.add(itemStack);
-                ++i;
-            }
-        }
-        return i == this.ingredients.size() && ModPlatform.getRecipeMatcher(inputList,this.ingredients) != null;
-    }
-
-    @Override
-    public ItemStack assemble(Container container, RegistryAccess registryAccess) {
-        return this.getResultItem(registryAccess).copy();
-    }
-
-    @Override
-    public boolean canCraftInDimensions(int i, int j) {
-        return i * j >= this.ingredients.size();
-    }
-
-    @Override
-    public ItemStack getResultItem(RegistryAccess registryAccess) {
-        return this.result;
-    }
-
-    @Override
-    public String getGroup() {
-        return this.group;
     }
 
     @Override
@@ -80,9 +45,51 @@ public class MortarRecipe implements Recipe<Container> {
     }
 
     @Override
+    public String getGroup() {
+        return this.group;
+    }
+
+    @Override
+    public ItemStack getResultItem(RegistryAccess registryAccess) {
+        return this.result;
+    }
+
+    @Override
+    public NonNullList<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    @Override
     public RecipeType<?> getType() {
         return ModRecipes.MORTAR;
     }
+
+
+    @Override
+    public boolean matches(Container container, Level level) {
+        StackedContents stackedContents = new StackedContents();
+        int i =0;
+        for(int j = 0; j < container.getContainerSize(); j++){
+            ItemStack itemStack = container.getItem(j);
+            if(!itemStack.isEmpty()){
+                stackedContents.accountStack(itemStack,1);
+                ++i;
+            }
+        }
+        return i == this.ingredients.size() && stackedContents.canCraft(this,null);
+    }
+
+    @Override
+    public ItemStack assemble(Container container, RegistryAccess registryAccess) {
+        return this.getResultItem(registryAccess).copy();
+    }
+
+    @Override
+    public boolean canCraftInDimensions(int i, int j) {
+        return i * j >= this.ingredients.size();
+    }
+
+
 
     public static class Serializer implements RecipeSerializer<MortarRecipe>{
 

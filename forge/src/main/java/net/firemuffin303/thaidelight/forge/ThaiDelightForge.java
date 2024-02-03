@@ -9,6 +9,9 @@ import net.firemuffin303.thaidelight.common.registry.*;
 import net.firemuffin303.thaidelight.forge.common.registry.ModBlocksForge;
 import net.firemuffin303.thaidelight.forge.common.registry.ModItemsForge;
 import net.firemuffin303.thaidelight.forge.common.structures.VillageStructures;
+import net.minecraft.client.sounds.SoundEngine;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.Entity;
@@ -65,6 +68,7 @@ public class ThaiDelightForge {
     public static final DeferredRegister<RecipeType<?>> RECIPE_TYPE = DeferredRegister.create(ForgeRegistries.RECIPE_TYPES,ThaiDelight.MOD_ID);
     public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZER = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS,ThaiDelight.MOD_ID);
     public static final DeferredRegister<MenuType<?>> MENU_TYPE = DeferredRegister.create(ForgeRegistries.MENU_TYPES,ThaiDelight.MOD_ID);
+    public static final DeferredRegister<SoundEvent> SOUND_EVENT = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS,ThaiDelight.MOD_ID);
 
     public ThaiDelightForge() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -122,7 +126,7 @@ public class ThaiDelightForge {
     }
 
     public void registerCommonSetup(FMLCommonSetupEvent event){
-        event.enqueueWork(SauceBowlInteraction::init);
+        //event.enqueueWork(SauceBowlInteraction::init);
         event.enqueueWork(ThaiDelight::registerComposterBlock);
     }
 

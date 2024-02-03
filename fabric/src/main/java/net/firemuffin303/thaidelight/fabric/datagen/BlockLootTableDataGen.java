@@ -30,15 +30,15 @@ public class BlockLootTableDataGen extends FabricBlockLootTableProvider {
         this.createSimpleLoot(ModBlocks.PAPAYA_CRATE);
 
 
-        net.minecraft.world.level.storage.loot.LootTable.Builder sauceBowl = this.applyExplosionDecay(ModBlocks.SAUCE_BOWL,
-                LootTable.lootTable()
-                        .withPool(LootPool.lootPool()
-                                .add(LootItem.lootTableItem(ModBlocks.SAUCE_BOWL))));
+        //net.minecraft.world.level.storage.loot.LootTable.Builder sauceBowl = this.applyExplosionDecay(ModBlocks.SAUCE_BOWL,
+        //        LootTable.lootTable()
+        //                .withPool(LootPool.lootPool()
+        //                        .add(LootItem.lootTableItem(ModBlocks.SAUCE_BOWL))));
 
-        this.add(ModBlocks.SAUCE_BOWL,sauceBowl);
-        this.add(ModBlocks.SEAFOOD_SAUCE_BOWL,sauceBowl);
-        this.add(ModBlocks.FISH_SAUCE_SAUCE_BOWL,sauceBowl);
-        this.add(ModBlocks.HONEY_SAUCE_BOWL,sauceBowl);
+        //this.add(ModBlocks.SAUCE_BOWL,sauceBowl);
+        //this.add(ModBlocks.SEAFOOD_SAUCE_BOWL,sauceBowl);
+        //this.add(ModBlocks.FISH_SAUCE_SAUCE_BOWL,sauceBowl);
+        //this.add(ModBlocks.HONEY_SAUCE_BOWL,sauceBowl);
 
         this.add(ModBlocks.CRAB_EGG,this.applyExplosionDecay(ModBlocks.CRAB_EGG,
                 LootTable.lootTable()

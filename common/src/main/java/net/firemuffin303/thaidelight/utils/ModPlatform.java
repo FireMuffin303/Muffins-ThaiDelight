@@ -69,6 +69,11 @@ public class ModPlatform {
     }
 
     @ExpectPlatform
+    public static SoundEvent registerSoundEvent(String id,SoundEvent event){
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
     public static void registerFluid(String id,Fluid fluid){
         throw new AssertionError();
     }
