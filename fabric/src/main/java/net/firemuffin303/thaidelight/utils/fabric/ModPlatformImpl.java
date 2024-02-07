@@ -1,6 +1,7 @@
 package net.firemuffin303.thaidelight.utils.fabric;
 
 import com.jamieswhiteshirt.reachentityattributes.ReachEntityAttributes;
+import com.mojang.serialization.Codec;
 import com.nhoryzon.mc.farmersdelight.block.FeastBlock;
 import com.nhoryzon.mc.farmersdelight.block.WildCropBlock;
 import com.nhoryzon.mc.farmersdelight.item.ConsumableItem;
@@ -53,6 +54,8 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
+import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
 import net.minecraft.world.level.material.Fluid;
 
 import java.util.ArrayList;
@@ -104,6 +107,10 @@ public class ModPlatformImpl {
 
     public static <M extends AbstractContainerMenu,U extends Screen & MenuAccess<M>> void registerScreen(MenuType<M> menuType, ModPlatform.ScreenConstructor<M, U> screen) {
         MenuScreens.register(menuType,screen::create);
+    }
+
+    public static <T extends TreeDecorator> TreeDecoratorType<T> registerTreeDecorator(String id, Codec<T> codec) {
+        return Registry.register(BuiltInRegistries.TREE_DECORATOR_TYPE,new ResourceLocation(ThaiDelight.MOD_ID,id),new TreeDecoratorType(codec));
     }
 
     public static CreativeModeTab createCreativeModeTab(ResourceLocation resourceLocation, Supplier<ItemStack> icon, ArrayList<Item> itemList) {
@@ -227,8 +234,4 @@ public class ModPlatformImpl {
     public static <T extends AbstractContainerMenu> MenuType<T> registryMenu(String id, ModPlatform.MenuSupplier<T> menu) {
         return Registry.register(BuiltInRegistries.MENU,new ResourceLocation(ThaiDelight.MOD_ID,id),new MenuType(menu::create, FeatureFlags.VANILLA_SET));
     }
-
-
-
-
 }

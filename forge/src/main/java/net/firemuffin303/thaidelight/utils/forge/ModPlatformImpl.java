@@ -1,5 +1,6 @@
 package net.firemuffin303.thaidelight.utils.forge;
 
+import com.mojang.serialization.Codec;
 import net.firemuffin303.thaidelight.ThaiDelight;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.firemuffin303.thaidelight.forge.ThaiDelightForge;
@@ -44,6 +45,8 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
+import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.ForgeSpawnEggItem;
@@ -113,6 +116,12 @@ public class ModPlatformImpl {
 
     public static <T extends Recipe<?>> void registerRecipeSerializer(String id, RecipeSerializer<T> recipeSerializer) {
         ThaiDelightForge.RECIPE_SERIALIZER.register(id,() -> recipeSerializer);
+    }
+
+    public static <T extends TreeDecorator> TreeDecoratorType<T> registerTreeDecorator(String id, Codec<T> codec) {
+        TreeDecoratorType<T> treeDecoratorType = new TreeDecoratorType(codec);
+        ThaiDelightForge.TREE_DECORATOR.register(id,() -> treeDecoratorType);
+        return treeDecoratorType;
     }
 
     public static CreativeModeTab createCreativeModeTab(ResourceLocation resourceLocation, Supplier<ItemStack> icon, ArrayList<Item> itemList) {

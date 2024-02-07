@@ -3,11 +3,11 @@
   "category": "misc",
   "ingredients": [
     {
-      "item": "muffins_thaidelight:unripe_papaya_crate"
+      "item": "muffins_thaidelight:raw_papaya_crate"
     }
   ],
   "result": {
     "count": 9,
-    "item": "muffins_thaidelight:unripe_papaya"
+    "item": "muffins_thaidelight:raw_papaya"
   }
 }

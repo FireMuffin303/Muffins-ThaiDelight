@@ -3,7 +3,6 @@ package net.firemuffin303.thaidelight.common.registry;
 import com.google.common.collect.Sets;
 import net.firemuffin303.thaidelight.ThaiDelight;
 import net.firemuffin303.thaidelight.common.item.ModMusicDisc;
-import net.firemuffin303.thaidelight.common.item.LoinclothItem;
 import net.firemuffin303.thaidelight.common.item.bottle.SeafoodBottleItem;
 import net.firemuffin303.thaidelight.utils.ModPlatform;
 import net.minecraft.resources.ResourceLocation;
@@ -77,8 +76,8 @@ public class ModItems {
 
     public static final Item PAPAYA = new Item(new Item.Properties());
     public static final Item SLICED_PAPAYA = new Item(new Item.Properties().food(ModFood.SLICED_PAPAYA));
-    public static final Item UNRIPE_PAPAYA = new Item(new Item.Properties());
-    public static final Item SLICED_UNRIPE_PAPAYA = new Item(new Item.Properties().food(ModFood.SLICED_UNRIPE_PAPAYA));
+    public static final Item RAW_PAPAYA = new Item(new Item.Properties());
+    public static final Item RAW_PAPAYA_SLICE = new Item(new Item.Properties().food(ModFood.SLICED_UNRIPE_PAPAYA));
     public static final Item PAPAYA_SEED = new ItemNameBlockItem(ModBlocks.PAPAYA_STEM,new Item.Properties()){
         @Override
         public void registerBlocks(Map<Block, Item> map, Item item) {
@@ -125,8 +124,8 @@ public class ModItems {
 
         register("papaya",PAPAYA);
         register("papaya_slice",SLICED_PAPAYA);
-        register("unripe_papaya",UNRIPE_PAPAYA);
-        register("unripe_papaya_slice",SLICED_UNRIPE_PAPAYA);
+        register("raw_papaya", RAW_PAPAYA);
+        register("raw_papaya_slice", RAW_PAPAYA_SLICE);
         register("papaya_seeds",PAPAYA_SEED);
 
 

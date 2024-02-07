@@ -7,7 +7,6 @@ import net.fabricmc.fabric.api.datagen.v1.provider.*;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.minecraft.data.recipes.*;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -63,17 +62,17 @@ public class ModDataGen implements DataGeneratorEntrypoint {
 
             bigPackingCraft(Item.byBlock(ModBlocks.LIME_CRATE),1,ModItems.LIME,exporter);
             bigPackingCraft(Item.byBlock(ModBlocks.PEPPER_CRATE),1,ModItems.PEPPER,exporter);
-            bigPackingCraft(Item.byBlock(ModBlocks.UNRIPE_PAPAYA_CRATE),1,ModItems.UNRIPE_PAPAYA,exporter);
+            bigPackingCraft(Item.byBlock(ModBlocks.UNRIPE_PAPAYA_CRATE),1,ModItems.RAW_PAPAYA,exporter);
             bigPackingCraft(Item.byBlock(ModBlocks.PAPAYA_CRATE),1,ModItems.PAPAYA,exporter);
 
             ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD,ModItems.LIME,9).requires(ModBlocks.LIME_CRATE).unlockedBy(getHasName(ModBlocks.LIME_CRATE),has(ModBlocks.LIME_CRATE)).save(exporter,"crafting/"+getItemName(ModItems.LIME)+"_from_crafting");
             ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD,ModItems.PEPPER,9).requires(ModBlocks.PEPPER_CRATE).unlockedBy(getHasName(ModBlocks.PEPPER_CRATE),has(ModBlocks.PEPPER_CRATE)).save(exporter,"crafting/"+getItemName(ModItems.PEPPER)+"_from_crafting");
-            ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD,ModItems.UNRIPE_PAPAYA,9).requires(ModBlocks.UNRIPE_PAPAYA_CRATE).unlockedBy(getHasName(ModBlocks.UNRIPE_PAPAYA_CRATE),has(ModBlocks.UNRIPE_PAPAYA_CRATE)).save(exporter,"crafting/"+getItemName(ModItems.UNRIPE_PAPAYA)+"_from_crafting");
+            ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD,ModItems.RAW_PAPAYA,9).requires(ModBlocks.UNRIPE_PAPAYA_CRATE).unlockedBy(getHasName(ModBlocks.UNRIPE_PAPAYA_CRATE),has(ModBlocks.UNRIPE_PAPAYA_CRATE)).save(exporter,"crafting/"+getItemName(ModItems.RAW_PAPAYA)+"_from_crafting");
             ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD,ModItems.PAPAYA,9).requires(ModBlocks.PAPAYA_CRATE).unlockedBy(getHasName(ModBlocks.PAPAYA_TOP_STEM),has(ModBlocks.PAPAYA_CRATE)).save(exporter,"crafting/"+getItemName(ModItems.PAPAYA)+"_from_crafting");
 
             ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,ModItems.PEPPER_SEED,4).requires(ModItems.PEPPER).unlockedBy(getHasName(ModItems.PEPPER),has(ModItems.PEPPER)).save(exporter,"crafting/"+getItemName(ModItems.PEPPER_SEED)+"_from_crafting");
             ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,ModItems.PAPAYA_SEED,4).requires(ModItems.PAPAYA).unlockedBy(getHasName(ModItems.PAPAYA),has(ModItems.PAPAYA)).save(exporter,"crafting/"+getItemName(ModItems.PAPAYA_SEED)+"_by_papaya_from_crafting");
-            ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,ModItems.PAPAYA_SEED,4).requires(ModItems.UNRIPE_PAPAYA).unlockedBy(getHasName(ModItems.UNRIPE_PAPAYA),has(ModItems.UNRIPE_PAPAYA)).save(exporter,"crafting/"+getItemName(ModItems.PAPAYA_SEED)+"_by_unripe_papaya_from_crafting");
+            ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,ModItems.PAPAYA_SEED,4).requires(ModItems.RAW_PAPAYA).unlockedBy(getHasName(ModItems.RAW_PAPAYA),has(ModItems.RAW_PAPAYA)).save(exporter,"crafting/"+getItemName(ModItems.PAPAYA_SEED)+"_by_unripe_papaya_from_crafting");
             ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,ModItems.PAPAYA_SEED,2).requires(ModItems.SLICED_PAPAYA).unlockedBy(getHasName(ModItems.SLICED_PAPAYA),has(ModItems.SLICED_PAPAYA)).save(exporter,"crafting/"+getItemName(ModItems.PAPAYA_SEED)+"_by_sliced_papaya_from_crafting");
         }
 

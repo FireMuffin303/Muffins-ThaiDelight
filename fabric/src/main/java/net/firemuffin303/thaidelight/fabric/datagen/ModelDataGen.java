@@ -20,7 +20,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
 import java.util.Optional;
 
-import static net.minecraft.data.models.model.TextureMapping.cubeTop;
+import static net.minecraft.data.models.BlockModelGenerators.createHorizontalFacingDispatchAlt;
 import static net.minecraft.data.models.model.TextureMapping.getBlockTexture;
 
 public class ModelDataGen extends FabricModelProvider {
@@ -37,7 +37,23 @@ public class ModelDataGen extends FabricModelProvider {
         createCrateBlock(ModBlocks.UNRIPE_PAPAYA_CRATE,blockStateModelGenerator);
         createCrateBlock(ModBlocks.PAPAYA_CRATE,blockStateModelGenerator);
 
+        blockStateModelGenerator.woodProvider(ModBlocks.PAPAYA_LOG).logWithHorizontal(ModBlocks.PAPAYA_LOG).wood(ModBlocks.PAPAYA_WOOD);
+        blockStateModelGenerator.woodProvider(ModBlocks.STRIPPED_PAPAYA_LOG).logWithHorizontal(ModBlocks.STRIPPED_PAPAYA_LOG).wood(ModBlocks.STRIPPED_PAPAYA_WOOD);
+
+        blockStateModelGenerator.blockStateOutput.accept(
+                MultiVariantGenerator.multiVariant(ModBlocks.PAPAYA)
+                        .with(PropertyDispatch.property(BlockStateProperties.AGE_2)
+                                .select(0, net.minecraft.data.models.blockstates.Variant.variant()
+                                        .with(VariantProperties.MODEL, ModelLocationUtils.getModelLocation(ModBlocks.PAPAYA, "_stage0")))
+                                .select(1, net.minecraft.data.models.blockstates.Variant.variant()
+                                        .with(VariantProperties.MODEL, ModelLocationUtils.getModelLocation(ModBlocks.PAPAYA, "_stage1")))
+                                .select(2, net.minecraft.data.models.blockstates.Variant.variant()
+                                        .with(VariantProperties.MODEL, ModelLocationUtils.getModelLocation(ModBlocks.PAPAYA, "_stage2"))))
+                        .with(createHorizontalFacingDispatchAlt()));
+
+
         blockStateModelGenerator.createCrossBlockWithDefaultItem(ModBlocks.WILD_PEPPER_CROP, BlockModelGenerators.TintState.NOT_TINTED);
+        blockStateModelGenerator.createCrossBlockWithDefaultItem(ModBlocks.PAPAYA_SAPLING, BlockModelGenerators.TintState.NOT_TINTED);
 
         createPepperCrop(blockStateModelGenerator);
         createLimeCrop(blockStateModelGenerator);
@@ -73,8 +89,8 @@ public class ModelDataGen extends FabricModelProvider {
 
         itemModelGenerator.generateFlatItem(ModItems.PAPAYA, ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.SLICED_PAPAYA, ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.UNRIPE_PAPAYA, ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.SLICED_UNRIPE_PAPAYA,ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.RAW_PAPAYA, ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.RAW_PAPAYA_SLICE,ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.PAPAYA_SEED, ModelTemplates.FLAT_ITEM);
 
         itemModelGenerator.generateFlatItem(ModItems.PAPAYA_JUICE, ModelTemplates.FLAT_ITEM);

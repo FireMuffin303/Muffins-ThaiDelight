@@ -1,8 +1,8 @@
 {
   "ambientocclusion": false,
   "textures": {
-    "particle": "muffins_thaidelight:block/crab_egg",
-    "texture": "muffins_thaidelight:block/crab_egg"
+    "particle": "muffins_thaidelight:block/flower_crab_egg",
+    "texture": "muffins_thaidelight:block/flower_crab_egg"
   },
   "elements": [
     {   "from": [  0, 0.25,  0 ],

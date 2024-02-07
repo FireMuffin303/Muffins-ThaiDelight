@@ -3,8 +3,10 @@ package net.firemuffin303.thaidelight.fabric.datagen;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
 import net.firemuffin303.thaidelight.common.block.crops.LimeCrop;
+import net.firemuffin303.thaidelight.common.block.crops.PapayaBlock;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
+import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
@@ -40,6 +42,22 @@ public class BlockLootTableDataGen extends FabricBlockLootTableProvider {
         //this.add(ModBlocks.FISH_SAUCE_SAUCE_BOWL,sauceBowl);
         //this.add(ModBlocks.HONEY_SAUCE_BOWL,sauceBowl);
 
+        this.add(ModBlocks.PAPAYA,this.applyExplosionDecay(ModBlocks.PAPAYA,
+                LootTable.lootTable()
+                        .withPool(LootPool.lootPool()
+                                .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.PAPAYA)
+                                        .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(PapayaBlock.AGE,1))
+                                )
+                                .add(LootItem.lootTableItem(ModItems.RAW_PAPAYA))
+                        )
+
+                        .withPool(LootPool.lootPool()
+                                .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.PAPAYA)
+                                        .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(PapayaBlock.AGE,2))
+                                ).add(LootItem.lootTableItem(ModItems.PAPAYA))
+                        )
+                ));
+
         this.add(ModBlocks.CRAB_EGG,this.applyExplosionDecay(ModBlocks.CRAB_EGG,
                 LootTable.lootTable()
                         .withPool(LootPool.lootPool()
@@ -73,7 +91,7 @@ public class BlockLootTableDataGen extends FabricBlockLootTableProvider {
                                                 .apply(ApplyBonusCount.addBonusBinomialDistributionCount(Enchantments.BLOCK_FORTUNE, 0.5714286F, 3))))
                                 .withPool(LootPool.lootPool()
                                         .when(checkPapayaLevel6)
-                                        .add(LootItem.lootTableItem(ModItems.UNRIPE_PAPAYA)
+                                        .add(LootItem.lootTableItem(ModItems.RAW_PAPAYA)
                                                 .apply(ApplyBonusCount.addBonusBinomialDistributionCount(Enchantments.BLOCK_FORTUNE,0.5714286F, 3)))
                                 )
                 ));

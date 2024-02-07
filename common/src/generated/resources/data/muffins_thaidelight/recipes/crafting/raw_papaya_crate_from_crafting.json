@@ -3,7 +3,7 @@
   "category": "building",
   "key": {
     "A": {
-      "item": "muffins_thaidelight:unripe_papaya"
+      "item": "muffins_thaidelight:raw_papaya"
     }
   },
   "pattern": [
@@ -12,7 +12,7 @@
     "AAA"
   ],
   "result": {
-    "item": "muffins_thaidelight:unripe_papaya_crate"
+    "item": "muffins_thaidelight:raw_papaya_crate"
   },
   "show_notification": true
 }

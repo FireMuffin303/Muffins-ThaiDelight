@@ -23,6 +23,7 @@ import net.minecraft.world.entity.animal.Pig;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.inventory.RecipeBookType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -35,6 +36,7 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.crafting.CompoundIngredient;
@@ -69,6 +71,8 @@ public class ThaiDelightForge {
     public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZER = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS,ThaiDelight.MOD_ID);
     public static final DeferredRegister<MenuType<?>> MENU_TYPE = DeferredRegister.create(ForgeRegistries.MENU_TYPES,ThaiDelight.MOD_ID);
     public static final DeferredRegister<SoundEvent> SOUND_EVENT = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS,ThaiDelight.MOD_ID);
+    public static final DeferredRegister<TreeDecoratorType<?>> TREE_DECORATOR = DeferredRegister.create(ForgeRegistries.TREE_DECORATOR_TYPES,ThaiDelight.MOD_ID);
+
 
     public ThaiDelightForge() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -84,6 +88,7 @@ public class ThaiDelightForge {
         RECIPE_TYPE.register(modEventBus);
         RECIPE_SERIALIZER.register(modEventBus);
         MENU_TYPE.register(modEventBus);
+        SOUND_EVENT.register(modEventBus);
 
 
         modEventBus.addListener(EventPriority.HIGH,this::registerEvent);
@@ -123,6 +128,7 @@ public class ThaiDelightForge {
         registerEvent.register(ForgeRegistries.Keys.RECIPE_TYPES,helper -> ModRecipes.init());
         registerEvent.register(ForgeRegistries.Keys.RECIPE_SERIALIZERS,helper -> ModRecipes.ModRecipeSerializer.init());
         registerEvent.register(ForgeRegistries.Keys.MENU_TYPES,helper -> ModMenuType.init());
+        registerEvent.register(ForgeRegistries.Keys.SOUND_EVENTS,helper -> ModSoundEvents.init());
     }
 
     public void registerCommonSetup(FMLCommonSetupEvent event){

@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "muffins_thaidelight:block/stripped_papaya_wood",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "muffins_thaidelight:block/stripped_papaya_wood"
+    },
+    "axis=z": {
+      "model": "muffins_thaidelight:block/stripped_papaya_wood",
+      "x": 90
+    }
+  }
+}

@@ -1,6 +1,5 @@
 package net.firemuffin303.thaidelight;
 
-import net.firemuffin303.thaidelight.common.block.saucebowl.SauceBowlInteraction;
 import net.firemuffin303.thaidelight.common.registry.*;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.Item;
@@ -44,11 +43,11 @@ public class ThaiDelight {
         ComposterBlock.COMPOSTABLES.put(ModItems.PAPAYA_SEED,0.3f);
         ComposterBlock.COMPOSTABLES.put(ModItems.PEPPER,0.65f);
         ComposterBlock.COMPOSTABLES.put(ModItems.LIME,0.65f);
-        ComposterBlock.COMPOSTABLES.put(ModItems.UNRIPE_PAPAYA,0.65f);
+        ComposterBlock.COMPOSTABLES.put(ModItems.RAW_PAPAYA,0.65f);
         ComposterBlock.COMPOSTABLES.put(ModItems.PAPAYA,0.65f);
 
         ComposterBlock.COMPOSTABLES.put(ModItems.SLICED_LIME,0.4f);
-        ComposterBlock.COMPOSTABLES.put(ModItems.SLICED_UNRIPE_PAPAYA,0.4f);
+        ComposterBlock.COMPOSTABLES.put(ModItems.RAW_PAPAYA_SLICE,0.4f);
         ComposterBlock.COMPOSTABLES.put(ModItems.SLICED_PAPAYA,0.4f);
     }
 }

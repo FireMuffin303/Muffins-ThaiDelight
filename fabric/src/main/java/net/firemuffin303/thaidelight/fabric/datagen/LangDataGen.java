@@ -73,8 +73,8 @@ public class LangDataGen extends FabricLanguageProvider {
 
         translationBuilder.add(ModItems.PAPAYA,"Papaya");
         translationBuilder.add(ModItems.SLICED_PAPAYA,"Papaya Slice");
-        translationBuilder.add(ModItems.UNRIPE_PAPAYA,"Unripe Papaya");
-        translationBuilder.add(ModItems.SLICED_UNRIPE_PAPAYA,"Unripe Papaya Slice");
+        translationBuilder.add(ModItems.RAW_PAPAYA,"Unripe Papaya");
+        translationBuilder.add(ModItems.RAW_PAPAYA_SLICE,"Unripe Papaya Slice");
         translationBuilder.add(ModItems.PAPAYA_SEED,"Papaya Seeds");
 
         translationBuilder.add(ModItems.PAPAYA_JUICE,"Papaya Juice");
@@ -159,8 +159,8 @@ public class LangDataGen extends FabricLanguageProvider {
 
             translationBuilder.add(ModItems.PAPAYA,"มะละกอ");
             translationBuilder.add(ModItems.SLICED_PAPAYA,"มะละกอหั่น");
-            translationBuilder.add(ModItems.UNRIPE_PAPAYA,"มะละกอดิบ");
-            translationBuilder.add(ModItems.SLICED_UNRIPE_PAPAYA,"มะละกอดิบหั่น");
+            translationBuilder.add(ModItems.RAW_PAPAYA,"มะละกอดิบ");
+            translationBuilder.add(ModItems.RAW_PAPAYA_SLICE,"มะละกอดิบหั่น");
             translationBuilder.add(ModItems.PAPAYA_SEED,"เมล็ดมะละกอ");
 
             translationBuilder.add(ModItemsFabric.SOMTAM,"ถ้วยส้มตำ");

@@ -4,21 +4,22 @@ import net.firemuffin303.thaidelight.common.block.CrabEggBlock;
 import net.firemuffin303.thaidelight.common.block.MortarBlock;
 import net.firemuffin303.thaidelight.common.block.crops.*;
 import net.firemuffin303.thaidelight.common.block.entity.MortarBlockEntity;
+import net.firemuffin303.thaidelight.common.block.grower.PapayaTreeGrower;
 import net.firemuffin303.thaidelight.common.block.saucebowl.LevelSauceBowl;
 import net.firemuffin303.thaidelight.common.block.saucebowl.SauceBowl;
 import net.firemuffin303.thaidelight.common.block.saucebowl.SauceBowlInteraction;
 import net.firemuffin303.thaidelight.utils.ModPlatform;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 
@@ -52,10 +53,20 @@ public class ModBlocks {
     public static final Block PAPAYA_STEM = new PapayaStem(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).randomTicks().instabreak().strength(1.0F).sound(SoundType.WOOD).ignitedByLava().pushReaction(PushReaction.DESTROY));
     public static final Block PAPAYA_TOP_STEM = new UpperPapayaBlock(BlockBehaviour.Properties.copy(PAPAYA_STEM));
 
+    public static final Block PAPAYA = new PapayaBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).randomTicks().strength(0.2F, 3.0F).sound(SoundType.WOOD).noOcclusion().pushReaction(PushReaction.DESTROY));
+    public static final Block PAPAYA_SAPLING = new ModSaplingBlock(new PapayaTreeGrower(), BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY));
+
     //Feast
     public static final Block CRAB_FRIED_RICE_FEAST = ModPlatform.getCrabFriedRice();
     public static final Block SOMTAM_FEAST = ModPlatform.getSomtamBlock();
     public static final Block SPICY_MINCED_MEAT_SALAD_FEAST = ModPlatform.getSpicyMincedPorkBlock();
+
+    //Log
+    public static final Block PAPAYA_LOG = log(MapColor.COLOR_CYAN,MapColor.COLOR_CYAN);
+    public static final Block STRIPPED_PAPAYA_LOG = log(MapColor.COLOR_CYAN,MapColor.COLOR_CYAN);
+    public static final Block PAPAYA_WOOD = new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava());
+    public static final Block STRIPPED_PAPAYA_WOOD = new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava());
+
 
     public static void init(){
         //Functional Block
@@ -64,7 +75,7 @@ public class ModBlocks {
         //Crate
         registerWithItem("lime_crate",LIME_CRATE);
         registerWithItem("pepper_crate",PEPPER_CRATE);
-        registerWithItem("unripe_papaya_crate",UNRIPE_PAPAYA_CRATE);
+        registerWithItem("raw_papaya_crate",UNRIPE_PAPAYA_CRATE);
         registerWithItem("papaya_crate",PAPAYA_CRATE);
 
         //Sauce Bowl
@@ -88,10 +99,19 @@ public class ModBlocks {
         register("papaya_top_stem", PAPAYA_TOP_STEM);
         register("papaya_stem", PAPAYA_STEM);
 
+        register("papaya",PAPAYA);
+        registerWithItem("papaya_sapling",PAPAYA_SAPLING);
+
         //Feast
         registerWithItem("somtam_feast",SOMTAM_FEAST);
         registerWithItem("spicy_minced_meat_salad_feast", SPICY_MINCED_MEAT_SALAD_FEAST);
         registerWithItem("crab_fried_rice_feast", CRAB_FRIED_RICE_FEAST);
+
+        //Block
+        registerWithItem("papaya_log",PAPAYA_LOG);
+        registerWithItem("stripped_papaya_log",STRIPPED_PAPAYA_LOG);
+        registerWithItem("papaya_wood",PAPAYA_WOOD);
+        registerWithItem("stripped_papaya_wood",STRIPPED_PAPAYA_WOOD);
     }
 
     public static void register(String id, Block block){
@@ -103,6 +123,12 @@ public class ModBlocks {
         Item item = new BlockItem(block,new Item.Properties());
         ModPlatform.registryItem(id,() -> item);
         ModItems.ITEMS.add(item);
+    }
+
+    private static RotatedPillarBlock log(MapColor mapColor, MapColor mapColor2) {
+        return new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor((blockState) -> {
+            return blockState.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? mapColor : mapColor2;
+        }).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava());
     }
 
     public static class ModBlockEntityTypes{

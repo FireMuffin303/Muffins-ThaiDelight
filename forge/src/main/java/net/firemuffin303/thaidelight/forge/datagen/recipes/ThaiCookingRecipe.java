@@ -43,7 +43,7 @@ public class ThaiCookingRecipe {
                 .build(consumer,ForgeRegistries.ITEMS.getKey(Item.byBlock(ModBlocks.SPICY_MINCED_MEAT_SALAD_FEAST)));
 
         CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.LIME), Ingredient.of(ForgeTags.TOOLS_KNIVES),ModItems.SLICED_LIME,2).build(consumer,ForgeRegistries.ITEMS.getKey(ModItems.SLICED_LIME));
-        CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.UNRIPE_PAPAYA), Ingredient.of(ForgeTags.TOOLS_KNIVES),ModItems.SLICED_UNRIPE_PAPAYA,4).build(consumer,ForgeRegistries.ITEMS.getKey(ModItems.SLICED_UNRIPE_PAPAYA));
+        CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.RAW_PAPAYA), Ingredient.of(ForgeTags.TOOLS_KNIVES),ModItems.RAW_PAPAYA_SLICE,4).build(consumer,ForgeRegistries.ITEMS.getKey(ModItems.RAW_PAPAYA_SLICE));
         CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.PAPAYA), Ingredient.of(ForgeTags.TOOLS_KNIVES),ModItems.SLICED_PAPAYA,2).build(consumer,ForgeRegistries.ITEMS.getKey(ModItems.SLICED_PAPAYA));
 
         CookingPotRecipeBuilder.cookingPotRecipe(ModItems.PAPAYA_JUICE,1,CookingRecipes.NORMAL_COOKING,1.0f)

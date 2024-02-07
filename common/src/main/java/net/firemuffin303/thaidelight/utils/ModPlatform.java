@@ -1,5 +1,6 @@
 package net.firemuffin303.thaidelight.utils;
 
+import com.mojang.serialization.Codec;
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.minecraft.client.gui.screens.Screen;
@@ -34,6 +35,8 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
+import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
 import net.minecraft.world.level.material.Fluid;
 import org.apache.commons.lang3.NotImplementedException;
 
@@ -105,6 +108,11 @@ public class ModPlatform {
 
     @ExpectPlatform
     public static <M extends AbstractContainerMenu,U extends Screen & MenuAccess<M>> void registerScreen(MenuType<M> menuType, ScreenConstructor<M,U> screen){
+        throw new NotImplementedException();
+    }
+
+    @ExpectPlatform
+    public static <T extends TreeDecorator> TreeDecoratorType<T> registerTreeDecorator(String id, Codec<T> codec){
         throw new NotImplementedException();
     }
 
