@@ -1,5 +1,6 @@
 package net.firemuffin303.thaidelight.utils.forge;
 
+import com.google.common.collect.ImmutableMap;
 import com.mojang.serialization.Codec;
 import net.firemuffin303.thaidelight.ThaiDelight;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
@@ -10,6 +11,7 @@ import net.firemuffin303.thaidelight.forge.common.item.PastleItem;
 import net.firemuffin303.thaidelight.forge.common.item.SomtamItem;
 import net.firemuffin303.thaidelight.forge.common.registry.ModBlocksForge;
 import net.firemuffin303.thaidelight.forge.common.registry.ModItemsForge;
+import net.firemuffin303.thaidelight.forge.mixin.AxeItemAccessor;
 import net.firemuffin303.thaidelight.utils.ModPlatform;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.gui.screens.Screen;
@@ -61,6 +63,7 @@ import vectorwing.farmersdelight.common.registry.ModItems;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
@@ -243,7 +246,10 @@ public class ModPlatformImpl {
         return new LimeJuiceItem(properties);
     }
 
-
+    public static void registerStrippables(Map<Block, Block> blockBlockMap) {
+        Map<Block,Block> map = new ImmutableMap.Builder<Block,Block>().putAll(AxeItemAccessor.getStrippables()).putAll(blockBlockMap).build();
+        AxeItemAccessor.setStrippables(map);
+    }
 
 
 }

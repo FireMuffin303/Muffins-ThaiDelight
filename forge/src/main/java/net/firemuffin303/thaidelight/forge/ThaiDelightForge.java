@@ -89,6 +89,7 @@ public class ThaiDelightForge {
         RECIPE_SERIALIZER.register(modEventBus);
         MENU_TYPE.register(modEventBus);
         SOUND_EVENT.register(modEventBus);
+        TREE_DECORATOR.register(modEventBus);
 
 
         modEventBus.addListener(EventPriority.HIGH,this::registerEvent);
@@ -129,11 +130,12 @@ public class ThaiDelightForge {
         registerEvent.register(ForgeRegistries.Keys.RECIPE_SERIALIZERS,helper -> ModRecipes.ModRecipeSerializer.init());
         registerEvent.register(ForgeRegistries.Keys.MENU_TYPES,helper -> ModMenuType.init());
         registerEvent.register(ForgeRegistries.Keys.SOUND_EVENTS,helper -> ModSoundEvents.init());
+        registerEvent.register(ForgeRegistries.Keys.TREE_DECORATOR_TYPES,helper -> ModTreeDecorator.init());
     }
 
     public void registerCommonSetup(FMLCommonSetupEvent event){
-        //event.enqueueWork(SauceBowlInteraction::init);
         event.enqueueWork(ThaiDelight::registerComposterBlock);
+        event.enqueueWork(ThaiDelight::registerStrippables);
     }
 
     public void registerVillagerTrades(VillagerTradesEvent event){

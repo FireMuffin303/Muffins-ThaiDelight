@@ -42,6 +42,7 @@ import org.apache.commons.lang3.NotImplementedException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
@@ -68,6 +69,11 @@ public class ModPlatform {
 
     @ExpectPlatform
     public static <T extends Entity> void registerEntityType(String id,EntityType<T> entityType){
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static void registerStrippables(Map<Block,Block> blockBlockMap){
         throw new AssertionError();
     }
 

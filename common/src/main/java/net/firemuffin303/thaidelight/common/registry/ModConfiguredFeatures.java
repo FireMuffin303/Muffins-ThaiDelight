@@ -18,7 +18,6 @@ public class ModConfiguredFeatures {
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> FEATURE_PAPAYA_TREE;
 
-    public static final TreeDecoratorType<PapayaDecorator> TREE_DECORATOR_PAPAYA;
 
     public static void init(){}
 
@@ -30,6 +29,6 @@ public class ModConfiguredFeatures {
         PATCH_LIME_BUSH = ResourceKey.create(Registries.PLACED_FEATURE,new ResourceLocation(ThaiDelight.MOD_ID,"patch_lime_bush"));
         PATCH_WILD_PEPPER = ResourceKey.create(Registries.PLACED_FEATURE,new ResourceLocation(ThaiDelight.MOD_ID,"patch_wild_pepper"));
 
-        TREE_DECORATOR_PAPAYA = ModPlatform.registerTreeDecorator("papaya",PapayaDecorator.CODEC);
+
     }
 }

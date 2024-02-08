@@ -1,12 +1,16 @@
 package net.firemuffin303.thaidelight;
 
 import net.firemuffin303.thaidelight.common.registry.*;
+import net.firemuffin303.thaidelight.utils.ModPlatform;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ComposterBlock;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 public class ThaiDelight {
@@ -28,13 +32,14 @@ public class ThaiDelight {
         ModRecipes.ModRecipeSerializer.init();
         ModMenuType.init();
         ModSoundEvents.init();
+        ModTreeDecorator.init();
     }
 
     public static void postInit(){
         ModEntityTypes.postInit();
         ModPotions.postInit();
-        //SauceBowlInteraction.init();
         registerComposterBlock();
+        registerStrippables();
     }
 
     public static void registerComposterBlock(){
@@ -49,5 +54,13 @@ public class ThaiDelight {
         ComposterBlock.COMPOSTABLES.put(ModItems.SLICED_LIME,0.4f);
         ComposterBlock.COMPOSTABLES.put(ModItems.RAW_PAPAYA_SLICE,0.4f);
         ComposterBlock.COMPOSTABLES.put(ModItems.SLICED_PAPAYA,0.4f);
+    }
+
+    public static void registerStrippables(){
+        Map<Block,Block> stippables = new HashMap<>();
+        stippables.put(ModBlocks.PAPAYA_LOG,ModBlocks.STRIPPED_PAPAYA_LOG);
+        stippables.put(ModBlocks.PAPAYA_WOOD,ModBlocks.STRIPPED_PAPAYA_WOOD);
+
+        ModPlatform.registerStrippables(stippables);
     }
 }

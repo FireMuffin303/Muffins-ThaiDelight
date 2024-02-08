@@ -4,6 +4,7 @@ import com.mojang.serialization.Codec;
 import net.firemuffin303.thaidelight.common.block.crops.PapayaBlock;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.firemuffin303.thaidelight.common.registry.ModConfiguredFeatures;
+import net.firemuffin303.thaidelight.common.registry.ModTreeDecorator;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
@@ -26,7 +27,7 @@ public class PapayaDecorator extends TreeDecorator {
 
     @Override
     protected TreeDecoratorType<?> type() {
-        return ModConfiguredFeatures.TREE_DECORATOR_PAPAYA;
+        return ModTreeDecorator.TREE_DECORATOR_PAPAYA;
     }
 
     @Override

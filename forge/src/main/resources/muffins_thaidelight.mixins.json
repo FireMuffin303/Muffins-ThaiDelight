@@ -1,11 +1,12 @@
 {
   "required": true,
-  "package": "net.firemuffin303.muffins_mobvote2023.forge",
+  "package": "net.firemuffin303.thaidelight.forge.mixin",
   "compatibilityLevel": "JAVA_17",
   "minVersion": "0.8",
   "client": [
   ],
   "mixins": [
+    "AxeItemAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

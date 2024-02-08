@@ -12,6 +12,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.registry.FabricBrewingRecipeRegistry;
+import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.firemuffin303.thaidelight.ThaiDelight;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
@@ -60,6 +61,7 @@ import net.minecraft.world.level.material.Fluid;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
@@ -233,5 +235,9 @@ public class ModPlatformImpl {
 
     public static <T extends AbstractContainerMenu> MenuType<T> registryMenu(String id, ModPlatform.MenuSupplier<T> menu) {
         return Registry.register(BuiltInRegistries.MENU,new ResourceLocation(ThaiDelight.MOD_ID,id),new MenuType(menu::create, FeatureFlags.VANILLA_SET));
+    }
+
+    public static void registerStrippables(Map<Block, Block> blockBlockMap) {
+        blockBlockMap.forEach(StrippableBlockRegistry::register);
     }
 }
