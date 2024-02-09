@@ -31,6 +31,12 @@ public class BlockLootTableDataGen extends FabricBlockLootTableProvider {
         this.createSimpleLoot(ModBlocks.UNRIPE_PAPAYA_CRATE);
         this.createSimpleLoot(ModBlocks.PAPAYA_CRATE);
 
+        this.createSimpleLoot(ModBlocks.PAPAYA_LOG);
+        this.createSimpleLoot(ModBlocks.STRIPPED_PAPAYA_LOG);
+        this.createSimpleLoot(ModBlocks.PAPAYA_WOOD);
+        this.createSimpleLoot(ModBlocks.STRIPPED_PAPAYA_WOOD);
+
+
 
         //net.minecraft.world.level.storage.loot.LootTable.Builder sauceBowl = this.applyExplosionDecay(ModBlocks.SAUCE_BOWL,
         //        LootTable.lootTable()

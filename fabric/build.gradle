@@ -43,7 +43,7 @@ dependencies {
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
     include modApi("com.jamieswhiteshirt:reach-entity-attributes:${rootProject.reach_version}")
-    modImplementation("maven.modrinth:farmers-delight-fabric:rlm3hWGx")
+    modImplementation("maven.modrinth:farmers-delight-fabric:DzmY31OQ")
 }
 
 processResources {
