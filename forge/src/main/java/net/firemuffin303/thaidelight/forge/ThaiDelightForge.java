@@ -2,44 +2,29 @@ package net.firemuffin303.thaidelight.forge;
 
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.firemuffin303.thaidelight.ThaiDelight;
-import net.firemuffin303.thaidelight.common.block.saucebowl.SauceBowlInteraction;
 import net.firemuffin303.thaidelight.common.entity.FlowerCrabEntity;
 import net.firemuffin303.thaidelight.common.event.ModVillagerTrades;
 import net.firemuffin303.thaidelight.common.registry.*;
 import net.firemuffin303.thaidelight.forge.common.registry.ModBlocksForge;
 import net.firemuffin303.thaidelight.forge.common.registry.ModItemsForge;
 import net.firemuffin303.thaidelight.forge.common.structures.VillageStructures;
-import net.minecraft.client.sounds.SoundEngine;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffect;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.SpawnPlacements;
-import net.minecraft.world.entity.animal.Chicken;
-import net.minecraft.world.entity.animal.Parrot;
-import net.minecraft.world.entity.animal.Pig;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.inventory.MenuType;
-import net.minecraft.world.inventory.RecipeBookType;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potion;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.item.trading.MerchantOffer;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.crafting.CompoundIngredient;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent;
 import net.minecraftforge.event.village.VillagerTradesEvent;
@@ -52,10 +37,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegisterEvent;
-import org.jetbrains.annotations.Nullable;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 @Mod(ThaiDelight.MOD_ID)
@@ -139,17 +121,17 @@ public class ThaiDelightForge {
     }
 
     public void registerVillagerTrades(VillagerTradesEvent event){
-        if(event.getType() == VillagerProfession.FARMER){
-            Int2ObjectMap<List<VillagerTrades.ItemListing>> trades = event.getTrades();
-            ModVillagerTrades.farmerTrade().forEach(integerMerchantOfferPair -> {
-                trades.get(integerMerchantOfferPair.first).add((arg, arg2) -> integerMerchantOfferPair.second);
-            });
-        }
+        ModVillagerTrades.trades().forEach(modVillagerTrade -> {
+            if(event.getType() == modVillagerTrade.villagerProfession()){
+                Int2ObjectMap<List<VillagerTrades.ItemListing>> trades = event.getTrades();
+                trades.get(modVillagerTrade.level()).add(((arg, arg2) -> modVillagerTrade.merchantOffer()));
+            }
+        });
     }
 
     public void registerWandererTrades(WandererTradesEvent event){
         ModVillagerTrades.wanderTrade().forEach(integerMerchantOfferPair -> {
-            event.getGenericTrades().add((arg, arg2) -> integerMerchantOfferPair.second);
+            event.getGenericTrades().add((arg, arg2) -> integerMerchantOfferPair);
         });
     }
 

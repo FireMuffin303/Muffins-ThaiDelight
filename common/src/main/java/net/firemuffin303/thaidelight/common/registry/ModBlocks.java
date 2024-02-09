@@ -3,20 +3,17 @@ package net.firemuffin303.thaidelight.common.registry;
 import net.firemuffin303.thaidelight.common.block.CrabEggBlock;
 import net.firemuffin303.thaidelight.common.block.MortarBlock;
 import net.firemuffin303.thaidelight.common.block.crops.*;
-import net.firemuffin303.thaidelight.common.block.entity.MortarBlockEntity;
 import net.firemuffin303.thaidelight.common.block.grower.PapayaTreeGrower;
-import net.firemuffin303.thaidelight.common.block.saucebowl.LevelSauceBowl;
-import net.firemuffin303.thaidelight.common.block.saucebowl.SauceBowl;
-import net.firemuffin303.thaidelight.common.block.saucebowl.SauceBowlInteraction;
 import net.firemuffin303.thaidelight.utils.ModPlatform;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
@@ -67,6 +64,7 @@ public class ModBlocks {
     public static final Block PAPAYA_WOOD = new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava());
     public static final Block STRIPPED_PAPAYA_WOOD = new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava());
 
+    public static final Block PAPAYA_LEAVES = leaves(SoundType.AZALEA_LEAVES);
 
     public static void init(){
         //Functional Block
@@ -112,6 +110,7 @@ public class ModBlocks {
         registerWithItem("stripped_papaya_log",STRIPPED_PAPAYA_LOG);
         registerWithItem("papaya_wood",PAPAYA_WOOD);
         registerWithItem("stripped_papaya_wood",STRIPPED_PAPAYA_WOOD);
+        registerWithItem("papaya_leaves",PAPAYA_LEAVES);
     }
 
     public static void register(String id, Block block){
@@ -129,6 +128,14 @@ public class ModBlocks {
         return new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor((blockState) -> {
             return blockState.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? mapColor : mapColor2;
         }).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava());
+    }
+
+    private static LeavesBlock leaves(SoundType soundType) {
+        return new LeavesBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).strength(0.2F).randomTicks().sound(soundType).noOcclusion().isValidSpawn(ModBlocks::ocelotOrParrot).isSuffocating((blockState, blockGetter, blockPos) -> false).isViewBlocking((blockState, blockGetter, blockPos) -> false).ignitedByLava().pushReaction(PushReaction.DESTROY).isRedstoneConductor((blockState, blockGetter, blockPos) -> false));
+    }
+
+    private static Boolean ocelotOrParrot(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, EntityType<?> entityType) {
+        return entityType == EntityType.OCELOT || entityType == EntityType.PARROT;
     }
 
     public static class ModBlockEntityTypes{

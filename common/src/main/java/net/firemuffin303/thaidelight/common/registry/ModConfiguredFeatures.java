@@ -13,10 +13,11 @@ import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 public class ModConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?,?>> FEATURE_PATCH_LIME_BUSH;
     public static final ResourceKey<ConfiguredFeature<?,?>> FEATURE_PATCH_WILD_PEPPER;
+    public static final ResourceKey<ConfiguredFeature<?, ?>> FEATURE_PAPAYA_TREE;
     public static final ResourceKey<PlacedFeature> PATCH_LIME_BUSH;
     public static final ResourceKey<PlacedFeature> PATCH_WILD_PEPPER;
+    public static final ResourceKey<PlacedFeature> PAPAYA_TREE_CHECKED;
 
-    public static final ResourceKey<ConfiguredFeature<?, ?>> FEATURE_PAPAYA_TREE;
 
 
     public static void init(){}
@@ -28,6 +29,7 @@ public class ModConfiguredFeatures {
 
         PATCH_LIME_BUSH = ResourceKey.create(Registries.PLACED_FEATURE,new ResourceLocation(ThaiDelight.MOD_ID,"patch_lime_bush"));
         PATCH_WILD_PEPPER = ResourceKey.create(Registries.PLACED_FEATURE,new ResourceLocation(ThaiDelight.MOD_ID,"patch_wild_pepper"));
+        PAPAYA_TREE_CHECKED = ResourceKey.create(Registries.PLACED_FEATURE,new ResourceLocation(ThaiDelight.MOD_ID,"papaya_tree_checked"));
 
 
     }

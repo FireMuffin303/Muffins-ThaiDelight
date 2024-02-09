@@ -76,6 +76,10 @@ public class ThaiDelightModFabric implements ModInitializer {
             return BiomeSelectors.includeByKey(Biomes.FOREST, Biomes.BIRCH_FOREST, Biomes.FLOWER_FOREST,Biomes.SAVANNA,Biomes.SAVANNA_PLATEAU).test(context);
         }, GenerationStep.Decoration.VEGETAL_DECORATION, ModConfiguredFeatures.PATCH_WILD_PEPPER);
 
+        BiomeModifications.addFeature((context) ->{
+            return BiomeSelectors.includeByKey(Biomes.FOREST, Biomes.BIRCH_FOREST, Biomes.FLOWER_FOREST,Biomes.SAVANNA,Biomes.SAVANNA_PLATEAU).test(context);
+        }, GenerationStep.Decoration.VEGETAL_DECORATION, ModConfiguredFeatures.PAPAYA_TREE_CHECKED);
+
         this.addVillagersTrades();
 
         Set<ResourceLocation> chestsId = Set.of(
@@ -101,16 +105,16 @@ public class ThaiDelightModFabric implements ModInitializer {
     }
 
     private void addVillagersTrades(){
-        ModVillagerTrades.farmerTrade().forEach(integerMerchantOfferPair -> {
-            TradeOfferHelper.registerVillagerOffers(VillagerProfession.FARMER,integerMerchantOfferPair.first,(factories) ->{
-                factories.add((entity, randomSource) -> integerMerchantOfferPair.second);
+        ModVillagerTrades.trades().forEach(modVillagerTrade -> {
+            TradeOfferHelper.registerVillagerOffers(modVillagerTrade.villagerProfession(), modVillagerTrade.level(), (factories) ->{
+                factories.add((entity, randomSource) -> modVillagerTrade.merchantOffer());
             });
         });
 
 
         TradeOfferHelper.registerWanderingTraderOffers(1, (factories) -> {
             ModVillagerTrades.wanderTrade().forEach(integerMerchantOfferPair -> {
-                factories.add((entity, randomSource) -> integerMerchantOfferPair.second);
+                factories.add((entity, randomSource) -> integerMerchantOfferPair);
             });
         });
     }
