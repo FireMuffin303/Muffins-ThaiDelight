@@ -59,7 +59,7 @@ public class ModBlocks {
     public static final Block SPICY_MINCED_MEAT_SALAD_FEAST = ModPlatform.getSpicyMincedPorkBlock();
 
     //Log
-    public static final Block PAPAYA_LOG = log(MapColor.COLOR_CYAN,MapColor.COLOR_CYAN);
+    public static final Block PAPAYA_LOG = new PapayaLog(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.NETHER_WOOD).ignitedByLava());
     public static final Block STRIPPED_PAPAYA_LOG = log(MapColor.COLOR_CYAN,MapColor.COLOR_CYAN);
     public static final Block PAPAYA_WOOD = new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava());
     public static final Block STRIPPED_PAPAYA_WOOD = new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava());

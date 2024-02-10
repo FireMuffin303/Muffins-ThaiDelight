@@ -1,11 +1,18 @@
 package net.firemuffin303.thaidelight.common.block.crops;
 
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
+import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.tags.BlockTags;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -20,7 +27,9 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.block.state.properties.Property;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
@@ -48,7 +57,24 @@ public class PapayaBlock extends HorizontalDirectionalBlock implements Bonemeala
                 serverLevel.setBlock(blockPos, (BlockState)blockState.setValue(AGE, i + 1), 2);
             }
         }
+    }
 
+    @Override
+    public InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
+        int i = (Integer)blockState.getValue(AGE);
+        boolean flag = i == 2;
+        if (!flag && player.getItemInHand(interactionHand).is(Items.BONE_MEAL)) {
+            return InteractionResult.PASS;
+        } else if (i > 0) {
+            popResource(level, blockPos, new ItemStack(flag ? ModItems.PAPAYA : ModItems.RAW_PAPAYA, 1));
+            level.playSound((Player)null, blockPos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
+            BlockState blockstate = Blocks.AIR.defaultBlockState();
+            level.setBlock(blockPos, blockstate, 2);
+            level.gameEvent(GameEvent.BLOCK_CHANGE, blockPos, GameEvent.Context.of(player, blockstate));
+            return InteractionResult.sidedSuccess(level.isClientSide);
+        } else {
+            return super.use(blockState, level, blockPos, player, interactionHand, blockHitResult);
+        }
     }
 
     public boolean canSurvive(BlockState blockState, LevelReader levelReader, BlockPos blockPos) {

@@ -1,17 +1,19 @@
 package net.firemuffin303.thaidelight;
 
 import net.firemuffin303.thaidelight.common.registry.*;
+import net.firemuffin303.thaidelight.mixin.PigFoodAccessor;
 import net.firemuffin303.thaidelight.utils.ModPlatform;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ComposterBlock;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 public class ThaiDelight {
     public static final Logger LOGGER = LoggerFactory.getLogger(ThaiDelight.MOD_ID);
@@ -40,6 +42,9 @@ public class ThaiDelight {
         ModPotions.postInit();
         registerComposterBlock();
         registerStrippables();
+
+
+
     }
 
     public static void registerComposterBlock(){
