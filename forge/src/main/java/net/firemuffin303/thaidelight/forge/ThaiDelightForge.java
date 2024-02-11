@@ -12,7 +12,6 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.SpawnPlacements;
-import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.Item;
@@ -118,6 +117,7 @@ public class ThaiDelightForge {
     public void registerCommonSetup(FMLCommonSetupEvent event){
         event.enqueueWork(ThaiDelight::registerComposterBlock);
         event.enqueueWork(ThaiDelight::registerStrippables);
+        event.enqueueWork(ThaiDelight::registerAnimalFoodItem);
     }
 
     public void registerVillagerTrades(VillagerTradesEvent event){

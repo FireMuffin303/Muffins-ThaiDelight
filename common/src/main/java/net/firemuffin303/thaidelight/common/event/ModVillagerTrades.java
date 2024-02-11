@@ -19,7 +19,7 @@ public class ModVillagerTrades {
         modVillagerTrades.add(new ModVillagerTrade(VillagerProfession.FARMER,1,new MerchantOffer(new ItemStack(ModItems.PAPAYA,16),new ItemStack(Items.EMERALD),16,2,1)));
         modVillagerTrades.add(new ModVillagerTrade(VillagerProfession.FARMER,1,new MerchantOffer(new ItemStack(ModItems.RAW_PAPAYA,16),new ItemStack(Items.EMERALD),16,2,1)));
 
-        modVillagerTrades.add(new ModVillagerTrade(VillagerProfession.FARMER,1,new MerchantOffer(new ItemStack(Items.EMERALD,1),new ItemStack(ModItems.PAPAYA_SEED,1),8,2,1)));
+        modVillagerTrades.add(new ModVillagerTrade(VillagerProfession.FARMER,1,new MerchantOffer(new ItemStack(Items.EMERALD,1),new ItemStack(ModBlocks.PAPAYA_SEEDS,1),8,2,1)));
         modVillagerTrades.add(new ModVillagerTrade(VillagerProfession.FARMER,1,new MerchantOffer(new ItemStack(Items.EMERALD,1),new ItemStack(ModBlocks.LIME_SAPLING,1),8,2,1)));
         modVillagerTrades.add(new ModVillagerTrade(VillagerProfession.FARMER,1,new MerchantOffer(new ItemStack(Items.EMERALD,1),new ItemStack(ModBlocks.LIME_SAPLING,1),8,2,1)));
 
@@ -32,7 +32,7 @@ public class ModVillagerTrades {
     public static List<MerchantOffer> wanderTrade(){
         List<MerchantOffer> merchantOfferList = new ArrayList<>();
 
-        merchantOfferList.add(new MerchantOffer(new ItemStack(Items.EMERALD),new ItemStack(ModItems.PAPAYA_SEED,1),16,2,1));
+        merchantOfferList.add(new MerchantOffer(new ItemStack(Items.EMERALD),new ItemStack(ModBlocks.PAPAYA_SEEDS,1),16,2,1));
         merchantOfferList.add(new MerchantOffer(new ItemStack(Items.EMERALD),new ItemStack(ModBlocks.LIME_SAPLING,1),16,2,1));
         merchantOfferList.add(new MerchantOffer(new ItemStack(Items.EMERALD),new ItemStack(ModItems.PEPPER_SEED,1),16,2,1));
 

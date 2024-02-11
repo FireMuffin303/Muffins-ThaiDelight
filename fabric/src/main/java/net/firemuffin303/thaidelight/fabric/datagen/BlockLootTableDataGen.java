@@ -28,13 +28,19 @@ public class BlockLootTableDataGen extends FabricBlockLootTableProvider {
 
         this.createSimpleLoot(ModBlocks.LIME_CRATE);
         this.createSimpleLoot(ModBlocks.PEPPER_CRATE);
-        this.createSimpleLoot(ModBlocks.UNRIPE_PAPAYA_CRATE);
+        this.createSimpleLoot(ModBlocks.RAW_PAPAYA_CRATE);
         this.createSimpleLoot(ModBlocks.PAPAYA_CRATE);
 
         this.createSimpleLoot(ModBlocks.PAPAYA_LOG);
         this.createSimpleLoot(ModBlocks.STRIPPED_PAPAYA_LOG);
         this.createSimpleLoot(ModBlocks.PAPAYA_WOOD);
         this.createSimpleLoot(ModBlocks.STRIPPED_PAPAYA_WOOD);
+
+        this.add(ModBlocks.PAPAYA_LEAVES,this.applyExplosionDecay(ModBlocks.PAPAYA_LEAVES,
+                LootTable.lootTable()
+                        .withPool(LootPool.lootPool()
+                                .when(HAS_SHEARS)
+                                .add(LootItem.lootTableItem(ModBlocks.PAPAYA_LEAVES)))));
 
 
 
@@ -86,21 +92,6 @@ public class BlockLootTableDataGen extends FabricBlockLootTableProvider {
         net.minecraft.world.level.storage.loot.predicates.LootItemCondition.Builder checkPepperLevel = LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.PEPPER_CROP).setProperties(net.minecraft.advancements.critereon.StatePropertiesPredicate.Builder.properties().hasProperty(CarrotBlock.AGE, 7));
         this.add(ModBlocks.PEPPER_CROP, (net.minecraft.world.level.storage.loot.LootTable.Builder)this.applyExplosionDecay(ModBlocks.PEPPER_CROP, LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.PEPPER))).withPool(LootPool.lootPool().when(checkPepperLevel).add(LootItem.lootTableItem(ModItems.PEPPER).apply(ApplyBonusCount.addBonusBinomialDistributionCount(Enchantments.BLOCK_FORTUNE, 0.5714286F, 3))))));
 
-        net.minecraft.world.level.storage.loot.predicates.LootItemCondition.Builder checkPapayaLevel = LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.PAPAYA_TOP_STEM).setProperties(net.minecraft.advancements.critereon.StatePropertiesPredicate.Builder.properties().hasProperty(CarrotBlock.AGE, 7));
-        net.minecraft.world.level.storage.loot.predicates.LootItemCondition.Builder checkPapayaLevel6 = LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.PAPAYA_TOP_STEM).setProperties(net.minecraft.advancements.critereon.StatePropertiesPredicate.Builder.properties().hasProperty(CarrotBlock.AGE, 6));
-        this.add(ModBlocks.PAPAYA_TOP_STEM, (net.minecraft.world.level.storage.loot.LootTable.Builder)
-                this.applyExplosionDecay(ModBlocks.PAPAYA_TOP_STEM,
-                        LootTable.lootTable()
-                                .withPool(LootPool.lootPool()
-                                        .when(checkPapayaLevel)
-                                        .add(LootItem.lootTableItem(ModItems.PAPAYA)
-                                                .apply(ApplyBonusCount.addBonusBinomialDistributionCount(Enchantments.BLOCK_FORTUNE, 0.5714286F, 3))))
-                                .withPool(LootPool.lootPool()
-                                        .when(checkPapayaLevel6)
-                                        .add(LootItem.lootTableItem(ModItems.RAW_PAPAYA)
-                                                .apply(ApplyBonusCount.addBonusBinomialDistributionCount(Enchantments.BLOCK_FORTUNE,0.5714286F, 3)))
-                                )
-                ));
 
         this.add(ModBlocks.WILD_PEPPER_CROP,this.applyExplosionDecay(ModBlocks.WILD_PEPPER_CROP,
                 LootTable.lootTable()

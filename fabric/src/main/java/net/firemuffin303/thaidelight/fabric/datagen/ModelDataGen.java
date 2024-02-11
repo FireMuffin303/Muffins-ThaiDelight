@@ -15,7 +15,6 @@ import net.minecraft.data.models.model.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
 import java.util.Optional;
@@ -34,7 +33,7 @@ public class ModelDataGen extends FabricModelProvider {
     public void generateBlockStateModels(BlockModelGenerators blockStateModelGenerator) {
         createCrateBlock(ModBlocks.LIME_CRATE,blockStateModelGenerator);
         createCrateBlock(ModBlocks.PEPPER_CRATE,blockStateModelGenerator);
-        createCrateBlock(ModBlocks.UNRIPE_PAPAYA_CRATE,blockStateModelGenerator);
+        createCrateBlock(ModBlocks.RAW_PAPAYA_CRATE,blockStateModelGenerator);
         createCrateBlock(ModBlocks.PAPAYA_CRATE,blockStateModelGenerator);
 
         blockStateModelGenerator.woodProvider(ModBlocks.PAPAYA_LOG).logWithHorizontal(ModBlocks.PAPAYA_LOG).wood(ModBlocks.PAPAYA_WOOD);
@@ -55,7 +54,7 @@ public class ModelDataGen extends FabricModelProvider {
 
 
         blockStateModelGenerator.createCrossBlockWithDefaultItem(ModBlocks.WILD_PEPPER_CROP, BlockModelGenerators.TintState.NOT_TINTED);
-        blockStateModelGenerator.createCrossBlockWithDefaultItem(ModBlocks.PAPAYA_SAPLING, BlockModelGenerators.TintState.NOT_TINTED);
+        blockStateModelGenerator.createCrossBlockWithDefaultItem(ModBlocks.PAPAYA_SEEDS, BlockModelGenerators.TintState.NOT_TINTED);
 
         createPepperCrop(blockStateModelGenerator);
         createLimeCrop(blockStateModelGenerator);
@@ -77,8 +76,6 @@ public class ModelDataGen extends FabricModelProvider {
         //itemModelGenerator.generateFlatItem(Item.byBlock(ModBlocks.SAUCE_BOWL), ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(Item.byBlock(ModBlocks.CRAB_EGG), ModelTemplates.FLAT_ITEM);
 
-        itemModelGenerator.generateFlatItem(Item.byBlock(ModBlocks.WILD_PAPAYA_CROP), ModelTemplates.FLAT_ITEM);
-
 
         itemModelGenerator.generateFlatItem(ModItems.SEAFOOD_BOTTLE, ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.FISH_SAUCE_BOTTLE, ModelTemplates.FLAT_ITEM);
@@ -93,7 +90,6 @@ public class ModelDataGen extends FabricModelProvider {
         itemModelGenerator.generateFlatItem(ModItems.SLICED_PAPAYA, ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.RAW_PAPAYA, ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.RAW_PAPAYA_SLICE,ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.PAPAYA_SEED, ModelTemplates.FLAT_ITEM);
 
         itemModelGenerator.generateFlatItem(ModItems.PAPAYA_JUICE, ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.LIME_JUICE, ModelTemplates.FLAT_ITEM);

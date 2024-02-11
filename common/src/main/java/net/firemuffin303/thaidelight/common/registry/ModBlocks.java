@@ -27,7 +27,7 @@ public class ModBlocks {
     //Crate
     public static final Block LIME_CRATE = new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).destroyTime(2.0f).explosionResistance(3.0f).sound(SoundType.WOOD));
     public static final Block PEPPER_CRATE = new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).destroyTime(2.0f).explosionResistance(3.0f).sound(SoundType.WOOD));
-    public static final Block UNRIPE_PAPAYA_CRATE = new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).destroyTime(2.0f).explosionResistance(3.0f).sound(SoundType.WOOD));
+    public static final Block RAW_PAPAYA_CRATE = new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).destroyTime(2.0f).explosionResistance(3.0f).sound(SoundType.WOOD));
     public static final Block PAPAYA_CRATE = new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).destroyTime(2.0f).explosionResistance(3.0f).sound(SoundType.WOOD));
 
     //Sauce Bowl
@@ -41,30 +41,27 @@ public class ModBlocks {
 
     //Wild Crops
     public static final Block WILD_PEPPER_CROP = ModPlatform.getWildCropBlock(MobEffects.CONFUSION,6,BlockBehaviour.Properties.copy(Blocks.TALL_GRASS));
-    public static final Block WILD_PAPAYA_CROP = ModPlatform.getWildCropBlock(MobEffects.CONFUSION,6,BlockBehaviour.Properties.copy(Blocks.TALL_GRASS));
-
     //Crops
     public static final Block LIME_CROP = new LimeCrop(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).randomTicks().sound(SoundType.SWEET_BERRY_BUSH).pushReaction(PushReaction.DESTROY));
     public static final Block LIME_SAPLING = new LimeSapling(BlockBehaviour.Properties.copy(ModBlocks.LIME_CROP).noCollission());
     public static final Block PEPPER_CROP = new PepperCropBlock(BlockBehaviour.Properties.copy(Blocks.POTATOES));
-    public static final Block PAPAYA_STEM = new PapayaStem(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).randomTicks().instabreak().strength(1.0F).sound(SoundType.WOOD).ignitedByLava().pushReaction(PushReaction.DESTROY));
-    public static final Block PAPAYA_TOP_STEM = new UpperPapayaBlock(BlockBehaviour.Properties.copy(PAPAYA_STEM));
 
-    public static final Block PAPAYA = new PapayaBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).randomTicks().strength(0.2F, 3.0F).sound(SoundType.WOOD).noOcclusion().pushReaction(PushReaction.DESTROY));
-    public static final Block PAPAYA_SAPLING = new ModSaplingBlock(new PapayaTreeGrower(), BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY));
 
     //Feast
     public static final Block CRAB_FRIED_RICE_FEAST = ModPlatform.getCrabFriedRice();
     public static final Block SOMTAM_FEAST = ModPlatform.getSomtamBlock();
     public static final Block SPICY_MINCED_MEAT_SALAD_FEAST = ModPlatform.getSpicyMincedPorkBlock();
 
-    //Log
+    //Papaya
     public static final Block PAPAYA_LOG = new PapayaLog(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.NETHER_WOOD).ignitedByLava());
     public static final Block STRIPPED_PAPAYA_LOG = log(MapColor.COLOR_CYAN,MapColor.COLOR_CYAN);
     public static final Block PAPAYA_WOOD = new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava());
     public static final Block STRIPPED_PAPAYA_WOOD = new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava());
-
     public static final Block PAPAYA_LEAVES = leaves(SoundType.AZALEA_LEAVES);
+
+    public static final Block PAPAYA = new PapayaBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).randomTicks().strength(0.2F, 3.0F).sound(SoundType.WOOD).noOcclusion().pushReaction(PushReaction.DESTROY));
+    public static final Block PAPAYA_SEEDS = new ModSaplingBlock(new PapayaTreeGrower(), BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY));
+
 
     public static void init(){
         //Functional Block
@@ -73,7 +70,7 @@ public class ModBlocks {
         //Crate
         registerWithItem("lime_crate",LIME_CRATE);
         registerWithItem("pepper_crate",PEPPER_CRATE);
-        registerWithItem("raw_papaya_crate",UNRIPE_PAPAYA_CRATE);
+        registerWithItem("raw_papaya_crate", RAW_PAPAYA_CRATE);
         registerWithItem("papaya_crate",PAPAYA_CRATE);
 
         //Sauce Bowl
@@ -87,18 +84,15 @@ public class ModBlocks {
 
         //Wild Crops
         registerWithItem("wild_pepper",WILD_PEPPER_CROP);
-        registerWithItem("wild_papaya",WILD_PAPAYA_CROP);
 
         //Crops
         register("pepper",PEPPER_CROP);
         register("lime_bush", LIME_CROP);
         registerWithItem("lime_sapling", LIME_SAPLING);
 
-        register("papaya_top_stem", PAPAYA_TOP_STEM);
-        register("papaya_stem", PAPAYA_STEM);
 
         register("papaya",PAPAYA);
-        registerWithItem("papaya_sapling",PAPAYA_SAPLING);
+        registerWithItem("papaya_seeds", PAPAYA_SEEDS);
 
         //Feast
         registerWithItem("somtam_feast",SOMTAM_FEAST);

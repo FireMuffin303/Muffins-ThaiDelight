@@ -66,7 +66,7 @@ public class LootTableDataGen extends SimpleFabricLootTableProvider {
                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0f,4.0f))))
                     .add(LootItem.lootTableItem(ModBlocks.LIME_SAPLING)
                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0f,4.0f))))
-                    .add(LootItem.lootTableItem(ModItems.PAPAYA_SEED)
+                    .add(LootItem.lootTableItem(ModBlocks.PAPAYA_SEEDS)
                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0f,4.0f)))));
 
             biConsumer.accept(new ResourceLocation(ThaiDelight.MOD_ID,"inject/chests/village/village_desert_house"),villageLoot);
@@ -82,7 +82,7 @@ public class LootTableDataGen extends SimpleFabricLootTableProvider {
                                     .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f,3.0f))))
                             .add(LootItem.lootTableItem(ModBlocks.LIME_SAPLING)
                                     .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f,3.0f))))
-                            .add(LootItem.lootTableItem(ModItems.PAPAYA_SEED)
+                            .add(LootItem.lootTableItem(ModBlocks.PAPAYA_SEEDS)
                                     .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f,3.0f)))))
             );
 
@@ -93,7 +93,7 @@ public class LootTableDataGen extends SimpleFabricLootTableProvider {
                                     .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f,3.0f))))
                             .add(LootItem.lootTableItem(ModBlocks.LIME_SAPLING)
                                     .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f,3.0f))))
-                            .add(LootItem.lootTableItem(ModItems.PAPAYA_SEED)
+                            .add(LootItem.lootTableItem(ModBlocks.PAPAYA_SEEDS)
                                     .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f,3.0f)))))
             );
 
@@ -109,7 +109,7 @@ public class LootTableDataGen extends SimpleFabricLootTableProvider {
                                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f,3.0f))))
                                     .add(LootItem.lootTableItem(ModBlocks.LIME_SAPLING)
                                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f,3.0f))))
-                                    .add(LootItem.lootTableItem(ModItems.PAPAYA_SEED)
+                                    .add(LootItem.lootTableItem(ModBlocks.PAPAYA_SEEDS)
                                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f,3.0f))))
                                     .add(LootItem.lootTableItem(ItemsRegistry.CABBAGE_SEEDS.get())
                                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f,3.0f))))

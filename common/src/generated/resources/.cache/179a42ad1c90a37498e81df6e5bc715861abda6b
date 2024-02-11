@@ -1,7 +1,6 @@
-// 1.20.1	2024-02-09T17:34:27.3309553	Muffin's Thai Delight/Block Loot Tables
+// 1.20.1	2024-02-11T11:39:31.4364559	Muffin's Thai Delight/Block Loot Tables
 d647329544f9ceac2bde42e641a3888b980e5ab6 data\muffins_thaidelight\loot_tables\blocks\lime_bush.json
 a95639db1747867e1b15cc0c971b9c78c12ea135 data\muffins_thaidelight\loot_tables\blocks\flower_crab_egg.json
-4f36eff2b1642eb1f9a5e60fc99621f3ad6dfa63 data\muffins_thaidelight\loot_tables\blocks\papaya_top_stem.json
 224e8dc58d988448f9060dce46ae20bf2300cb46 data\muffins_thaidelight\loot_tables\blocks\papaya.json
 8c7ed33523eb75fc1bc405acfbf2aa2d56ab2ac4 data\muffins_thaidelight\loot_tables\blocks\lime_sapling.json
 21c1381b185088e8f93ae84f173a227dd9cbea91 data\muffins_thaidelight\loot_tables\blocks\papaya_crate.json
@@ -10,6 +9,7 @@ be62fcd61dba846d6208879eb0d2202f993a1fa5 data\muffins_thaidelight\loot_tables\bl
 bce63a7799f903e5c19dda64b97980322304e7a3 data\muffins_thaidelight\loot_tables\blocks\papaya_log.json
 5da919f67864e015dd9845b7b67efe22b65ec56c data\muffins_thaidelight\loot_tables\blocks\pepper.json
 7647aa221bcac3056c682c0bd1ac6ff9f8351657 data\muffins_thaidelight\loot_tables\blocks\pepper_crate.json
+4e599f0fd7672f951f9594f2893a6baf0f90e89a data\muffins_thaidelight\loot_tables\blocks\papaya_leaves.json
 c7429ec0b961a53898041655656b9a3d6062efad data\muffins_thaidelight\loot_tables\blocks\lime_crate.json
 aad3c240825cd59239f4b86106805921741a8918 data\muffins_thaidelight\loot_tables\blocks\wild_pepper.json
 110c1103d534fbc022222eb0d834fb3de79783f4 data\muffins_thaidelight\loot_tables\blocks\stripped_papaya_wood.json
