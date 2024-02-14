@@ -84,7 +84,8 @@ public class ModItems {
     //public static final Item LOINCLOTH = new LoinclothItem(new Item.Properties());
 
     //Disc
-    public static final Item ESAN_MUSIC_DISC = new ModMusicDisc(3,SoundEvents.MUSIC_DISC_RELIC,new Item.Properties().stacksTo(1).rarity(Rarity.RARE),218);
+    //I can't write lugtoong music
+    //public static final Item ESAN_MUSIC_DISC = new ModMusicDisc(3,SoundEvents.MUSIC_DISC_RELIC,new Item.Properties().stacksTo(1).rarity(Rarity.RARE),218);
 
     public static void init(){
         //register("stone_pastle",STONE_PASTLE);
@@ -128,7 +129,7 @@ public class ModItems {
         //register("crab_fried_rice",CRAB_FRIED_RICE);
 
         //register("loincloth",LOINCLOTH);
-        register("music_disc_northeast",ESAN_MUSIC_DISC);
+        //register("music_disc_northeast",ESAN_MUSIC_DISC);
 
 
     }

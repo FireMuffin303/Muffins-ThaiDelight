@@ -43,8 +43,8 @@ public class LangDataGen extends FabricLanguageProvider {
         translationBuilder.add(ModBlocks.STRIPPED_PAPAYA_WOOD, "Stripped Papaya Wood");
         translationBuilder.add(ModBlocks.PAPAYA_LEAVES, "Papaya Leaves");
 
-        translationBuilder.add(ModItems.ESAN_MUSIC_DISC,"Music Disc");
-        translationBuilder.add("item.muffins_thaidelight.music_disc_northeast.desc","FireMuffin303 - untitled");
+        //translationBuilder.add(ModItems.ESAN_MUSIC_DISC,"Music Disc");
+        //translationBuilder.add("item.muffins_thaidelight.music_disc_northeast.desc","FireMuffin303 - untitled");
 
         //Feast
         translationBuilder.add(ModBlocksFabric.SOMTAM_FEAST,"Somtam");
@@ -128,8 +128,8 @@ public class LangDataGen extends FabricLanguageProvider {
             translationBuilder.add(ModBlocks.STRIPPED_PAPAYA_WOOD, "ไม้มะละกอลอกเปลือก");
             translationBuilder.add(ModBlocks.PAPAYA_LEAVES, "ใบไม้มะละกอ");
 
-            translationBuilder.add(ModItems.ESAN_MUSIC_DISC,"แผ่นเพลง");
-            translationBuilder.add("item.muffins_thaidelight.music_disc_northeast.desc","FireMuffin303 - untitled");
+            //translationBuilder.add(ModItems.ESAN_MUSIC_DISC,"แผ่นเพลง");
+            //translationBuilder.add("item.muffins_thaidelight.music_disc_northeast.desc","FireMuffin303 - untitled");
 
             //Feast
             translationBuilder.add(ModBlocksFabric.SOMTAM_FEAST,"ส้มตำ");

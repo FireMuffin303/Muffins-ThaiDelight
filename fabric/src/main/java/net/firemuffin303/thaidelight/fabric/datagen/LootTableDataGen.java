@@ -100,10 +100,6 @@ public class LootTableDataGen extends SimpleFabricLootTableProvider {
             biConsumer.accept(new ResourceLocation(ThaiDelight.MOD_ID,"chests/village/village_thai_house"),
                     LootTable.lootTable()
                             .withPool(LootPool.lootPool()
-                                    .setRolls(ConstantValue.exactly(1))
-                                    .add(LootItem.lootTableItem(ModItems.ESAN_MUSIC_DISC)
-                                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0f,1.0f)))))
-                            .withPool(LootPool.lootPool()
                                     .setRolls(UniformGenerator.between(1,6))
                                     .add(LootItem.lootTableItem(ModItems.PEPPER_SEED)
                                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f,3.0f))))

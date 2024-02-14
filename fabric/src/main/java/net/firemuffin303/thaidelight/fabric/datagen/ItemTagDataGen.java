@@ -33,7 +33,7 @@ public class ItemTagDataGen extends FabricTagProvider.ItemTagProvider {
                 .add(ModItems.LIME_JUICE)
                 .add(ModItems.PAPAYA_JUICE);
 
-        getOrCreateTagBuilder(ItemTags.MUSIC_DISCS).add(ModItems.ESAN_MUSIC_DISC);
+       // getOrCreateTagBuilder(ItemTags.MUSIC_DISCS).add(ModItems.ESAN_MUSIC_DISC);
 
 
     }
