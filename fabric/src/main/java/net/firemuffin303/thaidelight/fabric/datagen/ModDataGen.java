@@ -55,11 +55,6 @@ public class ModDataGen implements DataGeneratorEntrypoint {
             //ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS,ModItems.LOINCLOTH,1).define('A', ItemTags.WOOL).define('B', Items.WHITE_DYE).pattern("A").pattern("B").pattern("A").unlockedBy(getHasName(Items.WHITE_WOOL),has(ItemTags.WOOL)).save(exporter,"crafting/"+getItemName(ModItems.LOINCLOTH)+"_from_crafting");
             ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD,ModItems.SEAFOOD_BOTTLE,1).requires(Items.KELP).requires(ModItems.PEPPER).requires(Items.SUGAR).unlockedBy(getHasName(ModItems.PEPPER),has(ModItems.PEPPER)).save(exporter,"crafting/"+getItemName(ModItems.SEAFOOD_BOTTLE)+"_from_crafting");
 
-            //ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS,ModItems.STONE_PASTLE,1).define('A', Items.COBBLESTONE).pattern("A").pattern("A").pattern("A").unlockedBy(getHasName(Items.COBBLESTONE),has(Items.COBBLESTONE)).save(exporter,"crafting/"+getItemName(ModItems.STONE_PASTLE)+"_from_crafting");
-            //ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS,ModItems.IRON_PASTLE,1).define('A', Items.IRON_INGOT).pattern("A").pattern("A").pattern("A").unlockedBy(getHasName(Items.IRON_INGOT),has(Items.IRON_INGOT)).save(exporter,"crafting/"+getItemName(ModItems.IRON_PASTLE)+"_from_crafting");
-            //ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS,ModItems.GOLDEN_PASTLE,1).define('A', Items.GOLD_INGOT).pattern("A").pattern("A").pattern("A").unlockedBy(getHasName(Items.GOLD_INGOT),has(Items.GOLD_INGOT)).save(exporter,"crafting/"+getItemName(ModItems.GOLDEN_PASTLE)+"_from_crafting");
-            //ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS,ModItems.DIAMOND_PASTLE,1).define('A', Items.DIAMOND).pattern("A").pattern("A").pattern("A").unlockedBy(getHasName(Items.DIAMOND),has(Items.DIAMOND)).save(exporter,"crafting/"+getItemName(ModItems.DIAMOND_PASTLE)+"_from_crafting");
-
             bigPackingCraft(Item.byBlock(ModBlocks.LIME_CRATE),1,ModItems.LIME,exporter);
             bigPackingCraft(Item.byBlock(ModBlocks.PEPPER_CRATE),1,ModItems.PEPPER,exporter);
             bigPackingCraft(Item.byBlock(ModBlocks.RAW_PAPAYA_CRATE),1,ModItems.RAW_PAPAYA,exporter);
@@ -74,6 +69,9 @@ public class ModDataGen implements DataGeneratorEntrypoint {
             ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,ModBlocks.PAPAYA_SEEDS,4).requires(ModItems.PAPAYA).unlockedBy(getHasName(ModItems.PAPAYA),has(ModItems.PAPAYA)).save(exporter,"crafting/"+getItemName(ModBlocks.PAPAYA_SEEDS)+"_by_papaya_from_crafting");
             ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,ModBlocks.PAPAYA_SEEDS,4).requires(ModItems.RAW_PAPAYA).unlockedBy(getHasName(ModItems.RAW_PAPAYA),has(ModItems.RAW_PAPAYA)).save(exporter,"crafting/"+getItemName(ModBlocks.PAPAYA_SEEDS)+"_by_unripe_papaya_from_crafting");
             ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,ModBlocks.PAPAYA_SEEDS,2).requires(ModItems.SLICED_PAPAYA).unlockedBy(getHasName(ModItems.SLICED_PAPAYA),has(ModItems.SLICED_PAPAYA)).save(exporter,"crafting/"+getItemName(ModBlocks.PAPAYA_SEEDS)+"_by_sliced_papaya_from_crafting");
+
+            MortarRecipeBuilder.mortar(ModBlocks.SOMTAM_FEAST).requires(ModItems.PEPPER,2).requires(ModItems.RAW_PAPAYA_SLICE).requires(ModItems.CRAB_MEAT).unlockedBy(getHasName(ModItems.RAW_PAPAYA),has(ModItems.RAW_PAPAYA)).save(exporter,"mortar/"+getItemName(ModBlocks.SOMTAM_FEAST)+"_by_raw_papaya_slice");
+            MortarRecipeBuilder.mortar(ModBlocks.SOMTAM_FEAST).requires(ModItems.PEPPER,2).requires(ModItems.RAW_PAPAYA).requires(ModItems.CRAB_MEAT).unlockedBy(getHasName(ModItems.RAW_PAPAYA),has(ModItems.RAW_PAPAYA)).save(exporter,"mortar/"+getItemName(ModBlocks.SOMTAM_FEAST)+"_by_raw_papaya");
         }
 
         private void smithing(Consumer<FinishedRecipe> exporter){

@@ -3,9 +3,7 @@ package net.firemuffin303.thaidelight.common.recipe;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
-import it.unimi.dsi.fastutil.ints.IntList;
 import net.firemuffin303.thaidelight.common.registry.ModRecipes;
-import net.firemuffin303.thaidelight.utils.ModPlatform;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
@@ -16,10 +14,6 @@ import net.minecraft.world.entity.player.StackedContents;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 public class MortarRecipe implements Recipe<Container> {
     private final ResourceLocation id;

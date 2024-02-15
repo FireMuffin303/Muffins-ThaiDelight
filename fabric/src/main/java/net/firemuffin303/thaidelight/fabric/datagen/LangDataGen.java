@@ -82,8 +82,8 @@ public class LangDataGen extends FabricLanguageProvider {
         translationBuilder.add(ModBlocks.CRAB_EGG,"Flower Crab Egg");
         translationBuilder.add(ModItems.CRAB_SPAWN_EGG,"Flower Crab Spawn Egg");
         translationBuilder.add(ModItems.CRAB_BUCKET,"Flower Crab in a Bucket");
-        translationBuilder.add(ModItems.CRAB_MEAT,"Raw Crab");
-        translationBuilder.add(ModItems.COOKED_CRAB_MEAT,"Cooked Crab");
+        translationBuilder.add(ModItems.CRAB_MEAT,"Raw Flower Crab");
+        translationBuilder.add(ModItems.COOKED_CRAB_MEAT,"Cooked Flower Crab");
         translationBuilder.add(ModItems.CRAB_MEAT_WITH_SEAFOOD,"Seafooded Cooked Crab");
 
         translationBuilder.add(ModItems.DRAGONFLY_SPAWN_EGG,"Dragonfly Spawn Egg");
@@ -168,9 +168,9 @@ public class LangDataGen extends FabricLanguageProvider {
             translationBuilder.add(ModBlocks.CRAB_EGG,"ไข่ปูม้า");
             translationBuilder.add(ModItems.CRAB_SPAWN_EGG,"ไข่เกิดปูม้า");
             translationBuilder.add(ModItems.CRAB_BUCKET,"ปูม้าในถัง");
-            translationBuilder.add(ModItems.CRAB_MEAT,"เนื้อปูสด");
-            translationBuilder.add(ModItems.COOKED_CRAB_MEAT,"เนื้อปูสุก");
-            translationBuilder.add(ModItems.CRAB_MEAT_WITH_SEAFOOD,"เนื้อปูสุกเคลือบซีฟู้ด");
+            translationBuilder.add(ModItems.CRAB_MEAT,"เนื้อปูม้าสด");
+            translationBuilder.add(ModItems.COOKED_CRAB_MEAT,"เนื้อปูม้าสุก");
+            translationBuilder.add(ModItems.CRAB_MEAT_WITH_SEAFOOD,"เนื้อปูม้าสุกเคลือบซีฟู้ด");
 
             translationBuilder.add(ModItems.DRAGONFLY_SPAWN_EGG,"ไข่เกิดแมลงปอ");
             translationBuilder.add(ModItems.DRAGONFLY,"แมลงปอสด");

@@ -26,13 +26,6 @@ public class ModItems {
     public static final Set<Enchantment> DISALLOW_PESTLE_ENCHANTMENT = Sets.newHashSet(Enchantments.SHARPNESS,Enchantments.SMITE,Enchantments.BANE_OF_ARTHROPODS,Enchantments.SWEEPING_EDGE);
     public static final ArrayList<Item> ITEMS = new ArrayList<>();
 
-    //Pastle
-    //public static final Item STONE_PASTLE = ModPlatform.createPastleItem(Tiers.STONE,3,-3.0f,new Item.Properties().stacksTo(1));
-    //public static final Item IRON_PASTLE = ModPlatform.createPastleItem(Tiers.IRON,3,-3.0f,new Item.Properties().stacksTo(1));
-    //public static final Item GOLDEN_PASTLE = ModPlatform.createPastleItem(Tiers.GOLD,3,-3.0f,new Item.Properties().stacksTo(1));
-    //public static final Item DIAMOND_PASTLE = ModPlatform.createPastleItem(Tiers.DIAMOND,3,-3.0f,new Item.Properties().stacksTo(1));
-    //public static final Item NETHERITE_PASTLE = ModPlatform.createPastleItem(Tiers.NETHERITE,3,-3.0f,new Item.Properties().stacksTo(1).fireResistant());
-
     //Crab
     public static final Item CRAB_SPAWN_EGG = ModPlatform.registerSpawnEgg(ModEntityTypes.FLOWER_CRAB,0x5c5dbc,0xf0784f,new Item.Properties());
 
@@ -88,12 +81,6 @@ public class ModItems {
     //public static final Item ESAN_MUSIC_DISC = new ModMusicDisc(3,SoundEvents.MUSIC_DISC_RELIC,new Item.Properties().stacksTo(1).rarity(Rarity.RARE),218);
 
     public static void init(){
-        //register("stone_pastle",STONE_PASTLE);
-        //register("iron_pastle",IRON_PASTLE);
-        //register("golden_pastle",GOLDEN_PASTLE);
-        //register("diamond_pastle",DIAMOND_PASTLE);
-        //register("netherite_pastle",NETHERITE_PASTLE);
-
         register("flower_crab_spawn_egg",CRAB_SPAWN_EGG);
         register("flower_crab_bucket",CRAB_BUCKET);
         register("flower_crab",CRAB_MEAT);
@@ -121,17 +108,6 @@ public class ModItems {
         register("papaya_slice",SLICED_PAPAYA);
         register("raw_papaya", RAW_PAPAYA);
         register("raw_papaya_slice", RAW_PAPAYA_SLICE);
-
-
-
-        //register("somtam",SOMTAM);
-        //register("spicy_minced_pork_salad",SPICY_MINCED_PORK_SALAD);
-        //register("crab_fried_rice",CRAB_FRIED_RICE);
-
-        //register("loincloth",LOINCLOTH);
-        //register("music_disc_northeast",ESAN_MUSIC_DISC);
-
-
     }
 
 
