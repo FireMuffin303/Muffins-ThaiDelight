@@ -10,4 +10,8 @@ import net.minecraft.world.level.block.Block;
 public class ModTags {
     public static final TagKey<Block> PAPAYA_LOGS = TagKey.create(Registries.BLOCK, new ResourceLocation(ThaiDelight.MOD_ID,"papaya_logs"));
 
+    public static final TagKey<Item> LIME = TagKey.create(Registries.ITEM, new ResourceLocation(ThaiDelight.MOD_ID,"lime"));
+    public static final TagKey<Item> PAPAYA = TagKey.create(Registries.ITEM, new ResourceLocation(ThaiDelight.MOD_ID,"papaya"));
+    public static final TagKey<Item> RAW_PAPAYA = TagKey.create(Registries.ITEM, new ResourceLocation(ThaiDelight.MOD_ID,"raw_papaya"));
+
 }

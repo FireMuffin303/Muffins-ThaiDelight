@@ -95,13 +95,13 @@ public class ModPlatformImpl {
         ThaiDelightForge.FLUIDS.register(id,() -> fluid);
     }
 
-    public static void registerMobEffect(String id, MobEffect mobEffect) {
+    /*public static void registerMobEffect(String id, MobEffect mobEffect) {
         ThaiDelightForge.MOB_EFFECT.register(id,() -> mobEffect);
-    }
+    }*/
 
-    public static void registerPotion(String id, Potion potion) {
+    /*public static void registerPotion(String id, Potion potion) {
         ThaiDelightForge.POTION.register(id,() -> potion);
-    }
+    }*/
 
     public static <T extends Recipe<?>> void registerRecipeType(String id,RecipeType<T> recipeType) {
         ThaiDelightForge.RECIPE_TYPE.register(id,() -> recipeType);
@@ -138,21 +138,6 @@ public class ModPlatformImpl {
     //-----------------------------------------------------------------------
 
 
-    public static void holdingCrabClaw(Player player) {
-        if(!player.getAttribute(ForgeMod.BLOCK_REACH.get()).hasModifier(ThaiDelight.CRAB_REACH)){
-            player.getAttribute(ForgeMod.BLOCK_REACH.get()).addTransientModifier(ThaiDelight.CRAB_REACH);
-
-        }
-    }
-
-
-    public static void stopHoldingCrabClaw(Player player) {
-        if(player.getAttribute(ForgeMod.BLOCK_REACH.get()).hasModifier(ThaiDelight.CRAB_REACH)){
-            player.getAttribute(ForgeMod.BLOCK_REACH.get()).removeModifier(ThaiDelight.CRAB_REACH);
-
-        }
-    }
-
     public static <T extends Entity> void registerEntityRenderer(EntityType<T> entityTypeSupplier, EntityRendererProvider<T> entityRendererProvider) {
         EntityRenderers.register(entityTypeSupplier, entityRendererProvider);
     }
@@ -171,10 +156,6 @@ public class ModPlatformImpl {
 
     public static void registerPotionBrewing(Supplier<Potion> input, Supplier<Item> ingredient, Supplier<Potion> output) {
         BrewingRecipeRegistry.addRecipe(new BrewingRecipe(Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION),input.get())),Ingredient.of(ingredient.get()) ,PotionUtils.setPotion(new ItemStack(Items.POTION),output.get())));
-    }
-
-    public static Attribute getReachAttribute() {
-        return ForgeMod.BLOCK_REACH.get();
     }
 
     public static <T extends BlockEntity> BlockEntityType.Builder<T> buildBlockEntity(ModBlocks.ModBlockEntityTypes.BlockEntitySupplier<T> blockEntityTypeSupplier, Block block) {

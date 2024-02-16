@@ -148,16 +148,6 @@ public class ModPlatform {
     }
 
     @ExpectPlatform
-    public static void holdingCrabClaw(Player player){
-        throw new AssertionError();
-    }
-
-    @ExpectPlatform
-    public static void stopHoldingCrabClaw(Player player){
-        throw new AssertionError();
-    }
-
-    @ExpectPlatform
     public static <T extends Entity> void registerEntityRenderer(EntityType<T> entityTypeSupplier, EntityRendererProvider<T> entityRendererProvider){
         throw new AssertionError();
     }
@@ -174,11 +164,6 @@ public class ModPlatform {
 
     @ExpectPlatform
     public static <T extends BlockEntity> void registerBlockEntity(String id,BlockEntityType<T> blockEntityType){
-        throw new AssertionError();
-    }
-
-    @ExpectPlatform
-    public static Attribute getReachAttribute() {
         throw new AssertionError();
     }
 

@@ -50,6 +50,8 @@ dependencies {
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive = false }
     modImplementation("maven.modrinth:farmers-delight:k7RoRFPF")
+    // at runtime, use the full JEI jar for Forge
+    modLocalRuntime("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
 }
 
 processResources {

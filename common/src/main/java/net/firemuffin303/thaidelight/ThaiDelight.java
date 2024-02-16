@@ -30,8 +30,6 @@ public class ThaiDelight {
         ModBlocks.ModBlockEntityTypes.init();
         ModFluid.init();
         ModItems.init();
-        ModMobEffects.init();
-        ModPotions.init();
         ModRecipes.init();
         ModConfiguredFeatures.init();
         ModRecipes.ModRecipeSerializer.init();

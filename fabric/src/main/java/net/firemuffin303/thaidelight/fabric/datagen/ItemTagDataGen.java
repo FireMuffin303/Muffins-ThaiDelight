@@ -3,6 +3,7 @@ package net.firemuffin303.thaidelight.fabric.datagen;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
+import net.firemuffin303.thaidelight.common.registry.ModTags;
 import net.firemuffin303.thaidelight.fabric.common.registry.ModItemsFabric;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
@@ -32,6 +33,20 @@ public class ItemTagDataGen extends FabricTagProvider.ItemTagProvider {
                 .add(ModItems.FISH_SAUCE_BOTTLE)
                 .add(ModItems.LIME_JUICE)
                 .add(ModItems.PAPAYA_JUICE);
+
+        getOrCreateTagBuilder(ModTags.LIME)
+                .add(ModItems.LIME)
+                .add(ModItems.SLICED_LIME);
+
+        getOrCreateTagBuilder(ModTags.RAW_PAPAYA)
+                .add(ModItems.RAW_PAPAYA)
+                .add(ModItems.RAW_PAPAYA_SLICE);
+
+        getOrCreateTagBuilder(ModTags.PAPAYA)
+                .add(ModItems.PAPAYA)
+                .add(ModItems.SLICED_PAPAYA)
+                .addTag(ModTags.RAW_PAPAYA);
+
 
        // getOrCreateTagBuilder(ItemTags.MUSIC_DISCS).add(ModItems.ESAN_MUSIC_DISC);
 

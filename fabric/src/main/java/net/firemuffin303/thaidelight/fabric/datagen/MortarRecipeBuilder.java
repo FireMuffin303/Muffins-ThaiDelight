@@ -11,7 +11,9 @@ import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeBuilder;
+import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -62,6 +64,14 @@ public class MortarRecipeBuilder implements RecipeBuilder {
         return this.result;
     }
 
+    public MortarRecipeBuilder requires(TagKey<Item> tagKey) {
+        return this.requires(Ingredient.of(tagKey));
+    }
+
+    public MortarRecipeBuilder requires(Ingredient ingredient) {
+        return this.requires(ingredient, 1);
+    }
+
     public MortarRecipeBuilder requires(ItemLike arg) {
         return this.requires(arg, 1);
     }
@@ -69,6 +79,14 @@ public class MortarRecipeBuilder implements RecipeBuilder {
     public MortarRecipeBuilder requires(ItemLike arg, int i) {
         for(int j = 0; j < i; ++j) {
             this.ingredients.add(Ingredient.of(arg));
+        }
+
+        return this;
+    }
+
+    public MortarRecipeBuilder requires(Ingredient ingredient, int i) {
+        for(int j = 0; j < i; ++j) {
+            this.ingredients.add(ingredient);
         }
 
         return this;

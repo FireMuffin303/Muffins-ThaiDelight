@@ -23,6 +23,9 @@
     ],
     "client": [
       "net.firemuffin303.thaidelight.fabric.ThaiDelightModFabricClient"
+    ],
+    "jei_mod_plugin": [
+      "net.firemuffin303.thaidelight.integration.ThaiDelightJEIIntegration"
     ]
   },
   "mixins": [

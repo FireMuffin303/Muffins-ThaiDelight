@@ -48,6 +48,10 @@ public class MortarRecipe implements Recipe<Container> {
         return this.result;
     }
 
+    public Ingredient getResult(){
+        return Ingredient.of(this.result);
+    }
+
     @Override
     public NonNullList<Ingredient> getIngredients() {
         return ingredients;

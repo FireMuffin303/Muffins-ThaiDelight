@@ -1,8 +1,6 @@
 package net.firemuffin303.thaidelight.utils.fabric;
 
-import com.jamieswhiteshirt.reachentityattributes.ReachEntityAttributes;
 import com.mojang.serialization.Codec;
-import com.nhoryzon.mc.farmersdelight.block.FeastBlock;
 import com.nhoryzon.mc.farmersdelight.block.WildCropBlock;
 import com.nhoryzon.mc.farmersdelight.item.ConsumableItem;
 import com.nhoryzon.mc.farmersdelight.item.DrinkableItem;
@@ -15,7 +13,6 @@ import net.fabricmc.fabric.api.registry.FabricBrewingRecipeRegistry;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.firemuffin303.thaidelight.ThaiDelight;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
-import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.firemuffin303.thaidelight.fabric.common.item.LimeJuiceItem;
 import net.firemuffin303.thaidelight.fabric.common.item.PapayaJuiceItem;
 import net.firemuffin303.thaidelight.fabric.common.item.PastleItem;
@@ -38,8 +35,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.SpawnPlacements;
-import net.minecraft.world.entity.ai.attributes.Attribute;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -126,18 +121,6 @@ public class ModPlatformImpl {
 
     //---------------------------------------------------------------------
 
-    public static void holdingCrabClaw(Player player) {
-        if(!player.getAttribute(ReachEntityAttributes.REACH).hasModifier(ThaiDelight.CRAB_REACH)){
-            player.getAttribute(ReachEntityAttributes.REACH).addTransientModifier(ThaiDelight.CRAB_REACH);
-        }
-    }
-
-    public static void stopHoldingCrabClaw(Player player) {
-        if(player.getAttribute(ReachEntityAttributes.REACH).hasModifier(ThaiDelight.CRAB_REACH)){
-            player.getAttribute(ReachEntityAttributes.REACH).removeModifier(ThaiDelight.CRAB_REACH);
-        }
-    }
-
     public static <T extends Entity> void registerEntityRenderer(EntityType<T> entityTypeSupplier, EntityRendererProvider<T> entityRendererProvider) {
         EntityRendererRegistry.register(entityTypeSupplier,entityRendererProvider);
 
@@ -158,11 +141,6 @@ public class ModPlatformImpl {
     public static void registerPotionBrewing(Supplier<Potion> input, Supplier<Item> ingredient, Supplier<Potion> output) {
         FabricBrewingRecipeRegistry.registerPotionRecipe(input.get(), Ingredient.of(ingredient.get()),output.get());
     }
-
-    public static Attribute getReachAttribute() {
-        return ReachEntityAttributes.REACH;
-    }
-
 
 
     public static <T extends BlockEntity> BlockEntityType.Builder<T> buildBlockEntity(ModBlocks.ModBlockEntityTypes.BlockEntitySupplier<T> blockEntityTypeSupplier, Block block) {

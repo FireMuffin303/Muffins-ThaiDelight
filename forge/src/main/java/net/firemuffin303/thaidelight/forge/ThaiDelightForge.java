@@ -46,8 +46,6 @@ public class ThaiDelightForge {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS,ThaiDelight.MOD_ID);
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES,ThaiDelight.MOD_ID);
     public static final DeferredRegister<Fluid> FLUIDS = DeferredRegister.create(ForgeRegistries.FLUIDS,ThaiDelight.MOD_ID);
-    public static final DeferredRegister<MobEffect> MOB_EFFECT = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS,ThaiDelight.MOD_ID);
-    public static final DeferredRegister<Potion> POTION = DeferredRegister.create(ForgeRegistries.POTIONS,ThaiDelight.MOD_ID);
     public static final DeferredRegister<RecipeType<?>> RECIPE_TYPE = DeferredRegister.create(ForgeRegistries.RECIPE_TYPES,ThaiDelight.MOD_ID);
     public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZER = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS,ThaiDelight.MOD_ID);
     public static final DeferredRegister<MenuType<?>> MENU_TYPE = DeferredRegister.create(ForgeRegistries.MENU_TYPES,ThaiDelight.MOD_ID);
@@ -63,9 +61,7 @@ public class ThaiDelightForge {
         BLOCK.register(modEventBus);
         BLOCK_ENTITY_TYPES.register(modEventBus);
         FLUIDS.register(modEventBus);
-        MOB_EFFECT.register(modEventBus);
         ITEMS.register(modEventBus);
-        POTION.register(modEventBus);
         RECIPE_TYPE.register(modEventBus);
         RECIPE_SERIALIZER.register(modEventBus);
         MENU_TYPE.register(modEventBus);
@@ -101,12 +97,10 @@ public class ThaiDelightForge {
         });
         registerEvent.register(ForgeRegistries.Keys.BLOCK_ENTITY_TYPES,helper -> ModBlocks.ModBlockEntityTypes.init());
         registerEvent.register(ForgeRegistries.Keys.FLUIDS,helper -> ModFluid.init());
-        registerEvent.register(ForgeRegistries.Keys.MOB_EFFECTS,helper -> ModMobEffects.init());
         registerEvent.register(ForgeRegistries.Keys.ITEMS,helper -> {
             ModItems.init();
             ModItemsForge.init();
         });
-        registerEvent.register(ForgeRegistries.Keys.POTIONS,helper -> ModPotions.init());
         registerEvent.register(ForgeRegistries.Keys.RECIPE_TYPES,helper -> ModRecipes.init());
         registerEvent.register(ForgeRegistries.Keys.RECIPE_SERIALIZERS,helper -> ModRecipes.ModRecipeSerializer.init());
         registerEvent.register(ForgeRegistries.Keys.MENU_TYPES,helper -> ModMenuType.init());

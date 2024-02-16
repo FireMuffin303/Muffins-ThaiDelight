@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.*;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
+import net.firemuffin303.thaidelight.common.registry.ModTags;
 import net.minecraft.data.recipes.*;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -70,8 +71,9 @@ public class ModDataGen implements DataGeneratorEntrypoint {
             ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,ModBlocks.PAPAYA_SEEDS,4).requires(ModItems.RAW_PAPAYA).unlockedBy(getHasName(ModItems.RAW_PAPAYA),has(ModItems.RAW_PAPAYA)).save(exporter,"crafting/"+getItemName(ModBlocks.PAPAYA_SEEDS)+"_by_unripe_papaya_from_crafting");
             ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,ModBlocks.PAPAYA_SEEDS,2).requires(ModItems.SLICED_PAPAYA).unlockedBy(getHasName(ModItems.SLICED_PAPAYA),has(ModItems.SLICED_PAPAYA)).save(exporter,"crafting/"+getItemName(ModBlocks.PAPAYA_SEEDS)+"_by_sliced_papaya_from_crafting");
 
-            MortarRecipeBuilder.mortar(ModBlocks.SOMTAM_FEAST).requires(ModItems.PEPPER,2).requires(ModItems.RAW_PAPAYA_SLICE).requires(ModItems.CRAB_MEAT).unlockedBy(getHasName(ModItems.RAW_PAPAYA),has(ModItems.RAW_PAPAYA)).save(exporter,"mortar/"+getItemName(ModBlocks.SOMTAM_FEAST)+"_by_raw_papaya_slice");
-            MortarRecipeBuilder.mortar(ModBlocks.SOMTAM_FEAST).requires(ModItems.PEPPER,2).requires(ModItems.RAW_PAPAYA).requires(ModItems.CRAB_MEAT).unlockedBy(getHasName(ModItems.RAW_PAPAYA),has(ModItems.RAW_PAPAYA)).save(exporter,"mortar/"+getItemName(ModBlocks.SOMTAM_FEAST)+"_by_raw_papaya");
+            MortarRecipeBuilder.mortar(ModBlocks.SOMTAM_FEAST).requires(ModItems.PEPPER,2).requires(ModTags.RAW_PAPAYA).requires(ModItems.CRAB_MEAT).unlockedBy(getHasName(ModItems.RAW_PAPAYA),has(ModItems.RAW_PAPAYA)).save(exporter,"mortar/"+getItemName(ModBlocks.SOMTAM_FEAST));
+
+            //MortarRecipeBuilder.mortar(ModBlocks.SPICY_MINCED_MEAT_SALAD_FEAST).requires(ModItems.PEPPER).requires(Items.COOKED_PORKCHOP).requires(ModTags.LIME).unlockedBy(getHasName(ModItems.RAW_PAPAYA),has(ModItems.RAW_PAPAYA)).save(exporter,"mortar/"+getItemName(ModBlocks.SOMTAM_FEAST)+"_by_raw_papaya");
         }
 
         private void smithing(Consumer<FinishedRecipe> exporter){
