@@ -2,13 +2,13 @@
   "type": "farmersdelight:cutting",
   "ingredients": [
     {
-      "item": "muffins_thaidelight:unripe_papaya"
+      "item": "muffins_thaidelight:raw_papaya"
     }
   ],
   "result": [
     {
       "count": 4,
-      "item": "muffins_thaidelight:unripe_papaya_slice"
+      "item": "muffins_thaidelight:raw_papaya_slice"
     }
   ],
   "tool": {

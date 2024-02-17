@@ -1,5 +1,7 @@
 package net.firemuffin303.thaidelight.fabric.datagen;
 
+import com.nhoryzon.mc.farmersdelight.item.ModItemSettings;
+import com.nhoryzon.mc.farmersdelight.registry.ItemsRegistry;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -7,6 +9,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.*;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.firemuffin303.thaidelight.common.registry.ModTags;
+import net.firemuffin303.thaidelight.fabric.common.registry.ModItemsFabric;
 import net.minecraft.data.recipes.*;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -53,9 +56,6 @@ public class ModDataGen implements DataGeneratorEntrypoint {
         }
 
         private void craft(Consumer<FinishedRecipe> exporter){
-            //ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS,ModItems.LOINCLOTH,1).define('A', ItemTags.WOOL).define('B', Items.WHITE_DYE).pattern("A").pattern("B").pattern("A").unlockedBy(getHasName(Items.WHITE_WOOL),has(ItemTags.WOOL)).save(exporter,"crafting/"+getItemName(ModItems.LOINCLOTH)+"_from_crafting");
-            ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD,ModItems.SEAFOOD_BOTTLE,1).requires(Items.KELP).requires(ModItems.PEPPER).requires(Items.SUGAR).unlockedBy(getHasName(ModItems.PEPPER),has(ModItems.PEPPER)).save(exporter,"crafting/"+getItemName(ModItems.SEAFOOD_BOTTLE)+"_from_crafting");
-
             bigPackingCraft(Item.byBlock(ModBlocks.LIME_CRATE),1,ModItems.LIME,exporter);
             bigPackingCraft(Item.byBlock(ModBlocks.PEPPER_CRATE),1,ModItems.PEPPER,exporter);
             bigPackingCraft(Item.byBlock(ModBlocks.RAW_PAPAYA_CRATE),1,ModItems.RAW_PAPAYA,exporter);
@@ -71,9 +71,9 @@ public class ModDataGen implements DataGeneratorEntrypoint {
             ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,ModBlocks.PAPAYA_SEEDS,4).requires(ModItems.RAW_PAPAYA).unlockedBy(getHasName(ModItems.RAW_PAPAYA),has(ModItems.RAW_PAPAYA)).save(exporter,"crafting/"+getItemName(ModBlocks.PAPAYA_SEEDS)+"_by_unripe_papaya_from_crafting");
             ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,ModBlocks.PAPAYA_SEEDS,2).requires(ModItems.SLICED_PAPAYA).unlockedBy(getHasName(ModItems.SLICED_PAPAYA),has(ModItems.SLICED_PAPAYA)).save(exporter,"crafting/"+getItemName(ModBlocks.PAPAYA_SEEDS)+"_by_sliced_papaya_from_crafting");
 
-            MortarRecipeBuilder.mortar(ModBlocks.SOMTAM_FEAST).requires(ModItems.PEPPER,2).requires(ModTags.RAW_PAPAYA).requires(ModItems.CRAB_MEAT).unlockedBy(getHasName(ModItems.RAW_PAPAYA),has(ModItems.RAW_PAPAYA)).save(exporter,"mortar/"+getItemName(ModBlocks.SOMTAM_FEAST));
+            ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, ModItemsFabric.STIR_FRIED_NOODLE).requires(ItemsRegistry.ONION.get()).requires(ItemsRegistry.RAW_PASTA.get()).requires(Items.SUGAR).requires(Items.BOWL).requires(ModTags.LIME).unlockedBy(getHasName(ItemsRegistry.RAW_PASTA.get()),has(ItemsRegistry.RAW_PASTA.get())).save(exporter,"crafting/"+getItemName(ModItemsFabric.STIR_FRIED_NOODLE));
 
-            //MortarRecipeBuilder.mortar(ModBlocks.SPICY_MINCED_MEAT_SALAD_FEAST).requires(ModItems.PEPPER).requires(Items.COOKED_PORKCHOP).requires(ModTags.LIME).unlockedBy(getHasName(ModItems.RAW_PAPAYA),has(ModItems.RAW_PAPAYA)).save(exporter,"mortar/"+getItemName(ModBlocks.SOMTAM_FEAST)+"_by_raw_papaya");
+            MortarRecipeBuilder.mortar(ModBlocks.SOMTAM_FEAST).requires(ModItems.PEPPER,2).requires(ModTags.RAW_PAPAYA).requires(ModItems.CRAB_MEAT).unlockedBy(getHasName(ModItems.RAW_PAPAYA),has(ModItems.RAW_PAPAYA)).save(exporter,"mortar/"+getItemName(ModBlocks.SOMTAM_FEAST));
         }
 
         private void smithing(Consumer<FinishedRecipe> exporter){

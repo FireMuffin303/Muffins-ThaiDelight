@@ -1,12 +1,15 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_pepper": {
+    "has_any_ingredient": {
       "conditions": {
         "items": [
           {
             "items": [
-              "muffins_thaidelight:pepper"
+              "minecraft:cooked_mutton",
+              "muffins_thaidelight:pepper",
+              "minecraft:sugar",
+              "muffins_thaidelight:fish_sauce_bottle"
             ]
           }
         ]
@@ -15,21 +18,21 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:crafting/seafood_bottle_from_crafting"
+        "recipe": "muffins_thaidelight:spicy_minced_meat_salad_feast_from_cooked_mutton"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_pepper",
+      "has_any_ingredient",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:crafting/seafood_bottle_from_crafting"
+      "muffins_thaidelight:spicy_minced_meat_salad_feast_from_cooked_mutton"
     ]
   },
-  "sends_telemetry_event": false
+  "sends_telemetry_event": true
 }

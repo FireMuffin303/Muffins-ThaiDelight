@@ -1,14 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_any_ingredient": {
+    "has_raw_pasta": {
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:glass_bottle",
-              "minecraft:cod",
-              "minecraft:salmon"
+              "farmersdelight:raw_pasta"
             ]
           }
         ]
@@ -17,21 +15,21 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "muffins_thaidelight:fish_sauce_bottle"
+        "recipe": "minecraft:crafting/stir_fried_noodle"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_any_ingredient",
+      "has_raw_pasta",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "muffins_thaidelight:fish_sauce_bottle"
+      "minecraft:crafting/stir_fried_noodle"
     ]
   },
-  "sends_telemetry_event": true
+  "sends_telemetry_event": false
 }

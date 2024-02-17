@@ -66,18 +66,14 @@ public class ModelDataGen extends FabricModelProvider {
         itemModelGenerator.generateFlatItem(ModItems.CRAB_BUCKET, ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.CRAB_MEAT, ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.COOKED_CRAB_MEAT, ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.CRAB_MEAT_WITH_SEAFOOD, ModelTemplates.FLAT_ITEM);
 
         itemModelGenerator.generateFlatItem(ModItems.DRAGONFLY_SPAWN_EGG,SPAWN_EGG);
         itemModelGenerator.generateFlatItem(ModItems.DRAGONFLY, ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.DRAGONFLY_BOTTLE, ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.COOKED_DRAGONFLY, ModelTemplates.FLAT_ITEM);
 
-        //itemModelGenerator.generateFlatItem(Item.byBlock(ModBlocks.SAUCE_BOWL), ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(Item.byBlock(ModBlocks.CRAB_EGG), ModelTemplates.FLAT_ITEM);
 
-
-        itemModelGenerator.generateFlatItem(ModItems.SEAFOOD_BOTTLE, ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.FISH_SAUCE_BOTTLE, ModelTemplates.FLAT_ITEM);
 
         itemModelGenerator.generateFlatItem(ModItems.LIME, ModelTemplates.FLAT_ITEM);
@@ -94,10 +90,6 @@ public class ModelDataGen extends FabricModelProvider {
         itemModelGenerator.generateFlatItem(ModItems.PAPAYA_JUICE, ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.LIME_JUICE, ModelTemplates.FLAT_ITEM);
 
-
-        //itemModelGenerator.generateFlatItem(ModItems.LOINCLOTH, ModelTemplates.FLAT_ITEM);
-        //itemModelGenerator.generateFlatItem(ModItems.ESAN_MUSIC_DISC, ModelTemplates.FLAT_ITEM);
-
         itemModelGenerator.generateFlatItem(ModItemsFabric.SOMTAM, ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItemsFabric.SPICY_MINCED_MEAT_SALAD, ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItemsFabric.CRAB_FRIED_RICE, ModelTemplates.FLAT_ITEM);
@@ -108,17 +100,6 @@ public class ModelDataGen extends FabricModelProvider {
         itemModelGenerator.generateFlatItem(Item.byBlock(ModBlocks.SPICY_MINCED_MEAT_SALAD_FEAST), ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(Item.byBlock(ModBlocks.CRAB_FRIED_RICE_FEAST), ModelTemplates.FLAT_ITEM);
 
-        //itemModelGenerator.generateFlatItem(ModItems.STONE_PASTLE,"_3d",PASTLE_3D);
-        //itemModelGenerator.generateFlatItem(ModItems.IRON_PASTLE,"_3d",PASTLE_3D);
-        //itemModelGenerator.generateFlatItem(ModItems.GOLDEN_PASTLE,"_3d",PASTLE_3D);
-        //itemModelGenerator.generateFlatItem(ModItems.DIAMOND_PASTLE,"_3d",PASTLE_3D);
-        //itemModelGenerator.generateFlatItem(ModItems.NETHERITE_PASTLE,"_3d",PASTLE_3D);
-//
-        //itemModelGenerator.generateFlatItem(ModItems.STONE_PASTLE,"_2d",ModelTemplates.FLAT_ITEM);
-        //itemModelGenerator.generateFlatItem(ModItems.IRON_PASTLE,"_2d",ModelTemplates.FLAT_ITEM);
-        //itemModelGenerator.generateFlatItem(ModItems.GOLDEN_PASTLE,"_2d",ModelTemplates.FLAT_ITEM);
-        //itemModelGenerator.generateFlatItem(ModItems.DIAMOND_PASTLE,"_2d",ModelTemplates.FLAT_ITEM);
-        //itemModelGenerator.generateFlatItem(ModItems.NETHERITE_PASTLE,"_2d",ModelTemplates.FLAT_ITEM);
     }
 
     private static void createBlock(Block block,ModelTemplate modelTemplate,TextureMapping textureMapping, BlockModelGenerators blockModelGenerator){

@@ -7,7 +7,10 @@
   "experience": 0.35,
   "ingredients": [
     {
-      "item": "minecraft:cooked_porkchop"
+      "tag": "forge:cooked_mutton"
+    },
+    {
+      "tag": "forge:cooked_mutton"
     },
     {
       "item": "muffins_thaidelight:pepper"
@@ -21,6 +24,6 @@
   ],
   "recipe_book_tab": "meals",
   "result": {
-    "item": "muffins_thaidelight:spicy_minced_pork_salad_feast"
+    "item": "muffins_thaidelight:spicy_minced_meat_salad_feast"
   }
 }

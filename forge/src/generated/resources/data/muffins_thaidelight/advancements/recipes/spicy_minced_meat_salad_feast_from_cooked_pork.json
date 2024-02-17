@@ -6,9 +6,11 @@
         "items": [
           {
             "items": [
-              "minecraft:glass_bottle",
-              "minecraft:cod",
-              "minecraft:salmon"
+              "minecraft:cooked_porkchop",
+              "farmersdelight:cooked_bacon",
+              "muffins_thaidelight:pepper",
+              "minecraft:sugar",
+              "muffins_thaidelight:fish_sauce_bottle"
             ]
           }
         ]
@@ -17,7 +19,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "muffins_thaidelight:fish_sauce_bottle"
+        "recipe": "muffins_thaidelight:spicy_minced_meat_salad_feast_from_cooked_pork"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -30,7 +32,7 @@
   ],
   "rewards": {
     "recipes": [
-      "muffins_thaidelight:fish_sauce_bottle"
+      "muffins_thaidelight:spicy_minced_meat_salad_feast_from_cooked_pork"
     ]
   },
   "sends_telemetry_event": true

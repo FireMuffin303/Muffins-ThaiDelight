@@ -1,6 +1,8 @@
-// 1.20.1	2024-02-16T08:44:20.8240486	Muffin's Thai Delight/Tags for minecraft:item
-1ccd6b441737fb2512fc1367d5a0f41c4cc997ee data\create\tags\items\upright_on_belt.json
+// 1.20.1	2024-02-17T11:13:12.5896898	Muffin's Thai Delight/Tags for minecraft:item
+872ae5c51e6f9358677e0d6e1f5993acf4ab7ac8 data\create\tags\items\upright_on_belt.json
 008e1b0d34346b4a371b19fa489c9a251667bac2 data\origins\tags\items\meat.json
 1c48a8a9c3d0a1e66b7d6dd6152429f0a1319ba7 data\muffins_thaidelight\tags\items\raw_papaya.json
+4e52cdb5e76f2551f2119d4801802d527470f327 data\muffins_thaidelight\tags\items\flower_crab_meat.json
+5dbe4ac6ac645c069c524832f9909774b22a80b0 data\muffins_thaidelight\tags\items\ripe_papaya.json
 d45f8e77edd3c6d47aa78e691f604e8f91834423 data\muffins_thaidelight\tags\items\lime.json
-858f4f48ad1107dfdbcfcf5e2f8b58b3316ae54b data\muffins_thaidelight\tags\items\papaya.json
+8802cc3aafe6081a937869502b012eccb2a214ce data\muffins_thaidelight\tags\items\papaya.json

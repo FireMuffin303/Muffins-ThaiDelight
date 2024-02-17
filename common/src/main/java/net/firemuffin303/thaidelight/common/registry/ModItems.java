@@ -32,7 +32,6 @@ public class ModItems {
     public static final Item CRAB_BUCKET = ModPlatform.registerMobBucket(ModEntityTypes.FLOWER_CRAB,()-> Fluids.WATER, () -> SoundEvents.BUCKET_EMPTY_FISH,new Item.Properties().stacksTo(1));
     public static final Item CRAB_MEAT = new Item(new Item.Properties().food(ModFood.CRAB));
     public static final Item COOKED_CRAB_MEAT =  new Item(new Item.Properties().food(ModFood.COOKED_CRAB));
-    public static final Item CRAB_MEAT_WITH_SEAFOOD =  new Item(new Item.Properties().food(ModFood.CRAB_WITH_SEAFOOD));
 
     //Dragonfly
     public static final Item DRAGONFLY_SPAWN_EGG = ModPlatform.registerSpawnEgg(ModEntityTypes.DRAGONFLY,0x5c5dbc,0xf0784f,new Item.Properties());
@@ -42,7 +41,6 @@ public class ModItems {
 
 
     //Bucket
-    public static final Item SEAFOOD_BOTTLE = new SeafoodBottleItem(new Item.Properties().stacksTo(16).craftRemainder(Items.GLASS_BOTTLE));
     public static final Item FISH_SAUCE_BOTTLE =  ModPlatform.getDrinkable(drinkItem().food(ModFood.FISH_SAUCE),true,false);
     public static final Item PAPAYA_JUICE = ModPlatform.getPapayaJuice(drinkItem().food(ModFood.PAPAYA_JUICE));
     public static final Item LIME_JUICE = ModPlatform.getLimeJuice(drinkItem().food(ModFood.LIME_JUICE));
@@ -85,15 +83,12 @@ public class ModItems {
         register("flower_crab_bucket",CRAB_BUCKET);
         register("flower_crab",CRAB_MEAT);
         register("cooked_flower_crab",COOKED_CRAB_MEAT);
-        register("cooked_seafood_flower_crab",CRAB_MEAT_WITH_SEAFOOD);
 
         register("dragonfly_spawn_egg",DRAGONFLY_SPAWN_EGG);
         register("dragonfly",DRAGONFLY);
         register("dragonfly_bottle",DRAGONFLY_BOTTLE);
         register("cooked_dragonfly",COOKED_DRAGONFLY);
 
-
-        register("seafood_bottle", SEAFOOD_BOTTLE);
         register("fish_sauce_bottle",FISH_SAUCE_BOTTLE);
         register("papaya_juice",PAPAYA_JUICE);
         register("lime_juice",LIME_JUICE);

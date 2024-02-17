@@ -6,7 +6,11 @@
         "items": [
           {
             "items": [
-              "minecraft:cooked_porkchop"
+              "minecraft:cooked_cod",
+              "minecraft:cooked_salmon",
+              "muffins_thaidelight:pepper",
+              "minecraft:sugar",
+              "muffins_thaidelight:fish_sauce_bottle"
             ]
           }
         ]
@@ -15,7 +19,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "muffins_thaidelight:spicy_minced_pork_salad_feast"
+        "recipe": "muffins_thaidelight:spicy_minced_meat_salad_feast_from_cooked_fishes"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +32,7 @@
   ],
   "rewards": {
     "recipes": [
-      "muffins_thaidelight:spicy_minced_pork_salad_feast"
+      "muffins_thaidelight:spicy_minced_meat_salad_feast_from_cooked_fishes"
     ]
   },
   "sends_telemetry_event": true

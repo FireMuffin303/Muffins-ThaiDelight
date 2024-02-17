@@ -10,16 +10,7 @@
       "tag": "muffins_thaidelight:flower_crab_meat"
     },
     {
-      "item": "farmersdelight:rice"
-    },
-    {
-      "tag": "forge:eggs"
-    },
-    {
-      "item": "minecraft:carrot"
-    },
-    {
-      "item": "farmersdelight:onion"
+      "item": "farmersdelight:fried_rice"
     }
   ],
   "recipe_book_tab": "meals",

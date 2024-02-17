@@ -75,7 +75,6 @@ public class LangDataGen extends FabricLanguageProvider {
         translationBuilder.add(ModItems.PAPAYA_JUICE,"Papaya Juice");
         translationBuilder.add(ModItems.LIME_JUICE,"Lime Juice");
 
-        translationBuilder.add(ModItems.SEAFOOD_BOTTLE,"Seafood Bottle");
         translationBuilder.add(ModItems.FISH_SAUCE_BOTTLE,"Fish Sauce Bottle");
 
         //Mobs
@@ -84,7 +83,6 @@ public class LangDataGen extends FabricLanguageProvider {
         translationBuilder.add(ModItems.CRAB_BUCKET,"Flower Crab in a Bucket");
         translationBuilder.add(ModItems.CRAB_MEAT,"Raw Flower Crab");
         translationBuilder.add(ModItems.COOKED_CRAB_MEAT,"Cooked Flower Crab");
-        translationBuilder.add(ModItems.CRAB_MEAT_WITH_SEAFOOD,"Seafooded Cooked Crab");
 
         translationBuilder.add(ModItems.DRAGONFLY_SPAWN_EGG,"Dragonfly Spawn Egg");
         translationBuilder.add(ModItems.DRAGONFLY,"Dragonfly");
@@ -154,7 +152,6 @@ public class LangDataGen extends FabricLanguageProvider {
             translationBuilder.add(ModItems.SLICED_LIME,"มะนาวหั่น");
 
             //Food
-            translationBuilder.add(ModItems.SEAFOOD_BOTTLE,"ขวดซีฟู้ด");
             translationBuilder.add(ModItems.FISH_SAUCE_BOTTLE,"ขวดน้ำปลา");
             translationBuilder.add(ModItems.PAPAYA_JUICE,"น้ำมะละกอ");
             translationBuilder.add(ModItems.LIME_JUICE,"น้ำมะนาว");
@@ -170,7 +167,6 @@ public class LangDataGen extends FabricLanguageProvider {
             translationBuilder.add(ModItems.CRAB_BUCKET,"ปูม้าในถัง");
             translationBuilder.add(ModItems.CRAB_MEAT,"เนื้อปูม้าสด");
             translationBuilder.add(ModItems.COOKED_CRAB_MEAT,"เนื้อปูม้าสุก");
-            translationBuilder.add(ModItems.CRAB_MEAT_WITH_SEAFOOD,"เนื้อปูม้าสุกเคลือบซีฟู้ด");
 
             translationBuilder.add(ModItems.DRAGONFLY_SPAWN_EGG,"ไข่เกิดแมลงปอ");
             translationBuilder.add(ModItems.DRAGONFLY,"แมลงปอสด");

@@ -7,23 +7,23 @@
   "experience": 0.35,
   "ingredients": [
     {
-      "tag": "muffins_thaidelight:flower_crab_meat"
+      "tag": "forge:cooked_chicken"
     },
     {
-      "item": "farmersdelight:rice"
+      "tag": "forge:cooked_chicken"
     },
     {
-      "tag": "forge:eggs"
+      "item": "muffins_thaidelight:pepper"
     },
     {
-      "item": "minecraft:carrot"
+      "item": "minecraft:sugar"
     },
     {
-      "item": "farmersdelight:onion"
+      "item": "muffins_thaidelight:fish_sauce_bottle"
     }
   ],
   "recipe_book_tab": "meals",
   "result": {
-    "item": "muffins_thaidelight:crab_fried_rice_feast"
+    "item": "muffins_thaidelight:spicy_minced_meat_salad_feast"
   }
 }

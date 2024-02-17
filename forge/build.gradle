@@ -19,11 +19,10 @@ loom {
     }
 
     runs {
-
         data {
             forgeTemplate("data")
             environment "data"
-            programArgs "--mod=muffins_thaidelight", "--all", "--output=" + file("src/generated/resources/"), "--existing=" + project(":common").file("src/main/resources/")
+            programArgs "--mod=muffins_thaidelight", "--all", "--output=" + project(":common").file("src/generated/resources/"), "--existing=" + project(":common").file("src/main/resources/")
             name "Forge Data Generation"
         }
     }
@@ -52,6 +51,7 @@ dependencies {
     modImplementation("maven.modrinth:farmers-delight:k7RoRFPF")
     // at runtime, use the full JEI jar for Forge
     modLocalRuntime("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
+    modLocalRuntime("maven.modrinth:appleskin:XdXDExVF")
 }
 
 processResources {

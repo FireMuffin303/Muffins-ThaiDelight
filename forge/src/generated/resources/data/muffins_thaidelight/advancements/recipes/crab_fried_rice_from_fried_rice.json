@@ -6,9 +6,9 @@
         "items": [
           {
             "items": [
-              "minecraft:glass_bottle",
-              "minecraft:cod",
-              "minecraft:salmon"
+              "muffins_thaidelight:flower_crab",
+              "muffins_thaidelight:cooked_flower_crab",
+              "farmersdelight:fried_rice"
             ]
           }
         ]
@@ -17,7 +17,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "muffins_thaidelight:fish_sauce_bottle"
+        "recipe": "muffins_thaidelight:crab_fried_rice_from_fried_rice"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -30,7 +30,7 @@
   ],
   "rewards": {
     "recipes": [
-      "muffins_thaidelight:fish_sauce_bottle"
+      "muffins_thaidelight:crab_fried_rice_from_fried_rice"
     ]
   },
   "sends_telemetry_event": true

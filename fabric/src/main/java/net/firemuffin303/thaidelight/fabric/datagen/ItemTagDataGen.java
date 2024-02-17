@@ -29,7 +29,6 @@ public class ItemTagDataGen extends FabricTagProvider.ItemTagProvider {
                 .add(ModItemsFabric.SPICY_MINCED_MEAT_SALAD);
 
         getOrCreateTagBuilder(TagKey.create(Registries.ITEM, new ResourceLocation("create","upright_on_belt")))
-                .add(ModItems.SEAFOOD_BOTTLE)
                 .add(ModItems.FISH_SAUCE_BOTTLE)
                 .add(ModItems.LIME_JUICE)
                 .add(ModItems.PAPAYA_JUICE);
@@ -42,10 +41,17 @@ public class ItemTagDataGen extends FabricTagProvider.ItemTagProvider {
                 .add(ModItems.RAW_PAPAYA)
                 .add(ModItems.RAW_PAPAYA_SLICE);
 
-        getOrCreateTagBuilder(ModTags.PAPAYA)
+        getOrCreateTagBuilder(ModTags.RIPE_PAPAYA)
                 .add(ModItems.PAPAYA)
-                .add(ModItems.SLICED_PAPAYA)
+                .add(ModItems.SLICED_PAPAYA);
+
+        getOrCreateTagBuilder(ModTags.PAPAYA)
+                .addTag(ModTags.RIPE_PAPAYA)
                 .addTag(ModTags.RAW_PAPAYA);
+
+        getOrCreateTagBuilder(ModTags.FLOWER_CRAB_MEAT)
+                .add(ModItems.CRAB_MEAT)
+                .add(ModItems.COOKED_CRAB_MEAT);
 
 
        // getOrCreateTagBuilder(ItemTags.MUSIC_DISCS).add(ModItems.ESAN_MUSIC_DISC);

@@ -4,10 +4,10 @@
   "experience": 1.0,
   "ingredients": [
     {
-      "item": "muffins_thaidelight:papaya_slice"
+      "tag": "muffins_thaidelight:ripe_papaya"
     },
     {
-      "item": "muffins_thaidelight:papaya_slice"
+      "tag": "muffins_thaidelight:ripe_papaya"
     },
     {
       "item": "minecraft:sugar"

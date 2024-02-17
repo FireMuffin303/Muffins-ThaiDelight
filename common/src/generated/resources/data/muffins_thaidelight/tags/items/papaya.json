@@ -1,8 +1,7 @@
 {
   "replace": false,
   "values": [
-    "muffins_thaidelight:papaya",
-    "muffins_thaidelight:papaya_slice",
+    "#muffins_thaidelight:ripe_papaya",
     "#muffins_thaidelight:raw_papaya"
   ]
 }
