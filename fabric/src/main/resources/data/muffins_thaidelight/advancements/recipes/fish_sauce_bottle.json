@@ -6,7 +6,9 @@
         "items": [
           {
             "items": [
-              "minecraft:glass_bottle"
+              "minecraft:glass_bottle",
+              "minecraft:cod",
+              "minecraft:salmon"
             ]
           }
         ]

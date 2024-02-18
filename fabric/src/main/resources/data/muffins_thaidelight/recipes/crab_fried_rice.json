@@ -7,23 +7,23 @@
   "experience": 0.35,
   "ingredients": [
     {
-      "item": "muffins_thaidelight:flower_crab"
-    },
-    {
-      "item": "muffins_thaidelight:flower_crab"
-    },
-    {
-      "item": "farmersdelight:rice"
+      "tag": "muffins_thaidelight:flower_crab_meat"
     },
     {
       "item": "farmersdelight:rice"
     },
     {
       "tag": "c:eggs"
+    },
+    {
+      "item": "minecraft:carrot"
+    },
+    {
+      "item": "farmersdelight:onion"
     }
   ],
   "recipe_book_tab": "meals",
   "result": {
-    "item": "muffins_thaidelight:crab_fried_rice"
+    "item": "muffins_thaidelight:crab_fried_rice_feast"
   }
 }

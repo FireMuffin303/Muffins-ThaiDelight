@@ -1,0 +1,12 @@
+{
+  "type": "muffins_thaidelight:mortar",
+  "ingredients": [
+    {
+      "item": "minecraft:coal"
+    }
+  ],
+  "result": {
+    "count": 2,
+    "item": "minecraft:black_dye"
+  }
+}

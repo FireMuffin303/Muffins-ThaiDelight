@@ -7,7 +7,10 @@
   "experience": 0.35,
   "ingredients": [
     {
-      "item": "minecraft:cooked_porkchop"
+      "tag": "c:cooked_fishes"
+    },
+    {
+      "tag": "c:cooked_fishes"
     },
     {
       "item": "muffins_thaidelight:pepper"

@@ -1,0 +1,39 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_any_ingredient": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:cooked_cod",
+              "minecraft:cooked_salmon",
+              "muffins_thaidelight:pepper",
+              "minecraft:sugar",
+              "muffins_thaidelight:fish_sauce_bottle"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "muffins_thaidelight:spicy_minced_meat_salad_feast_from_cooked_fishes"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_any_ingredient",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "muffins_thaidelight:spicy_minced_meat_salad_feast_from_cooked_fishes"
+    ]
+  },
+  "sends_telemetry_event": true
+}

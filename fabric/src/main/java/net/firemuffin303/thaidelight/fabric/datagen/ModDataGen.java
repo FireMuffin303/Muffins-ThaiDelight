@@ -47,6 +47,7 @@ public class ModDataGen implements DataGeneratorEntrypoint {
             smithing(exporter);
             cook(ModItems.CRAB_MEAT, ModItems.COOKED_CRAB_MEAT, 0.35f, 200, exporter);
             cook(ModItems.DRAGONFLY, ModItems.COOKED_DRAGONFLY, 0.35f, 200, exporter);
+            mortar(exporter);
         }
 
         private void cook(ItemLike ingredient, Item result, float exp, int cookTicks, Consumer<FinishedRecipe> exporter) {
@@ -72,8 +73,7 @@ public class ModDataGen implements DataGeneratorEntrypoint {
             ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,ModBlocks.PAPAYA_SEEDS,2).requires(ModItems.SLICED_PAPAYA).unlockedBy(getHasName(ModItems.SLICED_PAPAYA),has(ModItems.SLICED_PAPAYA)).save(exporter,"crafting/"+getItemName(ModBlocks.PAPAYA_SEEDS)+"_by_sliced_papaya_from_crafting");
 
             ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, ModItemsFabric.STIR_FRIED_NOODLE).requires(ItemsRegistry.ONION.get()).requires(ItemsRegistry.RAW_PASTA.get()).requires(Items.SUGAR).requires(Items.BOWL).requires(ModTags.LIME).unlockedBy(getHasName(ItemsRegistry.RAW_PASTA.get()),has(ItemsRegistry.RAW_PASTA.get())).save(exporter,"crafting/"+getItemName(ModItemsFabric.STIR_FRIED_NOODLE));
-
-            MortarRecipeBuilder.mortar(ModBlocks.SOMTAM_FEAST).requires(ModItems.PEPPER,2).requires(ModTags.RAW_PAPAYA).requires(ModItems.CRAB_MEAT).unlockedBy(getHasName(ModItems.RAW_PAPAYA),has(ModItems.RAW_PAPAYA)).save(exporter,"mortar/"+getItemName(ModBlocks.SOMTAM_FEAST));
+            ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD,ItemsRegistry.MIXED_SALAD.get()).requires(ModTags.RAW_PAPAYA).requires(ItemsRegistry.TOMATO.get()).requires(Items.BEETROOT).requires(Items.BOWL).unlockedBy(getHasName(Items.BOWL),has(Items.BOWL)).save(exporter,"crafting/"+getItemName(ItemsRegistry.MIXED_SALAD.get())+"by_raw_papaya");
         }
 
         private void smithing(Consumer<FinishedRecipe> exporter){
@@ -82,6 +82,57 @@ public class ModDataGen implements DataGeneratorEntrypoint {
 
         private void bigPackingCraft(Item result,int resultAmount,ItemLike ingredient,Consumer<FinishedRecipe> exporter){
             ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS,result,resultAmount).define('A',ingredient).pattern("AAA").pattern("AAA").pattern("AAA").unlockedBy(getHasName(ingredient),has(ingredient)).save(exporter,"crafting/"+getItemName(result)+"_from_crafting");
+        }
+
+        private void mortar(Consumer<FinishedRecipe> exporter){
+            MortarRecipeBuilder.mortar(ModBlocks.SOMTAM_FEAST).requires(ModItems.PEPPER,2).requires(ModTags.RAW_PAPAYA).requires(ModItems.CRAB_MEAT).unlockedBy(getHasName(ModItems.RAW_PAPAYA),has(ModItems.RAW_PAPAYA)).save(exporter,"mortar/"+getItemName(ModBlocks.SOMTAM_FEAST));
+
+            MortarRecipeBuilder.mortar(Items.BONE_MEAL,4).requires(Items.BONE,1).unlockedBy(getHasName(Items.BONE),has(Items.BONE)).save(exporter,"mortar/"+getItemName(Items.BONE_MEAL)+"_by_bone");
+            MortarRecipeBuilder.mortar(Items.BONE_MEAL,2).requires(Items.NAUTILUS_SHELL,1).unlockedBy(getHasName(Items.NAUTILUS_SHELL),has(Items.NAUTILUS_SHELL)).save(exporter,"mortar/"+getItemName(Items.BONE_MEAL)+"_by_nautilus_shell");
+            MortarRecipeBuilder.mortar(Items.BLAZE_POWDER,3).requires(Items.BLAZE_ROD,1).unlockedBy(getHasName(Items.BLAZE_ROD),has(Items.BLAZE_ROD)).save(exporter,"mortar/"+getItemName(Items.BLAZE_POWDER)+"_by_blaze_rod");
+            MortarRecipeBuilder.mortar(Items.SUGAR,2).requires(Items.SUGAR_CANE,1).unlockedBy(getHasName(Items.SUGAR_CANE),has(Items.SUGAR_CANE)).save(exporter,"mortar/"+getItemName(Items.SUGAR)+"_by_sugar_cane");
+            MortarRecipeBuilder.mortar(Items.BLACK_DYE,2).requires(Items.COAL,1).unlockedBy(getHasName(Items.COAL),has(Items.COAL)).save(exporter,"mortar/"+getItemName(Items.BLACK_DYE)+"_by_coal");
+            MortarRecipeBuilder.mortar(Items.BLACK_DYE,2).requires(Items.CHARCOAL,1).unlockedBy(getHasName(Items.CHARCOAL),has(Items.CHARCOAL)).save(exporter,"mortar/"+getItemName(Items.BLACK_DYE)+"_by_charcoal");
+
+            MortarRecipeBuilder.mortar(Items.WHITE_DYE,2).requires(Items.BONE_MEAL,1).unlockedBy(getHasName(Items.BONE_MEAL),has(Items.BONE_MEAL)).save(exporter,"mortar/"+getItemName(Items.WHITE_CARPET)+"_by_bone_meal");
+            MortarRecipeBuilder.mortar(Items.WHITE_DYE,2).requires(Items.LILY_OF_THE_VALLEY,1).unlockedBy(getHasName(Items.LILY_OF_THE_VALLEY),has(Items.LILY_OF_THE_VALLEY)).save(exporter,"mortar/"+getItemName(Items.WHITE_CARPET)+"_by_lily_of_the_valley");
+
+            MortarRecipeBuilder.mortar(Items.LIGHT_GRAY_DYE,2).requires(Items.OXEYE_DAISY,1).unlockedBy(getHasName(Items.OXEYE_DAISY),has(Items.OXEYE_DAISY)).save(exporter,"mortar/"+getItemName(Items.LIGHT_GRAY_DYE)+"_by_oxeye_daisy");
+            MortarRecipeBuilder.mortar(Items.LIGHT_GRAY_DYE,2).requires(Items.AZURE_BLUET,1).unlockedBy(getHasName(Items.AZURE_BLUET),has(Items.AZURE_BLUET)).save(exporter,"mortar/"+getItemName(Items.LIGHT_GRAY_DYE)+"_by_azure_bluet");
+            MortarRecipeBuilder.mortar(Items.LIGHT_GRAY_DYE,2).requires(Items.WHITE_TULIP,1).unlockedBy(getHasName(Items.WHITE_TULIP),has(Items.WHITE_TULIP)).save(exporter, "mortar/"+getItemName(Items.LIGHT_GRAY_DYE)+"_by_white_tulip");
+
+            MortarRecipeBuilder.mortar(Items.BLACK_DYE,2).requires(Items.INK_SAC,1).unlockedBy(getHasName(Items.INK_SAC),has(Items.INK_SAC)).save(exporter,"mortar/"+getItemName(Items.BLACK_DYE)+"_by_ink_sac");
+            MortarRecipeBuilder.mortar(Items.BLACK_DYE,2).requires(Items.WITHER_ROSE,1).unlockedBy(getHasName(Items.WITHER_ROSE),has(Items.WITHER_ROSE)).save(exporter,"mortar/"+getItemName(Items.BLACK_DYE)+"_by_wither_rose");
+
+            MortarRecipeBuilder.mortar(Items.BROWN_DYE,2).requires(Items.COCOA_BEANS,1).unlockedBy(getHasName(Items.COCOA_BEANS),has(Items.COCOA_BEANS)).save(exporter,"mortar/"+getItemName(Items.BROWN_DYE)+"_by_cocoa");
+
+            MortarRecipeBuilder.mortar(Items.RED_DYE,2).requires(Items.POPPY,1).unlockedBy(getHasName(Items.POPPY),has(Items.POPPY)).save(exporter,"mortar/"+getItemName(Items.RED_DYE)+"_by_poppy");
+            MortarRecipeBuilder.mortar(Items.RED_DYE,2).requires(Items.BEETROOT,1).unlockedBy(getHasName(Items.BEETROOT),has(Items.BEETROOT)).save(exporter,"mortar/"+getItemName(Items.RED_DYE)+"_by_beetroot");
+            MortarRecipeBuilder.mortar(Items.RED_DYE,2).requires(Items.RED_TULIP,1).unlockedBy(getHasName(Items.RED_TULIP),has(Items.RED_TULIP)).save(exporter,"mortar/"+getItemName(Items.RED_DYE)+"_by_red_tulip");
+            MortarRecipeBuilder.mortar(Items.RED_DYE,2).requires(Items.ROSE_BUSH,1).unlockedBy(getHasName(Items.ROSE_BUSH),has(Items.ROSE_BUSH)).save(exporter,"mortar/"+getItemName(Items.RED_DYE)+"_by_rose_bush");
+
+            MortarRecipeBuilder.mortar(Items.ORANGE_DYE,2).requires(Items.TORCHFLOWER,1).unlockedBy(getHasName(Items.TORCHFLOWER),has(Items.TORCHFLOWER)).save(exporter,"mortar/"+getItemName(Items.ORANGE_DYE)+"_by_torchflower");
+            MortarRecipeBuilder.mortar(Items.ORANGE_DYE,2).requires(Items.ORANGE_TULIP,1).unlockedBy(getHasName(Items.ORANGE_TULIP),has(Items.ORANGE_TULIP)).save(exporter,"mortar/"+getItemName(Items.ORANGE_DYE)+"_by_orange_tulip");
+
+            MortarRecipeBuilder.mortar(Items.YELLOW_DYE,2).requires(Items.DANDELION,1).unlockedBy(getHasName(Items.DANDELION),has(Items.DANDELION)).save(exporter,"mortar/"+getItemName(Items.YELLOW_DYE)+"_by_dandelion");
+            MortarRecipeBuilder.mortar(Items.YELLOW_DYE,3).requires(Items.SUNFLOWER,1).unlockedBy(getHasName(Items.SUNFLOWER),has(Items.SUNFLOWER)).save(exporter,"mortar/"+getItemName(Items.YELLOW_DYE)+"_by_sunflower");
+
+            MortarRecipeBuilder.mortar(Items.CYAN_DYE,3).requires(Items.PITCHER_PLANT,1).unlockedBy(getHasName(Items.PITCHER_PLANT),has(Items.PITCHER_PLANT)).save(exporter,"mortar/"+getItemName(Items.CYAN_DYE)+"_by_pitcher_plant");
+
+            MortarRecipeBuilder.mortar(Items.LIGHT_BLUE_DYE,2).requires(Items.BLUE_ORCHID,1).unlockedBy(getHasName(Items.BLUE_ORCHID),has(Items.BLUE_ORCHID)).save(exporter,"mortar/"+getItemName(Items.LIGHT_BLUE_DYE)+"_by_blue_orchid");
+
+            MortarRecipeBuilder.mortar(Items.BLUE_DYE,2).requires(Items.CORNFLOWER,1).unlockedBy(getHasName(Items.CORNFLOWER),has(Items.CORNFLOWER)).save(exporter,"mortar/"+getItemName(Items.BLUE_DYE)+"_by_cornflower");
+            MortarRecipeBuilder.mortar(Items.BLUE_DYE,2).requires(Items.LAPIS_LAZULI,1).unlockedBy(getHasName(Items.LAPIS_LAZULI),has(Items.LAPIS_LAZULI)).save(exporter,"mortar/"+getItemName(Items.BLUE_DYE)+"_by_lapis_lazuli");
+
+            MortarRecipeBuilder.mortar(Items.PURPLE_DYE,1).requires(Items.CHORUS_FRUIT,1).unlockedBy(getHasName(Items.CHORUS_FRUIT),has(Items.CHORUS_FRUIT)).save(exporter,"mortar/"+getItemName(Items.PURPLE_DYE)+"_by_chorus_fruit");
+
+            MortarRecipeBuilder.mortar(Items.MAGENTA_DYE,2).requires(Items.ALLIUM,1).unlockedBy(getHasName(Items.ALLIUM),has(Items.ALLIUM)).save(exporter,"mortar/"+getItemName(Items.MAGENTA_DYE)+"_by_allium");
+            MortarRecipeBuilder.mortar(Items.MAGENTA_DYE,3).requires(Items.LILAC,1).unlockedBy(getHasName(Items.LILAC),has(Items.LILAC)).save(exporter,"mortar/"+getItemName(Items.MAGENTA_DYE)+"_by_lilac");
+
+            MortarRecipeBuilder.mortar(Items.PINK_DYE,2).requires(Items.PINK_PETALS,1).unlockedBy(getHasName(Items.PINK_PETALS),has(Items.PINK_PETALS)).save(exporter,"mortar/"+getItemName(Items.PINK_DYE)+"_by_pink_petals");
+            MortarRecipeBuilder.mortar(Items.PINK_DYE,2).requires(Items.PINK_TULIP,1).unlockedBy(getHasName(Items.PINK_TULIP),has(Items.PINK_TULIP)).save(exporter,"mortar/"+getItemName(Items.PINK_DYE)+"_by_pink_tulip");
+            MortarRecipeBuilder.mortar(Items.PINK_DYE,3).requires(Items.PEONY,1).unlockedBy(getHasName(Items.PEONY),has(Items.PEONY)).save(exporter,"mortar/"+getItemName(Items.PINK_DYE)+"_by_peony");
+
         }
     }
 }

@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_sliced_lime": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "muffins_thaidelight:lime_slice"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "muffins_thaidelight:lime_juice"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_sliced_lime",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "muffins_thaidelight:lime_juice"
+    ]
+  },
+  "sends_telemetry_event": true
+}

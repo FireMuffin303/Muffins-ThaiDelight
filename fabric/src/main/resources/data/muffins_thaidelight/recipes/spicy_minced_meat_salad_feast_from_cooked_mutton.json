@@ -1,0 +1,29 @@
+{
+  "type": "farmersdelight:cooking",
+  "container": {
+    "item": "minecraft:bowl"
+  },
+  "cookingtime": 200,
+  "experience": 0.35,
+  "ingredients": [
+    {
+      "tag": "c:cooked_mutton"
+    },
+    {
+      "tag": "c:cooked_mutton"
+    },
+    {
+      "item": "muffins_thaidelight:pepper"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "item": "muffins_thaidelight:fish_sauce_bottle"
+    }
+  ],
+  "recipe_book_tab": "meals",
+  "result": {
+    "item": "muffins_thaidelight:spicy_minced_meat_salad_feast"
+  }
+}
