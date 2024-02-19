@@ -1,5 +1,6 @@
 {
   "parent": "muffins_thaidelight:block/crop_cross",
+  "render_type": "minecraft:cutout",
   "textures": {
     "cross": "muffins_thaidelight:block/pepper_stage1"
   }

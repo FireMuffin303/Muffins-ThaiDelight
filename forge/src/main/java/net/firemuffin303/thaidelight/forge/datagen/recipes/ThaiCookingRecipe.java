@@ -63,12 +63,14 @@ public class ThaiCookingRecipe {
                 .addIngredient(ModItems.PEPPER)
                 .addIngredient(Items.SUGAR)
                 .addIngredient(ModItems.FISH_SAUCE_BOTTLE)
+                .addIngredient(vectorwing.farmersdelight.common.registry.ModItems.ONION.get())
                 .setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
                 .unlockedByAnyIngredient(
                         Items.COOKED_BEEF,
                         vectorwing.farmersdelight.common.registry.ModItems.BEEF_PATTY.get(),
                         ModItems.PEPPER,
                         Items.SUGAR,
+                        vectorwing.farmersdelight.common.registry.ModItems.ONION.get(),
                         ModItems.FISH_SAUCE_BOTTLE
                 )
                 .build(consumer,ForgeRegistries.ITEMS.getKey(Item.byBlock(ModBlocks.SPICY_MINCED_MEAT_SALAD_FEAST))+"_from_cooked_beef");
@@ -79,6 +81,7 @@ public class ThaiCookingRecipe {
                 .addIngredient(ModItems.PEPPER)
                 .addIngredient(Items.SUGAR)
                 .addIngredient(ModItems.FISH_SAUCE_BOTTLE)
+                .addIngredient(vectorwing.farmersdelight.common.registry.ModItems.ONION.get())
                 .setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
                 .unlockedByAnyIngredient(
                         Items.COOKED_PORKCHOP,
@@ -95,6 +98,7 @@ public class ThaiCookingRecipe {
                 .addIngredient(ModItems.PEPPER)
                 .addIngredient(Items.SUGAR)
                 .addIngredient(ModItems.FISH_SAUCE_BOTTLE)
+                .addIngredient(vectorwing.farmersdelight.common.registry.ModItems.ONION.get())
                 .setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
                 .unlockedByAnyIngredient(
                         Items.COOKED_MUTTON,
@@ -110,6 +114,7 @@ public class ThaiCookingRecipe {
                 .addIngredient(ModItems.PEPPER)
                 .addIngredient(Items.SUGAR)
                 .addIngredient(ModItems.FISH_SAUCE_BOTTLE)
+                .addIngredient(vectorwing.farmersdelight.common.registry.ModItems.ONION.get())
                 .setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
                 .unlockedByAnyIngredient(
                         Items.COOKED_CHICKEN,
@@ -125,6 +130,7 @@ public class ThaiCookingRecipe {
                 .addIngredient(ModItems.PEPPER)
                 .addIngredient(Items.SUGAR)
                 .addIngredient(ModItems.FISH_SAUCE_BOTTLE)
+                .addIngredient(vectorwing.farmersdelight.common.registry.ModItems.ONION.get())
                 .setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
                 .unlockedByAnyIngredient(
                         Items.COOKED_COD,
@@ -141,6 +147,7 @@ public class ThaiCookingRecipe {
                 .addIngredient(ModItems.PEPPER)
                 .addIngredient(Items.SUGAR)
                 .addIngredient(ModItems.FISH_SAUCE_BOTTLE)
+                .addIngredient(vectorwing.farmersdelight.common.registry.ModItems.ONION.get())
                 .setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
                 .unlockedByAnyIngredient(
                         ModItems.COOKED_CRAB_MEAT,

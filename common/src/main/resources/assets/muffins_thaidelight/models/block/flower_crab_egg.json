@@ -1,5 +1,6 @@
 {
   "ambientocclusion": false,
+  "render_type": "minecraft:cutout",
   "textures": {
     "particle": "muffins_thaidelight:block/flower_crab_egg",
     "texture": "muffins_thaidelight:block/flower_crab_egg"

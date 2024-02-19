@@ -25,7 +25,8 @@ public class LangDataGen extends FabricLanguageProvider {
         translationBuilder.add("advancement.muffins_thaidelight.sliced_lime.description","Obtains Sliced Lime");
 
         translationBuilder.add("farmersdelight.tooltip.papaya_juice","Clear Hunger Effect");
-        translationBuilder.add("farmersdelight.tooltip.lime_juice","Clear Blindness and Darkness Effect");
+        translationBuilder.add("farmersdelight.tooltip.lime_juice","Clear Blindness Effect");
+        translationBuilder.add("jei.info.papaya_log","Right click with bone meal to grow papayas.");
 
 
         translationBuilder.add("itemGroup.muffins_thaidelight.main","Muffin's Thai Delight");
@@ -110,6 +111,8 @@ public class LangDataGen extends FabricLanguageProvider {
 
             translationBuilder.add("farmersdelight.tooltip.papaya_juice","ล้างหิวเร็ว");
             translationBuilder.add("farmersdelight.tooltip.lime_juice","ล้างตาบอด");
+            translationBuilder.add("jei.info.papaya_log","คลิ๊กขวาด้วยผงกระดูกเพื่อโตผลมะละกอ");
+
 
 
             translationBuilder.add("itemGroup.muffins_thaidelight.main","Muffin's Thai Delight");

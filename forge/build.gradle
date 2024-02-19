@@ -22,7 +22,7 @@ loom {
         data {
             forgeTemplate("data")
             environment "data"
-            programArgs "--mod=muffins_thaidelight", "--all", "--output=" + project(":common").file("src/generated/resources/"), "--existing=" + project(":common").file("src/main/resources/")
+            programArgs "--mod=muffins_thaidelight", "--all", "--output=" + file("src/generated/resources/"), "--existing=" + project(":common").file("src/main/resources/")
             name "Forge Data Generation"
         }
     }

@@ -54,7 +54,9 @@ public class ModelDataGen extends FabricModelProvider {
 
 
         blockStateModelGenerator.createCrossBlockWithDefaultItem(ModBlocks.WILD_PEPPER_CROP, BlockModelGenerators.TintState.NOT_TINTED);
-        blockStateModelGenerator.createCrossBlockWithDefaultItem(ModBlocks.PAPAYA_SEEDS, BlockModelGenerators.TintState.NOT_TINTED);
+        blockStateModelGenerator.createCrossBlock(ModBlocks.PAPAYA_SEEDS,
+                BlockModelGenerators.TintState.NOT_TINTED,
+                new TextureMapping().put(TextureSlot.CROSS,new ResourceLocation(ThaiDelight.MOD_ID,"block/papaya_sapling")));
 
         createPepperCrop(blockStateModelGenerator);
         createLimeCrop(blockStateModelGenerator);
@@ -86,6 +88,7 @@ public class ModelDataGen extends FabricModelProvider {
         itemModelGenerator.generateFlatItem(ModItems.SLICED_PAPAYA, ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.RAW_PAPAYA, ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.RAW_PAPAYA_SLICE,ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(Item.byBlock(ModBlocks.PAPAYA_SEEDS),ModelTemplates.FLAT_ITEM);
 
         itemModelGenerator.generateFlatItem(ModItems.PAPAYA_JUICE, ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.LIME_JUICE, ModelTemplates.FLAT_ITEM);

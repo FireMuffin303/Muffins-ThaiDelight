@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "muffins_thaidelight:block/papaya_seeds"
+    "layer0": "muffins_thaidelight:item/papaya_seeds"
   }
 }
