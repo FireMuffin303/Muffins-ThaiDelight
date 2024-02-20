@@ -18,7 +18,7 @@ public class ModEntityTypes {
     public static final ArrayList<EntityType<?>> ENTITY_TYPES = new ArrayList<>();
 
     public static final EntityType<FlowerCrabEntity> FLOWER_CRAB = EntityType.Builder.of(FlowerCrabEntity::new, MobCategory.CREATURE).sized(0.8f,0.5f).build(ThaiDelight.MOD_ID);
-    public static final EntityType<Dragonfly> DRAGONFLY = EntityType.Builder.of(Dragonfly::new, MobCategory.AMBIENT).sized(1.5f,1f).build(ThaiDelight.MOD_ID);
+    public static final EntityType<Dragonfly> DRAGONFLY = EntityType.Builder.of(Dragonfly::new, MobCategory.AMBIENT).sized(0.8f,0.6f).build(ThaiDelight.MOD_ID);
 
 
     public static void init(){

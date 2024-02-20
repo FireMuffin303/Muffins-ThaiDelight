@@ -3,6 +3,7 @@ package net.firemuffin303.thaidelight.common.registry;
 import com.google.common.collect.Sets;
 import net.firemuffin303.thaidelight.ThaiDelight;
 import net.firemuffin303.thaidelight.common.item.ModMusicDisc;
+import net.firemuffin303.thaidelight.common.item.bottle.DragonflyBottleItem;
 import net.firemuffin303.thaidelight.common.item.bottle.SeafoodBottleItem;
 import net.firemuffin303.thaidelight.utils.ModPlatform;
 import net.minecraft.resources.ResourceLocation;
@@ -35,8 +36,8 @@ public class ModItems {
 
     //Dragonfly
     public static final Item DRAGONFLY_SPAWN_EGG = ModPlatform.registerSpawnEgg(ModEntityTypes.DRAGONFLY,0x5c5dbc,0xf0784f,new Item.Properties());
-    public static final Item DRAGONFLY = new Item(new Item.Properties());
-    public static final Item DRAGONFLY_BOTTLE = new Item(new Item.Properties());
+    public static final Item DRAGONFLY = new Item(new Item.Properties().food(ModFood.DRAGONFLY));
+    public static final Item DRAGONFLY_BOTTLE = new DragonflyBottleItem(new Item.Properties());
     public static final Item COOKED_DRAGONFLY = new Item(new Item.Properties().food(ModFood.COOKED_DRAGONFLY));
 
 
@@ -125,6 +126,7 @@ public class ModItems {
         public static final FoodProperties COOKED_CRAB = new FoodProperties.Builder().nutrition(8).saturationMod(0.5F).meat().build();
 
         public static final FoodProperties COOKED_DRAGONFLY = new FoodProperties.Builder().nutrition(3).saturationMod(0.2f).alwaysEat().build();
+        public static final FoodProperties DRAGONFLY = new FoodProperties.Builder().nutrition(2).saturationMod(0.1f).alwaysEat().build();
 
         public static final FoodProperties PEPPER = new FoodProperties.Builder().nutrition(1).saturationMod(0.1F).alwaysEat().fast().build();
 
