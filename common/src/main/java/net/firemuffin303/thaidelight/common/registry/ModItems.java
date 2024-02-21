@@ -37,7 +37,7 @@ public class ModItems {
     //Dragonfly
     public static final Item DRAGONFLY_SPAWN_EGG = ModPlatform.registerSpawnEgg(ModEntityTypes.DRAGONFLY,0x5c5dbc,0xf0784f,new Item.Properties());
     public static final Item DRAGONFLY = new Item(new Item.Properties().food(ModFood.DRAGONFLY));
-    public static final Item DRAGONFLY_BOTTLE = new DragonflyBottleItem(new Item.Properties());
+    public static final Item DRAGONFLY_BOTTLE = new DragonflyBottleItem(new Item.Properties().stacksTo(1));
     public static final Item COOKED_DRAGONFLY = new Item(new Item.Properties().food(ModFood.COOKED_DRAGONFLY));
 
 

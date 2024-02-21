@@ -9,6 +9,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.advancements.AdvancementVisibilityEvaluator;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
@@ -33,6 +34,7 @@ import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import org.jetbrains.annotations.Nullable;
@@ -42,11 +44,16 @@ public class FlowerCrabEntity extends Animal implements Bucketable {
     private static final Ingredient FOOD_ITEMS;
     private static final EntityDataAccessor<Boolean> LAYING_EGG;
     private static final EntityDataAccessor<Boolean> FROM_BUCKET;
+    private static final EntityDataAccessor<Boolean> DANCING;
 
     public final AnimationState idleAnimationState = new AnimationState();
+    public final AnimationState danceAnimationState = new AnimationState();
 
     private int idleAnimationTimeout = 0;
     int layEggCounter;
+
+    @Nullable
+    private BlockPos jukebox;
 
 
 
@@ -80,6 +87,7 @@ public class FlowerCrabEntity extends Animal implements Bucketable {
         this.entityData.define(HAS_EGG, false);
         this.entityData.define(LAYING_EGG, false);
         this.entityData.define(FROM_BUCKET, false);
+        this.entityData.define(DANCING, false);
 
     }
 
@@ -111,12 +119,34 @@ public class FlowerCrabEntity extends Animal implements Bucketable {
         }
     }
 
+    @Override
+    public void aiStep() {
+        if (this.jukebox == null || !this.jukebox.closerToCenterThan(this.position(), 3.46D) || !this.level().getBlockState(this.jukebox).is(Blocks.JUKEBOX)) {
+            this.jukebox = null;
+            this.danceAnimationState.stop();
+        }
+
+        super.aiStep();
+    }
+
+
     private void setupAnimationStates() {
         if (this.idleAnimationTimeout <= 0) {
-            this.idleAnimationTimeout = 68;
+            this.idleAnimationTimeout = 40;
             this.idleAnimationState.start(this.tickCount);
         } else {
             --this.idleAnimationTimeout;
+        }
+
+    }
+
+    @Override
+    public void setRecordPlayingNearby(BlockPos blockPos, boolean bl) {
+        this.jukebox = blockPos;
+        if(blockPos != null && bl){
+            this.danceAnimationState.startIfStopped(this.tickCount);
+        }else {
+            this.danceAnimationState.stop();
         }
 
     }
@@ -156,6 +186,7 @@ public class FlowerCrabEntity extends Animal implements Bucketable {
         LAYING_EGG = SynchedEntityData.defineId(FlowerCrabEntity.class, EntityDataSerializers.BOOLEAN);
         FOOD_ITEMS = Ingredient.of(Items.COD, Items.SALMON, Items.TROPICAL_FISH);
         FROM_BUCKET = SynchedEntityData.defineId(FlowerCrabEntity.class, EntityDataSerializers.BOOLEAN);
+        DANCING = SynchedEntityData.defineId(FlowerCrabEntity.class, EntityDataSerializers.BOOLEAN);
     }
 
     @Override

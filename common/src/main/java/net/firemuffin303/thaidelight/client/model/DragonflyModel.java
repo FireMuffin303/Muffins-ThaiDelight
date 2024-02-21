@@ -8,14 +8,29 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 
 
 public class DragonflyModel <T extends Dragonfly> extends HierarchicalModel<T> {
     private final ModelPart body;
+    private final ModelPart leftFrontWing;
+    private final ModelPart rightFrontWing;
+    private final ModelPart leftBackWing;
+    private final ModelPart rightBackWing;
+    private final ModelPart frontLeg;
+    private final ModelPart midLeg;
+    private final ModelPart hindLeg;
     public static final ModelLayerLocation LAYER = new ModelLayerLocation(new ResourceLocation(ThaiDelight.MOD_ID,"dragonfly"),"main");
 
     public DragonflyModel(ModelPart body) {
-        this.body = body;
+        this.body = body.getChild("body");
+        this.leftFrontWing = this.body.getChild("left_frontwing");
+        this.rightFrontWing = this.body.getChild("right_frontwing");
+        this.leftBackWing = this.body.getChild("left_backwing");
+        this.rightBackWing = this.body.getChild("right_backwing");
+        this.frontLeg = this.body.getChild("front_leg");
+        this.midLeg = this.body.getChild("middle_leg");
+        this.hindLeg = this.body.getChild("hind_leg");
     }
 
     @Override
@@ -27,31 +42,33 @@ public class DragonflyModel <T extends Dragonfly> extends HierarchicalModel<T> {
         MeshDefinition meshdefinition = new MeshDefinition();
         PartDefinition partdefinition = meshdefinition.getRoot();
 
-        PartDefinition body = partdefinition.addOrReplaceChild("body", CubeListBuilder.create().texOffs(0, 0).addBox(-2.0F, -2.5F, -4.0F, 4.0F, 5.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 21.5F, 0.0F));
+        PartDefinition Body = partdefinition.addOrReplaceChild("body", CubeListBuilder.create().texOffs(16, 12).addBox(-2.0F, -2.0F, -4.0F, 4.0F, 4.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 20.0F, 0.0F));
 
-        PartDefinition head = body.addOrReplaceChild("head", CubeListBuilder.create().texOffs(21, 22).addBox(-2.0F, -6.0F, -7.0F, 4.0F, 4.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 3.5F, 0.0F));
+        PartDefinition head = Body.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 24).addBox(-5.0F, -6.0F, -7.0F, 10.0F, 4.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 5.0F, 0.0F));
 
-        PartDefinition tail = body.addOrReplaceChild("tail", CubeListBuilder.create().texOffs(0, 13).addBox(-1.0F, -2.0F, -1.0F, 2.0F, 2.0F, 10.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -0.5F, 5.0F));
+        PartDefinition tail = Body.addOrReplaceChild("tail", CubeListBuilder.create(), PartPose.offset(0.0F, 1.0F, 5.0F));
 
-        PartDefinition front_leg = body.addOrReplaceChild("front_leg", CubeListBuilder.create(), PartPose.offset(0.0F, 2.5F, -3.0F));
+        PartDefinition cube_r1 = tail.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(0, 8).addBox(-1.0F, -1.0F, -3.0F, 2.0F, 2.0F, 10.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, -0.5236F, 0.0F, 0.0F));
 
-        PartDefinition cube_r1 = front_leg.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(0, 4).addBox(-2.0F, 0.0F, 0.0F, 4.0F, 2.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.5236F, 0.0F, 0.0F));
+        PartDefinition front_leg = Body.addOrReplaceChild("front_leg", CubeListBuilder.create(), PartPose.offset(0.0F, 4.0F, -3.0F));
 
-        PartDefinition middle_leg = body.addOrReplaceChild("middle_leg", CubeListBuilder.create(), PartPose.offset(0.0F, 2.5F, 0.0F));
+        PartDefinition cube_r2 = front_leg.addOrReplaceChild("cube_r2", CubeListBuilder.create().texOffs(0, 12).addBox(-2.0F, 0.0F, 0.0F, 4.0F, 2.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -2.0F, 0.0F, 0.5236F, 0.0F, 0.0F));
 
-        PartDefinition cube_r2 = middle_leg.addOrReplaceChild("cube_r2", CubeListBuilder.create().texOffs(0, 2).addBox(-2.0F, 0.0F, 0.0F, 4.0F, 2.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.5236F, 0.0F, 0.0F));
+        PartDefinition middle_leg = Body.addOrReplaceChild("middle_leg", CubeListBuilder.create(), PartPose.offset(0.0F, 4.0F, 0.0F));
 
-        PartDefinition hind_leg = body.addOrReplaceChild("hind_leg", CubeListBuilder.create(), PartPose.offset(0.0F, 2.5F, 3.0F));
+        PartDefinition cube_r3 = middle_leg.addOrReplaceChild("cube_r3", CubeListBuilder.create().texOffs(0, 10).addBox(-2.0F, 0.0F, 0.0F, 4.0F, 2.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -2.0F, 0.0F, 0.5236F, 0.0F, 0.0F));
 
-        PartDefinition cube_r3 = hind_leg.addOrReplaceChild("cube_r3", CubeListBuilder.create().texOffs(0, 0).addBox(-2.0F, 0.0F, 0.0F, 4.0F, 2.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.5236F, 0.0F, 0.0F));
+        PartDefinition hind_leg = Body.addOrReplaceChild("hind_leg", CubeListBuilder.create(), PartPose.offset(0.0F, 4.0F, 3.0F));
 
-        PartDefinition left_wing = body.addOrReplaceChild("left_wing", CubeListBuilder.create().texOffs(12, 4).addBox(0.0F, -1.0F, -2.0F, 12.0F, 0.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -1.5F, -2.0F));
+        PartDefinition cube_r4 = hind_leg.addOrReplaceChild("cube_r4", CubeListBuilder.create().texOffs(0, 8).addBox(-2.0F, 0.0F, 0.0F, 4.0F, 2.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -2.0F, 0.0F, 0.5236F, 0.0F, 0.0F));
 
-        PartDefinition left_backwing = body.addOrReplaceChild("left_backwing", CubeListBuilder.create().texOffs(12, 15).addBox(0.0F, -1.0F, -1.0F, 8.0F, 0.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -1.5F, 2.0F));
+        PartDefinition left_wing = Body.addOrReplaceChild("left_frontwing", CubeListBuilder.create().texOffs(0, 4).addBox(0.0F, 0.0F, -2.0F, 12.0F, 0.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -2.0F, -2.0F));
 
-        PartDefinition right_backwing = body.addOrReplaceChild("right_backwing", CubeListBuilder.create().texOffs(12, 13).addBox(-8.0F, -1.0F, -1.0F, 8.0F, 0.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -1.5F, 2.0F));
+        PartDefinition left_backwing = Body.addOrReplaceChild("left_backwing", CubeListBuilder.create().texOffs(24, 0).addBox(0.0F, 0.0F, -2.0F, 8.0F, 0.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -2.0F, 2.0F));
 
-        PartDefinition right_fly = body.addOrReplaceChild("right_fly", CubeListBuilder.create().texOffs(12, 0).addBox(-12.0F, -1.0F, -2.0F, 12.0F, 0.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -1.5F, -2.0F));
+        PartDefinition right_backwing = Body.addOrReplaceChild("right_backwing", CubeListBuilder.create().texOffs(10, 8).addBox(-8.0F, 0.0F, -2.0F, 8.0F, 0.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -2.0F, 2.0F));
+
+        PartDefinition right_fly = Body.addOrReplaceChild("right_frontwing", CubeListBuilder.create().texOffs(0, 0).addBox(-12.0F, 0.0F, -2.0F, 12.0F, 0.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -2.0F, -2.0F));
 
         return LayerDefinition.create(meshdefinition, 64, 64);
     }
@@ -59,6 +76,21 @@ public class DragonflyModel <T extends Dragonfly> extends HierarchicalModel<T> {
 
     @Override
     public void setupAnim(T entity, float f, float g, float h, float i, float j) {
+        float k = h * 120.32113F * 0.017453292F;
+        this.rightFrontWing.yRot = 0.0F;
+        this.rightFrontWing.zRot = Mth.cos(k) * 3.1415927F * 0.15F;
+        this.leftFrontWing.xRot = this.rightFrontWing.xRot;
+        this.leftFrontWing.yRot = this.rightFrontWing.yRot;
+        this.leftFrontWing.zRot = -this.rightFrontWing.zRot;
 
+        this.rightBackWing.yRot = 0.0f;
+        this.rightBackWing.zRot = -Mth.cos(k) * 3.1415927F * 0.15F;
+        this.leftBackWing.xRot = this.rightBackWing.xRot;
+        this.leftBackWing.yRot = this.rightBackWing.yRot;
+        this.leftBackWing.zRot = -this.rightBackWing.zRot;
+
+        this.body.xRot = 0.0F;
+        this.body.yRot = 0.0F;
+        this.body.zRot = 0.0F;
     }
 }

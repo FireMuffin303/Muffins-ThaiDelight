@@ -44,7 +44,7 @@ public class Dragonfly extends FlyingMob implements VariantHolder<Dragonfly.Drag
     }
 
     public static AttributeSupplier.Builder createAttributes() {
-        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 4.0D).add(Attributes.FLYING_SPEED, 0.9100000238418579D).add(Attributes.MOVEMENT_SPEED, 0.50000001192092896D).add(Attributes.FOLLOW_RANGE, 48.0D);
+        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 4.0D).add(Attributes.FLYING_SPEED, 0.7500000238418579D).add(Attributes.MOVEMENT_SPEED, 0.40000001192092896D);
     }
 
     @Override

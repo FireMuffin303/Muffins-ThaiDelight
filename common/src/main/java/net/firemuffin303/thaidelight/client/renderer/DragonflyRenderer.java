@@ -10,7 +10,7 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 
 public class DragonflyRenderer extends MobRenderer<Dragonfly, DragonflyModel<Dragonfly>> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(ThaiDelight.MOD_ID,"textures/entity/dragonfly/dragonfly.png");
+    //private static final ResourceLocation TEXTURE = new ResourceLocation(ThaiDelight.MOD_ID,"textures/entity/dragonfly/%s.png");
 
     public DragonflyRenderer(EntityRendererProvider.Context context) {
         super(context, new DragonflyModel<>(context.bakeLayer(DragonflyModel.LAYER)), 0.4f);
@@ -18,6 +18,6 @@ public class DragonflyRenderer extends MobRenderer<Dragonfly, DragonflyModel<Dra
 
     @Override
     public ResourceLocation getTextureLocation(Dragonfly entity) {
-        return TEXTURE;
+        return new ResourceLocation(ThaiDelight.MOD_ID,String.format("textures/entity/dragonfly/%s.png",entity.getVariant().getName()));
     }
 }

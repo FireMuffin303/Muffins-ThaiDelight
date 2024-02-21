@@ -8,7 +8,7 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 
 public class CrabRenderer extends MobRenderer<FlowerCrabEntity, FlowerCrabModel<FlowerCrabEntity>> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(ThaiDelight.MOD_ID,"textures/entity/crab/crab.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(ThaiDelight.MOD_ID,"textures/entity/flower_crab/flower_crab.png");
 
 
     public CrabRenderer(EntityRendererProvider.Context context) {
