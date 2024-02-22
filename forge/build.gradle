@@ -55,6 +55,9 @@ dependencies {
     modLocalRuntime("maven.modrinth:crabbers-delight:Omdrcn17")
     modLocalRuntime("maven.modrinth:geckolib:pyB0jIsx")
     modLocalRuntime("maven.modrinth:embeddium:pdLkrlJc")
+
+    modLocalRuntime("maven.modrinth:fish-of-thieves:MK9xQTXT")
+    modLocalRuntime("maven.modrinth:cloth-config:nr1znv5v")
 }
 
 processResources {

@@ -45,7 +45,13 @@ dependencies {
     modImplementation("maven.modrinth:farmers-delight-fabric:DzmY31OQ")
 
     // at runtime, use the full JEI jar for Fabric
+    modRuntimeOnly("maven.modrinth:emi:KzxcdPKP")
+    modRuntimeOnly("maven.modrinth:emitrades:kWMqVWTm")
     modRuntimeOnly("mezz.jei:jei-${minecraft_version}-fabric:${jei_version}")
+
+
+    modRuntimeOnly("maven.modrinth:sodium:OkwCNtFH")
+    modRuntimeOnly("maven.modrinth:modmenu:lEkperf6")
 }
 
 processResources {

@@ -3,6 +3,7 @@ package net.firemuffin303.thaidelight.common.entity;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.firemuffin303.thaidelight.common.registry.ModEntityTypes;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
+import net.firemuffin303.thaidelight.common.registry.ModTags;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -44,7 +45,6 @@ public class FlowerCrabEntity extends Animal implements Bucketable {
     private static final Ingredient FOOD_ITEMS;
     private static final EntityDataAccessor<Boolean> LAYING_EGG;
     private static final EntityDataAccessor<Boolean> FROM_BUCKET;
-    private static final EntityDataAccessor<Boolean> DANCING;
 
     public final AnimationState idleAnimationState = new AnimationState();
     public final AnimationState danceAnimationState = new AnimationState();
@@ -87,7 +87,6 @@ public class FlowerCrabEntity extends Animal implements Bucketable {
         this.entityData.define(HAS_EGG, false);
         this.entityData.define(LAYING_EGG, false);
         this.entityData.define(FROM_BUCKET, false);
-        this.entityData.define(DANCING, false);
 
     }
 
@@ -184,9 +183,8 @@ public class FlowerCrabEntity extends Animal implements Bucketable {
     static {
         HAS_EGG = SynchedEntityData.defineId(FlowerCrabEntity.class, EntityDataSerializers.BOOLEAN);
         LAYING_EGG = SynchedEntityData.defineId(FlowerCrabEntity.class, EntityDataSerializers.BOOLEAN);
-        FOOD_ITEMS = Ingredient.of(Items.COD, Items.SALMON, Items.TROPICAL_FISH);
+        FOOD_ITEMS = Ingredient.of(ModTags.FLOWER_CRAB_FOOD);
         FROM_BUCKET = SynchedEntityData.defineId(FlowerCrabEntity.class, EntityDataSerializers.BOOLEAN);
-        DANCING = SynchedEntityData.defineId(FlowerCrabEntity.class, EntityDataSerializers.BOOLEAN);
     }
 
     @Override

@@ -1,12 +1,15 @@
 package net.firemuffin303.thaidelight.common.entity;
 
+import net.firemuffin303.thaidelight.common.registry.ModEntityTypes;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
+import net.firemuffin303.thaidelight.common.registry.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.ByIdMap;
@@ -18,26 +21,30 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.MoveControl;
-import net.minecraft.world.entity.ai.goal.FloatGoal;
-import net.minecraft.world.entity.ai.goal.Goal;
-import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.animal.FlyingAnimal;
 import net.minecraft.world.entity.animal.axolotl.Axolotl;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.EnumSet;
 import java.util.function.IntFunction;
 
-public class Dragonfly extends FlyingMob implements VariantHolder<Dragonfly.DragonflyVariant>, Bottleable {
-
+public class Dragonfly extends Animal implements VariantHolder<Dragonfly.DragonflyVariant>, Bottleable, FlyingAnimal {
+    private static final Ingredient FOOD_ITEMS = Ingredient.of(ModTags.DRAGONFLY_FOOD);
     private static final EntityDataAccessor<Integer> DATA_VARIANT = SynchedEntityData.defineId(Dragonfly.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> FROM_BOTTLE = SynchedEntityData.defineId(Dragonfly.class,EntityDataSerializers.BOOLEAN);
 
-    public Dragonfly(EntityType<? extends FlyingMob> entityType, Level level) {
+    public Dragonfly(EntityType<? extends Animal> entityType, Level level) {
         super(entityType, level);
         this.moveControl = new DragonflyMoveControl(this);
 
@@ -45,6 +52,44 @@ public class Dragonfly extends FlyingMob implements VariantHolder<Dragonfly.Drag
 
     public static AttributeSupplier.Builder createAttributes() {
         return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 4.0D).add(Attributes.FLYING_SPEED, 0.7500000238418579D).add(Attributes.MOVEMENT_SPEED, 0.40000001192092896D);
+    }
+
+    @Override
+    public void travel(Vec3 vec3) {
+        if (this.isControlledByLocalInstance()) {
+            if (this.isInWater()) {
+                this.moveRelative(0.02F, vec3);
+                this.move(MoverType.SELF, this.getDeltaMovement());
+                this.setDeltaMovement(this.getDeltaMovement().scale(0.800000011920929D));
+            } else if (this.isInLava()) {
+                this.moveRelative(0.02F, vec3);
+                this.move(MoverType.SELF, this.getDeltaMovement());
+                this.setDeltaMovement(this.getDeltaMovement().scale(0.5D));
+            } else {
+                float f = 0.91F;
+                if (this.onGround()) {
+                    f = this.level().getBlockState(this.getBlockPosBelowThatAffectsMyMovement()).getBlock().getFriction() * 0.91F;
+                }
+
+                float g = 0.16277137F / (f * f * f);
+                f = 0.91F;
+                if (this.onGround()) {
+                    f = this.level().getBlockState(this.getBlockPosBelowThatAffectsMyMovement()).getBlock().getFriction() * 0.91F;
+                }
+
+                this.moveRelative(this.onGround() ? 0.1F * g : 0.02F, vec3);
+                this.move(MoverType.SELF, this.getDeltaMovement());
+                this.setDeltaMovement(this.getDeltaMovement().scale((double)f));
+            }
+        }
+
+        this.calculateEntityAnimation(false);
+    }
+
+    @Nullable
+    @Override
+    public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
+        return ModEntityTypes.DRAGONFLY.create(serverLevel);
     }
 
     @Override
@@ -56,13 +101,15 @@ public class Dragonfly extends FlyingMob implements VariantHolder<Dragonfly.Drag
 
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
+        this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
+        this.goalSelector.addGoal(3, new TemptGoal(this, 1.0D, FOOD_ITEMS, false));
         this.goalSelector.addGoal(7, new DragonflyLookGoal(this));
         this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
         this.goalSelector.addGoal(8, new FlyWanderGoal(this));
     }
 
     @Override
-    protected InteractionResult mobInteract(Player player, InteractionHand interactionHand) {
+    public InteractionResult mobInteract(Player player, InteractionHand interactionHand) {
         return Bottleable.tryBottle(player,interactionHand,this).orElse(super.mobInteract(player,interactionHand));
     }
 
@@ -71,6 +118,14 @@ public class Dragonfly extends FlyingMob implements VariantHolder<Dragonfly.Drag
         super.addAdditionalSaveData(compoundTag);
         compoundTag.putInt("Variant", this.getVariant().getId());
         compoundTag.putBoolean("FromBottle",this.entityData.get(FROM_BOTTLE));
+    }
+
+    @Override
+    protected void ageBoundaryReached() {
+        super.ageBoundaryReached();
+        if (!this.isBaby() && this.level().getGameRules().getBoolean(GameRules.RULE_DOMOBLOOT)) {
+            this.spawnAtLocation(Items.PHANTOM_MEMBRANE, 1);
+        }
     }
 
     @Override
@@ -97,6 +152,11 @@ public class Dragonfly extends FlyingMob implements VariantHolder<Dragonfly.Drag
     @Override
     public MobType getMobType() {
         return MobType.ARTHROPOD;
+    }
+
+    @Override
+    public boolean isFood(ItemStack itemStack) {
+        return FOOD_ITEMS.test(itemStack);
     }
 
     @Override
@@ -131,6 +191,14 @@ public class Dragonfly extends FlyingMob implements VariantHolder<Dragonfly.Drag
     public SoundEvent getBottleFillSound() {
         return SoundEvents.BOTTLE_FILL;
     }
+
+    @Override
+    public boolean isFlying() {
+        return !this.onGround();
+    }
+
+    @Override
+    public boolean onClimbable() { return false; }
 
     static class DragonflyMoveControl extends MoveControl{
         private final Dragonfly dragonfly;
