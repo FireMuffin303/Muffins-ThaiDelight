@@ -5,6 +5,8 @@
     "minecraft:salmon",
     "minecraft:tropical_fish",
     "farmersdelight:cod_slice",
-    "farmersdelight:salmon_slice"
+    "farmersdelight:salmon_slice",
+    "#forge:raw_fishes",
+    "#c:raw_fishes"
   ]
 }

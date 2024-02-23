@@ -1,7 +1,10 @@
 package net.firemuffin303.thaidelight.client.model;
 
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.firemuffin303.thaidelight.ThaiDelight;
 import net.firemuffin303.thaidelight.common.entity.Dragonfly;
+import net.minecraft.client.model.AgeableHierarchicalModel;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
@@ -92,5 +95,19 @@ public class DragonflyModel <T extends Dragonfly> extends HierarchicalModel<T> {
         this.body.xRot = 0.0F;
         this.body.yRot = 0.0F;
         this.body.zRot = 0.0F;
+    }
+
+    @Override
+    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int i, int j, float f, float g, float h, float k) {
+        if (this.young) {
+            poseStack.pushPose();
+            poseStack.scale(0.5f,0.5f,0.5f);
+            poseStack.translate(0.0F, 1.5f, 0.0F);
+            this.root().render(poseStack, vertexConsumer, i, j, f, g, h, k);
+            poseStack.popPose();
+        } else {
+            this.root().render(poseStack, vertexConsumer, i, j, f, g, h, k);
+        }
+
     }
 }

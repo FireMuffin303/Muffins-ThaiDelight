@@ -15,23 +15,36 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.ByIdMap;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.control.LookControl;
 import net.minecraft.world.entity.ai.control.MoveControl;
 import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
+import net.minecraft.world.entity.ai.navigation.PathNavigation;
+import net.minecraft.world.entity.ai.util.AirAndWaterRandomPos;
+import net.minecraft.world.entity.ai.util.HoverRandomPos;
 import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.animal.Bee;
 import net.minecraft.world.entity.animal.FlyingAnimal;
 import net.minecraft.world.entity.animal.axolotl.Axolotl;
+import net.minecraft.world.entity.animal.frog.Tadpole;
+import net.minecraft.world.entity.monster.AbstractSkeleton;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
@@ -47,49 +60,42 @@ public class Dragonfly extends Animal implements VariantHolder<Dragonfly.Dragonf
     public Dragonfly(EntityType<? extends Animal> entityType, Level level) {
         super(entityType, level);
         this.moveControl = new DragonflyMoveControl(this);
+        this.lookControl = new LookControl(this);
+        this.setPathfindingMalus(BlockPathTypes.FENCE,-1.0f);
+        this.setPathfindingMalus(BlockPathTypes.COCOA,-1.0f);
+        this.setPathfindingMalus(BlockPathTypes.WATER,-1.0f);
+        this.setPathfindingMalus(BlockPathTypes.LAVA,-1.0f);
 
     }
 
     public static AttributeSupplier.Builder createAttributes() {
-        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 4.0D).add(Attributes.FLYING_SPEED, 0.7500000238418579D).add(Attributes.MOVEMENT_SPEED, 0.40000001192092896D);
+        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 4.0D).add(Attributes.FLYING_SPEED, 0.6500000238418579D).add(Attributes.MOVEMENT_SPEED, 0.40000001192092896D).add(Attributes.ATTACK_DAMAGE, 2.0D);
     }
 
     @Override
-    public void travel(Vec3 vec3) {
-        if (this.isControlledByLocalInstance()) {
-            if (this.isInWater()) {
-                this.moveRelative(0.02F, vec3);
-                this.move(MoverType.SELF, this.getDeltaMovement());
-                this.setDeltaMovement(this.getDeltaMovement().scale(0.800000011920929D));
-            } else if (this.isInLava()) {
-                this.moveRelative(0.02F, vec3);
-                this.move(MoverType.SELF, this.getDeltaMovement());
-                this.setDeltaMovement(this.getDeltaMovement().scale(0.5D));
-            } else {
-                float f = 0.91F;
-                if (this.onGround()) {
-                    f = this.level().getBlockState(this.getBlockPosBelowThatAffectsMyMovement()).getBlock().getFriction() * 0.91F;
-                }
-
-                float g = 0.16277137F / (f * f * f);
-                f = 0.91F;
-                if (this.onGround()) {
-                    f = this.level().getBlockState(this.getBlockPosBelowThatAffectsMyMovement()).getBlock().getFriction() * 0.91F;
-                }
-
-                this.moveRelative(this.onGround() ? 0.1F * g : 0.02F, vec3);
-                this.move(MoverType.SELF, this.getDeltaMovement());
-                this.setDeltaMovement(this.getDeltaMovement().scale((double)f));
+    protected PathNavigation createNavigation(Level level) {
+        FlyingPathNavigation flyingPathNavigation = new FlyingPathNavigation(this,level){
+            public boolean isStableDestination(BlockPos blockPos) {
+                return !this.level.getBlockState(blockPos.below()).isAir();
             }
-        }
+        };
 
-        this.calculateEntityAnimation(false);
+        flyingPathNavigation.setCanOpenDoors(false);
+        flyingPathNavigation.setCanFloat(false);
+        flyingPathNavigation.setCanPassDoors(true);
+        return flyingPathNavigation;
     }
 
     @Nullable
     @Override
     public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
-        return ModEntityTypes.DRAGONFLY.create(serverLevel);
+        Dragonfly dragonfly = ModEntityTypes.DRAGONFLY.create(serverLevel);
+        if(dragonfly != null){
+            dragonfly.setVariant(this.random.nextBoolean() ? this.getVariant() : ((Dragonfly)ageableMob ).getVariant());
+            dragonfly.setPersistenceRequired();
+        }
+
+        return dragonfly;
     }
 
     @Override
@@ -103,14 +109,19 @@ public class Dragonfly extends Animal implements VariantHolder<Dragonfly.Dragonf
         this.goalSelector.addGoal(0, new FloatGoal(this));
         this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
         this.goalSelector.addGoal(3, new TemptGoal(this, 1.0D, FOOD_ITEMS, false));
-        this.goalSelector.addGoal(7, new DragonflyLookGoal(this));
         this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
-        this.goalSelector.addGoal(8, new FlyWanderGoal(this));
+        this.goalSelector.addGoal(8, new DragonflyWanderGoal());
+
+
     }
 
     @Override
     public InteractionResult mobInteract(Player player, InteractionHand interactionHand) {
         return Bottleable.tryBottle(player,interactionHand,this).orElse(super.mobInteract(player,interactionHand));
+    }
+
+    public float getWalkTargetValue(BlockPos blockPos, LevelReader levelReader) {
+        return levelReader.getBlockState(blockPos).isAir() ? 10.0F : 0.0F;
     }
 
     @Override
@@ -155,6 +166,19 @@ public class Dragonfly extends Animal implements VariantHolder<Dragonfly.Dragonf
     }
 
     @Override
+    protected void pushEntities() {
+    }
+
+    @Override
+    public boolean isPushable() {
+        return false;
+    }
+
+    @Override
+    protected void doPush(Entity entity) {
+    }
+
+    @Override
     public boolean isFood(ItemStack itemStack) {
         return FOOD_ITEMS.test(itemStack);
     }
@@ -174,12 +198,14 @@ public class Dragonfly extends Animal implements VariantHolder<Dragonfly.Dragonf
         Bottleable.copyDataToStack(this,stack);
         CompoundTag compoundTag = stack.getOrCreateTag();
         compoundTag.putInt("Variant",this.getVariant().getId());
+        compoundTag.putInt("Age",this.age);
     }
 
     @Override
     public void copyDataFromNbt(CompoundTag nbt) {
         Bottleable.copyDataFromNbt(this,nbt);
         this.setVariant(DragonflyVariant.byId(nbt.getInt("Variant")));
+        this.setAge(nbt.getInt("Age"));
     }
 
     @Override
@@ -200,6 +226,16 @@ public class Dragonfly extends Animal implements VariantHolder<Dragonfly.Dragonf
     @Override
     public boolean onClimbable() { return false; }
 
+    @Override
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor serverLevelAccessor, DifficultyInstance difficultyInstance, MobSpawnType mobSpawnType, @Nullable SpawnGroupData spawnGroupData, @Nullable CompoundTag compoundTag) {
+        if (mobSpawnType == MobSpawnType.BUCKET) {
+            return (SpawnGroupData) spawnGroupData;
+        }
+        RandomSource randomSource = serverLevelAccessor.getRandom();
+        this.setVariant(DragonflyVariant.byId(randomSource.nextInt(0,4)));
+        return super.finalizeSpawn(serverLevelAccessor, difficultyInstance,mobSpawnType,spawnGroupData, compoundTag);
+    }
+
     static class DragonflyMoveControl extends MoveControl{
         private final Dragonfly dragonfly;
 
@@ -211,29 +247,38 @@ public class Dragonfly extends Animal implements VariantHolder<Dragonfly.Dragonf
 
         public void tick(){
             if (this.operation == Operation.MOVE_TO) {
-                Vec3 vec3 = new Vec3(this.wantedX - dragonfly.getX(), this.wantedY - dragonfly.getY(), this.wantedZ - dragonfly.getZ());
-                double d = vec3.length();
-                vec3 = vec3.normalize();
-                if (this.canReach(vec3, Mth.ceil(d))) {
-                    dragonfly.setDeltaMovement(dragonfly.getDeltaMovement().add(vec3.scale(0.05d)));
-                }else {
-                    this.operation = Operation.WAIT;
+                this.operation = Operation.WAIT;
+
+                this.mob.setNoGravity(true);
+
+                double d = this.wantedX - this.mob.getX();
+                double e = this.wantedY - this.mob.getY();
+                double f = this.wantedZ - this.mob.getZ();
+                double g = d * d + e * e + f * f;
+                if (g < 2.500000277905201E-7D) {
+                    this.mob.setYya(0.0F);
+                    this.mob.setZza(0.0F);
+                    return;
                 }
+                float h = (float)(Mth.atan2(f, d) * 57.2957763671875D) - 90.0F;
+                this.mob.setYRot(this.rotlerp(this.mob.getYRot(), h, 90.0F));
+
+                float i = (float) (this.mob.getAttributeBaseValue(Attributes.FLYING_SPEED));
+                this.mob.setSpeed(i);
+
+                double j = Math.sqrt(d * d + f * f);
+                if (Math.abs(e) > 9.999999747378752E-6D || Math.abs(j) > 9.999999747378752E-6D) {
+                    float k = (float)(-(Mth.atan2(e, j) * 57.2957763671875D));
+                    this.mob.setXRot(this.rotlerp(this.mob.getXRot(), k, 10));
+                    this.mob.setYya(e > 0.0D ? i : -i);
+                }
+
+            }else{
+                this.mob.setYya(0.0F);
+                this.mob.setZza(0.0F);
             }
         }
 
-        private boolean canReach(Vec3 vec3, int i) {
-            AABB aABB = dragonfly.getBoundingBox();
-
-            for(int j = 1; j < i; ++j) {
-                aABB = aABB.move(vec3);
-                if (!this.dragonfly.level().noCollision(this.dragonfly, aABB)) {
-                    return false;
-                }
-            }
-
-            return true;
-        }
     }
 
     static class FlyWanderGoal extends Goal {
@@ -263,10 +308,11 @@ public class Dragonfly extends Animal implements VariantHolder<Dragonfly.Dragonf
 
         public void start() {
             RandomSource randomSource = this.dragonfly.getRandom();
-            double d = this.dragonfly.getX() + (double)((randomSource.nextFloat() * 2.0F - 1.0F) * 2);
+            double d = this.dragonfly.getX() + (double)((randomSource.nextFloat() * 2.0F - 1.0F) * 3);
             double e = this.dragonfly.getY() + (double)((randomSource.nextFloat() * 2.0F - 1.0F));
-            double f = this.dragonfly.getZ() + (double)((randomSource.nextFloat() * 2.0F - 1.0F) * 2);
-            this.dragonfly.getMoveControl().setWantedPosition(d, e, f, 1.0D);
+            double f = this.dragonfly.getZ() + (double)((randomSource.nextFloat() * 2.0F - 1.0F) * 3);
+
+            this.dragonfly.navigation.moveTo(d, e, f, 1.0D);
         }
     }
 
@@ -289,6 +335,38 @@ public class Dragonfly extends Animal implements VariantHolder<Dragonfly.Dragonf
                 this.dragonfly.setYRot(-((float)Mth.atan2(vec3.x, vec3.z)) * 57.295776F);
                 this.dragonfly.yBodyRot = this.dragonfly.getYRot();
             }
+        }
+    }
+
+    class DragonflyWanderGoal extends Goal {
+        private static final int WANDER_THRESHOLD = 22;
+
+        DragonflyWanderGoal() {
+            this.setFlags(EnumSet.of(Flag.MOVE));
+        }
+
+        public boolean canUse() {
+            return Dragonfly.this.navigation.isDone() && Dragonfly.this.random.nextInt(10) == 0;
+        }
+
+        public boolean canContinueToUse() {
+            return Dragonfly.this.navigation.isInProgress();
+        }
+
+        public void start() {
+            Vec3 vec3 = this.findPos();
+            if (vec3 != null) {
+                Dragonfly.this.navigation.moveTo(Dragonfly.this.navigation.createPath(BlockPos.containing(vec3), 1), 1.2D);
+            }
+        }
+
+        @Nullable
+        private Vec3 findPos() {
+            Vec3 vec32;
+            vec32 = Dragonfly.this.getViewVector(0.0F);
+
+            Vec3 vec33 = HoverRandomPos.getPos(Dragonfly.this, 8, 2, vec32.x, vec32.z, 1.5707964F, 3, 1);
+            return vec33 != null ? vec33 : AirAndWaterRandomPos.getPos(Dragonfly.this, 8, 4, -2, vec32.x, vec32.z, 1.5707963705062866D);
         }
     }
 

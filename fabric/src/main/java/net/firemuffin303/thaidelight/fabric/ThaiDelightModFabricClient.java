@@ -40,7 +40,8 @@ public class ThaiDelightModFabricClient implements ClientModInitializer {
                 ModBlocks.WILD_PEPPER_CROP,
                 ModBlocks.PEPPER_CROP,
                 ModBlocks.PAPAYA,
-                ModBlocks.PAPAYA_SEEDS);
+                ModBlocks.PAPAYA_SEEDS,
+                ModBlocks.CRAB_EGG);
 
 
     }
