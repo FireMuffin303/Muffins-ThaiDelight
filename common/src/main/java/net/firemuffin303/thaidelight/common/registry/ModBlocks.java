@@ -60,7 +60,8 @@ public class ModBlocks {
     public static final Block PAPAYA_LEAVES = leaves(SoundType.AZALEA_LEAVES);
 
     public static final Block PAPAYA = new PapayaBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).randomTicks().strength(0.2F, 3.0F).sound(SoundType.WOOD).noOcclusion().pushReaction(PushReaction.DESTROY));
-    public static final Block PAPAYA_SEEDS = new ModSaplingBlock(new PapayaTreeGrower(), BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY));
+    public static final Block PAPAYA_SAPLING = new ModSaplingBlock(new PapayaTreeGrower(), BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY));
+    public static final Block PAPAYA_CROPS = new PapayaCropBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY));
 
 
     public static void init(){
@@ -92,7 +93,8 @@ public class ModBlocks {
 
 
         register("papaya",PAPAYA);
-        registerWithItem("papaya_seeds", PAPAYA_SEEDS);
+        registerWithItem("papaya_sapling", PAPAYA_SAPLING);
+        register("papaya_crop", PAPAYA_CROPS);
 
         //Feast
         registerWithItem("somtam_feast",SOMTAM_FEAST);

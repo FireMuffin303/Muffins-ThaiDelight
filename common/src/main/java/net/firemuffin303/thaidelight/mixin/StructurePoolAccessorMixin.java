@@ -1,4 +1,4 @@
-package net.firemuffin303.thaidelight.fabric.mixin;
+package net.firemuffin303.thaidelight.mixin;
 
 import com.mojang.datafixers.util.Pair;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;

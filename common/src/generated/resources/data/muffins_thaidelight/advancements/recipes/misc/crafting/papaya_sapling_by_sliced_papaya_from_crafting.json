@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:crafting/papaya_seeds_by_sliced_papaya_from_crafting"
+        "recipe": "minecraft:crafting/papaya_sapling_by_sliced_papaya_from_crafting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:crafting/papaya_seeds_by_sliced_papaya_from_crafting"
+      "minecraft:crafting/papaya_sapling_by_sliced_papaya_from_crafting"
     ]
   },
   "sends_telemetry_event": false

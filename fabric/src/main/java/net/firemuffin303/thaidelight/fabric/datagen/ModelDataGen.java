@@ -53,13 +53,17 @@ public class ModelDataGen extends FabricModelProvider {
                         .with(createHorizontalFacingDispatchAlt()));
 
 
+
         blockStateModelGenerator.createCrossBlockWithDefaultItem(ModBlocks.WILD_PEPPER_CROP, BlockModelGenerators.TintState.NOT_TINTED);
-        blockStateModelGenerator.createCrossBlock(ModBlocks.PAPAYA_SEEDS,
-                BlockModelGenerators.TintState.NOT_TINTED,
-                new TextureMapping().put(TextureSlot.CROSS,new ResourceLocation(ThaiDelight.MOD_ID,"block/papaya_sapling")));
+        blockStateModelGenerator.createCrossBlockWithDefaultItem(ModBlocks.PAPAYA_SAPLING, BlockModelGenerators.TintState.NOT_TINTED);
 
         createPepperCrop(blockStateModelGenerator);
         createLimeCrop(blockStateModelGenerator);
+
+        blockStateModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.PAPAYA_CROPS).with(PropertyDispatch.property(BlockStateProperties.AGE_1).generate((integer) -> {
+            return net.minecraft.data.models.blockstates.Variant.variant().with(VariantProperties.MODEL,
+                    blockStateModelGenerator.createSuffixedVariant(ModBlocks.PAPAYA_CROPS, "_stage" + integer, new ModelTemplate(Optional.of(new ResourceLocation(ThaiDelight.MOD_ID,"block/crop_cross")),Optional.empty(),TextureSlot.CROSS), TextureMapping::cross));
+        })));
     }
 
     @Override
@@ -88,7 +92,7 @@ public class ModelDataGen extends FabricModelProvider {
         itemModelGenerator.generateFlatItem(ModItems.SLICED_PAPAYA, ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.RAW_PAPAYA, ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.RAW_PAPAYA_SLICE,ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(Item.byBlock(ModBlocks.PAPAYA_SEEDS),ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.PAPAYA_SEEDS,ModelTemplates.FLAT_ITEM);
 
         itemModelGenerator.generateFlatItem(ModItems.PAPAYA_JUICE, ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.LIME_JUICE, ModelTemplates.FLAT_ITEM);
@@ -119,14 +123,25 @@ public class ModelDataGen extends FabricModelProvider {
 
     private static void createLimeCrop( BlockModelGenerators blockModelGenerator){
         blockModelGenerator.createCrossBlockWithDefaultItem(ModBlocks.LIME_SAPLING, BlockModelGenerators.TintState.NOT_TINTED);
-        blockModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.LIME_CROP).with(PropertyDispatch.property(BlockStateProperties.AGE_2).generate((integer) -> {
+       /* blockModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.LIME_CROP).with(PropertyDispatch.property(BlockStateProperties.AGE_2).generate((integer) -> {
 
             return net.minecraft.data.models.blockstates.Variant.variant().with(VariantProperties.MODEL,
                     blockModelGenerator.createSuffixedVariant(ModBlocks.LIME_CROP, "_stage" + integer, ModelTemplates.AZALEA, (resourceLocation -> {
                         return new TextureMapping().put(TextureSlot.SIDE, getBlockTexture(ModBlocks.LIME_CROP, "_side_stage" + integer))
                                 .put(TextureSlot.TOP, getBlockTexture(ModBlocks.LIME_CROP, "_top_stage" + integer));
                     })));
-        })));
+        })));*/
+
+        blockModelGenerator.blockStateOutput.accept(
+                MultiVariantGenerator.multiVariant(ModBlocks.LIME_CROP)
+                        .with(PropertyDispatch.property(BlockStateProperties.AGE_2)
+                                .select(0, net.minecraft.data.models.blockstates.Variant.variant()
+                                        .with(VariantProperties.MODEL, ModelLocationUtils.getModelLocation(ModBlocks.LIME_CROP, "_stage0")))
+                                .select(1, net.minecraft.data.models.blockstates.Variant.variant()
+                                        .with(VariantProperties.MODEL, ModelLocationUtils.getModelLocation(ModBlocks.LIME_CROP, "_stage1")))
+                                .select(2, net.minecraft.data.models.blockstates.Variant.variant()
+                                        .with(VariantProperties.MODEL, ModelLocationUtils.getModelLocation(ModBlocks.LIME_CROP, "_stage2")))));
+
     }
 
     private static void createCubeAll(Block block, BlockModelGenerators blockModelGenerator){

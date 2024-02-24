@@ -47,7 +47,7 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "muffins_thaidelight:papaya_seeds"
+          "name": "muffins_thaidelight:papaya_sapling"
         },
         {
           "type": "minecraft:item",

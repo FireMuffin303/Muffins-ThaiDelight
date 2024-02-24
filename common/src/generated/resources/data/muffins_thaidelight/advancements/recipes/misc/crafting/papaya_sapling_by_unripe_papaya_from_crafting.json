@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_papaya": {
+    "has_raw_papaya": {
       "conditions": {
         "items": [
           {
             "items": [
-              "muffins_thaidelight:papaya"
+              "muffins_thaidelight:raw_papaya"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:crafting/papaya_seeds_by_papaya_from_crafting"
+        "recipe": "minecraft:crafting/papaya_sapling_by_unripe_papaya_from_crafting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_papaya",
+      "has_raw_papaya",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:crafting/papaya_seeds_by_papaya_from_crafting"
+      "minecraft:crafting/papaya_sapling_by_unripe_papaya_from_crafting"
     ]
   },
   "sends_telemetry_event": false

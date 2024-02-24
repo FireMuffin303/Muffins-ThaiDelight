@@ -70,6 +70,13 @@ public class ModItems {
     public static final Item SLICED_PAPAYA = new Item(new Item.Properties().food(ModFood.SLICED_PAPAYA));
     public static final Item RAW_PAPAYA = new Item(new Item.Properties());
     public static final Item RAW_PAPAYA_SLICE = new Item(new Item.Properties().food(ModFood.SLICED_UNRIPE_PAPAYA));
+    public static final Item PAPAYA_SEEDS = new ItemNameBlockItem(ModBlocks.PAPAYA_CROPS,new Item.Properties()){
+        @Override
+        public void registerBlocks(Map<Block, Item> map, Item item) {
+            super.registerBlocks(map, item);
+            map.put(ModBlocks.PAPAYA_CROPS,item);
+        }
+    };
 
 
     //Equipment
@@ -104,6 +111,7 @@ public class ModItems {
         register("papaya_slice",SLICED_PAPAYA);
         register("raw_papaya", RAW_PAPAYA);
         register("raw_papaya_slice", RAW_PAPAYA_SLICE);
+        register("papaya_seeds", PAPAYA_SEEDS);
     }
 
 

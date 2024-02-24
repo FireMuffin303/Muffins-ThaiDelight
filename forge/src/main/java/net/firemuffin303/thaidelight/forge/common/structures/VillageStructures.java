@@ -1,5 +1,6 @@
 package net.firemuffin303.thaidelight.forge.common.structures;
 
+import net.firemuffin303.thaidelight.ThaiDelight;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -12,12 +13,6 @@ import static vectorwing.farmersdelight.common.world.VillageStructures.addBuildi
 public class VillageStructures {
 
     public static void addNewVillageBuilding(ServerAboutToStartEvent event) {
-        Registry<StructureTemplatePool> templatePools = event.getServer().registryAccess().registry(Registries.TEMPLATE_POOL).get();
-        Registry<StructureProcessorList> processorLists = event.getServer().registryAccess().registry(Registries.PROCESSOR_LIST).get();
-        addBuildingToPool(templatePools, processorLists, new ResourceLocation("minecraft:village/plains/houses"),
-                "muffins_thaidelight:village/plains/houses/small_thai_house_1", 4);
-
-        addBuildingToPool(templatePools, processorLists, new ResourceLocation("minecraft:village/savanna/houses"),
-                "muffins_thaidelight:village/savanna/houses/savanna_small_thai_house_1",4);
+        ThaiDelight.registerStructure(event.getServer());
     }
 }

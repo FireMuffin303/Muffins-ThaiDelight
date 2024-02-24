@@ -4,5 +4,24 @@
       "muffins_thaidelight:mortar/take_result1"
     ],
     "subtitle": "subtitles.ui.mortar.take_result"
+  },
+  "entity.dragonfly.loop": {
+    "sounds": [
+      {
+        "attenuation_distance": 6,
+        "name": "muffins_thaidelight:dragonfly/loop1",
+        "volume": 0.6
+      }
+    ],
+    "subtitle": "subtitles.entity.dragonfly.loop"
+  },
+  "entity.dragonfly.hurt": {
+    "sounds": [
+      "muffins_thaidelight:dragonfly/hurt1",
+      {
+        "name": "muffins_thaidelight:dragonfly/hurt1",
+        "pitch": 1.2
+      }
+    ]
   }
 }

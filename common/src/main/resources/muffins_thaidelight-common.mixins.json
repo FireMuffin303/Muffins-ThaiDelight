@@ -10,7 +10,8 @@
     "FrogFoodAccessor",
     "ParrotTameFoodAccessor",
     "PigFoodAccessor",
-    "SpawnPlacementMixin"
+    "SpawnPlacementMixin",
+    "StructurePoolAccessorMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -2,6 +2,7 @@ package net.firemuffin303.thaidelight.common.entity;
 
 import net.firemuffin303.thaidelight.common.registry.ModEntityTypes;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
+import net.firemuffin303.thaidelight.common.registry.ModSoundEvents;
 import net.firemuffin303.thaidelight.common.registry.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -18,6 +19,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -176,6 +178,18 @@ public class Dragonfly extends Animal implements VariantHolder<Dragonfly.Dragonf
 
     @Override
     protected void doPush(Entity entity) {
+    }
+
+    @Nullable
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return null;
+    }
+
+    @Nullable
+    @Override
+    protected SoundEvent getHurtSound(DamageSource damageSource) {
+        return ModSoundEvents.DRAGONFLY_HURT;
     }
 
     @Override

@@ -1,7 +1,6 @@
 package net.firemuffin303.thaidelight.fabric;
 
 import com.mojang.datafixers.util.Pair;
-import com.nhoryzon.mc.farmersdelight.mixin.PigEntityBreedingMixin;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
@@ -17,14 +16,12 @@ import net.firemuffin303.thaidelight.common.registry.ModConfiguredFeatures;
 import net.firemuffin303.thaidelight.common.registry.ModEntityTypes;
 import net.firemuffin303.thaidelight.fabric.common.registry.ModBlocksFabric;
 import net.firemuffin303.thaidelight.fabric.common.registry.ModItemsFabric;
-import net.firemuffin303.thaidelight.fabric.mixin.StructurePoolAccessorMixin;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.entity.MobCategory;
-import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.structure.pools.SinglePoolElement;
@@ -46,22 +43,17 @@ public class ThaiDelightModFabric implements ModInitializer {
     public static final Logger LOGGER = LoggerFactory.getLogger("Muffin's Thai Delight");
     @Override
     public void onInitialize() {
-        ServerLifecycleEvents.SERVER_STARTING.register((server) ->{
-            LOGGER.info("Registering structure in village type of plains");
-            this.addToStructurePool(server,
-                    new ResourceLocation("minecraft","village/plains/houses"),
-                    new ResourceLocation(ThaiDelight.MOD_ID, "village/plains/houses/small_thai_house_1"),4);
 
-            LOGGER.info("Registering structure in village type of savanna");
-            this.addToStructurePool(server,
-                    new ResourceLocation("minecraft","village/savanna/houses"),
-                    new ResourceLocation(ThaiDelight.MOD_ID,"village/savanna/houses/savanna_small_thai_house_1"),4);
-        });
         ThaiDelight.init();
         ThaiDelight.postInit();
 
         ModBlocksFabric.init();
         ModItemsFabric.init();
+
+        ServerLifecycleEvents.SERVER_STARTING.register((server) ->{
+            LOGGER.info("Registering thaidelight structure in villages");
+            ThaiDelight.registerStructure(server);
+        });
 
         FabricDefaultAttributeRegistry.register(ModEntityTypes.FLOWER_CRAB, FlowerCrabEntity.createAttributes());
         FabricDefaultAttributeRegistry.register(ModEntityTypes.DRAGONFLY, Dragonfly.createAttributes());
@@ -118,24 +110,4 @@ public class ThaiDelightModFabric implements ModInitializer {
             });
         });
     }
-
-    protected void addToStructurePool(MinecraftServer server, ResourceLocation poolIdentifier, ResourceLocation nbtIdentifier, int weight) {
-        Holder.Reference<StructureProcessorList> emptyProcessorList = server.registryAccess().registryOrThrow(Registries.PROCESSOR_LIST)
-                .getHolderOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, new ResourceLocation("minecraft", "empty")));
-
-        server.registryAccess().registryOrThrow(Registries.TEMPLATE_POOL).getOptional(poolIdentifier).ifPresentOrElse((structurePool) -> {
-            SinglePoolElement compostPilePool = (SinglePoolElement) StructurePoolElement.legacy(nbtIdentifier.toString(), emptyProcessorList).apply(StructureTemplatePool.Projection.RIGID);
-            List<Pair<StructurePoolElement, Integer>> elementCounts = new ArrayList(((StructurePoolAccessorMixin)structurePool).getRawTemplates());
-            elementCounts.add(Pair.of(compostPilePool, weight));
-            ((StructurePoolAccessorMixin)structurePool).setRawTemplates(elementCounts);
-            IntStream.range(0, weight).forEach((value) -> {
-                ((StructurePoolAccessorMixin)structurePool).getTemplates().add(compostPilePool);
-                //LOGGER.info( ((StructurePoolAccessorMixin)structurePool).getTemplates().toString());
-
-            });
-        }, () -> {
-            LOGGER.warn("No structure pool found for {}, no compost heaps will be added on it.", poolIdentifier);
-        });
-    }
-
 }
