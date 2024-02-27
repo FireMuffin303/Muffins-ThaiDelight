@@ -31,4 +31,8 @@ public class DragonflyBottleItem extends MobBottleItem{
             list.add(Component.translatable(string).withStyle(chatFormattings));
         }
     }
+
+    public static void setVariant(ItemStack itemStack, Dragonfly.DragonflyVariant variant){
+        itemStack.getOrCreateTag().putInt("Variant",variant.getId());
+    }
 }

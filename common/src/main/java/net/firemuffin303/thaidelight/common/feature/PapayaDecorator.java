@@ -36,13 +36,13 @@ public class PapayaDecorator extends TreeDecorator {
             List<BlockPos> list = context.logs();
             int i = ((BlockPos)list.get(list.size()-1)).getY();
             list.stream().filter((blockPos) -> {
-                return i - blockPos.getY() <= 1;
+                return i - blockPos.getY() <= 2;
             }).forEach((blockPos) -> {
                 Iterator var3 = Direction.Plane.HORIZONTAL.iterator();
 
                 while(var3.hasNext()) {
                     Direction direction = (Direction)var3.next();
-                    if (randomSource.nextFloat() <= 0.50F) {
+                    if (randomSource.nextFloat() <= 0.75F) {
                         Direction direction2 = direction.getOpposite();
                         BlockPos blockPos2 = blockPos.offset(direction2.getStepX(), 0, direction2.getStepZ());
                         if (context.isAir(blockPos2)) {

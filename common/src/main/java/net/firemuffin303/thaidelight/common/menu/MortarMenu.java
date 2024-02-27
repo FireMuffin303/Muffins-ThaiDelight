@@ -152,22 +152,22 @@ public class MortarMenu extends RecipeBookMenu<Container> {
                 this.access.execute((arg3, arg4) -> {
                     itemStack2.getItem().onCraftedBy(itemStack2, arg3, arg);
                 });
-                if (!this.moveItemStackTo(itemStack2, 5, 40, true)) {
+                if (!this.moveItemStackTo(itemStack2, 5, 41, true)) {
                     return ItemStack.EMPTY;
                 }
 
                 slot.onQuickCraft(itemStack2, itemStack);
-            } else if (i >= 6 && i < 40) {
-                if (!this.moveItemStackTo(itemStack2, 1, 6, false)) {
+            } else if (i >= 5 && i < 41) {
+                if (!this.moveItemStackTo(itemStack2, 1, 5, false)) {
                     if (i < 37) {
-                        if (!this.moveItemStackTo(itemStack2, 30, 40, false)) {
+                        if (!this.moveItemStackTo(itemStack2, 30, 41, false)) {
                             return ItemStack.EMPTY;
                         }
                     } else if (!this.moveItemStackTo(itemStack2, 5, 30, false)) {
                         return ItemStack.EMPTY;
                     }
                 }
-            } else if (!this.moveItemStackTo(itemStack2, 5, 40, false)) {
+            } else if (!this.moveItemStackTo(itemStack2, 5, 41, false)) {
                 return ItemStack.EMPTY;
             }
 

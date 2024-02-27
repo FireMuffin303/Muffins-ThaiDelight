@@ -34,10 +34,7 @@ public class PapayaCropBlock extends CropBlock {
     }
 
     public void randomTick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource) {
-        if (randomSource.nextInt(3) != 0) {
-            super.randomTick(blockState, serverLevel, blockPos, randomSource);
-        }
-
+        super.randomTick(blockState, serverLevel, blockPos, randomSource);
     }
 
     public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {

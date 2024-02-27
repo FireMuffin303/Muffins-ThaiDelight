@@ -22,8 +22,8 @@ public class ModItemsForge {
 
     public static class ModFoodForge{
         public static final FoodProperties SOMTAM = new FoodProperties.Builder()
-                .nutrition(18)
-                .saturationMod(0.8F)
+                .nutrition(16)
+                .saturationMod(0.6F)
                 .effect(new MobEffectInstance(ModEffects.NOURISHMENT.get(),6000,0),1.0f).build();
 
 

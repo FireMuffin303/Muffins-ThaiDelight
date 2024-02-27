@@ -36,7 +36,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class MortarBlock extends Block {
     private static final VoxelShape SHAPE;
-    private static final Component CONTAINER_TITLE = Component.translatable("container.mortar");
+    private static final Component CONTAINER_TITLE = Component.translatable("container.muffins_thaidelight.mortar");
 
     public MortarBlock(Properties properties) {
         super(properties);

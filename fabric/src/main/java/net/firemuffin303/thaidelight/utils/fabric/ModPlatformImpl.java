@@ -45,6 +45,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -110,13 +111,17 @@ public class ModPlatformImpl {
         return Registry.register(BuiltInRegistries.TREE_DECORATOR_TYPE,new ResourceLocation(ThaiDelight.MOD_ID,id),new TreeDecoratorType(codec));
     }
 
-    public static CreativeModeTab createCreativeModeTab(ResourceLocation resourceLocation, Supplier<ItemStack> icon, ArrayList<Item> itemList) {
+    public static CreativeModeTab createCreativeModeTab(ResourceLocation resourceLocation, Supplier<ItemStack> icon, ArrayList<ItemLike> itemList) {
         CreativeModeTab creativeModeTab = FabricItemGroup.builder()
                 .title(Component.translatable("itemGroup."+resourceLocation.getNamespace()+"."+resourceLocation.getPath()))
                 .icon(icon)
                 .displayItems((itemDisplayParameters, output) -> itemList.forEach(output::accept)).build();
         CreativeModeTab creativeModeTab1 = Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB,resourceLocation,creativeModeTab);
         return creativeModeTab1;
+    }
+
+    public static CreativeModeTab.Builder createCreativeModeTab(CreativeModeTab.Builder builder) {
+        return builder;
     }
 
     //---------------------------------------------------------------------

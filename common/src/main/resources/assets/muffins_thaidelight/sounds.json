@@ -1,7 +1,10 @@
 {
   "ui.mortar.take_result": {
     "sounds": [
-      "muffins_thaidelight:mortar/take_result1"
+      {
+       "name": "muffins_thaidelight:mortar/take_result1",
+        "volume": 0.6
+      }
     ],
     "subtitle": "subtitles.ui.mortar.take_result"
   },
@@ -17,10 +20,14 @@
   },
   "entity.dragonfly.hurt": {
     "sounds": [
-      "muffins_thaidelight:dragonfly/hurt1",
       {
         "name": "muffins_thaidelight:dragonfly/hurt1",
-        "pitch": 1.2
+        "volume" : 0.5
+      },
+      {
+        "name": "muffins_thaidelight:dragonfly/hurt1",
+        "pitch": 1.2,
+        "volume" : 0.5
       }
     ]
   }

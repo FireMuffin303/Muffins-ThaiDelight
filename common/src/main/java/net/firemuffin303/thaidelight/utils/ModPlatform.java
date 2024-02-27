@@ -30,6 +30,7 @@ import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -125,7 +126,12 @@ public class ModPlatform {
 
 
     @ExpectPlatform
-    public static CreativeModeTab createCreativeModeTab(ResourceLocation resourceLocation, Supplier<ItemStack> icon, ArrayList<Item> itemList){
+    public static CreativeModeTab createCreativeModeTab(ResourceLocation resourceLocation, Supplier<ItemStack> icon, ArrayList<ItemLike> itemList){
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static CreativeModeTab.Builder createCreativeModeTab(CreativeModeTab.Builder builder){
         throw new AssertionError();
     }
     //---------------------------------------------------

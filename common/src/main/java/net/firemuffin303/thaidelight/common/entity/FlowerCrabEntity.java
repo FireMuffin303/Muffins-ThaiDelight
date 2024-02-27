@@ -1,5 +1,6 @@
 package net.firemuffin303.thaidelight.common.entity;
 
+import net.firemuffin303.thaidelight.common.block.CrabEggBlock;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.firemuffin303.thaidelight.common.registry.ModEntityTypes;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
@@ -38,6 +39,8 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
 import org.jetbrains.annotations.Nullable;
 
 public class FlowerCrabEntity extends Animal implements Bucketable {
@@ -291,7 +294,8 @@ public class FlowerCrabEntity extends Animal implements Bucketable {
                     Level level = this.crab.level();
                     level.playSound((Player)null, blockPos, SoundEvents.TURTLE_LAY_EGG, SoundSource.BLOCKS, 0.3F, 0.9F + level.random.nextFloat() * 0.2F);
                     BlockPos blockPos2 = this.blockPos.above();
-                    BlockState blockState = (BlockState) ModBlocks.CRAB_EGG.defaultBlockState();
+                    FluidState fluidState = level.getFluidState(blockPos2);
+                    BlockState blockState = (BlockState) ModBlocks.CRAB_EGG.defaultBlockState().setValue(CrabEggBlock.WATERLOGGED,fluidState.is(Fluids.WATER));
                     level.setBlock(blockPos2, blockState, 3);
                     level.gameEvent(GameEvent.BLOCK_PLACE, blockPos2, GameEvent.Context.of(this.crab, blockState));
                     this.crab.setHasEgg(false);

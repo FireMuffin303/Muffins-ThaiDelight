@@ -58,6 +58,9 @@ dependencies {
 
     modLocalRuntime("maven.modrinth:fish-of-thieves:MK9xQTXT")
     modLocalRuntime("maven.modrinth:cloth-config:nr1znv5v")
+
+    modLocalRuntime("maven.modrinth:alexs-mobs:ftwjMYH7")
+    modLocalRuntime("maven.modrinth:citadel:3OJWvUG9")
 }
 
 processResources {

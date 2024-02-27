@@ -82,14 +82,19 @@ public class LangDataGen extends FabricLanguageProvider {
         //Mobs
         translationBuilder.add(ModBlocks.CRAB_EGG,"Flower Crab Egg");
         translationBuilder.add(ModItems.CRAB_SPAWN_EGG,"Flower Crab Spawn Egg");
-        translationBuilder.add(ModItems.CRAB_BUCKET,"Flower Crab in a Bucket");
+        translationBuilder.add(ModItems.CRAB_BUCKET,"Bucket of Flower Crab");
         translationBuilder.add(ModItems.CRAB_MEAT,"Raw Flower Crab");
         translationBuilder.add(ModItems.COOKED_CRAB_MEAT,"Cooked Flower Crab");
 
         translationBuilder.add(ModItems.DRAGONFLY_SPAWN_EGG,"Dragonfly Spawn Egg");
         translationBuilder.add(ModItems.DRAGONFLY,"Dragonfly");
-        translationBuilder.add(ModItems.DRAGONFLY_BOTTLE,"Dragonfly in a Bottle");
+        translationBuilder.add(ModItems.DRAGONFLY_BOTTLE,"Bottle of Dragonfly");
         translationBuilder.add(ModItems.COOKED_DRAGONFLY,"Cooked Dragonfly");
+        translationBuilder.add("dragonfly.variant.muffins_thaidelight.red","Red");
+        translationBuilder.add("dragonfly.variant.muffins_thaidelight.yellow","Yellow");
+        translationBuilder.add("dragonfly.variant.muffins_thaidelight.green","Green");
+        translationBuilder.add("dragonfly.variant.muffins_thaidelight.blue","Blue");
+        translationBuilder.add("container.muffins_thaidelight.mortar","Mortar");
     }
 
     static class ThaiLangDataGen extends FabricLanguageProvider{
@@ -169,14 +174,21 @@ public class LangDataGen extends FabricLanguageProvider {
             //Mobs
             translationBuilder.add(ModBlocks.CRAB_EGG,"ไข่ปูม้า");
             translationBuilder.add(ModItems.CRAB_SPAWN_EGG,"ไข่เกิดปูม้า");
-            translationBuilder.add(ModItems.CRAB_BUCKET,"ปูม้าในถัง");
+            translationBuilder.add(ModItems.CRAB_BUCKET,"ถังปูม้า");
             translationBuilder.add(ModItems.CRAB_MEAT,"เนื้อปูม้าสด");
             translationBuilder.add(ModItems.COOKED_CRAB_MEAT,"เนื้อปูม้าสุก");
 
             translationBuilder.add(ModItems.DRAGONFLY_SPAWN_EGG,"ไข่เกิดแมลงปอ");
             translationBuilder.add(ModItems.DRAGONFLY,"แมลงปอสด");
-            translationBuilder.add(ModItems.DRAGONFLY_BOTTLE,"แมลงปอในขวดแก้ว");
+            translationBuilder.add(ModItems.DRAGONFLY_BOTTLE,"ขวดแก้วแมลงปอ");
             translationBuilder.add(ModItems.COOKED_DRAGONFLY,"แมลงปอทอด");
+
+
+            translationBuilder.add("dragonfly.variant.muffins_thaidelight.red","สีแดง");
+            translationBuilder.add("dragonfly.variant.muffins_thaidelight.yellow","สีเหลือง");
+            translationBuilder.add("dragonfly.variant.muffins_thaidelight.green","สีเขียว");
+            translationBuilder.add("dragonfly.variant.muffins_thaidelight.blue","สีฟ้า");
+            translationBuilder.add("container.muffins_thaidelight.mortar","ครก");
         }
     }
 }

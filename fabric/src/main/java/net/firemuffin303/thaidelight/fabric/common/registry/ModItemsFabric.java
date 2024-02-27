@@ -38,7 +38,7 @@ public class ModItemsFabric {
     }
 
     public static class ModFoodFabric{
-        public static final FoodProperties SOMTAM = new FoodProperties.Builder().nutrition(18).saturationMod(0.8F).effect(new MobEffectInstance(EffectsRegistry.NOURISHMENT.get(),6000,0),1.0f).build();
+        public static final FoodProperties SOMTAM = new FoodProperties.Builder().nutrition(16).saturationMod(0.6F).effect(new MobEffectInstance(EffectsRegistry.NOURISHMENT.get(),6000,0),1.0f).build();
         public static final FoodProperties CRAB_FRIED_RICE = new FoodProperties.Builder().nutrition(16).saturationMod(0.8F).effect(new MobEffectInstance(EffectsRegistry.COMFORT.get(),6000,0),1.0f).build();
         public static final FoodProperties SPICY_MINCED_PORK_SALAD = new FoodProperties.Builder()
                 .nutrition(14)

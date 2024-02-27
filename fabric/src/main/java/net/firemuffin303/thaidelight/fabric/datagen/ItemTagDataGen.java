@@ -92,6 +92,9 @@ public class ItemTagDataGen extends FabricTagProvider.ItemTagProvider {
         getOrCreateTagBuilder(TagKey.create(Registries.ITEM,new ResourceLocation("crabbersdelight","raw_seafood")))
                 .add(ModItems.CRAB_MEAT);
 
+        getOrCreateTagBuilder(TagKey.create(Registries.ITEM,new ResourceLocation("forge","seeds")))
+                .add(ModItems.PEPPER_SEED)
+                .add(ModItems.PAPAYA_SEEDS);
 
 
     }

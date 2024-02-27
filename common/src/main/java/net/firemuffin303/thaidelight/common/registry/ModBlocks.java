@@ -22,7 +22,7 @@ import net.minecraft.world.level.material.PushReaction;
 
 public class ModBlocks {
     //Functional Block
-    public static final Block MORTAR = new MortarBlock(BlockBehaviour.Properties.copy(Blocks.DECORATED_POT).noOcclusion());
+    public static final Block MORTAR = new MortarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_RED).strength(0.5f,6.0f).noOcclusion().sound(SoundType.DECORATED_POT));
 
     //Crate
     public static final Block LIME_CRATE = new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).destroyTime(2.0f).explosionResistance(3.0f).sound(SoundType.WOOD));

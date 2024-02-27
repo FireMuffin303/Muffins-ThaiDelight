@@ -1,6 +1,7 @@
 {
 	"credit": "Made with Blockbench",
 	"parent": "block/block",
+	"render_type": "minecraft:cutout",
 	"textures": {
 		"side": "muffins_thaidelight:block/lime_bush_side_stage0",
 		"top": "muffins_thaidelight:block/lime_bush_top_stage0",

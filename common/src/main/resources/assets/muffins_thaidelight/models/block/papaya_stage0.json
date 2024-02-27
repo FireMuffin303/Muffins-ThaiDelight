@@ -2,7 +2,8 @@
 	"credit": "Made with Blockbench",
 	"render_type": "minecraft:cutout",
 	"textures": {
-		"1": "muffins_thaidelight:block/papaya_0"
+		"1": "muffins_thaidelight:block/papaya_0",
+		"particle": "muffins_thaidelight:block/papaya_0"
 	},
 	"elements": [
 		{

@@ -2,22 +2,33 @@ package net.firemuffin303.thaidelight.forge;
 
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.firemuffin303.thaidelight.ThaiDelight;
+import net.firemuffin303.thaidelight.common.entity.Dragonfly;
 import net.firemuffin303.thaidelight.common.entity.FlowerCrabEntity;
 import net.firemuffin303.thaidelight.common.event.ModVillagerTrades;
+import net.firemuffin303.thaidelight.common.item.bottle.DragonflyBottleItem;
 import net.firemuffin303.thaidelight.common.registry.*;
+import net.firemuffin303.thaidelight.forge.common.Configuration;
 import net.firemuffin303.thaidelight.forge.common.registry.ModBlocksForge;
 import net.firemuffin303.thaidelight.forge.common.registry.ModItemsForge;
 import net.firemuffin303.thaidelight.forge.common.structures.VillageStructures;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.levelgen.Heightmap;
@@ -30,7 +41,9 @@ import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.event.village.WandererTradesEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
@@ -57,6 +70,8 @@ public class ThaiDelightForge {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         //ThaiDelight.init();
         modEventBus.register(this);
+
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Configuration.COMMON_CONFIG);
         ENTITY_TYPES.register(modEventBus);
         BLOCK.register(modEventBus);
         BLOCK_ENTITY_TYPES.register(modEventBus);
@@ -106,6 +121,13 @@ public class ThaiDelightForge {
         registerEvent.register(ForgeRegistries.Keys.MENU_TYPES,helper -> ModMenuType.init());
         registerEvent.register(ForgeRegistries.Keys.SOUND_EVENTS,helper -> ModSoundEvents.init());
         registerEvent.register(ForgeRegistries.Keys.TREE_DECORATOR_TYPES,helper -> ModTreeDecorator.init());
+
+        registerEvent.register(Registries.CREATIVE_MODE_TAB, helper ->
+                Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB,
+                        new ResourceLocation(ThaiDelight.MOD_ID,"main"),
+                        CreativeModeTab.builder().title(Component.translatable("itemGroup."+ThaiDelight.MOD_ID+".main"))
+                                .icon(() -> new ItemStack(ModBlocks.MORTAR))
+                                .displayItems(this::displayItem).build()));
     }
 
     public void registerCommonSetup(FMLCommonSetupEvent event){
@@ -129,5 +151,65 @@ public class ThaiDelightForge {
         });
     }
 
+    public void displayItem(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output output){
+        output.accept(ModBlocks.MORTAR);
 
+        output.accept(ModBlocks.LIME_CRATE);
+        output.accept(ModBlocks.PEPPER_CRATE);
+        output.accept(ModBlocks.RAW_PAPAYA_CRATE);
+        output.accept(ModBlocks.PAPAYA_CRATE);
+        output.accept(ModBlocks.PAPAYA_LOG);
+        output.accept(ModBlocks.PAPAYA_WOOD);
+        output.accept(ModBlocks.STRIPPED_PAPAYA_LOG);
+        output.accept(ModBlocks.STRIPPED_PAPAYA_WOOD);
+        output.accept(ModBlocks.PAPAYA_LEAVES);
+
+        output.accept(ModBlocks.SOMTAM_FEAST);
+        output.accept(ModBlocks.SPICY_MINCED_MEAT_SALAD_FEAST);
+        output.accept(ModBlocks.CRAB_FRIED_RICE_FEAST);
+
+        output.accept(ModBlocks.WILD_PEPPER_CROP);
+        output.accept(ModItems.PEPPER);
+        output.accept(ModItems.PEPPER_SEED);
+
+        output.accept(ModItems.LIME);
+        output.accept(ModItems.SLICED_LIME);
+        output.accept(ModBlocks.LIME_SAPLING);
+
+        output.accept(ModItems.PAPAYA);
+        output.accept(ModItems.SLICED_PAPAYA);
+        output.accept(ModItems.RAW_PAPAYA);
+        output.accept(ModItems.RAW_PAPAYA_SLICE);
+        output.accept(ModBlocks.PAPAYA_SAPLING);
+        output.accept(ModItems.PAPAYA_SEEDS);
+
+        output.accept(ModItemsForge.SOMTAM.get());
+        output.accept(ModItemsForge.SPICY_MINCED_MEAT_SALAD.get());
+        output.accept(ModItemsForge.CRAB_FRIED_RICE.get());
+        output.accept(ModItemsForge.STIR_FRIED_NOODLE.get());
+
+        output.accept(ModItems.LIME_JUICE);
+        output.accept(ModItems.PAPAYA_JUICE);
+
+        output.accept(ModItems.CRAB_SPAWN_EGG);
+        output.accept(ModBlocks.CRAB_EGG);
+        output.accept(ModItems.CRAB_BUCKET);
+        output.accept(ModItems.CRAB_MEAT);
+        output.accept(ModItems.COOKED_CRAB_MEAT);
+
+        output.accept(ModItems.DRAGONFLY_SPAWN_EGG);
+
+        Dragonfly.DragonflyVariant[] dragonflyVariants = Dragonfly.DragonflyVariant.values();
+
+        for(Dragonfly.DragonflyVariant variant : dragonflyVariants){
+            ItemStack itemStack = new ItemStack(ModItems.DRAGONFLY_BOTTLE);
+            DragonflyBottleItem.setVariant(itemStack,variant);
+            output.accept(itemStack);
+
+
+        }
+
+        output.accept(ModItems.DRAGONFLY);
+        output.accept(ModItems.COOKED_DRAGONFLY);
+    }
 }
