@@ -7,7 +7,8 @@ import net.firemuffin303.thaidelight.client.registry.ModScreensClient;
 public class ThaiDelightClient {
     public static void init(){
         ModEntityClient.init();
-        ModBlockEntityClient.init();
         ModScreensClient.init();
+
+
     }
 }

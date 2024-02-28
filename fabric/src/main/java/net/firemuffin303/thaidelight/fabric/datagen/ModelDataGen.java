@@ -39,9 +39,9 @@ public class ModelDataGen extends FabricModelProvider {
         blockStateModelGenerator.woodProvider(ModBlocks.PAPAYA_LOG).logWithHorizontal(ModBlocks.PAPAYA_LOG).wood(ModBlocks.PAPAYA_WOOD);
         blockStateModelGenerator.woodProvider(ModBlocks.STRIPPED_PAPAYA_LOG).logWithHorizontal(ModBlocks.STRIPPED_PAPAYA_LOG).wood(ModBlocks.STRIPPED_PAPAYA_WOOD);
 
-        createCubeAll(ModBlocks.PAPAYA_LEAVES,blockStateModelGenerator);
+        //createCubeAll(ModBlocks.PAPAYA_LEAVES,blockStateModelGenerator);
 
-        blockStateModelGenerator.blockStateOutput.accept(
+        /*blockStateModelGenerator.blockStateOutput.accept(
                 MultiVariantGenerator.multiVariant(ModBlocks.PAPAYA)
                         .with(PropertyDispatch.property(BlockStateProperties.AGE_2)
                                 .select(0, net.minecraft.data.models.blockstates.Variant.variant()
@@ -63,7 +63,7 @@ public class ModelDataGen extends FabricModelProvider {
         blockStateModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.PAPAYA_CROPS).with(PropertyDispatch.property(BlockStateProperties.AGE_1).generate((integer) -> {
             return net.minecraft.data.models.blockstates.Variant.variant().with(VariantProperties.MODEL,
                     blockStateModelGenerator.createSuffixedVariant(ModBlocks.PAPAYA_CROPS, "_stage" + integer, new ModelTemplate(Optional.of(new ResourceLocation(ThaiDelight.MOD_ID,"block/crop_cross")),Optional.empty(),TextureSlot.CROSS), TextureMapping::cross));
-        })));
+        })));*/
     }
 
     @Override
@@ -75,10 +75,7 @@ public class ModelDataGen extends FabricModelProvider {
 
         itemModelGenerator.generateFlatItem(ModItems.DRAGONFLY_SPAWN_EGG,SPAWN_EGG);
         itemModelGenerator.generateFlatItem(ModItems.DRAGONFLY, ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.DRAGONFLY_BOTTLE, ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.COOKED_DRAGONFLY, ModelTemplates.FLAT_ITEM);
-
-        itemModelGenerator.generateFlatItem(Item.byBlock(ModBlocks.CRAB_EGG), ModelTemplates.FLAT_ITEM);
 
         itemModelGenerator.generateFlatItem(ModItems.FISH_SAUCE_BOTTLE, ModelTemplates.FLAT_ITEM);
 

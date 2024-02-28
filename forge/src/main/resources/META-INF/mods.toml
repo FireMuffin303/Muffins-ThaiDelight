@@ -1,17 +1,18 @@
 modLoader = "javafml"
 loaderVersion = "[43,)"
-#issueTrackerURL = ""
-license = "Insert License Here"
+issueTrackerURL = "https://github.com/FireMuffin303/Muffins-ThaiDelight/issues"
+license = "MIT License"
 
 [[mods]]
 modId = "muffins_thaidelight"
 version = "${version}"
-displayName = "Muffin's Thai Delight"
+displayName = "Muffin's Thai's Delight"
 authors = "FireMuffin303"
+credits = "lllLucaslll - Concept Artist"
 description = '''
-This is an example description! Tell everyone what your mod is about!
+Cooking expansion focus on Thai's Food!
 '''
-#logoFile = ""
+logoFile = "assets/muffins_thaidelight/logo.png"
 
 [[dependencies.muffins_thaidelight]]
 modId = "forge"

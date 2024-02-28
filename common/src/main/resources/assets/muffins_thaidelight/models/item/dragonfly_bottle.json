@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "muffins_thaidelight:item/dragonfly_bottle"
+  },
+  "overrides": [
+    {
+      "predicate": {
+      "muffins_thaidelight:variant": 0
+      },
+      "model": "muffins_thaidelight:item/dragonfly_bottle_variant/red_dragonfly_bottle"
+    },
+    {
+      "predicate": {
+        "muffins_thaidelight:variant": 0.25
+      },
+      "model": "muffins_thaidelight:item/dragonfly_bottle_variant/green_dragonfly_bottle"
+    },
+    {
+      "predicate": {
+        "muffins_thaidelight:variant": 0.5
+      },
+      "model": "muffins_thaidelight:item/dragonfly_bottle_variant/blue_dragonfly_bottle"
+    },
+    {
+      "predicate": {
+        "muffins_thaidelight:variant": 0.75
+      },
+      "model": "muffins_thaidelight:item/dragonfly_bottle_variant/yellow_dragonfly_bottle"
+    }
+  ]
+}

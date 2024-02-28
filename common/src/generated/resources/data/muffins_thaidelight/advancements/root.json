@@ -1,37 +1,29 @@
 {
   "criteria": {
-    "got_mortar": {
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "muffins_thaidelight:mortar"
-            ]
-          }
-        ]
-      },
+    "seeds": {
+      "conditions": {},
       "trigger": "minecraft:inventory_changed"
     }
   },
   "display": {
-    "announce_to_chat": true,
-    "background": "minecraft:textures/gui/advancement/backgrounds/adventure.png",
+    "announce_to_chat": false,
+    "background": "minecraft:textures/block/oak_log.png",
     "description": {
       "translate": "advancement.muffins_thaidelight.got_mortar.description"
     },
     "frame": "task",
-    "hidden": true,
+    "hidden": false,
     "icon": {
       "item": "muffins_thaidelight:mortar"
     },
-    "show_toast": true,
+    "show_toast": false,
     "title": {
       "translate": "advancement.muffins_thaidelight.got_mortar"
     }
   },
   "requirements": [
     [
-      "got_mortar"
+      "seeds"
     ]
   ],
   "sends_telemetry_event": true

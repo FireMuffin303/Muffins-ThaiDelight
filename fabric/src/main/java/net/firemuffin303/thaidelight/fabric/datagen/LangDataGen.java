@@ -15,14 +15,26 @@ public class LangDataGen extends FabricLanguageProvider {
     @Override
     public void generateTranslations(TranslationBuilder translationBuilder) {
         //Advancement
+        translationBuilder.add("advancement.muffins_thaidelight.got_mortar","Thai's Delight");
+        translationBuilder.add("advancement.muffins_thaidelight.got_mortar.description",".");
+
         translationBuilder.add("advancement.muffins_thaidelight.cooked_dragonfly","It's inedible!");
-        translationBuilder.add("advancement.muffins_thaidelight.cooked_dragonfly.description","Obtains Cooked Dragonfly.");
+        translationBuilder.add("advancement.muffins_thaidelight.cooked_dragonfly.description","Obtains Cooked Dragonfly. Is it really edible?");
 
         translationBuilder.add("advancement.muffins_thaidelight.sauce_bowl","Where is the sauce?");
         translationBuilder.add("advancement.muffins_thaidelight.sauce_bowl.description","Obtains Sauce Bowl");
 
         translationBuilder.add("advancement.muffins_thaidelight.sliced_lime","Is it snapshot day?");
-        translationBuilder.add("advancement.muffins_thaidelight.sliced_lime.description","Obtains Sliced Lime");
+        translationBuilder.add("advancement.muffins_thaidelight.sliced_lime.description","Obtains Sliced Lime. What are bugs they fixed this time?");
+
+        translationBuilder.add("advancement.muffins_thaidelight.got_pepper","The true ingredient");
+        translationBuilder.add("advancement.muffins_thaidelight.got_pepper.description","Obtains Pepper.");
+
+        translationBuilder.add("advancement.muffins_thaidelight.got_spicy_meat_salad","Yummy Larb");
+        translationBuilder.add("advancement.muffins_thaidelight.got_spicy_meat_salad.description","Obtains Spicy Meat Salad. Yummy");
+
+        translationBuilder.add("advancement.muffins_thaidelight.got_somtam","Pepper Please");
+        translationBuilder.add("advancement.muffins_thaidelight.got_somtam.description","Obtains Somtam, is one pepper really enough?");
 
         translationBuilder.add("farmersdelight.tooltip.papaya_juice","Clear Hunger Effect");
         translationBuilder.add("farmersdelight.tooltip.lime_juice","Clear Blindness Effect");
@@ -106,14 +118,26 @@ public class LangDataGen extends FabricLanguageProvider {
         @Override
         public void generateTranslations(TranslationBuilder translationBuilder) {
             //Advancement
+            translationBuilder.add("advancement.muffins_thaidelight.got_mortar","Thai's Delight");
+            translationBuilder.add("advancement.muffins_thaidelight.got_mortar.description",".");
+
             translationBuilder.add("advancement.muffins_thaidelight.cooked_dragonfly","มันกินไม่ได้!");
-            translationBuilder.add("advancement.muffins_thaidelight.cooked_dragonfly.description","ได้รับแมลงปอทอด");
+            translationBuilder.add("advancement.muffins_thaidelight.cooked_dragonfly.description","ได้รับแมลงปอทอด. มันกินได้จริง ๆ หรอ?");
 
-            translationBuilder.add("advancement.muffins_thaidelight.sauce_bowl","ไหนซอส?");
-            translationBuilder.add("advancement.muffins_thaidelight.sauce_bowl.description","ได้รับถ้วยน้ำจิ้ม");
+            translationBuilder.add("advancement.muffins_thaidelight.sauce_bowl","Where is the sauce?");
+            translationBuilder.add("advancement.muffins_thaidelight.sauce_bowl.description","Obtains Sauce Bowl");
 
-            translationBuilder.add("advancement.muffins_thaidelight.sliced_lime","วันนี้มี Snapshot หรอ?");
-            translationBuilder.add("advancement.muffins_thaidelight.sliced_lime.description","ได้รับมะนาวหั่น");
+            translationBuilder.add("advancement.muffins_thaidelight.sliced_lime","วันนี้มีสแน๊ปช็อตหรอ?");
+            translationBuilder.add("advancement.muffins_thaidelight.sliced_lime.description","ได้รับมะนาวหั่น. เขาแก้บัคอะไรบ้างนะ");
+
+            translationBuilder.add("advancement.muffins_thaidelight.got_pepper","วัตถุดิบที่แท้จริง");
+            translationBuilder.add("advancement.muffins_thaidelight.got_pepper.description","ได้รับพริก.");
+
+            translationBuilder.add("advancement.muffins_thaidelight.got_spicy_meat_salad","ลาบแซ่บ ๆ");
+            translationBuilder.add("advancement.muffins_thaidelight.got_spicy_meat_salad.description","ได้รับลาบเนื้อ แซ่บ ๆ");
+
+            translationBuilder.add("advancement.muffins_thaidelight.got_somtam","พริกเพิ่มหน่อย");
+            translationBuilder.add("advancement.muffins_thaidelight.got_somtam.description","ได้รับส้มตำ, เม็ดเดียวมันพอจริง ๆ หรอ?");
 
             translationBuilder.add("farmersdelight.tooltip.papaya_juice","ล้างหิวเร็ว");
             translationBuilder.add("farmersdelight.tooltip.lime_juice","ล้างตาบอด");

@@ -1,12 +1,12 @@
 {
   "parent": "muffins_thaidelight:root",
   "criteria": {
-    "got_sliced_lime": {
+    "got_pepper": {
       "conditions": {
         "items": [
           {
             "items": [
-              "muffins_thaidelight:lime_slice"
+              "muffins_thaidelight:pepper"
             ]
           }
         ]
@@ -18,21 +18,21 @@
     "announce_to_chat": true,
     "background": "minecraft:textures/block/oak_log.png",
     "description": {
-      "translate": "advancement.muffins_thaidelight.sliced_lime.description"
+      "translate": "advancement.muffins_thaidelight.got_pepper.description"
     },
     "frame": "task",
     "hidden": false,
     "icon": {
-      "item": "muffins_thaidelight:lime_slice"
+      "item": "muffins_thaidelight:pepper"
     },
     "show_toast": true,
     "title": {
-      "translate": "advancement.muffins_thaidelight.sliced_lime"
+      "translate": "advancement.muffins_thaidelight.got_pepper"
     }
   },
   "requirements": [
     [
-      "got_sliced_lime"
+      "got_pepper"
     ]
   ],
   "sends_telemetry_event": true

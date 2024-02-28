@@ -1,12 +1,12 @@
 {
-  "parent": "muffins_thaidelight:root",
+  "parent": "muffins_thaidelight:got_pepper",
   "criteria": {
-    "got_sliced_lime": {
+    "got_spicy_meat_salad": {
       "conditions": {
         "items": [
           {
             "items": [
-              "muffins_thaidelight:lime_slice"
+              "muffins_thaidelight:spicy_minced_meat_salad"
             ]
           }
         ]
@@ -18,21 +18,21 @@
     "announce_to_chat": true,
     "background": "minecraft:textures/block/oak_log.png",
     "description": {
-      "translate": "advancement.muffins_thaidelight.sliced_lime.description"
+      "translate": "advancement.muffins_thaidelight.got_spicy_meat_salad.description"
     },
     "frame": "task",
     "hidden": false,
     "icon": {
-      "item": "muffins_thaidelight:lime_slice"
+      "item": "muffins_thaidelight:spicy_minced_meat_salad"
     },
     "show_toast": true,
     "title": {
-      "translate": "advancement.muffins_thaidelight.sliced_lime"
+      "translate": "advancement.muffins_thaidelight.got_spicy_meat_salad"
     }
   },
   "requirements": [
     [
-      "got_sliced_lime"
+      "got_spicy_meat_salad"
     ]
   ],
   "sends_telemetry_event": true

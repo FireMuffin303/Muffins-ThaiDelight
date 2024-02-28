@@ -16,12 +16,12 @@
   },
   "display": {
     "announce_to_chat": true,
-    "background": "minecraft:textures/gui/advancements/backgrounds/adventure.png",
+    "background": "minecraft:textures/block/oak_log.png",
     "description": {
       "translate": "advancement.muffins_thaidelight.cooked_dragonfly.description"
     },
     "frame": "task",
-    "hidden": true,
+    "hidden": false,
     "icon": {
       "item": "muffins_thaidelight:cooked_dragonfly"
     },

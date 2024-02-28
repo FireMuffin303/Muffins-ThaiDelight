@@ -2,17 +2,19 @@
   "schemaVersion": 1,
   "id": "muffins_thaidelight",
   "version": "${version}",
-  "name": "Muffin's Thai Delight",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "Muffin's Thai's Delight",
+  "description": "Cooking expansion focus on Thai's Food!",
   "authors": [
-    "FireMuffin303!"
+    "FireMuffin303",
+    "lllLucaslll - Concept Artist"
   ],
   "contact": {
     "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "sources": "https://github.com/FireMuffin303/Muffins-ThaiDelight",
+    "issues": "https://github.com/FireMuffin303/Muffins-ThaiDelight/issues"
   },
-  "license": "MIT",
-  "icon": "assets/examplemod/icon.png",
+  "license": "MIT License",
+  "icon": "logo.png",
   "environment": "*",
   "entrypoints": {
     "fabric-datagen": [
