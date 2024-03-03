@@ -3,7 +3,7 @@
   "biomes": ["minecraft:mangrove_swamp","minecraft:swamp","minecraft:river"],
   "spawners": {
     "type": "muffins_thaidelight:dragonfly",
-    "weight": 5,
+    "weight": 2,
     "minCount": 1,
     "maxCount": 3
   },

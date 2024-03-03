@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "entries": [
+    "muffins_thaidelight:add_loot_abandoned_mineshaft",
+    "muffins_thaidelight:add_loot_pillager_outpost",
+    "muffins_thaidelight:add_loot_village_plains_house",
+    "muffins_thaidelight:add_loot_village_desert_house",
+    "muffins_thaidelight:add_loot_village_savanna_house",
+    "muffins_thaidelight:add_loot_village_snowy_house",
+    "muffins_thaidelight:add_loot_village_taiga_house"
+  ]
+}
