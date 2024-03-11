@@ -15,6 +15,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 
+import java.util.Iterator;
+
 public class MortarRecipe implements Recipe<Container> {
     private final ResourceLocation id;
     private final String group;
@@ -110,7 +112,7 @@ public class MortarRecipe implements Recipe<Container> {
             NonNullList<Ingredient> nonnulllist = NonNullList.create();
 
             for(int i = 0; i < ingredientArray.size(); ++i) {
-                Ingredient ingredient = Ingredient.fromJson(ingredientArray.get(i));
+                Ingredient ingredient = Ingredient.fromJson(ingredientArray.get(i),false);
                 if (!ingredient.isEmpty()) {
                     nonnulllist.add(ingredient);
                 }

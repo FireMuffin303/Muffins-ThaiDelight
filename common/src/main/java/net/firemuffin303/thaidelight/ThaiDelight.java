@@ -11,7 +11,6 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -30,14 +29,9 @@ public class ThaiDelight {
     public static final Logger LOGGER = LoggerFactory.getLogger(ThaiDelight.MOD_ID);
     public static final String MOD_ID = "muffins_thaidelight";
 
-    public static final AttributeModifier CRAB_REACH = new AttributeModifier(UUID.fromString("9b61c8ad-e259-4a36-b6f6-382ab3c509ea"),"Range Modifier",1.0d,AttributeModifier.Operation.ADDITION);
-
-
     public static void init() {
         ModEntityTypes.init();
         ModBlocks.init();
-        ModBlocks.ModBlockEntityTypes.init();
-        ModFluid.init();
         ModItems.init();
         ModRecipes.init();
         ModConfiguredFeatures.init();
@@ -49,7 +43,6 @@ public class ThaiDelight {
 
     public static void postInit(){
         ModEntityTypes.postInit();
-        ModPotions.postInit();
         registerComposterBlock();
         registerStrippables();
         registerAnimalFoodItem();

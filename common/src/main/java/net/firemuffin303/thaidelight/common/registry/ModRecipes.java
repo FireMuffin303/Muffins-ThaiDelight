@@ -36,7 +36,7 @@ public class ModRecipes {
         public static RecipeSerializer<MortarRecipe> MORTAR_SERIALIZER = new MortarRecipe.Serializer();
 
         public static void init(){
-            register("mortar",new MortarRecipe.Serializer());
+            register("mortar",MORTAR_SERIALIZER);
         }
 
         private static void register(String id,RecipeSerializer<?> recipeSerializer){

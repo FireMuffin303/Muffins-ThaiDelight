@@ -30,12 +30,6 @@ public class ModBlocks {
     public static final Block RAW_PAPAYA_CRATE = new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).destroyTime(2.0f).explosionResistance(3.0f).sound(SoundType.WOOD));
     public static final Block PAPAYA_CRATE = new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).destroyTime(2.0f).explosionResistance(3.0f).sound(SoundType.WOOD));
 
-    //Sauce Bowl
-    //public static final Block SAUCE_BOWL = new SauceBowl(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).instabreak());
-    //public static final Block SEAFOOD_SAUCE_BOWL = new LevelSauceBowl(BlockBehaviour.Properties.copy(ModBlocks.SAUCE_BOWL),SauceBowlInteraction.SEAFOOD);
-    //public static final Block FISH_SAUCE_SAUCE_BOWL = new LevelSauceBowl(BlockBehaviour.Properties.copy(ModBlocks.SAUCE_BOWL),SauceBowlInteraction.FISH_SAUCE);
-    //public static final Block HONEY_SAUCE_BOWL = new LevelSauceBowl(BlockBehaviour.Properties.copy(ModBlocks.SAUCE_BOWL),SauceBowlInteraction.FISH_SAUCE);
-
     //Eggs
     public static final Block CRAB_EGG = new CrabEggBlock(BlockBehaviour.Properties.copy(Blocks.FROGSPAWN));
 
@@ -73,12 +67,6 @@ public class ModBlocks {
         registerWithItem("pepper_crate",PEPPER_CRATE);
         registerWithItem("raw_papaya_crate", RAW_PAPAYA_CRATE);
         registerWithItem("papaya_crate",PAPAYA_CRATE);
-
-        //Sauce Bowl
-        //registerWithItem("sauce_bowl",SAUCE_BOWL);
-        //register("seafood_sauce_bowl",SEAFOOD_SAUCE_BOWL);
-        //register("fish_sauce_sauce_bowl",FISH_SAUCE_SAUCE_BOWL);
-        //register("honey_sauce_bowl",HONEY_SAUCE_BOWL);
 
         //Eggs
         registerWithItem("flower_crab_egg",CRAB_EGG);
@@ -135,10 +123,7 @@ public class ModBlocks {
     }
 
     public static class ModBlockEntityTypes{
-        //public static BlockEntityType<MortarBlockEntity> MORTAR_BLOCK_ENTITY = ModPlatform.buildBlockEntity(MortarBlockEntity::new,ModBlocks.MORTAR).build(null);
-
         public static void init(){
-            //ModPlatform.registerBlockEntity("mortar",MORTAR_BLOCK_ENTITY);
         }
 
 
