@@ -61,7 +61,7 @@ public class LangDataGen extends FabricLanguageProvider {
 
         //Feast
         translationBuilder.add(ModBlocksFabric.SOMTAM_FEAST,"Somtam");
-        translationBuilder.add(ModBlocksFabric.SPICY_MINCED_PORK_SALAD_FEAST,"Spicy Minced Pork Salad");
+        translationBuilder.add(ModBlocksFabric.SPICY_MINCED_PORK_SALAD_FEAST,"Spicy Minced Meat Salad");
         translationBuilder.add(ModBlocks.CRAB_FRIED_RICE_FEAST,"Crab Fried Rice");
 
 
@@ -83,7 +83,7 @@ public class LangDataGen extends FabricLanguageProvider {
 
         //Food
         translationBuilder.add(ModItemsFabric.SOMTAM,"Plate of Somtam");
-        translationBuilder.add(ModItemsFabric.SPICY_MINCED_MEAT_SALAD,"Plate of Spicy Minced Pork Salad");
+        translationBuilder.add(ModItemsFabric.SPICY_MINCED_MEAT_SALAD,"Plate of Spicy Minced Meat Salad");
         translationBuilder.add(ModItemsFabric.CRAB_FRIED_RICE,"Plate of Crab Fried Rice");
         translationBuilder.add(ModItemsFabric.STIR_FRIED_NOODLE,"Stir Fried Noodle");
         translationBuilder.add(ModItems.PAPAYA_JUICE,"Papaya Juice");

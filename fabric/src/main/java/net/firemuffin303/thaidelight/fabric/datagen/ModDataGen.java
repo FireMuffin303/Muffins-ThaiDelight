@@ -46,7 +46,7 @@ public class ModDataGen implements DataGeneratorEntrypoint {
             smithing(exporter);
             cook(ModItems.CRAB_MEAT, ModItems.COOKED_CRAB_MEAT, 0.35f, 200, exporter);
             cook(ModItems.DRAGONFLY, ModItems.COOKED_DRAGONFLY, 0.35f, 200, exporter);
-            mortar(exporter);
+            //mortar(exporter);
         }
 
         private void cook(ItemLike ingredient, Item result, float exp, int cookTicks, Consumer<FinishedRecipe> exporter) {

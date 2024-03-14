@@ -169,6 +169,7 @@ public class ThaiDelightModFabric implements ModInitializer {
 
         output.accept(ModItems.LIME_JUICE);
         output.accept(ModItems.PAPAYA_JUICE);
+        output.accept(ModItems.FISH_SAUCE_BOTTLE);
 
         output.accept(ModItems.CRAB_SPAWN_EGG);
         output.accept(ModBlocks.CRAB_EGG);

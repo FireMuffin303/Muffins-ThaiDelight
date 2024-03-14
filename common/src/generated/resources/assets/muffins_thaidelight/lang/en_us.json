@@ -27,7 +27,7 @@
   "block.muffins_thaidelight.pepper_crate": "Pepper Crate",
   "block.muffins_thaidelight.raw_papaya_crate": "Raw Papaya Crate",
   "block.muffins_thaidelight.somtam_feast": "Somtam",
-  "block.muffins_thaidelight.spicy_minced_meat_salad_feast": "Spicy Minced Pork Salad",
+  "block.muffins_thaidelight.spicy_minced_meat_salad_feast": "Spicy Minced Meat Salad",
   "block.muffins_thaidelight.stripped_papaya_log": "Stripped Papaya Log",
   "block.muffins_thaidelight.stripped_papaya_wood": "Stripped Papaya Wood",
   "block.muffins_thaidelight.wild_pepper": "Wild Pepper",
@@ -60,7 +60,7 @@
   "item.muffins_thaidelight.raw_papaya": "Raw Papaya",
   "item.muffins_thaidelight.raw_papaya_slice": "Raw Papaya Slice",
   "item.muffins_thaidelight.somtam": "Plate of Somtam",
-  "item.muffins_thaidelight.spicy_minced_meat_salad": "Plate of Spicy Minced Pork Salad",
+  "item.muffins_thaidelight.spicy_minced_meat_salad": "Plate of Spicy Minced Meat Salad",
   "item.muffins_thaidelight.stir_fried_noodle": "Stir Fried Noodle",
   "itemGroup.muffins_thaidelight.main": "Muffin's Thai Delight",
   "jei.info.papaya_log": "Right click with bone meal to grow papayas."
