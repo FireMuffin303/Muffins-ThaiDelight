@@ -1,6 +1,6 @@
 {
   "type": "forge:add_spawns",
-  "biomes": ["minecraft:mangrove_swamp","minecraft:swamp","minecraft:river"],
+  "biomes": ["minecraft:mangrove_swamp","minecraft:swamp"],
   "spawners": {
     "type": "muffins_thaidelight:dragonfly",
     "weight": 2,

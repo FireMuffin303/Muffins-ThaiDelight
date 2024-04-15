@@ -15,6 +15,5 @@ public class LimeJuiceItem extends DrinkableItem {
     public void affectConsumer(ItemStack stack, Level world, LivingEntity user) {
         super.affectConsumer(stack, world, user);
         user.removeEffect(MobEffects.BLINDNESS);
-        user.removeEffect(MobEffects.DARKNESS);
     }
 }

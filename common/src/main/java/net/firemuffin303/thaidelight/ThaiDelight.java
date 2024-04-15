@@ -78,12 +78,13 @@ public class ThaiDelight {
 
     public static void registerAnimalFoodItem(){
         //Please Mojang, just turn animal food to ItemTags. I beg you.
+        //Finally. I'll do it after next update.
 
         ParrotTameFoodAccessor.getTameFood().add(Item.byBlock(ModBlocks.PAPAYA_SAPLING) );
         ParrotTameFoodAccessor.getTameFood().add(ModItems.PEPPER_SEED);
 
         Ingredient newPigFoods = Ingredient.of(ModItems.RAW_PAPAYA,ModItems.PAPAYA,ModItems.SLICED_PAPAYA,ModItems.RAW_PAPAYA_SLICE,ModItems.LIME,ModItems.SLICED_LIME);
-        Ingredient newChickenFoods = Ingredient.of(ModBlocks.PAPAYA_SAPLING,ModItems.PEPPER_SEED);
+        Ingredient newChickenFoods = Ingredient.of(ModItems.PAPAYA_SEEDS,ModItems.PEPPER_SEED);
 
         Ingredient newFrogFoods = Ingredient.of(ModItems.DRAGONFLY,ModItems.COOKED_DRAGONFLY);
 
