@@ -90,6 +90,8 @@ public class LangDataGen extends FabricLanguageProvider {
         translationBuilder.add(ModItems.LIME_JUICE,"Lime Juice");
 
         translationBuilder.add(ModItems.FISH_SAUCE_BOTTLE,"Fish Sauce Bottle");
+        translationBuilder.add(ModItems.FERMENTED_FISH_BOTTLE,"Fermented Fish Bottle");
+        translationBuilder.add(ModBlocks.FERMENTED_FISH_CAULDRON,"Fermented Fish Cauldron");
 
         //Mobs
         translationBuilder.add(ModBlocks.CRAB_EGG,"Flower Crab Egg");
@@ -187,6 +189,8 @@ public class LangDataGen extends FabricLanguageProvider {
 
             //Food
             translationBuilder.add(ModItems.FISH_SAUCE_BOTTLE,"ขวดน้ำปลา");
+            translationBuilder.add(ModItems.FERMENTED_FISH_BOTTLE,"ขวดปลาร้า");
+            translationBuilder.add(ModBlocks.FERMENTED_FISH_CAULDRON,"หม้อปลาร้า");
             translationBuilder.add(ModItems.PAPAYA_JUICE,"น้ำมะละกอ");
             translationBuilder.add(ModItems.LIME_JUICE,"น้ำมะนาว");
 

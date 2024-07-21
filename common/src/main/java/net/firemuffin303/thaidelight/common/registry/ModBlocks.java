@@ -2,6 +2,7 @@ package net.firemuffin303.thaidelight.common.registry;
 
 import net.firemuffin303.thaidelight.common.block.CrabEggBlock;
 import net.firemuffin303.thaidelight.common.block.MortarBlock;
+import net.firemuffin303.thaidelight.common.block.cauldron.FermentedFishCauldron;
 import net.firemuffin303.thaidelight.common.block.crops.*;
 import net.firemuffin303.thaidelight.common.block.grower.PapayaTreeGrower;
 import net.firemuffin303.thaidelight.utils.ModPlatform;
@@ -57,6 +58,8 @@ public class ModBlocks {
     public static final Block PAPAYA_SAPLING = new ModSaplingBlock(new PapayaTreeGrower(), BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY));
     public static final Block PAPAYA_CROPS = new PapayaCropBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY));
 
+    //Cauldron
+    public static final Block FERMENTED_FISH_CAULDRON = new FermentedFishCauldron(BlockBehaviour.Properties.copy(Blocks.CAULDRON).randomTicks(),ModCauldronInteraction.FERMENTED_FISH);
 
     public static void init(){
         //Functional Block
@@ -95,6 +98,8 @@ public class ModBlocks {
         registerWithItem("papaya_wood",PAPAYA_WOOD);
         registerWithItem("stripped_papaya_wood",STRIPPED_PAPAYA_WOOD);
         registerWithItem("papaya_leaves",PAPAYA_LEAVES);
+
+        register("fermented_fish_cauldron",FERMENTED_FISH_CAULDRON);
     }
 
     public static void register(String id, Block block){

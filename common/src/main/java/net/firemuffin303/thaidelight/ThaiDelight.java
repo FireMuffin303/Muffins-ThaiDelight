@@ -39,6 +39,8 @@ public class ThaiDelight {
         ModMenuType.init();
         ModSoundEvents.init();
         ModTreeDecorator.init();
+
+
     }
 
     public static void postInit(){
@@ -46,6 +48,7 @@ public class ThaiDelight {
         registerComposterBlock();
         registerStrippables();
         registerAnimalFoodItem();
+        ModCauldronInteraction.init();
     }
 
     public static void registerComposterBlock(){

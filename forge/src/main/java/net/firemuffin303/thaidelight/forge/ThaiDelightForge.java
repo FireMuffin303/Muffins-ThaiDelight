@@ -136,6 +136,7 @@ public class ThaiDelightForge {
         event.enqueueWork(ThaiDelight::registerComposterBlock);
         event.enqueueWork(ThaiDelight::registerStrippables);
         event.enqueueWork(ThaiDelight::registerAnimalFoodItem);
+        event.enqueueWork(ModCauldronInteraction::init);
     }
 
     public void registerVillagerTrades(VillagerTradesEvent event){

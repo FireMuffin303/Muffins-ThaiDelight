@@ -45,6 +45,7 @@ public class ModItems {
 
     //Bucket
     public static final Item FISH_SAUCE_BOTTLE =  ModPlatform.getDrinkable(drinkItem().food(ModFood.FISH_SAUCE),true,false);
+    public static final Item FERMENTED_FISH_BOTTLE = ModPlatform.getDrinkable(drinkItem(),true,false);
     public static final Item PAPAYA_JUICE = ModPlatform.getPapayaJuice(drinkItem().food(ModFood.PAPAYA_JUICE));
     public static final Item LIME_JUICE = ModPlatform.getLimeJuice(drinkItem().food(ModFood.LIME_JUICE));
 
@@ -100,6 +101,7 @@ public class ModItems {
         register("cooked_dragonfly",COOKED_DRAGONFLY);
 
         register("fish_sauce_bottle",FISH_SAUCE_BOTTLE);
+        register("fermented_fish_bottle",FERMENTED_FISH_BOTTLE);
         register("papaya_juice",PAPAYA_JUICE);
         register("lime_juice",LIME_JUICE);
 
