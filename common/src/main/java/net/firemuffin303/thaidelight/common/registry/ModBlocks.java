@@ -21,96 +21,52 @@ import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 
+import java.util.function.Supplier;
+
 public class ModBlocks {
     //Functional Block
-    public static final Block MORTAR = new MortarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_RED).strength(0.5f,6.0f).noOcclusion().sound(SoundType.DECORATED_POT));
+    public static final Supplier<Block> MORTAR = register("mortar",() -> new MortarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_RED).strength(0.5f,6.0f).noOcclusion().sound(SoundType.DECORATED_POT)));
 
     //Crate
-    public static final Block LIME_CRATE = new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).destroyTime(2.0f).explosionResistance(3.0f).sound(SoundType.WOOD));
-    public static final Block PEPPER_CRATE = new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).destroyTime(2.0f).explosionResistance(3.0f).sound(SoundType.WOOD));
-    public static final Block RAW_PAPAYA_CRATE = new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).destroyTime(2.0f).explosionResistance(3.0f).sound(SoundType.WOOD));
-    public static final Block PAPAYA_CRATE = new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).destroyTime(2.0f).explosionResistance(3.0f).sound(SoundType.WOOD));
+    public static final Supplier<Block> LIME_CRATE = register("lime_crate",() -> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).destroyTime(2.0f).explosionResistance(3.0f).sound(SoundType.WOOD)));
+    public static final Supplier<Block> PEPPER_CRATE = register("pepper_crate",() -> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).destroyTime(2.0f).explosionResistance(3.0f).sound(SoundType.WOOD)));
+    public static final Supplier<Block> RAW_PAPAYA_CRATE = register("raw_papaya_crate",() -> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).destroyTime(2.0f).explosionResistance(3.0f).sound(SoundType.WOOD)));
+    public static final Supplier<Block> PAPAYA_CRATE = register("papaya_crate",() -> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).destroyTime(2.0f).explosionResistance(3.0f).sound(SoundType.WOOD)));
 
     //Eggs
-    public static final Block CRAB_EGG = new CrabEggBlock(BlockBehaviour.Properties.copy(Blocks.FROGSPAWN));
+    public static final Supplier<Block> CRAB_EGG = register("flower_crab_egg",() -> new CrabEggBlock(BlockBehaviour.Properties.copy(Blocks.FROGSPAWN)));
 
     //Wild Crops
-    public static final Block WILD_PEPPER_CROP = ModPlatform.getWildCropBlock(MobEffects.CONFUSION,6,BlockBehaviour.Properties.copy(Blocks.TALL_GRASS));
+    public static final Supplier<Block> WILD_PEPPER_CROP = ModPlatform.getWildCropBlock(MobEffects.CONFUSION,6,BlockBehaviour.Properties.copy(Blocks.TALL_GRASS));
     //Crops
-    public static final Block LIME_CROP = new LimeCrop(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).randomTicks().sound(SoundType.SWEET_BERRY_BUSH).pushReaction(PushReaction.DESTROY));
-    public static final Block LIME_SAPLING = new LimeSapling(BlockBehaviour.Properties.copy(ModBlocks.LIME_CROP).noCollission());
-    public static final Block PEPPER_CROP = new PepperCropBlock(BlockBehaviour.Properties.copy(Blocks.POTATOES));
+    public static final Supplier<Block> LIME_CROP = register("lime_bush",() -> new LimeCrop(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).randomTicks().sound(SoundType.SWEET_BERRY_BUSH).pushReaction(PushReaction.DESTROY)));
+    public static final Supplier<Block> LIME_SAPLING = register("lime_sapling",() -> new LimeSapling(BlockBehaviour.Properties.copy(ModBlocks.LIME_CROP).noCollission()));
+    public static final Supplier<Block> PEPPER_CROP = register("pepper",() -> new PepperCropBlock(BlockBehaviour.Properties.copy(Blocks.POTATOES)));
 
 
     //Feast
-    public static final Block CRAB_FRIED_RICE_FEAST = ModPlatform.getCrabFriedRice();
-    public static final Block SOMTAM_FEAST = ModPlatform.getSomtamBlock();
-    public static final Block SPICY_MINCED_MEAT_SALAD_FEAST = ModPlatform.getSpicyMincedPorkBlock();
+    public static final Supplier<Block> CRAB_FRIED_RICE_FEAST = register("crab_fried_rice_feast", ModPlatform::getCrabFriedRice);
+    public static final Supplier<Block> SOMTAM_FEAST = register("somtam_feast",ModPlatform::getSomtamBlock);
+    public static final Supplier<Block> LARB_FEAST = register("larb_feast",ModPlatform::getSpicyMincedPorkBlock);
 
     //Papaya
-    public static final Block PAPAYA_LOG = new PapayaLog(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.NETHER_WOOD).ignitedByLava());
-    public static final Block STRIPPED_PAPAYA_LOG = log(MapColor.COLOR_CYAN,MapColor.COLOR_CYAN);
-    public static final Block PAPAYA_WOOD = new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava());
-    public static final Block STRIPPED_PAPAYA_WOOD = new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava());
-    public static final Block PAPAYA_LEAVES = leaves(SoundType.AZALEA_LEAVES);
+    public static final Supplier<Block> PAPAYA_LOG = register("papaya_log", () -> new PapayaLog(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.NETHER_WOOD).ignitedByLava()));
+    public static final Supplier<Block> STRIPPED_PAPAYA_LOG = register("stripped_papaya_log",() -> log(MapColor.COLOR_CYAN,MapColor.COLOR_CYAN));
+    public static final Supplier<Block> PAPAYA_WOOD = register("papaya_wood",() -> new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava()));
+    public static final Supplier<Block> STRIPPED_PAPAYA_WOOD = register("stripped_papaya_wood", () -> new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava()));
+    public static final Supplier<Block> PAPAYA_LEAVES = register("papaya_leaves",() -> leaves(SoundType.AZALEA_LEAVES));
 
-    public static final Block PAPAYA = new PapayaBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).randomTicks().strength(0.2F, 3.0F).sound(SoundType.WOOD).noOcclusion().pushReaction(PushReaction.DESTROY));
-    public static final Block PAPAYA_SAPLING = new ModSaplingBlock(new PapayaTreeGrower(), BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY));
-    public static final Block PAPAYA_CROPS = new PapayaCropBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY));
+    public static final Supplier<Block> PAPAYA = register("papaya",() -> new PapayaBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).randomTicks().strength(0.2F, 3.0F).sound(SoundType.WOOD).noOcclusion().pushReaction(PushReaction.DESTROY)));
+    public static final Supplier<Block> PAPAYA_SAPLING = register("papaya_sapling",() -> new ModSaplingBlock(new PapayaTreeGrower(), BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY)));
+    public static final Supplier<Block> PAPAYA_CROPS = register("papaya_crop",() -> new PapayaCropBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY)));
 
     //Cauldron
-    public static final Block FERMENTED_FISH_CAULDRON = new FermentedFishCauldron(BlockBehaviour.Properties.copy(Blocks.CAULDRON).randomTicks(),ModCauldronInteraction.FERMENTED_FISH);
+    public static final Supplier<Block> FERMENTED_FISH_CAULDRON = register("fermented_fish_cauldron",() -> new FermentedFishCauldron(BlockBehaviour.Properties.copy(Blocks.CAULDRON).randomTicks(),ModCauldronInteraction.FERMENTED_FISH));
 
-    public static void init(){
-        //Functional Block
-        registerWithItem("mortar",MORTAR);
+    public static void init(){}
 
-        //Crate
-        registerWithItem("lime_crate",LIME_CRATE);
-        registerWithItem("pepper_crate",PEPPER_CRATE);
-        registerWithItem("raw_papaya_crate", RAW_PAPAYA_CRATE);
-        registerWithItem("papaya_crate",PAPAYA_CRATE);
-
-        //Eggs
-        registerWithItem("flower_crab_egg",CRAB_EGG);
-
-        //Wild Crops
-        registerWithItem("wild_pepper",WILD_PEPPER_CROP);
-
-        //Crops
-        register("pepper",PEPPER_CROP);
-        register("lime_bush", LIME_CROP);
-        registerWithItem("lime_sapling", LIME_SAPLING);
-
-
-        register("papaya",PAPAYA);
-        registerWithItem("papaya_sapling", PAPAYA_SAPLING);
-        register("papaya_crop", PAPAYA_CROPS);
-
-        //Feast
-        registerWithItem("somtam_feast",SOMTAM_FEAST);
-        registerWithItem("spicy_minced_meat_salad_feast", SPICY_MINCED_MEAT_SALAD_FEAST);
-        registerWithItem("crab_fried_rice_feast", CRAB_FRIED_RICE_FEAST);
-
-        //Block
-        registerWithItem("papaya_log",PAPAYA_LOG);
-        registerWithItem("stripped_papaya_log",STRIPPED_PAPAYA_LOG);
-        registerWithItem("papaya_wood",PAPAYA_WOOD);
-        registerWithItem("stripped_papaya_wood",STRIPPED_PAPAYA_WOOD);
-        registerWithItem("papaya_leaves",PAPAYA_LEAVES);
-
-        register("fermented_fish_cauldron",FERMENTED_FISH_CAULDRON);
-    }
-
-    public static void register(String id, Block block){
-        ModPlatform.registryBlock(id,()->block);
-    }
-
-    public static void registerWithItem(String id, Block block){
-        register(id, block);
-        Item item = new BlockItem(block,new Item.Properties());
-        ModPlatform.registryItem(id,() -> item);
-        ModItems.ITEMS.add(item);
+    public static Supplier<Block> register(String id, Supplier<Block> block){
+        return ModPlatform.registryBlock(id,block);
     }
 
     private static RotatedPillarBlock log(MapColor mapColor, MapColor mapColor2) {

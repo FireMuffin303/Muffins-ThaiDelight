@@ -1,31 +1,19 @@
 plugins {
-    id "com.github.johnrengelman.shadow" version "7.1.2"
+    id 'com.github.johnrengelman.shadow'
 }
 
 architectury {
     platformSetupLoomIde()
-    forge()
+    neoForge()
+}
+
+repositories {
+    maven { url 'https://maven.neoforged.net/releases/' }
 }
 
 loom {
     accessWidenerPath = project(":common").loom.accessWidenerPath
 
-    forge {
-        convertAccessWideners = true
-        extraAccessWideners.add loom.accessWidenerPath.get().asFile.name
-
-        mixinConfig "muffins_thaidelight-common.mixins.json"
-        mixinConfig "muffins_thaidelight.mixins.json"
-    }
-
-    runs {
-        data {
-            forgeTemplate("data")
-            environment "data"
-            programArgs "--mod=muffins_thaidelight", "--all", "--output=" + file("src/generated/resources/"), "--existing=" + project(":common").file("src/main/resources/")
-            name "Forge Data Generation"
-        }
-    }
 }
 
 sourceSets.main {
@@ -39,28 +27,20 @@ configurations {
     shadowCommon // Don't use shadow from the shadow plugin since it *excludes* files.
     compileClasspath.extendsFrom common
     runtimeClasspath.extendsFrom common
-    developmentForge.extendsFrom common
+    developmentNeoForge.extendsFrom common
 }
 
 dependencies {
-    forge "net.minecraftforge:forge:${rootProject.forge_version}"
+    neoForge "net.neoforged:neoforge:${rootProject.neoforge_version}"
     // Remove the next line if you don't want to depend on the API
 
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
-    shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive = false }
-    modImplementation("maven.modrinth:farmers-delight:k7RoRFPF")
+    shadowCommon(project(path: ":common", configuration: "transformProductionNeoForge")) { transitive = false }
+    modImplementation("maven.modrinth:farmers-delight:ovSzG9pc")
     // at runtime, use the full JEI jar for Forge
-    modLocalRuntime("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
-    modLocalRuntime("maven.modrinth:appleskin:XdXDExVF")
-    modLocalRuntime("maven.modrinth:crabbers-delight:Omdrcn17")
-    modLocalRuntime("maven.modrinth:geckolib:pyB0jIsx")
-    modLocalRuntime("maven.modrinth:embeddium:pdLkrlJc")
+    modLocalRuntime("mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}")
+    modLocalRuntime("maven.modrinth:sodium:rcNehRIZ")
 
-    modLocalRuntime("maven.modrinth:fish-of-thieves:MK9xQTXT")
-    modLocalRuntime("maven.modrinth:cloth-config:nr1znv5v")
-
-    modLocalRuntime("maven.modrinth:alexs-mobs:ftwjMYH7")
-    modLocalRuntime("maven.modrinth:citadel:3OJWvUG9")
 }
 
 processResources {
@@ -76,17 +56,17 @@ shadowJar {
     exclude "architectury.common.json"
 
     configurations = [project.configurations.shadowCommon]
-    classifier "dev-shadow"
+    archiveClassifier = "dev"
 }
 
 remapJar {
     input.set shadowJar.archiveFile
     dependsOn shadowJar
-    classifier null
+    archiveClassifier = null
 }
 
 jar {
-    classifier "dev"
+    archiveClassifier = "dev"
 }
 
 sourcesJar {

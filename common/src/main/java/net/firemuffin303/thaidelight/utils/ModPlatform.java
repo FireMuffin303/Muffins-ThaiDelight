@@ -59,12 +59,12 @@ public class ModPlatform {
     }
 
     @ExpectPlatform
-    public static <T extends Block> void registryBlock(String id, Supplier<T> block){
+    public static <T extends Block> Supplier<T> registryBlock(String id, Supplier<T> block){
         throw new AssertionError();
     }
 
     @ExpectPlatform
-    public static <T extends Item> void registryItem(String id,Supplier<T> item){
+    public static <T extends Item> Supplier<T> registryItem(String id,Supplier<T> item){
         throw new AssertionError();
     }
 

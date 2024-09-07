@@ -33,7 +33,7 @@ public class ModFluid {
 
 
     private static TagKey<Fluid> createTag(String string) {
-        return TagKey.create(Registries.FLUID, new ResourceLocation(ThaiDelight.MOD_ID,string));
+        return TagKey.create(Registries.FLUID, ResourceLocation.fromNamespaceAndPath(ThaiDelight.MOD_ID,string));
     }
 
 

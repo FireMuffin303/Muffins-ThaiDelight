@@ -7,7 +7,6 @@ import net.firemuffin303.thaidelight.common.entity.FlowerCrabEntity;
 import net.firemuffin303.thaidelight.common.event.ModVillagerTrades;
 import net.firemuffin303.thaidelight.common.item.bottle.DragonflyBottleItem;
 import net.firemuffin303.thaidelight.common.registry.*;
-import net.firemuffin303.thaidelight.forge.common.Configuration;
 import net.firemuffin303.thaidelight.forge.common.registry.ModBlocksForge;
 import net.firemuffin303.thaidelight.forge.common.registry.ModItemsForge;
 import net.firemuffin303.thaidelight.forge.common.structures.VillageStructures;
@@ -17,7 +16,6 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.SpawnPlacements;
@@ -26,74 +24,65 @@ import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
-import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent;
-import net.minecraftforge.event.village.VillagerTradesEvent;
-import net.minecraftforge.event.village.WandererTradesEvent;
-import net.minecraftforge.eventbus.api.EventPriority;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegisterEvent;
+import net.neoforged.bus.api.EventPriority;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
+import net.neoforged.neoforge.event.village.VillagerTradesEvent;
+import net.neoforged.neoforge.event.village.WandererTradesEvent;
+import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforge.registries.RegisterEvent;
 
 import java.util.List;
 
 @Mod(ThaiDelight.MOD_ID)
 public class ThaiDelightForge {
-    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES,ThaiDelight.MOD_ID);
-    public static final DeferredRegister<Block> BLOCK = DeferredRegister.create(ForgeRegistries.BLOCKS,ThaiDelight.MOD_ID);
-    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS,ThaiDelight.MOD_ID);
-    public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES,ThaiDelight.MOD_ID);
-    public static final DeferredRegister<Fluid> FLUIDS = DeferredRegister.create(ForgeRegistries.FLUIDS,ThaiDelight.MOD_ID);
-    public static final DeferredRegister<RecipeType<?>> RECIPE_TYPE = DeferredRegister.create(ForgeRegistries.RECIPE_TYPES,ThaiDelight.MOD_ID);
-    public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZER = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS,ThaiDelight.MOD_ID);
-    public static final DeferredRegister<MenuType<?>> MENU_TYPE = DeferredRegister.create(ForgeRegistries.MENU_TYPES,ThaiDelight.MOD_ID);
-    public static final DeferredRegister<SoundEvent> SOUND_EVENT = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS,ThaiDelight.MOD_ID);
-    public static final DeferredRegister<TreeDecoratorType<?>> TREE_DECORATOR = DeferredRegister.create(ForgeRegistries.TREE_DECORATOR_TYPES,ThaiDelight.MOD_ID);
+    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES = DeferredRegister.create(BuiltInRegistries.BLOCK_ENTITY_TYPE,ThaiDelight.MOD_ID);
+    public static final DeferredRegister<Block> BLOCK = DeferredRegister.create(BuiltInRegistries.BLOCK,ThaiDelight.MOD_ID);
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(BuiltInRegistries.ITEM,ThaiDelight.MOD_ID);
+    public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(BuiltInRegistries.ENTITY_TYPE,ThaiDelight.MOD_ID);
+    public static final DeferredRegister<Fluid> FLUIDS = DeferredRegister.create(BuiltInRegistries.FLUID,ThaiDelight.MOD_ID);
+    public static final DeferredRegister<RecipeType<?>> RECIPE_TYPE = DeferredRegister.create(BuiltInRegistries.RECIPE_TYPE,ThaiDelight.MOD_ID);
+    public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZER = DeferredRegister.create(BuiltInRegistries.RECIPE_SERIALIZER,ThaiDelight.MOD_ID);
+    public static final DeferredRegister<MenuType<?>> MENU_TYPE = DeferredRegister.create(BuiltInRegistries.MENU,ThaiDelight.MOD_ID);
+    public static final DeferredRegister<SoundEvent> SOUND_EVENT = DeferredRegister.create(BuiltInRegistries.SOUND_EVENT,ThaiDelight.MOD_ID);
+    public static final DeferredRegister<TreeDecoratorType<?>> TREE_DECORATOR = DeferredRegister.create(BuiltInRegistries.TREE_DECORATOR_TYPE,ThaiDelight.MOD_ID);
 
 
-    public ThaiDelightForge() {
-        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+    public ThaiDelightForge(IEventBus iEventBus) {
         //ThaiDelight.init();
-        modEventBus.register(this);
+        iEventBus.register(this);
 
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Configuration.COMMON_CONFIG);
-        ENTITY_TYPES.register(modEventBus);
-        BLOCK.register(modEventBus);
-        BLOCK_ENTITY_TYPES.register(modEventBus);
-        FLUIDS.register(modEventBus);
-        ITEMS.register(modEventBus);
-        RECIPE_TYPE.register(modEventBus);
-        RECIPE_SERIALIZER.register(modEventBus);
-        MENU_TYPE.register(modEventBus);
-        SOUND_EVENT.register(modEventBus);
-        TREE_DECORATOR.register(modEventBus);
+        ENTITY_TYPES.register(iEventBus);
+        BLOCK.register(iEventBus);
+        BLOCK_ENTITY_TYPES.register(iEventBus);
+        FLUIDS.register(iEventBus);
+        ITEMS.register(iEventBus);
+        RECIPE_TYPE.register(iEventBus);
+        RECIPE_SERIALIZER.register(iEventBus);
+        MENU_TYPE.register(iEventBus);
+        SOUND_EVENT.register(iEventBus);
+        TREE_DECORATOR.register(iEventBus);
 
 
-        modEventBus.addListener(EventPriority.HIGH,this::registerEvent);
-        modEventBus.addListener(EventPriority.LOW,this::registerAttribute);
-        modEventBus.addListener(EventPriority.LOW,this::registerEntitySpawn);
-        modEventBus.addListener(EventPriority.LOW,this::registerCommonSetup);
+        iEventBus.addListener(EventPriority.HIGH,this::registerEvent);
+        iEventBus.addListener(EventPriority.LOW,this::registerAttribute);
+        iEventBus.addListener(EventPriority.LOW,this::registerEntitySpawn);
+        iEventBus.addListener(EventPriority.LOW,this::registerCommonSetup);
 
-        MinecraftForge.EVENT_BUS.addListener(VillageStructures::addNewVillageBuilding);
-        MinecraftForge.EVENT_BUS.addListener(this::registerVillagerTrades);
-        MinecraftForge.EVENT_BUS.addListener(this::registerWandererTrades);
-        MinecraftForge.EVENT_BUS.register(this);
+        NeoForge.EVENT_BUS.addListener(VillageStructures::addNewVillageBuilding);
+        NeoForge.EVENT_BUS.addListener(this::registerVillagerTrades);
+        NeoForge.EVENT_BUS.addListener(this::registerWandererTrades);
+        NeoForge.EVENT_BUS.register(this);
 
     }
 
@@ -126,7 +115,7 @@ public class ThaiDelightForge {
 
         registerEvent.register(Registries.CREATIVE_MODE_TAB, helper ->
                 Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB,
-                        new ResourceLocation(ThaiDelight.MOD_ID,"main"),
+                        ResourceLocation.fromNamespaceAndPath(ThaiDelight.MOD_ID,"main"),
                         CreativeModeTab.builder().title(Component.translatable("itemGroup."+ThaiDelight.MOD_ID+".main"))
                                 .icon(() -> new ItemStack(ModBlocks.MORTAR))
                                 .displayItems(this::displayItem).build()));
@@ -168,7 +157,7 @@ public class ThaiDelightForge {
         output.accept(ModBlocks.PAPAYA_LEAVES);
 
         output.accept(ModBlocks.SOMTAM_FEAST);
-        output.accept(ModBlocks.SPICY_MINCED_MEAT_SALAD_FEAST);
+        output.accept(ModBlocks.LARB_FEAST);
         output.accept(ModBlocks.CRAB_FRIED_RICE_FEAST);
 
         output.accept(ModBlocks.WILD_PEPPER_CROP);

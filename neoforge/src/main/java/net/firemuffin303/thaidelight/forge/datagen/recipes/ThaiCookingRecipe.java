@@ -8,7 +8,6 @@ import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.client.recipebook.CookingPotRecipeBookTab;
 import vectorwing.farmersdelight.common.tag.ForgeTags;
@@ -57,7 +56,7 @@ public class ThaiCookingRecipe {
                         )
                 .build(consumer,ForgeRegistries.ITEMS.getKey(ModItemsForge.CRAB_FRIED_RICE.get())+"_from_fried_rice");
 
-        CookingPotRecipeBuilder.cookingPotRecipe(ModBlocks.SPICY_MINCED_MEAT_SALAD_FEAST,1,CookingRecipes.NORMAL_COOKING,0.35f, Items.BOWL)
+        CookingPotRecipeBuilder.cookingPotRecipe(ModBlocks.LARB_FEAST,1,CookingRecipes.NORMAL_COOKING,0.35f, Items.BOWL)
                 .addIngredient(ForgeTags.COOKED_BEEF)
                 .addIngredient(ForgeTags.COOKED_BEEF)
                 .addIngredient(ModItems.PEPPER)
@@ -73,9 +72,9 @@ public class ThaiCookingRecipe {
                         vectorwing.farmersdelight.common.registry.ModItems.ONION.get(),
                         ModItems.FISH_SAUCE_BOTTLE
                 )
-                .build(consumer,ForgeRegistries.ITEMS.getKey(Item.byBlock(ModBlocks.SPICY_MINCED_MEAT_SALAD_FEAST))+"_from_cooked_beef");
+                .build(consumer,ForgeRegistries.ITEMS.getKey(Item.byBlock(ModBlocks.LARB_FEAST))+"_from_cooked_beef");
 
-        CookingPotRecipeBuilder.cookingPotRecipe(ModBlocks.SPICY_MINCED_MEAT_SALAD_FEAST,1,CookingRecipes.NORMAL_COOKING,0.35f, Items.BOWL)
+        CookingPotRecipeBuilder.cookingPotRecipe(ModBlocks.LARB_FEAST,1,CookingRecipes.NORMAL_COOKING,0.35f, Items.BOWL)
                 .addIngredient(ForgeTags.COOKED_PORK)
                 .addIngredient(ForgeTags.COOKED_PORK)
                 .addIngredient(ModItems.PEPPER)
@@ -90,9 +89,9 @@ public class ThaiCookingRecipe {
                         Items.SUGAR,
                         ModItems.FISH_SAUCE_BOTTLE
                 )
-                .build(consumer,ForgeRegistries.ITEMS.getKey(Item.byBlock(ModBlocks.SPICY_MINCED_MEAT_SALAD_FEAST))+"_from_cooked_pork");
+                .build(consumer,ForgeRegistries.ITEMS.getKey(Item.byBlock(ModBlocks.LARB_FEAST))+"_from_cooked_pork");
 
-        CookingPotRecipeBuilder.cookingPotRecipe(ModBlocks.SPICY_MINCED_MEAT_SALAD_FEAST,1,CookingRecipes.NORMAL_COOKING,0.35f, Items.BOWL)
+        CookingPotRecipeBuilder.cookingPotRecipe(ModBlocks.LARB_FEAST,1,CookingRecipes.NORMAL_COOKING,0.35f, Items.BOWL)
                 .addIngredient(ForgeTags.COOKED_MUTTON)
                 .addIngredient(ForgeTags.COOKED_MUTTON)
                 .addIngredient(ModItems.PEPPER)
@@ -106,9 +105,9 @@ public class ThaiCookingRecipe {
                         Items.SUGAR,
                         ModItems.FISH_SAUCE_BOTTLE
                 )
-                .build(consumer,ForgeRegistries.ITEMS.getKey(Item.byBlock(ModBlocks.SPICY_MINCED_MEAT_SALAD_FEAST))+"_from_cooked_mutton");
+                .build(consumer,ForgeRegistries.ITEMS.getKey(Item.byBlock(ModBlocks.LARB_FEAST))+"_from_cooked_mutton");
 
-        CookingPotRecipeBuilder.cookingPotRecipe(ModBlocks.SPICY_MINCED_MEAT_SALAD_FEAST,1,CookingRecipes.NORMAL_COOKING,0.35f, Items.BOWL)
+        CookingPotRecipeBuilder.cookingPotRecipe(ModBlocks.LARB_FEAST,1,CookingRecipes.NORMAL_COOKING,0.35f, Items.BOWL)
                 .addIngredient(ForgeTags.COOKED_CHICKEN)
                 .addIngredient(ForgeTags.COOKED_CHICKEN)
                 .addIngredient(ModItems.PEPPER)
@@ -122,9 +121,9 @@ public class ThaiCookingRecipe {
                         Items.SUGAR,
                         ModItems.FISH_SAUCE_BOTTLE
                 )
-                .build(consumer,ForgeRegistries.ITEMS.getKey(Item.byBlock(ModBlocks.SPICY_MINCED_MEAT_SALAD_FEAST))+"_from_cooked_chicken");
+                .build(consumer,ForgeRegistries.ITEMS.getKey(Item.byBlock(ModBlocks.LARB_FEAST))+"_from_cooked_chicken");
 
-        CookingPotRecipeBuilder.cookingPotRecipe(ModBlocks.SPICY_MINCED_MEAT_SALAD_FEAST,1,CookingRecipes.NORMAL_COOKING,0.35f, Items.BOWL)
+        CookingPotRecipeBuilder.cookingPotRecipe(ModBlocks.LARB_FEAST,1,CookingRecipes.NORMAL_COOKING,0.35f, Items.BOWL)
                 .addIngredient(ForgeTags.COOKED_FISHES)
                 .addIngredient(ForgeTags.COOKED_FISHES)
                 .addIngredient(ModItems.PEPPER)
@@ -139,9 +138,9 @@ public class ThaiCookingRecipe {
                         Items.SUGAR,
                         ModItems.FISH_SAUCE_BOTTLE
                 )
-                .build(consumer,ForgeRegistries.ITEMS.getKey(Item.byBlock(ModBlocks.SPICY_MINCED_MEAT_SALAD_FEAST))+"_from_cooked_fishes");
+                .build(consumer,ForgeRegistries.ITEMS.getKey(Item.byBlock(ModBlocks.LARB_FEAST))+"_from_cooked_fishes");
 
-        CookingPotRecipeBuilder.cookingPotRecipe(ModBlocks.SPICY_MINCED_MEAT_SALAD_FEAST,1,CookingRecipes.NORMAL_COOKING,0.35f, Items.BOWL)
+        CookingPotRecipeBuilder.cookingPotRecipe(ModBlocks.LARB_FEAST,1,CookingRecipes.NORMAL_COOKING,0.35f, Items.BOWL)
                 .addIngredient(ModItems.COOKED_CRAB_MEAT)
                 .addIngredient(ModItems.COOKED_CRAB_MEAT)
                 .addIngredient(ModItems.PEPPER)
@@ -155,7 +154,7 @@ public class ThaiCookingRecipe {
                         Items.SUGAR,
                         ModItems.FISH_SAUCE_BOTTLE
                 )
-                .build(consumer,ForgeRegistries.ITEMS.getKey(Item.byBlock(ModBlocks.SPICY_MINCED_MEAT_SALAD_FEAST))+"_from_cooked_flower_crab");
+                .build(consumer,ForgeRegistries.ITEMS.getKey(Item.byBlock(ModBlocks.LARB_FEAST))+"_from_cooked_flower_crab");
 
         CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.LIME), Ingredient.of(ForgeTags.TOOLS_KNIVES),ModItems.SLICED_LIME,2).build(consumer,ForgeRegistries.ITEMS.getKey(ModItems.SLICED_LIME));
         CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.RAW_PAPAYA), Ingredient.of(ForgeTags.TOOLS_KNIVES),ModItems.RAW_PAPAYA_SLICE,4).build(consumer,ForgeRegistries.ITEMS.getKey(ModItems.RAW_PAPAYA_SLICE));
