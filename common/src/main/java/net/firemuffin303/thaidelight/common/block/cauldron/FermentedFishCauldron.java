@@ -1,5 +1,7 @@
 package net.firemuffin303.thaidelight.common.block.cauldron;
 
+import com.mojang.serialization.MapCodec;
+import net.firemuffin303.thaidelight.common.registry.ModCauldronInteraction;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.cauldron.CauldronInteraction;
 import net.minecraft.server.level.ServerLevel;
@@ -26,8 +28,10 @@ public class FermentedFishCauldron extends AbstractCauldronBlock {
     public static final IntegerProperty FERMENT;
     private static final int FERMENTING_TIMER = 200;
 
-    public FermentedFishCauldron(Properties properties, Map<Item, CauldronInteraction> map) {
-        super(properties, map);
+    public static final MapCodec<FermentedFishCauldron> CODEC = simpleCodec(FermentedFishCauldron::new);
+
+    public FermentedFishCauldron(Properties properties) {
+        super(properties, ModCauldronInteraction.FERMENTED_FISH);
         this.registerDefaultState((BlockState) this.stateDefinition.any().setValue(FERMENT,0));
     }
 
@@ -49,6 +53,11 @@ public class FermentedFishCauldron extends AbstractCauldronBlock {
     @Override
     public boolean isRandomlyTicking(BlockState blockState) {
         return blockState.getValue(FERMENT) < 2;
+    }
+
+    @Override
+    protected MapCodec<? extends AbstractCauldronBlock> codec() {
+        return CODEC;
     }
 
     @Override

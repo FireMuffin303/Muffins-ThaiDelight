@@ -19,7 +19,7 @@ import static net.minecraft.core.cauldron.CauldronInteraction.WATER;
 import static net.minecraft.core.cauldron.CauldronInteraction.fillBucket;
 
 public class ModCauldronInteraction {
-     static CauldronInteraction.InteractionMap FERMENTED_FISH = CauldronInteraction.newInteractionMap("fermented_fish");
+    public static CauldronInteraction.InteractionMap FERMENTED_FISH = CauldronInteraction.newInteractionMap("fermented_fish");
 
     static CauldronInteraction MAKE_FERMENTED_FISH = ((blockState, level, blockPos, player, interactionHand, itemStack) -> {
         if(!level.isClientSide) {

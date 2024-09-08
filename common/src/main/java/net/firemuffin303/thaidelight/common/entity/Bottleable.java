@@ -1,5 +1,6 @@
 package net.firemuffin303.thaidelight.common.entity;
 
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.InteractionHand;
@@ -10,6 +11,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.Level;
 
 import java.util.Optional;
@@ -28,32 +30,31 @@ public interface Bottleable {
     SoundEvent getBottleFillSound();
 
     static void copyDataToStack(Mob entity, ItemStack stack) {
-        CompoundTag compoundTag = stack.getOrCreateTag();
-        if (entity.hasCustomName()) {
-            stack.setHoverName(entity.getCustomName());
-        }
+        stack.set(DataComponents.CUSTOM_NAME,entity.getCustomName());
 
-        if (entity.isNoAi()) {
-            compoundTag.putBoolean("NoAI", entity.isNoAi());
-        }
+        CustomData.update(DataComponents.BUCKET_ENTITY_DATA,stack,(compoundTag) -> {
+            if (entity.isNoAi()) {
+                compoundTag.putBoolean("NoAI", entity.isNoAi());
+            }
 
-        if (entity.isSilent()) {
-            compoundTag.putBoolean("Silent", entity.isSilent());
-        }
+            if (entity.isSilent()) {
+                compoundTag.putBoolean("Silent", entity.isSilent());
+            }
 
-        if (entity.isNoGravity()) {
-            compoundTag.putBoolean("NoGravity", entity.isNoGravity());
-        }
+            if (entity.isNoGravity()) {
+                compoundTag.putBoolean("NoGravity", entity.isNoGravity());
+            }
 
-        if (entity.hasGlowingTag()) {
-            compoundTag.putBoolean("Glowing", entity.isCurrentlyGlowing());
-        }
+            if (entity.hasGlowingTag()) {
+                compoundTag.putBoolean("Glowing", entity.hasGlowingTag());
+            }
 
-        if (entity.isInvulnerable()) {
-            compoundTag.putBoolean("Invulnerable", entity.isInvulnerable());
-        }
+            if (entity.isInvulnerable()) {
+                compoundTag.putBoolean("Invulnerable", entity.isInvulnerable());
+            }
 
-        compoundTag.putFloat("Health", entity.getHealth());
+            compoundTag.putFloat("Health", entity.getHealth());
+        });
     }
 
     static void copyDataFromNbt(Mob entity, CompoundTag compoundTag) {

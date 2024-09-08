@@ -59,27 +59,22 @@ public class ModPlatform {
     }
 
     @ExpectPlatform
-    public static <T extends Block> Supplier<T> registryBlock(String id, Supplier<T> block){
+    public static <T extends Block> Supplier<T> registryBlock(ResourceLocation resourceLocation, Supplier<T> block){
         throw new AssertionError();
     }
 
     @ExpectPlatform
-    public static <T extends Item> Supplier<T> registryItem(String id,Supplier<T> item){
+    public static <T extends Item> Supplier<T> registryItem(ResourceLocation resourceLocation,Supplier<T> item){
         throw new AssertionError();
     }
 
     @ExpectPlatform
-    public static <T extends Entity> void registerEntityType(String id,EntityType<T> entityType){
+    public static <T extends Entity> Supplier<EntityType<T>> registerEntityType(ResourceLocation resourceLocation,Supplier<EntityType<T>> entityType){
         throw new AssertionError();
     }
 
     @ExpectPlatform
-    public static void registerStrippables(Map<Block,Block> blockBlockMap){
-        throw new AssertionError();
-    }
-
-    @ExpectPlatform
-    public static SoundEvent registerSoundEvent(String id,SoundEvent event){
+    public static Supplier<SoundEvent> registerSoundEvent(ResourceLocation resourceLocation,Supplier<SoundEvent> event){
         throw new AssertionError();
     }
 
@@ -99,7 +94,7 @@ public class ModPlatform {
     }
 
     @ExpectPlatform
-    public static <T extends Recipe<?>> void registerRecipeType(String id, RecipeType<T> recipeType){
+    public static <T extends Recipe<?>> Supplier<RecipeType<T>> registerRecipeType(ResourceLocation resourceLocation, Supplier<RecipeType<T>> recipeType){
         throw new AssertionError();
     }
 
@@ -121,6 +116,11 @@ public class ModPlatform {
     @ExpectPlatform
     public static <T extends TreeDecorator> TreeDecoratorType<T> registerTreeDecorator(String id, Codec<T> codec){
         throw new NotImplementedException();
+    }
+
+    @ExpectPlatform
+    public static void registerStrippables(Map<Block,Block> blockBlockMap){
+        throw new AssertionError();
     }
 
 

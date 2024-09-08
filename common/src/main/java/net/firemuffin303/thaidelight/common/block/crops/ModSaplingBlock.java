@@ -1,7 +1,6 @@
 package net.firemuffin303.thaidelight.common.block.crops;
 
 import net.minecraft.world.level.block.SaplingBlock;
-import net.minecraft.world.level.block.grower.AbstractTreeGrower;
 import net.minecraft.world.level.block.grower.TreeGrower;
 
 public class ModSaplingBlock extends SaplingBlock {

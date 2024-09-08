@@ -1,5 +1,6 @@
 package net.firemuffin303.thaidelight.common.block.crops;
 
+import com.mojang.serialization.MapCodec;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -15,11 +16,17 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class LimeSapling extends BushBlock implements BonemealableBlock {
+    public static final MapCodec<LimeSapling> CODEC = simpleCodec(LimeSapling::new);
     private static final VoxelShape SAPLING_SHAPE = Block.box(3.0D, 0.0D, 3.0D, 13.0D, 8.0D, 13.0D);
 
 
     public LimeSapling(Properties properties) {
         super(properties);
+    }
+
+    @Override
+    protected MapCodec<? extends BushBlock> codec() {
+        return null;
     }
 
     @Override
@@ -30,13 +37,13 @@ public class LimeSapling extends BushBlock implements BonemealableBlock {
     @Override
     public void randomTick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource) {
         if (randomSource.nextInt(5) == 0 && serverLevel.getRawBrightness(blockPos.above(), 0) >= 9) {
-            serverLevel.setBlock(blockPos, (BlockState) ModBlocks.LIME_CROP.defaultBlockState().setValue(LimeCrop.AGE, 0), 3);
+            serverLevel.setBlock(blockPos, (BlockState) ModBlocks.LIME_CROP.get().defaultBlockState().setValue(LimeCrop.AGE, 0), 3);
 
         }
     }
 
     @Override
-    public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState, boolean bl) {
+    public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState) {
         return true;
     }
 
@@ -47,6 +54,6 @@ public class LimeSapling extends BushBlock implements BonemealableBlock {
 
     @Override
     public void performBonemeal(ServerLevel serverLevel, RandomSource randomSource, BlockPos blockPos, BlockState blockState) {
-        serverLevel.setBlock(blockPos, (BlockState) ModBlocks.LIME_CROP.defaultBlockState().setValue(LimeCrop.AGE, 0), 3);
+        serverLevel.setBlock(blockPos, (BlockState) ModBlocks.LIME_CROP.get().defaultBlockState().setValue(LimeCrop.AGE, 0), 3);
     }
 }

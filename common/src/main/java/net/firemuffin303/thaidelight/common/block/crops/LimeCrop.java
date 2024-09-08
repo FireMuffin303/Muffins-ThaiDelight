@@ -1,5 +1,6 @@
 package net.firemuffin303.thaidelight.common.block.crops;
 
+import com.mojang.serialization.MapCodec;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.minecraft.core.BlockPos;
@@ -9,6 +10,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -21,6 +23,7 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.BushBlock;
+import net.minecraft.world.level.block.SweetBerryBushBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -34,6 +37,8 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class LimeCrop extends BushBlock implements BonemealableBlock {
+    public static final MapCodec<LimeCrop> CODEC = simpleCodec(LimeCrop::new);
+
     public static final IntegerProperty AGE = BlockStateProperties.AGE_2;
 
     private static final VoxelShape SAPLING_SHAPE = Block.box(3.0D, 0.0D, 3.0D, 13.0D, 8.0D, 13.0D);
@@ -42,6 +47,11 @@ public class LimeCrop extends BushBlock implements BonemealableBlock {
     public LimeCrop(Properties properties) {
         super(properties);
         this.registerDefaultState((BlockState)((BlockState)this.stateDefinition.any()).setValue(AGE, 0));
+    }
+
+    @Override
+    protected MapCodec<? extends BushBlock> codec() {
+        return CODEC;
     }
 
     public boolean isRandomlyTicking(BlockState blockState) {
@@ -62,8 +72,8 @@ public class LimeCrop extends BushBlock implements BonemealableBlock {
     }
 
     @Override
-    public ItemStack getCloneItemStack(BlockGetter blockGetter, BlockPos blockPos, BlockState blockState) {
-        return new ItemStack(ModBlocks.LIME_SAPLING);
+    public ItemStack getCloneItemStack(LevelReader levelReader, BlockPos blockPos, BlockState blockState) {
+        return new ItemStack(ModItems.LIME_SAPLING.get());
     }
 
     public void randomTick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource) {
@@ -76,32 +86,44 @@ public class LimeCrop extends BushBlock implements BonemealableBlock {
     }
 
     @Override
-    public InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
+    protected ItemInteractionResult useItemOn(ItemStack itemStack, BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
         int i = (Integer)blockState.getValue(AGE);
         boolean flag = i == 2;
-        if (!flag && player.getItemInHand(interactionHand).is(Items.BONE_MEAL)) {
-            return InteractionResult.PASS;
-        } else if (flag) {
+
+        if(itemStack.is(Items.BONE_MEAL)){
+
+        }
+
+        return super.useItemOn(itemStack, blockState, level, blockPos, player, interactionHand, blockHitResult);
+    }
+
+    @Override
+    protected InteractionResult useWithoutItem(BlockState blockState, Level level, BlockPos blockPos, Player player, BlockHitResult blockHitResult) {
+        int i = (Integer)blockState.getValue(AGE);
+        boolean flag = i == 2;
+        if(flag){
             int j = 2 + level.random.nextInt(3);
             int k = level.random.nextInt(4);
-            popResource(level, blockPos, new ItemStack(ModItems.LIME, j));
-            if(k <= 1){
-                popResource(level,blockPos,new ItemStack(ModBlocks.LIME_SAPLING,1));
-            }
-            level.playSound((Player)null, player, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
+            popResource(level, blockPos, new ItemStack(ModItems.LIME.get(), j));
 
+            if(k <= 1){
+                popResource(level,blockPos,new ItemStack(ModBlocks.LIME_SAPLING.get(),1));
+            }
+
+            level.playSound((Player)null, player, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
 
             BlockState blockstate = (BlockState)blockState.setValue(AGE, 0);
             level.setBlock(blockPos, blockstate, 2);
             level.gameEvent(GameEvent.BLOCK_CHANGE, blockPos, GameEvent.Context.of(player, blockstate));
             return InteractionResult.sidedSuccess(level.isClientSide);
-        } else {
-            return super.use(blockState, level, blockPos, player, interactionHand, blockHitResult);
         }
+
+        return super.useWithoutItem(blockState, level, blockPos, player, blockHitResult);
     }
 
+
     @Override
-    public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState, boolean bl) {
+    public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState) {
         return blockState.getValue(AGE) < 2;
     }
 

@@ -1,5 +1,6 @@
 package net.firemuffin303.thaidelight.common.registry;
 
+import net.firemuffin303.thaidelight.ThaiDelight;
 import net.firemuffin303.thaidelight.common.block.CrabEggBlock;
 import net.firemuffin303.thaidelight.common.block.MortarBlock;
 import net.firemuffin303.thaidelight.common.block.cauldron.FermentedFishCauldron;
@@ -28,20 +29,20 @@ public class ModBlocks {
     public static final Supplier<Block> MORTAR = register("mortar",() -> new MortarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_RED).strength(0.5f,6.0f).noOcclusion().sound(SoundType.DECORATED_POT)));
 
     //Crate
-    public static final Supplier<Block> LIME_CRATE = register("lime_crate",() -> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).destroyTime(2.0f).explosionResistance(3.0f).sound(SoundType.WOOD)));
-    public static final Supplier<Block> PEPPER_CRATE = register("pepper_crate",() -> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).destroyTime(2.0f).explosionResistance(3.0f).sound(SoundType.WOOD)));
-    public static final Supplier<Block> RAW_PAPAYA_CRATE = register("raw_papaya_crate",() -> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).destroyTime(2.0f).explosionResistance(3.0f).sound(SoundType.WOOD)));
-    public static final Supplier<Block> PAPAYA_CRATE = register("papaya_crate",() -> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).destroyTime(2.0f).explosionResistance(3.0f).sound(SoundType.WOOD)));
+    public static final Supplier<Block> LIME_CRATE = register("lime_crate",() -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).destroyTime(2.0f).explosionResistance(3.0f).sound(SoundType.WOOD)));
+    public static final Supplier<Block> PEPPER_CRATE = register("pepper_crate",() -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).destroyTime(2.0f).explosionResistance(3.0f).sound(SoundType.WOOD)));
+    public static final Supplier<Block> RAW_PAPAYA_CRATE = register("raw_papaya_crate",() -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).destroyTime(2.0f).explosionResistance(3.0f).sound(SoundType.WOOD)));
+    public static final Supplier<Block> PAPAYA_CRATE = register("papaya_crate",() -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).destroyTime(2.0f).explosionResistance(3.0f).sound(SoundType.WOOD)));
 
     //Eggs
-    public static final Supplier<Block> CRAB_EGG = register("flower_crab_egg",() -> new CrabEggBlock(BlockBehaviour.Properties.copy(Blocks.FROGSPAWN)));
+    public static final Supplier<Block> CRAB_EGG = register("flower_crab_egg",() -> new CrabEggBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.FROGSPAWN)));
 
     //Wild Crops
-    public static final Supplier<Block> WILD_PEPPER_CROP = ModPlatform.getWildCropBlock(MobEffects.CONFUSION,6,BlockBehaviour.Properties.copy(Blocks.TALL_GRASS));
+    public static final Supplier<Block> WILD_PEPPER_CROP = register("wild_pepper_crop",() -> ModPlatform.getWildCropBlock(MobEffects.CONFUSION.value(),6,BlockBehaviour.Properties.ofFullCopy(Blocks.TALL_GRASS)));
     //Crops
     public static final Supplier<Block> LIME_CROP = register("lime_bush",() -> new LimeCrop(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).randomTicks().sound(SoundType.SWEET_BERRY_BUSH).pushReaction(PushReaction.DESTROY)));
-    public static final Supplier<Block> LIME_SAPLING = register("lime_sapling",() -> new LimeSapling(BlockBehaviour.Properties.copy(ModBlocks.LIME_CROP).noCollission()));
-    public static final Supplier<Block> PEPPER_CROP = register("pepper",() -> new PepperCropBlock(BlockBehaviour.Properties.copy(Blocks.POTATOES)));
+    public static final Supplier<Block> LIME_SAPLING = register("lime_sapling",() -> new LimeSapling(BlockBehaviour.Properties.ofFullCopy(ModBlocks.LIME_CROP.get()).noCollission()));
+    public static final Supplier<Block> PEPPER_CROP = register("pepper",() -> new PepperCropBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.POTATOES)));
 
 
     //Feast
@@ -61,12 +62,12 @@ public class ModBlocks {
     public static final Supplier<Block> PAPAYA_CROPS = register("papaya_crop",() -> new PapayaCropBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY)));
 
     //Cauldron
-    public static final Supplier<Block> FERMENTED_FISH_CAULDRON = register("fermented_fish_cauldron",() -> new FermentedFishCauldron(BlockBehaviour.Properties.copy(Blocks.CAULDRON).randomTicks(),ModCauldronInteraction.FERMENTED_FISH));
+    public static final Supplier<Block> FERMENTED_FISH_CAULDRON = register("fermented_fish_cauldron",() -> new FermentedFishCauldron(BlockBehaviour.Properties.ofFullCopy(Blocks.CAULDRON).randomTicks()));
 
     public static void init(){}
 
     public static Supplier<Block> register(String id, Supplier<Block> block){
-        return ModPlatform.registryBlock(id,block);
+        return ModPlatform.registryBlock(ThaiDelight.ModResource(id),block);
     }
 
     private static RotatedPillarBlock log(MapColor mapColor, MapColor mapColor2) {

@@ -52,29 +52,29 @@ public class ThaiDelight {
     }
 
     public static void registerComposterBlock(){
-        ComposterBlock.COMPOSTABLES.put(ModItems.PEPPER_SEED,0.3f);
-        ComposterBlock.COMPOSTABLES.put(Item.byBlock(ModBlocks.PAPAYA_LEAVES),0.3f);
-        ComposterBlock.COMPOSTABLES.put(Item.byBlock(ModBlocks.LIME_SAPLING),0.3f);
-        ComposterBlock.COMPOSTABLES.put(Item.byBlock(ModBlocks.PAPAYA_SAPLING),0.3f);
-        ComposterBlock.COMPOSTABLES.put(ModItems.PEPPER,0.65f);
-        ComposterBlock.COMPOSTABLES.put(ModItems.LIME,0.65f);
-        ComposterBlock.COMPOSTABLES.put(ModItems.RAW_PAPAYA,0.65f);
-        ComposterBlock.COMPOSTABLES.put(ModItems.PAPAYA,0.65f);
+        ComposterBlock.COMPOSTABLES.put(ModItems.PEPPER_SEED.get(),0.3f);
+        ComposterBlock.COMPOSTABLES.put(Item.byBlock(ModBlocks.PAPAYA_LEAVES.get()),0.3f);
+        ComposterBlock.COMPOSTABLES.put(Item.byBlock(ModBlocks.LIME_SAPLING.get()),0.3f);
+        ComposterBlock.COMPOSTABLES.put(Item.byBlock(ModBlocks.PAPAYA_SAPLING.get()),0.3f);
+        ComposterBlock.COMPOSTABLES.put(ModItems.PEPPER.get(),0.65f);
+        ComposterBlock.COMPOSTABLES.put(ModItems.LIME.get(),0.65f);
+        ComposterBlock.COMPOSTABLES.put(ModItems.RAW_PAPAYA.get(),0.65f);
+        ComposterBlock.COMPOSTABLES.put(ModItems.PAPAYA.get(),0.65f);
 
-        ComposterBlock.COMPOSTABLES.put(ModItems.SLICED_LIME,0.4f);
-        ComposterBlock.COMPOSTABLES.put(ModItems.RAW_PAPAYA_SLICE,0.4f);
-        ComposterBlock.COMPOSTABLES.put(ModItems.SLICED_PAPAYA,0.4f);
+        ComposterBlock.COMPOSTABLES.put(ModItems.SLICED_LIME.get(),0.4f);
+        ComposterBlock.COMPOSTABLES.put(ModItems.RAW_PAPAYA_SLICE.get(),0.4f);
+        ComposterBlock.COMPOSTABLES.put(ModItems.SLICED_PAPAYA.get(),0.4f);
 
-        ComposterBlock.COMPOSTABLES.put(Item.byBlock(ModBlocks.PAPAYA_LOG),0.8f);
-        ComposterBlock.COMPOSTABLES.put(Item.byBlock(ModBlocks.STRIPPED_PAPAYA_LOG),0.8f);
-        ComposterBlock.COMPOSTABLES.put(Item.byBlock(ModBlocks.PAPAYA_WOOD),0.8f);
-        ComposterBlock.COMPOSTABLES.put(Item.byBlock(ModBlocks.STRIPPED_PAPAYA_WOOD),0.8f);
+        ComposterBlock.COMPOSTABLES.put(Item.byBlock(ModBlocks.PAPAYA_LOG.get()),0.8f);
+        ComposterBlock.COMPOSTABLES.put(Item.byBlock(ModBlocks.STRIPPED_PAPAYA_LOG.get()),0.8f);
+        ComposterBlock.COMPOSTABLES.put(Item.byBlock(ModBlocks.PAPAYA_WOOD.get()),0.8f);
+        ComposterBlock.COMPOSTABLES.put(Item.byBlock(ModBlocks.STRIPPED_PAPAYA_WOOD.get()),0.8f);
     }
 
     public static void registerStrippables(){
         Map<Block,Block> stippables = new HashMap<>();
-        stippables.put(ModBlocks.PAPAYA_LOG,ModBlocks.STRIPPED_PAPAYA_LOG);
-        stippables.put(ModBlocks.PAPAYA_WOOD,ModBlocks.STRIPPED_PAPAYA_WOOD);
+        stippables.put(ModBlocks.PAPAYA_LOG.get(),ModBlocks.STRIPPED_PAPAYA_LOG.get());
+        stippables.put(ModBlocks.PAPAYA_WOOD.get(),ModBlocks.STRIPPED_PAPAYA_WOOD.get());
 
         ModPlatform.registerStrippables(stippables);
     }
@@ -82,14 +82,14 @@ public class ThaiDelight {
     public static void registerAnimalFoodItem(){
         //Please Mojang, just turn animal food to ItemTags. I beg you.
         //Finally. I'll do it after next update.
-
-        ParrotTameFoodAccessor.getTameFood().add(Item.byBlock(ModBlocks.PAPAYA_SAPLING) );
-        ParrotTameFoodAccessor.getTameFood().add(ModItems.PEPPER_SEED);
+/*
+        ParrotTameFoodAccessor.getTameFood().add(Item.byBlock(ModBlocks.PAPAYA_SAPLING.get()) );
+        ParrotTameFoodAccessor.getTameFood().add(ModItems.PEPPER_SEED.get());
 
         Ingredient newPigFoods = Ingredient.of(ModItems.RAW_PAPAYA,ModItems.PAPAYA,ModItems.SLICED_PAPAYA,ModItems.RAW_PAPAYA_SLICE,ModItems.LIME,ModItems.SLICED_LIME);
         Ingredient newChickenFoods = Ingredient.of(ModItems.PAPAYA_SEEDS,ModItems.PEPPER_SEED);
 
-        Ingredient newFrogFoods = Ingredient.of(ModItems.DRAGONFLY,ModItems.COOKED_DRAGONFLY);
+        Ingredient newFrogFoods = Ingredient.of(ModItems.DRAGONFLY.get(),ModItems.COOKED_DRAGONFLY.get());
 
         PigFoodAccessor.setFoodItems(Ingredient.of(new ImmutableList.Builder<ItemStack>().addAll(Arrays.stream(PigFoodAccessor.getFoodItems().getItems()).iterator())
                 .addAll(Arrays.asList(newPigFoods.getItems())).build().stream()));
@@ -101,22 +101,24 @@ public class ThaiDelight {
         FrogFoodAccessor.setFoodItems(Ingredient.of(
                 new ImmutableList.Builder<ItemStack>().addAll(Arrays.asList(FrogFoodAccessor.getFoodItems().getItems()).iterator())
                         .addAll(Arrays.asList(newFrogFoods.getItems())).build().stream()));
+
+ */
     }
 
 
     public static void registerStructure(MinecraftServer server){
         addToStructurePool(server,
-                new ResourceLocation("minecraft","village/plains/houses"),
-                new ResourceLocation(ThaiDelight.MOD_ID, "village/plains/houses/small_thai_house_1"),4);
+                ResourceLocation.fromNamespaceAndPath("minecraft","village/plains/houses"),
+                ResourceLocation.fromNamespaceAndPath(ThaiDelight.MOD_ID, "village/plains/houses/small_thai_house_1"),4);
 
         addToStructurePool(server,
-                new ResourceLocation("minecraft","village/savanna/houses"),
-                new ResourceLocation(ThaiDelight.MOD_ID,"village/savanna/houses/savanna_small_thai_house_1"),4);
+                ResourceLocation.fromNamespaceAndPath("minecraft","village/savanna/houses"),
+                ResourceLocation.fromNamespaceAndPath(ThaiDelight.MOD_ID,"village/savanna/houses/savanna_small_thai_house_1"),4);
     }
 
     public static void addToStructurePool(MinecraftServer server, ResourceLocation poolIdentifier, ResourceLocation nbtIdentifier, int weight) {
         Holder<StructureProcessorList> emptyProcessList = server.registryAccess().registryOrThrow(Registries.PROCESSOR_LIST)
-                .getHolderOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, new ResourceLocation("minecraft", "empty")));
+                .getHolderOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, ResourceLocation.fromNamespaceAndPath("minecraft", "empty")));
         Registry<StructureTemplatePool> structureTemplatePools = server.registryAccess().registry(Registries.TEMPLATE_POOL).orElseThrow();
 
         StructureTemplatePool structure = structureTemplatePools.get(poolIdentifier);
@@ -135,5 +137,9 @@ public class ThaiDelight {
         for(int i = 0; i < weight; i++){
             ((StructurePoolAccessorMixin)structure).getTemplates().add(singlePoolElement);
         }
+    }
+
+    public static ResourceLocation ModResource(String id){
+        return ResourceLocation.fromNamespaceAndPath(ThaiDelight.MOD_ID,id);
     }
 }

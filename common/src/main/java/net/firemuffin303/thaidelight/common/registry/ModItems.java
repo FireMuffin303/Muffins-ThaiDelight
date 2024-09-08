@@ -54,14 +54,14 @@ public class ModItems {
 
 
     //Crab
-    public static final Supplier<Item>  CRAB_SPAWN_EGG = register("flower_crab_spawn_egg",() -> new SpawnEggItem(ModEntityTypes.FLOWER_CRAB,0x93a064,0xac3247,new Item.Properties()));
+    public static final Supplier<Item>  CRAB_SPAWN_EGG = register("flower_crab_spawn_egg",() -> new SpawnEggItem(ModEntityTypes.FLOWER_CRAB.get(),0x93a064,0xac3247,new Item.Properties()));
 
-    public static final Supplier<Item> CRAB_BUCKET = register("flower_crab_bucket",() -> ModPlatform.registerMobBucket(ModEntityTypes.FLOWER_CRAB,()-> Fluids.WATER, () -> SoundEvents.BUCKET_EMPTY_FISH,new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> CRAB_BUCKET = register("flower_crab_bucket",() -> new MobBucketItem(ModEntityTypes.FLOWER_CRAB.get(),Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH,new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> CRAB_MEAT = register("flower_crab",() -> new Item(new Item.Properties().food(ModFood.CRAB)));
     public static final Supplier<Item> COOKED_CRAB_MEAT =  register("cooked_flower_crab", () -> new Item(new Item.Properties().food(ModFood.COOKED_CRAB)));
 
     //Dragonfly
-    public static final Supplier<Item> DRAGONFLY_SPAWN_EGG = register("dragonfly_spawn_egg", () -> new SpawnEggItem(ModEntityTypes.DRAGONFLY,0x181d13,0x246011,new Item.Properties()));
+    public static final Supplier<Item> DRAGONFLY_SPAWN_EGG = register("dragonfly_spawn_egg", () -> new SpawnEggItem(ModEntityTypes.DRAGONFLY.get(),0x181d13,0x246011,new Item.Properties()));
     public static final Supplier<Item> DRAGONFLY = register("dragonfly",() -> new Item(new Item.Properties().food(ModFood.DRAGONFLY)));
     public static final Supplier<Item> DRAGONFLY_BOTTLE = register("dragon_bottle",() -> new DragonflyBottleItem(new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> COOKED_DRAGONFLY = register("cooked_dragonfly",() -> new Item(new Item.Properties().food(ModFood.COOKED_DRAGONFLY)));
@@ -118,7 +118,7 @@ public class ModItems {
 
 
     public static Supplier<Item> register(String id,Supplier<Item> item){
-       return ModPlatform.registryItem(id,item);
+       return ModPlatform.registryItem(ThaiDelight.ModResource(id),item);
     }
 
     public static Item.Properties drinkItem() {

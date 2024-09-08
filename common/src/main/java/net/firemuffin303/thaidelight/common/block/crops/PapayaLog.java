@@ -18,7 +18,7 @@ public class PapayaLog extends RotatedPillarBlock implements BonemealableBlock {
 
 
     @Override
-    public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState, boolean bl) {
+    public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState) {
         for(Direction direction : Direction.Plane.HORIZONTAL){
             Direction direction2 = direction.getOpposite();
             BlockPos blockPos2 = blockPos.offset(direction2.getStepX(), 0, direction2.getStepZ());
@@ -40,7 +40,7 @@ public class PapayaLog extends RotatedPillarBlock implements BonemealableBlock {
             Direction direction2 = direction.getOpposite();
             BlockPos blockPos2 = blockPos.offset(direction2.getStepX(), 0, direction2.getStepZ());
             if (serverLevel.getBlockState(blockPos2).isAir()) {
-                serverLevel.setBlock(blockPos2, (BlockState) ((BlockState) ModBlocks.PAPAYA.defaultBlockState().setValue(PapayaBlock.AGE, 0).setValue(PapayaBlock.FACING, direction)), 2);
+                serverLevel.setBlock(blockPos2, (BlockState) ((BlockState) ModBlocks.PAPAYA.get().defaultBlockState().setValue(PapayaBlock.AGE, 0).setValue(PapayaBlock.FACING, direction)), 2);
                 return;
             }
         }

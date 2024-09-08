@@ -1,15 +1,9 @@
 package net.firemuffin303.thaidelight.utils.fabric;
 
 import com.mojang.serialization.Codec;
-import com.nhoryzon.mc.farmersdelight.block.WildCropBlock;
-import com.nhoryzon.mc.farmersdelight.item.ConsumableItem;
-import com.nhoryzon.mc.farmersdelight.item.DrinkableItem;
-import com.nhoryzon.mc.farmersdelight.registry.EffectsRegistry;
-import com.nhoryzon.mc.farmersdelight.util.RecipeMatcher;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
-import net.fabricmc.fabric.api.registry.FabricBrewingRecipeRegistry;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.firemuffin303.thaidelight.ThaiDelight;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
@@ -63,44 +57,49 @@ import java.util.function.Supplier;
 
 public class ModPlatformImpl {
 
-    public static <T extends Block> void registryBlock(String id, Supplier<T> block) {
-        Registry.register(BuiltInRegistries.BLOCK,new ResourceLocation(ThaiDelight.MOD_ID,id),block.get());
+    public static <T extends Block> Supplier<T> registryBlock(ResourceLocation resourceLocation, Supplier<T> block) {
+        T returnBlock = Registry.register(BuiltInRegistries.BLOCK,resourceLocation,block.get());
+        return () -> returnBlock;
     }
 
-    public static <T extends Item> void registryItem(String id, Supplier<T> item) {
-        Registry.register(BuiltInRegistries.ITEM,new ResourceLocation(ThaiDelight.MOD_ID,id),item.get());
+    public static <T extends Item> Supplier<Item> registryItem(ResourceLocation resourceLocation, Supplier<T> item) {
+        T returnItem = Registry.register(BuiltInRegistries.ITEM,resourceLocation,item.get());
+        return () -> returnItem;
     }
 
     public static <T extends BlockEntity> void registerBlockEntity(String id,BlockEntityType<T> blockEntityType) {
         Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE,new ResourceLocation(ThaiDelight.MOD_ID,id),blockEntityType);
     }
 
-    public static  <T extends Recipe<?>> void registerRecipeType(String id,RecipeType<T> recipeType) {
-        Registry.register(BuiltInRegistries.RECIPE_TYPE, new ResourceLocation(ThaiDelight.MOD_ID, id), recipeType);
+    public static  <T extends Recipe<?>> Supplier<RecipeType<T>> registerRecipeType(ResourceLocation resourceLocation,Supplier<RecipeType<T>> recipeType) {
+        RecipeType<T> rtRecipe = Registry.register(BuiltInRegistries.RECIPE_TYPE, resourceLocation, recipeType.get());
+        return () -> rtRecipe;
     }
 
-    public static <T extends Entity> void registerEntityType(String id, EntityType<T> entityType) {
-        Registry.register(BuiltInRegistries.ENTITY_TYPE,new ResourceLocation(ThaiDelight.MOD_ID,id) ,entityType);
+    public static <T extends Entity> Supplier<EntityType<T>> registerEntityType(ResourceLocation resourceLocation, Supplier<EntityType<T>>entityType) {
+        EntityType<T> rtEntityType = Registry.register(BuiltInRegistries.ENTITY_TYPE,resourceLocation ,entityType.get());
+        return () -> rtEntityType;
     }
 
-    public static SoundEvent registerSoundEvent(String id,SoundEvent event) {
-        return Registry.register(BuiltInRegistries.SOUND_EVENT,new ResourceLocation(ThaiDelight.MOD_ID,id),event);
+    public static Supplier<SoundEvent> registerSoundEvent(ResourceLocation resourceLocation,Supplier<SoundEvent> event) {
+        SoundEvent soundEvent = Registry.register(BuiltInRegistries.SOUND_EVENT,resourceLocation,event.get());
+        return () -> soundEvent;
     }
 
     public static void registerFluid(String id, Fluid fluid) {
-        Registry.register(BuiltInRegistries.FLUID,new ResourceLocation(ThaiDelight.MOD_ID,id),fluid);
+        Registry.register(BuiltInRegistries.FLUID,ResourceLocation.fromNamespaceAndPath(ThaiDelight.MOD_ID,id),fluid);
     }
 
     public static void registerMobEffect(String id, MobEffect mobEffect) {
-        Registry.register(BuiltInRegistries.MOB_EFFECT,new ResourceLocation(ThaiDelight.MOD_ID,id),mobEffect);
+        Registry.register(BuiltInRegistries.MOB_EFFECT,ResourceLocation.fromNamespaceAndPath(ThaiDelight.MOD_ID,id),mobEffect);
     }
 
     public static void registerPotion(String id, Potion potion) {
-        Registry.register(BuiltInRegistries.POTION,new ResourceLocation(ThaiDelight.MOD_ID,id),potion);
+        Registry.register(BuiltInRegistries.POTION,ResourceLocation.fromNamespaceAndPath(ThaiDelight.MOD_ID,id),potion);
     }
 
     public static <T extends Recipe<?>> void registerRecipeSerializer(String id, RecipeSerializer<T> recipeSerializer) {
-        Registry.register(BuiltInRegistries.RECIPE_SERIALIZER,new ResourceLocation(ThaiDelight.MOD_ID,id),recipeSerializer);
+        Registry.register(BuiltInRegistries.RECIPE_SERIALIZER,ResourceLocation.fromNamespaceAndPath(ThaiDelight.MOD_ID,id),recipeSerializer);
     }
 
     public static <M extends AbstractContainerMenu,U extends Screen & MenuAccess<M>> void registerScreen(MenuType<M> menuType, ModPlatform.ScreenConstructor<M, U> screen) {

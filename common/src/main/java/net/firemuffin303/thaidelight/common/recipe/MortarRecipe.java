@@ -3,10 +3,16 @@ package net.firemuffin303.thaidelight.common.recipe;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.firemuffin303.thaidelight.common.registry.ModRecipes;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.Container;
@@ -17,11 +23,11 @@ import net.minecraft.world.level.Level;
 
 import java.util.Iterator;
 
-public class MortarRecipe implements Recipe<Container> {
-    private final ResourceLocation id;
-    private final String group;
-    private final NonNullList<Ingredient> ingredients;
-    private final ItemStack result;
+public class MortarRecipe implements Recipe<CraftingRecipe> {
+    final ResourceLocation id;
+    final String group;
+    final NonNullList<Ingredient> ingredients;
+    final ItemStack result;
 
     public MortarRecipe(ResourceLocation id,String group,NonNullList<Ingredient> ingredients,ItemStack result){
         this.id = id;
@@ -46,7 +52,7 @@ public class MortarRecipe implements Recipe<Container> {
     }
 
     @Override
-    public ItemStack getResultItem(RegistryAccess registryAccess) {
+    public ItemStack getResultItem(HolderLookup.Provider provider) {
         return this.result;
     }
 
@@ -66,10 +72,10 @@ public class MortarRecipe implements Recipe<Container> {
 
 
     @Override
-    public boolean matches(Container container, Level level) {
+    public boolean matches(CraftingRecipe recipeInput, Level level) {
         StackedContents stackedContents = new StackedContents();
         int i =0;
-        for(int j = 0; j < container.getContainerSize(); j++){
+        for(int j = 0; j < recipeInput.getContainerSize(); j++){
             ItemStack itemStack = container.getItem(j);
             if(!itemStack.isEmpty()){
                 stackedContents.accountStack(itemStack,1);
@@ -79,10 +85,12 @@ public class MortarRecipe implements Recipe<Container> {
         return i == this.ingredients.size() && stackedContents.canCraft(this,null);
     }
 
+
     @Override
-    public ItemStack assemble(Container container, RegistryAccess registryAccess) {
-        return this.getResultItem(registryAccess).copy();
+    public ItemStack assemble(CraftingRecipe recipeInput, HolderLookup.Provider provider) {
+        return this.getResultItem(provider).copy();
     }
+
 
     @Override
     public boolean canCraftInDimensions(int i, int j) {
@@ -92,6 +100,14 @@ public class MortarRecipe implements Recipe<Container> {
 
 
     public static class Serializer implements RecipeSerializer<MortarRecipe>{
+
+        private final MapCodec<MortarRecipe> CODEC = RecordCodecBuilder.mapCodec((instance) ->{
+            return instance.group(Codec.STRING.optionalFieldOf("group","").forGetter((recipe) ->{
+                return recipe.group;
+            })
+        });
+
+
 
         @Override
         public MortarRecipe fromJson(ResourceLocation resourceLocation, JsonObject jsonObject) {
@@ -147,6 +163,16 @@ public class MortarRecipe implements Recipe<Container> {
 
             friendlyByteBuf.writeItem(recipe.result);
 
+        }
+
+        @Override
+        public MapCodec<MortarRecipe> codec() {
+            return null;
+        }
+
+        @Override
+        public StreamCodec<RegistryFriendlyByteBuf, MortarRecipe> streamCodec() {
+            return null;
         }
     }
 }

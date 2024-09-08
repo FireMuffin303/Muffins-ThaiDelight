@@ -1,5 +1,6 @@
 package net.firemuffin303.thaidelight.common.registry;
 
+import net.firemuffin303.thaidelight.ThaiDelight;
 import net.firemuffin303.thaidelight.common.recipe.MortarRecipe;
 import net.firemuffin303.thaidelight.utils.ModPlatform;
 import net.minecraft.client.gui.components.toasts.RecipeToast;
@@ -11,10 +12,11 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 
 import java.util.ArrayList;
+import java.util.function.Supplier;
 
 public class ModRecipes {
-    public static ArrayList<RecipeType<?>> RECIPES = new ArrayList<>();
-    public static RecipeType<MortarRecipe> MORTAR = new RecipeType<MortarRecipe>() {
+
+    public static RecipeType<MortarRecipe> MORTAR =  new RecipeType<MortarRecipe>() {
         @Override
         public String toString() {
             return "mortar";
@@ -25,9 +27,8 @@ public class ModRecipes {
         register("mortar",MORTAR);
     }
 
-    private static void register(String id,RecipeType<?> recipeType){
-        ModPlatform.registerRecipeType(id,recipeType);
-        RECIPES.add(recipeType);
+    private static void register(String id, Supplier<RecipeType<?>> recipeType){
+        ModPlatform.registerRecipeType(ResourceLocation.fromNamespaceAndPath(ThaiDelight.MOD_ID,id),recipeType);
 
     }
 

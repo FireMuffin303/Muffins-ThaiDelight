@@ -7,11 +7,11 @@ import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.firemuffin303.thaidelight.common.registry.ModTags;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.server.advancements.AdvancementVisibilityEvaluator;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
@@ -30,7 +30,7 @@ import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.Bucketable;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
@@ -43,6 +43,7 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import org.jetbrains.annotations.Nullable;
 
+//TODO : Put this mob on water breathing mob tag
 public class FlowerCrabEntity extends Animal implements Bucketable {
     private static final EntityDataAccessor<Boolean> HAS_EGG;
     private static final Ingredient FOOD_ITEMS;
@@ -85,11 +86,11 @@ public class FlowerCrabEntity extends Animal implements Bucketable {
     }
 
     @Override
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(HAS_EGG, false);
-        this.entityData.define(LAYING_EGG, false);
-        this.entityData.define(FROM_BUCKET, false);
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(HAS_EGG, false);
+        builder.define(LAYING_EGG, false);
+        builder.define(FROM_BUCKET, false);
 
     }
 
@@ -153,10 +154,6 @@ public class FlowerCrabEntity extends Animal implements Bucketable {
 
     }
 
-    public boolean canBreatheUnderwater() {
-        return true;
-    }
-
     public boolean hasEgg() {
         return (Boolean)this.entityData.get(HAS_EGG);
     }
@@ -178,7 +175,7 @@ public class FlowerCrabEntity extends Animal implements Bucketable {
     @Nullable
     @Override
     public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
-        return ModEntityTypes.FLOWER_CRAB.create(serverLevel);
+        return ModEntityTypes.FLOWER_CRAB.get().create(serverLevel);
 
     }
 
@@ -203,10 +200,9 @@ public class FlowerCrabEntity extends Animal implements Bucketable {
     @Override
     public void saveToBucketTag(ItemStack arg) {
         Bucketable.saveDefaultDataToBucketTag(this, arg);
-        CompoundTag compoundTag = arg.getOrCreateTag();
-        compoundTag.putInt("Age", this.getAge());
-
-
+        CustomData.update(DataComponents.BUCKET_ENTITY_DATA,arg,(compoundTag) -> {
+            compoundTag.putInt("Age", this.getAge());
+        });
     }
 
     public void loadFromBucketTag(CompoundTag arg) {
@@ -218,7 +214,7 @@ public class FlowerCrabEntity extends Animal implements Bucketable {
 
     @Override
     public ItemStack getBucketItemStack() {
-        return new ItemStack(ModItems.CRAB_BUCKET);
+        return new ItemStack(ModItems.CRAB_BUCKET.get());
     }
 
     @Override
@@ -295,7 +291,7 @@ public class FlowerCrabEntity extends Animal implements Bucketable {
                     level.playSound((Player)null, blockPos, SoundEvents.TURTLE_LAY_EGG, SoundSource.BLOCKS, 0.3F, 0.9F + level.random.nextFloat() * 0.2F);
                     BlockPos blockPos2 = this.blockPos.above();
                     FluidState fluidState = level.getFluidState(blockPos2);
-                    BlockState blockState = (BlockState) ModBlocks.CRAB_EGG.defaultBlockState().setValue(CrabEggBlock.WATERLOGGED,fluidState.is(Fluids.WATER));
+                    BlockState blockState = (BlockState) ModBlocks.CRAB_EGG.get().defaultBlockState().setValue(CrabEggBlock.WATERLOGGED,fluidState.is(Fluids.WATER));
                     level.setBlock(blockPos2, blockState, 3);
                     level.gameEvent(GameEvent.BLOCK_PLACE, blockPos2, GameEvent.Context.of(this.crab, blockState));
                     this.crab.setHasEgg(false);

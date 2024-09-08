@@ -61,22 +61,20 @@ import java.util.function.Supplier;
 
 public class ModPlatformImpl {
 
-    public static <T extends Block> void registryBlock(String id, Supplier<T> block) {
-        ThaiDelightForge.BLOCK.register(id,block);
+    public static <T extends Block> Supplier<T> registryBlock(ResourceLocation resourceLocation, Supplier<T> block) {
+        return ThaiDelightForge.BLOCK.register(resourceLocation.getPath(),block);
     }
 
-
-    public static <T extends Item> void registryItem(String id, Supplier<T> item) {
-        ThaiDelightForge.ITEMS.register(id,item);
+    public static <T extends Item> Supplier<T> registryItem(ResourceLocation resourceLocation, Supplier<T> item) {
+        return ThaiDelightForge.ITEMS.register(resourceLocation.getPath(),item);
     }
 
-    public static <T extends Entity> void registerEntityType(String id, EntityType<T> entityType) {
-        ThaiDelightForge.ENTITY_TYPES.register(id,()->entityType);
+    public static <T extends Entity> Supplier<EntityType<T>> registerEntityType(ResourceLocation resourceLocation, Supplier<EntityType<T>> entityType) {
+        return ThaiDelightForge.ENTITY_TYPES.register(resourceLocation.getPath(),entityType);
     }
 
-    public static SoundEvent registerSoundEvent(String id,SoundEvent event) {
-         ThaiDelightForge.SOUND_EVENT.register(id,() -> event);
-         return event;
+    public static Supplier<SoundEvent> registerSoundEvent(ResourceLocation id,Supplier<SoundEvent> event) {
+         return ThaiDelightForge.SOUND_EVENT.register(id.getPath(),event);
     }
 
     public static <T extends BlockEntity> void registerBlockEntity(String id,BlockEntityType<T> blockEntityType) {
@@ -95,8 +93,8 @@ public class ModPlatformImpl {
         ThaiDelightForge.POTION.register(id,() -> potion);
     }*/
 
-    public static <T extends Recipe<?>> void registerRecipeType(String id,RecipeType<T> recipeType) {
-        ThaiDelightForge.RECIPE_TYPE.register(id,() -> recipeType);
+    public static <T extends Recipe<?>> Supplier<RecipeType<T>> registerRecipeType(ResourceLocation resourceLocation,Supplier<RecipeType<T>> recipeType) {
+        return ThaiDelightForge.RECIPE_TYPE.register(resourceLocation.getPath(),recipeType);
     }
 
     public static <T extends AbstractContainerMenu> MenuType<T> registryMenu(String id, ModPlatform.MenuSupplier<T> menu) {

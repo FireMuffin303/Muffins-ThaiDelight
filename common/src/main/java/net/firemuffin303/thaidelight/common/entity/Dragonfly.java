@@ -5,6 +5,7 @@ import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.firemuffin303.thaidelight.common.registry.ModSoundEvents;
 import net.firemuffin303.thaidelight.common.registry.ModTags;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -34,19 +35,21 @@ import net.minecraft.world.entity.animal.FlyingAnimal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.pathfinder.BlockPathTypes;
+import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.EnumSet;
 import java.util.function.IntFunction;
 
+//TODO : Arthropod Entity Tag
 public class Dragonfly extends Animal implements VariantHolder<Dragonfly.DragonflyVariant>, Bottleable, FlyingAnimal {
     private static final Ingredient FOOD_ITEMS = Ingredient.of(ModTags.DRAGONFLY_FOOD);
     private static final EntityDataAccessor<Integer> DATA_VARIANT = SynchedEntityData.defineId(Dragonfly.class, EntityDataSerializers.INT);
@@ -56,10 +59,10 @@ public class Dragonfly extends Animal implements VariantHolder<Dragonfly.Dragonf
         super(entityType, level);
         this.moveControl = new DragonflyMoveControl(this);
         this.lookControl = new LookControl(this);
-        this.setPathfindingMalus(BlockPathTypes.FENCE,-1.0f);
-        this.setPathfindingMalus(BlockPathTypes.COCOA,-1.0f);
-        this.setPathfindingMalus(BlockPathTypes.WATER,-1.0f);
-        this.setPathfindingMalus(BlockPathTypes.LAVA,-1.0f);
+        this.setPathfindingMalus(PathType.FENCE,-1.0f);
+        this.setPathfindingMalus(PathType.COCOA,-1.0f);
+        this.setPathfindingMalus(PathType.WATER,-1.0f);
+        this.setPathfindingMalus(PathType.LAVA,-1.0f);
 
     }
 
@@ -84,7 +87,7 @@ public class Dragonfly extends Animal implements VariantHolder<Dragonfly.Dragonf
     @Nullable
     @Override
     public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
-        Dragonfly dragonfly = ModEntityTypes.DRAGONFLY.create(serverLevel);
+        Dragonfly dragonfly = ModEntityTypes.DRAGONFLY.get().create(serverLevel);
         if(dragonfly != null){
             dragonfly.setVariant(this.random.nextBoolean() ? this.getVariant() : ((Dragonfly)ageableMob ).getVariant());
             dragonfly.setPersistenceRequired();
@@ -94,10 +97,10 @@ public class Dragonfly extends Animal implements VariantHolder<Dragonfly.Dragonf
     }
 
     @Override
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(DATA_VARIANT, 0);
-        this.entityData.define(FROM_BOTTLE, false);
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(DATA_VARIANT, 0);
+        builder.define(FROM_BOTTLE, false);
     }
 
     protected void registerGoals() {
@@ -156,11 +159,6 @@ public class Dragonfly extends Animal implements VariantHolder<Dragonfly.Dragonf
     }
 
     @Override
-    public MobType getMobType() {
-        return MobType.ARTHROPOD;
-    }
-
-    @Override
     protected void pushEntities() {
     }
 
@@ -203,21 +201,27 @@ public class Dragonfly extends Animal implements VariantHolder<Dragonfly.Dragonf
     @Override
     public void copyDataToStack(ItemStack stack) {
         Bottleable.copyDataToStack(this,stack);
-        CompoundTag compoundTag = stack.getOrCreateTag();
-        compoundTag.putInt("Variant",this.getVariant().getId());
-        compoundTag.putInt("Age",this.age);
+        CustomData.update(DataComponents.BUCKET_ENTITY_DATA,stack,(compoundTag) -> {
+            compoundTag.putInt("Variant",this.getVariant().getId());
+            compoundTag.putInt("Age",this.age);
+        });
+
     }
 
     @Override
     public void copyDataFromNbt(CompoundTag nbt) {
         Bottleable.copyDataFromNbt(this,nbt);
         this.setVariant(DragonflyVariant.byId(nbt.getInt("Variant")));
-        this.setAge(nbt.getInt("Age"));
+        if(nbt.contains("Age")){
+            this.setAge(nbt.getInt("Age"));
+        }
+
+
     }
 
     @Override
     public ItemStack getBottleItem() {
-        return new ItemStack(ModItems.DRAGONFLY_BOTTLE);
+        return new ItemStack(ModItems.DRAGONFLY_BOTTLE.get());
     }
 
     @Override
@@ -234,13 +238,13 @@ public class Dragonfly extends Animal implements VariantHolder<Dragonfly.Dragonf
     public boolean onClimbable() { return false; }
 
     @Override
-    public SpawnGroupData finalizeSpawn(ServerLevelAccessor serverLevelAccessor, DifficultyInstance difficultyInstance, MobSpawnType mobSpawnType, @Nullable SpawnGroupData spawnGroupData, @Nullable CompoundTag compoundTag) {
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor serverLevelAccessor, DifficultyInstance difficultyInstance, MobSpawnType mobSpawnType, @Nullable SpawnGroupData spawnGroupData) {
         if (mobSpawnType == MobSpawnType.BUCKET) {
             return (SpawnGroupData) spawnGroupData;
         }
         RandomSource randomSource = serverLevelAccessor.getRandom();
         this.setVariant(DragonflyVariant.byId(randomSource.nextInt(0,4)));
-        return super.finalizeSpawn(serverLevelAccessor, difficultyInstance,mobSpawnType,spawnGroupData, compoundTag);
+        return super.finalizeSpawn(serverLevelAccessor, difficultyInstance,mobSpawnType,spawnGroupData);
     }
 
     static class DragonflyMoveControl extends MoveControl{
