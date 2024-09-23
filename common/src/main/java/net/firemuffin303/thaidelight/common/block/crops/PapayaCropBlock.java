@@ -46,7 +46,7 @@ public class PapayaCropBlock extends CropBlock {
     }
 
     protected ItemLike getBaseSeedId() {
-        return ModItems.PAPAYA_SEEDS;
+        return ModItems.PAPAYA_SEEDS.get();
     }
 
 
@@ -55,7 +55,7 @@ public class PapayaCropBlock extends CropBlock {
     }
 
     public BlockState getStateForAge(int i) {
-        return i == 2 ? ModBlocks.PAPAYA_SAPLING.defaultBlockState() : super.getStateForAge(i);
+        return i == 2 ? ModBlocks.PAPAYA_SAPLING.get().defaultBlockState() : super.getStateForAge(i);
     }
 
     protected int getBonemealAgeIncrease(Level level) {

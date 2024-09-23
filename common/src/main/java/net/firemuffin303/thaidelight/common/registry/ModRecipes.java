@@ -16,20 +16,18 @@ import java.util.function.Supplier;
 
 public class ModRecipes {
 
-    public static RecipeType<MortarRecipe> MORTAR =  new RecipeType<MortarRecipe>() {
+    public static Supplier<RecipeType<MortarRecipe>>  MORTAR =  register("mortar",() -> new RecipeType<MortarRecipe>() {
         @Override
         public String toString() {
             return "mortar";
         }
-    };
+    });
 
     public static void init(){
-        register("mortar",MORTAR);
     }
 
-    private static void register(String id, Supplier<RecipeType<?>> recipeType){
-        ModPlatform.registerRecipeType(ResourceLocation.fromNamespaceAndPath(ThaiDelight.MOD_ID,id),recipeType);
-
+    private static <T extends Recipe<?>> Supplier<RecipeType<T>> register(String id, Supplier<RecipeType<T>> recipeType){
+        return ModPlatform.registerRecipeType(ResourceLocation.fromNamespaceAndPath(ThaiDelight.MOD_ID,id),recipeType);
     }
 
     public static class ModRecipeSerializer{

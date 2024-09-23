@@ -5,14 +5,17 @@ import net.firemuffin303.thaidelight.utils.ModPlatform;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 
+import java.util.function.Supplier;
+
 public class ModSoundEvents {
-    public static SoundEvent MORTAR_CRAFT;
-    public static SoundEvent DRAGONFLY_LOOP;
-    public static SoundEvent DRAGONFLY_HURT;
+    public static Supplier<SoundEvent> MORTAR_CRAFT = register("ui.mortar.take_result");
+    public static Supplier<SoundEvent> DRAGONFLY_LOOP = register("entity.dragonfly.loop");
+    public static Supplier<SoundEvent> DRAGONFLY_HURT = register("entity.dragonfly.hurt");
 
     public static void init(){
-        MORTAR_CRAFT = ModPlatform.registerSoundEvent("ui.mortar.take_result",SoundEvent.createVariableRangeEvent(new ResourceLocation(ThaiDelight.MOD_ID,"ui.mortar.take_result")));
-        DRAGONFLY_LOOP = ModPlatform.registerSoundEvent("entity.dragonfly.loop",SoundEvent.createVariableRangeEvent(new ResourceLocation(ThaiDelight.MOD_ID,"entity.dragonfly.loop")));
-        DRAGONFLY_HURT = ModPlatform.registerSoundEvent("entity.dragonfly.hurt",SoundEvent.createVariableRangeEvent(new ResourceLocation(ThaiDelight.MOD_ID,"entity.dragonfly.hurt")));
+    }
+
+    private static Supplier<SoundEvent> register(String id){
+        return ModPlatform.registerSoundEvent(ResourceLocation.fromNamespaceAndPath(ThaiDelight.MOD_ID,id),() -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(ThaiDelight.MOD_ID,id)));
     }
 }

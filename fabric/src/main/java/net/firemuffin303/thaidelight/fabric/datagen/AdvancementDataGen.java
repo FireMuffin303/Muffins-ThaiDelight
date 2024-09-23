@@ -7,19 +7,21 @@ import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.firemuffin303.thaidelight.fabric.common.registry.ModItemsFabric;
 import net.minecraft.advancements.Advancement;
-import net.minecraft.advancements.FrameType;
+import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.ItemLike;
 
+import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 
 public class AdvancementDataGen extends FabricAdvancementProvider {
-    private final ResourceLocation BACKGROUND = new ResourceLocation("minecraft","textures/block/oak_log.png");
+    private final ResourceLocation BACKGROUND = ResourceLocation.fromNamespaceAndPath("minecraft","textures/block/oak_log.png");
 
-    protected AdvancementDataGen(FabricDataOutput output) {
-        super(output);
+    protected AdvancementDataGen(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registryLookup) {
+        super(output,registryLookup);
     }
 
     Advancement ROOT = Advancement.Builder.advancement()
@@ -31,7 +33,8 @@ public class AdvancementDataGen extends FabricAdvancementProvider {
                     false,
                     false,
                     false)
-            .addCriterion("seeds", InventoryChangeTrigger.TriggerInstance.hasItems(new ItemLike[]{})).build(new ResourceLocation(ThaiDelight.MOD_ID,"root"));
+            .addCriterion("seeds",
+                    InventoryChangeTrigger.TriggerInstance.hasItems(new ItemLike[]{})).build(ResourceLocation.fromNamespaceAndPath(ThaiDelight.MOD_ID,"root"));
 
     Advancement GOT_COOKED_DRAGONFLY = Advancement.Builder.advancement()
             .display(
@@ -46,7 +49,7 @@ public class AdvancementDataGen extends FabricAdvancementProvider {
             .addCriterion("got_cooked_dragonfly",
                     InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.COOKED_DRAGONFLY))
             .parent(ROOT)
-            .build(new ResourceLocation(ThaiDelight.MOD_ID,"got_cooked_dragonfly"));
+            .build(ResourceLocation.fromNamespaceAndPath(ThaiDelight.MOD_ID,"got_cooked_dragonfly"));
 
 
     Advancement GOT_SLICED_LIME = Advancement.Builder.advancement()
@@ -62,7 +65,7 @@ public class AdvancementDataGen extends FabricAdvancementProvider {
             .addCriterion("got_sliced_lime",
                     InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.SLICED_LIME))
             .parent(ROOT)
-            .build(new ResourceLocation(ThaiDelight.MOD_ID,"got_sliced_lime"));
+            .build(ResourceLocation.fromNamespaceAndPath(ThaiDelight.MOD_ID,"got_sliced_lime"));
 
     Advancement GOT_PEPPER = Advancement.Builder.advancement()
             .display(
@@ -75,7 +78,7 @@ public class AdvancementDataGen extends FabricAdvancementProvider {
                     true,
                     false)
             .addCriterion("got_pepper", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.PEPPER))
-            .parent(ROOT).build(new ResourceLocation(ThaiDelight.MOD_ID,"got_pepper"));
+            .parent(ROOT).build(ResourceLocation.fromNamespaceAndPath(ThaiDelight.MOD_ID,"got_pepper"));
 
 
     Advancement GOT_SPICY_MEAT_SALAD = Advancement.Builder.advancement()
@@ -91,7 +94,7 @@ public class AdvancementDataGen extends FabricAdvancementProvider {
             .addCriterion("got_spicy_meat_salad",
                     InventoryChangeTrigger.TriggerInstance.hasItems(ModItemsFabric.SPICY_MINCED_MEAT_SALAD))
             .parent(GOT_PEPPER)
-            .build(new ResourceLocation(ThaiDelight.MOD_ID,"got_spicy_meat_salad"));
+            .build(ResourceLocation.fromNamespaceAndPath(ThaiDelight.MOD_ID,"got_spicy_meat_salad"));
 
     Advancement GOT_SOMTAM = Advancement.Builder.advancement()
             .display(
@@ -106,12 +109,12 @@ public class AdvancementDataGen extends FabricAdvancementProvider {
             .addCriterion("got_spicy_meat_salad",
                     InventoryChangeTrigger.TriggerInstance.hasItems(ModItemsFabric.SOMTAM))
             .parent(GOT_PEPPER)
-            .build(new ResourceLocation(ThaiDelight.MOD_ID,"got_somtam"));
+            .build(ResourceLocation.fromNamespaceAndPath(ThaiDelight.MOD_ID,"got_somtam"));
 
 
 
     @Override
-    public void generateAdvancement(Consumer<Advancement> consumer) {
+    public void generateAdvancement(HolderLookup.Provider provider, Consumer<AdvancementHolder> consumer) {
         consumer.accept(ROOT);
         consumer.accept(GOT_COOKED_DRAGONFLY);
         consumer.accept(GOT_SLICED_LIME);

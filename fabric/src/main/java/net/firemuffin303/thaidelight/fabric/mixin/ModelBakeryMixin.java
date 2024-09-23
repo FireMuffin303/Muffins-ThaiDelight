@@ -17,6 +17,7 @@ import static net.firemuffin303.thaidelight.fabric.ThaiDelightModFabricClient.*;
 
 @Mixin(ModelBakery.class)
 public abstract class ModelBakeryMixin {
+    /*
     @Shadow
     protected abstract void loadTopLevel(ModelResourceLocation modelResourceLocation);
 
@@ -28,4 +29,5 @@ public abstract class ModelBakeryMixin {
         this.loadTopLevel(DIAMOND_PASTLE_MODEL);
         this.loadTopLevel(NETHERITE_PASTLE_MODEL);
     }
+    */
 }

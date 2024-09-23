@@ -23,7 +23,7 @@ public class DragonflyModel <T extends Dragonfly> extends HierarchicalModel<T> {
     private final ModelPart frontLeg;
     private final ModelPart midLeg;
     private final ModelPart hindLeg;
-    public static final ModelLayerLocation LAYER = new ModelLayerLocation(new ResourceLocation(ThaiDelight.MOD_ID,"dragonfly"),"main");
+    public static final ModelLayerLocation LAYER = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(ThaiDelight.MOD_ID,"dragonfly"),"main");
 
     public DragonflyModel(ModelPart body) {
         this.body = body.getChild("body");
@@ -97,16 +97,15 @@ public class DragonflyModel <T extends Dragonfly> extends HierarchicalModel<T> {
         this.body.zRot = 0.0F;
     }
 
-    @Override
-    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int i, int j, float f, float g, float h, float k) {
+    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int i, int j, int k) {
         if (this.young) {
             poseStack.pushPose();
             poseStack.scale(0.5f,0.5f,0.5f);
             poseStack.translate(0.0F, 1.5f, 0.0F);
-            this.root().render(poseStack, vertexConsumer, i, j, f, g, h, k);
+            this.root().render(poseStack, vertexConsumer, i, j, k);
             poseStack.popPose();
         } else {
-            this.root().render(poseStack, vertexConsumer, i, j, f, g, h, k);
+            this.root().render(poseStack, vertexConsumer, i, j, k);
         }
 
     }

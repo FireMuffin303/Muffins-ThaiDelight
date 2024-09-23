@@ -1,5 +1,6 @@
 package net.firemuffin303.thaidelight.common.block.crops;
 
+import com.mojang.serialization.MapCodec;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.minecraft.core.BlockPos;
@@ -10,6 +11,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -46,6 +48,11 @@ public class PapayaBlock extends HorizontalDirectionalBlock implements Bonemeala
         this.registerDefaultState((BlockState)((BlockState)((BlockState)this.stateDefinition.any()).setValue(FACING, Direction.NORTH)).setValue(AGE, 0));
     }
 
+    @Override
+    protected MapCodec<? extends HorizontalDirectionalBlock> codec() {
+        return null;
+    }
+
     public boolean isRandomlyTicking(BlockState blockState) {
         return (Integer)blockState.getValue(AGE) < 2;
     }
@@ -60,26 +67,36 @@ public class PapayaBlock extends HorizontalDirectionalBlock implements Bonemeala
     }
 
     @Override
-    public InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
+    protected InteractionResult useWithoutItem(BlockState blockState, Level level, BlockPos blockPos, Player player, BlockHitResult blockHitResult) {
         int i = (Integer)blockState.getValue(AGE);
         boolean flag = i == 2;
-        if (!flag && player.getItemInHand(interactionHand).is(Items.BONE_MEAL)) {
-            return InteractionResult.PASS;
-        } else if (i > 0) {
-            popResource(level, blockPos, new ItemStack(flag ? ModItems.PAPAYA : ModItems.RAW_PAPAYA, 1));
+        if(i > 0){
+            popResource(level, blockPos, new ItemStack(flag ? ModItems.PAPAYA.get() : ModItems.RAW_PAPAYA.get(), 1));
             level.playSound((Player)null, blockPos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
             BlockState blockstate = Blocks.AIR.defaultBlockState();
             level.setBlock(blockPos, blockstate, 2);
             level.gameEvent(GameEvent.BLOCK_CHANGE, blockPos, GameEvent.Context.of(player, blockstate));
             return InteractionResult.sidedSuccess(level.isClientSide);
-        } else {
-            return super.use(blockState, level, blockPos, player, interactionHand, blockHitResult);
         }
+
+        return super.useWithoutItem(blockState, level, blockPos, player, blockHitResult);
     }
+
+    @Override
+    protected ItemInteractionResult useItemOn(ItemStack itemStack, BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
+        int i = (Integer)blockState.getValue(AGE);
+        boolean flag = i == 2;
+        if (!flag && player.getItemInHand(interactionHand).is(Items.BONE_MEAL)) {
+            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        }
+
+        return super.useItemOn(itemStack, blockState, level, blockPos, player, interactionHand, blockHitResult);
+    }
+
 
     public boolean canSurvive(BlockState blockState, LevelReader levelReader, BlockPos blockPos) {
         BlockState blockState2 = levelReader.getBlockState(blockPos.relative((Direction)blockState.getValue(FACING)));
-        return blockState2.is(ModBlocks.PAPAYA_LOG);
+        return blockState2.is(ModBlocks.PAPAYA_LOG.get());
     }
 
     public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
@@ -122,7 +139,7 @@ public class PapayaBlock extends HorizontalDirectionalBlock implements Bonemeala
         return direction == blockState.getValue(FACING) && !blockState.canSurvive(levelAccessor, blockPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(blockState, direction, blockState2, levelAccessor, blockPos, blockPos2);
     }
 
-    public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState, boolean bl) {
+    public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState) {
         return (Integer)blockState.getValue(AGE) < 2;
     }
 

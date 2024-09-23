@@ -21,7 +21,7 @@ public class PepperCropBlock extends CropBlock {
 
     @Override
     protected ItemLike getBaseSeedId() {
-        return ModItems.PEPPER_SEED;
+        return ModItems.PEPPER_SEED.get();
     }
 
 

@@ -1,6 +1,7 @@
 package net.firemuffin303.thaidelight.common.feature;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import net.firemuffin303.thaidelight.common.block.crops.PapayaBlock;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.firemuffin303.thaidelight.common.registry.ModTreeDecorator;
@@ -15,9 +16,8 @@ import java.util.Iterator;
 import java.util.List;
 
 public class PapayaDecorator extends TreeDecorator {
-    public static final Codec<PapayaDecorator> CODEC = Codec.floatRange(0.0F, 1.0F).fieldOf("probability").xmap(PapayaDecorator::new, (papayaDecorator) -> {
-        return papayaDecorator.probability;
-    }).codec();
+    public static final MapCodec<PapayaDecorator> CODEC =
+            Codec.floatRange(0.0F, 1.0F).fieldOf("probability").xmap(PapayaDecorator::new, (papayaDecorator) -> papayaDecorator.probability);
     private final float probability;
 
     public PapayaDecorator(float f){
@@ -46,7 +46,7 @@ public class PapayaDecorator extends TreeDecorator {
                         Direction direction2 = direction.getOpposite();
                         BlockPos blockPos2 = blockPos.offset(direction2.getStepX(), 0, direction2.getStepZ());
                         if (context.isAir(blockPos2)) {
-                            context.setBlock(blockPos2, (BlockState)((BlockState) ModBlocks.PAPAYA.defaultBlockState().setValue(PapayaBlock.AGE, randomSource.nextInt(2))).setValue(PapayaBlock.FACING, direction));
+                            context.setBlock(blockPos2, (BlockState)((BlockState) ModBlocks.PAPAYA.get().defaultBlockState().setValue(PapayaBlock.AGE, randomSource.nextInt(2))).setValue(PapayaBlock.FACING, direction));
                         }
                     }
                 }

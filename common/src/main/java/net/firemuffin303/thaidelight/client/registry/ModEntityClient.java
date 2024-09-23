@@ -15,8 +15,8 @@ import java.util.function.Supplier;
 
 public class ModEntityClient {
     public static void init(){
-        ModPlatform.registerEntityRenderer(ModEntityTypes.FLOWER_CRAB, CrabRenderer::new);
-        ModPlatform.registerEntityRenderer(ModEntityTypes.DRAGONFLY, DragonflyRenderer::new);
+        ModPlatform.registerEntityRenderer(ModEntityTypes.FLOWER_CRAB.get(), CrabRenderer::new);
+        ModPlatform.registerEntityRenderer(ModEntityTypes.DRAGONFLY.get(), DragonflyRenderer::new);
 
     }
 

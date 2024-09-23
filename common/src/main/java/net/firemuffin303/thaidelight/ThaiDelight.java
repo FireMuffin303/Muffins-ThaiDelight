@@ -39,8 +39,6 @@ public class ThaiDelight {
         ModMenuType.init();
         ModSoundEvents.init();
         ModTreeDecorator.init();
-
-
     }
 
     public static void postInit(){

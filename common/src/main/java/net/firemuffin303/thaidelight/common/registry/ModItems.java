@@ -1,29 +1,19 @@
 package net.firemuffin303.thaidelight.common.registry;
 
-import com.google.common.collect.Sets;
 import net.firemuffin303.thaidelight.ThaiDelight;
-import net.firemuffin303.thaidelight.common.entity.Dragonfly;
-import net.firemuffin303.thaidelight.common.item.ModMusicDisc;
 import net.firemuffin303.thaidelight.common.item.bottle.DragonflyBottleItem;
-import net.firemuffin303.thaidelight.common.item.bottle.SeafoodBottleItem;
 import net.firemuffin303.thaidelight.utils.ModPlatform;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
-import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.Enchantments;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluids;
 
-import java.util.ArrayList;
 import java.util.Map;
-import java.util.Set;
 import java.util.function.Supplier;
 
 public class ModItems {

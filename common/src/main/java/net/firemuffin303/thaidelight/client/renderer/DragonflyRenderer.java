@@ -18,6 +18,6 @@ public class DragonflyRenderer extends MobRenderer<Dragonfly, DragonflyModel<Dra
 
     @Override
     public ResourceLocation getTextureLocation(Dragonfly entity) {
-        return new ResourceLocation(ThaiDelight.MOD_ID,String.format("textures/entity/dragonfly/%s.png",entity.getVariant().getName()));
+        return ResourceLocation.fromNamespaceAndPath(ThaiDelight.MOD_ID,String.format("textures/entity/dragonfly/%s.png",entity.getVariant().getName()));
     }
 }

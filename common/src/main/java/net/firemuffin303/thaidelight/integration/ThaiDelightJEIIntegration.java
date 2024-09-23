@@ -11,16 +11,20 @@ import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import net.firemuffin303.thaidelight.ThaiDelight;
 import net.firemuffin303.thaidelight.client.screens.MortarScreen;
+import net.firemuffin303.thaidelight.common.recipe.MortarRecipe;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.firemuffin303.thaidelight.common.registry.ModRecipes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import org.apache.http.util.TextUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -28,7 +32,7 @@ import java.util.Objects;
 public class ThaiDelightJEIIntegration implements IModPlugin {
     @Override
     public ResourceLocation getPluginUid() {
-        return new ResourceLocation(ThaiDelight.MOD_ID,"jei");
+        return ResourceLocation.fromNamespaceAndPath(ThaiDelight.MOD_ID,"jei");
     }
 
     @Override
@@ -41,8 +45,13 @@ public class ThaiDelightJEIIntegration implements IModPlugin {
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
         ClientLevel level = Objects.requireNonNull(Minecraft.getInstance().level);
-        registration.addRecipes(MortarJEI.MORTAR,level.getRecipeManager().getAllRecipesFor(ModRecipes.MORTAR));
-        registration.addIngredientInfo(new ItemStack(ModBlocks.PAPAYA_LOG), VanillaTypes.ITEM_STACK, Component.translatable("jei.info.papaya_log"));
+        List<RecipeHolder<MortarRecipe>> mortarList = level.getRecipeManager().getAllRecipesFor(ModRecipes.MORTAR.get());
+        List<MortarRecipe> mortarRecipeList = new ArrayList<>();
+        mortarList.forEach(mortarRecipeRecipeHolder -> {
+            mortarRecipeList.add(mortarRecipeRecipeHolder.value());
+        });
+        registration.addRecipes(MortarJEI.MORTAR,mortarRecipeList);
+        registration.addIngredientInfo(new ItemStack(ModBlocks.PAPAYA_LOG.get()), VanillaTypes.ITEM_STACK, Component.translatable("jei.info.papaya_log"));
     }
 
     @Override
@@ -52,6 +61,6 @@ public class ThaiDelightJEIIntegration implements IModPlugin {
 
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
-        registration.addRecipeCatalyst(new ItemStack(ModBlocks.MORTAR),MortarJEI.MORTAR);
+        registration.addRecipeCatalyst(new ItemStack(ModBlocks.MORTAR.get()),MortarJEI.MORTAR);
     }
 }

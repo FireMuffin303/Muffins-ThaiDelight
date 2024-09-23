@@ -1,12 +1,14 @@
 package net.firemuffin303.thaidelight.utils;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.MenuAccess;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
@@ -114,7 +116,7 @@ public class ModPlatform {
     }
 
     @ExpectPlatform
-    public static <T extends TreeDecorator> TreeDecoratorType<T> registerTreeDecorator(String id, Codec<T> codec){
+    public static <T extends TreeDecorator> TreeDecoratorType<T> registerTreeDecorator(String id, MapCodec<T> codec){
         throw new NotImplementedException();
     }
 
@@ -137,31 +139,11 @@ public class ModPlatform {
     //---------------------------------------------------
 
     @ExpectPlatform
-    public static <T extends Mob> Item registerSpawnEgg(EntityType<T> entityType, int primaryColor, int secondaryColor, Item.Properties properties){
-        throw new AssertionError();
-    }
-
-    @ExpectPlatform
-    public static <T extends Mob> Item registerMobBucket(EntityType<T> entityType, Supplier<? extends Fluid> fluid, Supplier<? extends SoundEvent> soundEvent, Item.Properties properties){
-        throw new AssertionError();
-    }
-
-
-
-    @ExpectPlatform
-    public static void registerPotionBrewing(Supplier<Potion> input,Supplier<Item> ingredient,Supplier<Potion> output) {
-        throw new AssertionError();
-    }
-
-    @ExpectPlatform
     public static <T extends Entity> void registerEntityRenderer(EntityType<T> entityTypeSupplier, EntityRendererProvider<T> entityRendererProvider){
         throw new AssertionError();
     }
 
-    @ExpectPlatform
-    public static <T extends Mob> void registerEntitySpawn(EntityType<T> entityType, SpawnPlacements.Type type, Heightmap.Types heightMapTypes, SpawnPlacements.SpawnPredicate<T> predicate) {
-        throw new AssertionError();
-    }
+
 
     @ExpectPlatform
     public static <T extends BlockEntity> BlockEntityType.Builder<T> buildBlockEntity(ModBlocks.ModBlockEntityTypes.BlockEntitySupplier<T> blockEntityTypeSupplier, Block block){
@@ -169,7 +151,7 @@ public class ModPlatform {
     }
 
     @ExpectPlatform
-    public static <T extends BlockEntity> void registerBlockEntity(String id,BlockEntityType<T> blockEntityType){
+    public static <T extends BlockEntity> void registerBlockEntity(ResourceLocation resourceLocation,BlockEntityType<T> blockEntityType){
         throw new AssertionError();
     }
 
@@ -199,22 +181,12 @@ public class ModPlatform {
     }
 
     @ExpectPlatform
-    public static Item getSomtamItem(){
+    public static Holder<MobEffect> getNourishment(){
         throw new AssertionError();
     }
 
     @ExpectPlatform
-    public static MobEffect getNourishment(){
-        throw new AssertionError();
-    }
-
-    @ExpectPlatform
-    public static MobEffect getComfort() {
-        throw new AssertionError();
-    }
-
-    @ExpectPlatform
-    public static FoodProperties getSomtamFood(){
+    public static Holder<MobEffect> getComfort() {
         throw new AssertionError();
     }
 
@@ -247,10 +219,4 @@ public class ModPlatform {
     public static Item getLimeJuice(Item.Properties properties){
         throw new AssertionError();
     }
-
-    @ExpectPlatform
-    public static <T> int[] getRecipeMatcher(List<T> inputs, List<? extends Predicate<T>> tests){
-        throw new AssertionError();
-    }
-
 }

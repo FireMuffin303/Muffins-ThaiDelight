@@ -180,7 +180,7 @@ public class Dragonfly extends Animal implements VariantHolder<Dragonfly.Dragonf
     @Nullable
     @Override
     protected SoundEvent getHurtSound(DamageSource damageSource) {
-        return ModSoundEvents.DRAGONFLY_HURT;
+        return ModSoundEvents.DRAGONFLY_HURT.get();
     }
 
     @Override

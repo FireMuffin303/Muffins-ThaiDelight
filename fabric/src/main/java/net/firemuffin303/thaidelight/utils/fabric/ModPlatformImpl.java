@@ -1,9 +1,11 @@
 package net.firemuffin303.thaidelight.utils.fabric;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
+import net.fabricmc.fabric.api.registry.FabricBrewingRecipeRegistryBuilder;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.firemuffin303.thaidelight.ThaiDelight;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
@@ -19,6 +21,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.MenuAccess;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
@@ -48,6 +51,10 @@ import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
 import net.minecraft.world.level.material.Fluid;
+import vectorwing.farmersdelight.common.block.WildCropBlock;
+import vectorwing.farmersdelight.common.item.ConsumableItem;
+import vectorwing.farmersdelight.common.item.DrinkableItem;
+import vectorwing.farmersdelight.common.registry.ModEffects;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,8 +74,8 @@ public class ModPlatformImpl {
         return () -> returnItem;
     }
 
-    public static <T extends BlockEntity> void registerBlockEntity(String id,BlockEntityType<T> blockEntityType) {
-        Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE,new ResourceLocation(ThaiDelight.MOD_ID,id),blockEntityType);
+    public static <T extends BlockEntity> void registerBlockEntity(ResourceLocation resourceLocation,BlockEntityType<T> blockEntityType) {
+        Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE,resourceLocation,blockEntityType);
     }
 
     public static  <T extends Recipe<?>> Supplier<RecipeType<T>> registerRecipeType(ResourceLocation resourceLocation,Supplier<RecipeType<T>> recipeType) {
@@ -106,8 +113,8 @@ public class ModPlatformImpl {
         MenuScreens.register(menuType,screen::create);
     }
 
-    public static <T extends TreeDecorator> TreeDecoratorType<T> registerTreeDecorator(String id, Codec<T> codec) {
-        return Registry.register(BuiltInRegistries.TREE_DECORATOR_TYPE,new ResourceLocation(ThaiDelight.MOD_ID,id),new TreeDecoratorType(codec));
+    public static <T extends TreeDecorator> TreeDecoratorType<T> registerTreeDecorator(String id, MapCodec<T> codec) {
+        return Registry.register(BuiltInRegistries.TREE_DECORATOR_TYPE,ResourceLocation.fromNamespaceAndPath(ThaiDelight.MOD_ID,id),new TreeDecoratorType<T>(codec));
     }
 
     public static CreativeModeTab createCreativeModeTab(ResourceLocation resourceLocation, Supplier<ItemStack> icon, ArrayList<ItemLike> itemList) {
@@ -130,9 +137,6 @@ public class ModPlatformImpl {
 
     }
 
-    public static <T extends Mob> void registerEntitySpawn(EntityType<T> entityType, SpawnPlacements.Type type, Heightmap.Types heightMapTypes, SpawnPlacements.SpawnPredicate<T> predicate) {
-        //SpawnPlacementMixin.invokeRegister(entityType,type,heightMapTypes,predicate);
-    }
 
     public static  <T extends Mob> Item registerSpawnEgg(EntityType<T> entityType, int primaryColor, int secondaryColor, Item.Properties properties) {
         return new SpawnEggItem(entityType,primaryColor,secondaryColor,properties);
@@ -141,11 +145,6 @@ public class ModPlatformImpl {
     public static <T extends Mob> Item registerMobBucket(EntityType<T> entityType, Supplier<? extends Fluid> fluid, Supplier<? extends SoundEvent> soundEvent, Item.Properties properties) {
         return new MobBucketItem(entityType,fluid.get(),soundEvent.get(),properties);
     }
-
-    public static void registerPotionBrewing(Supplier<Potion> input, Supplier<Item> ingredient, Supplier<Potion> output) {
-        FabricBrewingRecipeRegistry.registerPotionRecipe(input.get(), Ingredient.of(ingredient.get()),output.get());
-    }
-
 
     public static <T extends BlockEntity> BlockEntityType.Builder<T> buildBlockEntity(ModBlocks.ModBlockEntityTypes.BlockEntitySupplier<T> blockEntityTypeSupplier, Block block) {
         return BlockEntityType.Builder.of(blockEntityTypeSupplier::create,block);
@@ -171,20 +170,12 @@ public class ModPlatformImpl {
         return new ConsumableItem(ModItemsFabric.foodBowl(foodProperties),effectTooltips);
     }
 
-    public static MobEffect getNourishment() {
-        return EffectsRegistry.NOURISHMENT.get();
+    public static Holder<MobEffect> getNourishment() {
+        return ModEffects.NOURISHMENT;
     }
 
-    public static MobEffect getComfort() {
-        return EffectsRegistry.COMFORT.get();
-    }
-
-    public static Item getSomtamItem() {
-        return new SomtamItem(ModItemsFabric.foodBowl(ModItemsFabric.ModFoodFabric.SOMTAM));
-    }
-
-    public static FoodProperties getSomtamFood() {
-        return ModItemsFabric.ModFoodFabric.SOMTAM;
+    public static Holder<MobEffect> getComfort() {
+        return ModEffects.COMFORT;
     }
 
     public static Item createPastleItem(Tier tier, int attackDamage, float attackSpeed, Item.Properties properties) {
@@ -195,12 +186,8 @@ public class ModPlatformImpl {
         return PastleItem.class;
     }
 
-    public static Block getWildCropBlock(MobEffect mobEffect, int duration, BlockBehaviour.Properties properties) {
-        return new WildCropBlock();
-    }
-
-    public static <T> int[] getRecipeMatcher(List<T> inputs, List<? extends Predicate<T>> tests) {
-        return RecipeMatcher.findMatches(inputs,tests);
+    public static Block getWildCropBlock(Holder<MobEffect> mobEffect, int duration, BlockBehaviour.Properties properties) {
+        return new WildCropBlock(mobEffect,duration,properties);
     }
 
     public static Item getDrinkable(Item.Properties properties, boolean hasFoodEffectTooltip, boolean hasCustomTooltip) {
@@ -216,7 +203,7 @@ public class ModPlatformImpl {
     }
 
     public static <T extends AbstractContainerMenu> MenuType<T> registryMenu(String id, ModPlatform.MenuSupplier<T> menu) {
-        return Registry.register(BuiltInRegistries.MENU,new ResourceLocation(ThaiDelight.MOD_ID,id),new MenuType(menu::create, FeatureFlags.VANILLA_SET));
+        return Registry.register(BuiltInRegistries.MENU,ResourceLocation.fromNamespaceAndPath(ThaiDelight.MOD_ID,id),new MenuType<T>(menu::create, FeatureFlags.VANILLA_SET));
     }
 
     public static void registerStrippables(Map<Block, Block> blockBlockMap) {

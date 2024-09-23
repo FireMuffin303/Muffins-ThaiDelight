@@ -76,7 +76,6 @@ public class ThaiDelightForge {
 
         iEventBus.addListener(EventPriority.HIGH,this::registerEvent);
         iEventBus.addListener(EventPriority.LOW,this::registerAttribute);
-        iEventBus.addListener(EventPriority.LOW,this::registerEntitySpawn);
         iEventBus.addListener(EventPriority.LOW,this::registerCommonSetup);
 
         NeoForge.EVENT_BUS.addListener(VillageStructures::addNewVillageBuilding);
@@ -90,34 +89,12 @@ public class ThaiDelightForge {
         ModEntityTypes.registerAttributes(((supplier, builderSupplier) -> event.put(supplier.get(),builderSupplier.get().build())));
     }
 
-    public void registerEntitySpawn(SpawnPlacementRegisterEvent spawnPlacements){
-        spawnPlacements.register(ModEntityTypes.FLOWER_CRAB,SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, FlowerCrabEntity::checkSpawnRules, SpawnPlacementRegisterEvent.Operation.AND);
-        spawnPlacements.register(ModEntityTypes.DRAGONFLY,SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules, SpawnPlacementRegisterEvent.Operation.AND);
-    }
-
     public void registerEvent(RegisterEvent registerEvent){
-        registerEvent.register(ForgeRegistries.Keys.ENTITY_TYPES,helper -> ModEntityTypes.init());
-        registerEvent.register(ForgeRegistries.Keys.BLOCKS,helper -> {
-            ModBlocks.init();
-            ModBlocksForge.init();
-        });
-        registerEvent.register(ForgeRegistries.Keys.BLOCK_ENTITY_TYPES,helper -> ModBlocks.ModBlockEntityTypes.init());
-        registerEvent.register(ForgeRegistries.Keys.FLUIDS,helper -> ModFluid.init());
-        registerEvent.register(ForgeRegistries.Keys.ITEMS,helper -> {
-            ModItems.init();
-            ModItemsForge.init();
-        });
-        registerEvent.register(ForgeRegistries.Keys.RECIPE_TYPES,helper -> ModRecipes.init());
-        registerEvent.register(ForgeRegistries.Keys.RECIPE_SERIALIZERS,helper -> ModRecipes.ModRecipeSerializer.init());
-        registerEvent.register(ForgeRegistries.Keys.MENU_TYPES,helper -> ModMenuType.init());
-        registerEvent.register(ForgeRegistries.Keys.SOUND_EVENTS,helper -> ModSoundEvents.init());
-        registerEvent.register(ForgeRegistries.Keys.TREE_DECORATOR_TYPES,helper -> ModTreeDecorator.init());
-
         registerEvent.register(Registries.CREATIVE_MODE_TAB, helper ->
                 Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB,
                         ResourceLocation.fromNamespaceAndPath(ThaiDelight.MOD_ID,"main"),
                         CreativeModeTab.builder().title(Component.translatable("itemGroup."+ThaiDelight.MOD_ID+".main"))
-                                .icon(() -> new ItemStack(ModBlocks.MORTAR))
+                                .icon(() -> new ItemStack(ModBlocks.MORTAR.get()))
                                 .displayItems(this::displayItem).build()));
     }
 
@@ -144,65 +121,65 @@ public class ThaiDelightForge {
     }
 
     public void displayItem(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output output){
-        output.accept(ModBlocks.MORTAR);
+        output.accept(ModBlocks.MORTAR.get());
 
-        output.accept(ModBlocks.LIME_CRATE);
-        output.accept(ModBlocks.PEPPER_CRATE);
-        output.accept(ModBlocks.RAW_PAPAYA_CRATE);
-        output.accept(ModBlocks.PAPAYA_CRATE);
-        output.accept(ModBlocks.PAPAYA_LOG);
-        output.accept(ModBlocks.PAPAYA_WOOD);
-        output.accept(ModBlocks.STRIPPED_PAPAYA_LOG);
-        output.accept(ModBlocks.STRIPPED_PAPAYA_WOOD);
-        output.accept(ModBlocks.PAPAYA_LEAVES);
+        output.accept(ModBlocks.LIME_CRATE.get());
+        output.accept(ModBlocks.PEPPER_CRATE.get());
+        output.accept(ModBlocks.RAW_PAPAYA_CRATE.get());
+        output.accept(ModBlocks.PAPAYA_CRATE.get());
+        output.accept(ModBlocks.PAPAYA_LOG.get());
+        output.accept(ModBlocks.PAPAYA_WOOD.get());
+        output.accept(ModBlocks.STRIPPED_PAPAYA_LOG.get());
+        output.accept(ModBlocks.STRIPPED_PAPAYA_WOOD.get());
+        output.accept(ModBlocks.PAPAYA_LEAVES.get());
 
-        output.accept(ModBlocks.SOMTAM_FEAST);
-        output.accept(ModBlocks.LARB_FEAST);
-        output.accept(ModBlocks.CRAB_FRIED_RICE_FEAST);
+        output.accept(ModBlocks.SOMTAM_FEAST.get());
+        output.accept(ModBlocks.LARB_FEAST.get());
+        output.accept(ModBlocks.CRAB_FRIED_RICE_FEAST.get());
 
-        output.accept(ModBlocks.WILD_PEPPER_CROP);
-        output.accept(ModItems.PEPPER);
-        output.accept(ModItems.PEPPER_SEED);
+        output.accept(ModBlocks.WILD_PEPPER_CROP.get());
+        output.accept(ModItems.PEPPER.get());
+        output.accept(ModItems.PEPPER_SEED.get());
 
-        output.accept(ModItems.LIME);
-        output.accept(ModItems.SLICED_LIME);
-        output.accept(ModBlocks.LIME_SAPLING);
+        output.accept(ModItems.LIME.get());
+        output.accept(ModItems.SLICED_LIME.get());
+        output.accept(ModBlocks.LIME_SAPLING.get());
 
-        output.accept(ModItems.PAPAYA);
-        output.accept(ModItems.SLICED_PAPAYA);
-        output.accept(ModItems.RAW_PAPAYA);
-        output.accept(ModItems.RAW_PAPAYA_SLICE);
-        output.accept(ModBlocks.PAPAYA_SAPLING);
-        output.accept(ModItems.PAPAYA_SEEDS);
+        output.accept(ModItems.PAPAYA.get());
+        output.accept(ModItems.SLICED_PAPAYA.get());
+        output.accept(ModItems.RAW_PAPAYA.get());
+        output.accept(ModItems.RAW_PAPAYA_SLICE.get());
+        output.accept(ModBlocks.PAPAYA_SAPLING.get());
+        output.accept(ModItems.PAPAYA_SEEDS.get());
 
         output.accept(ModItemsForge.SOMTAM.get());
         output.accept(ModItemsForge.SPICY_MINCED_MEAT_SALAD.get());
         output.accept(ModItemsForge.CRAB_FRIED_RICE.get());
         output.accept(ModItemsForge.STIR_FRIED_NOODLE.get());
 
-        output.accept(ModItems.LIME_JUICE);
-        output.accept(ModItems.PAPAYA_JUICE);
-        output.accept(ModItems.FISH_SAUCE_BOTTLE);
+        output.accept(ModItems.LIME_JUICE.get());
+        output.accept(ModItems.PAPAYA_JUICE.get());
+        output.accept(ModItems.FISH_SAUCE_BOTTLE.get());
 
-        output.accept(ModItems.CRAB_SPAWN_EGG);
-        output.accept(ModBlocks.CRAB_EGG);
-        output.accept(ModItems.CRAB_BUCKET);
-        output.accept(ModItems.CRAB_MEAT);
-        output.accept(ModItems.COOKED_CRAB_MEAT);
+        output.accept(ModItems.CRAB_SPAWN_EGG.get());
+        output.accept(ModBlocks.CRAB_EGG.get());
+        output.accept(ModItems.CRAB_BUCKET.get());
+        output.accept(ModItems.CRAB_MEAT.get());
+        output.accept(ModItems.COOKED_CRAB_MEAT.get());
 
-        output.accept(ModItems.DRAGONFLY_SPAWN_EGG);
+        output.accept(ModItems.DRAGONFLY_SPAWN_EGG.get());
 
         Dragonfly.DragonflyVariant[] dragonflyVariants = Dragonfly.DragonflyVariant.values();
 
         for(Dragonfly.DragonflyVariant variant : dragonflyVariants){
-            ItemStack itemStack = new ItemStack(ModItems.DRAGONFLY_BOTTLE);
+            ItemStack itemStack = new ItemStack(ModItems.DRAGONFLY_BOTTLE.get());
             DragonflyBottleItem.setVariant(itemStack,variant);
             output.accept(itemStack);
 
 
         }
 
-        output.accept(ModItems.DRAGONFLY);
-        output.accept(ModItems.COOKED_DRAGONFLY);
+        output.accept(ModItems.DRAGONFLY.get());
+        output.accept(ModItems.COOKED_DRAGONFLY.get());
     }
 }

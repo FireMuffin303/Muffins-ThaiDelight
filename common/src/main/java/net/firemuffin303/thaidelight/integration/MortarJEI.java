@@ -20,14 +20,14 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 
 public class MortarJEI implements IRecipeCategory<MortarRecipe> {
-    private static final ResourceLocation ID = new ResourceLocation(ThaiDelight.MOD_ID,"mortar");
+    private static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(ThaiDelight.MOD_ID,"mortar");
     public static final RecipeType<MortarRecipe> MORTAR = new RecipeType<>(ID,MortarRecipe.class);
 
     private final IDrawable icon;
     private final IDrawable background;
 
     public MortarJEI(IGuiHelper helper){
-        this.icon = helper.createDrawableItemStack(new ItemStack(ModBlocks.MORTAR));
+        this.icon = helper.createDrawableItemStack(new ItemStack(ModBlocks.MORTAR.get()));
         this.background = helper.createBlankDrawable(180,80);
     }
 
@@ -38,7 +38,7 @@ public class MortarJEI implements IRecipeCategory<MortarRecipe> {
 
     @Override
     public Component getTitle() {
-        return ModBlocks.MORTAR.getName();
+        return ModBlocks.MORTAR.get().getName();
     }
 
     @Override
@@ -53,7 +53,7 @@ public class MortarJEI implements IRecipeCategory<MortarRecipe> {
 
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, MortarRecipe recipe, IFocusGroup focuses) {
-        builder.addInvisibleIngredients(RecipeIngredientRole.CATALYST).addIngredients(Ingredient.of(ModBlocks.MORTAR));
+        builder.addInvisibleIngredients(RecipeIngredientRole.CATALYST).addIngredients(Ingredient.of(ModBlocks.MORTAR.get()));
         builder.addSlot(RecipeIngredientRole.OUTPUT,124,35).addIngredients(recipe.getResult());
         for(int i = 0;i < recipe.getIngredients().size();i++){
 

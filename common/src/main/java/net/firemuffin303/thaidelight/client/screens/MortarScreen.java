@@ -13,8 +13,8 @@ import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.inventory.Slot;
 
 public class MortarScreen extends AbstractContainerScreen<MortarMenu> {
-    public static final ResourceLocation CRAFTING_TABLE_LOCATION = new ResourceLocation(ThaiDelight.MOD_ID,"textures/gui/mortar.png");
-    private static final ResourceLocation RECIPE_BUTTON_LOCATION = new ResourceLocation("textures/gui/recipe_button.png");
+    public static final ResourceLocation CRAFTING_TABLE_LOCATION = ResourceLocation.fromNamespaceAndPath(ThaiDelight.MOD_ID,"textures/gui/mortar.png");
+    private static final ResourceLocation RECIPE_BUTTON_LOCATION = ResourceLocation.withDefaultNamespace("textures/gui/recipe_button.png");
 
     public static final Rect2i CLICK_AREA = new Rect2i(41, 25, 26, 25);
 
@@ -53,7 +53,7 @@ public class MortarScreen extends AbstractContainerScreen<MortarMenu> {
     }
 
     public void render(GuiGraphics guiGraphics, int i, int j, float f) {
-        this.renderBackground(guiGraphics);
+        this.renderBackground(guiGraphics,i,j,f);
         this.renderBg(guiGraphics, f, i, j);
         super.render(guiGraphics, i, j, f);
         this.renderTooltip(guiGraphics, i, j);

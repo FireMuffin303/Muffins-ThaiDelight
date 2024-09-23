@@ -23,7 +23,7 @@ public class FlowerCrabModel<T extends FlowerCrabEntity> extends HierarchicalMod
         this.body = body;
     }
 
-    public static final ModelLayerLocation LAYER = new ModelLayerLocation(new ResourceLocation(ThaiDelight.MOD_ID,"crab"),"main");
+    public static final ModelLayerLocation LAYER = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(ThaiDelight.MOD_ID,"crab"),"main");
 
 
     public static LayerDefinition createBodyLayer() {
@@ -85,16 +85,15 @@ public class FlowerCrabModel<T extends FlowerCrabEntity> extends HierarchicalMod
 
     }
 
-    @Override
-    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int i, int j, float f, float g, float h, float k) {
+    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int i, int j,int k) {
         if (this.young) {
             poseStack.pushPose();
             poseStack.scale(0.45F, 0.45F, 0.45F);
             poseStack.translate(0.0F, 1.834375F, 0.0F);
-            this.root().render(poseStack, vertexConsumer, i, j, f, g, h, k);
+            this.root().render(poseStack, vertexConsumer, i, j, k);
             poseStack.popPose();
         } else {
-            this.root().render(poseStack, vertexConsumer, i, j, f, g, h, k);
+            this.root().render(poseStack, vertexConsumer, i, j, k);
         }
     }
 

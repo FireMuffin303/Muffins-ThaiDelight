@@ -2,6 +2,7 @@ package net.firemuffin303.thaidelight.utils.forge;
 
 import com.google.common.collect.ImmutableMap;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.firemuffin303.thaidelight.forge.ThaiDelightForge;
 import net.firemuffin303.thaidelight.forge.common.item.LimeJuiceItem;
@@ -111,7 +112,7 @@ public class ModPlatformImpl {
         ThaiDelightForge.RECIPE_SERIALIZER.register(id,() -> recipeSerializer);
     }
 
-    public static <T extends TreeDecorator> TreeDecoratorType<T> registerTreeDecorator(String id, Codec<T> codec) {
+    public static <T extends TreeDecorator> TreeDecoratorType<T> registerTreeDecorator(String id, MapCodec<T> codec) {
         TreeDecoratorType<T> treeDecoratorType = new TreeDecoratorType(codec);
         ThaiDelightForge.TREE_DECORATOR.register(id,() -> treeDecoratorType);
         return treeDecoratorType;
@@ -132,21 +133,6 @@ public class ModPlatformImpl {
         EntityRenderers.register(entityTypeSupplier, entityRendererProvider);
     }
 
-    public static <T extends Mob> void registerEntitySpawn(EntityType<T> entityType, SpawnPlacements.Type type, Heightmap.Types heightMapTypes, SpawnPlacements.SpawnPredicate<T> predicate) {
-        SpawnPlacements.register(entityType,type,heightMapTypes,predicate);
-    }
-
-    public static <T extends Mob> Item registerSpawnEgg(EntityType<T> entityType, int primaryColor, int secondaryColor, Item.Properties properties) {
-        return new ForgeSpawnEggItem(() -> entityType,primaryColor,secondaryColor,properties);
-    }
-
-    public static <T extends Mob> Item registerMobBucket(EntityType<T> entityType, Supplier<? extends Fluid> fluid, Supplier<? extends SoundEvent> soundEvent, Item.Properties properties) {
-        return new MobBucketItem(()->entityType,fluid,soundEvent,properties);
-    }
-
-    public static void registerPotionBrewing(Supplier<Potion> input, Supplier<Item> ingredient, Supplier<Potion> output) {
-        BrewingRecipeRegistry.addRecipe(new BrewingRecipe(Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION),input.get())),Ingredient.of(ingredient.get()) ,PotionUtils.setPotion(new ItemStack(Items.POTION),output.get())));
-    }
 
     public static <T extends BlockEntity> BlockEntityType.Builder<T> buildBlockEntity(ModBlocks.ModBlockEntityTypes.BlockEntitySupplier<T> blockEntityTypeSupplier, Block block) {
         return BlockEntityType.Builder.of(blockEntityTypeSupplier::create,block);

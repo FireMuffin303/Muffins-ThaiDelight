@@ -5,14 +5,12 @@ import net.firemuffin303.thaidelight.common.block.CrabEggBlock;
 import net.firemuffin303.thaidelight.common.block.MortarBlock;
 import net.firemuffin303.thaidelight.common.block.cauldron.FermentedFishCauldron;
 import net.firemuffin303.thaidelight.common.block.crops.*;
-import net.firemuffin303.thaidelight.common.block.grower.PapayaTreeGrower;
+import net.firemuffin303.thaidelight.common.block.grower.ModTreeGrower;
 import net.firemuffin303.thaidelight.utils.ModPlatform;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -58,7 +56,7 @@ public class ModBlocks {
     public static final Supplier<Block> PAPAYA_LEAVES = register("papaya_leaves",() -> leaves(SoundType.AZALEA_LEAVES));
 
     public static final Supplier<Block> PAPAYA = register("papaya",() -> new PapayaBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).randomTicks().strength(0.2F, 3.0F).sound(SoundType.WOOD).noOcclusion().pushReaction(PushReaction.DESTROY)));
-    public static final Supplier<Block> PAPAYA_SAPLING = register("papaya_sapling",() -> new ModSaplingBlock(new PapayaTreeGrower(), BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY)));
+    public static final Supplier<Block> PAPAYA_SAPLING = register("papaya_sapling",() -> new ModSaplingBlock(ModTreeGrower.PAPAYA, BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY)));
     public static final Supplier<Block> PAPAYA_CROPS = register("papaya_crop",() -> new PapayaCropBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY)));
 
     //Cauldron

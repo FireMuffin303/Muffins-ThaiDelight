@@ -27,12 +27,14 @@ public abstract class AbstractSauceBowl extends Block {
         this.interactions = map;
     }
 
+    /*
     @Override
     public InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
         ItemStack itemStack = player.getItemInHand(interactionHand);
         SauceBowlInteraction sauceBowlInteraction = this.interactions.get(itemStack.getItem());
         return sauceBowlInteraction.interact(blockState,level,blockPos,player,interactionHand,itemStack);
     }
+    */
 
     @Override
     public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {

@@ -16,13 +16,13 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.player.StackedContents;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
-public class MortarMenu extends RecipeBookMenu<Container> {
+public class MortarMenu extends RecipeBookMenu<CraftingInput, MortarRecipe> {
     private final ResultContainer resultContainer = new ResultContainer();
     private final CraftingContainer craftSlots = new TransientCraftingContainer(this, 2, 2);
     private final Player player;
@@ -74,22 +74,24 @@ public class MortarMenu extends RecipeBookMenu<Container> {
         });
     }
 
-    protected static void slotChangedCraftingGrid(AbstractContainerMenu arg, Level arg2, Player arg3, CraftingContainer arg4, ResultContainer arg5) {
-        if (!arg2.isClientSide) {
+    protected static void slotChangedCraftingGrid(AbstractContainerMenu arg, Level level, Player arg3, CraftingContainer craftingContainer, ResultContainer resultContainer) {
+        if (!level.isClientSide) {
+            CraftingInput craftingInput = craftingContainer.asCraftInput();
             ServerPlayer serverPlayer = (ServerPlayer)arg3;
             ItemStack itemStack = ItemStack.EMPTY;
-            Optional<MortarRecipe> optional = arg2.getServer().getRecipeManager().getRecipeFor(ModRecipes.MORTAR, arg4, arg2);
+            Optional<RecipeHolder<MortarRecipe>> optional = level.getServer().getRecipeManager().getRecipeFor(ModRecipes.MORTAR.get(), craftingInput, level);
             if (optional.isPresent()) {
-                MortarRecipe mortarRecipe = optional.get();
-                if (arg5.setRecipeUsed(arg2, serverPlayer, mortarRecipe)) {
-                    ItemStack itemStack2 = mortarRecipe.assemble(arg4, arg2.registryAccess());
-                    if (itemStack2.isItemEnabled(arg2.enabledFeatures())) {
+                RecipeHolder<MortarRecipe> mortarRecipeHolder = optional.get();
+                MortarRecipe mortarRecipe = mortarRecipeHolder.value();
+                if (resultContainer.setRecipeUsed(level, serverPlayer, mortarRecipeHolder)) {
+                    ItemStack itemStack2 = mortarRecipe.assemble(craftingInput, level.registryAccess());
+                    if (itemStack2.isItemEnabled(level.enabledFeatures())) {
                         itemStack = itemStack2;
                     }
                 }
             }
 
-            arg5.setItem(0, itemStack);
+            resultContainer.setItem(0, itemStack);
             arg.setRemoteSlot(0, itemStack);
             serverPlayer.connection.send(new ClientboundContainerSetSlotPacket(arg.containerId, arg.incrementStateId(), 0, itemStack));
         }
@@ -107,8 +109,8 @@ public class MortarMenu extends RecipeBookMenu<Container> {
     }
 
     @Override
-    public boolean recipeMatches(Recipe<? super Container> recipe) {
-        return recipe.matches(this.craftSlots,this.player.level());
+    public boolean recipeMatches(RecipeHolder<MortarRecipe> recipeHolder) {
+        return recipeHolder.value().matches(this.craftSlots.asCraftInput(),this.player.level());
     }
 
     @Override
@@ -192,7 +194,7 @@ public class MortarMenu extends RecipeBookMenu<Container> {
 
     @Override
     public boolean stillValid(Player player) {
-        return stillValid(this.access,this.player, ModBlocks.MORTAR);
+        return stillValid(this.access,this.player, ModBlocks.MORTAR.get());
     }
 
     class MortarResultSlot extends ResultSlot{
@@ -208,7 +210,7 @@ public class MortarMenu extends RecipeBookMenu<Container> {
         public void onTake(Player player, ItemStack itemStack) {
 
             this.checkTakeAchievements(itemStack);
-            NonNullList<ItemStack> nonNullList = player.level().getRecipeManager().getRemainingItemsFor(ModRecipes.MORTAR, this.craftSlots, player.level());
+            NonNullList<ItemStack> nonNullList = player.level().getRecipeManager().getRemainingItemsFor(ModRecipes.MORTAR.get(), this.craftSlots.asCraftInput(), player.level());
 
             for(int i = 0; i < nonNullList.size(); ++i) {
                 ItemStack itemStack2 = this.craftSlots.getItem(i);
@@ -221,7 +223,7 @@ public class MortarMenu extends RecipeBookMenu<Container> {
                 if (!itemStack3.isEmpty()) {
                     if (itemStack2.isEmpty()) {
                         this.craftSlots.setItem(i, itemStack3);
-                    } else if (ItemStack.isSameItemSameTags(itemStack2, itemStack3)) {
+                    } else if (ItemStack.isSameItemSameComponents(itemStack2, itemStack3)) {
                         itemStack3.grow(itemStack2.getCount());
                         this.craftSlots.setItem(i, itemStack3);
                     } else if (!this.player.getInventory().add(itemStack3)) {
@@ -233,7 +235,7 @@ public class MortarMenu extends RecipeBookMenu<Container> {
             MortarMenu.this.access.execute((level, blockPos) -> {
                 long l = level.getGameTime();
                 if (MortarMenu.this.lastSoundTime != l) {
-                    level.playSound((Player)null, blockPos, ModSoundEvents.MORTAR_CRAFT, SoundSource.BLOCKS, 1.0F, 1.0F);
+                    level.playSound((Player)null, blockPos, ModSoundEvents.MORTAR_CRAFT.get(), SoundSource.BLOCKS, 1.0F, 1.0F);
                     MortarMenu.this.lastSoundTime = l;
                 }
 
