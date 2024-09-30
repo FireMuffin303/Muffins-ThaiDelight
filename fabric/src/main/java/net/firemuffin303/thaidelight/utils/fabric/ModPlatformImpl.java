@@ -1,11 +1,6 @@
 package net.firemuffin303.thaidelight.utils.fabric;
 
 import com.mojang.serialization.Codec;
-import com.nhoryzon.mc.farmersdelight.block.WildCropBlock;
-import com.nhoryzon.mc.farmersdelight.item.ConsumableItem;
-import com.nhoryzon.mc.farmersdelight.item.DrinkableItem;
-import com.nhoryzon.mc.farmersdelight.registry.EffectsRegistry;
-import com.nhoryzon.mc.farmersdelight.util.RecipeMatcher;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
@@ -54,11 +49,13 @@ import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
 import net.minecraft.world.level.material.Fluid;
+import vectorwing.farmersdelight.common.block.WildCropBlock;
+import vectorwing.farmersdelight.common.item.ConsumableItem;
+import vectorwing.farmersdelight.common.item.DrinkableItem;
+import vectorwing.farmersdelight.common.registry.ModEffects;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
-import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 public class ModPlatformImpl {
@@ -173,11 +170,11 @@ public class ModPlatformImpl {
     }
 
     public static MobEffect getNourishment() {
-        return EffectsRegistry.NOURISHMENT.get();
+        return ModEffects.NOURISHMENT.get();
     }
 
     public static MobEffect getComfort() {
-        return EffectsRegistry.COMFORT.get();
+        return ModEffects.COMFORT.get();
     }
 
     public static Item getSomtamItem() {
@@ -197,11 +194,7 @@ public class ModPlatformImpl {
     }
 
     public static Block getWildCropBlock(MobEffect mobEffect, int duration, BlockBehaviour.Properties properties) {
-        return new WildCropBlock();
-    }
-
-    public static <T> int[] getRecipeMatcher(List<T> inputs, List<? extends Predicate<T>> tests) {
-        return RecipeMatcher.findMatches(inputs,tests);
+        return new WildCropBlock(mobEffect,duration,properties);
     }
 
     public static Item getDrinkable(Item.Properties properties, boolean hasFoodEffectTooltip, boolean hasCustomTooltip) {

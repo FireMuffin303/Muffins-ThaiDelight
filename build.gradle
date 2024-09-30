@@ -1,6 +1,6 @@
 plugins {
     id "architectury-plugin" version "3.4-SNAPSHOT"
-    id "dev.architectury.loom" version "1.1-SNAPSHOT" apply false
+    id "dev.architectury.loom" version "1.7-SNAPSHOT" apply false
 }
 
 architectury {
@@ -50,6 +50,25 @@ allprojects {
 
         maven {
             url = "https://api.modrinth.com/maven"
+        }
+
+        maven {
+            name = "Greenhouse Maven"
+            url = 'https://repo.greenhouse.house/releases/'
+        }
+
+        maven { url "https://mvn.devos.one/releases/" } // Porting Lib
+        maven {
+            url "https://maven.jamieswhiteshirt.com/libs-release" // Reach Entity Attributes (Required by Porting Lib)
+            content {
+                includeGroup "com.jamieswhiteshirt"
+            }
+        }
+        maven {
+            url "https://jitpack.io/" // Fabric ASM
+            content {
+                excludeGroup "io.github.fabricators_of_create"
+            }
         }
 
         // Add repositories to retrieve artifacts from in here.

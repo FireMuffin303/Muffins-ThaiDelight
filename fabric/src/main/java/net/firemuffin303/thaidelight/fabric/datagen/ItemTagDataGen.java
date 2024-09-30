@@ -1,17 +1,13 @@
 package net.firemuffin303.thaidelight.fabric.datagen;
 
-import com.nhoryzon.mc.farmersdelight.registry.ItemsRegistry;
-import com.nhoryzon.mc.farmersdelight.registry.TagsRegistry;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
-import net.fabricmc.fabric.api.tag.convention.v1.ConventionalItemTags;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.firemuffin303.thaidelight.common.registry.ModTags;
 import net.firemuffin303.thaidelight.fabric.common.registry.ModItemsFabric;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -68,8 +64,8 @@ public class ItemTagDataGen extends FabricTagProvider.ItemTagProvider {
                 .add(Items.COD)
                 .add(Items.SALMON)
                 .add(Items.TROPICAL_FISH)
-                .add(ItemsRegistry.COD_SLICE.get())
-                .add(ItemsRegistry.SALMON_SLICE.get())
+                .add(vectorwing.farmersdelight.common.registry.ModItems.COD_SLICE.get())
+                .add(vectorwing.farmersdelight.common.registry.ModItems.SALMON_SLICE.get())
                 .forceAddTag(FORGE_RAW_FISHES)
                 .forceAddTag(C_RAW_FISHES)
         ;

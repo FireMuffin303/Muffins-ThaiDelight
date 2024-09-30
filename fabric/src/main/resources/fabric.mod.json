@@ -35,8 +35,8 @@
     "muffins_thaidelight-common.mixins.json"
   ],
   "depends": {
-    "fabric": "*",
-    "minecraft": ">=1.20",
-    "farmersdelight": ">=1.4.0"
+    "fabric": ">=0.15.7",
+    "minecraft": ">=1.20.1",
+    "farmersdelight": ">=1.20.1-2.0.13+refabricated"
   }
 }

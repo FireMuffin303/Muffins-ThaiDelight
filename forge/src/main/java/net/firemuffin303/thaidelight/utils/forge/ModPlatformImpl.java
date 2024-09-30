@@ -208,10 +208,6 @@ public class ModPlatformImpl {
         return new WildCropBlock(mobEffect,duration,properties);
     }
 
-    public static <T> int[] getRecipeMatcher(List<T> inputs, List<? extends Predicate<T>> tests) {
-        return RecipeMatcher.findMatches(inputs,tests);
-    }
-
     public static Block getCrabFriedRice() {
         return ModBlocksForge.CRAB_FRIED_RICE;
     }

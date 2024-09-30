@@ -71,8 +71,8 @@ public class ModDataGen implements DataGeneratorEntrypoint {
             ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,ModItems.PAPAYA_SEEDS,4).requires(ModItems.RAW_PAPAYA).unlockedBy(getHasName(ModItems.RAW_PAPAYA),has(ModItems.RAW_PAPAYA)).save(exporter,"crafting/"+getItemName(ModBlocks.PAPAYA_SAPLING)+"_by_unripe_papaya_from_crafting");
             ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,ModItems.PAPAYA_SEEDS,2).requires(ModItems.SLICED_PAPAYA).unlockedBy(getHasName(ModItems.SLICED_PAPAYA),has(ModItems.SLICED_PAPAYA)).save(exporter,"crafting/"+getItemName(ModBlocks.PAPAYA_SAPLING)+"_by_sliced_papaya_from_crafting");
 
-            ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, ModItemsFabric.STIR_FRIED_NOODLE).requires(ItemsRegistry.ONION.get()).requires(ItemsRegistry.RAW_PASTA.get()).requires(Items.SUGAR).requires(Items.BOWL).requires(ModTags.LIME).unlockedBy(getHasName(ItemsRegistry.RAW_PASTA.get()),has(ItemsRegistry.RAW_PASTA.get())).save(exporter,"crafting/"+getItemName(ModItemsFabric.STIR_FRIED_NOODLE));
-            ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD,ItemsRegistry.MIXED_SALAD.get()).requires(ModTags.RAW_PAPAYA).requires(ItemsRegistry.TOMATO.get()).requires(Items.BEETROOT).requires(Items.BOWL).unlockedBy(getHasName(Items.BOWL),has(Items.BOWL)).save(exporter,"crafting/"+getItemName(ItemsRegistry.MIXED_SALAD.get())+"by_raw_papaya");
+            ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, ModItemsFabric.STIR_FRIED_NOODLE).requires(vectorwing.farmersdelight.common.registry.ModItems.ONION.get()).requires(vectorwing.farmersdelight.common.registry.ModItems.RAW_PASTA.get()).requires(Items.SUGAR).requires(Items.BOWL).requires(ModTags.LIME).unlockedBy(getHasName(vectorwing.farmersdelight.common.registry.ModItems.RAW_PASTA.get()),has(vectorwing.farmersdelight.common.registry.ModItems.RAW_PASTA.get())).save(exporter,"crafting/"+getItemName(ModItemsFabric.STIR_FRIED_NOODLE));
+            ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, vectorwing.farmersdelight.common.registry.ModItems.MIXED_SALAD.get()).requires(ModTags.RAW_PAPAYA).requires(vectorwing.farmersdelight.common.registry.ModItems.TOMATO.get()).requires(Items.BEETROOT).requires(Items.BOWL).unlockedBy(getHasName(Items.BOWL),has(Items.BOWL)).save(exporter,"crafting/"+getItemName(vectorwing.farmersdelight.common.registry.ModItems.MIXED_SALAD.get())+"by_raw_papaya");
 
             ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModBlocks.MORTAR).define('A',Items.BRICK).define('B',Items.STICK).pattern("ABA").pattern("AAA").unlockedBy(getHasName(Items.STICK),has(Items.STICK)).save(exporter,"crafting/"+getItemName(ModBlocks.MORTAR));
         }
@@ -86,7 +86,7 @@ public class ModDataGen implements DataGeneratorEntrypoint {
         }
 
         private void mortar(Consumer<FinishedRecipe> exporter){
-            MortarRecipeBuilder.mortar(ModBlocks.SOMTAM_FEAST).requires(ModItems.PEPPER).requires(ItemsRegistry.TOMATO.get()).requires(ModTags.RAW_PAPAYA).requires(ModItems.CRAB_MEAT).unlockedBy(getHasName(ModItems.RAW_PAPAYA),has(ModItems.RAW_PAPAYA)).save(exporter,"mortar/"+getItemName(ModBlocks.SOMTAM_FEAST));
+            MortarRecipeBuilder.mortar(ModBlocks.SOMTAM_FEAST).requires(ModItems.PEPPER).requires(vectorwing.farmersdelight.common.registry.ModItems.TOMATO.get()).requires(ModTags.RAW_PAPAYA).requires(ModItems.CRAB_MEAT).unlockedBy(getHasName(ModItems.RAW_PAPAYA),has(ModItems.RAW_PAPAYA)).save(exporter,"mortar/"+getItemName(ModBlocks.SOMTAM_FEAST));
 
             MortarRecipeBuilder.mortar(Items.BONE_MEAL,4).requires(Items.BONE,1).unlockedBy(getHasName(Items.BONE),has(Items.BONE)).save(exporter,"mortar/"+getItemName(Items.BONE_MEAL)+"_by_bone");
             MortarRecipeBuilder.mortar(Items.BONE_MEAL,2).requires(Items.NAUTILUS_SHELL,1).unlockedBy(getHasName(Items.NAUTILUS_SHELL),has(Items.NAUTILUS_SHELL)).save(exporter,"mortar/"+getItemName(Items.BONE_MEAL)+"_by_nautilus_shell");

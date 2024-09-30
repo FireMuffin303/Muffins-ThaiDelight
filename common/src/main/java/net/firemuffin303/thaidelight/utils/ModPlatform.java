@@ -248,9 +248,5 @@ public class ModPlatform {
         throw new AssertionError();
     }
 
-    @ExpectPlatform
-    public static <T> int[] getRecipeMatcher(List<T> inputs, List<? extends Predicate<T>> tests){
-        throw new AssertionError();
-    }
 
 }

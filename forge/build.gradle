@@ -18,14 +18,6 @@ loom {
         mixinConfig "muffins_thaidelight.mixins.json"
     }
 
-    runs {
-        data {
-            forgeTemplate("data")
-            environment "data"
-            programArgs "--mod=muffins_thaidelight", "--all", "--output=" + file("src/generated/resources/"), "--existing=" + project(":common").file("src/main/resources/")
-            name "Forge Data Generation"
-        }
-    }
 }
 
 sourceSets.main {
@@ -52,15 +44,7 @@ dependencies {
     // at runtime, use the full JEI jar for Forge
     modLocalRuntime("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
     modLocalRuntime("maven.modrinth:appleskin:XdXDExVF")
-    modLocalRuntime("maven.modrinth:crabbers-delight:Omdrcn17")
-    modLocalRuntime("maven.modrinth:geckolib:pyB0jIsx")
-    modLocalRuntime("maven.modrinth:embeddium:pdLkrlJc")
 
-    modLocalRuntime("maven.modrinth:fish-of-thieves:MK9xQTXT")
-    modLocalRuntime("maven.modrinth:cloth-config:nr1znv5v")
-
-    modLocalRuntime("maven.modrinth:alexs-mobs:ftwjMYH7")
-    modLocalRuntime("maven.modrinth:citadel:3OJWvUG9")
 }
 
 processResources {
@@ -76,18 +60,13 @@ shadowJar {
     exclude "architectury.common.json"
 
     configurations = [project.configurations.shadowCommon]
-    classifier "dev-shadow"
 }
 
 remapJar {
     input.set shadowJar.archiveFile
     dependsOn shadowJar
-    classifier null
 }
 
-jar {
-    classifier "dev"
-}
 
 sourcesJar {
     def commonSources = project(":common").sourcesJar

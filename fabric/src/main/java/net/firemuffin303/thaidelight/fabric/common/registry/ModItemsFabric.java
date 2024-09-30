@@ -1,7 +1,5 @@
 package net.firemuffin303.thaidelight.fabric.common.registry;
 
-import com.nhoryzon.mc.farmersdelight.item.ConsumableItem;
-import com.nhoryzon.mc.farmersdelight.registry.EffectsRegistry;
 import net.firemuffin303.thaidelight.ThaiDelight;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.firemuffin303.thaidelight.fabric.common.item.SomtamItem;
@@ -12,11 +10,13 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import vectorwing.farmersdelight.common.item.ConsumableItem;
+import vectorwing.farmersdelight.common.registry.ModEffects;
 
 public class ModItemsFabric {
     public static final Item SOMTAM = new SomtamItem(foodBowl(ModFoodFabric.SOMTAM));
-    public static final Item SPICY_MINCED_MEAT_SALAD = new ConsumableItem(foodBowl(ModFoodFabric.SPICY_MINCED_PORK_SALAD));
-    public static final Item CRAB_FRIED_RICE = new ConsumableItem(foodBowl(ModFoodFabric.CRAB_FRIED_RICE));
+    public static final Item SPICY_MINCED_MEAT_SALAD = new vectorwing.farmersdelight.common.item.ConsumableItem(foodBowl(ModFoodFabric.SPICY_MINCED_PORK_SALAD));
+    public static final Item CRAB_FRIED_RICE = new vectorwing.farmersdelight.common.item.ConsumableItem(foodBowl(ModFoodFabric.CRAB_FRIED_RICE));
     public static final Item STIR_FRIED_NOODLE = new ConsumableItem(foodBowl(ModFoodFabric.STIR_FRIED_NOODLE));
 
     public static void init(){
@@ -38,16 +38,16 @@ public class ModItemsFabric {
     }
 
     public static class ModFoodFabric{
-        public static final FoodProperties SOMTAM = new FoodProperties.Builder().nutrition(16).saturationMod(0.6F).effect(new MobEffectInstance(EffectsRegistry.NOURISHMENT.get(),6000,0),1.0f).build();
-        public static final FoodProperties CRAB_FRIED_RICE = new FoodProperties.Builder().nutrition(16).saturationMod(0.8F).effect(new MobEffectInstance(EffectsRegistry.COMFORT.get(),6000,0),1.0f).build();
+        public static final FoodProperties SOMTAM = new FoodProperties.Builder().nutrition(16).saturationMod(0.6F).effect(new MobEffectInstance(ModEffects.NOURISHMENT.get(),6000,0),1.0f).build();
+        public static final FoodProperties CRAB_FRIED_RICE = new FoodProperties.Builder().nutrition(16).saturationMod(0.8F).effect(new MobEffectInstance(ModEffects.COMFORT.get(),6000,0),1.0f).build();
         public static final FoodProperties SPICY_MINCED_PORK_SALAD = new FoodProperties.Builder()
                 .nutrition(14)
                 .saturationMod(0.75F)
-                .effect(new MobEffectInstance(EffectsRegistry.NOURISHMENT.get(),5000,0),1.0f).build();
+                .effect(new MobEffectInstance(ModEffects.NOURISHMENT.get(),5000,0),1.0f).build();
 
         public static final FoodProperties STIR_FRIED_NOODLE = new FoodProperties.Builder()
                 .nutrition(12)
                 .saturationMod(0.65F)
-                .effect(new MobEffectInstance(EffectsRegistry.COMFORT.get(),5000,0),1.0f).build();
+                .effect(new MobEffectInstance(ModEffects.COMFORT.get(),5000,0),1.0f).build();
     }
 }
