@@ -17,6 +17,6 @@ public class EntityTypeTagDataGen extends FabricTagProvider.EntityTypeTagProvide
     @Override
     protected void addTags(HolderLookup.Provider arg) {
         getOrCreateTagBuilder(EntityTypeTags.FROG_FOOD)
-                .add(ModEntityTypes.DRAGONFLY);
+                .add(ModEntityTypes.DRAGONFLY.get());
     }
 }

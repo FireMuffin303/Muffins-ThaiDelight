@@ -18,7 +18,7 @@ public class SpicyMincedPorkSaladFeastBlock extends FeastBlock {
     protected static final VoxelShape PIE_SHAPE = Shapes.joinUnoptimized(PLATE_SHAPE, Block.box(2.0D, 2.0D, 2.0D, 14.0D, 7.0D, 14.0D), BooleanOp.OR);
 
     public SpicyMincedPorkSaladFeastBlock() {
-        super(BlockBehaviour.Properties.copy(Blocks.CAKE), ModItemsForge.SPICY_MINCED_MEAT_SALAD, true);
+        super(BlockBehaviour.Properties.ofFullCopy(Blocks.CAKE), ModItemsForge.SPICY_MINCED_MEAT_SALAD, true);
     }
 
     @Override

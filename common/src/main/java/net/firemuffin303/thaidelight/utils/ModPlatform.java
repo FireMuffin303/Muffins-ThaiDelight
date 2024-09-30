@@ -201,7 +201,7 @@ public class ModPlatform {
     }
 
     @ExpectPlatform
-    public static Block getWildCropBlock(MobEffect mobEffect, int duration, BlockBehaviour.Properties properties){
+    public static Block getWildCropBlock(Holder<MobEffect> mobEffectHolder, int duration, BlockBehaviour.Properties properties){
         throw new AssertionError();
     }
 

@@ -1,13 +1,11 @@
 package net.firemuffin303.thaidelight.utils.forge;
 
 import com.google.common.collect.ImmutableMap;
-import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.firemuffin303.thaidelight.forge.ThaiDelightForge;
 import net.firemuffin303.thaidelight.forge.common.item.LimeJuiceItem;
 import net.firemuffin303.thaidelight.forge.common.item.PapayaJuiceItem;
-import net.firemuffin303.thaidelight.forge.common.item.PastleItem;
 import net.firemuffin303.thaidelight.forge.common.item.SomtamItem;
 import net.firemuffin303.thaidelight.forge.common.registry.ModBlocksForge;
 import net.firemuffin303.thaidelight.forge.common.registry.ModItemsForge;
@@ -19,6 +17,7 @@ import net.minecraft.client.gui.screens.inventory.MenuAccess;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
@@ -27,15 +26,11 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.*;
-import net.minecraft.world.item.alchemy.Potion;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -44,20 +39,16 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
 import net.minecraft.world.level.material.Fluid;
 import vectorwing.farmersdelight.common.block.WildCropBlock;
 import vectorwing.farmersdelight.common.item.ConsumableItem;
 import vectorwing.farmersdelight.common.item.DrinkableItem;
-import vectorwing.farmersdelight.common.registry.ModEffects;
 import vectorwing.farmersdelight.common.registry.ModItems;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
-import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 public class ModPlatformImpl {
@@ -102,10 +93,6 @@ public class ModPlatformImpl {
         MenuType<T> menuType = new MenuType(menu::create, FeatureFlags.VANILLA_SET);
         ThaiDelightForge.MENU_TYPE.register(id,() -> menuType);
         return menuType;
-    }
-
-    public static <M extends AbstractContainerMenu,U extends Screen & MenuAccess<M>> void registerScreen(MenuType<M> menuType, ModPlatform.ScreenConstructor<M, U> screen) {
-        MenuScreens.register(menuType,screen::create);
     }
 
     public static <T extends Recipe<?>> void registerRecipeSerializer(String id, RecipeSerializer<T> recipeSerializer) {
@@ -155,13 +142,6 @@ public class ModPlatformImpl {
         return new ConsumableItem(ModItems.bowlFoodItem(foodProperties),effectTooltips);
     }
 
-    public static MobEffect getNourishment() {
-        return ModEffects.NOURISHMENT.get();
-    }
-
-    public static MobEffect getComfort() {
-        return ModEffects.COMFORT.get();
-    }
 
     public static Item getSomtamItem() {
         return new SomtamItem(ModItems.bowlFoodItem(ModItemsForge.ModFoodForge.SOMTAM));
@@ -171,20 +151,10 @@ public class ModPlatformImpl {
         return ModItemsForge.ModFoodForge.SOMTAM;
     }
 
-    public static Item createPastleItem(Tier tier, int attackDamage, float attackSpeed, Item.Properties properties) {
-        return new PastleItem(tier,attackDamage,attackSpeed,properties);
-    }
 
-    public static Class<? extends Item> getPastleClass() {
-        return PastleItem.class;
-    }
 
-    public static Block getWildCropBlock(MobEffect mobEffect, int duration, BlockBehaviour.Properties properties) {
+    public static Block getWildCropBlock(Holder<MobEffect> mobEffect, int duration, BlockBehaviour.Properties properties) {
         return new WildCropBlock(mobEffect,duration,properties);
-    }
-
-    public static <T> int[] getRecipeMatcher(List<T> inputs, List<? extends Predicate<T>> tests) {
-        return RecipeMatcher.findMatches(inputs,tests);
     }
 
     public static Block getCrabFriedRice() {

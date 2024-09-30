@@ -36,7 +36,7 @@ public class ModBlocks {
     public static final Supplier<Block> CRAB_EGG = register("flower_crab_egg",() -> new CrabEggBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.FROGSPAWN)));
 
     //Wild Crops
-    public static final Supplier<Block> WILD_PEPPER_CROP = register("wild_pepper_crop",() -> ModPlatform.getWildCropBlock(MobEffects.CONFUSION.value(),6,BlockBehaviour.Properties.ofFullCopy(Blocks.TALL_GRASS)));
+    public static final Supplier<Block> WILD_PEPPER_CROP = register("wild_pepper_crop",() -> ModPlatform.getWildCropBlock(MobEffects.CONFUSION,6,BlockBehaviour.Properties.ofFullCopy(Blocks.TALL_GRASS)));
     //Crops
     public static final Supplier<Block> LIME_CROP = register("lime_bush",() -> new LimeCrop(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).randomTicks().sound(SoundType.SWEET_BERRY_BUSH).pushReaction(PushReaction.DESTROY)));
     public static final Supplier<Block> LIME_SAPLING = register("lime_sapling",() -> new LimeSapling(BlockBehaviour.Properties.ofFullCopy(ModBlocks.LIME_CROP.get()).noCollission()));

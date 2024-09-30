@@ -17,20 +17,20 @@ public class BlockTagDataGen extends FabricTagProvider.BlockTagProvider {
     @Override
     protected void addTags(HolderLookup.Provider arg) {
         getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_AXE)
-                .add(ModBlocks.PEPPER_CRATE)
-                .add(ModBlocks.PAPAYA_CRATE)
-                .add(ModBlocks.LIME_CRATE);
+                .add(ModBlocks.PEPPER_CRATE.get())
+                .add(ModBlocks.PAPAYA_CRATE.get())
+                .add(ModBlocks.LIME_CRATE.get());
 
         getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_PICKAXE)
-                .add(ModBlocks.MORTAR);
+                .add(ModBlocks.MORTAR.get());
 
         getOrCreateTagBuilder(BlockTags.LOGS_THAT_BURN)
-                .add(ModBlocks.PAPAYA_LOG);
+                .add(ModBlocks.PAPAYA_LOG.get());
 
         getOrCreateTagBuilder(ModTags.PAPAYA_LOGS)
-                .add(ModBlocks.PAPAYA_LOG)
-                .add(ModBlocks.PAPAYA_WOOD)
-                .add(ModBlocks.STRIPPED_PAPAYA_LOG)
-                .add(ModBlocks.STRIPPED_PAPAYA_WOOD);
+                .add(ModBlocks.PAPAYA_LOG.get())
+                .add(ModBlocks.PAPAYA_WOOD.get())
+                .add(ModBlocks.STRIPPED_PAPAYA_LOG.get())
+                .add(ModBlocks.STRIPPED_PAPAYA_WOOD.get());
     }
 }

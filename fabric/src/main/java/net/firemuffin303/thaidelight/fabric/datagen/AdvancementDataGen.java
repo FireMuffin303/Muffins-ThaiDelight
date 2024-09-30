@@ -8,6 +8,7 @@ import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.firemuffin303.thaidelight.fabric.common.registry.ModItemsFabric;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementHolder;
+import net.minecraft.advancements.AdvancementType;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.network.chat.Component;
@@ -24,70 +25,71 @@ public class AdvancementDataGen extends FabricAdvancementProvider {
         super(output,registryLookup);
     }
 
-    Advancement ROOT = Advancement.Builder.advancement()
-            .display(ModBlocks.MORTAR,
+    AdvancementHolder ROOT = Advancement.Builder.advancement()
+            .display(ModBlocks.MORTAR.get(),
                     Component.translatable("advancement.muffins_thaidelight.got_mortar"),
                     Component.translatable("advancement.muffins_thaidelight.got_mortar.description"),
                     BACKGROUND,
-                    FrameType.TASK,
+                    AdvancementType.TASK,
                     false,
                     false,
                     false)
             .addCriterion("seeds",
-                    InventoryChangeTrigger.TriggerInstance.hasItems(new ItemLike[]{})).build(ResourceLocation.fromNamespaceAndPath(ThaiDelight.MOD_ID,"root"));
+                    InventoryChangeTrigger.TriggerInstance.hasItems(new ItemLike[]{}))
+            .build(ResourceLocation.fromNamespaceAndPath(ThaiDelight.MOD_ID,"root"));
 
-    Advancement GOT_COOKED_DRAGONFLY = Advancement.Builder.advancement()
+    AdvancementHolder GOT_COOKED_DRAGONFLY = Advancement.Builder.advancement()
             .display(
-                    ModItems.COOKED_DRAGONFLY,
+                    ModItems.COOKED_DRAGONFLY.get(),
                     Component.translatable("advancement.muffins_thaidelight.cooked_dragonfly"),
                     Component.translatable("advancement.muffins_thaidelight.cooked_dragonfly.description"),
                     BACKGROUND,
-                    FrameType.TASK,
+                    AdvancementType.TASK,
                     true,
                     true,
                     false)
             .addCriterion("got_cooked_dragonfly",
-                    InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.COOKED_DRAGONFLY))
+                    InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.COOKED_DRAGONFLY.get()))
             .parent(ROOT)
             .build(ResourceLocation.fromNamespaceAndPath(ThaiDelight.MOD_ID,"got_cooked_dragonfly"));
 
 
-    Advancement GOT_SLICED_LIME = Advancement.Builder.advancement()
+    AdvancementHolder GOT_SLICED_LIME = Advancement.Builder.advancement()
             .display(
-                    ModItems.SLICED_LIME,
+                    ModItems.SLICED_LIME.get(),
                     Component.translatable("advancement.muffins_thaidelight.sliced_lime"),
                     Component.translatable("advancement.muffins_thaidelight.sliced_lime.description"),
                     BACKGROUND,
-                    FrameType.TASK,
+                    AdvancementType.TASK,
                     true,
                     true,
                     false)
             .addCriterion("got_sliced_lime",
-                    InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.SLICED_LIME))
+                    InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.SLICED_LIME.get()))
             .parent(ROOT)
             .build(ResourceLocation.fromNamespaceAndPath(ThaiDelight.MOD_ID,"got_sliced_lime"));
 
-    Advancement GOT_PEPPER = Advancement.Builder.advancement()
+    AdvancementHolder GOT_PEPPER = Advancement.Builder.advancement()
             .display(
-                    ModItems.PEPPER,
+                    ModItems.PEPPER.get(),
                     Component.translatable("advancement.muffins_thaidelight.got_pepper"),
                     Component.translatable("advancement.muffins_thaidelight.got_pepper.description"),
                     BACKGROUND,
-                    FrameType.TASK,
+                    AdvancementType.TASK,
                     true,
                     true,
                     false)
-            .addCriterion("got_pepper", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.PEPPER))
+            .addCriterion("got_pepper", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.PEPPER.get()))
             .parent(ROOT).build(ResourceLocation.fromNamespaceAndPath(ThaiDelight.MOD_ID,"got_pepper"));
 
 
-    Advancement GOT_SPICY_MEAT_SALAD = Advancement.Builder.advancement()
+    AdvancementHolder GOT_SPICY_MEAT_SALAD = Advancement.Builder.advancement()
             .display(
                     ModItemsFabric.SPICY_MINCED_MEAT_SALAD,
                     Component.translatable("advancement.muffins_thaidelight.got_spicy_meat_salad"),
                     Component.translatable("advancement.muffins_thaidelight.got_spicy_meat_salad.description"),
                     BACKGROUND,
-                    FrameType.TASK,
+                    AdvancementType.TASK,
                     true,
                     true,
                     false)
@@ -96,13 +98,13 @@ public class AdvancementDataGen extends FabricAdvancementProvider {
             .parent(GOT_PEPPER)
             .build(ResourceLocation.fromNamespaceAndPath(ThaiDelight.MOD_ID,"got_spicy_meat_salad"));
 
-    Advancement GOT_SOMTAM = Advancement.Builder.advancement()
+    AdvancementHolder GOT_SOMTAM = Advancement.Builder.advancement()
             .display(
                     ModItemsFabric.SOMTAM,
                     Component.translatable("advancement.muffins_thaidelight.got_somtam"),
                     Component.translatable("advancement.muffins_thaidelight.got_somtam.description"),
                     BACKGROUND,
-                    FrameType.TASK,
+                    AdvancementType.TASK,
                     true,
                     true,
                     false)

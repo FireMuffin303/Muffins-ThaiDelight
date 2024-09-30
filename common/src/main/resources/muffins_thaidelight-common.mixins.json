@@ -6,10 +6,6 @@
   "client": [
   ],
   "mixins": [
-    "ChickenFoodAccessor",
-    "FrogFoodAccessor",
-    "ParrotTameFoodAccessor",
-    "PigFoodAccessor",
     "SpawnPlacementMixin",
     "StructurePoolAccessorMixin"
   ],

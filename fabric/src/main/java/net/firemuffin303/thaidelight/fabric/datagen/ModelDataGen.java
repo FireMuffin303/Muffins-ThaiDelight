@@ -30,13 +30,13 @@ public class ModelDataGen extends FabricModelProvider {
 
     @Override
     public void generateBlockStateModels(BlockModelGenerators blockStateModelGenerator) {
-        createCrateBlock(ModBlocks.LIME_CRATE,blockStateModelGenerator);
-        createCrateBlock(ModBlocks.PEPPER_CRATE,blockStateModelGenerator);
-        createCrateBlock(ModBlocks.RAW_PAPAYA_CRATE,blockStateModelGenerator);
-        createCrateBlock(ModBlocks.PAPAYA_CRATE,blockStateModelGenerator);
+        createCrateBlock(ModBlocks.LIME_CRATE.get(),blockStateModelGenerator);
+        createCrateBlock(ModBlocks.PEPPER_CRATE.get(),blockStateModelGenerator);
+        createCrateBlock(ModBlocks.RAW_PAPAYA_CRATE.get(),blockStateModelGenerator);
+        createCrateBlock(ModBlocks.PAPAYA_CRATE.get(),blockStateModelGenerator);
 
-        blockStateModelGenerator.woodProvider(ModBlocks.PAPAYA_LOG).logWithHorizontal(ModBlocks.PAPAYA_LOG).wood(ModBlocks.PAPAYA_WOOD);
-        blockStateModelGenerator.woodProvider(ModBlocks.STRIPPED_PAPAYA_LOG).logWithHorizontal(ModBlocks.STRIPPED_PAPAYA_LOG).wood(ModBlocks.STRIPPED_PAPAYA_WOOD);
+        blockStateModelGenerator.woodProvider(ModBlocks.PAPAYA_LOG.get()).logWithHorizontal(ModBlocks.PAPAYA_LOG.get()).wood(ModBlocks.PAPAYA_WOOD.get());
+        blockStateModelGenerator.woodProvider(ModBlocks.STRIPPED_PAPAYA_LOG.get()).logWithHorizontal(ModBlocks.STRIPPED_PAPAYA_LOG.get()).wood(ModBlocks.STRIPPED_PAPAYA_WOOD.get());
 
         //createCubeAll(ModBlocks.PAPAYA_LEAVES,blockStateModelGenerator);
 
@@ -67,32 +67,32 @@ public class ModelDataGen extends FabricModelProvider {
 
     @Override
     public void generateItemModels(ItemModelGenerators itemModelGenerator) {
-        itemModelGenerator.generateFlatItem(ModItems.CRAB_SPAWN_EGG,SPAWN_EGG);
-        itemModelGenerator.generateFlatItem(ModItems.CRAB_BUCKET, ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.CRAB_MEAT, ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.COOKED_CRAB_MEAT, ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.CRAB_SPAWN_EGG.get(),SPAWN_EGG);
+        itemModelGenerator.generateFlatItem(ModItems.CRAB_BUCKET.get(), ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.CRAB_MEAT.get(), ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.COOKED_CRAB_MEAT.get(), ModelTemplates.FLAT_ITEM);
 
-        itemModelGenerator.generateFlatItem(ModItems.DRAGONFLY_SPAWN_EGG,SPAWN_EGG);
-        itemModelGenerator.generateFlatItem(ModItems.DRAGONFLY, ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.COOKED_DRAGONFLY, ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.DRAGONFLY_SPAWN_EGG.get(),SPAWN_EGG);
+        itemModelGenerator.generateFlatItem(ModItems.DRAGONFLY.get(), ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.COOKED_DRAGONFLY.get(), ModelTemplates.FLAT_ITEM);
 
-        itemModelGenerator.generateFlatItem(ModItems.FISH_SAUCE_BOTTLE, ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.FERMENTED_FISH_BOTTLE,ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.FISH_SAUCE_BOTTLE.get(), ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.FERMENTED_FISH_BOTTLE.get(),ModelTemplates.FLAT_ITEM);
 
-        itemModelGenerator.generateFlatItem(ModItems.LIME, ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.SLICED_LIME, ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.LIME.get(), ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.SLICED_LIME.get(), ModelTemplates.FLAT_ITEM);
 
-        itemModelGenerator.generateFlatItem(ModItems.PEPPER, ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.PEPPER_SEED, ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.PEPPER.get(), ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.PEPPER_SEED.get(), ModelTemplates.FLAT_ITEM);
 
-        itemModelGenerator.generateFlatItem(ModItems.PAPAYA, ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.SLICED_PAPAYA, ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.RAW_PAPAYA, ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.RAW_PAPAYA_SLICE,ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.PAPAYA_SEEDS,ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.PAPAYA.get(), ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.SLICED_PAPAYA.get(), ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.RAW_PAPAYA.get(), ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.RAW_PAPAYA_SLICE.get(),ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.PAPAYA_SEEDS.get(),ModelTemplates.FLAT_ITEM);
 
-        itemModelGenerator.generateFlatItem(ModItems.PAPAYA_JUICE, ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.LIME_JUICE, ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.PAPAYA_JUICE.get(), ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.LIME_JUICE.get(), ModelTemplates.FLAT_ITEM);
 
         itemModelGenerator.generateFlatItem(ModItemsFabric.SOMTAM, ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItemsFabric.SPICY_MINCED_MEAT_SALAD, ModelTemplates.FLAT_ITEM);
@@ -100,9 +100,9 @@ public class ModelDataGen extends FabricModelProvider {
         itemModelGenerator.generateFlatItem(ModItemsFabric.STIR_FRIED_NOODLE, ModelTemplates.FLAT_ITEM);
 
 
-        itemModelGenerator.generateFlatItem(Item.byBlock(ModBlocks.SOMTAM_FEAST), ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(Item.byBlock(ModBlocks.LARB_FEAST), ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(Item.byBlock(ModBlocks.CRAB_FRIED_RICE_FEAST), ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(Item.byBlock(ModBlocks.SOMTAM_FEAST.get()), ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(Item.byBlock(ModBlocks.LARB_FEAST.get()), ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(Item.byBlock(ModBlocks.CRAB_FRIED_RICE_FEAST.get()), ModelTemplates.FLAT_ITEM);
 
     }
 
@@ -112,14 +112,14 @@ public class ModelDataGen extends FabricModelProvider {
     }
 
     private static void createPepperCrop(BlockModelGenerators blockModelGenerators){
-        blockModelGenerators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.PEPPER_CROP).with(PropertyDispatch.property(BlockStateProperties.AGE_7).generate((integer) -> {
+        blockModelGenerators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.PEPPER_CROP.get()).with(PropertyDispatch.property(BlockStateProperties.AGE_7).generate((integer) -> {
             return net.minecraft.data.models.blockstates.Variant.variant().with(VariantProperties.MODEL,
-                    blockModelGenerators.createSuffixedVariant(ModBlocks.PEPPER_CROP, "_stage" + integer, new ModelTemplate(Optional.of(new ResourceLocation(ThaiDelight.MOD_ID,"block/crop_cross")),Optional.empty(),TextureSlot.CROSS), TextureMapping::cross));
+                    blockModelGenerators.createSuffixedVariant(ModBlocks.PEPPER_CROP.get(), "_stage" + integer, new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(ThaiDelight.MOD_ID,"block/crop_cross")),Optional.empty(),TextureSlot.CROSS), TextureMapping::cross));
         })));
     }
 
     private static void createLimeCrop( BlockModelGenerators blockModelGenerator){
-        blockModelGenerator.createCrossBlockWithDefaultItem(ModBlocks.LIME_SAPLING, BlockModelGenerators.TintState.NOT_TINTED);
+        blockModelGenerator.createCrossBlockWithDefaultItem(ModBlocks.LIME_SAPLING.get(), BlockModelGenerators.TintState.NOT_TINTED);
        /* blockModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.LIME_CROP).with(PropertyDispatch.property(BlockStateProperties.AGE_2).generate((integer) -> {
 
             return net.minecraft.data.models.blockstates.Variant.variant().with(VariantProperties.MODEL,
@@ -130,14 +130,14 @@ public class ModelDataGen extends FabricModelProvider {
         })));*/
 
         blockModelGenerator.blockStateOutput.accept(
-                MultiVariantGenerator.multiVariant(ModBlocks.LIME_CROP)
+                MultiVariantGenerator.multiVariant(ModBlocks.LIME_CROP.get())
                         .with(PropertyDispatch.property(BlockStateProperties.AGE_2)
                                 .select(0, net.minecraft.data.models.blockstates.Variant.variant()
-                                        .with(VariantProperties.MODEL, ModelLocationUtils.getModelLocation(ModBlocks.LIME_CROP, "_stage0")))
+                                        .with(VariantProperties.MODEL, ModelLocationUtils.getModelLocation(ModBlocks.LIME_CROP.get(), "_stage0")))
                                 .select(1, net.minecraft.data.models.blockstates.Variant.variant()
-                                        .with(VariantProperties.MODEL, ModelLocationUtils.getModelLocation(ModBlocks.LIME_CROP, "_stage1")))
+                                        .with(VariantProperties.MODEL, ModelLocationUtils.getModelLocation(ModBlocks.LIME_CROP.get(), "_stage1")))
                                 .select(2, net.minecraft.data.models.blockstates.Variant.variant()
-                                        .with(VariantProperties.MODEL, ModelLocationUtils.getModelLocation(ModBlocks.LIME_CROP, "_stage2")))));
+                                        .with(VariantProperties.MODEL, ModelLocationUtils.getModelLocation(ModBlocks.LIME_CROP.get(), "_stage2")))));
 
     }
 
@@ -150,16 +150,16 @@ public class ModelDataGen extends FabricModelProvider {
         TextureMapping textureMapping = new TextureMapping()
                 .put(TextureSlot.SIDE, getBlockTexture(block, "_side"))
                 .put(TextureSlot.TOP, getBlockTexture(block, "_top"))
-                .put(TextureSlot.BOTTOM, new ResourceLocation("farmersdelight:block/crate_bottom"));
+                .put(TextureSlot.BOTTOM, ResourceLocation.fromNamespaceAndPath("farmersdelight","block/crate_bottom"));
         createBlock(block,ModelTemplates.CUBE_BOTTOM_TOP,textureMapping,blockModelGenerator);
     }
 
     private static ModelTemplate createModItem(String string, TextureSlot... textureSlots) {
-        return new ModelTemplate(Optional.of(new ResourceLocation(ThaiDelight.MOD_ID, "item/" + string)),Optional.empty(), textureSlots);
+        return new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(ThaiDelight.MOD_ID, "item/" + string)),Optional.empty(), textureSlots);
     }
 
     private static ModelTemplate createMincraftItem(String string, TextureSlot... textureSlots) {
-        return new ModelTemplate(Optional.of(new ResourceLocation("item/" + string)),Optional.empty(), textureSlots);
+        return new ModelTemplate(Optional.of(ResourceLocation.withDefaultNamespace("item/" + string)),Optional.empty(), textureSlots);
     }
 
 }

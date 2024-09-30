@@ -42,13 +42,15 @@ dependencies {
 
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
-    modImplementation("maven.modrinth:farmers-delight-refabricated:deqFhVqB")
+    implementation(annotationProcessor("com.github.llamalad7.mixinextras:mixinextras-fabric:0.2.0-beta.9"))
+    modImplementation("vectorwing:FarmersDelight:${fdrf_version}") {
+        exclude(group: "net.fabricmc")
+    }
 
     // at runtime, use the full JEI jar for Fabric
     modRuntimeOnly("mezz.jei:jei-${minecraft_version}-fabric:${jei_version}")
 
 
-    modRuntimeOnly("maven.modrinth:sodium:RncWhTxD")
 }
 
 processResources {

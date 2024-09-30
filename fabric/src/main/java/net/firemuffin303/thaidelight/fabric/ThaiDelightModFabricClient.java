@@ -15,17 +15,13 @@ import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.function.Supplier;
 
 public class ThaiDelightModFabricClient implements ClientModInitializer {
 
-    public static final ModelResourceLocation STONE_PASTLE_MODEL = new ModelResourceLocation(ThaiDelight.MOD_ID,"stone_pastle_3d","inventory");
-    public static final ModelResourceLocation IRON_PASTLE_MODEL = new ModelResourceLocation(ThaiDelight.MOD_ID,"iron_pastle_3d","inventory");
-    public static final ModelResourceLocation GOLDEN_PASTLE_MODEL = new ModelResourceLocation(ThaiDelight.MOD_ID,"golden_pastle_3d","inventory");
-    public static final ModelResourceLocation DIAMOND_PASTLE_MODEL = new ModelResourceLocation(ThaiDelight.MOD_ID,"diamond_pastle_3d","inventory");
-    public static final ModelResourceLocation NETHERITE_PASTLE_MODEL = new ModelResourceLocation(ThaiDelight.MOD_ID,"netherite_pastle_3d","inventory");
 
     @Override
     public void onInitializeClient() {
@@ -39,18 +35,18 @@ public class ThaiDelightModFabricClient implements ClientModInitializer {
         });
 
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutout(),
-                ModBlocks.SOMTAM_FEAST,
-                ModBlocks.LIME_SAPLING,
-                ModBlocks.LIME_CROP,
-                ModBlocks.WILD_PEPPER_CROP,
-                ModBlocks.PEPPER_CROP,
-                ModBlocks.PAPAYA,
-                ModBlocks.PAPAYA_SAPLING,
-                ModBlocks.CRAB_EGG,
-                ModBlocks.PAPAYA_CROPS);
+                ModBlocks.SOMTAM_FEAST.get(),
+                ModBlocks.LIME_SAPLING.get(),
+                ModBlocks.LIME_CROP.get(),
+                ModBlocks.WILD_PEPPER_CROP.get(),
+                ModBlocks.PEPPER_CROP.get(),
+                ModBlocks.PAPAYA.get(),
+                ModBlocks.PAPAYA_SAPLING.get(),
+                ModBlocks.CRAB_EGG.get(),
+                ModBlocks.PAPAYA_CROPS.get());
 
-        ItemProperties.register(ModItems.DRAGONFLY_BOTTLE,new ResourceLocation(ThaiDelight.MOD_ID,"variant"),(itemStack, clientLevel, livingEntity, i) -> {
-            return ((itemStack.getOrCreateTag().getInt("Variant")) * 4.0f) / 16f;
+        ItemProperties.register(ModItems.DRAGONFLY_BOTTLE.get(),ResourceLocation.fromNamespaceAndPath(ThaiDelight.MOD_ID,"variant"),(itemStack, clientLevel, livingEntity, i) -> {
+            return ((itemStack.get(DataComponents.BUCKET_ENTITY_DATA).copyTag().getInt("Variant")) * 4.0f) / 16f;
         });
     }
 }

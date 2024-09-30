@@ -1,18 +1,14 @@
 package net.firemuffin303.thaidelight.utils.fabric;
 
-import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
-import net.fabricmc.fabric.api.registry.FabricBrewingRecipeRegistryBuilder;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.firemuffin303.thaidelight.ThaiDelight;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.firemuffin303.thaidelight.fabric.common.item.LimeJuiceItem;
 import net.firemuffin303.thaidelight.fabric.common.item.PapayaJuiceItem;
-import net.firemuffin303.thaidelight.fabric.common.item.PastleItem;
-import net.firemuffin303.thaidelight.fabric.common.item.SomtamItem;
 import net.firemuffin303.thaidelight.fabric.common.registry.ModBlocksFabric;
 import net.firemuffin303.thaidelight.fabric.common.registry.ModItemsFabric;
 import net.firemuffin303.thaidelight.utils.ModPlatform;
@@ -31,14 +27,12 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.alchemy.Potion;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -47,7 +41,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
 import net.minecraft.world.level.material.Fluid;
@@ -57,9 +50,7 @@ import vectorwing.farmersdelight.common.item.DrinkableItem;
 import vectorwing.farmersdelight.common.registry.ModEffects;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
-import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 public class ModPlatformImpl {
@@ -178,13 +169,6 @@ public class ModPlatformImpl {
         return ModEffects.COMFORT;
     }
 
-    public static Item createPastleItem(Tier tier, int attackDamage, float attackSpeed, Item.Properties properties) {
-        return new PastleItem(tier,attackDamage,attackSpeed,properties);
-    }
-
-    public static Class<? extends Item> getPastleClass() {
-        return PastleItem.class;
-    }
 
     public static Block getWildCropBlock(Holder<MobEffect> mobEffect, int duration, BlockBehaviour.Properties properties) {
         return new WildCropBlock(mobEffect,duration,properties);

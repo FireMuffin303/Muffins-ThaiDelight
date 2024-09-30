@@ -53,6 +53,12 @@ allprojects {
             url = "https://api.modrinth.com/maven"
         }
 
+        maven { url 'https://maven.greenhouseteam.dev/releases/' } // FD REFabricated
+
+        maven {
+            url "https://jitpack.io/" // Fabric ASM
+        }
+
         // Add repositories to retrieve artifacts from in here.
         // You should only use this when depending on other mods because
         // Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
