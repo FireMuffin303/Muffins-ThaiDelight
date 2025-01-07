@@ -1,0 +1,7 @@
+{
+	"parent": "muffins_thaidelight:block/crab_fried_rice/crab_fried_rice_leftover",
+	"textures": {
+		"3": "muffins_thaidelight:block/crab_fried_rice/crab_fried_rice_feast_stage0",
+		"particle": "muffins_thaidelight:block/crab_fried_rice/crab_fried_rice_feast_stage0"
+	}
+}

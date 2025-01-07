@@ -1,0 +1,6 @@
+{
+  "parent": "muffins_thaidelight:block/crop_cross",
+  "textures": {
+    "cross": "muffins_thaidelight:block/pepper_crop_stage6"
+  }
+}

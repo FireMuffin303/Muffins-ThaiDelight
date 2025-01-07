@@ -1,0 +1,29 @@
+{
+  "type": "farmersdelight:cooking",
+  "container": {
+    "item": "minecraft:bowl"
+  },
+  "cookingtime": 200,
+  "experience": 0.35,
+  "ingredients": [
+    {
+      "tag": "muffins_thaidelight:flower_crab_meat"
+    },
+    {
+      "item": "farmersdelight:rice"
+    },
+    {
+      "tag": "c:eggs"
+    },
+    {
+      "item": "minecraft:carrot"
+    },
+    {
+      "item": "farmersdelight:onion"
+    }
+  ],
+  "recipe_book_tab": "meals",
+  "result": {
+    "item": "muffins_thaidelight:crab_fried_rice_feast"
+  }
+}

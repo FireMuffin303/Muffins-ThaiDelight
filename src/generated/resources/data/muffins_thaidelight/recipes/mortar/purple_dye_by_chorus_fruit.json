@@ -1,0 +1,11 @@
+{
+  "type": "muffins_thaidelight:mortar",
+  "ingredients": [
+    {
+      "item": "minecraft:chorus_fruit"
+    }
+  ],
+  "result": {
+    "item": "minecraft:purple_dye"
+  }
+}

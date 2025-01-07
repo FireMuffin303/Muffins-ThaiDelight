@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "muffins_thaidelight:block/papaya_crop_stage0"
+    },
+    "age=1": {
+      "model": "muffins_thaidelight:block/papaya_crop_stage1"
+    }
+  }
+}

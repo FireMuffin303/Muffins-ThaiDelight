@@ -1,0 +1,39 @@
+{
+  "parent": "muffins_thaidelight:got_pepper",
+  "criteria": {
+    "got_spicy_meat_salad": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "muffins_thaidelight:somtam"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "background": "minecraft:textures/block/oak_log.png",
+    "description": {
+      "translate": "advancement.muffins_thaidelight.got_somtam.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "muffins_thaidelight:somtam"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.muffins_thaidelight.got_somtam"
+    }
+  },
+  "requirements": [
+    [
+      "got_spicy_meat_salad"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

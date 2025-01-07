@@ -1,0 +1,141 @@
+{
+	"credit": "Made with Blockbench",
+	"texture_size": [64, 64],
+	"textures": {
+		"1": "muffins_thaidelight:block/mortar",
+		"particle": "minecraft:block/terracotta"
+	},
+	"elements": [
+		{
+			"from": [2, 0, 2],
+			"to": [14, 8, 4],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 2.5, 8]},
+			"faces": {
+				"north": {"uv": [0.5, 5.5, 3.5, 7.5], "texture": "#1"},
+				"east": {"uv": [0, 5.5, 0.5, 7.5], "texture": "#1"},
+				"south": {"uv": [4, 5.5, 7, 7.5], "texture": "#1"},
+				"west": {"uv": [3.5, 5.5, 4, 7.5], "texture": "#1"},
+				"up": {"uv": [3.5, 5.5, 0.5, 5], "texture": "#1"},
+				"down": {"uv": [6.5, 5, 3.5, 5.5], "texture": "#1"}
+			}
+		},
+		{
+			"from": [2, 0, 12],
+			"to": [14, 8, 14],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 2.5, 8]},
+			"faces": {
+				"north": {"uv": [0.5, 3, 3.5, 5], "texture": "#1"},
+				"east": {"uv": [0, 3, 0.5, 5], "texture": "#1"},
+				"south": {"uv": [4, 3, 7, 5], "texture": "#1"},
+				"west": {"uv": [3.5, 3, 4, 5], "texture": "#1"},
+				"up": {"uv": [3.5, 3, 0.5, 2.5], "texture": "#1"},
+				"down": {"uv": [6.5, 2.5, 3.5, 3], "texture": "#1"}
+			}
+		},
+		{
+			"from": [2, 0, 4],
+			"to": [4, 8, 12],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 2.5, 8]},
+			"faces": {
+				"north": {"uv": [9, 2.5, 9.5, 4.5], "texture": "#1"},
+				"east": {"uv": [7, 2.5, 9, 4.5], "texture": "#1"},
+				"south": {"uv": [11.5, 2.5, 12, 4.5], "texture": "#1"},
+				"west": {"uv": [9.5, 2.5, 11.5, 4.5], "texture": "#1"},
+				"up": {"uv": [9.5, 2.5, 9, 0.5], "texture": "#1"},
+				"down": {"uv": [10, 0.5, 9.5, 2.5], "texture": "#1"}
+			}
+		},
+		{
+			"from": [12, 0, 4],
+			"to": [14, 8, 12],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 2.5, 8]},
+			"faces": {
+				"north": {"uv": [7, 7.5, 7.5, 9.5], "texture": "#1"},
+				"east": {"uv": [5, 7.5, 7, 9.5], "texture": "#1"},
+				"south": {"uv": [9.5, 7.5, 10, 9.5], "texture": "#1"},
+				"west": {"uv": [7.5, 7.5, 9.5, 9.5], "texture": "#1"},
+				"up": {"uv": [7.5, 7.5, 7, 5.5], "texture": "#1"},
+				"down": {"uv": [8, 5.5, 7.5, 7.5], "texture": "#1"}
+			}
+		},
+		{
+			"from": [4, 0, 4],
+			"to": [12, 2, 12],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 2.5, 8]},
+			"faces": {
+				"north": {"uv": [2, 2, 4, 2.5], "texture": "#1"},
+				"east": {"uv": [0, 2, 2, 2.5], "texture": "#1"},
+				"south": {"uv": [6, 2, 8, 2.5], "texture": "#1"},
+				"west": {"uv": [4, 2, 6, 2.5], "texture": "#1"},
+				"up": {"uv": [4, 2, 2, 0], "texture": "#1"},
+				"down": {"uv": [6, 0, 4, 2], "texture": "#1"}
+			}
+		},
+		{
+			"from": [6, 2, 8],
+			"to": [10, 14, 12],
+			"rotation": {"angle": 45, "axis": "x", "origin": [10, 8, 10]},
+			"faces": {
+				"north": {"uv": [1, 8.5, 2, 11.5], "texture": "#1"},
+				"east": {"uv": [0, 8.5, 1, 11.5], "texture": "#1"},
+				"south": {"uv": [3, 8.5, 4, 11.5], "texture": "#1"},
+				"west": {"uv": [2, 8.5, 3, 11.5], "texture": "#1"},
+				"up": {"uv": [2, 8.5, 1, 7.5], "texture": "#1"},
+				"down": {"uv": [3, 7.5, 2, 8.5], "texture": "#1"}
+			}
+		}
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [68, 53, 0],
+			"translation": [0, 2.75, 1.5],
+			"scale": [0.35, 0.35, 0.35]
+		},
+		"thirdperson_lefthand": {
+			"rotation": [68, 53, 0],
+			"translation": [0, 2.75, 1.5],
+			"scale": [0.35, 0.35, 0.35]
+		},
+		"firstperson_righthand": {
+			"translation": [0.25, 1.75, 0],
+			"scale": [0.5, 0.5, 0.5]
+		},
+		"firstperson_lefthand": {
+			"translation": [0.25, 1.75, 0],
+			"scale": [0.5, 0.5, 0.5]
+		},
+		"ground": {
+			"scale": [0.5, 0.5, 0.5]
+		},
+		"gui": {
+			"rotation": [20, 35, 0],
+			"translation": [0, 1, 0],
+			"scale": [0.75, 0.75, 0.75]
+		},
+		"head": {
+			"translation": [0, 14.5, 0]
+		}
+	},
+	"groups": [
+		{
+			"name": "bone",
+			"origin": [0, 0, 0],
+			"color": 0,
+			"children": [
+				{
+					"name": "bowl",
+					"origin": [0, 0, 0],
+					"color": 0,
+					"children": [0, 1, 2, 3, 4]
+				},
+				{
+					"name": "sarg",
+					"origin": [2, 8, 2],
+					"rotation": [15, 22.5, 0],
+					"color": 0,
+					"children": [5]
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,39 @@
+{
+  "parent": "muffins_thaidelight:root",
+  "criteria": {
+    "got_pepper": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "muffins_thaidelight:pepper"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "background": "minecraft:textures/block/oak_log.png",
+    "description": {
+      "translate": "advancement.muffins_thaidelight.got_pepper.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "muffins_thaidelight:pepper"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.muffins_thaidelight.got_pepper"
+    }
+  },
+  "requirements": [
+    [
+      "got_pepper"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,20 @@
+{
+  "type": "farmersdelight:cooking",
+  "cookingtime": 200,
+  "experience": 1.0,
+  "ingredients": [
+    {
+      "tag": "muffins_thaidelight:lime"
+    },
+    {
+      "tag": "muffins_thaidelight:lime"
+    },
+    {
+      "item": "minecraft:sugar"
+    }
+  ],
+  "recipe_book_tab": "drinks",
+  "result": {
+    "item": "muffins_thaidelight:lime_juice"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "muffins_thaidelight:lime"
+    }
+  ],
+  "result": [
+    {
+      "count": 2,
+      "item": "muffins_thaidelight:lime_slice"
+    }
+  ],
+  "tool": {
+    "tag": "c:tools/knives"
+  }
+}

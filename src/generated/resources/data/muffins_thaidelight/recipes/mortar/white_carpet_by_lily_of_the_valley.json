@@ -1,0 +1,12 @@
+{
+  "type": "muffins_thaidelight:mortar",
+  "ingredients": [
+    {
+      "item": "minecraft:lily_of_the_valley"
+    }
+  ],
+  "result": {
+    "count": 2,
+    "item": "minecraft:white_dye"
+  }
+}

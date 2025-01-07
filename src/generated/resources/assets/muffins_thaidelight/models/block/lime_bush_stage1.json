@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/template_azalea",
+  "textures": {
+    "side": "muffins_thaidelight:block/lime_bush_side_stage1",
+    "top": "muffins_thaidelight:block/lime_bush_top_stage1"
+  }
+}

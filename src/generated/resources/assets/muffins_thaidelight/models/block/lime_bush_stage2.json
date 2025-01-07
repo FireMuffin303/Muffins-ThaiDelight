@@ -1,0 +1,7 @@
+{
+  "parent": "muffins_thaidelight:block/template_lime_bush_stage2",
+  "textures": {
+    "side": "muffins_thaidelight:block/lime_bush_side_stage0",
+    "top": "muffins_thaidelight:block/lime_bush_top_stage0"
+  }
+}
