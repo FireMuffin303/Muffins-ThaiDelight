@@ -4,25 +4,24 @@
   "package": "net.firemuffin303.muffinsthaidelightfabric.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "ChickenFoodAccessor",
-    "FrogFoodAccessor",
-    "ItemMixin",
-    "LayeredCauldronBlockMixin",
-    "LivingEntityMixin",
-    "MilkBottleItemMixin",
-    "MilkBucketItemMixin",
+    "flavor.ItemMixin",
     "MobAccessor",
-    "ParrotTameFoodAccessor",
-    "PigFoodAccessor",
-    "PlayerEntityMixin",
-    "PowderSnowBlockMixin",
-    "SniffingMixin",
     "StructurePoolAccessor",
-    "VillagerMixin"
+    "fermentedFish.LayeredCauldronBlockMixin",
+    "flavor.FoodDataMixin",
+    "food.ChickenFoodAccessor",
+    "food.FrogFoodAccessor",
+    "food.ParrotTameFoodAccessor",
+    "food.PigFoodAccessor",
+    "spicy.LivingEntityMixin",
+    "spicy.MilkBottleItemMixin",
+    "spicy.MilkBucketItemMixin",
+    "spicy.PowderSnowBlockMixin",
+    "sticky.SniffingMixin",
+    "sticky.VillagerMixin"
   ],
   "client": [
-    "GameRendererMixin",
-    "PlayerRendererMixin"
+    "spicy.GuiMixin"
   ],
   "injectors": {
     "defaultRequire": 1

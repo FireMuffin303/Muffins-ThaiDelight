@@ -1,31 +1,55 @@
 package net.firemuffin303.muffinsthaidelightfabric.client;
 
+import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
-import net.firemuffin303.muffinsthaidelightfabric.common.entitydata.SpicyData;
+import net.firemuffin303.muffinsthaidelightfabric.common.data.SpicyData;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.GameRenderer;
-import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
 @Environment(EnvType.CLIENT)
 public class ModHudRenderer {
     private static final ResourceLocation SPICY_OUTLINE_RESOURCE = new ResourceLocation(ThaiDelight.MOD_ID,"textures/misc/spicy_outline.png");
+    private static final ResourceLocation NAUSEA_LOCATION = new ResourceLocation("textures/misc/nausea.png");
 
     public static void init(GuiGraphics guiGraphics, float deltaTracker){
-        spicyOutline(guiGraphics,deltaTracker);
     }
 
     public static void spicyOutline(GuiGraphics guiGraphics,float deltaTracker){
         Minecraft minecraft = Minecraft.getInstance();
-        SpicyData spicyData = ((SpicyData.SpicyAccessor) minecraft.player).muffinsThaiDelight$access();
+        SpicyData spicyData = SpicyData.getSpicyData(minecraft.player);
         if(spicyData.getSpicyLevel() > 0){
-            renderTextureOverlay(guiGraphics, SPICY_OUTLINE_RESOURCE,spicyData.getPercent());
+            renderSpicyOverlay(guiGraphics,deltaTracker,spicyData.getPercent());
         }
+    }
+
+    private static void renderSpicyOverlay(GuiGraphics guiGraphics,float delta,float percent){
+        int i = guiGraphics.guiWidth();
+        int j = guiGraphics.guiHeight();
+        guiGraphics.pose().pushPose();
+
+        RenderSystem.disableDepthTest();
+        RenderSystem.depthMask(false);
+        RenderSystem.enableBlend();
+        RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ONE, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ONE);
+        float h = 0.5F * percent;
+        float k = 0.2F * percent;
+        float l = 0.2F * percent;
+        guiGraphics.setColor(h,k,l,percent);
+        guiGraphics.blit(NAUSEA_LOCATION,0,0,-90,0.f,0.f,i,j,i,j);
+
+        guiGraphics.setColor(1.0F, 1.0F, 1.0F, 1.0F);
+        RenderSystem.defaultBlendFunc();
+        RenderSystem.disableBlend();
+        RenderSystem.depthMask(true);
+        RenderSystem.enableDepthTest();
+
+        guiGraphics.pose().popPose();
     }
 
     private static void renderTextureOverlay(GuiGraphics guiGraphics, ResourceLocation resourceLocation, float f) {

@@ -1,4 +1,4 @@
-package net.firemuffin303.muffinsthaidelightfabric.mixin;
+package net.firemuffin303.muffinsthaidelightfabric.mixin.food;
 
 import net.minecraft.world.entity.animal.Parrot;
 import net.minecraft.world.item.Item;

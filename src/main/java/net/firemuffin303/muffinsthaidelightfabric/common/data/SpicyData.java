@@ -1,10 +1,8 @@
-package net.firemuffin303.muffinsthaidelightfabric.common.entitydata;
+package net.firemuffin303.muffinsthaidelightfabric.common.data;
 
 import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
-import net.minecraft.core.particles.ParticleOptions;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
@@ -93,6 +91,9 @@ public class SpicyData {
     }
     // -------------
 
+    public static SpicyData getSpicyData(LivingEntity livingEntity){
+        return ((SpicyAccessor)livingEntity).muffinsThaiDelight$access();
+    }
 
     public int getSpicyLevel() {
         return spicyLevel;

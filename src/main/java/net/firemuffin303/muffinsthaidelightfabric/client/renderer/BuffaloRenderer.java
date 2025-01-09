@@ -1,16 +1,23 @@
 package net.firemuffin303.muffinsthaidelightfabric.client.renderer;
 
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.logging.LogUtils;
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
+import net.firemuffin303.muffinsthaidelightfabric.client.model.BabyBuffoloModel;
 import net.firemuffin303.muffinsthaidelightfabric.client.model.BuffoloModel;
 import net.firemuffin303.muffinsthaidelightfabric.common.entity.BuffaloEntity;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 
 public class BuffaloRenderer extends MobRenderer<BuffaloEntity, BuffoloModel<BuffaloEntity>> {
     private static final ResourceLocation TEXTURE = new ResourceLocation(ThaiDelight.MOD_ID,"textures/entity/buffolo/buffolo.png");
+    private final BabyBuffoloModel<BuffaloEntity> baby;
     public BuffaloRenderer(EntityRendererProvider.Context context) {
         super(context, new BuffoloModel<>(context.bakeLayer(BuffoloModel.LAYER_LOCATION)), 0.8f);
+        this.baby = new BabyBuffoloModel<>(context.bakeLayer(BabyBuffoloModel.BABY_LAYER_LOCATION));
     }
 
     @Override
@@ -18,4 +25,11 @@ public class BuffaloRenderer extends MobRenderer<BuffaloEntity, BuffoloModel<Buf
         return TEXTURE;
     }
 
+    @Override
+    public void render(BuffaloEntity mob, float f, float g, PoseStack poseStack, MultiBufferSource multiBufferSource, int i) {
+        if(this.model.young){
+            this.model = this.baby;
+        }
+        super.render(mob, f, g, poseStack, multiBufferSource, i);
+    }
 }

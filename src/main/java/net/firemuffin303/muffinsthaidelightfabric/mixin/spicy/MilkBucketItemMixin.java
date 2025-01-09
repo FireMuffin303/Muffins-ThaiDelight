@@ -1,6 +1,6 @@
-package net.firemuffin303.muffinsthaidelightfabric.mixin;
+package net.firemuffin303.muffinsthaidelightfabric.mixin.spicy;
 
-import net.firemuffin303.muffinsthaidelightfabric.common.entitydata.SpicyData;
+import net.firemuffin303.muffinsthaidelightfabric.common.data.SpicyData;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.MilkBucketItem;
@@ -15,6 +15,6 @@ public abstract class MilkBucketItemMixin {
 
     @Inject(method = "finishUsingItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;removeAllEffects()Z",shift = At.Shift.AFTER))
     public void muffinsThaiDelight$finishUsingItem(ItemStack itemStack, Level level, LivingEntity livingEntity, CallbackInfoReturnable<ItemStack> cir){
-        ((SpicyData.SpicyAccessor)livingEntity).muffinsThaiDelight$access().reset();
+        SpicyData.getSpicyData(livingEntity).reset();
     }
 }

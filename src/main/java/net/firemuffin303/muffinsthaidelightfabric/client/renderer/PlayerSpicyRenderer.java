@@ -4,38 +4,46 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.firemuffin303.muffinsthaidelightfabric.common.entitydata.SpicyData;
+import net.firemuffin303.muffinsthaidelightfabric.common.data.SpicyData;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.HeadedModel;
-import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.PlayerModel;
-import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
-import net.minecraft.world.entity.Entity;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 
 @Environment(EnvType.CLIENT)
-public class PlayerSpicyRenderer extends RenderLayer<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> {
+public class PlayerSpicyRenderer extends RenderLayer<LivingEntity, EntityModel<LivingEntity>> {
+    private final EntityModel<LivingEntity> model;
+    private final LivingEntityRenderer<LivingEntity,EntityModel<LivingEntity>> livingEntityRenderer;
+    private static final float color[] = {0.9098039215686275f,0.4352941176470588f,0.4235294117647059f};
 
-
-    public PlayerSpicyRenderer(RenderLayerParent<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> renderLayerParent) {
+    public PlayerSpicyRenderer(RenderLayerParent<LivingEntity, EntityModel<LivingEntity>> renderLayerParent, LivingEntityRenderer<LivingEntity,EntityModel<LivingEntity>> livingEntityRenderer) {
         super(renderLayerParent);
+        this.model = this.getParentModel();
+        this.livingEntityRenderer = livingEntityRenderer;
     }
 
     @Override
-    public void render(PoseStack poseStack, MultiBufferSource multiBufferSource, int i, AbstractClientPlayer entity, float f, float g, float h, float j, float k, float l) {
+    public void render(PoseStack poseStack, MultiBufferSource multiBufferSource, int i, LivingEntity entity, float f, float g, float h, float j, float k, float l) {
         if(!entity.isInvisible()){
-            if(((SpicyData.SpicyAccessor)entity).muffinsThaiDelight$access().getSpicyLevel() > 0){
-                VertexConsumer vertexConsumer = multiBufferSource.getBuffer(RenderType.entityCutout(entity.getSkinTextureLocation()));
-                int m = LivingEntityRenderer.getOverlayCoords(entity, 0.0F);
-                float percent = ((SpicyData.SpicyAccessor)entity).muffinsThaiDelight$access().getPercent();
+            if(SpicyData.getSpicyData(entity).getSpicyLevel() > 0){
+                ResourceLocation resourceLocation = this.livingEntityRenderer.getTextureLocation(entity);
+                VertexConsumer vertexConsumer = multiBufferSource.getBuffer(RenderType.entityTranslucentCull(resourceLocation));
 
-                this.getParentModel().head.render(poseStack,vertexConsumer,i,m,colorCalculate(0.992156862745098f,percent),colorCalculate(0.5568627450980392f,percent),colorCalculate(0.5019607843137255f,percent),1.0f);
-                this.getParentModel().hat.render(poseStack,vertexConsumer,i,m,colorCalculate(0.992156862745098f,percent),colorCalculate(0.5568627450980392f,percent),colorCalculate(0.5019607843137255f,percent),1.0f);
+                int m = LivingEntityRenderer.getOverlayCoords(entity, 0.0F);
+                float percent = SpicyData.getSpicyData(entity).getPercent() * 0.6f;
+
+                if(this.model instanceof HeadedModel headedModel) {
+                    headedModel.getHead().render(poseStack, vertexConsumer, i, m, color[0],color[1],color[2], percent);
+                    if(this.model instanceof PlayerModel<LivingEntity> playerModel){
+                        playerModel.hat.render(poseStack, vertexConsumer, i, m,  color[0],color[1],color[2], percent);
+                    }
+                }
             }
         }
     }

@@ -1,4 +1,4 @@
-package net.firemuffin303.muffinsthaidelightfabric.mixin;
+package net.firemuffin303.muffinsthaidelightfabric.mixin.sticky;
 
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModMobEffects;
 import net.minecraft.world.InteractionHand;

@@ -70,6 +70,9 @@ dependencies {
     modCompileOnlyApi("mezz.jei:jei-${minecraft_version}-fabric-api:${project.jei_version}")
 
     modRuntimeOnly("mezz.jei:jei-${minecraft_version}-fabric:${project.jei_version}")
+    modRuntimeOnly("maven.modrinth:appleskin:${project.apple_skin_version}")
+    modRuntimeOnly("maven.modrinth:appleskin:${project.apple_skin_version}")
+    modRuntimeOnly("maven.modrinth:cloth-config:y0kQixP8")
 
 
 }

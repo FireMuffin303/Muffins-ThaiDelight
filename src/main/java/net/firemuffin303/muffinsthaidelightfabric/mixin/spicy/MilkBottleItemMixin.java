@@ -1,6 +1,6 @@
-package net.firemuffin303.muffinsthaidelightfabric.mixin;
+package net.firemuffin303.muffinsthaidelightfabric.mixin.spicy;
 
-import net.firemuffin303.muffinsthaidelightfabric.common.entitydata.SpicyData;
+import net.firemuffin303.muffinsthaidelightfabric.common.data.SpicyData;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -15,6 +15,6 @@ public abstract class MilkBottleItemMixin {
 
     @Inject(method = "affectConsumer" ,at = @At("TAIL"))
     public void muffinsThaiDelight$affectConsumer(ItemStack stack, Level level, LivingEntity consumer, CallbackInfo ci){
-        ((SpicyData.SpicyAccessor)consumer).muffinsThaiDelight$access().reset();
+        SpicyData.getSpicyData(consumer).reset();
     }
 }

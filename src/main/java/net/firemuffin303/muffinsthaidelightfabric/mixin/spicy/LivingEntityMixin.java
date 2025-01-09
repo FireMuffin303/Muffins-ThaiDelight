@@ -1,20 +1,14 @@
-package net.firemuffin303.muffinsthaidelightfabric.mixin;
+package net.firemuffin303.muffinsthaidelightfabric.mixin.spicy;
 
-import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
-import net.firemuffin303.muffinsthaidelightfabric.common.entitydata.SpicyData;
-import net.firemuffin303.muffinsthaidelightfabric.registry.ModMobEffects;
+import net.firemuffin303.muffinsthaidelightfabric.common.data.SpicyData;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModTags;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -69,20 +63,13 @@ public abstract class LivingEntityMixin implements SpicyData.SpicyAccessor {
 
     @ModifyVariable(method = "hurt", at = @At(value = "HEAD"),argsOnly = true)
     public float muffins_thaiDelight$getDamageAfterArmorAbsorb(float f, DamageSource damageSource){
-        if(((SpicyData.SpicyAccessor)this).muffinsThaiDelight$access().getSpicyLevel() > 0  && damageSource.is(DamageTypeTags.IS_FIRE)){
-            float spicyMultiplier = 1;
-            if(((SpicyData.SpicyAccessor)this).muffinsThaiDelight$access().getSpicyLevelState().equals(SpicyData.SpicyLevel.HIGH)){
-                spicyMultiplier = 2;
-            } else if (((SpicyData.SpicyAccessor) this).muffinsThaiDelight$access().getSpicyLevelState().equals(SpicyData.SpicyLevel.MEDIUM)) {
-                spicyMultiplier = 1.5f;
-            }
-            float afterSpicy = f * spicyMultiplier;
-             return afterSpicy;
+        if(SpicyData.getSpicyData((LivingEntity) (Object)this).getSpicyLevel() > 0  && damageSource.is(DamageTypeTags.IS_FIRE)){
+            float spicyMultiplier = 1.5f;
+            return f * spicyMultiplier;
         }
 
         return f;
     }
-
 
 
     @Override

@@ -1,5 +1,6 @@
 package net.firemuffin303.muffinsthaidelightfabric.common.recipe;
 
+import net.firemuffin303.muffinsthaidelightfabric.common.data.FlavorItemData;
 import net.firemuffin303.muffinsthaidelightfabric.common.item.tooltipComponent.FlavorTooltipClient;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModItems;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModRecipes;
@@ -30,7 +31,7 @@ public class SourCraftingRecipe extends CustomRecipe {
 
         for (int i = 0; i < container.getContainerSize(); ++i){
             ItemStack itemStack = container.getItem(i);
-            boolean containsTag = (itemStack.hasTag() && itemStack.getTag().contains(FlavorTooltipClient.FlavorTooltipComponent.FLAVOR_NBT));
+            boolean containsTag = FlavorItemData.hasFlavorTag(itemStack);
             if(!itemStack.isEmpty() && itemStack.isEdible() && !itemStack.is(ModItems.SLICED_LIME) && !containsTag){
                 if(foodChecked){
                     return false;
@@ -59,11 +60,7 @@ public class SourCraftingRecipe extends CustomRecipe {
         }
 
         if(!itemStack.isEmpty()){
-
-            CompoundTag compoundTag = itemStack.getOrCreateTag();
-            CompoundTag flavorTag = new CompoundTag();
-            flavorTag.putBoolean(FlavorTooltipClient.FlavorTooltipComponent.SOUR_NBT,true);
-            compoundTag.put(FlavorTooltipClient.FlavorTooltipComponent.FLAVOR_NBT,flavorTag);
+            FlavorItemData.saveData(itemStack,new FlavorItemData(0.8f,0.f,0f));
         }
 
         return itemStack;

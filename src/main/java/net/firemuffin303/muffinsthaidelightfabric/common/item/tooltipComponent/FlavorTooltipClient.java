@@ -1,20 +1,21 @@
 package net.firemuffin303.muffinsthaidelightfabric.common.item.tooltipComponent;
 
+import net.firemuffin303.muffinsthaidelightfabric.common.data.FlavorItemData;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import org.joml.Matrix4f;
 
 import java.util.Objects;
 
 public class FlavorTooltipClient implements ClientTooltipComponent {
-    private final boolean sour;
-    public FlavorTooltipClient(FlavorTooltipComponent tooltipComponent){
-        Objects.requireNonNull(Minecraft.getInstance().font);
-        this.sour = tooltipComponent.isSour();
+    private final FlavorItemData flavorItemData;
+    public FlavorTooltipClient(FlavorTooltipComponent flavorTooltipComponent){
+        this.flavorItemData = flavorTooltipComponent.flavorItemData();
     }
 
     @Override
@@ -31,17 +32,16 @@ public class FlavorTooltipClient implements ClientTooltipComponent {
     public void renderText(Font font, int i, int j, Matrix4f matrix4f, MultiBufferSource.BufferSource bufferSource) {
         Integer color = ChatFormatting.GRAY.getColor();
         int gray = color == null ? -1 : color;
-        if(this.sour){
-            font.drawInBatch("Sour",i,j, gray,true,matrix4f,bufferSource, Font.DisplayMode.NORMAL,0,15728880);
+        if(this.flavorItemData.getSourLevel() > 0){
+            Component component = Component.literal("Sour "+this.flavorItemData.getSourLevel());
+            font.drawInBatch(component,i,j, gray,true,matrix4f,bufferSource, Font.DisplayMode.NORMAL,0,15728880);
         }
     }
 
-    public record FlavorTooltipComponent(boolean isSour) implements TooltipComponent{
-        public static final String FLAVOR_NBT = "Flavors";
-        public static final String SOUR_NBT = "Sour";
+    public record FlavorTooltipComponent(FlavorItemData flavorItemData) implements TooltipComponent{
 
-        public FlavorTooltipComponent(boolean isSour){
-            this.isSour = isSour;
+        public FlavorTooltipComponent(FlavorItemData flavorItemData){
+            this.flavorItemData = flavorItemData;
         }
 
     }
