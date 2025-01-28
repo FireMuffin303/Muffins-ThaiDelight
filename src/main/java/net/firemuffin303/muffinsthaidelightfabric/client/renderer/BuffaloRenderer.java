@@ -27,9 +27,6 @@ public class BuffaloRenderer extends MobRenderer<BuffaloEntity, BuffoloModel<Buf
 
     @Override
     public void render(BuffaloEntity mob, float f, float g, PoseStack poseStack, MultiBufferSource multiBufferSource, int i) {
-        if(this.model.young){
-            this.model = this.baby;
-        }
         super.render(mob, f, g, poseStack, multiBufferSource, i);
     }
 }

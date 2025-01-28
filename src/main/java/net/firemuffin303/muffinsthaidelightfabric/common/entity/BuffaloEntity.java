@@ -317,4 +317,6 @@ public class BuffaloEntity extends AbstractHorse implements ContainerListener, H
         IN_WATER,
         UNDERWATER
     }
+
+    public class WalkToMudGoal extends
 }
