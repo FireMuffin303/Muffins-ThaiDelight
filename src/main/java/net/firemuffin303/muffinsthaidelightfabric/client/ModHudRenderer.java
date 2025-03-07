@@ -5,7 +5,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
-import net.firemuffin303.muffinsthaidelightfabric.common.data.SpicyData;
+import net.firemuffin303.muffinsthaidelightfabric.registry.ModComponents;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.GameRenderer;
@@ -22,9 +22,9 @@ public class ModHudRenderer {
 
     public static void spicyOutline(GuiGraphics guiGraphics,float deltaTracker){
         Minecraft minecraft = Minecraft.getInstance();
-        SpicyData spicyData = SpicyData.getSpicyData(minecraft.player);
-        if(spicyData.getSpicyLevel() > 0){
-            renderSpicyOverlay(guiGraphics,deltaTracker,spicyData.getPercent());
+
+        if(ModComponents.SPICY.get(minecraft.player).getSpicyLevel() > 0){
+            renderSpicyOverlay(guiGraphics,deltaTracker,ModComponents.SPICY.get(minecraft.player).getPercent());
         }
     }
 

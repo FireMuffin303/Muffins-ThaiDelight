@@ -25,7 +25,6 @@ public class LimeFeature extends Feature<NoneFeatureConfiguration> {
         if(limeBush.canSurvive(levelAccessor,blockPos)){
             levelAccessor.setBlock(blockPos, limeBush, 2);
             if(levelAccessor.getBlockState(blockPos.above()).is(Blocks.AIR)){
-                levelAccessor.setBlock(blockPos.above(1),ModBlocks.LIME_LEAVES.defaultBlockState().setValue(LimeLeavesBlock.CAN_PRODUCE,true), 2);
 
             }
             return true;

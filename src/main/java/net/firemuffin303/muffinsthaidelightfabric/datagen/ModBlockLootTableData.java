@@ -58,6 +58,7 @@ public class ModBlockLootTableData extends FabricBlockLootTableProvider {
         this.createSimpleLoot(ModBlocks.STRIPPED_PAPAYA_WOOD);
         this.createSimpleLoot(ModBlocks.PAPAYA_SAPLING);
         this.createSimpleLoot(ModBlocks.LIME_SAPLING);
+        this.createSimpleLoot(ModBlocks.DURIAN_SAPLING);
 
         this.add(ModBlocks.PAPAYA_LEAVES, (block) -> this.createLeavesDrops(block, ModBlocks.PAPAYA_SAPLING, NORMAL_LEAVES_SAPLING_CHANCES));
 

@@ -2,7 +2,6 @@ package net.firemuffin303.muffinsthaidelightfabric;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Pair;
-import io.netty.buffer.Unpooled;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
@@ -10,16 +9,14 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
-import net.firemuffin303.muffinsthaidelightfabric.common.entity.BuffaloEntity;
+import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.firemuffin303.muffinsthaidelightfabric.common.entity.DragonflyEntity;
 import net.firemuffin303.muffinsthaidelightfabric.common.entity.FlowerCrabEntity;
-import net.firemuffin303.muffinsthaidelightfabric.common.data.SpicyData;
 import net.firemuffin303.muffinsthaidelightfabric.common.event.ModVillagerTrades;
+import net.firemuffin303.muffinsthaidelightfabric.common.manager.FlavorManager;
 import net.firemuffin303.muffinsthaidelightfabric.mixin.*;
 import net.firemuffin303.muffinsthaidelightfabric.mixin.food.ChickenFoodAccessor;
 import net.firemuffin303.muffinsthaidelightfabric.mixin.food.FrogFoodAccessor;
@@ -30,11 +27,11 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.packs.PackType;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.world.entity.ai.goal.GoalSelector;
@@ -84,13 +81,7 @@ public class ThaiDelight implements ModInitializer {
         init();
         postInit();
 
-
-
-        ServerPlayConnectionEvents.JOIN.register((serverGamePacketListener, packetSender, minecraftServer) -> minecraftServer.execute(() -> {
-            FriendlyByteBuf buf = new FriendlyByteBuf(Unpooled.buffer());
-            buf.writeInt(((SpicyData.SpicyAccessor)serverGamePacketListener.player).muffinsThaiDelight$access().spicyLevel);
-            ServerPlayNetworking.send(serverGamePacketListener.player,ThaiDelight.SPICY_PAYLOAD_ID,buf);
-        }));
+        ResourceManagerHelper.get(PackType.SERVER_DATA).registerReloadListener(new FlavorManager());
 
 
         ServerEntityEvents.ENTITY_LOAD.register((entity, serverLevel) -> {
@@ -136,6 +127,7 @@ public class ThaiDelight implements ModInitializer {
         ModMenuType.init();
         ModTreeDecoratorTypes.init();
         ModMobEffects.init();
+        ModComponents.init();
     }
 
     private void postInit(){
@@ -147,21 +139,11 @@ public class ThaiDelight implements ModInitializer {
 
         FabricDefaultAttributeRegistry.register(ModEntityTypes.FLOWER_CRAB, FlowerCrabEntity.createAttributes());
         FabricDefaultAttributeRegistry.register(ModEntityTypes.DRAGONFLY, DragonflyEntity.createAttributes());
-        FabricDefaultAttributeRegistry.register(ModEntityTypes.BUFFALO, BuffaloEntity.createAttributes());
+
 
         SpawnPlacements.register(ModEntityTypes.FLOWER_CRAB,SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, FlowerCrabEntity::checkSpawnRules);
         SpawnPlacements.register(ModEntityTypes.DRAGONFLY,SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, DragonflyEntity::checkSpawnRules);
 
-        /*
-        List<Item> fishes = BuiltInRegistries.ITEM.stream().filter(item -> new ItemStack(item).is(ItemTags.FISHES)).toList();
-        for(Item item : fishes ){
-            PotionBrewing.add
-
-            new PotionBrewing.Mix<Item>(item, Ingredient.of(PotionUtils.setPotion(Items.POTION.getDefaultInstance(),Potions.WATER)),ModItems.FISH_SAUCE_BOTTLE);
-
-        }
-
-         */
 
         PotionBrewing.addMix(Potions.AWKWARD,ModItems.FERMENTED_FISH,ModMobEffects.STINKY_POTION);
         PotionBrewing.addMix(ModMobEffects.STINKY_POTION, Items.REDSTONE,ModMobEffects.LONG_STINKY_POTION);
@@ -277,5 +259,9 @@ public class ThaiDelight implements ModInitializer {
         for(int i = 0; i < weight; i++){
             ((StructurePoolAccessor)structure).getTemplates().add(singlePoolElement);
         }
+    }
+
+    public static ResourceLocation modid(String id){
+        return new ResourceLocation(MOD_ID,id);
     }
 }

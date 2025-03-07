@@ -143,7 +143,7 @@ public class BuffaloEntity extends AbstractHorse implements ContainerListener, H
 
     @Override
     public @Nullable AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
-        return ModEntityTypes.BUFFALO.create(serverLevel);
+        return EntityType.PIG.create(serverLevel);
     }
 
     //--- Ride Logic ---

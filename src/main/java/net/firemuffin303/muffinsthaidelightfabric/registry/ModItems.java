@@ -49,7 +49,7 @@ public class ModItems {
     public static final Item COOKED_DRAGONFLY = register("cooked_dragonfly",new Item(new Item.Properties().food(ModFood.COOKED_DRAGONFLY)));
 
     //Buffalo
-    public static final Item BUFFALO_SPAWN_EGG = register("buffalo_spawn_egg",new SpawnEggItem(ModEntityTypes.BUFFALO,0x343639,0x444444,new Item.Properties()));
+    //public static final Item BUFFALO_SPAWN_EGG = register("buffalo_spawn_egg",new SpawnEggItem(ModEntityTypes.BUFFALO,0x343639,0x444444,new Item.Properties()));
 
     //Bucket
     public static final Item FISH_SAUCE_BOTTLE = register("fish_sauce_bottle",new DrinkableItem(drinkItem().food(ModFood.FISH_SAUCE),true,false)) ;
@@ -85,7 +85,11 @@ public class ModItems {
         }
     });
 
-
+    //------------------ Durian ------------------
+    public static final Item DURIAN_SAPLING = register("durian_sapling",new BlockItem(ModBlocks.DURIAN_SAPLING,new Item.Properties()));
+    public static final Item DURIAN_LEAVES = register("durian_leaves",new BlockItem(ModBlocks.DURIAN_LEAVES,new Item.Properties()));
+    public static final Item DURIAN = register("durian",new Item(new Item.Properties()));
+    //------------------------
 
     public static final Item PAPAYA = register("papaya",new Item(new Item.Properties().food(ModFood.PAPAYA)));
     public static final Item SLICED_PAPAYA = register("papaya_slice",new Item(new Item.Properties().food(ModFood.SLICED_PAPAYA)));
@@ -139,11 +143,8 @@ public class ModItems {
         public static final FoodProperties COOKED_DRAGONFLY = new FoodProperties.Builder().nutrition(3).saturationMod(0.2f).alwaysEat().build();
         public static final FoodProperties DRAGONFLY = new FoodProperties.Builder().nutrition(2).saturationMod(0.1f).alwaysEat().effect(new MobEffectInstance(MobEffects.HUNGER,10*20,0),0.8f).effect(new MobEffectInstance(MobEffects.CONFUSION,10*20,0),0.8f).build();
 
-        public static final FoodProperties LIME = new FoodProperties.Builder().nutrition(4).saturationMod(0.2F)
-                .effect(new MobEffectInstance(ModMobEffects.GLUTTONY,10*20),1.0f)
-                .build();
+        public static final FoodProperties LIME = new FoodProperties.Builder().nutrition(4).saturationMod(0.2F).build();
         public static final FoodProperties LIME_SLICE = new FoodProperties.Builder().nutrition(2).saturationMod(0.1F)
-                .effect(new MobEffectInstance(ModMobEffects.GLUTTONY,5*20),1.0f)
                 .build();
 
         public static final FoodProperties PEPPER = new FoodProperties.Builder().nutrition(2).saturationMod(0.1F).alwaysEat().fast().build();

@@ -5,6 +5,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.firemuffin303.muffinsthaidelightfabric.common.data.SpicyData;
+import net.firemuffin303.muffinsthaidelightfabric.registry.ModComponents;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.HeadedModel;
 import net.minecraft.client.model.PlayerModel;
@@ -31,12 +32,12 @@ public class PlayerSpicyRenderer extends RenderLayer<LivingEntity, EntityModel<L
     @Override
     public void render(PoseStack poseStack, MultiBufferSource multiBufferSource, int i, LivingEntity entity, float f, float g, float h, float j, float k, float l) {
         if(!entity.isInvisible()){
-            if(SpicyData.getSpicyData(entity).getSpicyLevel() > 0){
+            if(ModComponents.SPICY.get(entity).getSpicyLevel() > 0){
                 ResourceLocation resourceLocation = this.livingEntityRenderer.getTextureLocation(entity);
                 VertexConsumer vertexConsumer = multiBufferSource.getBuffer(RenderType.entityTranslucentCull(resourceLocation));
 
                 int m = LivingEntityRenderer.getOverlayCoords(entity, 0.0F);
-                float percent = SpicyData.getSpicyData(entity).getPercent() * 0.6f;
+                float percent = ModComponents.SPICY.get(entity).getPercent() * 0.6f;
 
                 if(this.model instanceof HeadedModel headedModel) {
                     headedModel.getHead().render(poseStack, vertexConsumer, i, m, color[0],color[1],color[2], percent);

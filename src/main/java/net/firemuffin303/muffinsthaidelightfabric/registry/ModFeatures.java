@@ -3,6 +3,7 @@ package net.firemuffin303.muffinsthaidelightfabric.registry;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
 import net.firemuffin303.muffinsthaidelightfabric.common.feature.LimeFeature;
+import net.firemuffin303.muffinsthaidelightfabric.common.feature.ModTreeConfiguration;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.Registry;
@@ -13,6 +14,7 @@ import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
@@ -21,7 +23,11 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
+import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
 import net.minecraft.world.level.levelgen.placement.*;
 import vectorwing.farmersdelight.common.registry.ModBiomeFeatures;
 import vectorwing.farmersdelight.common.world.configuration.WildCropConfiguration;
@@ -34,6 +40,7 @@ public class ModFeatures {
     public static final ResourceKey<ConfiguredFeature<?,?>> FEATURE_PATCH_LIME_BUSH;
     public static final ResourceKey<ConfiguredFeature<?,?>> FEATURE_PATCH_WILD_PEPPER;
     public static final ResourceKey<ConfiguredFeature<?, ?>> FEATURE_PAPAYA_TREE;
+    public static final ResourceKey<ConfiguredFeature<?, ?>> FEATURE_DURIAN_TREE = ResourceKey.create(Registries.CONFIGURED_FEATURE,ThaiDelight.modid("durian_tree"));
     public static final ResourceKey<PlacedFeature> PATCH_LIME_BUSH;
     public static final ResourceKey<PlacedFeature> PATCH_WILD_PEPPER;
     public static final ResourceKey<PlacedFeature> PAPAYA_TREE_CHECKED;
@@ -51,15 +58,6 @@ public class ModFeatures {
                         )
                 ));
 
-        /*
-        bootstapContext.register(ModFeatures.FEATURE_PATCH_WILD_PEPPER,new ConfiguredFeature<>(Feature.RANDOM_PATCH,
-                new RandomPatchConfiguration(32,6,3,PlacementUtils.filtered(Feature.SIMPLE_BLOCK,
-                        new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.WILD_PEPPER_CROP.defaultBlockState())),
-                        BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE,BlockPredicate.matchesBlocks(Direction.DOWN.getNormal(),List.of()))
-                ))
-        ));
-
-         */
         bootstapContext.register(ModFeatures.FEATURE_PATCH_WILD_PEPPER,new ConfiguredFeature<>(ModBiomeFeatures.WILD_CROP.get(),
                 new WildCropConfiguration(32,6,3,
                         PlacementUtils.filtered(Feature.SIMPLE_BLOCK,
@@ -73,6 +71,17 @@ public class ModFeatures {
                                 BlockPredicate.allOf(BlockPredicate.replaceable(Direction.UP.getNormal()),BlockPredicate.matchesTag(BlockTags.DIRT)))
 
                         )));
+
+
+        bootstapContext.register(ModFeatures.FEATURE_DURIAN_TREE,new ConfiguredFeature<>(Feature.TREE,
+                new TreeConfiguration.TreeConfigurationBuilder(
+                        BlockStateProvider.simple(Blocks.ACACIA_LOG),
+                        new StraightTrunkPlacer(6,2,0),
+                        BlockStateProvider.simple(ModBlocks.DURIAN_LEAVES),
+                        new BlobFoliagePlacer(ConstantInt.of(3),ConstantInt.of(0),3),
+                        new TwoLayersFeatureSize(1,0,1)
+                ).ignoreVines().build()
+        ));
 
     }
 
@@ -103,6 +112,7 @@ public class ModFeatures {
     public static void dataGen(HolderLookup.Provider provider, FabricDynamicRegistryProvider.Entries entries){
         entries.add(provider.lookupOrThrow(Registries.CONFIGURED_FEATURE),ModFeatures.FEATURE_PATCH_LIME_BUSH);
         entries.add(provider.lookupOrThrow(Registries.CONFIGURED_FEATURE),ModFeatures.FEATURE_PATCH_WILD_PEPPER);
+        entries.add(provider.lookupOrThrow(Registries.CONFIGURED_FEATURE),ModFeatures.FEATURE_DURIAN_TREE);
         entries.add(provider.lookupOrThrow(Registries.PLACED_FEATURE),ModFeatures.PATCH_LIME_BUSH);
         entries.add(provider.lookupOrThrow(Registries.PLACED_FEATURE),ModFeatures.PATCH_WILD_PEPPER);
 

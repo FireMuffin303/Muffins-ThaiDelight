@@ -4,6 +4,8 @@ package net.firemuffin303.muffinsthaidelightfabric.registry;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.*;
+import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.DurianBlock;
+import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.DurianLeaveBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.lime.LimeBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.lime.LimeCropBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.lime.LimeLeavesBlock;
@@ -11,6 +13,7 @@ import net.firemuffin303.muffinsthaidelightfabric.common.block.lime.LimeSaplingB
 import net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.PapayaBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.PapayaCropBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.PapayaLogBlock;
+import net.firemuffin303.muffinsthaidelightfabric.common.trees.DurianTreeGrower;
 import net.firemuffin303.muffinsthaidelightfabric.common.trees.PapayaTreeGrower;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
@@ -50,6 +53,7 @@ public class ModBlocks {
 
     //Wild Crops
     public static final Block WILD_PEPPER_CROP = register("wild_pepper",new WildCropBlock(MobEffects.CONFUSION,6,BlockBehaviour.Properties.copy(Blocks.TALL_GRASS)));
+
     //Crops
     public static final Block LIME_BUSH = register("lime_bush",new LimeCropBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).randomTicks().sound(SoundType.SWEET_BERRY_BUSH).pushReaction(PushReaction.DESTROY)));
     public static final Block LIME_SAPLING = register("lime_sapling",new LimeSaplingBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).randomTicks().sound(SoundType.SWEET_BERRY_BUSH).pushReaction(PushReaction.DESTROY).noCollission()));
@@ -58,6 +62,10 @@ public class ModBlocks {
 
     public static final Block PEPPER_CROP = register("pepper_crop",new PepperCropBlock(BlockBehaviour.Properties.copy(Blocks.POTATOES)));
 
+    public static final Block DURIAN_SAPLING = register("durian_sapling",new SaplingBlock(new DurianTreeGrower(),BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
+    public static final Block POTTED_DURIAN_SAPLING = register("potted_durian_sapling",Blocks.flowerPot(DURIAN_SAPLING));
+    public static final Block DURIAN_BLOCK = register("durian_block",new DurianBlock(BlockBehaviour.Properties.copy(Blocks.MELON)));
+    public static final Block DURIAN_LEAVES = register("durian_leaves",new DurianLeaveBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES)));
 
     //Feast
     public static final Block SOMTAM_FEAST = register("somtam_feast",new FeastBlock(FabricBlockSettings.copyOf(Blocks.CAKE),() -> ModItems.SOMTAM,true){

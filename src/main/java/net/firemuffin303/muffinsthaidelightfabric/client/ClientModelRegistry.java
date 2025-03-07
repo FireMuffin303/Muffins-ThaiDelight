@@ -15,7 +15,6 @@ public class ClientModelRegistry {
     public static void entityInit(){
         EntityRendererRegistry.register(ModEntityTypes.FLOWER_CRAB, CrabRenderer::new);
         EntityRendererRegistry.register(ModEntityTypes.DRAGONFLY, DragonflyRenderer::new);
-        EntityRendererRegistry.register(ModEntityTypes.BUFFALO, BuffaloRenderer::new);
         EntityModelLayerRegistry.registerModelLayer(FlowerCrabModel.LAYER,FlowerCrabModel::createBodyLayer);
         EntityModelLayerRegistry.registerModelLayer(DragonflyModel.LAYER,DragonflyModel::createBodyLayer);
         EntityModelLayerRegistry.registerModelLayer(BuffoloModel.LAYER_LOCATION,BuffoloModel::createAdultBodyLayer);

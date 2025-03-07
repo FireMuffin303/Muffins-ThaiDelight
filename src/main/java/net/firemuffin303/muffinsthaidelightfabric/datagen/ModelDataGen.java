@@ -110,6 +110,9 @@ public class ModelDataGen extends FabricModelProvider {
                                                 TextureMapping.cauldron(fermentedLevel2), blockStateModelGenerator.modelOutput)))
                         )
         );
+
+        blockStateModelGenerator.createPlant(ModBlocks.DURIAN_SAPLING,ModBlocks.POTTED_DURIAN_SAPLING, BlockModelGenerators.TintState.NOT_TINTED);
+        blockStateModelGenerator.createTrivialBlock(ModBlocks.DURIAN_LEAVES,TexturedModel.LEAVES);
     }
 
     @Override
@@ -126,7 +129,7 @@ public class ModelDataGen extends FabricModelProvider {
         itemModelGenerator.generateFlatItem(ModItems.COOKED_DRAGONFLY, ModelTemplates.FLAT_ITEM);
 
         //Buffolo
-        itemModelGenerator.generateFlatItem(ModItems.BUFFALO_SPAWN_EGG,SPAWN_EGG);
+        //itemModelGenerator.generateFlatItem(ModItems.BUFFALO_SPAWN_EGG,SPAWN_EGG);
 
         itemModelGenerator.generateFlatItem(ModItems.FISH_SAUCE_BOTTLE, ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.FERMENTED_FISH,ModelTemplates.FLAT_ITEM);

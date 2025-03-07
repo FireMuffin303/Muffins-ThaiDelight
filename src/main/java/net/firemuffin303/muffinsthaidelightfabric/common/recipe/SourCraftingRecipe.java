@@ -1,7 +1,10 @@
 package net.firemuffin303.muffinsthaidelightfabric.common.recipe;
 
+import net.firemuffin303.muffinsthaidelightfabric.common.component.FlavorItemComponent;
 import net.firemuffin303.muffinsthaidelightfabric.common.data.FlavorItemData;
 import net.firemuffin303.muffinsthaidelightfabric.common.item.tooltipComponent.FlavorTooltipClient;
+import net.firemuffin303.muffinsthaidelightfabric.common.manager.FlavorManager;
+import net.firemuffin303.muffinsthaidelightfabric.registry.ModComponents;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModItems;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModRecipes;
 import net.minecraft.core.NonNullList;
@@ -26,41 +29,52 @@ public class SourCraftingRecipe extends CustomRecipe {
     @Override
     public boolean matches(CraftingContainer container, Level level) {
         boolean foodChecked = false;
-        boolean fishBottleCheck = false;
+        int flavor = 0;
 
 
         for (int i = 0; i < container.getContainerSize(); ++i){
             ItemStack itemStack = container.getItem(i);
-            boolean containsTag = FlavorItemData.hasFlavorTag(itemStack);
-            if(!itemStack.isEmpty() && itemStack.isEdible() && !itemStack.is(ModItems.SLICED_LIME) && !containsTag){
+            if(!itemStack.isEmpty() && itemStack.isEdible() && !FlavorManager.FLAVORS.containsKey(itemStack.getItem())){
                 if(foodChecked){
                     return false;
                 }
                 foodChecked = true;
-            } else if (Ingredient.of(ModItems.SLICED_LIME).test(itemStack)) {
-                if(fishBottleCheck){
+            } else if (FlavorManager.FLAVORS.containsKey(itemStack.getItem())) {
+                if(flavor > 3){
                     return false;
                 }
-                fishBottleCheck = true;
+                flavor++;
             }
         }
 
-        return fishBottleCheck && foodChecked;
+        return flavor <= 3 && flavor > 0 && foodChecked;
     }
 
     @Override
     public ItemStack assemble(CraftingContainer container, RegistryAccess registryAccess) {
         ItemStack itemStack = ItemStack.EMPTY;
+        int sour = 0,spicy = 0,salty = 0,sweet = 0;
+
 
         for(int i = 0; i < container.getContainerSize();++i){
             ItemStack foodStack = container.getItem(i);
-            if(foodStack.isEdible() && !foodStack.is(ModItems.SLICED_LIME)){
+            if(foodStack.isEdible() && !FlavorManager.FLAVORS.containsKey(foodStack.getItem())){
                 itemStack = new ItemStack(foodStack.getItem(),1);
+            }else if(FlavorManager.FLAVORS.containsKey(foodStack.getItem())){
+                FlavorManager.FlavorEntry flavorEntry = FlavorManager.FLAVORS.get(foodStack.getItem());
+                 sour += flavorEntry.sour();
+                 spicy += flavorEntry.spicy();
+                 salty += flavorEntry.salty();
+                 sweet += flavorEntry.sweet();
             }
         }
 
         if(!itemStack.isEmpty()){
-            FlavorItemData.saveData(itemStack,new FlavorItemData(0.8f,0.f,0f));
+            FlavorItemComponent flavorItemComponent = ModComponents.FLAVOR.get(itemStack);
+            flavorItemComponent.setSourLevel(sour);
+            flavorItemComponent.setSpicyLevel(spicy);
+            flavorItemComponent.setSaltyLevel(salty);
+            flavorItemComponent.setSweetLevel(sweet);
         }
 
         return itemStack;

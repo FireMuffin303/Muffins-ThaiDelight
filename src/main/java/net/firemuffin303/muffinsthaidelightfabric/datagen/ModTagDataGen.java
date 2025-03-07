@@ -128,6 +128,11 @@ public class ModTagDataGen {
             getOrCreateTagBuilder(BlockTags.LOGS_THAT_BURN)
                     .add(ModBlocks.PAPAYA_LOG);
 
+            getOrCreateTagBuilder(BlockTags.LEAVES)
+                    .add(ModBlocks.PAPAYA_LEAVES)
+                    .add(ModBlocks.DURIAN_LEAVES)
+                    .add(ModBlocks.LIME_LEAVES);
+
             getOrCreateTagBuilder(ModTags.PAPAYA_LOGS)
                     .add(ModBlocks.PAPAYA_LOG)
                     .add(ModBlocks.PAPAYA_WOOD)
