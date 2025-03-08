@@ -7,6 +7,8 @@ import net.firemuffin303.muffinsthaidelightfabric.common.component.FlavorItemCom
 import net.firemuffin303.muffinsthaidelightfabric.common.item.tooltipComponent.FlavorTooltipClient;
 import net.firemuffin303.muffinsthaidelightfabric.common.manager.FlavorManager;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModComponents;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -35,6 +37,9 @@ public abstract class ItemMixin {
         if(itemStack.isEdible() && ModComponents.FLAVOR.get(itemStack).isFlavored()){
             FlavorItemComponent flavorItemComponent = ModComponents.FLAVOR.get(itemStack);
             return Optional.of(new FlavorTooltipClient.FlavorTooltipComponent(flavorItemComponent.getFlavor()));
+        } else if (FlavorManager.FLAVORS.containsKey(itemStack.getItem())) {
+            FlavorManager.FlavorEntry flavorEntry = FlavorManager.FLAVORS.get(itemStack.getItem());
+            return Optional.of(new FlavorTooltipClient.FlavorTooltipComponent(flavorEntry.toNBT()));
         }
         return original;
     }

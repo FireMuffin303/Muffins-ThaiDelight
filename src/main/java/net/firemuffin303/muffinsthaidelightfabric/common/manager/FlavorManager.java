@@ -7,6 +7,8 @@ import com.mojang.logging.LogUtils;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -49,5 +51,20 @@ public class FlavorManager implements SimpleSynchronousResourceReloadListener {
 
     public record FlavorEntry(int sour, int spicy, int salty, int sweet){
 
+        public ListTag toNBT(){
+            ListTag listTag = new ListTag();
+            listTag.add(flavorToNBT("sour",this.sour));
+            listTag.add(flavorToNBT("spicy",this.spicy));
+            listTag.add(flavorToNBT("salt",this.salty));
+            listTag.add(flavorToNBT("sweet",this.sweet));
+            return listTag;
+        }
+
+        public CompoundTag flavorToNBT(String id,int level){
+            CompoundTag compoundTag = new CompoundTag();
+            compoundTag.putString("id",id);
+            compoundTag.putInt("level",level);
+            return compoundTag;
+        }
     }
 }
