@@ -1,0 +1,9 @@
+{
+  "item": "minecraft:sugar",
+  "flavor": {
+    "sour": 0,
+    "spicy": 0,
+    "salty": 0,
+    "sweet": 1
+  }
+}

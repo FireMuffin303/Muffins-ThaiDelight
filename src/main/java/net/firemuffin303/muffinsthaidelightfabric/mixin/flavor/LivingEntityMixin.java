@@ -15,7 +15,9 @@ public abstract class LivingEntityMixin {
 
     @Inject(method = "eat",at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;addEatEffect(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/LivingEntity;)V"))
     public void muffins_thaidelight$eat(Level level, ItemStack itemStack, CallbackInfoReturnable<ItemStack> cir){
-        if(FlavorManager.FLAVORS.containsKey(itemStack.getItem())){
+        if(ModComponents.FLAVOR.get(itemStack).getSpicyLevel() > 0){
+            ModComponents.SPICY.get(this).addSpicyLevel(ModComponents.FLAVOR.get(itemStack).getSpicyLevel() * 10);
+        }else if(FlavorManager.FLAVORS.containsKey(itemStack.getItem())){
             ModComponents.SPICY.get(this).addSpicyLevel(FlavorManager.FLAVORS.get(itemStack.getItem()).spicy() * 10);
         }
     }

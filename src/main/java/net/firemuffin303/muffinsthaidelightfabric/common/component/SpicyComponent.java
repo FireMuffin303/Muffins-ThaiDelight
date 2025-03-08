@@ -2,6 +2,7 @@ package net.firemuffin303.muffinsthaidelightfabric.common.component;
 
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import dev.onyxstudios.cca.api.v3.component.tick.CommonTickingComponent;
+import net.firemuffin303.muffinsthaidelightfabric.registry.ModComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffects;
@@ -9,7 +10,7 @@ import net.minecraft.world.entity.LivingEntity;
 
 public class SpicyComponent implements AutoSyncedComponent, CommonTickingComponent {
     public final String SPICY = "spicy_level";
-    public final int MAX_SPICY = 100;
+    public final int MAX_SPICY = 60;
     private int spicyLevel = 0;
     private LivingEntity livingEntity;
 
@@ -23,6 +24,7 @@ public class SpicyComponent implements AutoSyncedComponent, CommonTickingCompone
 
     public void setSpicyLevel(int spicyLevel) {
         this.spicyLevel = Mth.clamp(spicyLevel,0,MAX_SPICY);
+        ModComponents.SPICY.sync(this.livingEntity);
     }
 
     public int getSpicyLevel() {

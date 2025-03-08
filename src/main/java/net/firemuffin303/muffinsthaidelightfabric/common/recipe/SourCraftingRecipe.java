@@ -34,7 +34,7 @@ public class SourCraftingRecipe extends CustomRecipe {
 
         for (int i = 0; i < container.getContainerSize(); ++i){
             ItemStack itemStack = container.getItem(i);
-            if(!itemStack.isEmpty() && itemStack.isEdible() && !FlavorManager.FLAVORS.containsKey(itemStack.getItem())){
+            if(!itemStack.isEmpty() && itemStack.isEdible() && !FlavorManager.FLAVORS.containsKey(itemStack.getItem()) && !ModComponents.FLAVOR.get(itemStack).isFlavored()){
                 if(foodChecked){
                     return false;
                 }

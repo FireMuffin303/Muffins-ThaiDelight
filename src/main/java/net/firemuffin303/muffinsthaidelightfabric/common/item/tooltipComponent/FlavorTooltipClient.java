@@ -1,26 +1,28 @@
 package net.firemuffin303.muffinsthaidelightfabric.common.item.tooltipComponent;
 
-import net.firemuffin303.muffinsthaidelightfabric.common.data.FlavorItemData;
-import net.minecraft.ChatFormatting;
-import net.minecraft.client.Minecraft;
+import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
+import net.firemuffin303.muffinsthaidelightfabric.common.manager.FlavorManager;
 import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.network.chat.Component;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
-import org.joml.Matrix4f;
 
-import java.util.Objects;
+import java.util.List;
 
 public class FlavorTooltipClient implements ClientTooltipComponent {
-    private final FlavorItemData flavorItemData;
+    private static final ResourceLocation FLAVOR_TEXTURE = ThaiDelight.modid("textures/gui/flavor.png");
+    private final ListTag flavorItemData;
     public FlavorTooltipClient(FlavorTooltipComponent flavorTooltipComponent){
-        this.flavorItemData = flavorTooltipComponent.flavorItemData();
+        this.flavorItemData = flavorTooltipComponent.flavor;
     }
 
     @Override
     public int getHeight() {
-        return 25;
+        return 12;
     }
 
     @Override
@@ -29,19 +31,30 @@ public class FlavorTooltipClient implements ClientTooltipComponent {
     }
 
     @Override
-    public void renderText(Font font, int i, int j, Matrix4f matrix4f, MultiBufferSource.BufferSource bufferSource) {
-        Integer color = ChatFormatting.GRAY.getColor();
-        int gray = color == null ? -1 : color;
-        if(this.flavorItemData.getSourLevel() > 0){
-            Component component = Component.literal("Sour "+this.flavorItemData.getSourLevel());
-            font.drawInBatch(component,i,j, gray,true,matrix4f,bufferSource, Font.DisplayMode.NORMAL,0,15728880);
+    public void renderImage(Font font, int x, int y, GuiGraphics guiGraphics) {
+        int afterX = 0;
+        for(int i = 0 ; i < this.flavorItemData.size(); i++){
+            int u;
+            CompoundTag compoundTag = this.flavorItemData.getCompound(i);
+            u = switch (compoundTag.getString("id")){
+                case "sour" -> 8;
+                case "spicy" -> 16;
+                case "salt" -> 24;
+                case "sweet" -> 32;
+                default -> 0;
+            };
+
+            for (int j = 0 ;j < compoundTag.getInt("level");j++){
+                guiGraphics.blit(FLAVOR_TEXTURE,x + (afterX * 8),y,u,0,8,8,40,8);
+                afterX++;
+            }
         }
     }
 
-    public record FlavorTooltipComponent(FlavorItemData flavorItemData) implements TooltipComponent{
+    public record FlavorTooltipComponent(ListTag flavor) implements TooltipComponent{
 
-        public FlavorTooltipComponent(FlavorItemData flavorItemData){
-            this.flavorItemData = flavorItemData;
+        public FlavorTooltipComponent(ListTag flavor){
+            this.flavor = flavor;
         }
 
     }
