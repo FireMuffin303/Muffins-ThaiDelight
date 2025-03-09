@@ -1,6 +1,5 @@
 package net.firemuffin303.muffinsthaidelightfabric.mixin.spicy;
 
-import net.firemuffin303.muffinsthaidelightfabric.common.data.SpicyData;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModComponents;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;

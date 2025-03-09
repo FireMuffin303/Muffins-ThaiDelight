@@ -2,13 +2,10 @@ package net.firemuffin303.muffinsthaidelightfabric.client;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.*;
-import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
 import net.firemuffin303.muffinsthaidelightfabric.client.renderer.PlayerSpicyRenderer;
 import net.firemuffin303.muffinsthaidelightfabric.client.sceens.MortarScreen;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.FermentedFishCauldronBlock;
-import net.firemuffin303.muffinsthaidelightfabric.common.data.SpicyData;
 import net.firemuffin303.muffinsthaidelightfabric.common.item.tooltipComponent.FlavorTooltipClient;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModMenuType;
@@ -49,15 +46,6 @@ public class ThaiDelightClient implements ClientModInitializer {
                 RenderLayerParent<LivingEntity, EntityModel<LivingEntity>> renderLayerParent = (RenderLayerParent<LivingEntity, EntityModel<LivingEntity>>) livingEntityRenderer;
                 registrationHelper.register(new PlayerSpicyRenderer(renderLayerParent, (LivingEntityRenderer<LivingEntity, EntityModel<LivingEntity>>) livingEntityRenderer));
             }
-        });
-
-        ClientPlayNetworking.registerGlobalReceiver(ThaiDelight.SPICY_PAYLOAD_ID,(minecraft, clientPacketListener, friendlyByteBuf, packetSender) -> {
-            int spicyLevel = friendlyByteBuf.readInt();
-            minecraft.execute(() ->{
-                if(minecraft.player != null){
-                    ((SpicyData.SpicyAccessor)minecraft.player).muffinsThaiDelight$access().spicyLevel = spicyLevel;
-                }
-            });
         });
 
         TooltipComponentCallback.EVENT.register(tooltipComponent -> {

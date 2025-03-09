@@ -159,6 +159,7 @@ public class ModelDataGen extends FabricModelProvider {
         itemModelGenerator.generateFlatItem(Item.byBlock(ModBlocks.LARB_FEAST), ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(Item.byBlock(ModBlocks.CRAB_FRIED_RICE_FEAST), ModelTemplates.FLAT_ITEM);
 
+        itemModelGenerator.generateFlatItem(ModItems.SAUCE_BOWL,ModelTemplates.FLAT_ITEM);
     }
 
     private static void createBlock(Block block, ModelTemplate modelTemplate, TextureMapping textureMapping, BlockModelGenerators blockModelGenerator){

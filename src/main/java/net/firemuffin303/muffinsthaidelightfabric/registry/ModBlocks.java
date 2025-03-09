@@ -2,10 +2,12 @@ package net.firemuffin303.muffinsthaidelightfabric.registry;
 
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.*;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.DurianBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.DurianLeaveBlock;
+import net.firemuffin303.muffinsthaidelightfabric.common.block.entity.SauceBowlBlockEntity;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.lime.LimeBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.lime.LimeCropBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.lime.LimeLeavesBlock;
@@ -18,10 +20,12 @@ import net.firemuffin303.muffinsthaidelightfabric.common.trees.PapayaTreeGrower;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
@@ -109,6 +113,10 @@ public class ModBlocks {
 
     //Cauldron
     public static final Block FERMENTED_FISH_CAULDRON = register("fermented_fish_cauldron",new FermentedFishCauldronBlock(BlockBehaviour.Properties.copy(Blocks.CAULDRON),ModCauldronInteraction.FERMENTED_FISH));
+
+    public static final Block SAUCE_BOWL = register("sauce_bowl",new SauceBowlBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BROWN)));
+
+    public static final BlockEntityType<SauceBowlBlockEntity> SAUCE_BOWL_BLOCK_ENTITY = Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE,ThaiDelight.modid("sauce_bowl"), FabricBlockEntityTypeBuilder.create(SauceBowlBlockEntity::new,ModBlocks.SAUCE_BOWL).build());
 
     public static void init() {
         

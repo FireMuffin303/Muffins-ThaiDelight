@@ -3,6 +3,7 @@ package net.firemuffin303.muffinsthaidelightfabric.registry;
 
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
 import net.firemuffin303.muffinsthaidelightfabric.common.item.DragonflyBottleItem;
+import net.firemuffin303.muffinsthaidelightfabric.common.item.SauceBowlItem;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -109,15 +110,12 @@ public class ModItems {
         }
     });
 
+    //--- Sauce Bowl ---
+    public static final Item SAUCE_BOWL = register("sauce_bowl",new SauceBowlItem(new Item.Properties().stacksTo(1)));
+
     //---Food---
     public static final Item SOMTAM_FEAST = register("somtam_feast",new BlockItem(ModBlocks.SOMTAM_FEAST,new Item.Properties()));
-    public static final Item SOMTAM = register("somtam",new ConsumableItem(bowlFoodItem(ModFood.SOMTAM)){
-        @Override
-        public void affectConsumer(ItemStack stack, Level level, LivingEntity consumer) {
-            super.affectConsumer(stack, level, consumer);
-            consumer.setTicksFrozen(0);
-        }
-    });
+    public static final Item SOMTAM = register("somtam",new ConsumableItem(bowlFoodItem(ModFood.SOMTAM)));
 
     public static final Item LARB_FEAST = register("larb_feast",new BlockItem(ModBlocks.LARB_FEAST,new Item.Properties()));
     public static final Item LARB = register("larb",new ConsumableItem(bowlFoodItem(ModFood.LARB)));

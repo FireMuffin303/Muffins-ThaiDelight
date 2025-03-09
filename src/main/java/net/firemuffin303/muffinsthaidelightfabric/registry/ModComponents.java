@@ -27,6 +27,6 @@ public class ModComponents implements EntityComponentInitializer, ItemComponentI
 
     @Override
     public void registerItemComponentFactories(ItemComponentFactoryRegistry itemComponentFactoryRegistry) {
-        itemComponentFactoryRegistry.register(Item::isEdible,FLAVOR,FlavorItemComponent::new);
+        itemComponentFactoryRegistry.register(item -> item.isEdible() || item == ModItems.SAUCE_BOWL,FLAVOR,FlavorItemComponent::new);
     }
 }

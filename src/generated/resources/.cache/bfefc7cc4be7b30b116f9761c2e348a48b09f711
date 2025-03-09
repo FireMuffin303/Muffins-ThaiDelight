@@ -1,8 +1,8 @@
-// 1.20.1	2025-03-07T21:18:57.2936722	Muffin's Thai's Delight Refabricated/Tags for minecraft:item
+// 1.20.1	2025-03-09T10:56:58.623569	Muffin's Thai's Delight Refabricated/Tags for minecraft:item
 81dd85d651f0a0e9b4b4762e7d264117f16a05c8 data\c\tags\items\foods\cooked_meats.json
 32b2e80c4f617f2c9d13775b6f03518a19e68ce6 data\crabbersdelight\tags\items\cooked_seafood.json
-ea245bcc88673ba87ae5700240886a1010cda139 data\muffins_thaidelight\tags\items\dragonfly_food.json
 87ef45be87411bf3880d6685b5d9f9942f5cfe8a data\alexsmobs\tags\items\insect_items.json
+ea245bcc88673ba87ae5700240886a1010cda139 data\muffins_thaidelight\tags\items\dragonfly_food.json
 6123bb37a9aaba7d3b504e4f410c4873d813bcc4 data\muffins_thaidelight\tags\items\spicy_level_50.json
 8a23702b05296c8af5014d6aa6e9265ded85c7d9 data\c\tags\items\raw_fishes.json
 5dbe4ac6ac645c069c524832f9909774b22a80b0 data\muffins_thaidelight\tags\items\ripe_papaya.json

@@ -1,21 +1,16 @@
 package net.firemuffin303.muffinsthaidelightfabric.common.recipe;
 
 import net.firemuffin303.muffinsthaidelightfabric.common.component.FlavorItemComponent;
-import net.firemuffin303.muffinsthaidelightfabric.common.data.FlavorItemData;
-import net.firemuffin303.muffinsthaidelightfabric.common.item.tooltipComponent.FlavorTooltipClient;
 import net.firemuffin303.muffinsthaidelightfabric.common.manager.FlavorManager;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModComponents;
-import net.firemuffin303.muffinsthaidelightfabric.registry.ModItems;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModRecipes;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.CustomRecipe;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;

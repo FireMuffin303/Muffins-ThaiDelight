@@ -16,6 +16,10 @@ public class FlavorItemComponent extends ItemComponent {
         super(stack);
     }
 
+    public void clear(){
+        this.putList("flavor",new ListTag());
+    }
+
     public boolean isFlavored(){
         int i = 0;
         for(Tag tag : this.getList("flavor",NbtType.COMPOUND)){

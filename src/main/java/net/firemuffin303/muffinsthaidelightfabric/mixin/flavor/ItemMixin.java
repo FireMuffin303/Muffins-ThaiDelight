@@ -6,9 +6,9 @@ import com.llamalad7.mixinextras.sugar.Local;
 import net.firemuffin303.muffinsthaidelightfabric.common.component.FlavorItemComponent;
 import net.firemuffin303.muffinsthaidelightfabric.common.item.tooltipComponent.FlavorTooltipClient;
 import net.firemuffin303.muffinsthaidelightfabric.common.manager.FlavorManager;
+import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModComponents;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
+import net.firemuffin303.muffinsthaidelightfabric.registry.ModItems;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -34,7 +34,7 @@ public abstract class ItemMixin {
 
     @ModifyReturnValue(method = "getTooltipImage",at = @At("RETURN"))
     public Optional<TooltipComponent> muffins_thaiDelight$getTooltipImage(Optional<TooltipComponent> original,@Local(argsOnly = true)ItemStack itemStack){
-        if(itemStack.isEdible() && ModComponents.FLAVOR.get(itemStack).isFlavored()){
+        if((itemStack.isEdible() || itemStack.is(ModItems.SAUCE_BOWL)) && ModComponents.FLAVOR.get(itemStack).isFlavored()){
             FlavorItemComponent flavorItemComponent = ModComponents.FLAVOR.get(itemStack);
             return Optional.of(new FlavorTooltipClient.FlavorTooltipComponent(flavorItemComponent.getFlavor()));
         } else if (FlavorManager.FLAVORS.containsKey(itemStack.getItem())) {

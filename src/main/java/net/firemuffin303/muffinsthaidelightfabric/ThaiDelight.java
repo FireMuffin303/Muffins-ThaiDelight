@@ -16,6 +16,8 @@ import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.firemuffin303.muffinsthaidelightfabric.common.entity.DragonflyEntity;
 import net.firemuffin303.muffinsthaidelightfabric.common.entity.FlowerCrabEntity;
 import net.firemuffin303.muffinsthaidelightfabric.common.event.ModVillagerTrades;
+import net.firemuffin303.muffinsthaidelightfabric.common.item.DragonflyBottleItem;
+import net.firemuffin303.muffinsthaidelightfabric.common.item.SauceBowlItem;
 import net.firemuffin303.muffinsthaidelightfabric.common.manager.FlavorManager;
 import net.firemuffin303.muffinsthaidelightfabric.mixin.*;
 import net.firemuffin303.muffinsthaidelightfabric.mixin.food.ChickenFoodAccessor;
@@ -71,9 +73,7 @@ public class ThaiDelight implements ModInitializer {
     public static final CreativeModeTab MOD_TAB = FabricItemGroup.builder()
             .title(Component.translatable("itemGroup."+ThaiDelight.MOD_ID+".main"))
             .icon(() -> new ItemStack(ModBlocks.MORTAR))
-            .displayItems((itemDisplayParameters, output) -> {
-                ModItems.ITEMS.forEach(output::accept);
-            })
+            .displayItems(ThaiDelight::itemsGenerator)
             .build();
     @Override
     public void onInitialize() {
@@ -259,6 +259,64 @@ public class ThaiDelight implements ModInitializer {
         for(int i = 0; i < weight; i++){
             ((StructurePoolAccessor)structure).getTemplates().add(singlePoolElement);
         }
+    }
+
+    private static void itemsGenerator(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output output){
+        output.accept(ModItems.MORTAR);
+        output.accept(ModItems.LIME_CRATE);
+        output.accept(ModItems.PEPPER_CRATE);
+        output.accept(ModItems.RAW_PAPAYA_CRATE);
+        output.accept(ModItems.PAPAYA_CRATE);
+        output.accept(ModItems.CRAB_SPAWN_EGG);
+        output.accept(ModItems.CRAB_EGG);
+        output.accept(ModItems.CRAB_BUCKET);
+        output.accept(ModItems.CRAB_MEAT);
+        output.accept(ModItems.COOKED_CRAB_MEAT);
+        output.accept(ModItems.DRAGONFLY_SPAWN_EGG);
+        Arrays.stream(DragonflyEntity.DragonflyVariant.values()).forEach(dragonflyVariant -> {
+            ItemStack itemStack = new ItemStack(ModItems.DRAGONFLY_BOTTLE);
+            DragonflyBottleItem.setVariant(itemStack,dragonflyVariant);
+            output.accept(itemStack);
+        });
+        output.accept(ModItems.DRAGONFLY);
+        output.accept(ModItems.COOKED_DRAGONFLY);
+        output.accept(ModItems.FISH_SAUCE_BOTTLE);
+        output.accept(ModItems.FERMENTED_FISH);
+        output.accept(ModItems.PAPAYA_JUICE);
+        output.accept(ModItems.LIME_JUICE);
+        output.accept(ModItems.LIME_SAPLING);
+        output.accept(ModItems.LIME);
+        output.accept(ModItems.SLICED_LIME);
+        output.accept(ModItems.LIME_LEAVES);
+        output.accept(ModItems.WILD_PEPPER_CROP);
+        output.accept(ModItems.PEPPER);
+        output.accept(ModItems.PEPPER_SEED);
+        output.accept(ModItems.DURIAN_SAPLING);
+        output.accept(ModItems.DURIAN_LEAVES);
+        output.accept(ModItems.DURIAN);
+        output.accept(ModItems.PAPAYA);
+        output.accept(ModItems.SLICED_PAPAYA);
+        output.accept(ModItems.RAW_PAPAYA);
+        output.accept(ModItems.RAW_PAPAYA_SLICE);
+        output.accept(ModItems.PAPAYA_LOG);
+        output.accept(ModItems.STRIPPED_PAPAYA_LOG);
+        output.accept(ModItems.PAPAYA_WOOD);
+        output.accept(ModItems.STRIPPED_PAPAYA_WOOD);
+        output.accept(ModItems.PAPAYA_LEAVES);
+        output.accept(ModItems.PAPAYA_SAPLING);
+        output.accept(ModItems.PAPAYA_SEEDS);
+        output.accept(ModItems.SAUCE_BOWL);
+        output.accept(SauceBowlItem.createSauceBowl(3,0,0,0));
+        output.accept(SauceBowlItem.createSauceBowl(0,3,0,0));
+        output.accept(SauceBowlItem.createSauceBowl(0,0,3,0));
+        output.accept(SauceBowlItem.createSauceBowl(0,0,0,3));
+        output.accept(ModItems.SOMTAM_FEAST);
+        output.accept(ModItems.SOMTAM);
+        output.accept(ModItems.LARB_FEAST);
+        output.accept(ModItems.LARB);
+        output.accept(ModItems.CRAB_FRIED_RICE_FEAST);
+        output.accept(ModItems.CRAB_FRIED_RICE);
+        output.accept(ModItems.STIR_FRIED_NOODLE);
     }
 
     public static ResourceLocation modid(String id){
