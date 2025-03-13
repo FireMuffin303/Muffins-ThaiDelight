@@ -18,7 +18,6 @@ import org.spongepowered.asm.mixin.injection.At;
 
 import java.util.Optional;
 
-@Debug(export = true)
 @Mixin(Item.class)
 public abstract class ItemMixin {
 

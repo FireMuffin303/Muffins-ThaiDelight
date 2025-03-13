@@ -3,6 +3,7 @@ package net.firemuffin303.muffinsthaidelightfabric.datagen;
 import com.google.common.collect.Lists;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import io.github.fabricators_of_create.porting_lib.event.client.ColorHandlersCallback;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModRecipes;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.CriterionTriggerInstance;
@@ -14,6 +15,7 @@ import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
@@ -24,6 +26,7 @@ import java.util.function.Consumer;
 
 public class MortarRecipeBuilder implements RecipeBuilder {
     private final List<Ingredient> ingredients = Lists.newArrayList();
+    private Item container = Items.AIR;
     private final Item result;
     private final int count;
 
@@ -36,7 +39,7 @@ public class MortarRecipeBuilder implements RecipeBuilder {
         this.count = count;
     }
 
-    public static MortarRecipeBuilder mortar(ItemLike result,int count){
+    public static MortarRecipeBuilder mortar( ItemLike result, int count){
         return new MortarRecipeBuilder(result, count);
     }
 
@@ -90,11 +93,16 @@ public class MortarRecipeBuilder implements RecipeBuilder {
         return this;
     }
 
+    public MortarRecipeBuilder container(ItemLike itemLike){
+        this.container = itemLike.asItem();
+        return this;
+    }
+
     @Override
     public void save(Consumer<FinishedRecipe> consumer, ResourceLocation resourceLocation) {
         this.ensureValid(resourceLocation);
         this.advancement.parent(ROOT_RECIPE_ADVANCEMENT).addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(resourceLocation)).rewards(net.minecraft.advancements.AdvancementRewards.Builder.recipe(resourceLocation)).requirements(RequirementsStrategy.OR);
-        consumer.accept(new MortarRecipeBuilder.Result(resourceLocation,this.group, this.ingredients,this.result,this.count,this.advancement,resourceLocation.withPrefix("recipes/mortar/")));
+        consumer.accept(new MortarRecipeBuilder.Result(resourceLocation,this.group, this.ingredients,this.container,this.result,this.count,this.advancement,resourceLocation.withPrefix("recipes/mortar/")));
     }
 
     private void ensureValid(ResourceLocation arg) {
@@ -107,16 +115,18 @@ public class MortarRecipeBuilder implements RecipeBuilder {
         private final ResourceLocation id;
         private final String group;
         private final List<Ingredient> ingredients;
+        private final Item container;
         private final Item result;
         private final int count;
         private final Advancement.Builder advancement;
         private final ResourceLocation advancementId;
 
 
-        public Result(ResourceLocation resourceLocation, String group, List<Ingredient> ingredients, Item itemStack, int count, Advancement.Builder builder,ResourceLocation advancementId){
+        public Result(ResourceLocation resourceLocation, String group, List<Ingredient> ingredients,Item container, Item itemStack, int count, Advancement.Builder builder,ResourceLocation advancementId){
             this.id = resourceLocation;
             this.group = group;
             this.ingredients = ingredients;
+            this.container = container;
             this.result = itemStack;
             this.count = count;
             this.advancement = builder;
@@ -136,6 +146,13 @@ public class MortarRecipeBuilder implements RecipeBuilder {
             }
 
             jsonObject.add("ingredients", jsonArray);
+
+            if(this.container != Items.AIR){
+                JsonObject container = new JsonObject();
+                container.addProperty("item",BuiltInRegistries.ITEM.getKey(this.container).toString());
+                jsonObject.add("container", container);
+            }
+
 
             JsonObject jsonObject2 = new JsonObject();
             jsonObject2.addProperty("item", BuiltInRegistries.ITEM.getKey(this.result).toString());

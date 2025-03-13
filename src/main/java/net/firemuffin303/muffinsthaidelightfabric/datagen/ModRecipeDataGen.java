@@ -72,7 +72,7 @@ public class ModRecipeDataGen extends FabricRecipeProvider {
     }
 
     private void mortar(Consumer<FinishedRecipe> exporter){
-        MortarRecipeBuilder.mortar(ModBlocks.SOMTAM_FEAST).requires(ModItems.PEPPER).requires(vectorwing.farmersdelight.common.registry.ModItems.TOMATO.get()).requires(ModTags.RAW_PAPAYA).requires(ModItems.FERMENTED_FISH).unlockedBy(getHasName(ModItems.RAW_PAPAYA),has(ModItems.RAW_PAPAYA)).unlockedBy(getHasName(ModItems.FERMENTED_FISH),has(ModItems.FERMENTED_FISH)).save(exporter,"mortar/"+getItemName(ModBlocks.SOMTAM_FEAST));
+        MortarRecipeBuilder.mortar(ModBlocks.SOMTAM_FEAST).requires(ModItems.PEPPER).requires(vectorwing.farmersdelight.common.registry.ModItems.TOMATO.get()).requires(ModTags.RAW_PAPAYA).requires(ModItems.FERMENTED_FISH).container(Items.BOWL).unlockedBy(getHasName(ModItems.RAW_PAPAYA),has(ModItems.RAW_PAPAYA)).unlockedBy(getHasName(ModItems.FERMENTED_FISH),has(ModItems.FERMENTED_FISH)).save(exporter,"mortar/"+getItemName(ModBlocks.SOMTAM_FEAST));
 
         MortarRecipeBuilder.mortar(Items.BONE_MEAL,4).requires(Items.BONE,1).unlockedBy(getHasName(Items.BONE),has(Items.BONE)).save(exporter,"mortar/"+getItemName(Items.BONE_MEAL)+"_by_bone");
         MortarRecipeBuilder.mortar(Items.BONE_MEAL,2).requires(Items.NAUTILUS_SHELL,1).unlockedBy(getHasName(Items.NAUTILUS_SHELL),has(Items.NAUTILUS_SHELL)).save(exporter,"mortar/"+getItemName(Items.BONE_MEAL)+"_by_nautilus_shell");

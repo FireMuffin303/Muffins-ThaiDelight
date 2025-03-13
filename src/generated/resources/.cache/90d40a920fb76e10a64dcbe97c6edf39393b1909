@@ -1,4 +1,4 @@
-// 1.20.1	2025-03-09T10:56:58.6281635	Muffin's Thai's Delight Refabricated/Recipes
+// 1.20.1	2025-03-13T15:38:21.1434264	Muffin's Thai's Delight Refabricated/Recipes
 165425d88447b22539ee7668d5a74aaa08424500 data\muffins_thaidelight\recipes\mortar\bone_meal_by_nautilus_shell.json
 1010f7e180c69c7aa4ba3a90f383af97d07205ca data\muffins_thaidelight\advancements\recipes\misc\crafting\papaya_sapling_by_sliced_papaya_from_crafting.json
 6321ac0d2bb1f439196bf3c541d394608cd150ae data\muffins_thaidelight\recipes\smelting\cooked_dragonfly_from_smelting.json
@@ -16,7 +16,7 @@ d93bac2c8d2b2bea9001c3510ea86b12b375b388 data\muffins_thaidelight\recipes\mortar
 cc529ee8b6288f61f6b47ee10235f87b128377c9 data\muffins_thaidelight\advancements\recipes\food\crafting\lime_from_crafting.json
 53ffec05a22d357f9fd021864aa42d995a306b10 data\muffins_thaidelight\advancements\recipes\mortar\mortar\yellow_dye_by_dandelion.json
 4ef98a9183229c1915b5ac69cb563cf8cb97380e data\muffins_thaidelight\advancements\recipes\mortar\mortar\cyan_dye_by_pitcher_plant.json
-d4f668759b0d6ba8c2e622336ec96a262c258fef data\muffins_thaidelight\recipes\mortar\somtam_feast.json
+eebaf4207a200c503bd2993d540a9f3b6c95c00c data\muffins_thaidelight\recipes\mortar\somtam_feast.json
 2df5b6fc2fb48b019a99d1d5cbf56e7f6931f83a data\muffins_thaidelight\recipes\mortar\black_dye_by_charcoal.json
 a82e8c959e1616af7cceb53b2990ab37bf2d0001 data\muffins_thaidelight\advancements\recipes\mortar\mortar\brown_dye_by_cocoa.json
 0f3be4b0a6b1cb0283dc6cb4029ae39f72ff4faa data\muffins_thaidelight\recipes\mortar\red_dye_by_beetroot.json

@@ -10,7 +10,8 @@ import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
 import net.firemuffin303.muffinsthaidelightfabric.client.sceens.MortarScreen;
-import net.firemuffin303.muffinsthaidelightfabric.common.recipe.MortarRecipe;
+import net.firemuffin303.muffinsthaidelightfabric.common.recipe.mortar.MortarRecipe;
+import net.firemuffin303.muffinsthaidelightfabric.common.recipe.mortar.RegularMortarRecipe;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
@@ -19,9 +20,9 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 
-public class MortarJEI implements IRecipeCategory<MortarRecipe> {
+public class MortarJEI implements IRecipeCategory<RegularMortarRecipe> {
     private static final ResourceLocation ID = new ResourceLocation(ThaiDelight.MOD_ID,"mortar");
-    public static final RecipeType<MortarRecipe> MORTAR = new RecipeType<>(ID,MortarRecipe.class);
+    public static final RecipeType<RegularMortarRecipe> MORTAR = new RecipeType<>(ID,RegularMortarRecipe.class);
 
     private final IDrawable icon;
     private final IDrawable background;
@@ -32,7 +33,7 @@ public class MortarJEI implements IRecipeCategory<MortarRecipe> {
     }
 
     @Override
-    public RecipeType<MortarRecipe> getRecipeType() {
+    public RecipeType<RegularMortarRecipe> getRecipeType() {
         return MORTAR;
     }
 
@@ -52,9 +53,9 @@ public class MortarJEI implements IRecipeCategory<MortarRecipe> {
     }
 
     @Override
-    public void setRecipe(IRecipeLayoutBuilder builder, MortarRecipe recipe, IFocusGroup focuses) {
+    public void setRecipe(IRecipeLayoutBuilder builder, RegularMortarRecipe recipe, IFocusGroup focuses) {
         builder.addInvisibleIngredients(RecipeIngredientRole.CATALYST).addIngredients(Ingredient.of(ModBlocks.MORTAR));
-        builder.addSlot(RecipeIngredientRole.OUTPUT,124,35).addIngredients(recipe.getResult());
+        builder.addSlot(RecipeIngredientRole.OUTPUT,124,35).addIngredients(Ingredient.of(recipe.getResult()));
         for(int i = 0;i < recipe.getIngredients().size();i++){
 
             builder.addSlot(RecipeIngredientRole.INPUT,i > 1 ? 39 + Mth.clamp(i-2,0,1) *18 : 39+ i *18,i > 1 ? 26+18: 26).addIngredients(recipe.getIngredients().get(i));
@@ -62,7 +63,7 @@ public class MortarJEI implements IRecipeCategory<MortarRecipe> {
     }
 
     @Override
-    public void draw(MortarRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
+    public void draw(RegularMortarRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
         guiGraphics.blit(MortarScreen.CRAFTING_TABLE_LOCATION,4,4,4,4,169,70);
         IRecipeCategory.super.draw(recipe, recipeSlotsView, guiGraphics, mouseX, mouseY);
     }

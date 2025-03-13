@@ -46,7 +46,7 @@ public class ModelDataGen extends FabricModelProvider {
         blockStateModelGenerator.woodProvider(ModBlocks.STRIPPED_PAPAYA_LOG).logWithHorizontal(ModBlocks.STRIPPED_PAPAYA_LOG).wood(ModBlocks.STRIPPED_PAPAYA_WOOD);
 
         createCubeAll(ModBlocks.PAPAYA_LEAVES,blockStateModelGenerator);
-        createCubeAll(ModBlocks.LIME_LEAVES,blockStateModelGenerator);
+        //createCubeAll(ModBlocks.LIME_LEAVES,blockStateModelGenerator);
 
         blockStateModelGenerator.blockStateOutput.accept(
                 MultiVariantGenerator.multiVariant(ModBlocks.PAPAYA)
@@ -112,7 +112,13 @@ public class ModelDataGen extends FabricModelProvider {
         );
 
         blockStateModelGenerator.createPlant(ModBlocks.DURIAN_SAPLING,ModBlocks.POTTED_DURIAN_SAPLING, BlockModelGenerators.TintState.NOT_TINTED);
+        blockStateModelGenerator.createPlant(ModBlocks.LIME_SAPLING,ModBlocks.POTTED_LIME_SAPLING, BlockModelGenerators.TintState.NOT_TINTED);
+        blockStateModelGenerator.createPlant(ModBlocks.COCONUT_SAPLING,ModBlocks.POTTED_COCONUT_SAPLING, BlockModelGenerators.TintState.NOT_TINTED);
+        blockStateModelGenerator.createPlant(ModBlocks.MANGO_SAPLING,ModBlocks.POTTED_MANGO_SAPLING, BlockModelGenerators.TintState.NOT_TINTED);
         blockStateModelGenerator.createTrivialBlock(ModBlocks.DURIAN_LEAVES,TexturedModel.LEAVES);
+        blockStateModelGenerator.createTrivialBlock(ModBlocks.LIME_LEAVES,TexturedModel.LEAVES);
+        blockStateModelGenerator.createTrivialBlock(ModBlocks.MANGO_LEAVES,TexturedModel.LEAVES);
+        blockStateModelGenerator.createTrivialBlock(ModBlocks.COCONUT_LEAVES,TexturedModel.LEAVES);
     }
 
     @Override
@@ -160,6 +166,7 @@ public class ModelDataGen extends FabricModelProvider {
         itemModelGenerator.generateFlatItem(Item.byBlock(ModBlocks.CRAB_FRIED_RICE_FEAST), ModelTemplates.FLAT_ITEM);
 
         itemModelGenerator.generateFlatItem(ModItems.SAUCE_BOWL,ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.DURIAN_SLICE,ModelTemplates.FLAT_ITEM);
     }
 
     private static void createBlock(Block block, ModelTemplate modelTemplate, TextureMapping textureMapping, BlockModelGenerators blockModelGenerator){
@@ -175,8 +182,8 @@ public class ModelDataGen extends FabricModelProvider {
     }
 
     private static void createLimeCrop( BlockModelGenerators blockModelGenerator){
-        blockModelGenerator.createSimpleFlatItemModel(ModBlocks.LIME_SAPLING);
-        createBlock(ModBlocks.LIME_SAPLING,ModelTemplates.CROSS,TextureMapping.cross(ModBlocks.LIME_SAPLING),blockModelGenerator);
+        //blockModelGenerator.createSimpleFlatItemModel(ModBlocks.LIME_SAPLING);
+        //createBlock(ModBlocks.LIME_SAPLING,ModelTemplates.CROSS,TextureMapping.cross(ModBlocks.LIME_SAPLING),blockModelGenerator);
         blockModelGenerator.blockStateOutput.accept(
                 MultiVariantGenerator.multiVariant(ModBlocks.LIME_BUSH)
                         .with(PropertyDispatch.property(BlockStateProperties.AGE_2)

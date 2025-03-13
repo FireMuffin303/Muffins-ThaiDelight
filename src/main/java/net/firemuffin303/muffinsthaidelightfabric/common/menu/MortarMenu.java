@@ -1,6 +1,8 @@
 package net.firemuffin303.muffinsthaidelightfabric.common.menu;
 
-import net.firemuffin303.muffinsthaidelightfabric.common.recipe.MortarRecipe;
+import com.mojang.logging.LogUtils;
+import net.firemuffin303.muffinsthaidelightfabric.common.recipe.mortar.MortarRecipe;
+import net.firemuffin303.muffinsthaidelightfabric.common.recipe.mortar.RegularMortarRecipe;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModMenuType;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModRecipes;
@@ -10,6 +12,7 @@ import net.minecraft.network.protocol.game.ClientboundContainerSetSlotPacket;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Container;
+import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.player.StackedContents;
@@ -22,7 +25,7 @@ import java.util.Optional;
 
 public class MortarMenu extends RecipeBookMenu<Container> {
     private final ResultContainer resultContainer = new ResultContainer();
-    private final CraftingContainer craftSlots = new TransientCraftingContainer(this, 2, 2);
+    private final Container craftSlots;
     private final Player player;
     private final ContainerLevelAccess access;
     long lastSoundTime;
@@ -35,26 +38,31 @@ public class MortarMenu extends RecipeBookMenu<Container> {
         super(ModMenuType.MORTAR, i);
         this.player = inventory.player;
         this.access = containerLevelAccess;
+        this.craftSlots = new SimpleContainer(6){
+            @Override
+            public void setChanged() {
+                super.setChanged();
+                MortarMenu.this.slotsChanged(this);
+            }
+        };
 
         this.addSlot(new MortarResultSlot(this.player, this.craftSlots, this.resultContainer, 0, 124, 35));
 
+        this.addSlot(new Slot(this.craftSlots, 1, 39, 26));
+        this.addSlot(new Slot(this.craftSlots, 2, 57, 26));
+        this.addSlot(new Slot(this.craftSlots, 3, 39, 44));
+        this.addSlot(new Slot(this.craftSlots, 4, 57, 44));
 
-        int j;
-        int k;
+        this.addSlot(new Slot(this.craftSlots, 5, 84, 54));
 
-        for(j = 0; j < 2; ++j) {
-            for(k = 0; k < 2; ++k) {
-                this.addSlot(new Slot(this.craftSlots, k + j * 2, 39 + k * 18, 26 + j * 18));
-            }
-        }
 
-        for(j = 0; j < 3; ++j) {
-            for(k = 0; k < 9; ++k) {
+        for(int j = 0; j < 3; ++j) {
+            for(int k = 0; k < 9; ++k) {
                 this.addSlot(new Slot(inventory, k + j * 9 + 9, 8 + k * 18, 84 + j * 18));
             }
         }
 
-        for(j = 0; j < 9; ++j) {
+        for(int j = 0; j < 9; ++j) {
             this.addSlot(new Slot(inventory, j, 8 + j * 18, 142));
         }
     }
@@ -72,7 +80,7 @@ public class MortarMenu extends RecipeBookMenu<Container> {
         });
     }
 
-    protected static void slotChangedCraftingGrid(AbstractContainerMenu arg, Level arg2, Player arg3, CraftingContainer arg4, ResultContainer arg5) {
+    protected static void slotChangedCraftingGrid(AbstractContainerMenu arg, Level arg2, Player arg3, Container arg4, ResultContainer arg5) {
         if (!arg2.isClientSide) {
             ServerPlayer serverPlayer = (ServerPlayer)arg3;
             ItemStack itemStack = ItemStack.EMPTY;
@@ -95,7 +103,9 @@ public class MortarMenu extends RecipeBookMenu<Container> {
 
     @Override
     public void fillCraftSlotsStackedContents(StackedContents stackedContents) {
-        this.craftSlots.fillStackedContents(stackedContents);
+        for(int i = 0; i < this.craftSlots.getContainerSize(); ++i) {
+            stackedContents.accountSimpleStack(this.craftSlots.getItem(i));
+        }
     }
 
     @Override
@@ -116,17 +126,17 @@ public class MortarMenu extends RecipeBookMenu<Container> {
 
     @Override
     public int getGridWidth() {
-        return this.craftSlots.getWidth();
+        return 2;
     }
 
     @Override
     public int getGridHeight() {
-        return this.craftSlots.getHeight();
+        return 2;
     }
 
     @Override
     public int getSize() {
-        return 5;
+        return 6;
     }
 
     @Override
@@ -150,22 +160,22 @@ public class MortarMenu extends RecipeBookMenu<Container> {
                 this.access.execute((arg3, arg4) -> {
                     itemStack2.getItem().onCraftedBy(itemStack2, arg3, arg);
                 });
-                if (!this.moveItemStackTo(itemStack2, 5, 41, true)) {
+                if (!this.moveItemStackTo(itemStack2, 6, 42, true)) {
                     return ItemStack.EMPTY;
                 }
 
                 slot.onQuickCraft(itemStack2, itemStack);
-            } else if (i >= 5 && i < 41) {
-                if (!this.moveItemStackTo(itemStack2, 1, 5, false)) {
+            } else if (i >= 6 && i < 42) {
+                if (!this.moveItemStackTo(itemStack2, 1, 6, false)) {
                     if (i < 37) {
-                        if (!this.moveItemStackTo(itemStack2, 30, 41, false)) {
+                        if (!this.moveItemStackTo(itemStack2, 31, 42, false)) {
                             return ItemStack.EMPTY;
                         }
-                    } else if (!this.moveItemStackTo(itemStack2, 5, 30, false)) {
+                    } else if (!this.moveItemStackTo(itemStack2, 6, 31, false)) {
                         return ItemStack.EMPTY;
                     }
                 }
-            } else if (!this.moveItemStackTo(itemStack2, 5, 41, false)) {
+            } else if (!this.moveItemStackTo(itemStack2, 6, 42, false)) {
                 return ItemStack.EMPTY;
             }
 
@@ -193,13 +203,18 @@ public class MortarMenu extends RecipeBookMenu<Container> {
         return stillValid(this.access,this.player, ModBlocks.MORTAR);
     }
 
-    class MortarResultSlot extends ResultSlot{
-        protected CraftingContainer craftSlots;
+    class MortarResultSlot extends Slot{
+        protected Container craftSlots;
         protected Player player;
-        public MortarResultSlot(Player player, CraftingContainer craftingContainer, Container container, int i, int j, int k) {
-            super(player, craftingContainer, container, i, j, k);
+        public MortarResultSlot(Player player, Container craftingContainer, Container container, int i, int j, int k) {
+            super(container,i,j,k);
             this.craftSlots = craftingContainer;
             this.player = player;
+        }
+
+        @Override
+        public boolean mayPlace(ItemStack itemStack) {
+            return false;
         }
 
         @Override

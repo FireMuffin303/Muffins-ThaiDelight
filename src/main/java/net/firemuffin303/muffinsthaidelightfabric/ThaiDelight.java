@@ -267,11 +267,13 @@ public class ThaiDelight implements ModInitializer {
         output.accept(ModItems.PEPPER_CRATE);
         output.accept(ModItems.RAW_PAPAYA_CRATE);
         output.accept(ModItems.PAPAYA_CRATE);
+
         output.accept(ModItems.CRAB_SPAWN_EGG);
         output.accept(ModItems.CRAB_EGG);
         output.accept(ModItems.CRAB_BUCKET);
         output.accept(ModItems.CRAB_MEAT);
         output.accept(ModItems.COOKED_CRAB_MEAT);
+
         output.accept(ModItems.DRAGONFLY_SPAWN_EGG);
         Arrays.stream(DragonflyEntity.DragonflyVariant.values()).forEach(dragonflyVariant -> {
             ItemStack itemStack = new ItemStack(ModItems.DRAGONFLY_BOTTLE);
@@ -280,20 +282,31 @@ public class ThaiDelight implements ModInitializer {
         });
         output.accept(ModItems.DRAGONFLY);
         output.accept(ModItems.COOKED_DRAGONFLY);
+
         output.accept(ModItems.FISH_SAUCE_BOTTLE);
         output.accept(ModItems.FERMENTED_FISH);
         output.accept(ModItems.PAPAYA_JUICE);
         output.accept(ModItems.LIME_JUICE);
+
         output.accept(ModItems.LIME_SAPLING);
         output.accept(ModItems.LIME);
         output.accept(ModItems.SLICED_LIME);
         output.accept(ModItems.LIME_LEAVES);
+
         output.accept(ModItems.WILD_PEPPER_CROP);
         output.accept(ModItems.PEPPER);
         output.accept(ModItems.PEPPER_SEED);
+
         output.accept(ModItems.DURIAN_SAPLING);
         output.accept(ModItems.DURIAN_LEAVES);
         output.accept(ModItems.DURIAN);
+
+        output.accept(ModItems.COCONUT_SAPLING);
+        output.accept(ModItems.COCONUT_LEAVES);
+
+        output.accept(ModItems.MANGO_SAPLING);
+        output.accept(ModItems.MANGO_LEAVES);
+
         output.accept(ModItems.PAPAYA);
         output.accept(ModItems.SLICED_PAPAYA);
         output.accept(ModItems.RAW_PAPAYA);

@@ -89,8 +89,16 @@ public class ModItems {
     //------------------ Durian ------------------
     public static final Item DURIAN_SAPLING = register("durian_sapling",new BlockItem(ModBlocks.DURIAN_SAPLING,new Item.Properties()));
     public static final Item DURIAN_LEAVES = register("durian_leaves",new BlockItem(ModBlocks.DURIAN_LEAVES,new Item.Properties()));
-    public static final Item DURIAN = register("durian",new Item(new Item.Properties()));
+    public static final Item DURIAN = register("durian_block",new BlockItem(ModBlocks.DURIAN_BLOCK,new Item.Properties()));
+    public static final Item DURIAN_SLICE = register("durian_slice",new Item(new Item.Properties()));
+
     //------------------------
+    //------------------ COCONUT ------------------
+    public static final Item COCONUT_SAPLING = register("coconut_sapling",new BlockItem(ModBlocks.COCONUT_SAPLING,new Item.Properties()));
+    public static final Item COCONUT_LEAVES = register("coconut_leaves",new BlockItem(ModBlocks.COCONUT_LEAVES,new Item.Properties()));
+
+    public static final Item MANGO_SAPLING = register("mango_sapling",new BlockItem(ModBlocks.MANGO_SAPLING,new Item.Properties()));
+    public static final Item MANGO_LEAVES = register("mango_leaves",new BlockItem(ModBlocks.MANGO_LEAVES,new Item.Properties()));
 
     public static final Item PAPAYA = register("papaya",new Item(new Item.Properties().food(ModFood.PAPAYA)));
     public static final Item SLICED_PAPAYA = register("papaya_slice",new Item(new Item.Properties().food(ModFood.SLICED_PAPAYA)));
@@ -168,8 +176,7 @@ public class ModItems {
                 .nutrition(12)
                 .saturationMod(0.65F)
                 .effect(new MobEffectInstance(ModEffects.COMFORT.get(),5000,0),1.0f).build();
-        public static final FoodProperties FERMENTED_FISH = new FoodProperties.Builder()
-                .nutrition(7).saturationMod(0.35f).effect(new MobEffectInstance(ModMobEffects.STINKY,10*20),0.5f).build();
+        public static final FoodProperties FERMENTED_FISH = new FoodProperties.Builder().alwaysEat().effect(new MobEffectInstance(ModMobEffects.STINKY,10*20),0.5f).build();
     }
 
 }
