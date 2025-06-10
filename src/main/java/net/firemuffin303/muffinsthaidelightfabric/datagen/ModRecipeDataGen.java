@@ -29,10 +29,6 @@ public class ModRecipeDataGen extends FabricRecipeProvider {
         cook(ModItems.CRAB_MEAT, ModItems.COOKED_CRAB_MEAT, 0.35f, 200, exporter);
         cook(ModItems.DRAGONFLY, ModItems.COOKED_DRAGONFLY, 0.35f, 200, exporter);
         mortar(exporter);
-        SpecialRecipeBuilder.special(ModRecipes.ModSerializer.TASTY_CRAFTING_RECIPE).save(exporter,"tasty_food_crafting");
-
-
-
     }
 
     private void cook(ItemLike ingredient, Item result, float exp, int cookTicks, Consumer<FinishedRecipe> exporter) {

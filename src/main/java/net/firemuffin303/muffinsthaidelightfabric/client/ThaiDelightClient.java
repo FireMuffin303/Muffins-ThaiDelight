@@ -3,21 +3,14 @@ package net.firemuffin303.muffinsthaidelightfabric.client;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.*;
-import net.firemuffin303.muffinsthaidelightfabric.client.renderer.PlayerSpicyRenderer;
 import net.firemuffin303.muffinsthaidelightfabric.client.sceens.MortarScreen;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.FermentedFishCauldronBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.item.tooltipComponent.FlavorTooltipClient;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModMenuType;
 import net.minecraft.client.gui.screens.MenuScreens;
-import net.minecraft.client.model.EntityModel;
-import net.minecraft.client.model.HeadedModel;
-import net.minecraft.client.model.Model;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.entity.LivingEntityRenderer;
-import net.minecraft.client.renderer.entity.RenderLayerParent;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.block.Block;
 
 public class ThaiDelightClient implements ClientModInitializer {
@@ -39,14 +32,6 @@ public class ThaiDelightClient implements ClientModInitializer {
         },ModBlocks.FERMENTED_FISH_CAULDRON);
 
         HudRenderCallback.EVENT.register(ModHudRenderer::init);
-
-        LivingEntityFeatureRendererRegistrationCallback.EVENT.register((entityType, livingEntityRenderer, registrationHelper, context) -> {
-            Model model = livingEntityRenderer.getModel();
-            if(model instanceof HeadedModel) {
-                RenderLayerParent<LivingEntity, EntityModel<LivingEntity>> renderLayerParent = (RenderLayerParent<LivingEntity, EntityModel<LivingEntity>>) livingEntityRenderer;
-                registrationHelper.register(new PlayerSpicyRenderer(renderLayerParent, (LivingEntityRenderer<LivingEntity, EntityModel<LivingEntity>>) livingEntityRenderer));
-            }
-        });
 
         TooltipComponentCallback.EVENT.register(tooltipComponent -> {
             if(tooltipComponent instanceof FlavorTooltipClient.FlavorTooltipComponent flavorTooltipComponent){

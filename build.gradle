@@ -75,12 +75,6 @@ dependencies {
     modRuntimeOnly("maven.modrinth:appleskin:${project.apple_skin_version}")
     modRuntimeOnly("maven.modrinth:appleskin:${project.apple_skin_version}")
     modRuntimeOnly("maven.modrinth:cloth-config:y0kQixP8")
-
-    modApi("dev.onyxstudios.cardinal-components-api:cardinal-components-base:${cca_version}")
-    modApi("dev.onyxstudios.cardinal-components-api:cardinal-components-entity:${cca_version}")
-    modApi("dev.onyxstudios.cardinal-components-api:cardinal-components-item:${cca_version}")
-
-
 }
 
 processResources {

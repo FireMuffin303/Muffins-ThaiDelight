@@ -7,21 +7,14 @@
     "MobAccessor",
     "StructurePoolAccessor",
     "fermentedFish.LayeredCauldronBlockMixin",
-    "flavor.ItemMixin",
-    "flavor.LivingEntityMixin",
     "food.ChickenFoodAccessor",
     "food.FrogFoodAccessor",
     "food.ParrotTameFoodAccessor",
     "food.PigFoodAccessor",
-    "spicy.LivingEntityMixin",
-    "spicy.MilkBottleItemMixin",
-    "spicy.MilkBucketItemMixin",
-    "spicy.PowderSnowBlockMixin",
     "sticky.SniffingMixin",
     "sticky.VillagerMixin"
   ],
   "client": [
-    "spicy.GuiMixin"
   ],
   "injectors": {
     "defaultRequire": 1

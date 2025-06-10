@@ -1,7 +1,6 @@
 package net.firemuffin303.muffinsthaidelightfabric.registry;
 
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
-import net.firemuffin303.muffinsthaidelightfabric.common.recipe.SourCraftingRecipe;
 import net.firemuffin303.muffinsthaidelightfabric.common.recipe.mortar.*;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -25,10 +24,6 @@ public class ModRecipes {
 
     public static class ModSerializer{
         public static RecipeSerializer<RegularMortarRecipe> MORTAR_SERIALIZER = register("mortar",new MortarSerializer());
-        public static RecipeSerializer<SauceBowlRecipe> SAUCE_BOWL_SERIALIZER = register("sauce_bowl_mortar",new SimpleMortarRecipeSerializer<>(SauceBowlRecipe::new));
-
-        public static RecipeSerializer<SourCraftingRecipe> TASTY_CRAFTING_RECIPE = register("crafting_special_tasty",new SimpleCraftingRecipeSerializer<>(SourCraftingRecipe::new));
-
         public static void init(){}
 
         public static <T extends Recipe<?>> RecipeSerializer<T> register(String id,RecipeSerializer<T> recipeSerializer){

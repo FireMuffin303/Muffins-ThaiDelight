@@ -28,9 +28,6 @@
     ],
     "jei_mod_plugin": [
       "net.firemuffin303.muffinsthaidelightfabric.integration.ThaiDelightJEIIntegration"
-    ],
-    "cardinal-components": [
-      "net.firemuffin303.muffinsthaidelightfabric.registry.ModComponents"
     ]
   },
   "mixins": [
@@ -41,11 +38,5 @@
     "fabric": "*",
     "minecraft": "${minecraft_version}",
     "farmersdelight": ">=1.20.1-2.0.13+refabricated"
-  },
-  "custom": {
-    "cardinal-components": [
-      "muffins_thaidelight:spicy",
-      "muffins_thaidelight:flavor"
-    ]
   }
 }

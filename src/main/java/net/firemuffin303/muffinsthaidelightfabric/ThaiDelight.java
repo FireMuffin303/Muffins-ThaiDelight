@@ -17,7 +17,6 @@ import net.firemuffin303.muffinsthaidelightfabric.common.entity.DragonflyEntity;
 import net.firemuffin303.muffinsthaidelightfabric.common.entity.FlowerCrabEntity;
 import net.firemuffin303.muffinsthaidelightfabric.common.event.ModVillagerTrades;
 import net.firemuffin303.muffinsthaidelightfabric.common.item.DragonflyBottleItem;
-import net.firemuffin303.muffinsthaidelightfabric.common.item.SauceBowlItem;
 import net.firemuffin303.muffinsthaidelightfabric.common.manager.FlavorManager;
 import net.firemuffin303.muffinsthaidelightfabric.mixin.*;
 import net.firemuffin303.muffinsthaidelightfabric.mixin.food.ChickenFoodAccessor;
@@ -127,7 +126,6 @@ public class ThaiDelight implements ModInitializer {
         ModMenuType.init();
         ModTreeDecoratorTypes.init();
         ModMobEffects.init();
-        ModComponents.init();
     }
 
     private void postInit(){
@@ -318,11 +316,6 @@ public class ThaiDelight implements ModInitializer {
         output.accept(ModItems.PAPAYA_LEAVES);
         output.accept(ModItems.PAPAYA_SAPLING);
         output.accept(ModItems.PAPAYA_SEEDS);
-        output.accept(ModItems.SAUCE_BOWL);
-        output.accept(SauceBowlItem.createSauceBowl(3,0,0,0));
-        output.accept(SauceBowlItem.createSauceBowl(0,3,0,0));
-        output.accept(SauceBowlItem.createSauceBowl(0,0,3,0));
-        output.accept(SauceBowlItem.createSauceBowl(0,0,0,3));
         output.accept(ModItems.SOMTAM_FEAST);
         output.accept(ModItems.SOMTAM);
         output.accept(ModItems.LARB_FEAST);
