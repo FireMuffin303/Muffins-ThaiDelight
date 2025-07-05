@@ -13,9 +13,9 @@ import net.firemuffin303.muffinsthaidelightfabric.common.block.lime.LimePlantBlo
 import net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.PapayaBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.PapayaCropBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.PapayaLogBlock;
-import net.firemuffin303.muffinsthaidelightfabric.common.trees.DurianTreeGrower;
-import net.firemuffin303.muffinsthaidelightfabric.common.trees.LimeTreeGrower;
-import net.firemuffin303.muffinsthaidelightfabric.common.trees.PapayaTreeGrower;
+import net.firemuffin303.muffinsthaidelightfabric.common.world.trees.DurianTreeGrower;
+import net.firemuffin303.muffinsthaidelightfabric.common.world.trees.LimeTreeGrower;
+import net.firemuffin303.muffinsthaidelightfabric.common.world.trees.PapayaTreeGrower;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;

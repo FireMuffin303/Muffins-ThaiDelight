@@ -1,4 +1,4 @@
-package net.firemuffin303.muffinsthaidelightfabric.common.trees;
+package net.firemuffin303.muffinsthaidelightfabric.common.world.trees;
 
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModFeatures;
 import net.minecraft.resources.ResourceKey;

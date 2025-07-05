@@ -1,4 +1,4 @@
-package net.firemuffin303.muffinsthaidelightfabric.common.feature;
+package net.firemuffin303.muffinsthaidelightfabric.common.world.feature;
 
 import com.mojang.serialization.Codec;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.PapayaBlock;

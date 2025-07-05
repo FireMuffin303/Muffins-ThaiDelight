@@ -1,6 +1,5 @@
-package net.firemuffin303.muffinsthaidelightfabric.common.feature;
+package net.firemuffin303.muffinsthaidelightfabric.common.world.feature;
 
-import com.mojang.logging.LogUtils;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -80,7 +79,7 @@ public class DurianTreeTrunkPlacer extends TrunkPlacer {
 
         }
 
-        list.add(new FoliagePlacer.FoliageAttachment(blockPos.above(treeHeight),0,false));
+        list.add(new FoliagePlacer.FoliageAttachment(blockPos.above(treeHeight),1,false));
 
         for(int bcount = 0; bcount < branchCount;++bcount){
             Direction direction = Direction.Plane.HORIZONTAL.getRandomDirection(randomSource);
@@ -88,14 +87,20 @@ public class DurianTreeTrunkPlacer extends TrunkPlacer {
             int branchOffset = this.branchStartOffsetFromTop.sample(randomSource);
             //place branch
             BlockPos tempPos = blockPos.above(treeHeight).mutable().above(branchOffset);
+            BlockPos foliagePos = tempPos.mutable().move(direction,branchLength).above(1);
             for(int n = 0; n < branchLength; ++n){
                 BlockPos currentPosition = tempPos.mutable().move(direction,n+1);
                 if(TreeFeature.validTreePos(levelSimulatedReader,currentPosition)){
                     this.placeLog(levelSimulatedReader,biConsumer,randomSource,currentPosition,treeConfiguration, blockState -> blockState.trySetValue(RotatedPillarBlock.AXIS,direction.getAxis()));
                 }
+
+                if(n+1 == branchLength && TreeFeature.validTreePos(levelSimulatedReader,currentPosition.above(1)) && randomSource.nextBoolean()){
+                    foliagePos = currentPosition.above(2);
+                    this.placeLog(levelSimulatedReader,biConsumer,randomSource,currentPosition.above(1),treeConfiguration);
+                }
             }
 
-            list.add(new FoliagePlacer.FoliageAttachment(tempPos.mutable().move(direction,branchLength).above(1),0,false));
+            list.add(new FoliagePlacer.FoliageAttachment(foliagePos,0,false));
 
         }
 

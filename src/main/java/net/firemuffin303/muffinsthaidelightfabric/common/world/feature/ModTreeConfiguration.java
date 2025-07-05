@@ -1,4 +1,4 @@
-package net.firemuffin303.muffinsthaidelightfabric.common.feature;
+package net.firemuffin303.muffinsthaidelightfabric.common.world.feature;
 
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.featuresize.FeatureSize;

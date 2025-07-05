@@ -2,7 +2,7 @@ package net.firemuffin303.muffinsthaidelightfabric.registry;
 
 import com.mojang.serialization.Codec;
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
-import net.firemuffin303.muffinsthaidelightfabric.common.feature.PapayaDecorator;
+import net.firemuffin303.muffinsthaidelightfabric.common.world.feature.PapayaDecorator;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;

@@ -1,7 +1,40 @@
 {
   "type": "minecraft:tree",
   "config": {
-    "decorators": [],
+    "decorators": [
+      {
+        "type": "minecraft:attached_to_leaves",
+        "block_provider": {
+          "type": "minecraft:randomized_int_state_provider",
+          "property": "age",
+          "source": {
+            "type": "minecraft:simple_state_provider",
+            "state": {
+              "Name": "muffins_thaidelight:durian_block",
+              "Properties": {
+                "age": "0",
+                "hanging": "true",
+                "waterlogged": "false"
+              }
+            }
+          },
+          "values": {
+            "type": "minecraft:uniform",
+            "value": {
+              "max_inclusive": 3,
+              "min_inclusive": 0
+            }
+          }
+        },
+        "directions": [
+          "down"
+        ],
+        "exclusion_radius_xz": 1,
+        "exclusion_radius_y": 0,
+        "probability": 0.24,
+        "required_empty_blocks": 2
+      }
+    ],
     "dirt_provider": {
       "type": "minecraft:simple_state_provider",
       "state": {
@@ -9,15 +42,16 @@
       }
     },
     "foliage_placer": {
-      "type": "minecraft:blob_foliage_placer",
-      "height": 1,
+      "type": "muffins_thaidelight:durian_foliage_placer",
+      "hanging_leaves_chance": 0.4,
+      "hanging_leaves_extension_chance": 0.12,
       "offset": 0,
-      "radius": 3
+      "radius": 2
     },
     "foliage_provider": {
       "type": "minecraft:simple_state_provider",
       "state": {
-        "Name": "muffins_thaidelight:durian_leaves",
+        "Name": "minecraft:azalea_leaves",
         "Properties": {
           "distance": "7",
           "persistent": "false",

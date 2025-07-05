@@ -1,12 +1,10 @@
-package net.firemuffin303.muffinsthaidelightfabric.common.feature;
+package net.firemuffin303.muffinsthaidelightfabric.common.world.feature;
 
 import com.mojang.serialization.Codec;
-import net.firemuffin303.muffinsthaidelightfabric.common.block.lime.LimeLeavesBlock;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;

@@ -2,9 +2,11 @@ package net.firemuffin303.muffinsthaidelightfabric.registry;
 
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
-import net.firemuffin303.muffinsthaidelightfabric.common.feature.DurianTreeTrunkPlacer;
-import net.firemuffin303.muffinsthaidelightfabric.common.feature.LimeFeature;
-import net.firemuffin303.muffinsthaidelightfabric.common.feature.LimeTreeTrunkPlacer;
+import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.DurianBlock;
+import net.firemuffin303.muffinsthaidelightfabric.common.world.feature.DurianTreeFoliagePlacer;
+import net.firemuffin303.muffinsthaidelightfabric.common.world.feature.DurianTreeTrunkPlacer;
+import net.firemuffin303.muffinsthaidelightfabric.common.world.feature.LimeFeature;
+import net.firemuffin303.muffinsthaidelightfabric.common.world.feature.LimeTreeTrunkPlacer;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.Registry;
@@ -28,7 +30,10 @@ import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConf
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+import net.minecraft.world.level.levelgen.feature.stateproviders.RandomizedIntStateProvider;
+import net.minecraft.world.level.levelgen.feature.treedecorators.AttachedToLeavesDecorator;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
 import net.minecraft.world.level.levelgen.placement.*;
@@ -40,6 +45,8 @@ import java.util.List;
 public class ModFeatures {
     public static final TrunkPlacerType<LimeTreeTrunkPlacer> LIME_TRUNK_PLACER = Registry.register(BuiltInRegistries.TRUNK_PLACER_TYPE, ThaiDelight.modid("lime_trunk_placer"),new TrunkPlacerType<>(LimeTreeTrunkPlacer.CODEC));
     public static final TrunkPlacerType<DurianTreeTrunkPlacer> DURIAN_TRUNK_PLACER = Registry.register(BuiltInRegistries.TRUNK_PLACER_TYPE,ThaiDelight.modid("durian_trunk_placer"),new TrunkPlacerType<>(DurianTreeTrunkPlacer.CODEC));
+    public static final FoliagePlacerType<DurianTreeFoliagePlacer> DURIAN_FOLIAGE_PLACER = Registry.register(BuiltInRegistries.FOLIAGE_PLACER_TYPE,ThaiDelight.modid("durian_foliage_placer"),new FoliagePlacerType<>(DurianTreeFoliagePlacer.CODEC));
+
 
     public static final Feature<NoneFeatureConfiguration> LIME_FEATURE = Registry.register(BuiltInRegistries.FEATURE,new ResourceLocation(ThaiDelight.MOD_ID,"lime_feature"),new LimeFeature(NoneFeatureConfiguration.CODEC));
 
@@ -84,10 +91,18 @@ public class ModFeatures {
                 new TreeConfiguration.TreeConfigurationBuilder(
                         BlockStateProvider.simple(ModBlocks.DURIAN_LOG),
                         new DurianTreeTrunkPlacer(5,2,0, UniformInt.of(-2,-1), UniformInt.of(2,3),UniformInt.of(1,3)),
-                        BlockStateProvider.simple(ModBlocks.DURIAN_LEAVES),
-                        new BlobFoliagePlacer(ConstantInt.of(3),ConstantInt.of(0),1),
+                        BlockStateProvider.simple(Blocks.AZALEA_LEAVES),
+                        new DurianTreeFoliagePlacer(ConstantInt.of(2),ConstantInt.of(0),0.4f,0.12f),
                         new TwoLayersFeatureSize(1,0,1)
-                ).ignoreVines().build()
+                ).ignoreVines()
+                        .decorators(
+                                List.of(
+                                        new AttachedToLeavesDecorator(0.24f,1,0,new RandomizedIntStateProvider(
+                                                BlockStateProvider.simple(ModBlocks.DURIAN_BLOCK.defaultBlockState().setValue(DurianBlock.HANGING,true)),
+                                                DurianBlock.AGE,UniformInt.of(0,3)
+                                        ),2,List.of(Direction.DOWN))
+                                )
+                        ).build()
         ));
 
         bootstapContext.register(ModFeatures.FEATURE_LIME_TREE,new ConfiguredFeature<>(Feature.TREE,

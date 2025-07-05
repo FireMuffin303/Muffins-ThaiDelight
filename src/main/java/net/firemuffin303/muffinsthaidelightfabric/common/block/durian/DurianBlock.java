@@ -8,6 +8,7 @@ import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -18,18 +19,27 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.Nullable;
 
 public class DurianBlock extends FallingBlock implements SimpleWaterloggedBlock {
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+    public static final BooleanProperty HANGING = BlockStateProperties.HANGING;
+    public static final IntegerProperty AGE = BlockStateProperties.AGE_3;
+
     protected static final VoxelShape SHAPE = Block.box(2.0, 0.0, 2.0, 14.0, 16.0, 14.0);
     public DurianBlock(Properties properties) {
         super(properties);
-        this.registerDefaultState(this.defaultBlockState().setValue(WATERLOGGED,false));
+        this.registerDefaultState(this.stateDefinition.any()
+                .setValue(WATERLOGGED,false)
+                .setValue(AGE,0)
+                .setValue(HANGING,false)
+        );
     }
 
     @Override
@@ -49,7 +59,7 @@ public class DurianBlock extends FallingBlock implements SimpleWaterloggedBlock 
     @Override
     public void onProjectileHit(Level level, BlockState blockState, BlockHitResult blockHitResult, Projectile projectile) {
         BlockPos blockPos = blockHitResult.getBlockPos();
-        if (!level.isClientSide && projectile.mayInteract(level, blockPos) && projectile.getType().is(EntityTypeTags.IMPACT_PROJECTILES) && level.getBlockState(blockPos.below()).isAir()) {
+        if (!level.isClientSide && projectile.mayInteract(level, blockPos) && projectile.getType().is(EntityTypeTags.IMPACT_PROJECTILES) && level.getBlockState(blockPos.below()).isAir() && blockState.getValue(AGE) == 3) {
             FallingBlockEntity fallingBlockEntity = FallingBlockEntity.fall(level, blockPos, blockState);
             this.falling(fallingBlockEntity);
         }
@@ -62,7 +72,7 @@ public class DurianBlock extends FallingBlock implements SimpleWaterloggedBlock 
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(WATERLOGGED);
+        builder.add(WATERLOGGED).add(AGE).add(HANGING);
     }
 
 
@@ -75,7 +85,7 @@ public class DurianBlock extends FallingBlock implements SimpleWaterloggedBlock 
     }
 
     private static boolean shouldFall(BlockState blockState){
-        return blockState.isAir() || blockState.is(BlockTags.FIRE) || blockState.liquid() || blockState.canBeReplaced();
+        return (blockState.isAir() || blockState.is(BlockTags.FIRE) || blockState.liquid() || blockState.canBeReplaced());
     }
 
     @Override
@@ -86,5 +96,12 @@ public class DurianBlock extends FallingBlock implements SimpleWaterloggedBlock 
     @Override
     protected void falling(FallingBlockEntity fallingBlockEntity) {
         fallingBlockEntity.setHurtsEntities(0.5f,4);
+    }
+
+    @Override
+    public @Nullable BlockState getStateForPlacement(BlockPlaceContext blockPlaceContext) {
+        FluidState fluidState = blockPlaceContext.getLevel().getFluidState(blockPlaceContext.getClickedPos());
+        boolean bl = fluidState.getType() == Fluids.WATER;
+        return super.getStateForPlacement(blockPlaceContext).setValue(WATERLOGGED, bl).setValue(AGE, 3);
     }
 }
