@@ -45,6 +45,8 @@ public class ModelDataGen extends FabricModelProvider {
         blockStateModelGenerator.woodProvider(ModBlocks.PAPAYA_LOG).logWithHorizontal(ModBlocks.PAPAYA_LOG).wood(ModBlocks.PAPAYA_WOOD);
         blockStateModelGenerator.woodProvider(ModBlocks.STRIPPED_PAPAYA_LOG).logWithHorizontal(ModBlocks.STRIPPED_PAPAYA_LOG).wood(ModBlocks.STRIPPED_PAPAYA_WOOD);
 
+        blockStateModelGenerator.woodProvider(ModBlocks.DURIAN_LOG).logWithHorizontal(ModBlocks.DURIAN_LOG).wood(ModBlocks.DURIAN_WOOD);
+
         createCubeAll(ModBlocks.PAPAYA_LEAVES,blockStateModelGenerator);
         //createCubeAll(ModBlocks.LIME_LEAVES,blockStateModelGenerator);
 

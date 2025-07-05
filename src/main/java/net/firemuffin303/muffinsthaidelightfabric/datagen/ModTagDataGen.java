@@ -126,7 +126,8 @@ public class ModTagDataGen {
                     .add(ModBlocks.MORTAR);
 
             getOrCreateTagBuilder(BlockTags.LOGS_THAT_BURN)
-                    .add(ModBlocks.PAPAYA_LOG);
+                    .add(ModBlocks.PAPAYA_LOG)
+                    .add(ModBlocks.DURIAN_LOG);
 
             getOrCreateTagBuilder(BlockTags.LEAVES)
                     .add(ModBlocks.PAPAYA_LEAVES)

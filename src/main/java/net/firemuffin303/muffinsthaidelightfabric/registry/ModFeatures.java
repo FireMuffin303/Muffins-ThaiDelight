@@ -2,9 +2,9 @@ package net.firemuffin303.muffinsthaidelightfabric.registry;
 
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
+import net.firemuffin303.muffinsthaidelightfabric.common.feature.DurianTreeTrunkPlacer;
 import net.firemuffin303.muffinsthaidelightfabric.common.feature.LimeFeature;
 import net.firemuffin303.muffinsthaidelightfabric.common.feature.LimeTreeTrunkPlacer;
-import net.firemuffin303.muffinsthaidelightfabric.common.feature.ModTreeConfiguration;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.Registry;
@@ -16,6 +16,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.valueproviders.ConstantInt;
+import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
@@ -38,7 +39,7 @@ import java.util.List;
 
 public class ModFeatures {
     public static final TrunkPlacerType<LimeTreeTrunkPlacer> LIME_TRUNK_PLACER = Registry.register(BuiltInRegistries.TRUNK_PLACER_TYPE, ThaiDelight.modid("lime_trunk_placer"),new TrunkPlacerType<>(LimeTreeTrunkPlacer.CODEC));
-
+    public static final TrunkPlacerType<DurianTreeTrunkPlacer> DURIAN_TRUNK_PLACER = Registry.register(BuiltInRegistries.TRUNK_PLACER_TYPE,ThaiDelight.modid("durian_trunk_placer"),new TrunkPlacerType<>(DurianTreeTrunkPlacer.CODEC));
 
     public static final Feature<NoneFeatureConfiguration> LIME_FEATURE = Registry.register(BuiltInRegistries.FEATURE,new ResourceLocation(ThaiDelight.MOD_ID,"lime_feature"),new LimeFeature(NoneFeatureConfiguration.CODEC));
 
@@ -81,10 +82,10 @@ public class ModFeatures {
 
         bootstapContext.register(ModFeatures.FEATURE_DURIAN_TREE,new ConfiguredFeature<>(Feature.TREE,
                 new TreeConfiguration.TreeConfigurationBuilder(
-                        BlockStateProvider.simple(Blocks.ACACIA_LOG),
-                        new StraightTrunkPlacer(6,2,0),
+                        BlockStateProvider.simple(ModBlocks.DURIAN_LOG),
+                        new DurianTreeTrunkPlacer(5,2,0, UniformInt.of(-2,-1), UniformInt.of(2,3),UniformInt.of(1,3)),
                         BlockStateProvider.simple(ModBlocks.DURIAN_LEAVES),
-                        new BlobFoliagePlacer(ConstantInt.of(3),ConstantInt.of(0),3),
+                        new BlobFoliagePlacer(ConstantInt.of(3),ConstantInt.of(0),1),
                         new TwoLayersFeatureSize(1,0,1)
                 ).ignoreVines().build()
         ));

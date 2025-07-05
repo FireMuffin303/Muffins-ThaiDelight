@@ -70,7 +70,8 @@ public class ModItems {
     });
 
     //Crops
-    public static final Item LIME_SAPLING = register("lime_sapling",new BlockItem(ModBlocks.LIME_SAPLING,new Item.Properties()));
+    //------------- Lime ---------------
+    public static final Item LIME_SAPLING = register("lime_sapling",new BlockItem(ModBlocks.LIME_PLANT,new Item.Properties()));
     public static final Item LIME = register("lime",new Item(new Item.Properties().food(ModFood.LIME)));
     public static final Item SLICED_LIME = register("lime_slice",new Item(new Item.Properties().food(ModFood.LIME_SLICE)));
     public static final Item LIME_LEAVES = register("lime_leaves",new BlockItem(ModBlocks.LIME_LEAVES,new Item.Properties()));
@@ -90,6 +91,8 @@ public class ModItems {
     public static final Item DURIAN_LEAVES = register("durian_leaves",new BlockItem(ModBlocks.DURIAN_LEAVES,new Item.Properties()));
     public static final Item DURIAN = register("durian_block",new BlockItem(ModBlocks.DURIAN_BLOCK,new Item.Properties()));
     public static final Item DURIAN_SLICE = register("durian_slice",new Item(new Item.Properties()));
+    public static final Item DURIAN_LOG = register("durian_log",new BlockItem(ModBlocks.DURIAN_LOG,new Item.Properties()));
+    public static final Item DURIAN_WOOD = register("durian_wood",new BlockItem(ModBlocks.DURIAN_WOOD,new Item.Properties()));
 
     //------------------------
     //------------------ COCONUT ------------------
