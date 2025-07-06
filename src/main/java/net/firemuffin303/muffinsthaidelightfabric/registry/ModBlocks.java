@@ -10,11 +10,13 @@ import net.firemuffin303.muffinsthaidelightfabric.common.block.lime.LimeBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.lime.LimeCropBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.lime.LimeLeavesBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.lime.LimePlantBlock;
+import net.firemuffin303.muffinsthaidelightfabric.common.block.mango.MangoBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.PapayaBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.PapayaCropBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.PapayaLogBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.world.trees.DurianTreeGrower;
 import net.firemuffin303.muffinsthaidelightfabric.common.world.trees.LimeTreeGrower;
+import net.firemuffin303.muffinsthaidelightfabric.common.world.trees.MangoTreeGrower;
 import net.firemuffin303.muffinsthaidelightfabric.common.world.trees.PapayaTreeGrower;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
@@ -81,9 +83,10 @@ public class ModBlocks {
     public static final Block COCONUT_LEAVES = register("coconut_leaves",new LeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES)));
 
     //Mango
-    public static final Block MANGO_SAPLING = register("mango_sapling",new SaplingBlock(new DurianTreeGrower(),BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
+    public static final Block MANGO_SAPLING = register("mango_sapling",new SaplingBlock(new MangoTreeGrower(),BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
     public static final Block POTTED_MANGO_SAPLING = register("potted_mango_sapling",Blocks.flowerPot(ModBlocks.MANGO_SAPLING));
     public static final Block MANGO_LEAVES = register("mango_leaves",new LeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES)));
+    public static final Block MANGO_BLOCK = register("mango_block",new MangoBlock(BlockBehaviour.Properties.copy(Blocks.MELON)));
 
 
     //Feast

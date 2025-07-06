@@ -61,7 +61,23 @@ public class ModelDataGen extends FabricModelProvider {
                                         .with(VariantProperties.MODEL, ModelLocationUtils.getModelLocation(ModBlocks.PAPAYA, "_stage2"))))
                         .with(createHorizontalFacingDispatchAlt()));
 
-
+        blockStateModelGenerator.blockStateOutput.accept(
+                MultiVariantGenerator.multiVariant(ModBlocks.DURIAN_BLOCK)
+                        .with(PropertyDispatch.properties(BlockStateProperties.AGE_2,BlockStateProperties.HANGING)
+                                .select(0,true,Variant.variant()
+                                        .with(VariantProperties.MODEL,ModelLocationUtils.getModelLocation(ModBlocks.DURIAN_BLOCK,"_stage0_hanging")))
+                                .select(1,true,Variant.variant()
+                                        .with(VariantProperties.MODEL,ModelLocationUtils.getModelLocation(ModBlocks.DURIAN_BLOCK,"_stage1_hanging")))
+                                .select(2,true,Variant.variant()
+                                        .with(VariantProperties.MODEL,ModelLocationUtils.getModelLocation(ModBlocks.DURIAN_BLOCK,"_stage2")))
+                                .select(0,false,Variant.variant()
+                                        .with(VariantProperties.MODEL,ModelLocationUtils.getModelLocation(ModBlocks.DURIAN_BLOCK,"_stage0")))
+                                .select(1,false,Variant.variant()
+                                        .with(VariantProperties.MODEL,ModelLocationUtils.getModelLocation(ModBlocks.DURIAN_BLOCK,"_stage1")))
+                                .select(2,false,Variant.variant()
+                                        .with(VariantProperties.MODEL,ModelLocationUtils.getModelLocation(ModBlocks.DURIAN_BLOCK,"_stage2")))
+                        )
+        );
 
         blockStateModelGenerator.createCrossBlockWithDefaultItem(ModBlocks.WILD_PEPPER_CROP, BlockModelGenerators.TintState.NOT_TINTED);
         blockStateModelGenerator.createCrossBlockWithDefaultItem(ModBlocks.PAPAYA_SAPLING, BlockModelGenerators.TintState.NOT_TINTED);
