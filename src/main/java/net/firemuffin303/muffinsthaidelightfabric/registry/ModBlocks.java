@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.*;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.DurianBlock;
+import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.DurianFlowerBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.DurianLeaveBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.lime.LimeBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.lime.LimeCropBlock;
@@ -27,18 +28,20 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
+import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import vectorwing.farmersdelight.common.block.CabinetBlock;
 import vectorwing.farmersdelight.common.block.FeastBlock;
 import vectorwing.farmersdelight.common.block.WildCropBlock;
 
-import static net.minecraft.world.level.block.Blocks.leaves;
-import static net.minecraft.world.level.block.Blocks.log;
+import static net.minecraft.world.level.block.Blocks.*;
 
 public class ModBlocks {
 
@@ -72,22 +75,284 @@ public class ModBlocks {
     //Durian
     public static final Block DURIAN_SAPLING = register("durian_sapling",new SaplingBlock(new DurianTreeGrower(),BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
     public static final Block POTTED_DURIAN_SAPLING = register("potted_durian_sapling",Blocks.flowerPot(DURIAN_SAPLING));
+    public static final Block DURIAN_FLOWER = register("durian_flower",new DurianFlowerBlock(BlockBehaviour.Properties.copy(SPORE_BLOSSOM)));
     public static final Block DURIAN_BLOCK = register("durian_block",new DurianBlock(BlockBehaviour.Properties.copy(Blocks.MELON)));
     public static final Block DURIAN_LEAVES = register("durian_leaves",new DurianLeaveBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES)));
+
+    //Durian Woodset
     public static final Block DURIAN_LOG = register("durian_log",Blocks.log(MapColor.COLOR_LIGHT_GREEN, MapColor.COLOR_RED));
     public static final Block DURIAN_WOOD = register("durian_wood",new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava()));
+    public static final Block STRIPPED_DURIAN_LOG = register("stripped_durian_log",Blocks.log(MapColor.COLOR_RED,MapColor.COLOR_RED));
+    public static final Block STRIPPED_DURIAN_WOOD = register("stripped_durian_wood",new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava()));
+    public static final Block DURIAN_PLANKS = register("durian_planks",new Block(BlockBehaviour.Properties.of()
+            .mapColor(MapColor.COLOR_LIGHT_GREEN).instrument(NoteBlockInstrument.BASS).strength(2.0f,3.0f).sound(SoundType.WOOD).ignitedByLava()));
+    public static final Block DURIAN_STAIRS = register("durian_stairs",new StairBlock(DURIAN_PLANKS.defaultBlockState(),BlockBehaviour.Properties.copy(DURIAN_PLANKS)));
+    public static final Block DURIAN_SLAB = register("durian_slab",new SlabBlock(BlockBehaviour.Properties.copy(DURIAN_PLANKS)));
+    public static final Block DURIAN_FENCE = register("durian_fence", new FenceBlock(BlockBehaviour.Properties.copy(DURIAN_PLANKS)));
+    public static final Block DURIAN_FENCE_GATE = register("durian_fence_gate",new FenceGateBlock(BlockBehaviour.Properties.of().mapColor(DURIAN_PLANKS.defaultMapColor()).forceSolidOn().instrument(NoteBlockInstrument.BASS).strength(2.0f,3.0f).ignitedByLava(), WoodType.CHERRY));
+    public static final Block DURIAN_DOOR = register("durian_door",new DoorBlock(BlockBehaviour.Properties.of()
+            .mapColor(DURIAN_PLANKS.defaultMapColor())
+            .instrument(NoteBlockInstrument.BASS)
+            .strength(3.0f)
+            .noOcclusion()
+            .ignitedByLava()
+            .pushReaction(PushReaction.DESTROY),
+            BlockSetType.CHERRY
+    ));
+    public static final Block DURIAN_TRAPDOOR = register("durian_trapdoor",new TrapDoorBlock(BlockBehaviour.Properties.of()
+            .mapColor(DURIAN_PLANKS.defaultMapColor())
+            .instrument(NoteBlockInstrument.BASS)
+            .strength(3.0f)
+            .noOcclusion()
+            .isValidSpawn(Blocks::never)
+            .ignitedByLava(),
+            BlockSetType.CHERRY
+    ));
+
+    public static final Block DURIAN_PRESSURE_PLATE = register("durian_pressure_plate",new PressurePlateBlock(
+            PressurePlateBlock.Sensitivity.EVERYTHING,
+            BlockBehaviour.Properties.of()
+                    .mapColor(DURIAN_PLANKS.defaultMapColor())
+                    .forceSolidOn()
+                    .instrument(NoteBlockInstrument.BASS)
+                    .noCollission()
+                    .strength(0.5f)
+                    .ignitedByLava()
+                    .pushReaction(PushReaction.DESTROY),
+            BlockSetType.CHERRY
+    ));
+
+    public static final Block DURIAN_BUTTON = register("durian_button",Blocks.woodenButton(BlockSetType.CHERRY));
+    public static final Block DURIAN_SIGN = register("durian_sign",new StandingSignBlock(BlockBehaviour.Properties.of()
+            .mapColor(ModBlocks.DURIAN_PLANKS.defaultMapColor())
+            .forceSolidOn()
+            .instrument(NoteBlockInstrument.BASS)
+            .noCollission()
+            .strength(1.0f)
+            .ignitedByLava(),
+            WoodType.CHERRY
+    ));
+
+    public static final Block DURIAN_WALL_SIGN = register("durian_wall_sign",new WallSignBlock(BlockBehaviour.Properties.of()
+            .mapColor(ModBlocks.DURIAN_PLANKS.defaultMapColor())
+            .forceSolidOn()
+            .instrument(NoteBlockInstrument.BASS)
+            .noCollission()
+            .strength(1.0f)
+            .dropsLike(ModBlocks.DURIAN_SIGN)
+            .ignitedByLava(),
+            WoodType.CHERRY
+    ));
+
+    public static final Block DURIAN_HANGING_SIGN = register("durian_hanging_sign",new CeilingHangingSignBlock(BlockBehaviour.Properties.of()
+            .mapColor(ModBlocks.DURIAN_PLANKS.defaultMapColor())
+            .forceSolidOn()
+            .instrument(NoteBlockInstrument.BASS)
+            .noCollission()
+            .strength(1.0f)
+            .ignitedByLava(),
+            WoodType.CHERRY
+    ));
+
+    public static final Block DURIAN_WALL_HANGING_SIGN = register("durian_wall_hanging_sign",new WallHangingSignBlock(BlockBehaviour.Properties.of()
+            .mapColor(ModBlocks.DURIAN_PLANKS.defaultMapColor())
+            .forceSolidOn()
+            .instrument(NoteBlockInstrument.BASS)
+            .noCollission()
+            .strength(1.0f)
+            .ignitedByLava()
+            .dropsLike(DURIAN_HANGING_SIGN),
+            WoodType.CHERRY
+    ));
+
+    public static final Block DURIAN_CABINET = register("durian_cabinet",new CabinetBlock(BlockBehaviour.Properties.copy(BARREL)));
 
     //Coconut
     public static final Block COCONUT_SAPLING = register("coconut_sapling",new SaplingBlock(new DurianTreeGrower(),BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
     public static final Block POTTED_COCONUT_SAPLING = register("potted_coconut_sapling",Blocks.flowerPot(COCONUT_SAPLING));
     public static final Block COCONUT_LEAVES = register("coconut_leaves",new LeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES)));
 
-    //Mango
+    public static final Block COCONUT_LOG = register("coconut_log",Blocks.log(MapColor.COLOR_BROWN,MapColor.COLOR_YELLOW));
+    public static final Block COCONUT_WOOD = register("coconut_wood",new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava()));
+    public static final Block STRIPPED_COCONUT_LOG = register("stripped_coconut_log",Blocks.log(MapColor.COLOR_RED,MapColor.COLOR_RED));
+    public static final Block STRIPPED_COCONUT_WOOD = register("stripped_coconut_wood",new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava()));
+    public static final Block COCONUT_PLANKS = register("coconut_planks",new Block(BlockBehaviour.Properties.of()
+            .mapColor(MapColor.COLOR_LIGHT_GREEN).instrument(NoteBlockInstrument.BASS).strength(2.0f,3.0f).sound(SoundType.WOOD).ignitedByLava()));
+    public static final Block COCONUT_STAIRS = register("coconut_stairs",new StairBlock(COCONUT_PLANKS.defaultBlockState(),BlockBehaviour.Properties.copy(COCONUT_PLANKS)));
+    public static final Block COCONUT_SLAB = register("coconut_slab",new SlabBlock(BlockBehaviour.Properties.copy(COCONUT_PLANKS)));
+    public static final Block COCONUT_FENCE = register("coconut_fence",new FenceBlock(BlockBehaviour.Properties.copy(COCONUT_PLANKS)));
+    public static final Block COCONUT_FENCE_GATE = register("coconut_fence_gate",new FenceGateBlock(BlockBehaviour.Properties.of()
+            .mapColor(COCONUT_PLANKS.defaultMapColor())
+            .forceSolidOn()
+            .instrument(NoteBlockInstrument.BASS)
+            .strength(2.0f,3.0f)
+            .ignitedByLava(),
+            WoodType.CHERRY
+    ));
+    public static final Block COCONUT_DOOR = register("coconut_door",new DoorBlock(BlockBehaviour.Properties.of()
+            .mapColor(COCONUT_PLANKS.defaultMapColor())
+            .instrument(NoteBlockInstrument.BASS)
+            .strength(3.0f)
+            .noOcclusion()
+            .ignitedByLava()
+            .pushReaction(PushReaction.DESTROY),
+            BlockSetType.CHERRY
+    ));
+    public static final Block COCONUT_TRAPDOOR = register("coconut_trapdoor",new TrapDoorBlock(BlockBehaviour.Properties.of()
+            .mapColor(COCONUT_PLANKS.defaultMapColor())
+            .instrument(NoteBlockInstrument.BASS)
+            .strength(3.0f)
+            .noOcclusion()
+            .isValidSpawn(Blocks::never)
+            .ignitedByLava(),
+            BlockSetType.CHERRY
+    ));
+    public static final Block COCONUT_PRESSURE_PLATE = register("coconut_pressure_plate",new PressurePlateBlock(
+            PressurePlateBlock.Sensitivity.EVERYTHING,
+            BlockBehaviour.Properties.of()
+                    .mapColor(COCONUT_PLANKS.defaultMapColor())
+                    .forceSolidOn()
+                    .instrument(NoteBlockInstrument.BASS)
+                    .noCollission()
+                    .strength(0.5f)
+                    .ignitedByLava()
+                    .pushReaction(PushReaction.DESTROY),
+            BlockSetType.CHERRY
+    ));
+    public static final Block COCONUT_BUTTON = register("coconut_button",Blocks.woodenButton(BlockSetType.CHERRY));
+    public static final Block COCONUT_SIGN = register("coconut_sign",new StandingSignBlock(BlockBehaviour.Properties.of()
+            .mapColor(ModBlocks.DURIAN_PLANKS.defaultMapColor())
+            .forceSolidOn()
+            .instrument(NoteBlockInstrument.BASS)
+            .noCollission()
+            .strength(1.0f)
+            .ignitedByLava(),
+            WoodType.CHERRY
+    ));
+    public static final Block COCONUT_WALL_SIGN = register("coconut_wall_sign",new WallSignBlock(BlockBehaviour.Properties.of()
+            .mapColor(ModBlocks.COCONUT_PLANKS.defaultMapColor())
+            .forceSolidOn()
+            .instrument(NoteBlockInstrument.BASS)
+            .noCollission()
+            .strength(1.0f)
+            .dropsLike(ModBlocks.DURIAN_SIGN)
+            .ignitedByLava(),
+            WoodType.CHERRY
+    ));
+    public static final Block COCONUT_HANGING_SIGN = register("coconut_hanging_sign",new CeilingHangingSignBlock(BlockBehaviour.Properties.of()
+            .mapColor(ModBlocks.COCONUT_PLANKS.defaultMapColor())
+            .forceSolidOn()
+            .instrument(NoteBlockInstrument.BASS)
+            .noCollission()
+            .strength(1.0f)
+            .ignitedByLava(),
+            WoodType.CHERRY
+    ));
+    public static final Block COCONUT_WALL_HANGING_SIGN = register("coconut_wall_hanging_sign",new WallHangingSignBlock(BlockBehaviour.Properties.of()
+            .mapColor(ModBlocks.COCONUT_PLANKS.defaultMapColor())
+            .forceSolidOn()
+            .instrument(NoteBlockInstrument.BASS)
+            .noCollission()
+            .strength(1.0f)
+            .ignitedByLava()
+            .dropsLike(DURIAN_HANGING_SIGN),
+            WoodType.CHERRY
+    ));
+    public static final Block COCONUT_CABINET = register("coconut_cabinet",new CabinetBlock(BlockBehaviour.Properties.copy(BARREL)));
+
+    //----------------- Mango -----------
     public static final Block MANGO_SAPLING = register("mango_sapling",new SaplingBlock(new MangoTreeGrower(),BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
     public static final Block POTTED_MANGO_SAPLING = register("potted_mango_sapling",Blocks.flowerPot(ModBlocks.MANGO_SAPLING));
     public static final Block MANGO_LEAVES = register("mango_leaves",new LeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES)));
     public static final Block MANGO_BLOCK = register("mango_block",new MangoBlock(BlockBehaviour.Properties.copy(Blocks.MELON)));
 
+    public static final Block MANGO_LOG = register("mango_log", Blocks.log(MapColor.COLOR_BROWN,MapColor.COLOR_YELLOW));
+    public static final Block MANGO_WOOD = register("mango_wood",new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava()));
+    public static final Block STRIPPED_MANGO_LOG = register("stripped_mango_log",Blocks.log(MapColor.COLOR_YELLOW,MapColor.COLOR_YELLOW));
+    public static final Block STRIPPED_MANGO_WOOD = register("stripped_mango_wood",new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava()));
+    public static final Block MANGO_PLANKS = register("mango_planks",new Block(BlockBehaviour.Properties.of()
+            .mapColor(MapColor.COLOR_LIGHT_GREEN).instrument(NoteBlockInstrument.BASS).strength(2.0f,3.0f).sound(SoundType.WOOD).ignitedByLava()));
+    public static final Block MANGO_STAIRS = register("mango_stairs",new StairBlock(MANGO_PLANKS.defaultBlockState(),BlockBehaviour.Properties.copy(MANGO_PLANKS)));
+    public static final Block MANGO_SLAB = register("mango_slab",new SlabBlock(BlockBehaviour.Properties.copy(MANGO_PLANKS)));
+    public static final Block MANGO_FENCE = register("mango_fence",new FenceBlock(BlockBehaviour.Properties.copy(MANGO_PLANKS)));
+    public static final Block MANGO_FENCE_GATE = register("mango_fence_gate",new FenceGateBlock(BlockBehaviour.Properties.of()
+            .mapColor(MANGO_PLANKS.defaultMapColor())
+            .forceSolidOn()
+            .instrument(NoteBlockInstrument.BASS)
+            .strength(2.0f,3.0f)
+            .ignitedByLava(),
+            WoodType.CHERRY
+    ));
+    public static final Block MANGO_DOOR = register("mango_door",new DoorBlock(BlockBehaviour.Properties.of()
+            .mapColor(MANGO_PLANKS.defaultMapColor())
+            .instrument(NoteBlockInstrument.BASS)
+            .strength(3.0f)
+            .noOcclusion()
+            .ignitedByLava()
+            .pushReaction(PushReaction.DESTROY),
+            BlockSetType.CHERRY
+    ));
+    public static final Block MANGO_TRAPDOOR = register("mango_trapdoor",new TrapDoorBlock(BlockBehaviour.Properties.of()
+            .mapColor(MANGO_PLANKS.defaultMapColor())
+            .instrument(NoteBlockInstrument.BASS)
+            .strength(3.0f)
+            .noOcclusion()
+            .isValidSpawn(Blocks::never)
+            .ignitedByLava(),
+            BlockSetType.CHERRY
+    ));
+    public static final Block MANGO_PRESSURE_PLATE = register("mango_pressure_plate",new PressurePlateBlock(
+            PressurePlateBlock.Sensitivity.EVERYTHING,
+            BlockBehaviour.Properties.of()
+                    .mapColor(MANGO_PLANKS.defaultMapColor())
+                    .forceSolidOn()
+                    .instrument(NoteBlockInstrument.BASS)
+                    .noCollission()
+                    .strength(0.5f)
+                    .ignitedByLava()
+                    .pushReaction(PushReaction.DESTROY),
+            BlockSetType.CHERRY
+    ));
+    public static final Block MANGO_BUTTON = register("mango_button",Blocks.woodenButton(BlockSetType.CHERRY));
+    public static final Block MANGO_SIGN = register("mango_sign",new StandingSignBlock(BlockBehaviour.Properties.of()
+            .mapColor(ModBlocks.MANGO_PLANKS.defaultMapColor())
+            .forceSolidOn()
+            .instrument(NoteBlockInstrument.BASS)
+            .noCollission()
+            .strength(1.0f)
+            .ignitedByLava(),
+            WoodType.CHERRY
+    ));
+    public static final Block MANGO_WALL_SIGN = register("mango_wall_sign",new WallSignBlock(BlockBehaviour.Properties.of()
+            .mapColor(ModBlocks.MANGO_PLANKS.defaultMapColor())
+            .forceSolidOn()
+            .instrument(NoteBlockInstrument.BASS)
+            .noCollission()
+            .strength(1.0f)
+            .dropsLike(ModBlocks.DURIAN_SIGN)
+            .ignitedByLava(),
+            WoodType.CHERRY
+    ));
+    public static final Block MANGO_HANGING_SIGN = register("mango_hanging_sign",new CeilingHangingSignBlock(BlockBehaviour.Properties.of()
+            .mapColor(ModBlocks.MANGO_PLANKS.defaultMapColor())
+            .forceSolidOn()
+            .instrument(NoteBlockInstrument.BASS)
+            .noCollission()
+            .strength(1.0f)
+            .ignitedByLava(),
+            WoodType.CHERRY
+    ));
+    public static final Block MANGO_WALL_HANGING_SIGN = register("mango_wall_hanging_sign", new WallHangingSignBlock(BlockBehaviour.Properties.of()
+            .mapColor(ModBlocks.MANGO_PLANKS.defaultMapColor())
+            .forceSolidOn()
+            .instrument(NoteBlockInstrument.BASS)
+            .noCollission()
+            .strength(1.0f)
+            .ignitedByLava()
+            .dropsLike(DURIAN_HANGING_SIGN),
+            WoodType.CHERRY
+    ));
+    public static final Block MANGO_CABINET = register("mango_cabinet",new CabinetBlock(BlockBehaviour.Properties.copy(BARREL)));
 
     //Feast
     public static final Block SOMTAM_FEAST = register("somtam_feast",new FeastBlock(FabricBlockSettings.copyOf(Blocks.CAKE),() -> ModItems.SOMTAM,true){

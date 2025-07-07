@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/button",
+  "textures": {
+    "texture": "muffins_thaidelight:block/mango_planks"
+  }
+}

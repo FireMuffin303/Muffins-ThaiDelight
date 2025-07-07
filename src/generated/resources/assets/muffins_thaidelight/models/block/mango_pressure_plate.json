@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/pressure_plate_up",
+  "textures": {
+    "texture": "muffins_thaidelight:block/mango_planks"
+  }
+}

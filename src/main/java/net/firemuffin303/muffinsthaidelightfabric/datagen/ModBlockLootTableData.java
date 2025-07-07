@@ -118,7 +118,7 @@ public class ModBlockLootTableData extends FabricBlockLootTableProvider {
 
 
         this.add(ModBlocks.DURIAN_BLOCK,block -> {
-            return createSilkTouchDispatchTable(block,this.applyExplosionDecay(block,LootItem.lootTableItem(ModItems.DURIAN_SLICE).apply(SetItemCountFunction.setCount(UniformGenerator.between(3f,6f))).apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE)).apply(LimitCount.limitCount(IntRange.upperBound(9)))));
+            return createSilkTouchDispatchTable(block,this.applyExplosionDecay(block,LootItem.lootTableItem(ModItems.DURIAN_PULP).apply(SetItemCountFunction.setCount(ConstantValue.exactly(2))).apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE)).apply(LimitCount.limitCount(IntRange.upperBound(9)))));
         });
     }
 

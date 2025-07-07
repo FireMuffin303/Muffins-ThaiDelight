@@ -4,10 +4,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.DurianBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.mango.MangoBlock;
-import net.firemuffin303.muffinsthaidelightfabric.common.world.feature.DurianTreeFoliagePlacer;
-import net.firemuffin303.muffinsthaidelightfabric.common.world.feature.DurianTreeTrunkPlacer;
-import net.firemuffin303.muffinsthaidelightfabric.common.world.feature.LimeFeature;
-import net.firemuffin303.muffinsthaidelightfabric.common.world.feature.LimeTreeTrunkPlacer;
+import net.firemuffin303.muffinsthaidelightfabric.common.world.feature.*;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.Registry;
@@ -28,35 +25,57 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.*;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.FancyFoliagePlacer;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.RandomizedIntStateProvider;
 import net.minecraft.world.level.levelgen.feature.treedecorators.AttachedToLeavesDecorator;
+import net.minecraft.world.level.levelgen.feature.treedecorators.BeehiveDecorator;
+import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
+import net.minecraft.world.level.levelgen.feature.trunkplacers.FancyTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
 import net.minecraft.world.level.levelgen.placement.*;
 import vectorwing.farmersdelight.common.registry.ModBiomeFeatures;
 import vectorwing.farmersdelight.common.world.configuration.WildCropConfiguration;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.OptionalInt;
 
 public class ModFeatures {
     public static final TrunkPlacerType<LimeTreeTrunkPlacer> LIME_TRUNK_PLACER = Registry.register(BuiltInRegistries.TRUNK_PLACER_TYPE, ThaiDelight.modid("lime_trunk_placer"),new TrunkPlacerType<>(LimeTreeTrunkPlacer.CODEC));
     public static final TrunkPlacerType<DurianTreeTrunkPlacer> DURIAN_TRUNK_PLACER = Registry.register(BuiltInRegistries.TRUNK_PLACER_TYPE,ThaiDelight.modid("durian_trunk_placer"),new TrunkPlacerType<>(DurianTreeTrunkPlacer.CODEC));
     public static final FoliagePlacerType<DurianTreeFoliagePlacer> DURIAN_FOLIAGE_PLACER = Registry.register(BuiltInRegistries.FOLIAGE_PLACER_TYPE,ThaiDelight.modid("durian_foliage_placer"),new FoliagePlacerType<>(DurianTreeFoliagePlacer.CODEC));
-
+    public static final FoliagePlacerType<HangingBlobFoliagePlacer> HANGING_BLOB_FOLIAGE_PLACER = Registry.register(BuiltInRegistries.FOLIAGE_PLACER_TYPE,ThaiDelight.modid("hanging_blob_foliage_placer"),new FoliagePlacerType<>(HangingBlobFoliagePlacer.CODEC));
 
     public static final Feature<NoneFeatureConfiguration> LIME_FEATURE = Registry.register(BuiltInRegistries.FEATURE,new ResourceLocation(ThaiDelight.MOD_ID,"lime_feature"),new LimeFeature(NoneFeatureConfiguration.CODEC));
 
     public static final ResourceKey<ConfiguredFeature<?,?>> FEATURE_PATCH_LIME_BUSH;
     public static final ResourceKey<ConfiguredFeature<?,?>> FEATURE_PATCH_WILD_PEPPER;
+
+    //Papaya
     public static final ResourceKey<ConfiguredFeature<?, ?>> FEATURE_PAPAYA_TREE;
+
+    //Durian
     public static final ResourceKey<ConfiguredFeature<?, ?>> FEATURE_DURIAN_TREE = ResourceKey.create(Registries.CONFIGURED_FEATURE,ThaiDelight.modid("durian_tree"));
-    public static final ResourceKey<ConfiguredFeature<?, ?>> FEATURE_LIME_TREE = ResourceKey.create(Registries.CONFIGURED_FEATURE,ThaiDelight.modid("lime_tree"));
+    public static final ResourceKey<ConfiguredFeature<?, ?>> FEATURE_DURAIN_TREE_BEE = ResourceKey.create(Registries.CONFIGURED_FEATURE,ThaiDelight.modid("durian_tree_bee"));
+    //Mango
     public static final ResourceKey<ConfiguredFeature<?, ?>> FEATURE_MANGO_TREE = ResourceKey.create(Registries.CONFIGURED_FEATURE,ThaiDelight.modid("mango_tree"));
+    public static final ResourceKey<ConfiguredFeature<?, ?>> FEATURE_MANGO_TREE_BEE = ResourceKey.create(Registries.CONFIGURED_FEATURE,ThaiDelight.modid("mango_tree_bee"));
+    //Coconut
+    public static final ResourceKey<ConfiguredFeature<?, ?>> FEATURE_COCONUT_TREE = ResourceKey.create(Registries.CONFIGURED_FEATURE,ThaiDelight.modid("coconut_tree"));
+
+    //Lime
+    public static final ResourceKey<ConfiguredFeature<?, ?>> FEATURE_LIME_TREE = ResourceKey.create(Registries.CONFIGURED_FEATURE,ThaiDelight.modid("lime_tree"));
+
     public static final ResourceKey<PlacedFeature> PATCH_LIME_BUSH;
     public static final ResourceKey<PlacedFeature> PATCH_WILD_PEPPER;
     public static final ResourceKey<PlacedFeature> PAPAYA_TREE_CHECKED;
+
+
+
 
     public static void init(){}
 
@@ -86,23 +105,10 @@ public class ModFeatures {
                         )));
 
 
-        bootstapContext.register(ModFeatures.FEATURE_DURIAN_TREE,new ConfiguredFeature<>(Feature.TREE,
-                new TreeConfiguration.TreeConfigurationBuilder(
-                        BlockStateProvider.simple(ModBlocks.DURIAN_LOG),
-                        new DurianTreeTrunkPlacer(5,2,0, UniformInt.of(-2,-1), UniformInt.of(2,3),UniformInt.of(1,3)),
-                        BlockStateProvider.simple(Blocks.AZALEA_LEAVES),
-                        new DurianTreeFoliagePlacer(ConstantInt.of(2),ConstantInt.of(0),0.4f,0.12f),
-                        new TwoLayersFeatureSize(1,0,1)
-                ).ignoreVines()
-                        .decorators(
-                                List.of(
-                                        new AttachedToLeavesDecorator(0.24f,1,0,new RandomizedIntStateProvider(
-                                                BlockStateProvider.simple(ModBlocks.DURIAN_BLOCK.defaultBlockState().setValue(DurianBlock.HANGING,true)),
-                                                DurianBlock.AGE,UniformInt.of(0,1)
-                                        ),2,List.of(Direction.DOWN))
-                                )
-                        ).build()
-        ));
+        //Durian
+        bootstapContext.register(ModFeatures.FEATURE_DURIAN_TREE,new ConfiguredFeature<>(Feature.TREE,createDurianTree(List.of()).build()));
+        bootstapContext.register(ModFeatures.FEATURE_DURAIN_TREE_BEE,new ConfiguredFeature<>(Feature.TREE,createDurianTree(
+                List.of(new BeehiveDecorator(0.05f))).build()));
 
         bootstapContext.register(ModFeatures.FEATURE_LIME_TREE,new ConfiguredFeature<>(Feature.TREE,
                 new TreeConfiguration.TreeConfigurationBuilder(
@@ -114,21 +120,11 @@ public class ModFeatures {
                 ).ignoreVines().build()
                 ));
 
-        bootstapContext.register(ModFeatures.FEATURE_MANGO_TREE,new ConfiguredFeature<>(Feature.TREE,
-                new TreeConfiguration.TreeConfigurationBuilder(
-                        BlockStateProvider.simple(Blocks.OAK_LOG),
-                        new StraightTrunkPlacer(5,2,0),
-                        BlockStateProvider.simple(ModBlocks.MANGO_LEAVES),
-                        new BlobFoliagePlacer(UniformInt.of(3,4),ConstantInt.of(0),3),
-                        new TwoLayersFeatureSize(1,0,1)
-                ).ignoreVines()
-                        .decorators(List.of(
-                                new AttachedToLeavesDecorator(0.24f,1,0,new RandomizedIntStateProvider(
-                                        BlockStateProvider.simple(ModBlocks.MANGO_BLOCK.defaultBlockState().setValue(MangoBlock.HANGING,true)),
-                                        MangoBlock.AGE,UniformInt.of(0,1)
-                                ),2,List.of(Direction.DOWN))
-                        ))
-                        .build()));
+        //Mango
+        bootstapContext.register(ModFeatures.FEATURE_MANGO_TREE,new ConfiguredFeature<>(Feature.TREE, createMangoTree(List.of()).build()));
+        bootstapContext.register(ModFeatures.FEATURE_MANGO_TREE_BEE,new ConfiguredFeature<>(Feature.TREE,createMangoTree(List.of(
+                new BeehiveDecorator(0.05f)
+        )).build()));
 
     }
 
@@ -159,12 +155,59 @@ public class ModFeatures {
     public static void dataGen(HolderLookup.Provider provider, FabricDynamicRegistryProvider.Entries entries){
         entries.add(provider.lookupOrThrow(Registries.CONFIGURED_FEATURE),ModFeatures.FEATURE_PATCH_LIME_BUSH);
         entries.add(provider.lookupOrThrow(Registries.CONFIGURED_FEATURE),ModFeatures.FEATURE_PATCH_WILD_PEPPER);
+
+        //Durian
         entries.add(provider.lookupOrThrow(Registries.CONFIGURED_FEATURE),ModFeatures.FEATURE_DURIAN_TREE);
+        entries.add(provider.lookupOrThrow(Registries.CONFIGURED_FEATURE),ModFeatures.FEATURE_DURAIN_TREE_BEE);
+
+        //Mango
         entries.add(provider.lookupOrThrow(Registries.CONFIGURED_FEATURE),ModFeatures.FEATURE_MANGO_TREE);
+        entries.add(provider.lookupOrThrow(Registries.CONFIGURED_FEATURE),ModFeatures.FEATURE_MANGO_TREE_BEE);
+
+        //Coconut
+
+
         entries.add(provider.lookupOrThrow(Registries.CONFIGURED_FEATURE),ModFeatures.FEATURE_LIME_TREE);
         entries.add(provider.lookupOrThrow(Registries.PLACED_FEATURE),ModFeatures.PATCH_LIME_BUSH);
         entries.add(provider.lookupOrThrow(Registries.PLACED_FEATURE),ModFeatures.PATCH_WILD_PEPPER);
 
+    }
+
+    private static TreeConfiguration.TreeConfigurationBuilder createDurianTree(List<TreeDecorator> treeDecorators) {
+        List<TreeDecorator> decorators = new ArrayList<>();
+        decorators.add(new AttachedToLeavesDecorator(0.24f,1,0,new RandomizedIntStateProvider(
+                BlockStateProvider.simple(ModBlocks.DURIAN_BLOCK.defaultBlockState().setValue(DurianBlock.HANGING,true)),
+                DurianBlock.AGE,UniformInt.of(0,1)
+        ),2,List.of(Direction.DOWN)));
+
+        decorators.addAll(treeDecorators);
+
+
+        return new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBlocks.DURIAN_LOG),
+                new DurianTreeTrunkPlacer(5,2,0, UniformInt.of(-2,-1), UniformInt.of(2,3),UniformInt.of(1,3)),
+                BlockStateProvider.simple(Blocks.AZALEA_LEAVES),
+                new DurianTreeFoliagePlacer(ConstantInt.of(2),ConstantInt.of(0),0.4f,0.12f),
+                new TwoLayersFeatureSize(1,0,1)
+        ).ignoreVines().decorators(decorators);
+    }
+
+    private static TreeConfiguration.TreeConfigurationBuilder createMangoTree(List<TreeDecorator> treeDecorators){
+        List<TreeDecorator> decorators = new ArrayList<>();
+        decorators.add(new AttachedToLeavesDecorator(0.24f,1,0,new RandomizedIntStateProvider(
+                BlockStateProvider.simple(ModBlocks.MANGO_BLOCK.defaultBlockState().setValue(MangoBlock.HANGING,true)),
+                MangoBlock.AGE,UniformInt.of(0,1)
+        ),2,List.of(Direction.DOWN)));
+        decorators.addAll(treeDecorators);
+
+        return new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(Blocks.OAK_LOG),
+                new StraightTrunkPlacer(6,1,0),
+                BlockStateProvider.simple(Blocks.AZALEA_LEAVES),
+                new HangingBlobFoliagePlacer(UniformInt.of(2,3),ConstantInt.of(0),3,0.35f,0.1f),
+                new TwoLayersFeatureSize(1,0,1)
+        ).ignoreVines()
+                .decorators(decorators);
     }
 
     static {

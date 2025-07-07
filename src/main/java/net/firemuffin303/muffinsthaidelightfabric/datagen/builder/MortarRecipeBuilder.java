@@ -1,9 +1,8 @@
-package net.firemuffin303.muffinsthaidelightfabric.datagen;
+package net.firemuffin303.muffinsthaidelightfabric.datagen.builder;
 
 import com.google.common.collect.Lists;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import io.github.fabricators_of_create.porting_lib.event.client.ColorHandlersCallback;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModRecipes;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.CriterionTriggerInstance;

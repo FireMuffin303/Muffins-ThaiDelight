@@ -1,6 +1,6 @@
-// 1.20.1	2025-07-06T11:20:18.1965599	Muffin's Thai's Delight Refabricated/Tags for minecraft:block
+// 1.20.1	2025-07-07T16:39:18.8303814	Muffin's Thai's Delight Refabricated/Tags for minecraft:block
 5d46724ce46579469a169945bcf3c8b90c56b410 data\minecraft\tags\blocks\logs_that_burn.json
-a6b943f885a5daad113a3b8f50aae1a353fb13b4 data\minecraft\tags\blocks\mineable\axe.json
 0ba61a6f7cd8a11949e15db1ae11668ce297031c data\minecraft\tags\blocks\leaves.json
+a6b943f885a5daad113a3b8f50aae1a353fb13b4 data\minecraft\tags\blocks\mineable\axe.json
 973b7856466364aa110084974dd7dbc3236f4da5 data\muffins_thaidelight\tags\blocks\papaya_logs.json
 c48962fe61470e7c26bc8fa54e2152c20defb62a data\minecraft\tags\blocks\mineable\pickaxe.json

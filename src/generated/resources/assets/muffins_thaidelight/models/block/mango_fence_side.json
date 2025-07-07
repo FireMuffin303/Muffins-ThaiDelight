@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/fence_side",
+  "textures": {
+    "texture": "muffins_thaidelight:block/mango_planks"
+  }
+}

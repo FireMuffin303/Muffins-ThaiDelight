@@ -6,6 +6,8 @@ import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.FermentedFishCauldronBlock;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModItems;
+import net.minecraft.data.BlockFamilies;
+import net.minecraft.data.BlockFamily;
 import net.minecraft.data.models.BlockModelGenerators;
 import net.minecraft.data.models.ItemModelGenerators;
 import net.minecraft.data.models.blockstates.MultiVariantGenerator;
@@ -28,6 +30,49 @@ public class ModelDataGen extends FabricModelProvider {
     private static final ModelTemplate PASTLE_3D = createModItem("pastle_3d_template", TextureSlot.LAYER0);
     private static final ModelTemplate SPAWN_EGG = createMincraftItem("template_spawn_egg");
     private static final ModelTemplate LIME_BUSH_STAGE2 = new ModelTemplate(Optional.of(new ResourceLocation(ThaiDelight.MOD_ID,"block/template_lime_bush_stage2")),Optional.empty(),TextureSlot.SIDE,TextureSlot.TOP);
+
+    private static final BlockFamily DURIAN_PLANKS = BlockFamilies.familyBuilder(ModBlocks.DURIAN_PLANKS)
+            .button(ModBlocks.DURIAN_BUTTON)
+            .fence(ModBlocks.DURIAN_FENCE)
+            .fenceGate(ModBlocks.DURIAN_FENCE_GATE)
+            .pressurePlate(ModBlocks.DURIAN_PRESSURE_PLATE)
+            .sign(ModBlocks.DURIAN_SIGN,ModBlocks.DURIAN_WALL_SIGN)
+            .slab(ModBlocks.DURIAN_SLAB)
+            .stairs(ModBlocks.DURIAN_STAIRS)
+            .door(ModBlocks.DURIAN_DOOR)
+            .trapdoor(ModBlocks.DURIAN_TRAPDOOR)
+            .recipeGroupPrefix("wooden")
+            .recipeUnlockedBy("has_planks")
+            .getFamily();
+
+    private static final BlockFamily COCONUT_PLANKS = BlockFamilies.familyBuilder(ModBlocks.COCONUT_PLANKS)
+            .button(ModBlocks.COCONUT_BUTTON)
+            .fence(ModBlocks.COCONUT_FENCE)
+            .fenceGate(ModBlocks.COCONUT_FENCE_GATE)
+            .pressurePlate(ModBlocks.COCONUT_PRESSURE_PLATE)
+            .sign(ModBlocks.COCONUT_SIGN,ModBlocks.COCONUT_WALL_SIGN)
+            .slab(ModBlocks.COCONUT_SLAB)
+            .stairs(ModBlocks.COCONUT_STAIRS)
+            .door(ModBlocks.COCONUT_DOOR)
+            .trapdoor(ModBlocks.COCONUT_TRAPDOOR)
+            .recipeGroupPrefix("wooden")
+            .recipeUnlockedBy("has_planks")
+            .getFamily();
+
+    private static final BlockFamily MANGO_PLANKS = BlockFamilies.familyBuilder(ModBlocks.MANGO_PLANKS)
+            .button(ModBlocks.MANGO_BUTTON)
+            .fence(ModBlocks.MANGO_FENCE)
+            .fenceGate(ModBlocks.MANGO_FENCE_GATE)
+            .pressurePlate(ModBlocks.MANGO_PRESSURE_PLATE)
+            .sign(ModBlocks.MANGO_SIGN,ModBlocks.MANGO_WALL_SIGN)
+            .slab(ModBlocks.MANGO_SLAB)
+            .stairs(ModBlocks.MANGO_STAIRS)
+            .door(ModBlocks.MANGO_DOOR)
+            .trapdoor(ModBlocks.MANGO_TRAPDOOR)
+            .recipeGroupPrefix("wooden")
+            .recipeUnlockedBy("has_planks")
+            .getFamily();
+
     public ModelDataGen(FabricDataOutput output) {
         super(output);
     }
@@ -45,7 +90,26 @@ public class ModelDataGen extends FabricModelProvider {
         blockStateModelGenerator.woodProvider(ModBlocks.PAPAYA_LOG).logWithHorizontal(ModBlocks.PAPAYA_LOG).wood(ModBlocks.PAPAYA_WOOD);
         blockStateModelGenerator.woodProvider(ModBlocks.STRIPPED_PAPAYA_LOG).logWithHorizontal(ModBlocks.STRIPPED_PAPAYA_LOG).wood(ModBlocks.STRIPPED_PAPAYA_WOOD);
 
+        //Durian Model
         blockStateModelGenerator.woodProvider(ModBlocks.DURIAN_LOG).logWithHorizontal(ModBlocks.DURIAN_LOG).wood(ModBlocks.DURIAN_WOOD);
+        blockStateModelGenerator.woodProvider(ModBlocks.STRIPPED_DURIAN_LOG).logWithHorizontal(ModBlocks.STRIPPED_DURIAN_LOG).wood(ModBlocks.STRIPPED_DURIAN_WOOD);
+        blockStateModelGenerator.createHangingSign(ModBlocks.STRIPPED_DURIAN_LOG,ModBlocks.DURIAN_HANGING_SIGN,ModBlocks.DURIAN_WALL_HANGING_SIGN);
+        blockStateModelGenerator.createTrivialBlock(ModBlocks.DURIAN_LEAVES,TexturedModel.LEAVES);
+        blockStateModelGenerator.createPlant(ModBlocks.DURIAN_SAPLING,ModBlocks.POTTED_DURIAN_SAPLING, BlockModelGenerators.TintState.NOT_TINTED);
+        blockStateModelGenerator.family(ModBlocks.DURIAN_PLANKS).generateFor(DURIAN_PLANKS);
+
+        blockStateModelGenerator.woodProvider(ModBlocks.COCONUT_LOG).logWithHorizontal(ModBlocks.COCONUT_LOG).wood(ModBlocks.COCONUT_WOOD);
+        blockStateModelGenerator.woodProvider(ModBlocks.STRIPPED_COCONUT_LOG).logWithHorizontal(ModBlocks.STRIPPED_COCONUT_LOG).wood(ModBlocks.STRIPPED_COCONUT_WOOD);
+        blockStateModelGenerator.createHangingSign(ModBlocks.STRIPPED_COCONUT_LOG,ModBlocks.COCONUT_HANGING_SIGN,ModBlocks.COCONUT_WALL_HANGING_SIGN);
+        blockStateModelGenerator.createTrivialBlock(ModBlocks.COCONUT_LEAVES,TexturedModel.LEAVES);
+        blockStateModelGenerator.family(ModBlocks.COCONUT_PLANKS).generateFor(COCONUT_PLANKS);
+
+        blockStateModelGenerator.woodProvider(ModBlocks.MANGO_LOG).logWithHorizontal(ModBlocks.MANGO_LOG).wood(ModBlocks.MANGO_WOOD);
+        blockStateModelGenerator.woodProvider(ModBlocks.STRIPPED_MANGO_LOG).logWithHorizontal(ModBlocks.STRIPPED_MANGO_LOG).wood(ModBlocks.STRIPPED_MANGO_WOOD);
+        blockStateModelGenerator.createHangingSign(ModBlocks.STRIPPED_MANGO_LOG,ModBlocks.MANGO_HANGING_SIGN,ModBlocks.MANGO_WALL_HANGING_SIGN);
+        blockStateModelGenerator.createTrivialBlock(ModBlocks.MANGO_LEAVES,TexturedModel.LEAVES);
+        blockStateModelGenerator.family(ModBlocks.MANGO_PLANKS).generateFor(MANGO_PLANKS);
+
 
         createCubeAll(ModBlocks.PAPAYA_LEAVES,blockStateModelGenerator);
         //createCubeAll(ModBlocks.LIME_LEAVES,blockStateModelGenerator);
@@ -129,14 +193,12 @@ public class ModelDataGen extends FabricModelProvider {
                         )
         );
 
-        blockStateModelGenerator.createPlant(ModBlocks.DURIAN_SAPLING,ModBlocks.POTTED_DURIAN_SAPLING, BlockModelGenerators.TintState.NOT_TINTED);
+
         blockStateModelGenerator.createPlant(ModBlocks.LIME_SAPLING,ModBlocks.POTTED_LIME_SAPLING, BlockModelGenerators.TintState.NOT_TINTED);
         blockStateModelGenerator.createPlant(ModBlocks.COCONUT_SAPLING,ModBlocks.POTTED_COCONUT_SAPLING, BlockModelGenerators.TintState.NOT_TINTED);
         blockStateModelGenerator.createPlant(ModBlocks.MANGO_SAPLING,ModBlocks.POTTED_MANGO_SAPLING, BlockModelGenerators.TintState.NOT_TINTED);
-        blockStateModelGenerator.createTrivialBlock(ModBlocks.DURIAN_LEAVES,TexturedModel.LEAVES);
+
         blockStateModelGenerator.createTrivialBlock(ModBlocks.LIME_LEAVES,TexturedModel.LEAVES);
-        blockStateModelGenerator.createTrivialBlock(ModBlocks.MANGO_LEAVES,TexturedModel.LEAVES);
-        blockStateModelGenerator.createTrivialBlock(ModBlocks.COCONUT_LEAVES,TexturedModel.LEAVES);
     }
 
     @Override
@@ -183,7 +245,9 @@ public class ModelDataGen extends FabricModelProvider {
         itemModelGenerator.generateFlatItem(Item.byBlock(ModBlocks.LARB_FEAST), ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(Item.byBlock(ModBlocks.CRAB_FRIED_RICE_FEAST), ModelTemplates.FLAT_ITEM);
 
-        itemModelGenerator.generateFlatItem(ModItems.DURIAN_SLICE,ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.DURIAN_PULP,ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.DURIAN_BOAT,ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.DURIAN_CHEST_BOAT,ModelTemplates.FLAT_ITEM);
     }
 
     private static void createBlock(Block block, ModelTemplate modelTemplate, TextureMapping textureMapping, BlockModelGenerators blockModelGenerator){

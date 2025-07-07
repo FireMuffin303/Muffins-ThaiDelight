@@ -10,6 +10,6 @@ import org.jetbrains.annotations.Nullable;
 public class MangoTreeGrower extends AbstractTreeGrower {
     @Override
     protected @Nullable ResourceKey<ConfiguredFeature<?, ?>> getConfiguredFeature(RandomSource randomSource, boolean bl) {
-        return ModFeatures.FEATURE_MANGO_TREE;
+        return bl ? ModFeatures.FEATURE_MANGO_TREE_BEE : ModFeatures.FEATURE_MANGO_TREE;
     }
 }

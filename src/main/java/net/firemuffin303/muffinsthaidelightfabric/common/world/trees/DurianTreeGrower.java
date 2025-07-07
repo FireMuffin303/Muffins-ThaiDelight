@@ -10,6 +10,6 @@ import org.jetbrains.annotations.Nullable;
 public class DurianTreeGrower extends AbstractTreeGrower {
     @Override
     protected @Nullable ResourceKey<ConfiguredFeature<?, ?>> getConfiguredFeature(RandomSource randomSource, boolean bl) {
-        return ModFeatures.FEATURE_DURIAN_TREE;
+        return bl ? ModFeatures.FEATURE_DURAIN_TREE_BEE : ModFeatures.FEATURE_DURIAN_TREE;
     }
 }

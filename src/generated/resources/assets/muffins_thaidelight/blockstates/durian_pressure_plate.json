@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "muffins_thaidelight:block/durian_pressure_plate"
+    },
+    "powered=true": {
+      "model": "muffins_thaidelight:block/durian_pressure_plate_down"
+    }
+  }
+}

@@ -297,14 +297,71 @@ public class ThaiDelight implements ModInitializer {
 
         output.accept(ModItems.DURIAN_SAPLING);
         output.accept(ModItems.DURIAN_LEAVES);
+        output.accept(ModItems.DURIAN_FLOWER);
         output.accept(ModItems.DURIAN);
+        output.accept(ModItems.DURIAN_PULP);
         output.accept(ModItems.DURIAN_LOG);
+        output.accept(ModItems.DURIAN_WOOD);
+        output.accept(ModItems.STRIPPED_DURIAN_LOG);
+        output.accept(ModItems.STRIPPED_DURIAN_WOOD);
+        output.accept(ModItems.DURIAN_PLANKS);
+        output.accept(ModItems.DURIAN_STAIRS);
+        output.accept(ModItems.DURIAN_SLAB);
+        output.accept(ModItems.DURIAN_FENCE);
+        output.accept(ModItems.DURIAN_FENCE_GATE);
+        output.accept(ModItems.DURIAN_DOOR);
+        output.accept(ModItems.DURIAN_TRAPDOOR);
+        output.accept(ModItems.DURIAN_PRESSURE_PLATE);
+        output.accept(ModItems.DURIAN_BUTTON);
+        output.accept(ModItems.DURIAN_SIGN);
+        output.accept(ModItems.DURIAN_HANGING_SIGN);
+        output.accept(ModItems.DURIAN_CABINET);
+        output.accept(ModItems.DURIAN_BOAT);
+        output.accept(ModItems.DURIAN_CHEST_BOAT);
 
         output.accept(ModItems.COCONUT_SAPLING);
         output.accept(ModItems.COCONUT_LEAVES);
 
+        output.accept(ModItems.COCONUT_LOG);
+        output.accept(ModItems.COCONUT_WOOD);
+        output.accept(ModItems.STRIPPED_COCONUT_LOG);
+        output.accept(ModItems.STRIPPED_COCONUT_WOOD);
+        output.accept(ModItems.COCONUT_PLANKS);
+        output.accept(ModItems.COCONUT_STAIRS);
+        output.accept(ModItems.COCONUT_SLAB);
+        output.accept(ModItems.COCONUT_FENCE);
+        output.accept(ModItems.COCONUT_FENCE_GATE);
+        output.accept(ModItems.COCONUT_DOOR);
+        output.accept(ModItems.COCONUT_TRAPDOOR);
+        output.accept(ModItems.COCONUT_PRESSURE_PLATE);
+        output.accept(ModItems.COCONUT_BUTTON);
+        output.accept(ModItems.COCONUT_SIGN);
+        output.accept(ModItems.COCONUT_HANGING_SIGN);
+        output.accept(ModItems.COCONUT_BOAT);
+        output.accept(ModItems.COCONUT_CHEST_BOAT);
+        output.accept(ModItems.COCONUT_CABINET);
+
         output.accept(ModItems.MANGO_SAPLING);
         output.accept(ModItems.MANGO_LEAVES);
+
+        output.accept(ModItems.MANGO_LOG);
+        output.accept(ModItems.MANGO_WOOD);
+        output.accept(ModItems.STRIPPED_MANGO_LOG);
+        output.accept(ModItems.STRIPPED_MANGO_WOOD);
+        output.accept(ModItems.MANGO_PLANKS);
+        output.accept(ModItems.MANGO_STAIRS);
+        output.accept(ModItems.MANGO_SLAB);
+        output.accept(ModItems.MANGO_FENCE);
+        output.accept(ModItems.MANGO_FENCE_GATE);
+        output.accept(ModItems.MANGO_DOOR);
+        output.accept(ModItems.MANGO_TRAPDOOR);
+        output.accept(ModItems.MANGO_PRESSURE_PLATE);
+        output.accept(ModItems.MANGO_BUTTON);
+        output.accept(ModItems.MANGO_SIGN);
+        output.accept(ModItems.MANGO_HANGING_SIGN);
+        output.accept(ModItems.MANGO_BOAT);
+        output.accept(ModItems.MANGO_CHEST_BOAT);
+        output.accept(ModItems.MANGO_CABINET);
 
         output.accept(ModItems.PAPAYA);
         output.accept(ModItems.SLICED_PAPAYA);

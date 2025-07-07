@@ -2,18 +2,15 @@ package net.firemuffin303.muffinsthaidelightfabric.datagen;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
+import net.firemuffin303.muffinsthaidelightfabric.datagen.builder.MortarRecipeBuilder;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModItems;
-import net.firemuffin303.muffinsthaidelightfabric.registry.ModRecipes;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModTags;
 import net.minecraft.data.recipes.*;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
-import vectorwing.farmersdelight.client.gui.CookingPotRecipeBookComponent;
-import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
-import vectorwing.farmersdelight.common.crafting.CuttingBoardRecipe;
 
 import java.util.function.Consumer;
 

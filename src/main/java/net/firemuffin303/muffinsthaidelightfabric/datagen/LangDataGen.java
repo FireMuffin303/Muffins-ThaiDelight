@@ -86,6 +86,8 @@ public class LangDataGen extends FabricLanguageProvider {
         translationBuilder.add(ModBlocks.PAPAYA_SAPLING,"Papaya Sapling");
         translationBuilder.add(ModItems.PAPAYA_SEEDS,"Papaya Seeds");
 
+        translationBuilder.add(ModItems.DURIAN_PULP,"Durian Pulp");
+
         //Food
         translationBuilder.add(ModItems.SOMTAM,"Plate of Somtam");
         translationBuilder.add(ModItems.LARB,"Plate of Larb");
@@ -215,6 +217,8 @@ public class LangDataGen extends FabricLanguageProvider {
             translationBuilder.add(ModBlocks.LIME_SAPLING,"ต้นอ่อนมะนาว");
             translationBuilder.add(ModItems.LIME,"มะนาว");
             translationBuilder.add(ModItems.SLICED_LIME,"มะนาวหั่น");
+
+            translationBuilder.add(ModItems.DURIAN_PULP,"เนื้อทุเรียน");
 
             //Food
             translationBuilder.add(ModItems.FISH_SAUCE_BOTTLE,"ขวดน้ำปลา");

@@ -10,6 +10,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
@@ -89,18 +90,79 @@ public class ModItems {
     //------------------ Durian ------------------
     public static final Item DURIAN_SAPLING = register("durian_sapling",new BlockItem(ModBlocks.DURIAN_SAPLING,new Item.Properties()));
     public static final Item DURIAN_LEAVES = register("durian_leaves",new BlockItem(ModBlocks.DURIAN_LEAVES,new Item.Properties()));
+    public static final Item DURIAN_FLOWER = register("durian_flower",new BlockItem(ModBlocks.DURIAN_FLOWER,new Item.Properties()));
     public static final Item DURIAN = register("durian_block",new BlockItem(ModBlocks.DURIAN_BLOCK,new Item.Properties()));
-    public static final Item DURIAN_SLICE = register("durian_slice",new Item(new Item.Properties()));
+    public static final Item DURIAN_PULP = register("durian_pulp",new Item(new Item.Properties().food(ModFood.DURIAN_PULP)));
+    //Durian Woodset item
     public static final Item DURIAN_LOG = register("durian_log",new BlockItem(ModBlocks.DURIAN_LOG,new Item.Properties()));
     public static final Item DURIAN_WOOD = register("durian_wood",new BlockItem(ModBlocks.DURIAN_WOOD,new Item.Properties()));
+    public static final Item STRIPPED_DURIAN_LOG = register("stripped_durian_log",new BlockItem(ModBlocks.STRIPPED_DURIAN_LOG,new Item.Properties()));
+    public static final Item STRIPPED_DURIAN_WOOD = register("stripped_durian_wood",new BlockItem(ModBlocks.STRIPPED_DURIAN_WOOD,new Item.Properties()));
+    public static final Item DURIAN_PLANKS = register("durian_planks",new BlockItem(ModBlocks.DURIAN_PLANKS,new Item.Properties()));
+    public static final Item DURIAN_STAIRS = register("durian_stairs",new BlockItem(ModBlocks.DURIAN_STAIRS,new Item.Properties()));
+    public static final Item DURIAN_SLAB = register("durian_slab",new BlockItem(ModBlocks.DURIAN_SLAB,new Item.Properties()));
+    public static final Item DURIAN_FENCE = register("durian_fence",new BlockItem(ModBlocks.DURIAN_FENCE,new Item.Properties()));
+    public static final Item DURIAN_FENCE_GATE = register("durian_fence_gate",new BlockItem(ModBlocks.DURIAN_FENCE_GATE,new Item.Properties()));
+    public static final Item DURIAN_DOOR = register("durian_door",new BlockItem(ModBlocks.DURIAN_DOOR,new Item.Properties()));
+    public static final Item DURIAN_TRAPDOOR = register("durian_trapdoor",new BlockItem(ModBlocks.DURIAN_TRAPDOOR,new Item.Properties()));
+    public static final Item DURIAN_PRESSURE_PLATE = register("durian_pressure_plate",new BlockItem(ModBlocks.DURIAN_PRESSURE_PLATE,new Item.Properties()));
+    public static final Item DURIAN_BUTTON = register("durian_button",new BlockItem(ModBlocks.DURIAN_BUTTON,new Item.Properties()));
+    public static final Item DURIAN_SIGN = register("durian_sign",new SignItem(new Item.Properties().stacksTo(16),ModBlocks.DURIAN_SIGN,ModBlocks.DURIAN_WALL_SIGN));
+    public static final Item DURIAN_HANGING_SIGN = register("durian_hanging_sign",new HangingSignItem(ModBlocks.DURIAN_HANGING_SIGN,ModBlocks.DURIAN_WALL_HANGING_SIGN,new Item.Properties().stacksTo(16)));
+    public static final Item DURIAN_CABINET = register("durian_cabinet",new BlockItem(ModBlocks.DURIAN_CABINET,new Item.Properties()));
+    public static final Item DURIAN_BOAT = register("durian_boat",new BoatItem(false, Boat.Type.ACACIA,new Item.Properties().stacksTo(1)));
+    public static final Item DURIAN_CHEST_BOAT = register("durian_chest_boat", new BoatItem(true, Boat.Type.ACACIA,new Item.Properties().stacksTo(1)));
 
     //------------------------
     //------------------ COCONUT ------------------
     public static final Item COCONUT_SAPLING = register("coconut_sapling",new BlockItem(ModBlocks.COCONUT_SAPLING,new Item.Properties()));
     public static final Item COCONUT_LEAVES = register("coconut_leaves",new BlockItem(ModBlocks.COCONUT_LEAVES,new Item.Properties()));
+    //COCONUT Woodset item
+    public static final Item COCONUT_LOG = register("coconut_log",new BlockItem(ModBlocks.COCONUT_LOG,new Item.Properties()));
+    public static final Item COCONUT_WOOD = register("coconut_wood",new BlockItem(ModBlocks.COCONUT_WOOD,new Item.Properties()));
+    public static final Item STRIPPED_COCONUT_LOG = register("stripped_coconut_log",new BlockItem(ModBlocks.STRIPPED_COCONUT_LOG,new Item.Properties()));
+    public static final Item STRIPPED_COCONUT_WOOD = register("stripped_coconut_wood",new BlockItem(ModBlocks.STRIPPED_COCONUT_WOOD,new Item.Properties()));
+    public static final Item COCONUT_PLANKS = register("coconut_planks",new BlockItem(ModBlocks.COCONUT_PLANKS,new Item.Properties()));
+    public static final Item COCONUT_STAIRS = register("coconut_stairs",new BlockItem(ModBlocks.COCONUT_STAIRS,new Item.Properties()));
+    public static final Item COCONUT_SLAB = register("coconut_slab",new BlockItem(ModBlocks.COCONUT_SLAB,new Item.Properties()));
+    public static final Item COCONUT_FENCE = register("coconut_fence",new BlockItem(ModBlocks.COCONUT_FENCE,new Item.Properties()));
+    public static final Item COCONUT_FENCE_GATE = register("coconut_fence_gate",new BlockItem(ModBlocks.COCONUT_FENCE_GATE,new Item.Properties()));
+    public static final Item COCONUT_DOOR = register("coconut_door",new BlockItem(ModBlocks.COCONUT_DOOR,new Item.Properties()));
+    public static final Item COCONUT_TRAPDOOR = register("coconut_trapdoor",new BlockItem(ModBlocks.COCONUT_TRAPDOOR,new Item.Properties()));
+    public static final Item COCONUT_PRESSURE_PLATE = register("coconut_pressure_plate",new BlockItem(ModBlocks.COCONUT_PRESSURE_PLATE,new Item.Properties()));
+    public static final Item COCONUT_BUTTON = register("coconut_button",new BlockItem(ModBlocks.COCONUT_BUTTON,new Item.Properties()));
+    public static final Item COCONUT_SIGN = register("coconut_sign",new SignItem(new Item.Properties().stacksTo(16),ModBlocks.COCONUT_SIGN,ModBlocks.COCONUT_WALL_SIGN));
+    public static final Item COCONUT_HANGING_SIGN = register("coconut_hanging_sign",new HangingSignItem(ModBlocks.COCONUT_HANGING_SIGN,ModBlocks.COCONUT_WALL_HANGING_SIGN,new Item.Properties().stacksTo(16)));
+    public static final Item COCONUT_CABINET = register("coconut_cabinet",new BlockItem(ModBlocks.COCONUT_CABINET,new Item.Properties()));
+    public static final Item COCONUT_BOAT = register("coconut_boat",new BoatItem(false, Boat.Type.ACACIA,new Item.Properties().stacksTo(1)));
+    public static final Item COCONUT_CHEST_BOAT = register("coconut_chest_boat", new BoatItem(true, Boat.Type.ACACIA,new Item.Properties().stacksTo(1)));
 
+
+
+    //------------------ MANGO --------------------
     public static final Item MANGO_SAPLING = register("mango_sapling",new BlockItem(ModBlocks.MANGO_SAPLING,new Item.Properties()));
     public static final Item MANGO_LEAVES = register("mango_leaves",new BlockItem(ModBlocks.MANGO_LEAVES,new Item.Properties()));
+
+    public static final Item MANGO_LOG = register("mango_log",new BlockItem(ModBlocks.MANGO_LOG,new Item.Properties()));
+    public static final Item MANGO_WOOD = register("mango_wood",new BlockItem(ModBlocks.MANGO_WOOD,new Item.Properties()));
+    public static final Item STRIPPED_MANGO_LOG = register("stripped_mango_log",new BlockItem(ModBlocks.STRIPPED_MANGO_LOG,new Item.Properties()));
+    public static final Item STRIPPED_MANGO_WOOD = register("stripped_mango_wood",new BlockItem(ModBlocks.STRIPPED_MANGO_WOOD,new Item.Properties()));
+    public static final Item MANGO_PLANKS = register("mango_planks",new BlockItem(ModBlocks.MANGO_PLANKS,new Item.Properties()));
+    public static final Item MANGO_STAIRS = register("mango_stairs",new BlockItem(ModBlocks.MANGO_STAIRS,new Item.Properties()));
+    public static final Item MANGO_SLAB = register("mango_slab",new BlockItem(ModBlocks.MANGO_SLAB,new Item.Properties()));
+    public static final Item MANGO_FENCE = register("mango_fence",new BlockItem(ModBlocks.MANGO_FENCE,new Item.Properties()));
+    public static final Item MANGO_FENCE_GATE = register("mango_fence_gate",new BlockItem(ModBlocks.MANGO_FENCE_GATE,new Item.Properties()));
+    public static final Item MANGO_DOOR = register("mango_door",new BlockItem(ModBlocks.MANGO_DOOR,new Item.Properties()));
+    public static final Item MANGO_TRAPDOOR = register("mango_trapdoor",new BlockItem(ModBlocks.MANGO_TRAPDOOR,new Item.Properties()));
+    public static final Item MANGO_PRESSURE_PLATE = register("mango_pressure_plate",new BlockItem(ModBlocks.MANGO_PRESSURE_PLATE,new Item.Properties()));
+    public static final Item MANGO_BUTTON = register("mango_button",new BlockItem(ModBlocks.MANGO_BUTTON,new Item.Properties()));
+    public static final Item MANGO_SIGN = register("mango_sign",new SignItem(new Item.Properties().stacksTo(16),ModBlocks.MANGO_SIGN,ModBlocks.MANGO_WALL_SIGN));
+    public static final Item MANGO_HANGING_SIGN = register("mango_hanging_sign",new HangingSignItem(ModBlocks.MANGO_HANGING_SIGN,ModBlocks.MANGO_WALL_HANGING_SIGN,new Item.Properties().stacksTo(16)));
+    public static final Item MANGO_CABINET = register("mango_cabinet",new BlockItem(ModBlocks.MANGO_CABINET,new Item.Properties()));
+    public static final Item MANGO_BOAT = register("mango_boat",new BoatItem(false, Boat.Type.ACACIA,new Item.Properties().stacksTo(1)));
+    public static final Item MANGO_CHEST_BOAT = register("mango_chest_boat", new BoatItem(true, Boat.Type.ACACIA,new Item.Properties().stacksTo(1)));
+
+
 
     public static final Item PAPAYA = register("papaya",new Item(new Item.Properties().food(ModFood.PAPAYA)));
     public static final Item SLICED_PAPAYA = register("papaya_slice",new Item(new Item.Properties().food(ModFood.SLICED_PAPAYA)));
@@ -161,6 +223,8 @@ public class ModItems {
         public static final FoodProperties SLICED_PAPAYA = new FoodProperties.Builder().nutrition(3).saturationMod(0.2F).build();
         public static final FoodProperties PAPAYA = new FoodProperties.Builder().nutrition(5).saturationMod(0.4F).build();
         public static final FoodProperties RAW_PAPAYA = new FoodProperties.Builder().nutrition(4).saturationMod(0.2F).build();
+
+        public static final FoodProperties DURIAN_PULP = new FoodProperties.Builder().nutrition(2).saturationMod(0.2f).build();
 
         public static final FoodProperties FISH_SAUCE = new FoodProperties.Builder().alwaysEat().effect(new MobEffectInstance(MobEffects.HUNGER,200,0),1.0f).build();
         public static final FoodProperties SEAFOOD_SAUCE = new FoodProperties.Builder().alwaysEat().effect(new MobEffectInstance(MobEffects.WATER_BREATHING,200,0),1.0f).build();
