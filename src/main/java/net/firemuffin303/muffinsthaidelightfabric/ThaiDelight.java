@@ -2,6 +2,8 @@ package net.firemuffin303.muffinsthaidelightfabric;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Pair;
+import com.terraformersmc.terraform.boat.api.TerraformBoatType;
+import com.terraformersmc.terraform.boat.api.TerraformBoatTypeRegistry;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
@@ -45,6 +47,7 @@ import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.ComposterBlock;
+import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.structure.pools.SinglePoolElement;
@@ -69,6 +72,24 @@ public class ThaiDelight implements ModInitializer {
 
     public static final ResourceLocation SPICY_PAYLOAD_ID = new ResourceLocation(MOD_ID,"spicypayload");
 
+    public static final TerraformBoatType DURIAN = new TerraformBoatType.Builder()
+            .item(ModItems.DURIAN_BOAT)
+            .chestItem(ModItems.DURIAN_CHEST_BOAT)
+            .planks(ModItems.DURIAN_PLANKS)
+            .build();
+
+    private static final TerraformBoatType COCONUT = new TerraformBoatType.Builder()
+            .item(ModItems.COCONUT_BOAT)
+            .chestItem(ModItems.COCONUT_CHEST_BOAT)
+            .planks(ModItems.COCONUT_PLANKS)
+            .build();
+
+    private static final TerraformBoatType MANGO = new TerraformBoatType.Builder()
+            .item(ModItems.MANGO_BOAT)
+            .chestItem(ModItems.MANGO_CHEST_BOAT)
+            .planks(ModItems.MANGO_PLANKS)
+            .build();
+
     public static final CreativeModeTab MOD_TAB = FabricItemGroup.builder()
             .title(Component.translatable("itemGroup."+ThaiDelight.MOD_ID+".main"))
             .icon(() -> new ItemStack(ModBlocks.MORTAR))
@@ -77,6 +98,7 @@ public class ThaiDelight implements ModInitializer {
     @Override
     public void onInitialize() {
         Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB,new ResourceLocation(MOD_ID,"main"),MOD_TAB);
+
         init();
         postInit();
 
@@ -126,6 +148,11 @@ public class ThaiDelight implements ModInitializer {
         ModMenuType.init();
         ModTreeDecoratorTypes.init();
         ModMobEffects.init();
+
+        Registry.register(TerraformBoatTypeRegistry.INSTANCE,ModItems.DURIAN_BOAT_KEY,DURIAN);
+        Registry.register(TerraformBoatTypeRegistry.INSTANCE,ModItems.COCONUT_BOAT_KEY,COCONUT);
+        Registry.register(TerraformBoatTypeRegistry.INSTANCE,ModItems.MANGO_BOAT_KEY,MANGO);
+
     }
 
     private void postInit(){
@@ -134,6 +161,7 @@ public class ThaiDelight implements ModInitializer {
         registerStrippable();
         registerAnimalFood();
         addVillagersTrades();
+
 
         FabricDefaultAttributeRegistry.register(ModEntityTypes.FLOWER_CRAB, FlowerCrabEntity.createAttributes());
         FabricDefaultAttributeRegistry.register(ModEntityTypes.DRAGONFLY, DragonflyEntity.createAttributes());

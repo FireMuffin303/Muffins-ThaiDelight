@@ -1,6 +1,10 @@
 package net.firemuffin303.muffinsthaidelightfabric.registry;
 
 
+import com.terraformersmc.terraform.sign.block.TerraformHangingSignBlock;
+import com.terraformersmc.terraform.sign.block.TerraformSignBlock;
+import com.terraformersmc.terraform.sign.block.TerraformWallHangingSignBlock;
+import com.terraformersmc.terraform.sign.block.TerraformWallSignBlock;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.*;
@@ -123,46 +127,52 @@ public class ModBlocks {
     ));
 
     public static final Block DURIAN_BUTTON = register("durian_button",Blocks.woodenButton(BlockSetType.CHERRY));
-    public static final Block DURIAN_SIGN = register("durian_sign",new StandingSignBlock(BlockBehaviour.Properties.of()
-            .mapColor(ModBlocks.DURIAN_PLANKS.defaultMapColor())
-            .forceSolidOn()
-            .instrument(NoteBlockInstrument.BASS)
-            .noCollission()
-            .strength(1.0f)
-            .ignitedByLava(),
-            WoodType.CHERRY
-    ));
-
-    public static final Block DURIAN_WALL_SIGN = register("durian_wall_sign",new WallSignBlock(BlockBehaviour.Properties.of()
-            .mapColor(ModBlocks.DURIAN_PLANKS.defaultMapColor())
-            .forceSolidOn()
-            .instrument(NoteBlockInstrument.BASS)
-            .noCollission()
-            .strength(1.0f)
-            .dropsLike(ModBlocks.DURIAN_SIGN)
-            .ignitedByLava(),
-            WoodType.CHERRY
-    ));
-
-    public static final Block DURIAN_HANGING_SIGN = register("durian_hanging_sign",new CeilingHangingSignBlock(BlockBehaviour.Properties.of()
-            .mapColor(ModBlocks.DURIAN_PLANKS.defaultMapColor())
-            .forceSolidOn()
-            .instrument(NoteBlockInstrument.BASS)
-            .noCollission()
-            .strength(1.0f)
-            .ignitedByLava(),
-            WoodType.CHERRY
-    ));
-
-    public static final Block DURIAN_WALL_HANGING_SIGN = register("durian_wall_hanging_sign",new WallHangingSignBlock(BlockBehaviour.Properties.of()
+    public static final Block DURIAN_SIGN = register("durian_sign",new TerraformSignBlock(
+            ThaiDelight.modid("entity/signs/durian"),
+            BlockBehaviour.Properties.of()
             .mapColor(ModBlocks.DURIAN_PLANKS.defaultMapColor())
             .forceSolidOn()
             .instrument(NoteBlockInstrument.BASS)
             .noCollission()
             .strength(1.0f)
             .ignitedByLava()
-            .dropsLike(DURIAN_HANGING_SIGN),
-            WoodType.CHERRY
+    ));
+
+    public static final Block DURIAN_WALL_SIGN = register("durian_wall_sign",new TerraformWallSignBlock(
+            ThaiDelight.modid("entity/signs/durian"),
+            BlockBehaviour.Properties.of()
+            .mapColor(ModBlocks.DURIAN_PLANKS.defaultMapColor())
+            .forceSolidOn()
+            .instrument(NoteBlockInstrument.BASS)
+            .noCollission()
+            .strength(1.0f)
+            .dropsLike(ModBlocks.DURIAN_SIGN)
+            .ignitedByLava()
+    ));
+
+    public static final Block DURIAN_HANGING_SIGN = register("durian_hanging_sign",new TerraformHangingSignBlock(
+            ThaiDelight.modid("entity/signs/hanging/durian"),
+            ThaiDelight.modid("textures/gui/hanging_signs/durian"),
+            BlockBehaviour.Properties.of()
+            .mapColor(ModBlocks.DURIAN_PLANKS.defaultMapColor())
+            .forceSolidOn()
+            .instrument(NoteBlockInstrument.BASS)
+            .noCollission()
+            .strength(1.0f)
+            .ignitedByLava()
+    ));
+
+    public static final Block DURIAN_WALL_HANGING_SIGN = register("durian_wall_hanging_sign",new TerraformWallHangingSignBlock(
+            ThaiDelight.modid("entity/signs/hanging/durian"),
+            ThaiDelight.modid("textures/gui/hanging_signs/durian"),
+            BlockBehaviour.Properties.of()
+            .mapColor(ModBlocks.DURIAN_PLANKS.defaultMapColor())
+            .forceSolidOn()
+            .instrument(NoteBlockInstrument.BASS)
+            .noCollission()
+            .strength(1.0f)
+            .ignitedByLava()
+            .dropsLike(DURIAN_HANGING_SIGN)
     ));
 
     public static final Block DURIAN_CABINET = register("durian_cabinet",new CabinetBlock(BlockBehaviour.Properties.copy(BARREL)));
@@ -220,43 +230,49 @@ public class ModBlocks {
             BlockSetType.CHERRY
     ));
     public static final Block COCONUT_BUTTON = register("coconut_button",Blocks.woodenButton(BlockSetType.CHERRY));
-    public static final Block COCONUT_SIGN = register("coconut_sign",new StandingSignBlock(BlockBehaviour.Properties.of()
+    public static final Block COCONUT_SIGN = register("coconut_sign",new TerraformSignBlock(
+            ThaiDelight.modid("entity/signs/coconut"),
+            BlockBehaviour.Properties.of()
             .mapColor(ModBlocks.DURIAN_PLANKS.defaultMapColor())
             .forceSolidOn()
             .instrument(NoteBlockInstrument.BASS)
             .noCollission()
             .strength(1.0f)
-            .ignitedByLava(),
-            WoodType.CHERRY
+            .ignitedByLava()
     ));
-    public static final Block COCONUT_WALL_SIGN = register("coconut_wall_sign",new WallSignBlock(BlockBehaviour.Properties.of()
+    public static final Block COCONUT_WALL_SIGN = register("coconut_wall_sign",new TerraformWallSignBlock(
+            ThaiDelight.modid("entity/signs/durian"),
+            BlockBehaviour.Properties.of()
             .mapColor(ModBlocks.COCONUT_PLANKS.defaultMapColor())
             .forceSolidOn()
             .instrument(NoteBlockInstrument.BASS)
             .noCollission()
             .strength(1.0f)
             .dropsLike(ModBlocks.DURIAN_SIGN)
-            .ignitedByLava(),
-            WoodType.CHERRY
+            .ignitedByLava()
     ));
-    public static final Block COCONUT_HANGING_SIGN = register("coconut_hanging_sign",new CeilingHangingSignBlock(BlockBehaviour.Properties.of()
-            .mapColor(ModBlocks.COCONUT_PLANKS.defaultMapColor())
-            .forceSolidOn()
-            .instrument(NoteBlockInstrument.BASS)
-            .noCollission()
-            .strength(1.0f)
-            .ignitedByLava(),
-            WoodType.CHERRY
-    ));
-    public static final Block COCONUT_WALL_HANGING_SIGN = register("coconut_wall_hanging_sign",new WallHangingSignBlock(BlockBehaviour.Properties.of()
+    public static final Block COCONUT_HANGING_SIGN = register("coconut_hanging_sign",new TerraformHangingSignBlock(
+            ThaiDelight.modid("entity/signs/hanging/coconut"),
+            ThaiDelight.modid("textures/gui/hanging_signs/coconut"),
+            BlockBehaviour.Properties.of()
             .mapColor(ModBlocks.COCONUT_PLANKS.defaultMapColor())
             .forceSolidOn()
             .instrument(NoteBlockInstrument.BASS)
             .noCollission()
             .strength(1.0f)
             .ignitedByLava()
-            .dropsLike(DURIAN_HANGING_SIGN),
-            WoodType.CHERRY
+    ));
+    public static final Block COCONUT_WALL_HANGING_SIGN = register("coconut_wall_hanging_sign",new TerraformWallHangingSignBlock(
+            ThaiDelight.modid("entity/signs/hanging/coconut"),
+            ThaiDelight.modid("textures/gui/hanging_signs/coconut"),
+            BlockBehaviour.Properties.of()
+            .mapColor(ModBlocks.COCONUT_PLANKS.defaultMapColor())
+            .forceSolidOn()
+            .instrument(NoteBlockInstrument.BASS)
+            .noCollission()
+            .strength(1.0f)
+            .ignitedByLava()
+            .dropsLike(DURIAN_HANGING_SIGN)
     ));
     public static final Block COCONUT_CABINET = register("coconut_cabinet",new CabinetBlock(BlockBehaviour.Properties.copy(BARREL)));
 
@@ -314,43 +330,49 @@ public class ModBlocks {
             BlockSetType.CHERRY
     ));
     public static final Block MANGO_BUTTON = register("mango_button",Blocks.woodenButton(BlockSetType.CHERRY));
-    public static final Block MANGO_SIGN = register("mango_sign",new StandingSignBlock(BlockBehaviour.Properties.of()
-            .mapColor(ModBlocks.MANGO_PLANKS.defaultMapColor())
-            .forceSolidOn()
-            .instrument(NoteBlockInstrument.BASS)
-            .noCollission()
-            .strength(1.0f)
-            .ignitedByLava(),
-            WoodType.CHERRY
-    ));
-    public static final Block MANGO_WALL_SIGN = register("mango_wall_sign",new WallSignBlock(BlockBehaviour.Properties.of()
-            .mapColor(ModBlocks.MANGO_PLANKS.defaultMapColor())
-            .forceSolidOn()
-            .instrument(NoteBlockInstrument.BASS)
-            .noCollission()
-            .strength(1.0f)
-            .dropsLike(ModBlocks.DURIAN_SIGN)
-            .ignitedByLava(),
-            WoodType.CHERRY
-    ));
-    public static final Block MANGO_HANGING_SIGN = register("mango_hanging_sign",new CeilingHangingSignBlock(BlockBehaviour.Properties.of()
-            .mapColor(ModBlocks.MANGO_PLANKS.defaultMapColor())
-            .forceSolidOn()
-            .instrument(NoteBlockInstrument.BASS)
-            .noCollission()
-            .strength(1.0f)
-            .ignitedByLava(),
-            WoodType.CHERRY
-    ));
-    public static final Block MANGO_WALL_HANGING_SIGN = register("mango_wall_hanging_sign", new WallHangingSignBlock(BlockBehaviour.Properties.of()
+    public static final Block MANGO_SIGN = register("mango_sign",new TerraformSignBlock(
+            ThaiDelight.modid("entity/signs/mango"),
+            BlockBehaviour.Properties.of()
             .mapColor(ModBlocks.MANGO_PLANKS.defaultMapColor())
             .forceSolidOn()
             .instrument(NoteBlockInstrument.BASS)
             .noCollission()
             .strength(1.0f)
             .ignitedByLava()
-            .dropsLike(DURIAN_HANGING_SIGN),
-            WoodType.CHERRY
+    ));
+    public static final Block MANGO_WALL_SIGN = register("mango_wall_sign",new TerraformWallSignBlock(
+            ThaiDelight.modid("entity/signs/mango"),
+            BlockBehaviour.Properties.of()
+            .mapColor(ModBlocks.MANGO_PLANKS.defaultMapColor())
+            .forceSolidOn()
+            .instrument(NoteBlockInstrument.BASS)
+            .noCollission()
+            .strength(1.0f)
+            .dropsLike(ModBlocks.DURIAN_SIGN)
+            .ignitedByLava()
+    ));
+    public static final Block MANGO_HANGING_SIGN = register("mango_hanging_sign",new TerraformHangingSignBlock(
+            ThaiDelight.modid("entity/signs/hanging/mango"),
+            ThaiDelight.modid("textures/gui/hanging_signs/mango"),
+            BlockBehaviour.Properties.of()
+            .mapColor(ModBlocks.MANGO_PLANKS.defaultMapColor())
+            .forceSolidOn()
+            .instrument(NoteBlockInstrument.BASS)
+            .noCollission()
+            .strength(1.0f)
+            .ignitedByLava()
+    ));
+    public static final Block MANGO_WALL_HANGING_SIGN = register("mango_wall_hanging_sign", new TerraformWallHangingSignBlock(
+            ThaiDelight.modid("entity/signs/hanging/mango"),
+            ThaiDelight.modid("textures/gui/hanging_signs/mango"),
+            BlockBehaviour.Properties.of()
+            .mapColor(ModBlocks.MANGO_PLANKS.defaultMapColor())
+            .forceSolidOn()
+            .instrument(NoteBlockInstrument.BASS)
+            .noCollission()
+            .strength(1.0f)
+            .ignitedByLava()
+            .dropsLike(DURIAN_HANGING_SIGN)
     ));
     public static final Block MANGO_CABINET = register("mango_cabinet",new CabinetBlock(BlockBehaviour.Properties.copy(BARREL)));
 

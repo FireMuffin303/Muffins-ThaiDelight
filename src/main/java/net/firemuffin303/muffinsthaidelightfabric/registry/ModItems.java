@@ -1,10 +1,15 @@
 package net.firemuffin303.muffinsthaidelightfabric.registry;
 
 
+import com.chocohead.mm.api.ClassTinkerers;
+import com.terraformersmc.terraform.boat.api.TerraformBoatType;
+import com.terraformersmc.terraform.boat.api.TerraformBoatTypeRegistry;
+import com.terraformersmc.terraform.boat.api.item.TerraformBoatItemHelper;
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
 import net.firemuffin303.muffinsthaidelightfabric.common.item.DragonflyBottleItem;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -27,7 +32,12 @@ import static vectorwing.farmersdelight.common.registry.ModItems.bowlFoodItem;
 import static vectorwing.farmersdelight.common.registry.ModItems.drinkItem;
 
 public class ModItems {
+    public static final ResourceKey<TerraformBoatType> DURIAN_BOAT_KEY = TerraformBoatTypeRegistry.createKey(ThaiDelight.modid("durian_boat"));
+    public static final ResourceKey<TerraformBoatType> COCONUT_BOAT_KEY = TerraformBoatTypeRegistry.createKey(ThaiDelight.modid("coconut_boat"));
+    public static final ResourceKey<TerraformBoatType> MANGO_BOAT_KEY = TerraformBoatTypeRegistry.createKey(ThaiDelight.modid("mango_boat"));
+
     public static final ArrayList<Item> ITEMS = new ArrayList<>();
+
     public static final Item MORTAR = register("mortar",new BlockItem(ModBlocks.MORTAR,new Item.Properties()));
 
     //Blocks
@@ -110,8 +120,8 @@ public class ModItems {
     public static final Item DURIAN_SIGN = register("durian_sign",new SignItem(new Item.Properties().stacksTo(16),ModBlocks.DURIAN_SIGN,ModBlocks.DURIAN_WALL_SIGN));
     public static final Item DURIAN_HANGING_SIGN = register("durian_hanging_sign",new HangingSignItem(ModBlocks.DURIAN_HANGING_SIGN,ModBlocks.DURIAN_WALL_HANGING_SIGN,new Item.Properties().stacksTo(16)));
     public static final Item DURIAN_CABINET = register("durian_cabinet",new BlockItem(ModBlocks.DURIAN_CABINET,new Item.Properties()));
-    public static final Item DURIAN_BOAT = register("durian_boat",new BoatItem(false, Boat.Type.ACACIA,new Item.Properties().stacksTo(1)));
-    public static final Item DURIAN_CHEST_BOAT = register("durian_chest_boat", new BoatItem(true, Boat.Type.ACACIA,new Item.Properties().stacksTo(1)));
+    public static final Item DURIAN_BOAT = TerraformBoatItemHelper.registerBoatItem(ThaiDelight.modid("durian_boat"),DURIAN_BOAT_KEY,false);
+    public static final Item DURIAN_CHEST_BOAT = TerraformBoatItemHelper.registerBoatItem(ThaiDelight.modid("durian_chest_boat"),DURIAN_BOAT_KEY,true);
 
     //------------------------
     //------------------ COCONUT ------------------
@@ -134,8 +144,8 @@ public class ModItems {
     public static final Item COCONUT_SIGN = register("coconut_sign",new SignItem(new Item.Properties().stacksTo(16),ModBlocks.COCONUT_SIGN,ModBlocks.COCONUT_WALL_SIGN));
     public static final Item COCONUT_HANGING_SIGN = register("coconut_hanging_sign",new HangingSignItem(ModBlocks.COCONUT_HANGING_SIGN,ModBlocks.COCONUT_WALL_HANGING_SIGN,new Item.Properties().stacksTo(16)));
     public static final Item COCONUT_CABINET = register("coconut_cabinet",new BlockItem(ModBlocks.COCONUT_CABINET,new Item.Properties()));
-    public static final Item COCONUT_BOAT = register("coconut_boat",new BoatItem(false, Boat.Type.ACACIA,new Item.Properties().stacksTo(1)));
-    public static final Item COCONUT_CHEST_BOAT = register("coconut_chest_boat", new BoatItem(true, Boat.Type.ACACIA,new Item.Properties().stacksTo(1)));
+    public static final Item COCONUT_BOAT = TerraformBoatItemHelper.registerBoatItem(ThaiDelight.modid("coconut_boat"),COCONUT_BOAT_KEY,false);
+    public static final Item COCONUT_CHEST_BOAT = TerraformBoatItemHelper.registerBoatItem(ThaiDelight.modid("coconut_chest_boat"),COCONUT_BOAT_KEY,true);
 
 
 
@@ -159,8 +169,8 @@ public class ModItems {
     public static final Item MANGO_SIGN = register("mango_sign",new SignItem(new Item.Properties().stacksTo(16),ModBlocks.MANGO_SIGN,ModBlocks.MANGO_WALL_SIGN));
     public static final Item MANGO_HANGING_SIGN = register("mango_hanging_sign",new HangingSignItem(ModBlocks.MANGO_HANGING_SIGN,ModBlocks.MANGO_WALL_HANGING_SIGN,new Item.Properties().stacksTo(16)));
     public static final Item MANGO_CABINET = register("mango_cabinet",new BlockItem(ModBlocks.MANGO_CABINET,new Item.Properties()));
-    public static final Item MANGO_BOAT = register("mango_boat",new BoatItem(false, Boat.Type.ACACIA,new Item.Properties().stacksTo(1)));
-    public static final Item MANGO_CHEST_BOAT = register("mango_chest_boat", new BoatItem(true, Boat.Type.ACACIA,new Item.Properties().stacksTo(1)));
+    public static final Item MANGO_BOAT = TerraformBoatItemHelper.registerBoatItem(ThaiDelight.modid("mango_boat"),MANGO_BOAT_KEY,false);
+    public static final Item MANGO_CHEST_BOAT = TerraformBoatItemHelper.registerBoatItem(ThaiDelight.modid("mango_chest_boat"),MANGO_BOAT_KEY,true);
 
 
 
