@@ -20,6 +20,7 @@ import net.firemuffin303.muffinsthaidelightfabric.common.entity.FlowerCrabEntity
 import net.firemuffin303.muffinsthaidelightfabric.common.event.ModVillagerTrades;
 import net.firemuffin303.muffinsthaidelightfabric.common.item.DragonflyBottleItem;
 import net.firemuffin303.muffinsthaidelightfabric.common.manager.FlavorManager;
+import net.firemuffin303.muffinsthaidelightfabric.datagen.ModTagDataGen;
 import net.firemuffin303.muffinsthaidelightfabric.mixin.*;
 import net.firemuffin303.muffinsthaidelightfabric.mixin.food.ChickenFoodAccessor;
 import net.firemuffin303.muffinsthaidelightfabric.mixin.food.FrogFoodAccessor;
@@ -35,6 +36,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.packs.PackType;
+import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.world.entity.ai.goal.GoalSelector;
@@ -47,7 +49,6 @@ import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.ComposterBlock;
-import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.structure.pools.SinglePoolElement;
@@ -132,9 +133,6 @@ public class ThaiDelight implements ModInitializer {
             }
 
         });
-
-
-
     }
 
     private void init(){
@@ -189,6 +187,12 @@ public class ThaiDelight implements ModInitializer {
         BiomeModifications.addFeature((context) ->{
             return BiomeSelectors.includeByKey(Biomes.SAVANNA,Biomes.SAVANNA_PLATEAU,Biomes.WINDSWEPT_SAVANNA).test(context);
         }, GenerationStep.Decoration.VEGETAL_DECORATION, ModFeatures.PAPAYA_TREE_CHECKED);
+
+        BiomeModifications.addFeature(context -> BiomeSelectors.tag(BiomeTags.IS_JUNGLE).test(context),
+                GenerationStep.Decoration.VEGETAL_DECORATION,ModFeatures.TREES_DURIAN);
+
+        BiomeModifications.addFeature(context -> BiomeSelectors.tag(ModTagDataGen.ModBiomeTagDataGen.MANGO_TREE_BIOMES).test(context),
+                GenerationStep.Decoration.VEGETAL_DECORATION,ModFeatures.TREES_MANGO);
 
         ServerLifecycleEvents.SERVER_STARTING.register(minecraftServer -> {
             addToStructurePool(minecraftServer,

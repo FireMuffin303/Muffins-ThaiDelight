@@ -1,20 +1,21 @@
 package net.firemuffin303.muffinsthaidelightfabric.registry;
 
+import com.google.common.collect.ImmutableList;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.DurianBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.mango.MangoBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.world.feature.*;
-import net.minecraft.core.Direction;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.core.Registry;
+import net.minecraft.core.*;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
+import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.valueproviders.ClampedInt;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.Blocks;
@@ -25,15 +26,12 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.*;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
-import net.minecraft.world.level.levelgen.feature.foliageplacers.FancyFoliagePlacer;
-import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.RandomizedIntStateProvider;
 import net.minecraft.world.level.levelgen.feature.treedecorators.AttachedToLeavesDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.BeehiveDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
-import net.minecraft.world.level.levelgen.feature.trunkplacers.FancyTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
 import net.minecraft.world.level.levelgen.placement.*;
@@ -42,7 +40,6 @@ import vectorwing.farmersdelight.common.world.configuration.WildCropConfiguratio
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.OptionalInt;
 
 public class ModFeatures {
     public static final TrunkPlacerType<LimeTreeTrunkPlacer> LIME_TRUNK_PLACER = Registry.register(BuiltInRegistries.TRUNK_PLACER_TYPE, ThaiDelight.modid("lime_trunk_placer"),new TrunkPlacerType<>(LimeTreeTrunkPlacer.CODEC));
@@ -73,13 +70,13 @@ public class ModFeatures {
     public static final ResourceKey<PlacedFeature> PATCH_LIME_BUSH;
     public static final ResourceKey<PlacedFeature> PATCH_WILD_PEPPER;
     public static final ResourceKey<PlacedFeature> PAPAYA_TREE_CHECKED;
-
-
-
+    public static final ResourceKey<PlacedFeature> TREES_DURIAN = ResourceKey.create(Registries.PLACED_FEATURE,ThaiDelight.modid("trees_durian"));
+    public static final ResourceKey<PlacedFeature> TREES_MANGO = ResourceKey.create(Registries.PLACED_FEATURE,ThaiDelight.modid("trees_mango"));
 
     public static void init(){}
 
     public static void bootstrapConfiguredFeature(BootstapContext<ConfiguredFeature<?, ?>> bootstapContext){
+
         bootstapContext.register(ModFeatures.FEATURE_PATCH_LIME_BUSH,
                 new ConfiguredFeature<>(Feature.RANDOM_PATCH,
                         new RandomPatchConfiguration(12,5,3,
@@ -110,6 +107,7 @@ public class ModFeatures {
         bootstapContext.register(ModFeatures.FEATURE_DURAIN_TREE_BEE,new ConfiguredFeature<>(Feature.TREE,createDurianTree(
                 List.of(new BeehiveDecorator(0.05f))).build()));
 
+
         bootstapContext.register(ModFeatures.FEATURE_LIME_TREE,new ConfiguredFeature<>(Feature.TREE,
                 new TreeConfiguration.TreeConfigurationBuilder(
                         BlockStateProvider.simple(Blocks.OAK_LOG),
@@ -131,6 +129,9 @@ public class ModFeatures {
     public static void bootstrapPlacedFeature(BootstapContext<PlacedFeature> bootstapContext){
         var config_lime_bush = bootstapContext.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(ModFeatures.FEATURE_PATCH_LIME_BUSH);
         var config_wild_pepper = bootstapContext.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(ModFeatures.FEATURE_PATCH_WILD_PEPPER);
+        Holder.Reference<ConfiguredFeature<?,?>> durian_tree_checked = bootstapContext.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(ModFeatures.FEATURE_DURIAN_TREE);
+        Holder.Reference<ConfiguredFeature<?,?>> mango_tree_checked = bootstapContext.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(ModFeatures.FEATURE_MANGO_TREE);
+
         bootstapContext.register(ModFeatures.PATCH_LIME_BUSH,new PlacedFeature(config_lime_bush,
                 List.of(
                         HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
@@ -149,6 +150,16 @@ public class ModFeatures {
                 )
         ));
 
+        bootstapContext.register(ModFeatures.TREES_DURIAN,new PlacedFeature(durian_tree_checked, VegetationPlacements.treePlacement(PlacementUtils.countExtra(1,0.02f,1),ModBlocks.DURIAN_SAPLING)));
+        bootstapContext.register(ModFeatures.TREES_MANGO,new PlacedFeature(mango_tree_checked, ImmutableList.<PlacementModifier>builder()
+                .add(CountPlacement.of(ClampedInt.of(UniformInt.of(-3,1),0,1)))
+                .add(RarityFilter.onAverageOnceEvery(5))
+                .add(InSquarePlacement.spread())
+                .add(SurfaceWaterDepthFilter.forMaxDepth(0))
+                .add(PlacementUtils.HEIGHTMAP_OCEAN_FLOOR)
+                .add(BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(ModBlocks.MANGO_SAPLING.defaultBlockState(), BlockPos.ZERO)))
+                .add(BiomeFilter.biome()).build())
+        );
 
     }
 
@@ -170,6 +181,8 @@ public class ModFeatures {
         entries.add(provider.lookupOrThrow(Registries.CONFIGURED_FEATURE),ModFeatures.FEATURE_LIME_TREE);
         entries.add(provider.lookupOrThrow(Registries.PLACED_FEATURE),ModFeatures.PATCH_LIME_BUSH);
         entries.add(provider.lookupOrThrow(Registries.PLACED_FEATURE),ModFeatures.PATCH_WILD_PEPPER);
+        entries.add(provider.lookupOrThrow(Registries.PLACED_FEATURE),ModFeatures.TREES_DURIAN);
+        entries.add(provider.lookupOrThrow(Registries.PLACED_FEATURE),ModFeatures.TREES_MANGO);
 
     }
 

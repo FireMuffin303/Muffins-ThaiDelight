@@ -2,18 +2,23 @@ package net.firemuffin303.muffinsthaidelightfabric.datagen;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModEntityTypes;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModItems;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModTags;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.Biomes;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -152,6 +157,18 @@ public class ModTagDataGen {
         protected void addTags(HolderLookup.Provider provider) {
             getOrCreateTagBuilder(EntityTypeTags.FROG_FOOD)
                     .add(ModEntityTypes.DRAGONFLY);
+        }
+    }
+
+    public static class ModBiomeTagDataGen extends FabricTagProvider<Biome> {
+        public static final TagKey<Biome> MANGO_TREE_BIOMES = TagKey.create(Registries.BIOME, ThaiDelight.modid("mango_tree_biomes"));
+        public ModBiomeTagDataGen(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+            super(output, Registries.BIOME, registriesFuture);
+        }
+
+        @Override
+        protected void addTags(HolderLookup.Provider provider) {
+            getOrCreateTagBuilder(MANGO_TREE_BIOMES).add(Biomes.BIRCH_FOREST,Biomes.OLD_GROWTH_BIRCH_FOREST,Biomes.FLOWER_FOREST,Biomes.FOREST);
         }
     }
 }
