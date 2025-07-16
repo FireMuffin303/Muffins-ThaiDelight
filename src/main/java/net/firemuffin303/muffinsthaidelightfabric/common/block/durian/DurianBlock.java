@@ -1,5 +1,6 @@
 package net.firemuffin303.muffinsthaidelightfabric.common.block.durian;
 
+import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -64,6 +65,7 @@ public class DurianBlock extends FallingBlock implements SimpleWaterloggedBlock,
         if (!level.isClientSide && projectile.mayInteract(level, blockPos) && projectile.getType().is(EntityTypeTags.IMPACT_PROJECTILES) && level.getBlockState(blockPos.below()).isAir() && blockState.getValue(AGE) == 2) {
             FallingBlockEntity fallingBlockEntity = FallingBlockEntity.fall(level, blockPos, blockState);
             this.falling(fallingBlockEntity);
+            this.setFlower((ServerLevel) level,blockPos);
         }
     }
 
@@ -83,6 +85,7 @@ public class DurianBlock extends FallingBlock implements SimpleWaterloggedBlock,
         if (shouldFall(serverLevel.getBlockState(blockPos.below())) && shouldFall(serverLevel.getBlockState(blockPos.above())) && blockPos.getY() >= serverLevel.getMinBuildHeight()) {
             FallingBlockEntity fallingBlockEntity = FallingBlockEntity.fall(serverLevel, blockPos, blockState);
             this.falling(fallingBlockEntity);
+            this.setFlower(serverLevel,blockPos);
         }
     }
 
@@ -130,5 +133,9 @@ public class DurianBlock extends FallingBlock implements SimpleWaterloggedBlock,
             int i = Math.min(2,blockState.getValue(AGE) + randomSource.nextInt(1,3));
             serverLevel.setBlock(blockPos,blockState.setValue(AGE, i),2);
         }
+    }
+
+    private void setFlower(ServerLevel serverLevel,BlockPos blockPos){
+        serverLevel.setBlock(blockPos, ModBlocks.DURIAN_FLOWER.defaultBlockState().setValue(HANGING,true),2);
     }
 }
