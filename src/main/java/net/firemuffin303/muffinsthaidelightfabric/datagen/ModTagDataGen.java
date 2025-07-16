@@ -14,11 +14,13 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.EntityTypeTags;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
+import net.minecraft.world.level.block.Block;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -27,6 +29,10 @@ public class ModTagDataGen {
         TagKey<Item> INSECT_ITEMS = TagKey.create(Registries.ITEM, new ResourceLocation("alexsmobs", "insect_items"));
         TagKey<Item> FORGE_RAW_FISHES = TagKey.create(Registries.ITEM, new ResourceLocation("forge", "raw_fishes"));
         TagKey<Item> C_RAW_FISHES = TagKey.create(Registries.ITEM, new ResourceLocation("c", "raw_fishes"));
+
+        public static final TagKey<Item> DURIAN_LOGS = TagKey.create(Registries.ITEM,ThaiDelight.modid("durian_logs"));
+        public static final TagKey<Item> MANGO_LOGS = TagKey.create(Registries.ITEM,ThaiDelight.modid("mango_logs"));
+        public static final TagKey<Item> COCONUT_LOGS = TagKey.create(Registries.ITEM,ThaiDelight.modid("coconut_logs"));
 
         public ModItemTagDataGen(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> completableFuture) {
             super(output, completableFuture, null);
@@ -111,6 +117,11 @@ public class ModTagDataGen {
                     .add(ModItems.COOKED_CRAB_MEAT)
                     .add(ModItems.COOKED_DRAGONFLY);
 
+            getOrCreateTagBuilder(ItemTags.PLANKS).add(ModItems.DURIAN_PLANKS,ModItems.MANGO_PLANKS,ModItems.COCONUT_PLANKS);
+
+            getOrCreateTagBuilder(DURIAN_LOGS).add(ModItems.DURIAN_LOG,ModItems.DURIAN_WOOD,ModItems.STRIPPED_DURIAN_LOG,ModItems.STRIPPED_DURIAN_WOOD);
+            getOrCreateTagBuilder(MANGO_LOGS).add(ModItems.MANGO_LOG,ModItems.MANGO_WOOD,ModItems.STRIPPED_MANGO_LOG,ModItems.STRIPPED_MANGO_WOOD);
+            getOrCreateTagBuilder(COCONUT_LOGS).add(ModItems.COCONUT_LOG,ModItems.COCONUT_WOOD,ModItems.STRIPPED_COCONUT_LOG,ModItems.STRIPPED_COCONUT_WOOD);
         }
     }
 
@@ -125,10 +136,14 @@ public class ModTagDataGen {
             getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_AXE)
                     .add(ModBlocks.PEPPER_CRATE)
                     .add(ModBlocks.PAPAYA_CRATE)
-                    .add(ModBlocks.LIME_CRATE);
+                    .add(ModBlocks.LIME_CRATE)
+                    .add(ModBlocks.DURIAN_BLOCK);
 
             getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_PICKAXE)
                     .add(ModBlocks.MORTAR);
+
+            getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_HOE)
+                    .add(ModBlocks.DURIAN_BLOCK);
 
             getOrCreateTagBuilder(BlockTags.LOGS_THAT_BURN)
                     .add(ModBlocks.PAPAYA_LOG)
@@ -144,6 +159,17 @@ public class ModTagDataGen {
                     .add(ModBlocks.PAPAYA_WOOD)
                     .add(ModBlocks.STRIPPED_PAPAYA_LOG)
                     .add(ModBlocks.STRIPPED_PAPAYA_WOOD);
+
+
+            getOrCreateTagBuilder(BlockTags.PLANKS).add(ModBlocks.DURIAN_PLANKS,ModBlocks.MANGO_PLANKS,ModBlocks.COCONUT_PLANKS);
+            getOrCreateTagBuilder(BlockTags.WOODEN_STAIRS).add(ModBlocks.DURIAN_STAIRS,ModBlocks.MANGO_STAIRS,ModBlocks.COCONUT_STAIRS);
+            getOrCreateTagBuilder(BlockTags.WOODEN_SLABS).add(ModBlocks.DURIAN_SLAB,ModBlocks.MANGO_SLAB,ModBlocks.COCONUT_SLAB);
+            getOrCreateTagBuilder(BlockTags.WOODEN_FENCES).add(ModBlocks.DURIAN_FENCE,ModBlocks.MANGO_FENCE,ModBlocks.COCONUT_FENCE);
+            getOrCreateTagBuilder(BlockTags.FENCE_GATES).add(ModBlocks.DURIAN_FENCE_GATE,ModBlocks.MANGO_FENCE_GATE,ModBlocks.COCONUT_FENCE_GATE);
+            getOrCreateTagBuilder(BlockTags.WOODEN_DOORS).add(ModBlocks.DURIAN_DOOR,ModBlocks.MANGO_DOOR,ModBlocks.COCONUT_DOOR);
+            getOrCreateTagBuilder(BlockTags.WOODEN_TRAPDOORS).add(ModBlocks.DURIAN_TRAPDOOR,ModBlocks.MANGO_TRAPDOOR,ModBlocks.COCONUT_FENCE_GATE);
+            getOrCreateTagBuilder(BlockTags.WOODEN_PRESSURE_PLATES).add(ModBlocks.DURIAN_PRESSURE_PLATE,ModBlocks.MANGO_PRESSURE_PLATE,ModBlocks.COCONUT_PRESSURE_PLATE);
+            getOrCreateTagBuilder(BlockTags.WOODEN_BUTTONS).add(ModBlocks.DURIAN_BUTTON,ModBlocks.MANGO_BUTTON,ModBlocks.COCONUT_BUTTON);
         }
     }
 

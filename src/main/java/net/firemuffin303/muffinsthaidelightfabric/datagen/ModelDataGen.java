@@ -143,6 +143,16 @@ public class ModelDataGen extends FabricModelProvider {
                         )
         );
 
+        //blockStateModelGenerator.createSimpleFlatItemModel(ModBlocks.DURIAN_FLOWER);
+        ResourceLocation durian_flower_resource = BlockModelGenerators.TintState.NOT_TINTED.getCross().create(ModBlocks.DURIAN_FLOWER, TextureMapping.cross(ModBlocks.DURIAN_FLOWER), blockStateModelGenerator.modelOutput);
+        blockStateModelGenerator.blockStateOutput.accept(
+                MultiVariantGenerator.multiVariant(ModBlocks.DURIAN_FLOWER)
+                        .with(PropertyDispatch.property(BlockStateProperties.HANGING)
+                                .select(false,Variant.variant().with(VariantProperties.MODEL,durian_flower_resource))
+                                .select(true,Variant.variant().with(VariantProperties.MODEL,durian_flower_resource).with(VariantProperties.X_ROT,VariantProperties.Rotation.R180))
+                        )
+        );
+
         blockStateModelGenerator.createCrossBlockWithDefaultItem(ModBlocks.WILD_PEPPER_CROP, BlockModelGenerators.TintState.NOT_TINTED);
         blockStateModelGenerator.createCrossBlockWithDefaultItem(ModBlocks.PAPAYA_SAPLING, BlockModelGenerators.TintState.NOT_TINTED);
 
@@ -198,8 +208,11 @@ public class ModelDataGen extends FabricModelProvider {
         blockStateModelGenerator.createPlant(ModBlocks.COCONUT_SAPLING,ModBlocks.POTTED_COCONUT_SAPLING, BlockModelGenerators.TintState.NOT_TINTED);
         blockStateModelGenerator.createPlant(ModBlocks.MANGO_SAPLING,ModBlocks.POTTED_MANGO_SAPLING, BlockModelGenerators.TintState.NOT_TINTED);
 
+
+
         blockStateModelGenerator.createTrivialBlock(ModBlocks.LIME_LEAVES,TexturedModel.LEAVES);
     }
+
 
     @Override
     public void generateItemModels(ItemModelGenerators itemModelGenerator) {

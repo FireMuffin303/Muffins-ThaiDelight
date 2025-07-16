@@ -79,8 +79,8 @@ public class ModBlocks {
     //Durian
     public static final Block DURIAN_SAPLING = register("durian_sapling",new SaplingBlock(new DurianTreeGrower(),BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
     public static final Block POTTED_DURIAN_SAPLING = register("potted_durian_sapling",Blocks.flowerPot(DURIAN_SAPLING));
-    public static final Block DURIAN_FLOWER = register("durian_flower",new DurianFlowerBlock(BlockBehaviour.Properties.copy(SPORE_BLOSSOM)));
-    public static final Block DURIAN_BLOCK = register("durian_block",new DurianBlock(BlockBehaviour.Properties.copy(Blocks.MELON)));
+    public static final Block DURIAN_FLOWER = register("durian_flower",new DurianFlowerBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).instabreak().noCollission().sound(SoundType.SPORE_BLOSSOM).pushReaction(PushReaction.DESTROY).randomTicks()));
+    public static final Block DURIAN_BLOCK = register("durian_block",new DurianBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).strength(1.0F).sound(SoundType.WOOD).pushReaction(PushReaction.DESTROY).randomTicks()));
     public static final Block DURIAN_LEAVES = register("durian_leaves",new DurianLeaveBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES)));
 
     //Durian Woodset

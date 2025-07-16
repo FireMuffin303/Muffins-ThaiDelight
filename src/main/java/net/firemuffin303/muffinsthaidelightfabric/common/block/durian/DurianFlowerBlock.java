@@ -43,13 +43,20 @@ public class DurianFlowerBlock extends Block implements SimpleWaterloggedBlock, 
     //Placement
     @Override
     public boolean canSurvive(BlockState blockState, LevelReader levelReader, BlockPos blockPos) {
-        return isHanging(blockState) ? Block.canSupportCenter(levelReader,blockPos.above(), Direction.DOWN) : super.canSurvive(blockState, levelReader, blockPos);
+        return isHanging(blockState) ? Block.canSupportCenter(levelReader,blockPos.above(), Direction.DOWN) : canSupportCenter(levelReader, blockPos.below(), Direction.UP);
     }
 
     public BlockState getStateForPlacement(BlockPlaceContext blockPlaceContext) {
         FluidState fluidState = blockPlaceContext.getLevel().getFluidState(blockPlaceContext.getClickedPos());
-        boolean bl = fluidState.getType() == Fluids.WATER;
-        return super.getStateForPlacement(blockPlaceContext).setValue(WATERLOGGED, Boolean.valueOf(bl));
+        for (Direction direction : blockPlaceContext.getNearestLookingDirections()) {
+            if (direction.getAxis() == Direction.Axis.Y) {
+                BlockState blockState = this.defaultBlockState().setValue(HANGING, direction == Direction.UP);
+                if (blockState.canSurvive(blockPlaceContext.getLevel(), blockPlaceContext.getClickedPos())) {
+                    return blockState.setValue(WATERLOGGED, fluidState.getType() == Fluids.WATER);
+                }
+            }
+        }
+        return null;
     }
 
     //Growing

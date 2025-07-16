@@ -188,10 +188,9 @@ public class ModFeatures {
 
     private static TreeConfiguration.TreeConfigurationBuilder createDurianTree(List<TreeDecorator> treeDecorators) {
         List<TreeDecorator> decorators = new ArrayList<>();
-        decorators.add(new AttachedToLeavesDecorator(0.24f,1,0,new RandomizedIntStateProvider(
-                BlockStateProvider.simple(ModBlocks.DURIAN_BLOCK.defaultBlockState().setValue(DurianBlock.HANGING,true)),
-                DurianBlock.AGE,UniformInt.of(0,1)
-        ),2,List.of(Direction.DOWN)));
+        decorators.add(new AttachedToLeavesDecorator(0.15f,1,0,
+                BlockStateProvider.simple(ModBlocks.DURIAN_FLOWER.defaultBlockState().setValue(DurianBlock.HANGING,true)),
+                2,List.of(Direction.DOWN)));
 
         decorators.addAll(treeDecorators);
 
@@ -199,7 +198,7 @@ public class ModFeatures {
         return new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBlocks.DURIAN_LOG),
                 new DurianTreeTrunkPlacer(5,2,0, UniformInt.of(-2,-1), UniformInt.of(2,3),UniformInt.of(1,3)),
-                BlockStateProvider.simple(Blocks.AZALEA_LEAVES),
+                BlockStateProvider.simple(ModBlocks.DURIAN_LEAVES),
                 new DurianTreeFoliagePlacer(ConstantInt.of(2),ConstantInt.of(0),0.4f,0.12f),
                 new TwoLayersFeatureSize(1,0,1)
         ).ignoreVines().decorators(decorators);

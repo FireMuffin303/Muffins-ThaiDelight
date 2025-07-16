@@ -10,6 +10,7 @@ import net.minecraft.data.recipes.*;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.level.ItemLike;
 
 import java.util.function.Consumer;
@@ -35,6 +36,37 @@ public class ModRecipeDataGen extends FabricRecipeProvider {
     }
 
     private void craft(Consumer<FinishedRecipe> exporter){
+        RecipeProvider.planksFromLog(exporter,ModBlocks.DURIAN_PLANKS, ModTagDataGen.ModItemTagDataGen.DURIAN_LOGS,4);
+        RecipeProvider.woodFromLogs(exporter,ModBlocks.DURIAN_WOOD, ModBlocks.DURIAN_LOG);
+        RecipeProvider.woodenBoat(exporter,ModItems.DURIAN_BOAT,ModBlocks.DURIAN_PLANKS);
+        RecipeProvider.chestBoat(exporter,ModItems.DURIAN_CHEST_BOAT,ModItems.DURIAN_BOAT);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC,ModItems.DURIAN_CABINET)
+                .pattern("WWW")
+                .pattern("S S")
+                .pattern("WWW")
+                .define('W',ModItems.DURIAN_PLANKS).define('S',ModItems.DURIAN_SLAB);
+
+        RecipeProvider.planksFromLog(exporter,ModBlocks.MANGO_PLANKS, ModTagDataGen.ModItemTagDataGen.MANGO_LOGS,4);
+        RecipeProvider.woodFromLogs(exporter,ModBlocks.MANGO_WOOD, ModBlocks.MANGO_LOG);
+        RecipeProvider.woodenBoat(exporter,ModItems.MANGO_BOAT,ModBlocks.MANGO_PLANKS);
+        RecipeProvider.chestBoat(exporter,ModItems.MANGO_CHEST_BOAT,ModItems.MANGO_BOAT);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC,ModItems.MANGO_CABINET)
+                .pattern("WWW")
+                .pattern("S S")
+                .pattern("WWW")
+                .define('W',ModItems.MANGO_PLANKS).define('S',ModItems.MANGO_SLAB);
+
+        RecipeProvider.planksFromLog(exporter,ModBlocks.COCONUT_PLANKS, ModTagDataGen.ModItemTagDataGen.COCONUT_LOGS,4);
+        RecipeProvider.woodFromLogs(exporter,ModBlocks.COCONUT_WOOD, ModBlocks.COCONUT_LOG);
+        RecipeProvider.woodenBoat(exporter,ModItems.COCONUT_BOAT,ModBlocks.COCONUT_PLANKS);
+        RecipeProvider.chestBoat(exporter,ModItems.COCONUT_CHEST_BOAT,ModItems.COCONUT_BOAT);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC,ModItems.COCONUT_CABINET)
+                .pattern("WWW")
+                .pattern("S S")
+                .pattern("WWW")
+                .define('W',ModItems.COCONUT_PLANKS).define('S',ModItems.COCONUT_SLAB);
+
+
         bigPackingCraft(Item.byBlock(ModBlocks.LIME_CRATE),1,ModItems.LIME,exporter);
         bigPackingCraft(Item.byBlock(ModBlocks.PEPPER_CRATE),1,ModItems.PEPPER,exporter);
         bigPackingCraft(Item.byBlock(ModBlocks.RAW_PAPAYA_CRATE),1,ModItems.RAW_PAPAYA,exporter);

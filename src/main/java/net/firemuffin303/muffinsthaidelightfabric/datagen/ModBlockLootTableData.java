@@ -57,6 +57,62 @@ public class ModBlockLootTableData extends FabricBlockLootTableProvider {
         this.createSimpleLoot(ModBlocks.PAPAYA_SAPLING);
         this.createSimpleLoot(ModBlocks.LIME_SAPLING);
         this.createSimpleLoot(ModBlocks.DURIAN_SAPLING);
+        this.createSimpleLoot(ModBlocks.MANGO_SAPLING);
+        this.createSimpleLoot(ModBlocks.COCONUT_SAPLING);
+
+        //Durian
+        this.createSimpleLoot(ModBlocks.DURIAN_LOG);
+        this.createSimpleLoot(ModBlocks.DURIAN_WOOD);
+        this.createSimpleLoot(ModBlocks.STRIPPED_DURIAN_LOG);
+        this.createSimpleLoot(ModBlocks.STRIPPED_DURIAN_WOOD);
+        this.createSimpleLoot(ModBlocks.DURIAN_PLANKS);
+        this.createSimpleLoot(ModBlocks.DURIAN_STAIRS);
+        this.createSimpleLoot(ModBlocks.DURIAN_SLAB);
+        this.createSimpleLoot(ModBlocks.DURIAN_FENCE);
+        this.createSimpleLoot(ModBlocks.DURIAN_FENCE_GATE);
+        this.createSimpleLoot(ModBlocks.DURIAN_DOOR);
+        this.createSimpleLoot(ModBlocks.DURIAN_TRAPDOOR);
+        this.createSimpleLoot(ModBlocks.DURIAN_PRESSURE_PLATE);
+        this.createSimpleLoot(ModBlocks.DURIAN_BUTTON);
+        this.createSimpleLoot(ModBlocks.DURIAN_SIGN);
+        this.createSimpleLoot(ModBlocks.DURIAN_HANGING_SIGN);
+        this.createSimpleLoot(ModBlocks.DURIAN_CABINET);
+
+        //Mango
+        this.createSimpleLoot(ModBlocks.MANGO_LOG);
+        this.createSimpleLoot(ModBlocks.MANGO_WOOD);
+        this.createSimpleLoot(ModBlocks.STRIPPED_MANGO_LOG);
+        this.createSimpleLoot(ModBlocks.STRIPPED_MANGO_WOOD);
+        this.createSimpleLoot(ModBlocks.MANGO_PLANKS);
+        this.createSimpleLoot(ModBlocks.MANGO_STAIRS);
+        this.createSimpleLoot(ModBlocks.MANGO_SLAB);
+        this.createSimpleLoot(ModBlocks.MANGO_FENCE);
+        this.createSimpleLoot(ModBlocks.MANGO_FENCE_GATE);
+        this.createSimpleLoot(ModBlocks.MANGO_DOOR);
+        this.createSimpleLoot(ModBlocks.MANGO_TRAPDOOR);
+        this.createSimpleLoot(ModBlocks.MANGO_PRESSURE_PLATE);
+        this.createSimpleLoot(ModBlocks.MANGO_BUTTON);
+        this.createSimpleLoot(ModBlocks.MANGO_SIGN);
+        this.createSimpleLoot(ModBlocks.MANGO_HANGING_SIGN);
+        this.createSimpleLoot(ModBlocks.MANGO_CABINET);
+
+        //Coconut
+        this.createSimpleLoot(ModBlocks.COCONUT_LOG);
+        this.createSimpleLoot(ModBlocks.COCONUT_WOOD);
+        this.createSimpleLoot(ModBlocks.STRIPPED_COCONUT_LOG);
+        this.createSimpleLoot(ModBlocks.STRIPPED_COCONUT_WOOD);
+        this.createSimpleLoot(ModBlocks.COCONUT_PLANKS);
+        this.createSimpleLoot(ModBlocks.COCONUT_STAIRS);
+        this.createSimpleLoot(ModBlocks.COCONUT_SLAB);
+        this.createSimpleLoot(ModBlocks.COCONUT_FENCE);
+        this.createSimpleLoot(ModBlocks.COCONUT_FENCE_GATE);
+        this.createSimpleLoot(ModBlocks.COCONUT_DOOR);
+        this.createSimpleLoot(ModBlocks.COCONUT_TRAPDOOR);
+        this.createSimpleLoot(ModBlocks.COCONUT_PRESSURE_PLATE);
+        this.createSimpleLoot(ModBlocks.COCONUT_BUTTON);
+        this.createSimpleLoot(ModBlocks.COCONUT_SIGN);
+        this.createSimpleLoot(ModBlocks.COCONUT_HANGING_SIGN);
+        this.createSimpleLoot(ModBlocks.COCONUT_CABINET);
 
         this.add(ModBlocks.PAPAYA_LEAVES, (block) -> this.createLeavesDrops(block, ModBlocks.PAPAYA_SAPLING, NORMAL_LEAVES_SAPLING_CHANCES));
 

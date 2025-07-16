@@ -86,6 +86,13 @@ public class DurianBlock extends FallingBlock implements SimpleWaterloggedBlock,
         }
     }
 
+    @Override
+    public void randomTick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource) {
+        if(blockState.getValue(HANGING) && blockState.getValue(AGE) < 2 && randomSource.nextInt(7) == 0){
+            serverLevel.setBlock(blockPos,blockState.cycle(AGE),2);
+        }
+    }
+
     private static boolean shouldFall(BlockState blockState){
         return (blockState.isAir() || blockState.is(BlockTags.FIRE) || blockState.liquid() || blockState.canBeReplaced());
     }
@@ -120,7 +127,8 @@ public class DurianBlock extends FallingBlock implements SimpleWaterloggedBlock,
     @Override
     public void performBonemeal(ServerLevel serverLevel, RandomSource randomSource, BlockPos blockPos, BlockState blockState) {
         if(blockState.getValue(HANGING) && blockState.getValue(AGE) < 2){
-            serverLevel.setBlock(blockPos,blockState.cycle(AGE),2);
+            int i = Math.min(2,blockState.getValue(AGE) + randomSource.nextInt(1,3));
+            serverLevel.setBlock(blockPos,blockState.setValue(AGE, i),2);
         }
     }
 }

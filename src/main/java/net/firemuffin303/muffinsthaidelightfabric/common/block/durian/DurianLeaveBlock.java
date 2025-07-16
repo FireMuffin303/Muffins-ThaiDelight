@@ -27,6 +27,6 @@ public class DurianLeaveBlock extends LeavesBlock implements BonemealableBlock {
 
     @Override
     public void performBonemeal(ServerLevel serverLevel, RandomSource randomSource, BlockPos blockPos, BlockState blockState) {
-        serverLevel.setBlock(blockPos.below(), ModBlocks.DURIAN_BLOCK.defaultBlockState(), 2);
+        serverLevel.setBlock(blockPos.below(), ModBlocks.DURIAN_FLOWER.defaultBlockState().setValue(DurianFlowerBlock.HANGING,true), 2);
     }
 }
