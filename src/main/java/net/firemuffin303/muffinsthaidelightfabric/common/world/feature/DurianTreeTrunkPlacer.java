@@ -81,13 +81,16 @@ public class DurianTreeTrunkPlacer extends TrunkPlacer {
 
         list.add(new FoliagePlacer.FoliageAttachment(blockPos.above(treeHeight),1,false));
 
+        List<Direction> directions = Direction.Plane.HORIZONTAL.shuffledCopy(randomSource);
+
+
         for(int bcount = 0; bcount < branchCount;++bcount){
-            Direction direction = Direction.Plane.HORIZONTAL.getRandomDirection(randomSource);
+            Direction direction = directions.get(bcount);
             int branchLength = this.branchLength.sample(randomSource);
             int branchOffset = this.branchStartOffsetFromTop.sample(randomSource);
             //place branch
             BlockPos tempPos = blockPos.above(treeHeight).mutable().above(branchOffset);
-            BlockPos foliagePos = tempPos.mutable().move(direction,branchLength).above(1);
+            BlockPos foliagePos = tempPos.mutable().move(direction,branchLength).above(2);
             for(int n = 0; n < branchLength; ++n){
                 BlockPos currentPosition = tempPos.mutable().move(direction,n+1);
                 if(TreeFeature.validTreePos(levelSimulatedReader,currentPosition)){

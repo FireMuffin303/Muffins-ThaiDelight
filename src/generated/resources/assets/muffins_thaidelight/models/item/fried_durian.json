@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "muffins_thaidelight:block/durian_flower"
+    "layer0": "muffins_thaidelight:item/fried_durian"
   }
 }

@@ -143,7 +143,7 @@ public class ModelDataGen extends FabricModelProvider {
                         )
         );
 
-        //blockStateModelGenerator.createSimpleFlatItemModel(ModBlocks.DURIAN_FLOWER);
+        blockStateModelGenerator.createSimpleFlatItemModel(ModBlocks.DURIAN_FLOWER);
         ResourceLocation durian_flower_resource = BlockModelGenerators.TintState.NOT_TINTED.getCross().create(ModBlocks.DURIAN_FLOWER, TextureMapping.cross(ModBlocks.DURIAN_FLOWER), blockStateModelGenerator.modelOutput);
         blockStateModelGenerator.blockStateOutput.accept(
                 MultiVariantGenerator.multiVariant(ModBlocks.DURIAN_FLOWER)
@@ -247,6 +247,8 @@ public class ModelDataGen extends FabricModelProvider {
 
         itemModelGenerator.generateFlatItem(ModItems.PAPAYA_JUICE, ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.LIME_JUICE, ModelTemplates.FLAT_ITEM);
+
+        itemModelGenerator.generateFlatItem(ModItems.FRIED_DURIAN,ModelTemplates.FLAT_ITEM);
 
         itemModelGenerator.generateFlatItem(ModItems.SOMTAM, ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.LARB, ModelTemplates.FLAT_ITEM);

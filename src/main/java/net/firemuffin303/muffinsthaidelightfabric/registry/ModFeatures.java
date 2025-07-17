@@ -197,7 +197,7 @@ public class ModFeatures {
 
         return new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBlocks.DURIAN_LOG),
-                new DurianTreeTrunkPlacer(5,2,0, UniformInt.of(-2,-1), UniformInt.of(2,3),UniformInt.of(1,3)),
+                new DurianTreeTrunkPlacer(6,2,0, UniformInt.of(-4,-2), UniformInt.of(2,4),UniformInt.of(2,4)),
                 BlockStateProvider.simple(ModBlocks.DURIAN_LEAVES),
                 new DurianTreeFoliagePlacer(ConstantInt.of(2),ConstantInt.of(0),0.4f,0.12f),
                 new TwoLayersFeatureSize(1,0,1)

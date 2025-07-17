@@ -205,6 +205,8 @@ public class ModItems {
     public static final Item CRAB_FRIED_RICE = register("crab_fried_rice",new ConsumableItem(bowlFoodItem(ModFood.CRAB_FRIED_RICE)));
     public static final Item STIR_FRIED_NOODLE = register("stir_fried_noodle",new ConsumableItem(bowlFoodItem(ModFood.STIR_FRIED_NOODLE)));
 
+    public static final Item FRIED_DURIAN = register("fried_durian",new Item(new Item.Properties().food(ModFood.FRIED_DURIAN)));
+
     public static Item register(String id,Item item){
         ITEMS.add(item);
         return Registry.register(BuiltInRegistries.ITEM,new ResourceLocation(ThaiDelight.MOD_ID,id),item);
@@ -235,6 +237,7 @@ public class ModItems {
         public static final FoodProperties RAW_PAPAYA = new FoodProperties.Builder().nutrition(4).saturationMod(0.2F).build();
 
         public static final FoodProperties DURIAN_PULP = new FoodProperties.Builder().nutrition(2).saturationMod(0.2f).build();
+        public static final FoodProperties FRIED_DURIAN = new FoodProperties.Builder().alwaysEat().fast().nutrition(3).saturationMod(0.4f).build();
 
         public static final FoodProperties FISH_SAUCE = new FoodProperties.Builder().alwaysEat().effect(new MobEffectInstance(MobEffects.HUNGER,200,0),1.0f).build();
         public static final FoodProperties SEAFOOD_SAUCE = new FoodProperties.Builder().alwaysEat().effect(new MobEffectInstance(MobEffects.WATER_BREATHING,200,0),1.0f).build();

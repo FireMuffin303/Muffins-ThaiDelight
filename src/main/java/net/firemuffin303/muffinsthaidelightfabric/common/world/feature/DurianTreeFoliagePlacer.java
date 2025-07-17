@@ -35,9 +35,10 @@ public class DurianTreeFoliagePlacer extends FoliagePlacer {
 
     @Override
     protected void createFoliage(LevelSimulatedReader levelSimulatedReader, FoliageSetter foliageSetter, RandomSource randomSource, TreeConfiguration treeConfiguration, int treeHeight, FoliageAttachment foliageAttachment, int foliageHeight, int foliageRadius, int offsetRandom) {
-        this.placeLeavesRowWithHangingLeavesBelow(levelSimulatedReader,foliageSetter,randomSource,treeConfiguration,foliageAttachment.pos(),foliageRadius + foliageAttachment.radiusOffset(),-1,foliageAttachment.doubleTrunk(),this.hangingLeavesChance,this.hangingLeavesExtensionChance);
+        this.placeLeavesRowWithHangingLeavesBelow(levelSimulatedReader,foliageSetter,randomSource,treeConfiguration,foliageAttachment.pos(),foliageRadius + foliageAttachment.radiusOffset(),-2,foliageAttachment.doubleTrunk(),this.hangingLeavesChance,this.hangingLeavesExtensionChance);
         //Top
-        this.placeLeavesRow(levelSimulatedReader,foliageSetter,randomSource,treeConfiguration,foliageAttachment.pos(), Math.max(foliageRadius + foliageAttachment.radiusOffset() -1,1) ,0,foliageAttachment.doubleTrunk());
+        this.placeLeavesRow(levelSimulatedReader,foliageSetter,randomSource,treeConfiguration,foliageAttachment.pos(), Math.max(foliageRadius + foliageAttachment.radiusOffset()-1 ,1) ,0,foliageAttachment.doubleTrunk());
+        this.placeLeavesRow(levelSimulatedReader,foliageSetter,randomSource,treeConfiguration,foliageAttachment.pos(), Math.max(foliageRadius + foliageAttachment.radiusOffset() ,1) ,-1,foliageAttachment.doubleTrunk());
     }
 
     @Override

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "muffins_thaidelight:durian_flower"
+    }
+  ],
+  "result": {
+    "item": "minecraft:yellow_dye"
+  }
+}

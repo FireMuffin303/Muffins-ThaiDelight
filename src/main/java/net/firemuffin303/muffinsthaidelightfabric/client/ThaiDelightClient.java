@@ -11,16 +11,20 @@ import net.firemuffin303.muffinsthaidelightfabric.client.sceens.MortarScreen;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.FermentedFishCauldronBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.item.tooltipComponent.FlavorTooltipClient;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
+import net.firemuffin303.muffinsthaidelightfabric.registry.ModItems;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModMenuType;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.resources.model.Material;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.level.FoliageColor;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class ThaiDelightClient implements ClientModInitializer {
-    private static final Block[] CUTOUT = {ModBlocks.SOMTAM_FEAST, ModBlocks.LIME_BUSH, ModBlocks.WILD_PEPPER_CROP, ModBlocks.PEPPER_CROP, ModBlocks.PAPAYA, ModBlocks.PAPAYA_SAPLING, ModBlocks.CRAB_EGG, ModBlocks.PAPAYA_CROP, ModBlocks.LIME_SAPLING,ModBlocks.DURIAN_BLOCK,ModBlocks.DURIAN_FLOWER};
+    private static final Block[] CUTOUT = {ModBlocks.SOMTAM_FEAST, ModBlocks.LIME_BUSH, ModBlocks.WILD_PEPPER_CROP, ModBlocks.PEPPER_CROP, ModBlocks.PAPAYA, ModBlocks.PAPAYA_SAPLING, ModBlocks.CRAB_EGG, ModBlocks.PAPAYA_CROP, ModBlocks.LIME_SAPLING,ModBlocks.DURIAN_BLOCK,ModBlocks.DURIAN_FLOWER,ModBlocks.DURIAN_LEAVES};
 
     @Override
     public void onInitializeClient() {
@@ -44,6 +48,15 @@ public class ThaiDelightClient implements ClientModInitializer {
             }
             return 0xFFFFFF;
         },ModBlocks.FERMENTED_FISH_CAULDRON);
+
+        ColorProviderRegistry.BLOCK.register((blockState, blockAndTintGetter, blockPos, i) -> {
+            if(blockAndTintGetter != null && blockPos != null){
+                return BiomeColors.getAverageFoliageColor(blockAndTintGetter,blockPos);
+            }
+            return FoliageColor.getDefaultColor();
+        },ModBlocks.DURIAN_LEAVES);
+
+        ColorProviderRegistry.ITEM.register((itemStack, i) -> FoliageColor.getDefaultColor(), ModItems.DURIAN_LEAVES);
 
         HudRenderCallback.EVENT.register(ModHudRenderer::init);
 

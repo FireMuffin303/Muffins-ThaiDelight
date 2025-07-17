@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
 import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableProvider;
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
+import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.DurianBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.lime.LimeCropBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.PapayaBlock;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
@@ -77,6 +78,36 @@ public class ModBlockLootTableData extends FabricBlockLootTableProvider {
         this.createSimpleLoot(ModBlocks.DURIAN_SIGN);
         this.createSimpleLoot(ModBlocks.DURIAN_HANGING_SIGN);
         this.createSimpleLoot(ModBlocks.DURIAN_CABINET);
+
+        this.add(ModBlocks.DURIAN_LEAVES, (block) -> this.createLeavesDrops(block, ModBlocks.DURIAN_SAPLING, NORMAL_LEAVES_SAPLING_CHANCES));
+        this.dropSelf(ModBlocks.DURIAN_FLOWER);
+
+        this.add(ModBlocks.DURIAN_BLOCK,LootTable.lootTable()
+                .withPool(LootPool.lootPool()
+                        .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.DURIAN_BLOCK)
+                                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(DurianBlock.AGE,0))
+                        ).add(LootItem.lootTableItem(ModItems.DURIAN_PULP))
+                        .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))
+                        .apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE))
+                        .apply(LimitCount.limitCount(IntRange.upperBound(2)))
+                )
+                .withPool(LootPool.lootPool()
+                        .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.DURIAN_BLOCK)
+                                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(DurianBlock.AGE,1))
+                        ).add(LootItem.lootTableItem(ModItems.DURIAN_PULP))
+                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(1,2)))
+                        .apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE))
+                        .apply(LimitCount.limitCount(IntRange.upperBound(3)))
+                )
+                .withPool(LootPool.lootPool()
+                        .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.DURIAN_BLOCK)
+                                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(DurianBlock.AGE,2))
+                        ).add(LootItem.lootTableItem(ModItems.DURIAN_PULP))
+                        .apply(SetItemCountFunction.setCount(ConstantValue.exactly(2)))
+                        .apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE))
+                        .apply(LimitCount.limitCount(IntRange.upperBound(4)))
+                )
+        );
 
         //Mango
         this.createSimpleLoot(ModBlocks.MANGO_LOG);
@@ -173,9 +204,7 @@ public class ModBlockLootTableData extends FabricBlockLootTableProvider {
         ));
 
 
-        this.add(ModBlocks.DURIAN_BLOCK,block -> {
-            return createSilkTouchDispatchTable(block,this.applyExplosionDecay(block,LootItem.lootTableItem(ModItems.DURIAN_PULP).apply(SetItemCountFunction.setCount(ConstantValue.exactly(2))).apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE)).apply(LimitCount.limitCount(IntRange.upperBound(9)))));
-        });
+
     }
 
     private void createSimpleLoot(Block block){

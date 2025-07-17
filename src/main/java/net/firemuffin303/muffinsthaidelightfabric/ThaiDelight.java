@@ -406,6 +406,8 @@ public class ThaiDelight implements ModInitializer {
         output.accept(ModItems.PAPAYA_LEAVES);
         output.accept(ModItems.PAPAYA_SAPLING);
         output.accept(ModItems.PAPAYA_SEEDS);
+
+        output.accept(ModItems.FRIED_DURIAN);
         output.accept(ModItems.SOMTAM_FEAST);
         output.accept(ModItems.SOMTAM);
         output.accept(ModItems.LARB_FEAST);
