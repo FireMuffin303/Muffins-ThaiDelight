@@ -19,6 +19,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
@@ -28,6 +29,7 @@ public class MangoBlock extends FallingBlock implements SimpleWaterloggedBlock, 
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static final BooleanProperty HANGING = BlockStateProperties.HANGING;
     public static final IntegerProperty AGE = BlockStateProperties.AGE_2;
+    public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
     public MangoBlock(Properties properties) {
         super(properties);
@@ -35,12 +37,13 @@ public class MangoBlock extends FallingBlock implements SimpleWaterloggedBlock, 
                 .setValue(WATERLOGGED,false)
                 .setValue(HANGING,false)
                 .setValue(AGE,0)
+                .setValue(FACING,Direction.NORTH)
         );
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(WATERLOGGED).add(AGE).add(HANGING);
+        builder.add(WATERLOGGED).add(AGE).add(HANGING).add(FACING);
     }
 
     @Override
@@ -58,6 +61,11 @@ public class MangoBlock extends FallingBlock implements SimpleWaterloggedBlock, 
             FallingBlockEntity fallingBlockEntity = FallingBlockEntity.fall(level, blockPos, blockState);
             this.falling(fallingBlockEntity);
         }
+    }
+
+    @Override
+    public void animateTick(BlockState blockState, Level level, BlockPos blockPos, RandomSource randomSource) {
+        //cancel particle
     }
 
     @Override

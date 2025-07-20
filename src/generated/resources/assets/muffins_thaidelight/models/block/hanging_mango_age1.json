@@ -1,0 +1,6 @@
+{
+  "parent": "muffins_thaidelight:block/template_hanging_mango",
+  "textures": {
+    "all": "muffins_thaidelight:block/raw_mango"
+  }
+}

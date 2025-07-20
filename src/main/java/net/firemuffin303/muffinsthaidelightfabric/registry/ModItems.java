@@ -147,7 +147,9 @@ public class ModItems {
     public static final Item COCONUT_BOAT = TerraformBoatItemHelper.registerBoatItem(ThaiDelight.modid("coconut_boat"),COCONUT_BOAT_KEY,false);
     public static final Item COCONUT_CHEST_BOAT = TerraformBoatItemHelper.registerBoatItem(ThaiDelight.modid("coconut_chest_boat"),COCONUT_BOAT_KEY,true);
 
-
+    public static final Item COCONUT = register("coconut",new Item(new Item.Properties()));
+    public static final Item COCONUT_MILK_BOTTLE = register("coconut_milk_bottle",new Item(new Item.Properties()));
+    public static final Item COCONUT_MEAT = register("coconut_meat",new Item(new Item.Properties()));
 
     //------------------ MANGO --------------------
     public static final Item MANGO_SAPLING = register("mango_sapling",new BlockItem(ModBlocks.MANGO_SAPLING,new Item.Properties()));
@@ -172,6 +174,8 @@ public class ModItems {
     public static final Item MANGO_BOAT = TerraformBoatItemHelper.registerBoatItem(ThaiDelight.modid("mango_boat"),MANGO_BOAT_KEY,false);
     public static final Item MANGO_CHEST_BOAT = TerraformBoatItemHelper.registerBoatItem(ThaiDelight.modid("mango_chest_boat"),MANGO_BOAT_KEY,true);
 
+    public static final Item MANGO = register("mango",new Item(new Item.Properties()));
+    public static final Item MANGO_SLICE = register("mango_slice",new Item(new Item.Properties()));
 
 
     public static final Item PAPAYA = register("papaya",new Item(new Item.Properties().food(ModFood.PAPAYA)));
@@ -206,6 +210,7 @@ public class ModItems {
     public static final Item STIR_FRIED_NOODLE = register("stir_fried_noodle",new ConsumableItem(bowlFoodItem(ModFood.STIR_FRIED_NOODLE)));
 
     public static final Item FRIED_DURIAN = register("fried_durian",new Item(new Item.Properties().food(ModFood.FRIED_DURIAN)));
+    public static final Item MANGO_STICKY_RICE = register("mango_sticky_rice",new Item(new Item.Properties().food(ModFood.FRIED_DURIAN)));
 
     public static Item register(String id,Item item){
         ITEMS.add(item);

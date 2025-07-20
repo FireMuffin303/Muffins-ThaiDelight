@@ -4,8 +4,10 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.FermentedFishCauldronBlock;
+import net.firemuffin303.muffinsthaidelightfabric.common.block.mango.MangoBlock;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModItems;
+import net.minecraft.core.Direction;
 import net.minecraft.data.BlockFamilies;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.data.models.BlockModelGenerators;
@@ -30,6 +32,9 @@ public class ModelDataGen extends FabricModelProvider {
     private static final ModelTemplate PASTLE_3D = createModItem("pastle_3d_template", TextureSlot.LAYER0);
     private static final ModelTemplate SPAWN_EGG = createMincraftItem("template_spawn_egg");
     private static final ModelTemplate LIME_BUSH_STAGE2 = new ModelTemplate(Optional.of(new ResourceLocation(ThaiDelight.MOD_ID,"block/template_lime_bush_stage2")),Optional.empty(),TextureSlot.SIDE,TextureSlot.TOP);
+
+    public static  final  ModelTemplate HANGING_MANGO = new ModelTemplate(Optional.of(ThaiDelight.modid("block/template_hanging_mango")),Optional.empty(),TextureSlot.ALL);
+    public static  final  ModelTemplate MANGO = new ModelTemplate(Optional.of(ThaiDelight.modid("block/template_mango")),Optional.empty(),TextureSlot.ALL);
 
     private static final BlockFamily DURIAN_PLANKS = BlockFamilies.familyBuilder(ModBlocks.DURIAN_PLANKS)
             .button(ModBlocks.DURIAN_BUTTON)
@@ -143,6 +148,8 @@ public class ModelDataGen extends FabricModelProvider {
                         )
         );
 
+
+
         blockStateModelGenerator.createSimpleFlatItemModel(ModBlocks.DURIAN_FLOWER);
         ResourceLocation durian_flower_resource = BlockModelGenerators.TintState.NOT_TINTED.getCross().create(ModBlocks.DURIAN_FLOWER, TextureMapping.cross(ModBlocks.DURIAN_FLOWER), blockStateModelGenerator.modelOutput);
         blockStateModelGenerator.blockStateOutput.accept(
@@ -156,6 +163,7 @@ public class ModelDataGen extends FabricModelProvider {
         blockStateModelGenerator.createCrossBlockWithDefaultItem(ModBlocks.WILD_PEPPER_CROP, BlockModelGenerators.TintState.NOT_TINTED);
         blockStateModelGenerator.createCrossBlockWithDefaultItem(ModBlocks.PAPAYA_SAPLING, BlockModelGenerators.TintState.NOT_TINTED);
 
+        createMangoBlock(blockStateModelGenerator);
         createPepperCrop(blockStateModelGenerator);
         createLimeCrop(blockStateModelGenerator);
 
@@ -263,6 +271,13 @@ public class ModelDataGen extends FabricModelProvider {
         itemModelGenerator.generateFlatItem(ModItems.DURIAN_PULP,ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.DURIAN_BOAT,ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.DURIAN_CHEST_BOAT,ModelTemplates.FLAT_ITEM);
+
+        itemModelGenerator.generateFlatItem(ModItems.MANGO,ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.MANGO_SLICE,ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.MANGO_STICKY_RICE,ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.COCONUT,ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.COCONUT_MEAT,ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.COCONUT_MILK_BOTTLE,ModelTemplates.FLAT_ITEM);
     }
 
     private static void createBlock(Block block, ModelTemplate modelTemplate, TextureMapping textureMapping, BlockModelGenerators blockModelGenerator){
@@ -292,6 +307,125 @@ public class ModelDataGen extends FabricModelProvider {
                         )));
 
 
+    }
+
+    private static void createMangoBlock(BlockModelGenerators blockModelGenerators){
+        TextureMapping raw_mango_texture = TextureMapping.cube(ThaiDelight.modid("block/raw_mango"));
+        TextureMapping mango_texture = TextureMapping.cube(ThaiDelight.modid("block/mango"));
+
+        ResourceLocation hanging_raw_mango = HANGING_MANGO.create(ThaiDelight.modid("block/hanging_mango_age1"),raw_mango_texture, blockModelGenerators.modelOutput);
+        ResourceLocation raw_mango = MANGO.create(ThaiDelight.modid("block/mango_age1"),raw_mango_texture, blockModelGenerators.modelOutput);
+
+        ResourceLocation mango = MANGO.create(ThaiDelight.modid("block/mango_age2"),mango_texture, blockModelGenerators.modelOutput);
+        ResourceLocation hanging_mango = HANGING_MANGO.create(ThaiDelight.modid("block/hanging_mango_age2"),mango_texture, blockModelGenerators.modelOutput);
+
+        blockModelGenerators.blockStateOutput.accept(
+                MultiVariantGenerator.multiVariant(ModBlocks.MANGO_BLOCK)
+                        .with(PropertyDispatch.properties(MangoBlock.AGE,MangoBlock.HANGING,MangoBlock.FACING)
+                                //Hanging Raw Mango
+                                .select(0,false, Direction.NORTH,Variant.variant()
+                                        .with(VariantProperties.MODEL,ThaiDelight.modid("block/mango_age0"))
+                                )
+                                .select(0,false,Direction.EAST,Variant.variant()
+                                        .with(VariantProperties.MODEL,ThaiDelight.modid("block/mango_age0"))
+                                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)
+                                )
+                                .select(0,false,Direction.SOUTH,Variant.variant()
+                                        .with(VariantProperties.MODEL,ThaiDelight.modid("block/mango_age0"))
+                                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180)
+                                )
+                                .select(0,false,Direction.WEST,Variant.variant()
+                                        .with(VariantProperties.MODEL,ThaiDelight.modid("block/mango_age0"))
+                                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)
+                                )
+
+                                //Ground Raw Mango
+                                .select(0,true, Direction.NORTH,Variant.variant()
+                                        .with(VariantProperties.MODEL,ThaiDelight.modid("block/hanging_mango_age0"))
+                                )
+                                .select(0,true,Direction.EAST,Variant.variant()
+                                        .with(VariantProperties.MODEL,ThaiDelight.modid("block/hanging_mango_age0"))
+                                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)
+                                )
+                                .select(0,true,Direction.SOUTH,Variant.variant()
+                                        .with(VariantProperties.MODEL,ThaiDelight.modid("block/hanging_mango_age0"))
+                                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180)
+                                )
+                                .select(0,true,Direction.WEST,Variant.variant()
+                                        .with(VariantProperties.MODEL,ThaiDelight.modid("block/hanging_mango_age0"))
+                                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)
+                                )
+
+
+                                //Hanging Raw Mango
+                                .select(1,false, Direction.NORTH,Variant.variant()
+                                        .with(VariantProperties.MODEL,raw_mango)
+                                )
+                                .select(1,false,Direction.EAST,Variant.variant()
+                                        .with(VariantProperties.MODEL,raw_mango)
+                                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)
+                                )
+                                .select(1,false,Direction.SOUTH,Variant.variant()
+                                        .with(VariantProperties.MODEL,raw_mango)
+                                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180)
+                                )
+                                .select(1,false,Direction.WEST,Variant.variant()
+                                        .with(VariantProperties.MODEL,raw_mango)
+                                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)
+                                )
+
+                                //Ground Raw Mango
+                                .select(1,true, Direction.NORTH,Variant.variant()
+                                        .with(VariantProperties.MODEL,hanging_raw_mango)
+                                )
+                                .select(1,true,Direction.EAST,Variant.variant()
+                                        .with(VariantProperties.MODEL,hanging_raw_mango)
+                                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)
+                                )
+                                .select(1,true,Direction.SOUTH,Variant.variant()
+                                        .with(VariantProperties.MODEL,hanging_raw_mango)
+                                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180)
+                                )
+                                .select(1,true,Direction.WEST,Variant.variant()
+                                        .with(VariantProperties.MODEL,hanging_raw_mango)
+                                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)
+                                )
+                                //--------------------
+                                //Ground Mango
+                                .select(2,false, Direction.NORTH,Variant.variant()
+                                        .with(VariantProperties.MODEL,mango)
+                                )
+                                .select(2,false,Direction.EAST,Variant.variant()
+                                        .with(VariantProperties.MODEL,mango)
+                                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)
+                                )
+                                .select(2,false,Direction.SOUTH,Variant.variant()
+                                        .with(VariantProperties.MODEL,mango)
+                                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180)
+                                )
+                                .select(2,false,Direction.WEST,Variant.variant()
+                                        .with(VariantProperties.MODEL,mango)
+                                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)
+                                )
+
+                                //Hanging Mango
+                                .select(2,true, Direction.NORTH,Variant.variant()
+                                        .with(VariantProperties.MODEL,hanging_mango)
+                                )
+                                .select(2,true,Direction.EAST,Variant.variant()
+                                        .with(VariantProperties.MODEL,hanging_mango)
+                                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)
+                                )
+                                .select(2,true,Direction.SOUTH,Variant.variant()
+                                        .with(VariantProperties.MODEL,hanging_mango)
+                                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180)
+                                )
+                                .select(2,true,Direction.WEST,Variant.variant()
+                                        .with(VariantProperties.MODEL,hanging_mango)
+                                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)
+                                )
+                        )
+        );
     }
 
     private static TextureMapping limeTextureMapping(int level){

@@ -86,7 +86,69 @@ public class LangDataGen extends FabricLanguageProvider {
         translationBuilder.add(ModBlocks.PAPAYA_SAPLING,"Papaya Sapling");
         translationBuilder.add(ModItems.PAPAYA_SEEDS,"Papaya Seeds");
 
+        translationBuilder.add(ModItems.DURIAN_SAPLING,"Durian Sapling");
+        translationBuilder.add(ModItems.DURIAN_LEAVES,"Durian Leaves");
+        translationBuilder.add(ModItems.DURIAN_FLOWER,"Durian Flower");
+        translationBuilder.add(ModItems.DURIAN,"Durian");
         translationBuilder.add(ModItems.DURIAN_PULP,"Durian Pulp");
+
+        translationBuilder.add(ModItems.DURIAN_LOG,"Durian Log");
+        translationBuilder.add(ModItems.DURIAN_WOOD,"Durian Wood");
+        translationBuilder.add(ModItems.STRIPPED_DURIAN_LOG,"Stripped Durian Log");
+        translationBuilder.add(ModItems.STRIPPED_DURIAN_WOOD,"Stripped Durian Wood");
+        translationBuilder.add(ModItems.DURIAN_PLANKS,"Durian Planks");
+        translationBuilder.add(ModItems.DURIAN_STAIRS,"Durian Stairs");
+        translationBuilder.add(ModItems.DURIAN_SLAB,"Durian Slab");
+        translationBuilder.add(ModItems.DURIAN_FENCE,"Durian Fence");
+        translationBuilder.add(ModItems.DURIAN_FENCE_GATE,"Durian Fence Gate");
+        translationBuilder.add(ModItems.DURIAN_DOOR,"Durian Door");
+        translationBuilder.add(ModItems.DURIAN_TRAPDOOR,"Durian Trapdoor");
+        translationBuilder.add(ModItems.DURIAN_PRESSURE_PLATE,"Durian Pressure Plate");
+        translationBuilder.add(ModItems.DURIAN_BUTTON,"Durian Button");
+        translationBuilder.add(ModItems.DURIAN_SIGN,"Durian Sign");
+        translationBuilder.add(ModItems.DURIAN_HANGING_SIGN,"Durian Hanging Sign");
+        translationBuilder.add(ModItems.DURIAN_CABINET,"Durian Cabinet");
+        translationBuilder.add(ModItems.DURIAN_BOAT,"Durian Boat");
+        translationBuilder.add(ModItems.DURIAN_CHEST_BOAT,"Durian Boat with Chest");
+        translationBuilder.add(ModItems.FRIED_DURIAN,"Fried Durian");
+
+        translationBuilder.add(ModItems.MANGO_LOG,"Mango Log");
+        translationBuilder.add(ModItems.MANGO_WOOD,"Mango Wood");
+        translationBuilder.add(ModItems.STRIPPED_MANGO_LOG,"Stripped Mango Log");
+        translationBuilder.add(ModItems.STRIPPED_MANGO_WOOD,"Stripped Mango Wood");
+        translationBuilder.add(ModItems.MANGO_PLANKS,"Mango Planks");
+        translationBuilder.add(ModItems.MANGO_STAIRS,"Mango Stairs");
+        translationBuilder.add(ModItems.MANGO_SLAB,"Mango Slab");
+        translationBuilder.add(ModItems.MANGO_FENCE,"Mango Fence");
+        translationBuilder.add(ModItems.MANGO_FENCE_GATE,"Mango Fence Gate");
+        translationBuilder.add(ModItems.MANGO_DOOR,"Mango Door");
+        translationBuilder.add(ModItems.MANGO_TRAPDOOR,"Mango Trapdoor");
+        translationBuilder.add(ModItems.MANGO_PRESSURE_PLATE,"Mango Pressure Plate");
+        translationBuilder.add(ModItems.MANGO_BUTTON,"Mango Button");
+        translationBuilder.add(ModItems.MANGO_SIGN,"Mango Sign");
+        translationBuilder.add(ModItems.MANGO_HANGING_SIGN,"Mango Hanging Sign");
+        translationBuilder.add(ModItems.MANGO_CABINET,"Mango Cabinet");
+        translationBuilder.add(ModItems.MANGO_BOAT,"Mango Boat");
+        translationBuilder.add(ModItems.MANGO_CHEST_BOAT,"Mango Boat with Chest");
+
+        translationBuilder.add(ModItems.COCONUT_LOG,"Coconut Log");
+        translationBuilder.add(ModItems.COCONUT_WOOD,"Coconut Wood");
+        translationBuilder.add(ModItems.STRIPPED_COCONUT_LOG,"Stripped Coconut Log");
+        translationBuilder.add(ModItems.STRIPPED_COCONUT_WOOD,"Stripped Coconut Wood");
+        translationBuilder.add(ModItems.COCONUT_PLANKS,"Coconut Planks");
+        translationBuilder.add(ModItems.COCONUT_STAIRS,"Coconut Stairs");
+        translationBuilder.add(ModItems.COCONUT_SLAB,"Coconut Slab");
+        translationBuilder.add(ModItems.COCONUT_FENCE,"Coconut Fence");
+        translationBuilder.add(ModItems.COCONUT_FENCE_GATE,"Coconut Fence Gate");
+        translationBuilder.add(ModItems.COCONUT_DOOR,"Coconut Door");
+        translationBuilder.add(ModItems.COCONUT_TRAPDOOR,"Coconut Trapdoor");
+        translationBuilder.add(ModItems.COCONUT_PRESSURE_PLATE,"Coconut Pressure Plate");
+        translationBuilder.add(ModItems.COCONUT_BUTTON,"Coconut Button");
+        translationBuilder.add(ModItems.COCONUT_SIGN,"Coconut Sign");
+        translationBuilder.add(ModItems.COCONUT_HANGING_SIGN,"Coconut Hanging Sign");
+        translationBuilder.add(ModItems.COCONUT_CABINET,"Coconut Cabinet");
+        translationBuilder.add(ModItems.COCONUT_BOAT,"Coconut Boat");
+        translationBuilder.add(ModItems.COCONUT_CHEST_BOAT,"Coconut Boat with Chest");
 
         //Food
         translationBuilder.add(ModItems.SOMTAM,"Plate of Somtam");

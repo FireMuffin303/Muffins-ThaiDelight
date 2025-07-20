@@ -4,6 +4,7 @@ import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -45,7 +46,7 @@ public class DurianFlowerBlock extends Block implements SimpleWaterloggedBlock, 
     //Placement
     @Override
     public boolean canSurvive(BlockState blockState, LevelReader levelReader, BlockPos blockPos) {
-        return isHanging(blockState) ? Block.canSupportCenter(levelReader,blockPos.above(), Direction.DOWN) : canSupportCenter(levelReader, blockPos.below(), Direction.UP);
+        return isHanging(blockState) ? Block.canSupportCenter(levelReader,blockPos.above(), Direction.DOWN) || levelReader.getBlockState(blockPos.above()).is(BlockTags.LEAVES) : canSupportCenter(levelReader, blockPos.below(), Direction.UP);
     }
 
     @Override
