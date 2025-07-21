@@ -2,8 +2,8 @@
 	"format_version": "1.9.0",
 	"credit": "Made with Blockbench",
 	"textures": {
-		"2": "age0mango",
-		"particle": "raw_mango"
+		"2": "muffins_thaidelight:block/mango_age0",
+		"particle": "muffins_thaidelight:block/mango_age0"
 	},
 	"elements": [
 		{

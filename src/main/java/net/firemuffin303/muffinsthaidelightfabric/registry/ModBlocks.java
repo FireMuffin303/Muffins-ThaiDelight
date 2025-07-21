@@ -280,7 +280,7 @@ public class ModBlocks {
     public static final Block MANGO_SAPLING = register("mango_sapling",new SaplingBlock(new MangoTreeGrower(),BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
     public static final Block POTTED_MANGO_SAPLING = register("potted_mango_sapling",Blocks.flowerPot(ModBlocks.MANGO_SAPLING));
     public static final Block MANGO_LEAVES = register("mango_leaves",new LeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES)));
-    public static final Block MANGO_BLOCK = register("mango_block",new MangoBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).strength(1.0F).sound(SoundType.WOOD).pushReaction(PushReaction.DESTROY).noOcclusion()));
+    public static final Block MANGO_BLOCK = register("mango_block",new MangoBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).strength(1.0F).sound(SoundType.WOOD).pushReaction(PushReaction.DESTROY).noOcclusion().instabreak().randomTicks()));
 
     public static final Block MANGO_LOG = register("mango_log", Blocks.log(MapColor.COLOR_BROWN,MapColor.COLOR_YELLOW));
     public static final Block MANGO_WOOD = register("mango_wood",new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava()));

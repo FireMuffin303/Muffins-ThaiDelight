@@ -11,6 +11,7 @@ import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
@@ -28,6 +29,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
@@ -77,7 +79,7 @@ public class DurianBlock extends FallingBlock implements SimpleWaterloggedBlock,
     public InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
         if(!level.isClientSide){
             if(blockState.getValue(HANGING) && blockState.getValue(AGE) >= 2 && level.getBlockState(blockPos.below()).isAir() && level.getBlockState(blockPos.above()).is(ModBlocks.DURIAN_LEAVES)){
-                this.harvest((ServerLevel) level,blockPos,blockState);
+                this.harvest((ServerLevel) level,blockPos,blockState,player);
                 return InteractionResult.SUCCESS;
             }
         }
@@ -89,7 +91,7 @@ public class DurianBlock extends FallingBlock implements SimpleWaterloggedBlock,
     public void onProjectileHit(Level level, BlockState blockState, BlockHitResult blockHitResult, Projectile projectile) {
         BlockPos blockPos = blockHitResult.getBlockPos();
         if (!level.isClientSide && projectile.mayInteract(level, blockPos) && projectile.getType().is(EntityTypeTags.IMPACT_PROJECTILES) && level.getBlockState(blockPos.below()).isAir() && blockState.getValue(AGE) == 2) {
-            this.harvest((ServerLevel) level,blockPos,blockState);
+            this.harvest((ServerLevel) level,blockPos,blockState,projectile.getOwner());
         }
     }
 
@@ -108,7 +110,7 @@ public class DurianBlock extends FallingBlock implements SimpleWaterloggedBlock,
     @Override
     public void tick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource) {
         if (shouldFall(serverLevel.getBlockState(blockPos.below())) && shouldFall(serverLevel.getBlockState(blockPos.above())) && blockPos.getY() >= serverLevel.getMinBuildHeight()) {
-            this.harvest(serverLevel,blockPos,blockState);
+            this.harvest(serverLevel,blockPos,blockState,null);
         }
     }
 
@@ -158,16 +160,18 @@ public class DurianBlock extends FallingBlock implements SimpleWaterloggedBlock,
         }
     }
 
-    private void setFlower(ServerLevel serverLevel,BlockPos blockPos){
-        serverLevel.setBlock(blockPos, ModBlocks.DURIAN_FLOWER.defaultBlockState().setValue(HANGING,true),2);
+    private void setFlower(ServerLevel serverLevel,BlockPos blockPos,Entity entity){
+        BlockState blockState = ModBlocks.DURIAN_FLOWER.defaultBlockState().setValue(HANGING,true);
+        serverLevel.setBlock(blockPos, blockState,2);
+        serverLevel.gameEvent(GameEvent.BLOCK_CHANGE, blockPos, GameEvent.Context.of(entity, blockState));
     }
 
-    private void harvest(ServerLevel serverLevel,BlockPos blockPos,BlockState blockState){
+    private void harvest(ServerLevel serverLevel, BlockPos blockPos, BlockState blockState, Entity entity){
         serverLevel.playSound(null,blockPos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS);
         FallingBlockEntity fallingBlockEntity = FallingBlockEntity.fall(serverLevel, blockPos, blockState.setValue(DurianBlock.HANGING,false));
         this.falling(fallingBlockEntity);
         if(serverLevel.getBlockState(blockPos.above(1)).is(ModBlocks.DURIAN_LEAVES)){
-            this.setFlower(serverLevel,blockPos);
+            this.setFlower(serverLevel,blockPos,entity);
         }
     }
 }

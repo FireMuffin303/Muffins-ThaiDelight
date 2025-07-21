@@ -34,4 +34,8 @@ public class DragonflyBottleItem extends MobBottleItem {
     public static void setVariant(ItemStack itemStack, DragonflyEntity.DragonflyVariant variant){
         itemStack.getOrCreateTag().putInt("Variant",variant.getId());
     }
+
+    public static int getVariant(ItemStack itemStack){
+        return itemStack.getOrCreateTag().getInt("Variant");
+    }
 }

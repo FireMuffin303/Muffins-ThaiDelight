@@ -1,27 +1,36 @@
 package net.firemuffin303.muffinsthaidelightfabric.client;
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.terraformersmc.terraform.boat.api.client.TerraformBoatClientHelper;
-import com.terraformersmc.terraform.boat.api.item.TerraformBoatItemHelper;
 import com.terraformersmc.terraform.sign.SpriteIdentifierRegistry;
+import io.github.fabricators_of_create.porting_lib.util.ItemPredicateRegistry;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.*;
+import net.fabricmc.fabric.api.object.builder.v1.client.model.FabricModelPredicateProviderRegistry;
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
 import net.firemuffin303.muffinsthaidelightfabric.client.sceens.MortarScreen;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.FermentedFishCauldronBlock;
+import net.firemuffin303.muffinsthaidelightfabric.common.entity.DragonflyEntity;
+import net.firemuffin303.muffinsthaidelightfabric.common.item.DragonflyBottleItem;
 import net.firemuffin303.muffinsthaidelightfabric.common.item.tooltipComponent.FlavorTooltipClient;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModItems;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModMenuType;
 import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.BiomeColors;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.Sheets;
+import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
 import net.minecraft.client.resources.model.Material;
-import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemDisplayContext;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.FoliageColor;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
 
 public class ThaiDelightClient implements ClientModInitializer {
     private static final Block[] CUTOUT = {ModBlocks.SOMTAM_FEAST, ModBlocks.LIME_BUSH, ModBlocks.WILD_PEPPER_CROP, ModBlocks.PEPPER_CROP, ModBlocks.PAPAYA, ModBlocks.PAPAYA_SAPLING, ModBlocks.CRAB_EGG, ModBlocks.PAPAYA_CROP, ModBlocks.LIME_SAPLING,ModBlocks.DURIAN_BLOCK,ModBlocks.DURIAN_FLOWER,ModBlocks.DURIAN_LEAVES,ModBlocks.MANGO_BLOCK};
@@ -54,9 +63,16 @@ public class ThaiDelightClient implements ClientModInitializer {
                 return BiomeColors.getAverageFoliageColor(blockAndTintGetter,blockPos);
             }
             return FoliageColor.getDefaultColor();
-        },ModBlocks.DURIAN_LEAVES);
+        },ModBlocks.DURIAN_LEAVES,ModBlocks.MANGO_LEAVES);
 
-        ColorProviderRegistry.ITEM.register((itemStack, i) -> FoliageColor.getDefaultColor(), ModItems.DURIAN_LEAVES);
+        ColorProviderRegistry.ITEM.register((itemStack, i) -> FoliageColor.getDefaultColor(), ModItems.DURIAN_LEAVES,ModItems.MANGO_LEAVES);
+
+        FabricModelPredicateProviderRegistry.register(ModItems.DRAGONFLY_BOTTLE, ThaiDelight.modid("variant"), new ClampedItemPropertyFunction() {
+            @Override
+            public float unclampedCall(ItemStack itemStack, @Nullable ClientLevel clientLevel, @Nullable LivingEntity livingEntity, int i) {
+                return ((float)DragonflyBottleItem.getVariant(itemStack)) / ((float)DragonflyEntity.DragonflyVariant.values().length);
+            }
+        });
 
         HudRenderCallback.EVENT.register(ModHudRenderer::init);
 

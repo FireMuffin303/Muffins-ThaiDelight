@@ -109,6 +109,15 @@ public class ModBlockLootTableData extends FabricBlockLootTableProvider {
                 )
         );
 
+        this.add(ModBlocks.MANGO_BLOCK,LootTable.lootTable()
+                .withPool(LootPool.lootPool()
+                        .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.MANGO_BLOCK)
+                                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(DurianBlock.AGE,2))
+                        ).add(LootItem.lootTableItem(ModItems.MANGO))
+                        .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))
+                )
+        );
+
         //Mango
         this.createSimpleLoot(ModBlocks.MANGO_LOG);
         this.createSimpleLoot(ModBlocks.MANGO_WOOD);

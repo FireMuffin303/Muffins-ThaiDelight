@@ -215,7 +215,7 @@ public class ModFeatures {
         return new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(Blocks.OAK_LOG),
                 new StraightTrunkPlacer(6,1,0),
-                BlockStateProvider.simple(Blocks.AZALEA_LEAVES),
+                BlockStateProvider.simple(ModBlocks.MANGO_LEAVES),
                 new HangingBlobFoliagePlacer(UniformInt.of(2,3),ConstantInt.of(0),3,0.35f,0.1f),
                 new TwoLayersFeatureSize(1,0,1)
         ).ignoreVines()
