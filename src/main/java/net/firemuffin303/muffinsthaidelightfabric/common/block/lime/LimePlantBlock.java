@@ -3,13 +3,15 @@ package net.firemuffin303.muffinsthaidelightfabric.common.block.lime;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModItems;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -25,10 +27,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
-import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
@@ -100,7 +102,22 @@ public class LimePlantBlock extends DoublePlantBlock implements BonemealableBloc
         }
     }
 
-    public boolean canGrow(LevelReader levelReader,BlockState blockState,BlockPos blockPos){
+    @Override
+    public void entityInside(BlockState blockState, Level level, BlockPos blockPos, Entity entity) {
+        if (entity instanceof LivingEntity livingEntity && entity.getType() != EntityType.FOX && entity.getType() != EntityType.BEE) {
+            entity.makeStuckInBlock(blockState, new Vec3(0.800000011920929, 0.75, 0.800000011920929));
+
+            if (!level.isClientSide && livingEntity.getItemBySlot(EquipmentSlot.CHEST).isEmpty() && (entity.xOld != entity.getX() || entity.zOld != entity.getZ())) {
+                double d = Math.abs(entity.getX() - entity.xOld);
+                double e = Math.abs(entity.getZ() - entity.zOld);
+                if (d >= 0.003000000026077032 || e >= 0.003000000026077032) {
+                    entity.hurt(level.damageSources().sweetBerryBush(), 1.0F);
+                }
+            }
+        }
+    }
+
+    public boolean canGrow(LevelReader levelReader, BlockState blockState, BlockPos blockPos){
         return blockState.getValue(AGE) < 3  && sufficientLight(levelReader, blockPos);
     }
 

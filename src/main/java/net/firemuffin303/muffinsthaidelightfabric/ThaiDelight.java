@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Pair;
 import com.terraformersmc.terraform.boat.api.TerraformBoatType;
 import com.terraformersmc.terraform.boat.api.TerraformBoatTypeRegistry;
+import eu.midnightdust.lib.config.MidnightConfig;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
@@ -20,6 +21,7 @@ import net.firemuffin303.muffinsthaidelightfabric.common.entity.FlowerCrabEntity
 import net.firemuffin303.muffinsthaidelightfabric.common.event.ModVillagerTrades;
 import net.firemuffin303.muffinsthaidelightfabric.common.item.DragonflyBottleItem;
 import net.firemuffin303.muffinsthaidelightfabric.common.manager.FlavorManager;
+import net.firemuffin303.muffinsthaidelightfabric.config.ThaiDelightConfig;
 import net.firemuffin303.muffinsthaidelightfabric.datagen.ModTagDataGen;
 import net.firemuffin303.muffinsthaidelightfabric.mixin.*;
 import net.firemuffin303.muffinsthaidelightfabric.mixin.food.ChickenFoodAccessor;
@@ -102,6 +104,8 @@ public class ThaiDelight implements ModInitializer {
 
         init();
         postInit();
+
+        MidnightConfig.init(MOD_ID, ThaiDelightConfig.class);
 
         ResourceManagerHelper.get(PackType.SERVER_DATA).registerReloadListener(new FlavorManager());
 

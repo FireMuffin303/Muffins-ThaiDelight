@@ -197,6 +197,21 @@ public class LangDataGen extends FabricLanguageProvider {
         translationBuilder.add("item.minecraft.tipped_arrow.effect.long_stinkiness","Arrow of Stinkiness");
         translationBuilder.add("item.minecraft.tipped_arrow.effect.strong_stinkiness","Arrow of Stinkiness");
 
+        translationBuilder.add("muffins_thaidelight.midnightconfig.developer","------ Developer ------");
+        translationBuilder.add("muffins_thaidelight.midnightconfig.firemuffin","FireMuffin303");
+        translationBuilder.add("muffins_thaidelight.midnightconfig.concept_artist","------ Concept Artists ------");
+        translationBuilder.add("muffins_thaidelight.midnightconfig.lucas","lllLucaslll");
+        translationBuilder.add("muffins_thaidelight.midnightconfig.dino_care","Dino_care");
+        translationBuilder.add("muffins_thaidelight.midnightconfig.akalinka","No92");
+        translationBuilder.add("muffins_thaidelight.midnightconfig.translator","------ Translators ------");
+        translationBuilder.add("muffins_thaidelight.midnightconfig.en_us","--- English ---");
+        translationBuilder.add("muffins_thaidelight.midnightconfig.en_firemuffin","FireMuffin303");
+        translationBuilder.add("muffins_thaidelight.midnightconfig.th_th","--- Thai ---");
+        translationBuilder.add("muffins_thaidelight.midnightconfig.th_firemuffin","FireMuffin303");
+        translationBuilder.add("muffins_thaidelight.midnightconfig.uk_ua","--- Ukrainian ---");
+        translationBuilder.add("muffins_thaidelight.midnightconfig.peaenka","P34enKa");
+        translationBuilder.add("muffins_thaidelight.midnightconfig.zh_cn","--- Simplified Chinese ---");
+        translationBuilder.add("muffins_thaidelight.midnightconfig.huantanhua","Huantanhua");
     }
 
     public static class ThaiLangData extends FabricLanguageProvider{
@@ -330,6 +345,22 @@ public class LangDataGen extends FabricLanguageProvider {
             translationBuilder.add("item.minecraft.tipped_arrow.effect.stinkiness","ลูกธนูอาบยาเหม็น");
             translationBuilder.add("item.minecraft.tipped_arrow.effect.long_stinkiness","ลูกธนูอาบยาเหม็น");
             translationBuilder.add("item.minecraft.tipped_arrow.effect.strong_stinkiness","ลูกธนูอาบยาเหม็น");
+
+            translationBuilder.add("muffins_thaidelight.midnightconfig.developer","------ ผู้พัฒนา ------");
+            translationBuilder.add("muffins_thaidelight.midnightconfig.firemuffin","FireMuffin303");
+            translationBuilder.add("muffins_thaidelight.midnightconfig.concept_artist","------ ศิลปินคอนเซปต์อาร์ท ------");
+            translationBuilder.add("muffins_thaidelight.midnightconfig.lucas","lllLucaslll");
+            translationBuilder.add("muffins_thaidelight.midnightconfig.dino_care","Dino_care");
+            translationBuilder.add("muffins_thaidelight.midnightconfig.akalinka","No92");
+            translationBuilder.add("muffins_thaidelight.midnightconfig.translator","------ ผู้แปล ------");
+            translationBuilder.add("muffins_thaidelight.midnightconfig.en_us","--- ภาษาอังกฤษ ---");
+            translationBuilder.add("muffins_thaidelight.midnightconfig.en_firemuffin","FireMuffin303");
+            translationBuilder.add("muffins_thaidelight.midnightconfig.th_th","--- ภาษาไทย ---");
+            translationBuilder.add("muffins_thaidelight.midnightconfig.th_firemuffin","FireMuffin303");
+            translationBuilder.add("muffins_thaidelight.midnightconfig.uk_ua","--- ภาษายูเครน ---");
+            translationBuilder.add("muffins_thaidelight.midnightconfig.peaenka","P34enKa");
+            translationBuilder.add("muffins_thaidelight.midnightconfig.zh_cn","--- ภาษาจีนตัวย่อ ---");
+            translationBuilder.add("muffins_thaidelight.midnightconfig.huantanhua","Huantanhua");
         }
     }
 }

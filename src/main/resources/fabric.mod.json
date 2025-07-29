@@ -28,6 +28,9 @@
     ],
     "jei_mod_plugin": [
       "net.firemuffin303.muffinsthaidelightfabric.integration.ThaiDelightJEIIntegration"
+    ],
+    "modmenu": [
+      "net.firemuffin303.muffinsthaidelightfabric.integration.ThaiDelightModMenu"
     ]
   },
   "mixins": [
@@ -37,6 +40,7 @@
     "fabricloader": ">=${loader_version}",
     "fabric": "*",
     "minecraft": "${minecraft_version}",
-    "farmersdelight": ">=1.20.1-2.0.13+refabricated"
+    "farmersdelight": ">=1.20.1-2.0.13+refabricated",
+    "midnightlib": ">=1.4.1-fabric"
   }
 }

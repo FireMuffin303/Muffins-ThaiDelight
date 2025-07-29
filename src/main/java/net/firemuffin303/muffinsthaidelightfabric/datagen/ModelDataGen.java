@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.FermentedFishCauldronBlock;
+import net.firemuffin303.muffinsthaidelightfabric.common.block.lime.LimePlantBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.mango.MangoBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.PapayaLogBlock;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
@@ -22,6 +23,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 
 import java.util.Optional;
 
@@ -334,8 +336,49 @@ public class ModelDataGen extends FabricModelProvider {
     }
 
     private static void createLimeCrop( BlockModelGenerators blockModelGenerator){
+        ResourceLocation LIME_BOTTOM = ModelTemplates.AZALEA.create(ThaiDelight.modid("block/lime_bottom"),new TextureMapping()
+                .put(TextureSlot.TOP,new ResourceLocation("block/azalea_top"))
+                .put(TextureSlot.SIDE,new ResourceLocation("block/azalea_side"))
+                .put(TextureSlot.PLANT,new ResourceLocation("block/azalea_plant"))
+        ,blockModelGenerator.modelOutput);
+
+        ResourceLocation LIME_TOP = ModelTemplates.SLAB_BOTTOM.create(ThaiDelight.modid("block/lime_top"),new TextureMapping()
+                .put(TextureSlot.ALL,new ResourceLocation("block/azalea_top"))
+        ,blockModelGenerator.modelOutput);
+
+
         //blockModelGenerator.createSimpleFlatItemModel(ModBlocks.LIME_SAPLING);
         //createBlock(ModBlocks.LIME_SAPLING,ModelTemplates.CROSS,TextureMapping.cross(ModBlocks.LIME_SAPLING),blockModelGenerator);
+
+        blockModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.LIME_PLANT)
+                .with(PropertyDispatch.properties(LimePlantBlock.AGE,LimePlantBlock.HALF)
+                        .select(0, DoubleBlockHalf.LOWER,Variant.variant()
+                                .with(VariantProperties.MODEL,LIME_BOTTOM)
+                        )
+                        .select(0,DoubleBlockHalf.UPPER,Variant.variant()
+                                .with(VariantProperties.MODEL,LIME_TOP)
+                        )
+                        .select(1, DoubleBlockHalf.LOWER,Variant.variant()
+                                .with(VariantProperties.MODEL,LIME_BOTTOM)
+                        )
+                        .select(1,DoubleBlockHalf.UPPER,Variant.variant()
+                                .with(VariantProperties.MODEL,LIME_TOP)
+                        )
+                        .select(2, DoubleBlockHalf.LOWER,Variant.variant()
+                                .with(VariantProperties.MODEL,LIME_BOTTOM)
+                        )
+                        .select(2,DoubleBlockHalf.UPPER,Variant.variant()
+                                .with(VariantProperties.MODEL,LIME_TOP)
+                        )
+                        .select(3, DoubleBlockHalf.LOWER,Variant.variant()
+                                .with(VariantProperties.MODEL,LIME_BOTTOM)
+                        )
+                        .select(3,DoubleBlockHalf.UPPER,Variant.variant()
+                                .with(VariantProperties.MODEL,LIME_TOP)
+                        )
+                )
+        );
+
         blockModelGenerator.blockStateOutput.accept(
                 MultiVariantGenerator.multiVariant(ModBlocks.LIME_BUSH)
                         .with(PropertyDispatch.property(BlockStateProperties.AGE_2)

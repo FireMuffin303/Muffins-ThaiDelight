@@ -83,5 +83,20 @@
   "item.muffins_thaidelight.stir_fried_noodle": "ผัดหมี่",
   "item.muffins_thaidelight.tasty": "อยากอาหาร",
   "itemGroup.muffins_thaidelight.main": "Muffin's Thai Delight",
-  "jei.info.papaya_log": "คลิ๊กขวาด้วยผงกระดูกเพื่อโตผลมะละกอ"
+  "jei.info.papaya_log": "คลิ๊กขวาด้วยผงกระดูกเพื่อโตผลมะละกอ",
+  "muffins_thaidelight.midnightconfig.akalinka": "No92",
+  "muffins_thaidelight.midnightconfig.concept_artist": "------ ศิลปินคอนเซปต์อาร์ท ------",
+  "muffins_thaidelight.midnightconfig.developer": "------ ผู้พัฒนา ------",
+  "muffins_thaidelight.midnightconfig.dino_care": "Dino_care",
+  "muffins_thaidelight.midnightconfig.en_firemuffin": "FireMuffin303",
+  "muffins_thaidelight.midnightconfig.en_us": "--- ภาษาอังกฤษ ---",
+  "muffins_thaidelight.midnightconfig.firemuffin": "FireMuffin303",
+  "muffins_thaidelight.midnightconfig.huantanhua": "Huantanhua",
+  "muffins_thaidelight.midnightconfig.lucas": "lllLucaslll",
+  "muffins_thaidelight.midnightconfig.peaenka": "P34enKa",
+  "muffins_thaidelight.midnightconfig.th_firemuffin": "FireMuffin303",
+  "muffins_thaidelight.midnightconfig.th_th": "--- ภาษาไทย ---",
+  "muffins_thaidelight.midnightconfig.translator": "------ ผู้แปล ------",
+  "muffins_thaidelight.midnightconfig.uk_ua": "--- ภาษายูเครน ---",
+  "muffins_thaidelight.midnightconfig.zh_cn": "--- ภาษาจีนตัวย่อ ---"
 }

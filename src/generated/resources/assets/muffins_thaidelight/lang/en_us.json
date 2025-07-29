@@ -142,5 +142,20 @@
   "item.muffins_thaidelight.stir_fried_noodle": "Stir Fried Noodle",
   "item.muffins_thaidelight.tasty": "Tasty",
   "itemGroup.muffins_thaidelight.main": "Muffin's Thai Delight",
-  "jei.info.papaya_log": "Right click with bone meal to grow papayas."
+  "jei.info.papaya_log": "Right click with bone meal to grow papayas.",
+  "muffins_thaidelight.midnightconfig.akalinka": "No92",
+  "muffins_thaidelight.midnightconfig.concept_artist": "------ Concept Artists ------",
+  "muffins_thaidelight.midnightconfig.developer": "------ Developer ------",
+  "muffins_thaidelight.midnightconfig.dino_care": "Dino_care",
+  "muffins_thaidelight.midnightconfig.en_firemuffin": "FireMuffin303",
+  "muffins_thaidelight.midnightconfig.en_us": "--- English ---",
+  "muffins_thaidelight.midnightconfig.firemuffin": "FireMuffin303",
+  "muffins_thaidelight.midnightconfig.huantanhua": "Huantanhua",
+  "muffins_thaidelight.midnightconfig.lucas": "lllLucaslll",
+  "muffins_thaidelight.midnightconfig.peaenka": "P34enKa",
+  "muffins_thaidelight.midnightconfig.th_firemuffin": "FireMuffin303",
+  "muffins_thaidelight.midnightconfig.th_th": "--- Thai ---",
+  "muffins_thaidelight.midnightconfig.translator": "------ Translators ------",
+  "muffins_thaidelight.midnightconfig.uk_ua": "--- Ukrainian ---",
+  "muffins_thaidelight.midnightconfig.zh_cn": "--- Simplified Chinese ---"
 }
