@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.FermentedFishCauldronBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.mango.MangoBlock;
+import net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.PapayaLogBlock;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModItems;
 import net.minecraft.core.Direction;
@@ -92,7 +93,47 @@ public class ModelDataGen extends FabricModelProvider {
         blockStateModelGenerator.createSimpleFlatItemModel(ModBlocks.CRAB_EGG);
         blockStateModelGenerator.blockStateOutput.accept(createSimpleBlock(ModBlocks.CRAB_EGG,ModelLocationUtils.getModelLocation(ModBlocks.CRAB_EGG)));
 
-        blockStateModelGenerator.woodProvider(ModBlocks.PAPAYA_LOG).logWithHorizontal(ModBlocks.PAPAYA_LOG).wood(ModBlocks.PAPAYA_WOOD);
+        TextureMapping papaya_bottom = new TextureMapping()
+                .put(TextureSlot.SIDE, getBlockTexture(ModBlocks.PAPAYA_LOG,"_bottom"))
+                .put(TextureSlot.END, getBlockTexture(ModBlocks.PAPAYA_LOG, "_top"))
+                .put(TextureSlot.PARTICLE, getBlockTexture(ModBlocks.PAPAYA_LOG,"_bottom"));
+        TextureMapping papaya_log_mapping = new TextureMapping()
+                .put(TextureSlot.SIDE, getBlockTexture(ModBlocks.PAPAYA_LOG))
+                .put(TextureSlot.END, getBlockTexture(ModBlocks.PAPAYA_LOG, "_top"))
+                .put(TextureSlot.PARTICLE, getBlockTexture(ModBlocks.PAPAYA_LOG));
+        ResourceLocation papaya_log_bottom = ModelTemplates.CUBE_COLUMN.createWithSuffix(ModBlocks.PAPAYA_LOG,"_bottom", papaya_bottom, blockStateModelGenerator.modelOutput);
+        ResourceLocation papaya_log = ModelTemplates.CUBE_COLUMN.create(ModBlocks.PAPAYA_LOG,papaya_log_mapping, blockStateModelGenerator.modelOutput);
+
+        blockStateModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.PAPAYA_LOG)
+                .with(PropertyDispatch.properties(PapayaLogBlock.AXIS,PapayaLogBlock.BOTTOM)
+                        .select(Direction.Axis.X,true,Variant.variant()
+                                .with(VariantProperties.MODEL,papaya_log_bottom)
+                                .with(VariantProperties.X_ROT,VariantProperties.Rotation.R90)
+                                .with(VariantProperties.Y_ROT,VariantProperties.Rotation.R90)
+                        )
+                        .select(Direction.Axis.X,false,Variant.variant()
+                                .with(VariantProperties.MODEL,papaya_log)
+                                .with(VariantProperties.X_ROT,VariantProperties.Rotation.R90)
+                                .with(VariantProperties.Y_ROT,VariantProperties.Rotation.R90)
+                        )
+                        .select(Direction.Axis.Y,true,Variant.variant()
+                                .with(VariantProperties.MODEL,papaya_log_bottom)
+                        )
+                        .select(Direction.Axis.Y,false,Variant.variant()
+                                .with(VariantProperties.MODEL,papaya_log)
+                        )
+                        .select(Direction.Axis.Z,true,Variant.variant()
+                                .with(VariantProperties.MODEL,papaya_log_bottom)
+                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R90)
+                        )
+                        .select(Direction.Axis.Z,false,Variant.variant()
+                                .with(VariantProperties.MODEL,papaya_log)
+                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R90)
+                        )
+                )
+        );
+
+        blockStateModelGenerator.woodProvider(ModBlocks.PAPAYA_LOG).wood(ModBlocks.PAPAYA_WOOD);
         blockStateModelGenerator.woodProvider(ModBlocks.STRIPPED_PAPAYA_LOG).logWithHorizontal(ModBlocks.STRIPPED_PAPAYA_LOG).wood(ModBlocks.STRIPPED_PAPAYA_WOOD);
 
         //Durian Model
