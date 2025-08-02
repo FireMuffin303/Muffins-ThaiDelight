@@ -11,10 +11,7 @@ import net.firemuffin303.muffinsthaidelightfabric.common.block.*;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.DurianBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.DurianFlowerBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.DurianLeaveBlock;
-import net.firemuffin303.muffinsthaidelightfabric.common.block.lime.LimeBlock;
-import net.firemuffin303.muffinsthaidelightfabric.common.block.lime.LimeCropBlock;
-import net.firemuffin303.muffinsthaidelightfabric.common.block.lime.LimeLeavesBlock;
-import net.firemuffin303.muffinsthaidelightfabric.common.block.lime.LimePlantBlock;
+import net.firemuffin303.muffinsthaidelightfabric.common.block.lime.*;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.mango.MangoBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.PapayaBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.PapayaCropBlock;
@@ -69,7 +66,7 @@ public class ModBlocks {
     public static final Block LIME_PLANT = register("lime_plant",new LimePlantBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).randomTicks().noCollission().sound(SoundType.AZALEA_LEAVES).ignitedByLava().pushReaction(PushReaction.DESTROY)));
 
     public static final Block LIME_BUSH = register("lime_bush",new LimeCropBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).randomTicks().sound(SoundType.SWEET_BERRY_BUSH).pushReaction(PushReaction.DESTROY)));
-    public static final Block LIME_SAPLING = register("lime_sapling",new SaplingBlock(new LimeTreeGrower(),BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
+    public static final Block LIME_SAPLING = register("lime_sapling",new LimeSaplingBlock(BlockBehaviour.Properties.copy(OAK_SAPLING)));
     public static final Block POTTED_LIME_SAPLING = register("potted_lime_sapling",Blocks.flowerPot(ModBlocks.LIME_SAPLING));
     public static final Block LIME_LEAVES = register("lime_leaves",new LimeLeavesBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).randomTicks().sound(SoundType.SWEET_BERRY_BUSH).ignitedByLava()));
     public static final Block LIME_BLOCK = register("lime_block",new LimeBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).instabreak().noOcclusion().pushReaction(PushReaction.DESTROY).randomTicks().sound(SoundType.SWEET_BERRY_BUSH)));
@@ -77,7 +74,7 @@ public class ModBlocks {
     public static final Block PEPPER_CROP = register("pepper_crop",new PepperCropBlock(BlockBehaviour.Properties.copy(Blocks.POTATOES)));
 
     //Durian
-    public static final Block DURIAN_SAPLING = register("durian_sapling",new SaplingBlock(new DurianTreeGrower(),BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
+    public static final Block DURIAN_SAPLING = register("durian_sapling",new SaplingBlock(new DurianTreeGrower(), BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY)));
     public static final Block POTTED_DURIAN_SAPLING = register("potted_durian_sapling",Blocks.flowerPot(DURIAN_SAPLING));
     public static final Block DURIAN_FLOWER = register("durian_flower",new DurianFlowerBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).instabreak().noCollission().sound(SoundType.SPORE_BLOSSOM).pushReaction(PushReaction.DESTROY).randomTicks()));
     public static final Block DURIAN_BLOCK = register("durian_block",new DurianBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).strength(1.0F).sound(SoundType.WOOD).pushReaction(PushReaction.DESTROY).randomTicks()));

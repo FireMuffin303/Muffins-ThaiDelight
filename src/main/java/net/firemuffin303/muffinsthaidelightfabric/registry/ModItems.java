@@ -82,7 +82,7 @@ public class ModItems {
 
     //Crops
     //------------- Lime ---------------
-    public static final Item LIME_SAPLING = register("lime_sapling",new BlockItem(ModBlocks.LIME_PLANT,new Item.Properties()));
+    public static final Item LIME_SAPLING = register("lime_sapling",new BlockItem(ModBlocks.LIME_SAPLING,new Item.Properties()));
     public static final Item LIME = register("lime",new Item(new Item.Properties().food(ModFood.LIME)));
     public static final Item SLICED_LIME = register("lime_slice",new Item(new Item.Properties().food(ModFood.LIME_SLICE)));
     public static final Item LIME_LEAVES = register("lime_leaves",new BlockItem(ModBlocks.LIME_LEAVES,new Item.Properties()));

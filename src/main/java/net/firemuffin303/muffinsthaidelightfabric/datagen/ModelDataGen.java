@@ -9,6 +9,7 @@ import net.firemuffin303.muffinsthaidelightfabric.common.block.mango.MangoBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.PapayaLogBlock;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModItems;
+import net.minecraft.client.model.Model;
 import net.minecraft.core.Direction;
 import net.minecraft.data.BlockFamilies;
 import net.minecraft.data.BlockFamily;
@@ -35,6 +36,8 @@ public class ModelDataGen extends FabricModelProvider {
     private static final ModelTemplate PASTLE_3D = createModItem("pastle_3d_template", TextureSlot.LAYER0);
     private static final ModelTemplate SPAWN_EGG = createMincraftItem("template_spawn_egg");
     private static final ModelTemplate LIME_BUSH_STAGE2 = new ModelTemplate(Optional.of(new ResourceLocation(ThaiDelight.MOD_ID,"block/template_lime_bush_stage2")),Optional.empty(),TextureSlot.SIDE,TextureSlot.TOP);
+    private static final ModelTemplate LIME_UPPER_TEMPLATE = new ModelTemplate(Optional.of(ThaiDelight.modid("block/lime/template_lime_upper")),Optional.empty(),TextureSlot.SIDE,TextureSlot.TOP,TextureSlot.PLANT);
+    private static final ModelTemplate LIME_BOTTOM_TEMPLATE = new ModelTemplate(Optional.of(ThaiDelight.modid("block/lime/template_lime_bottom")),Optional.empty(),TextureSlot.SIDE,TextureSlot.BOTTOM,TextureSlot.STEM,TextureSlot.PLANT);
 
     public static  final  ModelTemplate HANGING_MANGO = new ModelTemplate(Optional.of(ThaiDelight.modid("block/template_hanging_mango")),Optional.empty(),TextureSlot.ALL);
     public static  final  ModelTemplate MANGO = new ModelTemplate(Optional.of(ThaiDelight.modid("block/template_mango")),Optional.empty(),TextureSlot.ALL);
@@ -335,17 +338,28 @@ public class ModelDataGen extends FabricModelProvider {
         })));
     }
 
+    private static TextureMapping upperLimeMapping(int age){
+        return new TextureMapping()
+                .put(TextureSlot.SIDE,ThaiDelight.modid("block/lime/lime_leaves_side_age"+ age))
+                .put(TextureSlot.TOP,ThaiDelight.modid("block/lime/lime_leaves_top"))
+                .put(TextureSlot.PLANT,ThaiDelight.modid("block/lime/lime_leaves_layer"));
+    }
+
+    private static TextureMapping bottomLimeMapping(int age){
+        return new TextureMapping()
+                .put(TextureSlot.SIDE,ThaiDelight.modid("block/lime/lime_leaves_side_age"+ age))
+                .put(TextureSlot.BOTTOM,ThaiDelight.modid("block/lime/lime_leaves_bottom"))
+                .put(TextureSlot.STEM,ThaiDelight.modid("block/lime/lime_stem"))
+                .put(TextureSlot.PLANT,ThaiDelight.modid("block/lime/lime_leaves_layer"));
+    }
+
     private static void createLimeCrop( BlockModelGenerators blockModelGenerator){
-        ResourceLocation LIME_BOTTOM = ModelTemplates.AZALEA.create(ThaiDelight.modid("block/lime_bottom"),new TextureMapping()
-                .put(TextureSlot.TOP,new ResourceLocation("block/azalea_top"))
-                .put(TextureSlot.SIDE,new ResourceLocation("block/azalea_side"))
-                .put(TextureSlot.PLANT,new ResourceLocation("block/azalea_plant"))
-        ,blockModelGenerator.modelOutput);
 
-        ResourceLocation LIME_TOP = ModelTemplates.SLAB_BOTTOM.create(ThaiDelight.modid("block/lime_top"),new TextureMapping()
-                .put(TextureSlot.ALL,new ResourceLocation("block/azalea_top"))
-        ,blockModelGenerator.modelOutput);
 
+        ResourceLocation LIME_UPPER_AGE0 = LIME_UPPER_TEMPLATE.create(ThaiDelight.modid("block/lime/lime_upper_age0"),upperLimeMapping(0), blockModelGenerator.modelOutput);
+        ResourceLocation LIME_UPPER_AGE1 = LIME_UPPER_TEMPLATE.create(ThaiDelight.modid("block/lime/lime_upper_age1"),upperLimeMapping(1), blockModelGenerator.modelOutput);
+        ResourceLocation LIME_BOTTOM_AGE0 = LIME_BOTTOM_TEMPLATE.create(ThaiDelight.modid("block/lime/lime_bottom_age0"),bottomLimeMapping(0),blockModelGenerator.modelOutput);
+        ResourceLocation LIME_BOTTOM_AGE1 = LIME_BOTTOM_TEMPLATE.create(ThaiDelight.modid("block/lime/lime_bottom_age1"),bottomLimeMapping(1),blockModelGenerator.modelOutput);
 
         //blockModelGenerator.createSimpleFlatItemModel(ModBlocks.LIME_SAPLING);
         //createBlock(ModBlocks.LIME_SAPLING,ModelTemplates.CROSS,TextureMapping.cross(ModBlocks.LIME_SAPLING),blockModelGenerator);
@@ -353,28 +367,22 @@ public class ModelDataGen extends FabricModelProvider {
         blockModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.LIME_PLANT)
                 .with(PropertyDispatch.properties(LimePlantBlock.AGE,LimePlantBlock.HALF)
                         .select(0, DoubleBlockHalf.LOWER,Variant.variant()
-                                .with(VariantProperties.MODEL,LIME_BOTTOM)
+                                .with(VariantProperties.MODEL,LIME_BOTTOM_AGE0)
                         )
                         .select(0,DoubleBlockHalf.UPPER,Variant.variant()
-                                .with(VariantProperties.MODEL,LIME_TOP)
+                                .with(VariantProperties.MODEL,LIME_UPPER_AGE0)
                         )
                         .select(1, DoubleBlockHalf.LOWER,Variant.variant()
-                                .with(VariantProperties.MODEL,LIME_BOTTOM)
+                                .with(VariantProperties.MODEL,LIME_BOTTOM_AGE1)
                         )
                         .select(1,DoubleBlockHalf.UPPER,Variant.variant()
-                                .with(VariantProperties.MODEL,LIME_TOP)
+                                .with(VariantProperties.MODEL,LIME_UPPER_AGE1)
                         )
                         .select(2, DoubleBlockHalf.LOWER,Variant.variant()
-                                .with(VariantProperties.MODEL,LIME_BOTTOM)
+                                .with(VariantProperties.MODEL,ThaiDelight.modid("block/lime/lime_bottom_age2"))
                         )
                         .select(2,DoubleBlockHalf.UPPER,Variant.variant()
-                                .with(VariantProperties.MODEL,LIME_TOP)
-                        )
-                        .select(3, DoubleBlockHalf.LOWER,Variant.variant()
-                                .with(VariantProperties.MODEL,LIME_BOTTOM)
-                        )
-                        .select(3,DoubleBlockHalf.UPPER,Variant.variant()
-                                .with(VariantProperties.MODEL,LIME_TOP)
+                                .with(VariantProperties.MODEL,ThaiDelight.modid("block/lime/lime_upper_age2"))
                         )
                 )
         );

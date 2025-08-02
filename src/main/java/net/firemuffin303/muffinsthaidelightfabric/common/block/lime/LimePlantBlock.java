@@ -35,7 +35,8 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class LimePlantBlock extends DoublePlantBlock implements BonemealableBlock {
-    public static final IntegerProperty AGE = BlockStateProperties.AGE_3;
+    public static final IntegerProperty AGE = BlockStateProperties.AGE_2;
+    private static final int MAX_AGE = 2;
 
     public LimePlantBlock(Properties properties) {
         super(properties);
@@ -55,11 +56,16 @@ public class LimePlantBlock extends DoublePlantBlock implements BonemealableBloc
     @Override
     public InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
         if(!level.isClientSide){
-            if(blockState.getValue(AGE) >= 3){
+            if(blockState.getValue(AGE) >= MAX_AGE){
                 BlockPos lowerPos = isLower(blockState) ? blockPos : blockPos.below();
 
                 int j = 2 + level.random.nextInt(2);
                 popResource(level,lowerPos.above(),new ItemStack(ModItems.LIME,j));
+
+                if(level.random.nextInt(5) == 0){
+                    popResource(level,lowerPos.above(),new ItemStack(ModItems.LIME_SAPLING,1));
+                }
+
                 level.playSound((Player)null, player, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
 
                 level.setBlock(lowerPos,blockState.setValue(AGE,0).setValue(HALF,DoubleBlockHalf.LOWER),2);
@@ -91,12 +97,18 @@ public class LimePlantBlock extends DoublePlantBlock implements BonemealableBloc
 
     @Override
     public void randomTick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource) {
-        if (serverLevel.getRawBrightness(blockPos, 0) >= 9) {
-            int i = blockState.getValue(AGE);
-            if (i < 3) {
-                float f = CropBlock.getGrowthSpeed(this, serverLevel, blockPos);
-                if (randomSource.nextInt((int)(25.0F / f) + 1) == 0) {
-                    serverLevel.setBlock(blockPos,  blockState.setValue(AGE,blockState.getValue(AGE)+1), 2);
+        if (canGrow(serverLevel,blockState,blockPos)) {
+            BlockPos lowerPos = blockPos;
+            BlockState lowerState = blockState;
+
+            if(!isLower(lowerState)){
+                lowerPos = blockPos.below();
+                lowerState = serverLevel.getBlockState(blockPos.below());
+            }
+
+            if(isLower(lowerState)){
+                if (randomSource.nextInt(5) == 0 && serverLevel.getRawBrightness(blockPos.above(), 0) >= 9) {
+                    grow(serverLevel,lowerState,lowerPos);
                 }
             }
         }
@@ -118,11 +130,11 @@ public class LimePlantBlock extends DoublePlantBlock implements BonemealableBloc
     }
 
     public boolean canGrow(LevelReader levelReader, BlockState blockState, BlockPos blockPos){
-        return blockState.getValue(AGE) < 3  && sufficientLight(levelReader, blockPos);
+        return blockState.getValue(AGE) < MAX_AGE  && sufficientLight(levelReader, blockPos);
     }
 
     private static boolean sufficientLight(LevelReader levelReader, BlockPos blockPos) {
-        return levelReader.getRawBrightness(blockPos, 0) >= 8 || levelReader.canSeeSky(blockPos);
+        return levelReader.getRawBrightness(blockPos, 0) >= 9;
     }
 
     public void grow(ServerLevel serverLevel,BlockState blockState,BlockPos blockPos){
@@ -142,7 +154,7 @@ public class LimePlantBlock extends DoublePlantBlock implements BonemealableBloc
 
     @Override
     public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState, boolean bl) {
-        return blockState.getValue(AGE) < 3;
+        return blockState.getValue(AGE) < MAX_AGE;
     }
 
     @Override

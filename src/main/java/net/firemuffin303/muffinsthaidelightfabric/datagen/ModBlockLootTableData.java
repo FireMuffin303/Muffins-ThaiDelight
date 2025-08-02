@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableProvider
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.DurianBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.lime.LimeCropBlock;
+import net.firemuffin303.muffinsthaidelightfabric.common.block.lime.LimePlantBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.PapayaBlock;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModItems;
@@ -17,6 +18,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.CarrotBlock;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.storage.loot.IntRange;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootPool;
@@ -175,7 +177,6 @@ public class ModBlockLootTableData extends FabricBlockLootTableProvider {
         this.add(ModBlocks.CRAB_EGG,this.applyExplosionDecay(ModBlocks.CRAB_EGG,
                 LootTable.lootTable()
                         .withPool(LootPool.lootPool()
-                                .when(BlockLootSubProvider.HAS_SILK_TOUCH)
                                 .add(LootItem.lootTableItem(ModBlocks.CRAB_EGG)))));
 
         net.minecraft.world.level.storage.loot.predicates.LootItemCondition.Builder checkLimeLevel = LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.LIME_BUSH).setProperties(net.minecraft.advancements.critereon.StatePropertiesPredicate.Builder.properties().hasProperty(LimeCropBlock.AGE, 2));
@@ -186,6 +187,27 @@ public class ModBlockLootTableData extends FabricBlockLootTableProvider {
                                 .withPool(LootPool.lootPool().when(checkLimeLevel)
                                         .add(LootItem.lootTableItem(ModItems.LIME)
                                                 .apply(ApplyBonusCount.addBonusBinomialDistributionCount(Enchantments.BLOCK_FORTUNE, 0.5714286F, 3))))));
+
+        this.add(ModBlocks.LIME_PLANT,this.applyExplosionDecay(ModBlocks.LIME_SAPLING,
+                LootTable.lootTable()
+                        .withPool(LootPool.lootPool()
+                                .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.LIME_PLANT)
+                                        .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(LimePlantBlock.HALF,DoubleBlockHalf.LOWER))
+                                )
+                                .add(LootItem.lootTableItem(ModItems.LIME_SAPLING))
+                        )
+                        .withPool(LootPool.lootPool()
+                                .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.LIME_PLANT)
+                                        .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(LimePlantBlock.AGE,2))
+                                        .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(LimePlantBlock.HALF, DoubleBlockHalf.LOWER))
+                                )
+                                .add(LootItem.lootTableItem(ModItems.LIME)
+                                        .apply(ApplyBonusCount.addBonusBinomialDistributionCount(Enchantments.BLOCK_FORTUNE,0.5714286F, 3))
+                                )
+                        )
+                )
+        );
+
 
         net.minecraft.world.level.storage.loot.predicates.LootItemCondition.Builder checkPepperLevel = LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.PEPPER_CROP).setProperties(net.minecraft.advancements.critereon.StatePropertiesPredicate.Builder.properties().hasProperty(CarrotBlock.AGE, 7));
         this.add(ModBlocks.PEPPER_CROP, (net.minecraft.world.level.storage.loot.LootTable.Builder)this.applyExplosionDecay(ModBlocks.PEPPER_CROP, LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.PEPPER))).withPool(LootPool.lootPool().when(checkPepperLevel).add(LootItem.lootTableItem(ModItems.PEPPER).apply(ApplyBonusCount.addBonusBinomialDistributionCount(Enchantments.BLOCK_FORTUNE, 0.5714286F, 3))))));
