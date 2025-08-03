@@ -29,7 +29,7 @@ import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.Nullable;
 
 public class ThaiDelightClient implements ClientModInitializer {
-    private static final Block[] CUTOUT = {ModBlocks.SOMTAM_FEAST, ModBlocks.LIME_BUSH, ModBlocks.WILD_PEPPER_CROP, ModBlocks.PEPPER_CROP, ModBlocks.PAPAYA, ModBlocks.PAPAYA_SAPLING, ModBlocks.CRAB_EGG, ModBlocks.PAPAYA_CROP, ModBlocks.LIME_SAPLING,ModBlocks.DURIAN_BLOCK,ModBlocks.DURIAN_FLOWER,ModBlocks.DURIAN_LEAVES,ModBlocks.MANGO_BLOCK,ModBlocks.LIME_PLANT};
+    private static final Block[] CUTOUT = {ModBlocks.SOMTAM_FEAST, ModBlocks.WILD_PEPPER_CROP, ModBlocks.PEPPER_CROP, ModBlocks.PAPAYA, ModBlocks.PAPAYA_SAPLING, ModBlocks.CRAB_EGG, ModBlocks.PAPAYA_CROP, ModBlocks.LIME_SAPLING,ModBlocks.DURIAN_BLOCK,ModBlocks.DURIAN_FLOWER,ModBlocks.DURIAN_LEAVES,ModBlocks.MANGO_BLOCK,ModBlocks.LIME_PLANT};
 
     @Override
     public void onInitializeClient() {

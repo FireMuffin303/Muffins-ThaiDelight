@@ -10,6 +10,7 @@ import net.minecraft.core.*;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.ResourceKey;
@@ -47,8 +48,6 @@ public class ModFeatures {
     public static final FoliagePlacerType<DurianTreeFoliagePlacer> DURIAN_FOLIAGE_PLACER = Registry.register(BuiltInRegistries.FOLIAGE_PLACER_TYPE,ThaiDelight.modid("durian_foliage_placer"),new FoliagePlacerType<>(DurianTreeFoliagePlacer.CODEC));
     public static final FoliagePlacerType<HangingBlobFoliagePlacer> HANGING_BLOB_FOLIAGE_PLACER = Registry.register(BuiltInRegistries.FOLIAGE_PLACER_TYPE,ThaiDelight.modid("hanging_blob_foliage_placer"),new FoliagePlacerType<>(HangingBlobFoliagePlacer.CODEC));
 
-    public static final Feature<NoneFeatureConfiguration> LIME_FEATURE = Registry.register(BuiltInRegistries.FEATURE,new ResourceLocation(ThaiDelight.MOD_ID,"lime_feature"),new LimeFeature(NoneFeatureConfiguration.CODEC));
-
     public static final ResourceKey<ConfiguredFeature<?,?>> FEATURE_PATCH_LIME_BUSH;
     public static final ResourceKey<ConfiguredFeature<?,?>> FEATURE_PATCH_WILD_PEPPER;
 
@@ -79,9 +78,8 @@ public class ModFeatures {
 
         bootstapContext.register(ModFeatures.FEATURE_PATCH_LIME_BUSH,
                 new ConfiguredFeature<>(Feature.RANDOM_PATCH,
-                        new RandomPatchConfiguration(12,5,3,
-                                PlacementUtils.filtered(ModFeatures.LIME_FEATURE,
-                                        new NoneFeatureConfiguration(),
+                        new RandomPatchConfiguration(32,6,3,
+                                PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.LIME_PLANT)),
                                         BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE,BlockPredicate.matchesBlocks(Direction.DOWN.getNormal(), List.of(Blocks.GRASS_BLOCK)))
                                 )
                         )

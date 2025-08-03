@@ -74,7 +74,7 @@ public class LangDataGen extends FabricLanguageProvider {
         translationBuilder.add(ModItems.PEPPER,"Pepper");
         translationBuilder.add(ModItems.PEPPER_SEED,"Pepper Seeds");
 
-        translationBuilder.add(ModBlocks.LIME_BUSH,"Lime Bush");
+        translationBuilder.add(ModBlocks.LIME_PLANT,"Lime Bush");
         translationBuilder.add(ModBlocks.LIME_SAPLING,"Lime Sapling");
         translationBuilder.add(ModItems.LIME,"Lime");
         translationBuilder.add(ModItems.SLICED_LIME,"Lime Slice");
@@ -290,7 +290,7 @@ public class LangDataGen extends FabricLanguageProvider {
             translationBuilder.add(ModItems.PEPPER,"พริก");
             translationBuilder.add(ModItems.PEPPER_SEED,"เมล็ดพริก");
 
-            translationBuilder.add(ModBlocks.LIME_BUSH,"ต้นมะนาว");
+            translationBuilder.add(ModBlocks.LIME_PLANT,"ต้นมะนาว");
             translationBuilder.add(ModBlocks.LIME_SAPLING,"ต้นอ่อนมะนาว");
             translationBuilder.add(ModItems.LIME,"มะนาว");
             translationBuilder.add(ModItems.SLICED_LIME,"มะนาวหั่น");

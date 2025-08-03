@@ -3,8 +3,19 @@
   "config": {
     "feature": {
       "feature": {
-        "type": "muffins_thaidelight:lime_feature",
-        "config": {}
+        "type": "minecraft:simple_block",
+        "config": {
+          "to_place": {
+            "type": "minecraft:simple_state_provider",
+            "state": {
+              "Name": "muffins_thaidelight:lime_plant",
+              "Properties": {
+                "age": "0",
+                "half": "lower"
+              }
+            }
+          }
+        }
       },
       "placement": [
         {
@@ -30,8 +41,8 @@
         }
       ]
     },
-    "tries": 12,
-    "xz_spread": 5,
+    "tries": 32,
+    "xz_spread": 6,
     "y_spread": 3
   }
 }

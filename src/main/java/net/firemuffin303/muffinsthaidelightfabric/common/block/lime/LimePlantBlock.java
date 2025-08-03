@@ -15,6 +15,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -56,8 +57,8 @@ public class LimePlantBlock extends DoublePlantBlock implements BonemealableBloc
     @Override
     public InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
         if(!level.isClientSide){
+            BlockPos lowerPos = isLower(blockState) ? blockPos : blockPos.below();
             if(blockState.getValue(AGE) >= MAX_AGE){
-                BlockPos lowerPos = isLower(blockState) ? blockPos : blockPos.below();
 
                 int j = 2 + level.random.nextInt(2);
                 popResource(level,lowerPos.above(),new ItemStack(ModItems.LIME,j));
@@ -68,6 +69,15 @@ public class LimePlantBlock extends DoublePlantBlock implements BonemealableBloc
 
                 level.playSound((Player)null, player, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
 
+                level.setBlock(lowerPos,blockState.setValue(AGE,0).setValue(HALF,DoubleBlockHalf.LOWER),2);
+                level.setBlock(lowerPos.above(),
+                        copyWaterloggedFrom(level, lowerPos, blockState.setValue(AGE, 0)
+                                .setValue(HALF, DoubleBlockHalf.UPPER)), 3);
+                level.gameEvent(GameEvent.BLOCK_CHANGE, lowerPos, GameEvent.Context.of(player, blockState));
+                return InteractionResult.SUCCESS;
+            } else if (blockState.getValue(AGE) == 1 && player.getItemInHand(interactionHand).is(Items.SHEARS)) {
+                popResource(level,lowerPos.above(),new ItemStack(ModItems.LIME_SAPLING,1));
+                level.playSound((Player)null, player, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
                 level.setBlock(lowerPos,blockState.setValue(AGE,0).setValue(HALF,DoubleBlockHalf.LOWER),2);
                 level.setBlock(lowerPos.above(),
                         copyWaterloggedFrom(level, lowerPos, blockState.setValue(AGE, 0)

@@ -179,15 +179,6 @@ public class ModBlockLootTableData extends FabricBlockLootTableProvider {
                         .withPool(LootPool.lootPool()
                                 .add(LootItem.lootTableItem(ModBlocks.CRAB_EGG)))));
 
-        net.minecraft.world.level.storage.loot.predicates.LootItemCondition.Builder checkLimeLevel = LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.LIME_BUSH).setProperties(net.minecraft.advancements.critereon.StatePropertiesPredicate.Builder.properties().hasProperty(LimeCropBlock.AGE, 2));
-        this.add(ModBlocks.LIME_BUSH, (net.minecraft.world.level.storage.loot.LootTable.Builder)
-                this.applyExplosionDecay(ModItems.LIME_SAPLING,
-                        LootTable.lootTable()
-                                .withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.LIME_SAPLING)))
-                                .withPool(LootPool.lootPool().when(checkLimeLevel)
-                                        .add(LootItem.lootTableItem(ModItems.LIME)
-                                                .apply(ApplyBonusCount.addBonusBinomialDistributionCount(Enchantments.BLOCK_FORTUNE, 0.5714286F, 3))))));
-
         this.add(ModBlocks.LIME_PLANT,this.applyExplosionDecay(ModBlocks.LIME_SAPLING,
                 LootTable.lootTable()
                         .withPool(LootPool.lootPool()

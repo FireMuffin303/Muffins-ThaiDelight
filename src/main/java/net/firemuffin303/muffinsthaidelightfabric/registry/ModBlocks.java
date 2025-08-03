@@ -17,7 +17,6 @@ import net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.PapayaBloc
 import net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.PapayaCropBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.PapayaLogBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.world.trees.DurianTreeGrower;
-import net.firemuffin303.muffinsthaidelightfabric.common.world.trees.LimeTreeGrower;
 import net.firemuffin303.muffinsthaidelightfabric.common.world.trees.MangoTreeGrower;
 import net.firemuffin303.muffinsthaidelightfabric.common.world.trees.PapayaTreeGrower;
 import net.minecraft.core.BlockPos;
@@ -65,8 +64,7 @@ public class ModBlocks {
     //## Lime
     public static final Block LIME_PLANT = register("lime_plant",new LimePlantBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).randomTicks().noCollission().sound(SoundType.AZALEA_LEAVES).ignitedByLava().pushReaction(PushReaction.DESTROY)));
 
-    public static final Block LIME_BUSH = register("lime_bush",new LimeCropBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).randomTicks().sound(SoundType.SWEET_BERRY_BUSH).pushReaction(PushReaction.DESTROY)));
-    public static final Block LIME_SAPLING = register("lime_sapling",new LimeSaplingBlock(BlockBehaviour.Properties.copy(OAK_SAPLING)));
+   public static final Block LIME_SAPLING = register("lime_sapling",new LimeSaplingBlock(BlockBehaviour.Properties.copy(OAK_SAPLING)));
     public static final Block POTTED_LIME_SAPLING = register("potted_lime_sapling",Blocks.flowerPot(ModBlocks.LIME_SAPLING));
     public static final Block LIME_LEAVES = register("lime_leaves",new LimeLeavesBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).randomTicks().sound(SoundType.SWEET_BERRY_BUSH).ignitedByLava()));
     public static final Block LIME_BLOCK = register("lime_block",new LimeBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).instabreak().noOcclusion().pushReaction(PushReaction.DESTROY).randomTicks().sound(SoundType.SWEET_BERRY_BUSH)));

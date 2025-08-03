@@ -387,17 +387,6 @@ public class ModelDataGen extends FabricModelProvider {
                 )
         );
 
-        blockModelGenerator.blockStateOutput.accept(
-                MultiVariantGenerator.multiVariant(ModBlocks.LIME_BUSH)
-                        .with(PropertyDispatch.property(BlockStateProperties.AGE_2)
-                                .select(0,Variant.variant().with(VariantProperties.MODEL,
-                                        blockModelGenerator.createSuffixedVariant(ModBlocks.LIME_BUSH,"_stage0",ModelTemplates.AZALEA, resourceLocation -> limeTextureMapping(0))))
-                                .select(1,Variant.variant().with(VariantProperties.MODEL,
-                                        blockModelGenerator.createSuffixedVariant(ModBlocks.LIME_BUSH,"_stage1",ModelTemplates.AZALEA, resourceLocation -> limeTextureMapping(1))))
-                                .select(2,Variant.variant().with(VariantProperties.MODEL,
-                                        blockModelGenerator.createSuffixedVariant(ModBlocks.LIME_BUSH,"_stage2",LIME_BUSH_STAGE2,resourceLocation -> limeTextureMapping(0)))
-                        )));
-
 
     }
 
@@ -520,10 +509,6 @@ public class ModelDataGen extends FabricModelProvider {
         );
     }
 
-    private static TextureMapping limeTextureMapping(int level){
-        return new TextureMapping().put(TextureSlot.SIDE, getBlockTexture(ModBlocks.LIME_BUSH, "_side_stage" + level))
-                .put(TextureSlot.TOP, getBlockTexture(ModBlocks.LIME_BUSH, "_top_stage" + level));
-    }
 
     private static void createCubeAll(Block block, BlockModelGenerators blockModelGenerator){
         TextureMapping textureMapping = TextureMapping.cube(block);
