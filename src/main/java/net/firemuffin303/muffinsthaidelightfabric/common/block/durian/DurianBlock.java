@@ -79,6 +79,7 @@ public class DurianBlock extends FallingBlock implements SimpleWaterloggedBlock,
     public InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
         if(!level.isClientSide){
             if(blockState.getValue(HANGING) && blockState.getValue(AGE) >= 2 && level.getBlockState(blockPos.below()).isAir() && level.getBlockState(blockPos.above()).is(ModBlocks.DURIAN_LEAVES)){
+                level.playSound(null,blockPos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS);
                 this.harvest((ServerLevel) level,blockPos,blockState,player);
                 return InteractionResult.SUCCESS;
             }
@@ -91,6 +92,7 @@ public class DurianBlock extends FallingBlock implements SimpleWaterloggedBlock,
     public void onProjectileHit(Level level, BlockState blockState, BlockHitResult blockHitResult, Projectile projectile) {
         BlockPos blockPos = blockHitResult.getBlockPos();
         if (!level.isClientSide && projectile.mayInteract(level, blockPos) && projectile.getType().is(EntityTypeTags.IMPACT_PROJECTILES) && level.getBlockState(blockPos.below()).isAir() && blockState.getValue(AGE) == 2) {
+            level.playSound(null,blockPos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS);
             this.harvest((ServerLevel) level,blockPos,blockState,projectile.getOwner());
         }
     }
@@ -132,7 +134,7 @@ public class DurianBlock extends FallingBlock implements SimpleWaterloggedBlock,
 
     @Override
     protected void falling(FallingBlockEntity fallingBlockEntity) {
-        fallingBlockEntity.setHurtsEntities(0.5f,4);
+        fallingBlockEntity.setHurtsEntities(0.5f,8);
     }
 
     @Override
@@ -167,7 +169,6 @@ public class DurianBlock extends FallingBlock implements SimpleWaterloggedBlock,
     }
 
     private void harvest(ServerLevel serverLevel, BlockPos blockPos, BlockState blockState, Entity entity){
-        serverLevel.playSound(null,blockPos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS);
         FallingBlockEntity fallingBlockEntity = FallingBlockEntity.fall(serverLevel, blockPos, blockState.setValue(DurianBlock.HANGING,false));
         this.falling(fallingBlockEntity);
         if(serverLevel.getBlockState(blockPos.above(1)).is(ModBlocks.DURIAN_LEAVES)){

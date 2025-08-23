@@ -234,6 +234,12 @@ public class ThaiDelight implements ModInitializer {
     private void registerStrippable(){
         StrippableBlockRegistry.register(ModBlocks.PAPAYA_LOG,ModBlocks.STRIPPED_PAPAYA_LOG);
         StrippableBlockRegistry.register(ModBlocks.PAPAYA_WOOD,ModBlocks.STRIPPED_PAPAYA_WOOD);
+        StrippableBlockRegistry.register(ModBlocks.DURIAN_LOG,ModBlocks.STRIPPED_DURIAN_LOG);
+        StrippableBlockRegistry.register(ModBlocks.DURIAN_WOOD,ModBlocks.STRIPPED_DURIAN_WOOD);
+        StrippableBlockRegistry.register(ModBlocks.MANGO_LOG,ModBlocks.STRIPPED_MANGO_LOG);
+        StrippableBlockRegistry.register(ModBlocks.MANGO_WOOD,ModBlocks.STRIPPED_MANGO_WOOD);
+        StrippableBlockRegistry.register(ModBlocks.COCONUT_LOG,ModBlocks.STRIPPED_COCONUT_LOG);
+        StrippableBlockRegistry.register(ModBlocks.COCONUT_WOOD,ModBlocks.STRIPPED_COCONUT_WOOD);
     }
 
     private void registerAnimalFood(){

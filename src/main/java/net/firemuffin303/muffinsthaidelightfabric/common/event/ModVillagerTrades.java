@@ -32,6 +32,10 @@ public class ModVillagerTrades {
         merchantOfferList.add(new MerchantOffer(new ItemStack(Items.EMERALD),new ItemStack(ModItems.LIME_SAPLING,1),16,2,1));
         merchantOfferList.add(new MerchantOffer(new ItemStack(Items.EMERALD),new ItemStack(ModItems.PEPPER_SEED,1),16,2,1));
 
+        merchantOfferList.add(new MerchantOffer(new ItemStack(Items.EMERALD,5), new ItemStack(ModItems.DURIAN_SAPLING,1),16,2,1));
+        merchantOfferList.add(new MerchantOffer(new ItemStack(Items.EMERALD,5), new ItemStack(ModItems.MANGO_SAPLING,1),16,2,1));
+        merchantOfferList.add(new MerchantOffer(new ItemStack(Items.EMERALD,5), new ItemStack(ModItems.COCONUT_SAPLING,1),16,2,1));
+
         return merchantOfferList;
     }
 
