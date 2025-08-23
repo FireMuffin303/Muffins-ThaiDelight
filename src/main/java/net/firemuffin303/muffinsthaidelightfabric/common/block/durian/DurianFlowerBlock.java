@@ -51,6 +51,10 @@ public class DurianFlowerBlock extends Block implements SimpleWaterloggedBlock, 
 
     @Override
     public BlockState updateShape(BlockState blockState, Direction direction, BlockState blockState2, LevelAccessor levelAccessor, BlockPos blockPos, BlockPos blockPos2) {
+        if (blockState.getValue(WATERLOGGED)) {
+            levelAccessor.scheduleTick(blockPos, Fluids.WATER, Fluids.WATER.getTickDelay(levelAccessor));
+        }
+
         return !blockState.canSurvive(levelAccessor, blockPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(blockState, direction, blockState2, levelAccessor, blockPos, blockPos2);
     }
 
@@ -92,6 +96,11 @@ public class DurianFlowerBlock extends Block implements SimpleWaterloggedBlock, 
 
     private static boolean isHanging(BlockState blockState){
         return blockState.getValue(HANGING);
+    }
+
+    @Override
+    public FluidState getFluidState(BlockState blockState) {
+        return (Boolean)blockState.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(blockState);
     }
 
 

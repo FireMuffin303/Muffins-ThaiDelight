@@ -16,7 +16,7 @@
       "model": "muffins_thaidelight:block/durian_block_stage2"
     },
     "age=2,hanging=true": {
-      "model": "muffins_thaidelight:block/durian_block_stage2"
+      "model": "muffins_thaidelight:block/durian_block_stage2_hanging"
     }
   }
 }

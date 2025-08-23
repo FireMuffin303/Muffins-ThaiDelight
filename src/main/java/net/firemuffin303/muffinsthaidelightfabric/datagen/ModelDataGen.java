@@ -176,6 +176,8 @@ public class ModelDataGen extends FabricModelProvider {
                                         .with(VariantProperties.MODEL, ModelLocationUtils.getModelLocation(ModBlocks.PAPAYA, "_stage2"))))
                         .with(createHorizontalFacingDispatchAlt()));
 
+
+        blockStateModelGenerator.skipAutoItemBlock(ModBlocks.DURIAN_BLOCK);
         blockStateModelGenerator.blockStateOutput.accept(
                 MultiVariantGenerator.multiVariant(ModBlocks.DURIAN_BLOCK)
                         .with(PropertyDispatch.properties(BlockStateProperties.AGE_2,BlockStateProperties.HANGING)
@@ -184,7 +186,7 @@ public class ModelDataGen extends FabricModelProvider {
                                 .select(1,true,Variant.variant()
                                         .with(VariantProperties.MODEL,ModelLocationUtils.getModelLocation(ModBlocks.DURIAN_BLOCK,"_stage1_hanging")))
                                 .select(2,true,Variant.variant()
-                                        .with(VariantProperties.MODEL,ModelLocationUtils.getModelLocation(ModBlocks.DURIAN_BLOCK,"_stage2")))
+                                        .with(VariantProperties.MODEL,ModelLocationUtils.getModelLocation(ModBlocks.DURIAN_BLOCK,"_stage2_hanging")))
                                 .select(0,false,Variant.variant()
                                         .with(VariantProperties.MODEL,ModelLocationUtils.getModelLocation(ModBlocks.DURIAN_BLOCK,"_stage0")))
                                 .select(1,false,Variant.variant()
@@ -261,8 +263,6 @@ public class ModelDataGen extends FabricModelProvider {
         blockStateModelGenerator.createPlant(ModBlocks.LIME_SAPLING,ModBlocks.POTTED_LIME_SAPLING, BlockModelGenerators.TintState.NOT_TINTED);
         blockStateModelGenerator.createPlant(ModBlocks.COCONUT_SAPLING,ModBlocks.POTTED_COCONUT_SAPLING, BlockModelGenerators.TintState.NOT_TINTED);
         blockStateModelGenerator.createPlant(ModBlocks.MANGO_SAPLING,ModBlocks.POTTED_MANGO_SAPLING, BlockModelGenerators.TintState.NOT_TINTED);
-
-
 
         blockStateModelGenerator.createTrivialBlock(ModBlocks.LIME_LEAVES,TexturedModel.LEAVES);
     }

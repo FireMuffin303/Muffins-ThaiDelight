@@ -1,4 +1,6 @@
 {
+	"parent": "minecraft:block/block",
+	"format_version": "1.21.6",
 	"credit": "Made with Blockbench",
 	"textures": {
 		"0": "muffins_thaidelight:block/durian/durian_stage0",
@@ -19,9 +21,9 @@
 			}
 		},
 		{
-			"from": [2, 0, 6],
-			"to": [14, 8, 6],
-			"rotation": {"angle": 0, "axis": "y", "origin": [2, 0, 6]},
+			"from": [2, 0, 4],
+			"to": [14, 8, 4],
+			"rotation": {"angle": 0, "axis": "y", "origin": [2, 0, 4]},
 			"faces": {
 				"north": {"uv": [0, 8, 12, 16], "texture": "#0"},
 				"east": {"uv": [0, 0, 0, 8], "texture": "#missing"},
@@ -32,9 +34,9 @@
 			}
 		},
 		{
-			"from": [2, 0, 10],
-			"to": [14, 8, 10],
-			"rotation": {"angle": 0, "axis": "y", "origin": [2, 0, 10]},
+			"from": [2, 0, 12],
+			"to": [14, 8, 12],
+			"rotation": {"angle": 0, "axis": "y", "origin": [2, 0, 12]},
 			"faces": {
 				"north": {"uv": [0, 8, 12, 16], "texture": "#0"},
 				"east": {"uv": [0, 0, 0, 8], "texture": "#missing"},
@@ -45,9 +47,9 @@
 			}
 		},
 		{
-			"from": [6, 0, 2],
-			"to": [6, 8, 14],
-			"rotation": {"angle": 0, "axis": "y", "origin": [6, 0, 14]},
+			"from": [4, 0, 2],
+			"to": [4, 8, 14],
+			"rotation": {"angle": 0, "axis": "y", "origin": [4, 0, 14]},
 			"faces": {
 				"north": {"uv": [0, 0, 0, 8], "texture": "#missing"},
 				"east": {"uv": [0, 8, 12, 16], "texture": "#0"},
@@ -58,9 +60,9 @@
 			}
 		},
 		{
-			"from": [9, 0, 2],
-			"to": [9, 8, 14],
-			"rotation": {"angle": 0, "axis": "y", "origin": [9, 0, 14]},
+			"from": [12, 0, 2],
+			"to": [12, 8, 14],
+			"rotation": {"angle": 0, "axis": "y", "origin": [12, 0, 14]},
 			"faces": {
 				"north": {"uv": [0, 0, 0, 8], "texture": "#missing"},
 				"east": {"uv": [0, 8, 12, 16], "texture": "#0"},
@@ -97,7 +99,6 @@
 			}
 		}
 	],
-	"display": {},
 	"groups": [
 		{
 			"name": "state_1",
