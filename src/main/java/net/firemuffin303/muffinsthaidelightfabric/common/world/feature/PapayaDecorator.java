@@ -1,5 +1,6 @@
 package net.firemuffin303.muffinsthaidelightfabric.common.world.feature;
 
+import com.mojang.logging.LogUtils;
 import com.mojang.serialization.Codec;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.PapayaBlock;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
@@ -36,9 +37,10 @@ public class PapayaDecorator extends TreeDecorator {
             List<BlockPos> list = context.logs();
             int i = ((BlockPos)list.get(list.size()-1)).getY();
             list.stream().filter((blockPos) -> {
-                return i - blockPos.getY() <= 2;
+                LogUtils.getLogger().info(String.valueOf(context.logs().size()));
+                return i - blockPos.getY() <= context.logs().size()-3;
             }).forEach((blockPos) -> {
-                Iterator var3 = Direction.Plane.HORIZONTAL.iterator();
+                Iterator<Direction> var3 = Direction.Plane.HORIZONTAL.iterator();
 
                 while(var3.hasNext()) {
                     Direction direction = (Direction)var3.next();
