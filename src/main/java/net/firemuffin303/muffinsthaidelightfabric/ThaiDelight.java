@@ -192,8 +192,10 @@ public class ThaiDelight implements ModInitializer {
             return BiomeSelectors.includeByKey(Biomes.SAVANNA,Biomes.SAVANNA_PLATEAU,Biomes.WINDSWEPT_SAVANNA).test(context);
         }, GenerationStep.Decoration.VEGETAL_DECORATION, ModFeatures.PAPAYA_TREE_CHECKED);
 
-        BiomeModifications.addFeature(context -> BiomeSelectors.tag(BiomeTags.IS_JUNGLE).test(context),
+        BiomeModifications.addFeature(context -> BiomeSelectors.includeByKey(Biomes.JUNGLE).test(context),
                 GenerationStep.Decoration.VEGETAL_DECORATION,ModFeatures.TREES_DURIAN);
+
+        BiomeModifications.addFeature(context -> BiomeSelectors.includeByKey(Biomes.SPARSE_JUNGLE).test(context), GenerationStep.Decoration.VEGETAL_DECORATION,ModFeatures.TREES_DURIAN_SPARSE_JUNGLE);
 
         BiomeModifications.addFeature(context -> BiomeSelectors.tag(ModTagDataGen.ModBiomeTagDataGen.MANGO_TREE_BIOMES).test(context),
                 GenerationStep.Decoration.VEGETAL_DECORATION,ModFeatures.TREES_MANGO);

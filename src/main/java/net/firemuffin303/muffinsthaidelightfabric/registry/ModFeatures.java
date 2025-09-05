@@ -70,6 +70,7 @@ public class ModFeatures {
     public static final ResourceKey<PlacedFeature> PATCH_WILD_PEPPER;
     public static final ResourceKey<PlacedFeature> PAPAYA_TREE_CHECKED;
     public static final ResourceKey<PlacedFeature> TREES_DURIAN = ResourceKey.create(Registries.PLACED_FEATURE,ThaiDelight.modid("trees_durian"));
+    public static final ResourceKey<PlacedFeature> TREES_DURIAN_SPARSE_JUNGLE = ResourceKey.create(Registries.PLACED_FEATURE,ThaiDelight.modid("trees_durian_sparse"));
     public static final ResourceKey<PlacedFeature> TREES_MANGO = ResourceKey.create(Registries.PLACED_FEATURE,ThaiDelight.modid("trees_mango"));
 
     public static void init(){}
@@ -148,7 +149,11 @@ public class ModFeatures {
                 )
         ));
 
-        bootstapContext.register(ModFeatures.TREES_DURIAN,new PlacedFeature(durian_tree_checked, VegetationPlacements.treePlacement(PlacementUtils.countExtra(1,0.02f,1),ModBlocks.DURIAN_SAPLING)));
+        bootstapContext.register(ModFeatures.TREES_DURIAN,
+                new PlacedFeature(durian_tree_checked, VegetationPlacements.treePlacement(PlacementUtils.countExtra(1,0.02f,1),ModBlocks.DURIAN_SAPLING)));
+        bootstapContext.register(ModFeatures.TREES_DURIAN_SPARSE_JUNGLE,
+                new PlacedFeature(durian_tree_checked,VegetationPlacements.treePlacement(RarityFilter.onAverageOnceEvery(50),ModBlocks.DURIAN_SAPLING)));
+
         bootstapContext.register(ModFeatures.TREES_MANGO,new PlacedFeature(mango_tree_checked, ImmutableList.<PlacementModifier>builder()
                 .add(CountPlacement.of(ClampedInt.of(UniformInt.of(-3,1),0,1)))
                 .add(RarityFilter.onAverageOnceEvery(5))
@@ -180,6 +185,7 @@ public class ModFeatures {
         entries.add(provider.lookupOrThrow(Registries.PLACED_FEATURE),ModFeatures.PATCH_LIME_BUSH);
         entries.add(provider.lookupOrThrow(Registries.PLACED_FEATURE),ModFeatures.PATCH_WILD_PEPPER);
         entries.add(provider.lookupOrThrow(Registries.PLACED_FEATURE),ModFeatures.TREES_DURIAN);
+        entries.add(provider.lookupOrThrow(Registries.PLACED_FEATURE),ModFeatures.TREES_DURIAN_SPARSE_JUNGLE);
         entries.add(provider.lookupOrThrow(Registries.PLACED_FEATURE),ModFeatures.TREES_MANGO);
 
     }
