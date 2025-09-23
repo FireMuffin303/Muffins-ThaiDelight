@@ -1,4 +1,4 @@
-// 1.20.1	2025-09-23T15:05:52.7863749	Muffin's Thai's Delight Refabricated/Tags for minecraft:block
+// 1.20.1	2025-09-23T21:00:32.2754259	Muffin's Thai's Delight Refabricated/Tags for minecraft:block
 ae7eb8a3671e3ffc481f0d370af2def02a40edfa data\minecraft\tags\blocks\fence_gates.json
 3fecf9b152e8330a9e39af07b063ead300a23490 data\minecraft\tags\blocks\mineable\axe.json
 0136a01774761f1499b4408c8b3cddc8a4faf838 data\minecraft\tags\blocks\mineable\hoe.json
@@ -11,6 +11,7 @@ d026fec16e02d7258ea497364a9ac91670a3fd4f data\minecraft\tags\blocks\wooden_doors
 c48962fe61470e7c26bc8fa54e2152c20defb62a data\minecraft\tags\blocks\mineable\pickaxe.json
 5d46724ce46579469a169945bcf3c8b90c56b410 data\minecraft\tags\blocks\logs_that_burn.json
 5b475a3f430e904087b198ab7c78704f9676fdcb data\minecraft\tags\blocks\wooden_trapdoors.json
+d2afbd8e0e2bcf8bbb10adbd0778528cb1ea8a51 data\minecraft\tags\blocks\flowers.json
 d95a9d13a9e123c4b0b4df46b540d8ac6f534c0c data\minecraft\tags\blocks\wooden_buttons.json
 3efa499397141b24686e4248446b671c3c5b96cd data\minecraft\tags\blocks\wooden_slabs.json
 91ab8538297ce7467e1a2856c66099e73c66845e data\minecraft\tags\blocks\planks.json

@@ -99,6 +99,11 @@ public class ModelDataGen extends FabricModelProvider {
         createCrateBlock(ModBlocks.PEPPER_CRATE,blockStateModelGenerator);
         createCrateBlock(ModBlocks.RAW_PAPAYA_CRATE,blockStateModelGenerator);
         createCrateBlock(ModBlocks.PAPAYA_CRATE,blockStateModelGenerator);
+        createCrateBlock(ModBlocks.DURIAN_CRATE,blockStateModelGenerator);
+        createCrateBlock(ModBlocks.MANGO_CRATE,blockStateModelGenerator);
+        createCrateBlock(ModBlocks.COCONUT_CRATE,blockStateModelGenerator);
+        createCrateBlock(ModBlocks.HOLY_BASIL_CRATE,blockStateModelGenerator);
+        createCrateBlock(ModBlocks.BASIL_CRATE,blockStateModelGenerator);
 
         blockStateModelGenerator.createSimpleFlatItemModel(ModBlocks.CRAB_EGG);
         blockStateModelGenerator.blockStateOutput.accept(createSimpleBlock(ModBlocks.CRAB_EGG,ModelLocationUtils.getModelLocation(ModBlocks.CRAB_EGG)));
@@ -317,6 +322,7 @@ public class ModelDataGen extends FabricModelProvider {
         itemModelGenerator.generateFlatItem(ModItems.LARB, ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.CRAB_FRIED_RICE, ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.STIR_FRIED_NOODLE, ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.PHAT_KAPHRAO,ModelTemplates.FLAT_ITEM);
 
 
         itemModelGenerator.generateFlatItem(Item.byBlock(ModBlocks.SOMTAM_FEAST), ModelTemplates.FLAT_ITEM);
@@ -331,7 +337,7 @@ public class ModelDataGen extends FabricModelProvider {
         itemModelGenerator.generateFlatItem(ModItems.MANGO_SLICE,ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.MANGO_STICKY_RICE,ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.COCONUT,ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.COCONUT_MEAT,ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.COCONUT_SLICE,ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.COCONUT_MILK_BOTTLE,ModelTemplates.FLAT_ITEM);
 
         itemModelGenerator.generateFlatItem(ModItems.HOLY_BASIL_SAPLING,ModelTemplates.FLAT_ITEM);

@@ -54,6 +54,11 @@ public class ModBlocks {
     public static final Block PEPPER_CRATE = register("pepper_crate",new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).destroyTime(2.0f).explosionResistance(3.0f).sound(SoundType.WOOD)));
     public static final Block RAW_PAPAYA_CRATE = register("raw_papaya_crate",new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).destroyTime(2.0f).explosionResistance(3.0f).sound(SoundType.WOOD)));
     public static final Block PAPAYA_CRATE = register("papaya_crate",new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).destroyTime(2.0f).explosionResistance(3.0f).sound(SoundType.WOOD)));
+    public static final Block DURIAN_CRATE = register("durian_crate",new Block(BlockBehaviour.Properties.copy(OAK_PLANKS).destroyTime(2.0f).explosionResistance(3.0f).sound(SoundType.WOOD)));
+    public static final Block MANGO_CRATE = register("mango_crate",new Block(BlockBehaviour.Properties.copy(OAK_PLANKS).destroyTime(2.0f).explosionResistance(3.0f).sound(SoundType.WOOD)));
+    public static final Block COCONUT_CRATE = register("coconut_crate",new Block(BlockBehaviour.Properties.copy(OAK_PLANKS).destroyTime(2.0f).explosionResistance(3.0f).sound(SoundType.WOOD)));
+    public static final Block HOLY_BASIL_CRATE = register("holy_basil_crate",new Block(BlockBehaviour.Properties.copy(OAK_PLANKS).destroyTime(2.0f).explosionResistance(3.0f).sound(SoundType.WOOD)));
+    public static final Block BASIL_CRATE = register("basil_crate",new Block(BlockBehaviour.Properties.copy(OAK_PLANKS).destroyTime(2.0f).explosionResistance(3.0f).sound(SoundType.WOOD)));
 
     //Eggs
     public static final Block CRAB_EGG = register("flower_crab_egg",new CrabEggBlock(BlockBehaviour.Properties.copy(Blocks.FROGSPAWN)));

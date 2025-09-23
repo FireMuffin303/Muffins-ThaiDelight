@@ -330,6 +330,11 @@ public class ThaiDelight implements ModInitializer {
         output.accept(ModItems.PEPPER_CRATE);
         output.accept(ModItems.RAW_PAPAYA_CRATE);
         output.accept(ModItems.PAPAYA_CRATE);
+        output.accept(ModItems.DURIAN_CRATE);
+        output.accept(ModItems.MANGO_CRATE);
+        output.accept(ModItems.COCONUT_CRATE);
+        output.accept(ModItems.HOLY_BASIL_CRATE);
+        output.accept(ModItems.BASIL_CRATE);
 
         output.accept(ModItems.CRAB_SPAWN_EGG);
         output.accept(ModItems.CRAB_EGG);
@@ -407,8 +412,7 @@ public class ThaiDelight implements ModInitializer {
         output.accept(ModItems.COCONUT_CABINET);
 
         output.accept(ModItems.COCONUT);
-        output.accept(ModItems.COCONUT_MEAT);
-        output.accept(ModItems.COCONUT_MILK_BOTTLE);
+        output.accept(ModItems.COCONUT_SLICE);
 
         output.accept(ModItems.MANGO_SAPLING);
         output.accept(ModItems.MANGO_LEAVES);
@@ -461,6 +465,8 @@ public class ThaiDelight implements ModInitializer {
         output.accept(ModItems.CRAB_FRIED_RICE);
         output.accept(ModItems.STIR_FRIED_NOODLE);
         output.accept(ModItems.MANGO_STICKY_RICE);
+        output.accept(ModItems.COCONUT_MILK_BOTTLE);
+        output.accept(ModItems.PHAT_KAPHRAO);
     }
 
     public static ResourceLocation modid(String id){

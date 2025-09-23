@@ -122,6 +122,8 @@ public class ModTagDataGen {
             getOrCreateTagBuilder(DURIAN_LOGS).add(ModItems.DURIAN_LOG,ModItems.DURIAN_WOOD,ModItems.STRIPPED_DURIAN_LOG,ModItems.STRIPPED_DURIAN_WOOD);
             getOrCreateTagBuilder(MANGO_LOGS).add(ModItems.MANGO_LOG,ModItems.MANGO_WOOD,ModItems.STRIPPED_MANGO_LOG,ModItems.STRIPPED_MANGO_WOOD);
             getOrCreateTagBuilder(COCONUT_LOGS).add(ModItems.COCONUT_LOG,ModItems.COCONUT_WOOD,ModItems.STRIPPED_COCONUT_LOG,ModItems.STRIPPED_COCONUT_WOOD);
+
+            getOrCreateTagBuilder(ItemTags.FLOWERS).add(ModItems.DURIAN_FLOWER);
         }
     }
 
@@ -170,6 +172,8 @@ public class ModTagDataGen {
             getOrCreateTagBuilder(BlockTags.WOODEN_TRAPDOORS).add(ModBlocks.DURIAN_TRAPDOOR,ModBlocks.MANGO_TRAPDOOR,ModBlocks.COCONUT_FENCE_GATE);
             getOrCreateTagBuilder(BlockTags.WOODEN_PRESSURE_PLATES).add(ModBlocks.DURIAN_PRESSURE_PLATE,ModBlocks.MANGO_PRESSURE_PLATE,ModBlocks.COCONUT_PRESSURE_PLATE);
             getOrCreateTagBuilder(BlockTags.WOODEN_BUTTONS).add(ModBlocks.DURIAN_BUTTON,ModBlocks.MANGO_BUTTON,ModBlocks.COCONUT_BUTTON);
+
+            getOrCreateTagBuilder(BlockTags.FLOWERS).add(ModBlocks.DURIAN_FLOWER);
         }
     }
 
