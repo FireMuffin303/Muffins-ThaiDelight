@@ -1,8 +1,11 @@
 package net.firemuffin303.muffinsthaidelightfabric.common.block.lime;
 
+import io.github.fabricators_of_create.porting_lib.tags.Tags;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModItems;
+import net.firemuffin303.muffinsthaidelightfabric.registry.ModLootTables;
 import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -13,6 +16,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -30,10 +34,16 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+
+import java.util.List;
 
 public class LimePlantBlock extends DoublePlantBlock implements BonemealableBlock {
     public static final IntegerProperty AGE = BlockStateProperties.AGE_2;
@@ -58,36 +68,47 @@ public class LimePlantBlock extends DoublePlantBlock implements BonemealableBloc
     public InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
         if(!level.isClientSide){
             BlockPos lowerPos = isLower(blockState) ? blockPos : blockPos.below();
-            if(blockState.getValue(AGE) >= MAX_AGE){
+            ItemStack handStack = player.getItemInHand(interactionHand);
+            InteractionResult result = InteractionResult.FAIL;
 
-                int j = 2 + level.random.nextInt(2);
-                popResource(level,lowerPos.above(),new ItemStack(ModItems.LIME,j));
-
-                if(level.random.nextInt(5) == 0){
-                    popResource(level,lowerPos.above(),new ItemStack(ModItems.LIME_SAPLING,1));
-                }
-
-                level.playSound((Player)null, player, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
-
-                level.setBlock(lowerPos,blockState.setValue(AGE,0).setValue(HALF,DoubleBlockHalf.LOWER),2);
-                level.setBlock(lowerPos.above(),
-                        copyWaterloggedFrom(level, lowerPos, blockState.setValue(AGE, 0)
-                                .setValue(HALF, DoubleBlockHalf.UPPER)), 3);
-                level.gameEvent(GameEvent.BLOCK_CHANGE, lowerPos, GameEvent.Context.of(player, blockState));
-                return InteractionResult.SUCCESS;
-            } else if (blockState.getValue(AGE) == 1 && player.getItemInHand(interactionHand).is(Items.SHEARS)) {
-                popResource(level,lowerPos.above(),new ItemStack(ModItems.LIME_SAPLING,1));
-                level.playSound((Player)null, player, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
-                level.setBlock(lowerPos,blockState.setValue(AGE,0).setValue(HALF,DoubleBlockHalf.LOWER),2);
-                level.setBlock(lowerPos.above(),
-                        copyWaterloggedFrom(level, lowerPos, blockState.setValue(AGE, 0)
-                                .setValue(HALF, DoubleBlockHalf.UPPER)), 3);
-                level.gameEvent(GameEvent.BLOCK_CHANGE, lowerPos, GameEvent.Context.of(player, blockState));
-                return InteractionResult.SUCCESS;
+            if (handStack.is(Tags.Items.SHEARS) && blockState.getValue(AGE) >= 1) {
+                drop(ModLootTables.LIME_SHEARS, (ServerLevel) level, player, handStack, blockState, lowerPos);
+                result = InteractionResult.SUCCESS;
             }
+
+            if(blockState.getValue(AGE) >= MAX_AGE) {
+                drop(ModLootTables.LIME_HARVEST, (ServerLevel) level,player,handStack,blockState,lowerPos);
+                result = InteractionResult.SUCCESS;
+            }
+
+            return result;
         }
 
         return super.use(blockState, level, blockPos, player, interactionHand, blockHitResult);
+    }
+
+    private void drop(ResourceLocation resourceLocation, ServerLevel serverLevel,Player player, ItemStack itemStack, BlockState blockState, BlockPos blockPos){
+        LootTable lootTable = serverLevel.getServer().getLootData().getLootTable(resourceLocation);
+        LootParams params = new LootParams.Builder(serverLevel)
+                .withParameter(LootContextParams.BLOCK_STATE,blockState)
+                .withParameter(LootContextParams.ORIGIN,blockPos.getCenter())
+                .withParameter(LootContextParams.TOOL,itemStack)
+                .create(LootContextParamSets.BLOCK);
+
+        List<ItemStack> list = lootTable.getRandomItems(params);
+
+        for (ItemStack dropStack : list) {
+            ItemEntity itemEntity = new ItemEntity(serverLevel, (double)blockPos.getX(), (double)blockPos.getY(), (double)blockPos.getZ(), dropStack);
+            itemEntity.setDefaultPickUpDelay();
+            serverLevel.addFreshEntity(itemEntity);
+        }
+
+        serverLevel.playSound(null,blockPos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS);
+        serverLevel.setBlock(blockPos,blockState.setValue(AGE,0).setValue(HALF,DoubleBlockHalf.LOWER),2);
+        serverLevel.setBlock(blockPos.above(),
+                copyWaterloggedFrom(serverLevel, blockPos, blockState.setValue(AGE, 0)
+                        .setValue(HALF, DoubleBlockHalf.UPPER)), 3);
+        serverLevel.gameEvent(GameEvent.BLOCK_CHANGE, blockPos, GameEvent.Context.of(player, blockState));
     }
 
     @Override

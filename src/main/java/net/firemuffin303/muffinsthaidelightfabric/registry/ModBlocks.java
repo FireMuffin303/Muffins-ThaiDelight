@@ -25,6 +25,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
@@ -413,6 +414,22 @@ public class ModBlocks {
 
     //Cauldron
     public static final Block FERMENTED_FISH_CAULDRON = register("fermented_fish_cauldron",new FermentedFishCauldronBlock(BlockBehaviour.Properties.copy(Blocks.CAULDRON),ModCauldronInteraction.FERMENTED_FISH));
+
+    // 🌿 BASIL 🌿
+    public static final Block BASIL = register("basil",new BasilCropBlock(BlockBehaviour.Properties.copy(Blocks.POTATOES),ModLootTables.BASIL_HARVEST,ModLootTables.BASIL_SHEARS){
+        @Override
+        protected ItemLike getBaseSeedId() {
+            return ModItems.BASIL_SAPLING;
+        }
+    });
+    public static final Block POTTED_BASIL = register("potted_basil",Blocks.flowerPot(ModBlocks.BASIL));
+    public static final Block HOLY_BASIL = register("holy_basil",new BasilCropBlock(BlockBehaviour.Properties.copy(Blocks.POTATOES),ModLootTables.HOLY_BASIL_HARVEST,ModLootTables.HOLY_BASIL_SHEARS){
+        @Override
+        protected ItemLike getBaseSeedId() {
+            return ModItems.HOLY_BASIL_SAPLING;
+        }
+    });
+    public static final Block POTTED_HOLY_BASIL = register("potted_holy_basil",Blocks.flowerPot(ModBlocks.HOLY_BASIL));
 
     //public static final Block SAUCE_BOWL = register("sauce_bowl",new SauceBowlBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BROWN)));
 

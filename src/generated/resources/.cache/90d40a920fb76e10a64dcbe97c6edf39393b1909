@@ -1,4 +1,4 @@
-// 1.20.1	2025-09-05T11:16:20.4824331	Muffin's Thai's Delight Refabricated/Recipes
+// 1.20.1	2025-09-23T15:05:52.7970672	Muffin's Thai's Delight Refabricated/Recipes
 165425d88447b22539ee7668d5a74aaa08424500 data\muffins_thaidelight\recipes\mortar\bone_meal_by_nautilus_shell.json
 1010f7e180c69c7aa4ba3a90f383af97d07205ca data\muffins_thaidelight\advancements\recipes\misc\crafting\papaya_sapling_by_sliced_papaya_from_crafting.json
 6321ac0d2bb1f439196bf3c541d394608cd150ae data\muffins_thaidelight\recipes\smelting\cooked_dragonfly_from_smelting.json
@@ -71,8 +71,8 @@ ea4970471ac74ad0fd4933ec5cee1f7d8e7e6169 data\muffins_thaidelight\recipes\crafti
 9e10698b7492a4d56fed1945048aafc9eb2e5290 data\muffins_thaidelight\recipes\mortar\black_dye_by_coal.json
 de9942136f59c821f99f946e431b0d28f16d69f8 data\muffins_thaidelight\advancements\recipes\food\campfire\fried_durian_from_campfire.json
 e363fdb1dea457a9905a5e5fd7855ac27465b0e7 data\muffins_thaidelight\recipes\durian_boat.json
-522f91e59fd11c941bef88eaa8ebfd79f20a1015 data\muffins_thaidelight\recipes\crafting\mortar.json
 07ef21285500465cf410f7d7b2f742007a504886 data\muffins_thaidelight\recipes\cooking\cooked_flower_crab_from_cooking.json
+522f91e59fd11c941bef88eaa8ebfd79f20a1015 data\muffins_thaidelight\recipes\crafting\mortar.json
 6e6de81446343137591275482d882ae163d7262e data\muffins_thaidelight\advancements\recipes\building_blocks\coconut_wood.json
 9f226fe8163ee6b882a0ddd17462785ac63e7066 data\muffins_thaidelight\recipes\coconut_planks.json
 a92c6ceaf5f68f04992194eb09dafcae244eb11e data\muffins_thaidelight\recipes\durian_chest_boat.json

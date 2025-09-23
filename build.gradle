@@ -35,9 +35,16 @@ repositories {
         name "cardinal components, playerabilitylib, trinkets"
         url "https://maven.ladysnake.org/releases"
     }
+
+    maven {
+        name = 'TerraformersMC'
+        url = 'https://maven.terraformersmc.com/'
+    }
+
+    // Refabricated REPO -------------------
     maven {
         name = "Greenhouse Maven"
-        url = 'https://repo.greenhouse.house/releases/'
+        url = 'https://maven.greenhouse.lgbt/releases/'
     }
 
     maven { url "https://mvn.devos.one/releases/" } // Porting Lib
@@ -53,11 +60,9 @@ repositories {
             excludeGroup "io.github.fabricators_of_create"
         }
     }
+    //--------------------------------------
 
-    maven {
-        name = 'TerraformersMC'
-        url = 'https://maven.terraformersmc.com/'
-    }
+
 
 
 }

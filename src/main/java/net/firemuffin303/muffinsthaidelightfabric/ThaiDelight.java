@@ -1,6 +1,5 @@
 package net.firemuffin303.muffinsthaidelightfabric;
 
-import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Pair;
 import com.terraformersmc.terraform.boat.api.TerraformBoatType;
 import com.terraformersmc.terraform.boat.api.TerraformBoatTypeRegistry;
@@ -12,6 +11,7 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
+import net.fabricmc.fabric.api.loot.v2.LootTableSource;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
@@ -28,6 +28,8 @@ import net.firemuffin303.muffinsthaidelightfabric.mixin.food.ChickenFoodAccessor
 import net.firemuffin303.muffinsthaidelightfabric.mixin.food.FrogFoodAccessor;
 import net.firemuffin303.muffinsthaidelightfabric.mixin.food.ParrotTameFoodAccessor;
 import net.firemuffin303.muffinsthaidelightfabric.mixin.food.PigFoodAccessor;
+import net.firemuffin303.muffinsthaidelightfabric.mixin.loot.LootPoolBuilderAccessor;
+import net.firemuffin303.muffinsthaidelightfabric.mixin.loot.LootTableAccessor;
 import net.firemuffin303.muffinsthaidelightfabric.registry.*;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
@@ -38,7 +40,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.packs.PackType;
-import net.minecraft.tags.BiomeTags;
+import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.world.entity.ai.goal.GoalSelector;
@@ -58,7 +60,11 @@ import net.minecraft.world.level.levelgen.structure.pools.StructurePoolElement;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorList;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
+import net.minecraft.world.level.storage.loot.LootDataManager;
 import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
 import net.minecraft.world.level.storage.loot.entries.LootTableReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -67,6 +73,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Stream;
 
 public class ThaiDelight implements ModInitializer {
     public static final Logger LOGGER = LoggerFactory.getLogger(ThaiDelight.MOD_ID);
@@ -128,14 +135,29 @@ public class ThaiDelight implements ModInitializer {
                 BuiltInLootTables.ABANDONED_MINESHAFT,
                 BuiltInLootTables.PILLAGER_OUTPOST);
 
-        LootTableEvents.MODIFY.register((resourceManager, lootDataManager, resourceLocation, builder, lootTableSource) -> {
-            ResourceLocation injectId = new ResourceLocation(ThaiDelight.MOD_ID, "inject/" + resourceLocation.getPath());
+
+        LootTableEvents.MODIFY.register(new LootTableEvents.Modify() {
+            @Override
+            public void modifyLootTable(ResourceManager resourceManager, LootDataManager lootDataManager,
+                                        ResourceLocation resourceLocation, LootTable.Builder builder, LootTableSource lootTableSource) {
+
+                if (chestsId.contains(resourceLocation)) {
+                    ResourceLocation injectId = new ResourceLocation(ThaiDelight.MOD_ID, "inject/" + resourceLocation.getPath());
+                    LootTable injectingLootTable = lootDataManager.getLootTable(injectId);
+                    LootTableAccessor accessor = (LootTableAccessor) injectingLootTable;
+
+                    LootPool injectingPool = List.of(accessor.getPools()).get(0);
+
+                    builder.modifyPools(builder1 -> {
+                        for(LootPoolEntryContainer lootPoolEntryContainer : injectingPool.entries){
+                            ((LootPoolBuilderAccessor) builder1).getEntries().add(lootPoolEntryContainer);
+                        }
+
+                    });
 
 
-            if (chestsId.contains(resourceLocation)) {
-                builder.pool(LootPool.lootPool().add(LootTableReference.lootTableReference(injectId).setWeight(1).setQuality(0)).build());
+                }
             }
-
         });
     }
 
@@ -172,7 +194,6 @@ public class ThaiDelight implements ModInitializer {
         SpawnPlacements.register(ModEntityTypes.FLOWER_CRAB,SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, FlowerCrabEntity::checkSpawnRules);
         SpawnPlacements.register(ModEntityTypes.DRAGONFLY,SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, DragonflyEntity::checkSpawnRules);
 
-
         PotionBrewing.addMix(Potions.AWKWARD,ModItems.FERMENTED_FISH,ModMobEffects.STINKY_POTION);
         PotionBrewing.addMix(ModMobEffects.STINKY_POTION, Items.REDSTONE,ModMobEffects.LONG_STINKY_POTION);
         PotionBrewing.addMix(ModMobEffects.STINKY_POTION, Items.GLOWSTONE_DUST,ModMobEffects.STRONG_STINKY_POTION);
@@ -203,14 +224,12 @@ public class ThaiDelight implements ModInitializer {
         ServerLifecycleEvents.SERVER_STARTING.register(minecraftServer -> {
             addToStructurePool(minecraftServer,
                     new ResourceLocation("minecraft","village/plains/houses"),
-                    new ResourceLocation(ThaiDelight.MOD_ID, "village/plains/houses/small_thai_house_1"),2);
+                    ThaiDelight.modid("village/plains/houses/small_thai_house_1"),2);
 
             addToStructurePool(minecraftServer,
                     new ResourceLocation("minecraft","village/savanna/houses"),
-                    new ResourceLocation(ThaiDelight.MOD_ID,"village/savanna/houses/savanna_small_thai_house_1"),2);
+                    ThaiDelight.modid("village/savanna/houses/savanna_small_thai_house_1"),2);
         });
-
-
     }
 
     private void registerComposter(){
@@ -253,16 +272,18 @@ public class ThaiDelight implements ModInitializer {
 
         Ingredient newFrogFoods = Ingredient.of(ModItems.DRAGONFLY,ModItems.COOKED_DRAGONFLY);
 
-        PigFoodAccessor.setFoodItems(Ingredient.of(new ImmutableList.Builder<ItemStack>().addAll(Arrays.stream(PigFoodAccessor.getFoodItems().getItems()).iterator())
-                .addAll(Arrays.asList(newPigFoods.getItems())).build().stream()));
+        PigFoodAccessor.setFoodItems(Ingredient.of(
+                Stream.concat(Arrays.stream(PigFoodAccessor.getFoodItems().getItems()),Arrays.stream(newPigFoods.getItems()))
+        ));
 
         ChickenFoodAccessor.setFoodItems(Ingredient.of(
-                new ImmutableList.Builder<ItemStack>().addAll(Arrays.stream(ChickenFoodAccessor.getFoodItems().getItems()).iterator())
-                        .addAll(Arrays.asList(newChickenFoods.getItems())).build().stream()));
+                Stream.concat(Arrays.stream(ChickenFoodAccessor.getFoodItems().getItems()),Arrays.stream(newChickenFoods.getItems()))
+        ));
 
         FrogFoodAccessor.setFoodItems(Ingredient.of(
-                new ImmutableList.Builder<ItemStack>().addAll(Arrays.asList(FrogFoodAccessor.getFoodItems().getItems()).iterator())
-                        .addAll(Arrays.asList(newFrogFoods.getItems())).build().stream()));
+                Stream.concat(Arrays.stream(FrogFoodAccessor.getFoodItems().getItems()),Arrays.stream(newFrogFoods.getItems()))
+        ));
+
     }
 
     private void addVillagersTrades(){
@@ -425,6 +446,11 @@ public class ThaiDelight implements ModInitializer {
         output.accept(ModItems.PAPAYA_LEAVES);
         output.accept(ModItems.PAPAYA_SAPLING);
         output.accept(ModItems.PAPAYA_SEEDS);
+
+        output.accept(ModItems.HOLY_BASIL);
+        output.accept(ModItems.HOLY_BASIL_SAPLING);
+        output.accept(ModItems.BASIL);
+        output.accept(ModItems.BASIL_SAPLING);
 
         output.accept(ModItems.FRIED_DURIAN);
         output.accept(ModItems.SOMTAM_FEAST);

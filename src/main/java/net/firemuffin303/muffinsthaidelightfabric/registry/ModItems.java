@@ -123,8 +123,7 @@ public class ModItems {
     public static final Item DURIAN_BOAT = TerraformBoatItemHelper.registerBoatItem(ThaiDelight.modid("durian_boat"),DURIAN_BOAT_KEY,false);
     public static final Item DURIAN_CHEST_BOAT = TerraformBoatItemHelper.registerBoatItem(ThaiDelight.modid("durian_chest_boat"),DURIAN_BOAT_KEY,true);
 
-    //------------------------
-    //------------------ COCONUT ------------------
+    //------------------ 🥥 COCONUT 🥥 ------------------
     public static final Item COCONUT_SAPLING = register("coconut_sapling",new BlockItem(ModBlocks.COCONUT_SAPLING,new Item.Properties()));
     public static final Item COCONUT_LEAVES = register("coconut_leaves",new BlockItem(ModBlocks.COCONUT_LEAVES,new Item.Properties()));
     //COCONUT Woodset item
@@ -151,7 +150,7 @@ public class ModItems {
     public static final Item COCONUT_MILK_BOTTLE = register("coconut_milk_bottle",new Item(new Item.Properties()));
     public static final Item COCONUT_MEAT = register("coconut_meat",new Item(new Item.Properties()));
 
-    //------------------ MANGO --------------------
+    //------------------ 🥭 MANGO 🥭 --------------------
     public static final Item MANGO_SAPLING = register("mango_sapling",new BlockItem(ModBlocks.MANGO_SAPLING,new Item.Properties()));
     public static final Item MANGO_LEAVES = register("mango_leaves",new BlockItem(ModBlocks.MANGO_LEAVES,new Item.Properties()));
 
@@ -177,7 +176,7 @@ public class ModItems {
     public static final Item MANGO = register("mango",new Item(new Item.Properties()));
     public static final Item MANGO_SLICE = register("mango_slice",new Item(new Item.Properties()));
 
-
+    //----- 🍐 Papaya 🍐 -----------------------------------
     public static final Item PAPAYA = register("papaya",new Item(new Item.Properties().food(ModFood.PAPAYA)));
     public static final Item SLICED_PAPAYA = register("papaya_slice",new Item(new Item.Properties().food(ModFood.SLICED_PAPAYA)));
     public static final Item RAW_PAPAYA = register("raw_papaya",new Item(new Item.Properties().food(ModFood.RAW_PAPAYA)));
@@ -196,10 +195,27 @@ public class ModItems {
         }
     });
 
-    //--- Sauce Bowl ---
-    //public static final Item SAUCE_BOWL = register("sauce_bowl",new SauceBowlItem(new Item.Properties().stacksTo(1)));
+    // 🌿 HOLY BASIL 🌿
+    public static final Item HOLY_BASIL_SAPLING = register("holy_basil_sapling",new ItemNameBlockItem(ModBlocks.HOLY_BASIL,new Item.Properties()){
+        @Override
+        public void registerBlocks(Map<Block, Item> map, Item item) {
+            super.registerBlocks(map, item);
+            map.put(ModBlocks.HOLY_BASIL,item);
+        }
+    });
+    public static final Item HOLY_BASIL = register("holy_basil",new Item(new Item.Properties()));
 
-    //---Food---
+    // 🌿 BASIL 🌿
+    public static final Item BASIL_SAPLING = register("basil_sapling",new ItemNameBlockItem(ModBlocks.BASIL,new Item.Properties()){
+        @Override
+        public void registerBlocks(Map<Block, Item> map, Item item) {
+            super.registerBlocks(map, item);
+            map.put(ModBlocks.BASIL,item);
+        }
+    });
+    public static final Item BASIL = register("basil",new Item(new Item.Properties()));
+
+    //--- 🍔 Food 🍔---
     public static final Item SOMTAM_FEAST = register("somtam_feast",new BlockItem(ModBlocks.SOMTAM_FEAST,new Item.Properties()));
     public static final Item SOMTAM = register("somtam",new ConsumableItem(bowlFoodItem(ModFood.SOMTAM)));
 

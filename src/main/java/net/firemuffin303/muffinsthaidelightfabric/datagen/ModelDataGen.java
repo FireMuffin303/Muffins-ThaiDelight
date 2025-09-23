@@ -3,6 +3,7 @@ package net.firemuffin303.muffinsthaidelightfabric.datagen;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
+import net.firemuffin303.muffinsthaidelightfabric.common.block.BasilCropBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.FermentedFishCauldronBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.lime.LimePlantBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.mango.MangoBlock;
@@ -33,11 +34,15 @@ import static net.minecraft.data.models.BlockModelGenerators.createSimpleBlock;
 import static net.minecraft.data.models.model.TextureMapping.getBlockTexture;
 
 public class ModelDataGen extends FabricModelProvider {
+    private static final TextureSlot FLOWER = TextureSlot.create("flower");
+
     private static final ModelTemplate PASTLE_3D = createModItem("pastle_3d_template", TextureSlot.LAYER0);
     private static final ModelTemplate SPAWN_EGG = createMincraftItem("template_spawn_egg");
     private static final ModelTemplate LIME_BUSH_STAGE2 = new ModelTemplate(Optional.of(new ResourceLocation(ThaiDelight.MOD_ID,"block/template_lime_bush_stage2")),Optional.empty(),TextureSlot.SIDE,TextureSlot.TOP);
     private static final ModelTemplate LIME_UPPER_TEMPLATE = new ModelTemplate(Optional.of(ThaiDelight.modid("block/lime/template_lime_upper")),Optional.empty(),TextureSlot.SIDE,TextureSlot.TOP,TextureSlot.PLANT);
     private static final ModelTemplate LIME_BOTTOM_TEMPLATE = new ModelTemplate(Optional.of(ThaiDelight.modid("block/lime/template_lime_bottom")),Optional.empty(),TextureSlot.SIDE,TextureSlot.BOTTOM,TextureSlot.STEM,TextureSlot.PLANT);
+
+    private static final ModelTemplate BASIL_TEMPLATE = new ModelTemplate(Optional.of(ThaiDelight.modid("block/basil/template_basil")),Optional.empty(),TextureSlot.SIDE,TextureSlot.BOTTOM,TextureSlot.TOP,TextureSlot.STEM,FLOWER);
 
     public static  final  ModelTemplate HANGING_MANGO = new ModelTemplate(Optional.of(ThaiDelight.modid("block/template_hanging_mango")),Optional.empty(),TextureSlot.ALL);
     public static  final  ModelTemplate MANGO = new ModelTemplate(Optional.of(ThaiDelight.modid("block/template_mango")),Optional.empty(),TextureSlot.ALL);
@@ -214,6 +219,8 @@ public class ModelDataGen extends FabricModelProvider {
         createMangoBlock(blockStateModelGenerator);
         createPepperCrop(blockStateModelGenerator);
         createLimeCrop(blockStateModelGenerator);
+        //createBasil(blockStateModelGenerator,ModBlocks.HOLY_BASIL);
+        createBasil(blockStateModelGenerator,ModBlocks.BASIL);
 
         blockStateModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.PAPAYA_CROP).with(PropertyDispatch.property(BlockStateProperties.AGE_1).generate((integer) -> {
             return net.minecraft.data.models.blockstates.Variant.variant().with(VariantProperties.MODEL,
@@ -258,6 +265,8 @@ public class ModelDataGen extends FabricModelProvider {
                                                 TextureMapping.cauldron(fermentedLevel2), blockStateModelGenerator.modelOutput)))
                         )
         );
+
+
 
 
         blockStateModelGenerator.createPlant(ModBlocks.LIME_SAPLING,ModBlocks.POTTED_LIME_SAPLING, BlockModelGenerators.TintState.NOT_TINTED);
@@ -324,6 +333,11 @@ public class ModelDataGen extends FabricModelProvider {
         itemModelGenerator.generateFlatItem(ModItems.COCONUT,ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.COCONUT_MEAT,ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.COCONUT_MILK_BOTTLE,ModelTemplates.FLAT_ITEM);
+
+        itemModelGenerator.generateFlatItem(ModItems.HOLY_BASIL_SAPLING,ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.HOLY_BASIL,ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.BASIL_SAPLING,ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.BASIL,ModelTemplates.FLAT_ITEM);
     }
 
     private static void createBlock(Block block, ModelTemplate modelTemplate, TextureMapping textureMapping, BlockModelGenerators blockModelGenerator){
@@ -351,6 +365,29 @@ public class ModelDataGen extends FabricModelProvider {
                 .put(TextureSlot.BOTTOM,ThaiDelight.modid("block/lime/lime_leaves_bottom"))
                 .put(TextureSlot.STEM,ThaiDelight.modid("block/lime/lime_stem"))
                 .put(TextureSlot.PLANT,ThaiDelight.modid("block/lime/lime_leaves_layer"));
+    }
+
+    private static void createBasil(BlockModelGenerators blockModelGenerators,Block block){
+        TextureMapping textureMapping = new TextureMapping()
+                .put(TextureSlot.STEM,ThaiDelight.modid("block/basil/basil_stem"))
+                .put(TextureSlot.SIDE,ThaiDelight.modid("block/basil/basil_leaves_side"))
+                .put(TextureSlot.TOP,ThaiDelight.modid("block/basil/basil_leaves_top"))
+                .put(TextureSlot.BOTTOM,ThaiDelight.modid("block/basil/basil_leaves_bottom"))
+                .put(FLOWER,ThaiDelight.modid("block/basil/basil_flower"));
+
+        ResourceLocation BASIL_AGE0 = BASIL_TEMPLATE.create(ThaiDelight.modid("block/basil/basil_age0"),textureMapping, blockModelGenerators.modelOutput);
+        ResourceLocation BASIL_AGE1 = BASIL_TEMPLATE.create(ThaiDelight.modid("block/basil/basil_age1"),textureMapping, blockModelGenerators.modelOutput);
+        ResourceLocation BASIL_AGE2 = BASIL_TEMPLATE.create(ThaiDelight.modid("block/basil/basil_age2"),textureMapping, blockModelGenerators.modelOutput);
+        ResourceLocation BASIL_AGE3 = BASIL_TEMPLATE.create(ThaiDelight.modid("block/basil/basil_age3"),textureMapping, blockModelGenerators.modelOutput);
+
+        blockModelGenerators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block)
+                .with(PropertyDispatch.property(BasilCropBlock.AGE)
+                        .select(0,Variant.variant().with(VariantProperties.MODEL,BASIL_AGE0))
+                        .select(1,Variant.variant().with(VariantProperties.MODEL,BASIL_AGE1))
+                        .select(2,Variant.variant().with(VariantProperties.MODEL,BASIL_AGE2))
+                        .select(3,Variant.variant().with(VariantProperties.MODEL,BASIL_AGE3))
+                )
+        );
     }
 
     private static void createLimeCrop( BlockModelGenerators blockModelGenerator){

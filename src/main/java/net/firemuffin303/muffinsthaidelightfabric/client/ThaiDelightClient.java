@@ -1,5 +1,6 @@
 package net.firemuffin303.muffinsthaidelightfabric.client;
 
+import com.terraformersmc.modmenu.util.mod.Mod;
 import com.terraformersmc.terraform.boat.api.client.TerraformBoatClientHelper;
 import com.terraformersmc.terraform.sign.SpriteIdentifierRegistry;
 import net.fabricmc.api.ClientModInitializer;
@@ -43,7 +44,13 @@ public class ThaiDelightClient implements ClientModInitializer {
             ModBlocks.DURIAN_LEAVES,
             ModBlocks.DURIAN_SAPLING,
             ModBlocks.MANGO_BLOCK,
-            ModBlocks.LIME_PLANT
+            ModBlocks.LIME_PLANT,
+            ModBlocks.POTTED_LIME_SAPLING,
+            ModBlocks.POTTED_COCONUT_SAPLING,
+            ModBlocks.POTTED_DURIAN_SAPLING,
+            ModBlocks.POTTED_MANGO_SAPLING,
+            ModBlocks.HOLY_BASIL,
+            ModBlocks.BASIL
     };
 
     @Override

@@ -4,6 +4,8 @@
   "package": "net.firemuffin303.muffinsthaidelightfabric.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "LootItemAccessor",
+    "loot.LootPoolBuilderAccessor",
     "MobAccessor",
     "StructurePoolAccessor",
     "fermentedFish.LayeredCauldronBlockMixin",
@@ -11,6 +13,7 @@
     "food.FrogFoodAccessor",
     "food.ParrotTameFoodAccessor",
     "food.PigFoodAccessor",
+    "loot.LootTableAccessor",
     "sticky.SniffingMixin",
     "sticky.VillagerMixin"
   ],

@@ -35,12 +35,12 @@ public class LimeCropBlock extends BushBlock implements BonemealableBlock {
 
     public LimeCropBlock(Properties properties) {
         super(properties);
-        this.registerDefaultState((BlockState)((BlockState)this.stateDefinition.any()).setValue(AGE, 0));
+        this.registerDefaultState(this.stateDefinition.any().setValue(AGE, 0));
     }
 
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(new Property[]{AGE});
+        builder.add(AGE);
     }
 
 
