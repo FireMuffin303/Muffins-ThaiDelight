@@ -273,18 +273,18 @@ public class ModItems {
         public static final FoodProperties LIME_JUICE = new FoodProperties.Builder().alwaysEat().build();
 
         public static final FoodProperties SOMTAM = new FoodProperties.Builder()
-                .nutrition(16)
-                .saturationMod(0.6F)
+                .nutrition(14)
+                .saturationMod(0.75F)
                 .effect(new MobEffectInstance(ModEffects.NOURISHMENT.get(),6000,0),1.0f).build();
         public static final FoodProperties CRAB_FRIED_RICE = new FoodProperties.Builder()
-                .nutrition(16)
+                .nutrition(14)
                 .saturationMod(0.6F)
                 .effect(new MobEffectInstance(ModEffects.COMFORT.get(),6000,0),1.0f).build();
 
         public static final FoodProperties LARB = new FoodProperties.Builder()
                 .nutrition(14)
-                .saturationMod(0.6F)
-                .effect(new MobEffectInstance(ModEffects.NOURISHMENT.get(),5000,0),1.0f).build();
+                .saturationMod(0.75F)
+                .effect(new MobEffectInstance(ModEffects.NOURISHMENT.get(),6000,0),1.0f).build();
 
         public static final FoodProperties STIR_FRIED_NOODLE = new FoodProperties.Builder()
                 .nutrition(12)
@@ -293,8 +293,8 @@ public class ModItems {
 
         public static final FoodProperties PHAT_KAPHRAO = new FoodProperties.Builder()
                 .nutrition(12)
-                .saturationMod(0.55f)
-                .effect(new MobEffectInstance(ModEffects.COMFORT.get(),5000,0),1.0f).build();
+                .saturationMod(0.8F)
+                .effect(new MobEffectInstance(ModEffects.NOURISHMENT.get(),3600,0),1.0f).build();
 
         public static final FoodProperties FERMENTED_FISH = new FoodProperties.Builder().alwaysEat().effect(new MobEffectInstance(ModMobEffects.STINKY,10*20),0.5f).build();
     }
