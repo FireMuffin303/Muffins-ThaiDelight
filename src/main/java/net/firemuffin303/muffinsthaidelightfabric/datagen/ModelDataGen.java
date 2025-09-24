@@ -5,13 +5,14 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.BasilCropBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.FermentedFishCauldronBlock;
+import net.firemuffin303.muffinsthaidelightfabric.common.block.coconut.CoconutLeafBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.lime.LimePlantBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.mango.MangoBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.PapayaLogBlock;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModItems;
-import net.minecraft.client.model.Model;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.BlockFamilies;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.data.models.BlockModelGenerators;
@@ -162,7 +163,41 @@ public class ModelDataGen extends FabricModelProvider {
         blockStateModelGenerator.woodProvider(ModBlocks.COCONUT_LOG).logWithHorizontal(ModBlocks.COCONUT_LOG).wood(ModBlocks.COCONUT_WOOD);
         blockStateModelGenerator.woodProvider(ModBlocks.STRIPPED_COCONUT_LOG).logWithHorizontal(ModBlocks.STRIPPED_COCONUT_LOG).wood(ModBlocks.STRIPPED_COCONUT_WOOD);
         blockStateModelGenerator.createHangingSign(ModBlocks.STRIPPED_COCONUT_LOG,ModBlocks.COCONUT_HANGING_SIGN,ModBlocks.COCONUT_WALL_HANGING_SIGN);
-        blockStateModelGenerator.createTrivialBlock(ModBlocks.COCONUT_LEAVES,TexturedModel.LEAVES);
+        blockStateModelGenerator.blockStateOutput.accept(
+                MultiVariantGenerator.multiVariant(ModBlocks.COCONUT_LEAF)
+                        .with(PropertyDispatch.properties(CoconutLeafBlock.FACING,CoconutLeafBlock.END)
+                                .select(Direction.NORTH,false,Variant.variant()
+                                        .with(VariantProperties.MODEL, BuiltInRegistries.BLOCK.getKey(ModBlocks.COCONUT_LEAF).withPrefix("block/coconut/"))
+                                )
+                                .select(Direction.NORTH,true,Variant.variant()
+                                        .with(VariantProperties.MODEL,BuiltInRegistries.BLOCK.getKey(ModBlocks.COCONUT_LEAF).withPrefix("block/coconut/").withSuffix("_end"))
+                                )
+                                .select(Direction.SOUTH,false,Variant.variant()
+                                        .with(VariantProperties.MODEL,BuiltInRegistries.BLOCK.getKey(ModBlocks.COCONUT_LEAF).withPrefix("block/coconut/"))
+                                        .with(VariantProperties.Y_ROT,VariantProperties.Rotation.R180)
+                                )
+                                .select(Direction.SOUTH,true,Variant.variant()
+                                        .with(VariantProperties.MODEL,BuiltInRegistries.BLOCK.getKey(ModBlocks.COCONUT_LEAF).withPrefix("block/coconut/").withSuffix("_end"))
+                                        .with(VariantProperties.Y_ROT,VariantProperties.Rotation.R180)
+                                )
+                                .select(Direction.EAST,false,Variant.variant()
+                                        .with(VariantProperties.MODEL,BuiltInRegistries.BLOCK.getKey(ModBlocks.COCONUT_LEAF).withPrefix("block/coconut/"))
+                                        .with(VariantProperties.Y_ROT,VariantProperties.Rotation.R90)
+                                )
+                                .select(Direction.EAST,true,Variant.variant()
+                                        .with(VariantProperties.MODEL,BuiltInRegistries.BLOCK.getKey(ModBlocks.COCONUT_LEAF).withPrefix("block/coconut/").withSuffix("_end"))
+                                        .with(VariantProperties.Y_ROT,VariantProperties.Rotation.R90)
+                                )
+                                .select(Direction.WEST,false,Variant.variant()
+                                        .with(VariantProperties.MODEL,BuiltInRegistries.BLOCK.getKey(ModBlocks.COCONUT_LEAF).withPrefix("block/coconut/"))
+                                        .with(VariantProperties.Y_ROT,VariantProperties.Rotation.R270)
+                                )
+                                .select(Direction.WEST,true,Variant.variant()
+                                        .with(VariantProperties.MODEL,BuiltInRegistries.BLOCK.getKey(ModBlocks.COCONUT_LEAF).withPrefix("block/coconut/").withSuffix("_end"))
+                                        .with(VariantProperties.Y_ROT,VariantProperties.Rotation.R270)
+                                )
+                        )
+        );
         blockStateModelGenerator.family(ModBlocks.COCONUT_PLANKS).generateFor(COCONUT_PLANKS);
 
         blockStateModelGenerator.woodProvider(ModBlocks.MANGO_LOG).logWithHorizontal(ModBlocks.MANGO_LOG).wood(ModBlocks.MANGO_WOOD);
@@ -185,6 +220,7 @@ public class ModelDataGen extends FabricModelProvider {
                                 .select(2, net.minecraft.data.models.blockstates.Variant.variant()
                                         .with(VariantProperties.MODEL, ModelLocationUtils.getModelLocation(ModBlocks.PAPAYA, "_stage2"))))
                         .with(createHorizontalFacingDispatchAlt()));
+
 
 
         blockStateModelGenerator.skipAutoItemBlock(ModBlocks.DURIAN_BLOCK);

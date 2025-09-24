@@ -30,6 +30,7 @@ import net.firemuffin303.muffinsthaidelightfabric.mixin.food.ParrotTameFoodAcces
 import net.firemuffin303.muffinsthaidelightfabric.mixin.food.PigFoodAccessor;
 import net.firemuffin303.muffinsthaidelightfabric.mixin.loot.LootPoolBuilderAccessor;
 import net.firemuffin303.muffinsthaidelightfabric.mixin.loot.LootTableAccessor;
+import net.firemuffin303.muffinsthaidelightfabric.mixin.villager.VillagerAccessor;
 import net.firemuffin303.muffinsthaidelightfabric.registry.*;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
@@ -63,16 +64,11 @@ import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootDataManager;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
-import net.minecraft.world.level.storage.loot.entries.LootTableReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Stream;
 
 public class ThaiDelight implements ModInitializer {
@@ -186,6 +182,32 @@ public class ThaiDelight implements ModInitializer {
         registerAnimalFood();
         addVillagersTrades();
 
+        Map<Item,Integer> villagerFoodPoint = new HashMap<>(VillagerAccessor.getFoodPoints());
+        villagerFoodPoint.put(ModItems.LIME,1);
+        villagerFoodPoint.put(ModItems.PEPPER,1);
+        villagerFoodPoint.put(ModItems.PAPAYA,1);
+        villagerFoodPoint.put(ModItems.RAW_PAPAYA,1);
+        villagerFoodPoint.put(ModItems.DURIAN_PULP,1);
+        villagerFoodPoint.put(ModItems.BASIL,1);
+        villagerFoodPoint.put(ModItems.HOLY_BASIL,1);
+        villagerFoodPoint.put(ModItems.MANGO,1);
+        villagerFoodPoint.put(ModItems.COCONUT_SLICE,1);
+
+        VillagerAccessor.setFoodPoints(villagerFoodPoint);
+
+        Set<Item> villagerWantedItems = new HashSet<>(VillagerAccessor.getWantedItems());
+        villagerWantedItems.add(ModItems.LIME);
+        villagerWantedItems.add(ModItems.PEPPER);
+        villagerWantedItems.add(ModItems.PAPAYA);
+        villagerWantedItems.add(ModItems.RAW_PAPAYA);
+        villagerWantedItems.add(ModItems.DURIAN_PULP);
+        villagerWantedItems.add(ModItems.BASIL);
+        villagerWantedItems.add(ModItems.HOLY_BASIL);
+        villagerWantedItems.add(ModItems.MANGO);
+        villagerWantedItems.add(ModItems.COCONUT_SLICE);
+        villagerWantedItems.add(ModItems.BASIL_SAPLING);
+        villagerWantedItems.add(ModItems.HOLY_BASIL_SAPLING);
+        VillagerAccessor.setWantedItems(villagerWantedItems);
 
         FabricDefaultAttributeRegistry.register(ModEntityTypes.FLOWER_CRAB, FlowerCrabEntity.createAttributes());
         FabricDefaultAttributeRegistry.register(ModEntityTypes.DRAGONFLY, DragonflyEntity.createAttributes());

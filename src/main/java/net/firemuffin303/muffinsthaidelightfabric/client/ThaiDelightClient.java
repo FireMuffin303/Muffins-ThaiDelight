@@ -50,7 +50,8 @@ public class ThaiDelightClient implements ClientModInitializer {
             ModBlocks.POTTED_DURIAN_SAPLING,
             ModBlocks.POTTED_MANGO_SAPLING,
             ModBlocks.HOLY_BASIL,
-            ModBlocks.BASIL
+            ModBlocks.BASIL,
+            ModBlocks.COCONUT_LEAF
     };
 
     @Override
