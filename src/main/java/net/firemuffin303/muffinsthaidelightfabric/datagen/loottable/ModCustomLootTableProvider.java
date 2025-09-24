@@ -45,7 +45,7 @@ public class ModCustomLootTableProvider extends SimpleFabricLootTableProvider {
         biConsumer.accept(ModLootTables.BASIL_HARVEST,
                 new LootTable.Builder().withPool(LootPool.lootPool()
                         .add(LootItem.lootTableItem(ModItems.BASIL))
-                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(2,4)))
+                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(1,3)))
                         .apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE))
                         .apply(LimitCount.limitCount(IntRange.upperBound(6)))
                 ));
@@ -61,7 +61,7 @@ public class ModCustomLootTableProvider extends SimpleFabricLootTableProvider {
         biConsumer.accept(ModLootTables.HOLY_BASIL_HARVEST,
                 new LootTable.Builder().withPool(LootPool.lootPool()
                         .add(LootItem.lootTableItem(ModItems.HOLY_BASIL))
-                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(2,4)))
+                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(1,3)))
                         .apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE))
                         .apply(LimitCount.limitCount(IntRange.upperBound(6)))
                 ));

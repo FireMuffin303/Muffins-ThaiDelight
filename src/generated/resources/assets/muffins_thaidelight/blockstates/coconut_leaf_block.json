@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "muffins_thaidelight:block/coconut_leaf_block",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "muffins_thaidelight:block/coconut_leaf_block"
+    },
+    "axis=z": {
+      "model": "muffins_thaidelight:block/coconut_leaf_block",
+      "x": 90
+    }
+  }
+}

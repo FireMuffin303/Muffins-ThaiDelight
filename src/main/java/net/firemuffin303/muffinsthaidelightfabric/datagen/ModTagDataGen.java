@@ -124,6 +124,12 @@ public class ModTagDataGen {
             getOrCreateTagBuilder(COCONUT_LOGS).add(ModItems.COCONUT_LOG,ModItems.COCONUT_WOOD,ModItems.STRIPPED_COCONUT_LOG,ModItems.STRIPPED_COCONUT_WOOD);
 
             getOrCreateTagBuilder(ItemTags.FLOWERS).add(ModItems.DURIAN_FLOWER);
+
+            getOrCreateTagBuilder(ItemTags.VILLAGER_PLANTABLE_SEEDS).add(
+                    ModItems.HOLY_BASIL_SAPLING,
+                    ModItems.BASIL_SAPLING,
+                    ModItems.PEPPER_SEED
+            );
         }
     }
 

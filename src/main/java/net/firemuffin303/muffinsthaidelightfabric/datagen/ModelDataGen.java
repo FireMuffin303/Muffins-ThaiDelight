@@ -27,6 +27,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import vectorwing.farmersdelight.common.block.CabinetBlock;
 
 import java.util.Optional;
 
@@ -106,6 +107,10 @@ public class ModelDataGen extends FabricModelProvider {
         createCrateBlock(ModBlocks.HOLY_BASIL_CRATE,blockStateModelGenerator);
         createCrateBlock(ModBlocks.BASIL_CRATE,blockStateModelGenerator);
 
+        createCabinet(ModBlocks.DURIAN_CABINET,blockStateModelGenerator);
+        createCabinet(ModBlocks.MANGO_CABINET,blockStateModelGenerator);
+        createCabinet(ModBlocks.COCONUT_CABINET,blockStateModelGenerator);
+
         blockStateModelGenerator.createSimpleFlatItemModel(ModBlocks.CRAB_EGG);
         blockStateModelGenerator.blockStateOutput.accept(createSimpleBlock(ModBlocks.CRAB_EGG,ModelLocationUtils.getModelLocation(ModBlocks.CRAB_EGG)));
 
@@ -148,6 +153,11 @@ public class ModelDataGen extends FabricModelProvider {
                         )
                 )
         );
+
+        blockStateModelGenerator.skipAutoItemBlock(ModBlocks.COCONUT_LEAF);
+
+        ResourceLocation resourceLocation = ModelTemplates.CUBE_COLUMN.create(ModBlocks.COCONUT_LEAF_BLOCK, TextureMapping.logColumn(ModBlocks.COCONUT_LEAF_BLOCK), blockStateModelGenerator.modelOutput);
+        blockStateModelGenerator.blockStateOutput.accept(BlockModelGenerators.createAxisAlignedPillarBlock(ModBlocks.COCONUT_LEAF_BLOCK, resourceLocation));
 
         blockStateModelGenerator.woodProvider(ModBlocks.PAPAYA_LOG).wood(ModBlocks.PAPAYA_WOOD);
         blockStateModelGenerator.woodProvider(ModBlocks.STRIPPED_PAPAYA_LOG).logWithHorizontal(ModBlocks.STRIPPED_PAPAYA_LOG).wood(ModBlocks.STRIPPED_PAPAYA_WOOD);
@@ -368,6 +378,10 @@ public class ModelDataGen extends FabricModelProvider {
         itemModelGenerator.generateFlatItem(ModItems.DURIAN_PULP,ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.DURIAN_BOAT,ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.DURIAN_CHEST_BOAT,ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.MANGO_BOAT,ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.MANGO_CHEST_BOAT,ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.COCONUT_BOAT,ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.COCONUT_CHEST_BOAT,ModelTemplates.FLAT_ITEM);
 
         itemModelGenerator.generateFlatItem(ModItems.MANGO,ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.MANGO_SLICE,ModelTemplates.FLAT_ITEM);
@@ -380,6 +394,47 @@ public class ModelDataGen extends FabricModelProvider {
         itemModelGenerator.generateFlatItem(ModItems.HOLY_BASIL,ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.BASIL_SAPLING,ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.BASIL,ModelTemplates.FLAT_ITEM);
+    }
+
+    public static void createCabinet(Block block,BlockModelGenerators blockModelGenerators){
+        ResourceLocation cabinet = ModelTemplates.CUBE_ORIENTABLE.create(block,TextureMapping.orientableCube(block), blockModelGenerators.modelOutput);
+        ResourceLocation cabinet_open = ModelTemplates.CUBE_ORIENTABLE.createWithSuffix(block,"_open",TextureMapping.orientableCube(block), blockModelGenerators.modelOutput);
+        blockModelGenerators.blockStateOutput.accept(
+                MultiVariantGenerator.multiVariant(block)
+                        .with(PropertyDispatch.properties(BlockStateProperties.HORIZONTAL_FACING,BlockStateProperties.OPEN)
+                                .select(Direction.NORTH,false, Variant.variant()
+                                        .with(VariantProperties.MODEL,cabinet)
+                                )
+                                .select(Direction.SOUTH,false, Variant.variant()
+                                        .with(VariantProperties.MODEL,cabinet)
+                                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180)
+                                )
+                                .select(Direction.EAST,false, Variant.variant()
+                                        .with(VariantProperties.MODEL,cabinet)
+                                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)
+                                )
+                                .select(Direction.WEST,false, Variant.variant()
+                                        .with(VariantProperties.MODEL,cabinet)
+                                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)
+                                )
+                                //Open
+                                .select(Direction.NORTH,true, Variant.variant()
+                                        .with(VariantProperties.MODEL,cabinet_open)
+                                )
+                                .select(Direction.SOUTH,true, Variant.variant()
+                                        .with(VariantProperties.MODEL,cabinet_open)
+                                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180)
+                                )
+                                .select(Direction.EAST,true, Variant.variant()
+                                        .with(VariantProperties.MODEL,cabinet_open)
+                                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)
+                                )
+                                .select(Direction.WEST,true, Variant.variant()
+                                        .with(VariantProperties.MODEL,cabinet_open)
+                                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)
+                                )
+
+        ));
     }
 
     private static void createBlock(Block block, ModelTemplate modelTemplate, TextureMapping textureMapping, BlockModelGenerators blockModelGenerator){

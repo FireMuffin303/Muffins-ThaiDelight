@@ -8,6 +8,7 @@ import com.terraformersmc.terraform.sign.block.TerraformWallSignBlock;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.*;
+import net.firemuffin303.muffinsthaidelightfabric.common.block.coconut.BundledCoconutLeafBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.coconut.CoconutLeafBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.DurianBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.DurianFlowerBlock;
@@ -183,6 +184,7 @@ public class ModBlocks {
     public static final Block COCONUT_SAPLING = register("coconut_sapling",new SaplingBlock(new DurianTreeGrower(),BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
     public static final Block POTTED_COCONUT_SAPLING = register("potted_coconut_sapling",Blocks.flowerPot(COCONUT_SAPLING));
     public static final Block COCONUT_LEAF = register("coconut_leaf",new CoconutLeafBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES)));
+    public static final Block COCONUT_LEAF_BLOCK = register("coconut_leaf_block",new BundledCoconutLeafBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GREEN).strength(0.5F, 2.5F).sound(SoundType.GRASS)));
 
     public static final Block COCONUT_LOG = register("coconut_log",Blocks.log(MapColor.COLOR_BROWN,MapColor.COLOR_YELLOW));
     public static final Block COCONUT_WOOD = register("coconut_wood",new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava()));

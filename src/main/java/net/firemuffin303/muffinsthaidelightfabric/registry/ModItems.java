@@ -128,7 +128,8 @@ public class ModItems {
 
     //------------------ 🥥 COCONUT 🥥 ------------------
     public static final Item COCONUT_SAPLING = register("coconut_sapling",new BlockItem(ModBlocks.COCONUT_SAPLING,new Item.Properties()));
-    public static final Item COCONUT_LEAVES = register("coconut_leaves",new BlockItem(ModBlocks.COCONUT_LEAF,new Item.Properties()));
+    public static final Item COCONUT_LEAF = register("coconut_leaf",new BlockItem(ModBlocks.COCONUT_LEAF,new Item.Properties()));
+    public static final Item COCONUT_LEAF_BLOCK = register("coconut_leaf_block",new BlockItem(ModBlocks.COCONUT_LEAF_BLOCK,new Item.Properties()));
     //COCONUT Woodset item
     public static final Item COCONUT_LOG = register("coconut_log",new BlockItem(ModBlocks.COCONUT_LOG,new Item.Properties()));
     public static final Item COCONUT_WOOD = register("coconut_wood",new BlockItem(ModBlocks.COCONUT_WOOD,new Item.Properties()));

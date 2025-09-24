@@ -412,7 +412,8 @@ public class ThaiDelight implements ModInitializer {
         output.accept(ModItems.DURIAN_CHEST_BOAT);
 
         output.accept(ModItems.COCONUT_SAPLING);
-        output.accept(ModItems.COCONUT_LEAVES);
+        output.accept(ModItems.COCONUT_LEAF);
+        output.accept(ModItems.COCONUT_LEAF_BLOCK);
 
         output.accept(ModItems.COCONUT_LOG);
         output.accept(ModItems.COCONUT_WOOD);

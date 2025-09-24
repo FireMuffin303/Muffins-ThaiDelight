@@ -2,6 +2,7 @@ package net.firemuffin303.muffinsthaidelightfabric.datagen.loottable;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
+import net.firemuffin303.muffinsthaidelightfabric.common.block.BasilCropBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.DurianBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.lime.LimePlantBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.PapayaBlock;
@@ -41,6 +42,11 @@ public class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
         this.createSimpleLoot(ModBlocks.PEPPER_CRATE);
         this.createSimpleLoot(ModBlocks.RAW_PAPAYA_CRATE);
         this.createSimpleLoot(ModBlocks.PAPAYA_CRATE);
+        this.createSimpleLoot(ModBlocks.DURIAN_CRATE);
+        this.createSimpleLoot(ModBlocks.MANGO_CRATE);
+        this.createSimpleLoot(ModBlocks.COCONUT_CRATE);
+        this.createSimpleLoot(ModBlocks.HOLY_BASIL_CRATE);
+        this.createSimpleLoot(ModBlocks.BASIL_CRATE);
 
         this.createSimpleLoot(ModBlocks.PAPAYA_LOG);
         this.createSimpleLoot(ModBlocks.STRIPPED_PAPAYA_LOG);
@@ -145,6 +151,9 @@ public class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
         this.createSimpleLoot(ModBlocks.COCONUT_HANGING_SIGN);
         this.createSimpleLoot(ModBlocks.COCONUT_CABINET);
 
+        this.createSimpleLoot(ModBlocks.COCONUT_LEAF_BLOCK);
+        this.createSimpleLoot(ModBlocks.COCONUT_LEAF);
+
         this.add(ModBlocks.PAPAYA_LEAVES, (block) -> this.createLeavesDrops(block, ModBlocks.PAPAYA_SAPLING, NORMAL_LEAVES_SAPLING_CHANCES));
 
         this.add(ModBlocks.PAPAYA,this.applyExplosionDecay(ModBlocks.PAPAYA,
@@ -213,6 +222,85 @@ public class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
                                         .apply(ApplyBonusCount.addBonusBinomialDistributionCount(Enchantments.BLOCK_FORTUNE, 0.5714286F, 3)))
                         )
         ));
+
+        this.add(ModBlocks.BASIL,new LootTable.Builder()
+                .withPool(LootPool.lootPool()
+                        .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.BASIL)
+                                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(BasilCropBlock.AGE,3))
+                        )
+                        .add(LootItem.lootTableItem(ModItems.BASIL)
+                                .apply(ApplyBonusCount.addBonusBinomialDistributionCount(Enchantments.BLOCK_FORTUNE, 0.5714286F, 3))
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(2,4)))
+                        )
+                )
+                .withPool(LootPool.lootPool()
+                        .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.BASIL)
+                                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(BasilCropBlock.AGE,3))
+                        )
+                        .add(LootItem.lootTableItem(ModItems.BASIL_SAPLING)
+                                .apply(ApplyBonusCount.addBonusBinomialDistributionCount(Enchantments.BLOCK_FORTUNE, 0.5714286F, 3))
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1,3)))
+                        )
+                )
+                .withPool(LootPool.lootPool()
+                        .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.BASIL)
+                                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(BasilCropBlock.AGE,2))
+                        )
+                        .add(LootItem.lootTableItem(ModItems.BASIL)
+                                .apply(ApplyBonusCount.addBonusBinomialDistributionCount(Enchantments.BLOCK_FORTUNE, 0.5714286F, 3))
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1,2)))
+                        )
+                )
+                .withPool(LootPool.lootPool()
+                        .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.BASIL)
+                                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(BasilCropBlock.AGE,2))
+                        )
+                        .add(LootItem.lootTableItem(ModItems.BASIL_SAPLING)
+                                .apply(ApplyBonusCount.addBonusBinomialDistributionCount(Enchantments.BLOCK_FORTUNE, 0.5714286F, 3))
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1,2)))
+                        )
+                )
+        );
+
+        this.add(ModBlocks.HOLY_BASIL,new LootTable.Builder()
+                .withPool(LootPool.lootPool()
+                        .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.HOLY_BASIL)
+                                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(BasilCropBlock.AGE,3))
+                        )
+                        .add(LootItem.lootTableItem(ModItems.HOLY_BASIL)
+                                .apply(ApplyBonusCount.addBonusBinomialDistributionCount(Enchantments.BLOCK_FORTUNE, 0.5714286F, 3))
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(2,4)))
+                        )
+                )
+                .withPool(LootPool.lootPool()
+                        .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.HOLY_BASIL)
+                                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(BasilCropBlock.AGE,3))
+                        )
+                        .add(LootItem.lootTableItem(ModItems.HOLY_BASIL_SAPLING)
+                                .apply(ApplyBonusCount.addBonusBinomialDistributionCount(Enchantments.BLOCK_FORTUNE, 0.5714286F, 3))
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1,3)))
+                        )
+                )
+                .withPool(LootPool.lootPool()
+                        .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.HOLY_BASIL)
+                                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(BasilCropBlock.AGE,2))
+                        )
+                        .add(LootItem.lootTableItem(ModItems.HOLY_BASIL)
+                                .apply(ApplyBonusCount.addBonusBinomialDistributionCount(Enchantments.BLOCK_FORTUNE, 0.5714286F, 3))
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1,2)))
+                        )
+                )
+                .withPool(LootPool.lootPool()
+                        .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.HOLY_BASIL)
+                                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(BasilCropBlock.AGE,2))
+                        )
+                        .add(LootItem.lootTableItem(ModItems.HOLY_BASIL_SAPLING)
+                                .apply(ApplyBonusCount.addBonusBinomialDistributionCount(Enchantments.BLOCK_FORTUNE, 0.5714286F, 3))
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1,2)))
+                        )
+                )
+        );
+
     }
 
     private void createSimpleLoot(Block block){
