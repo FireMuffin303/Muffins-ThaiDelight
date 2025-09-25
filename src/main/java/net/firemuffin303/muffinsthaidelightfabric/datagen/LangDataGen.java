@@ -43,6 +43,7 @@ public class LangDataGen extends FabricLanguageProvider {
 
         translationBuilder.add("farmersdelight.tooltip.papaya_juice","Clear Hunger Effect");
         translationBuilder.add("farmersdelight.tooltip.lime_juice","Clear Blindness Effect");
+        translationBuilder.add("farmersdelight.tooltip.coconut_water","Clear Weakness Effect");
         translationBuilder.add("jei.info.papaya_log","Right click with bone meal to grow papayas.");
 
 
@@ -157,6 +158,7 @@ public class LangDataGen extends FabricLanguageProvider {
         translationBuilder.add(ModItems.STIR_FRIED_NOODLE,"Stir Fried Noodle");
         translationBuilder.add(ModItems.PAPAYA_JUICE,"Papaya Juice");
         translationBuilder.add(ModItems.LIME_JUICE,"Lime Juice");
+        translationBuilder.add(ModItems.COCONUT_WATER,"Coconut Water");
 
         translationBuilder.add(ModItems.FISH_SAUCE_BOTTLE,"Fish Sauce Bottle");
         translationBuilder.add(ModItems.FERMENTED_FISH,"Fermented Fish");
@@ -249,6 +251,7 @@ public class LangDataGen extends FabricLanguageProvider {
 
             translationBuilder.add("farmersdelight.tooltip.papaya_juice","ล้างหิวเร็ว");
             translationBuilder.add("farmersdelight.tooltip.lime_juice","ล้างตาบอด");
+            translationBuilder.add("farmersdelight.tooltip.coconut_water","ล้างโจมตีเบา");
             translationBuilder.add("jei.info.papaya_log","คลิ๊กขวาด้วยผงกระดูกเพื่อโตผลมะละกอ");
 
             translationBuilder.add("item.muffins_thaidelight.tasty","อยากอาหาร");
@@ -303,6 +306,7 @@ public class LangDataGen extends FabricLanguageProvider {
             translationBuilder.add(ModBlocks.FERMENTED_FISH_CAULDRON,"หม้อปลาร้า");
             translationBuilder.add(ModItems.PAPAYA_JUICE,"น้ำมะละกอ");
             translationBuilder.add(ModItems.LIME_JUICE,"น้ำมะนาว");
+            translationBuilder.add(ModItems.COCONUT_WATER,"น้ำมะพร้าว");
 
             translationBuilder.add(ModItems.SOMTAM,"ถ้วยส้มตำ");
             translationBuilder.add(ModItems.CRAB_FRIED_RICE,"ถ้วยข้าวผัดปู");

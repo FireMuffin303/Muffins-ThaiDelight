@@ -2,7 +2,7 @@
   "parent": "muffins_thaidelight:block/basil/template_basil",
   "textures": {
     "bottom": "muffins_thaidelight:block/basil/basil_leaves_bottom",
-    "flower": "muffins_thaidelight:block/basil/basil_flower",
+    "flower": "muffins_thaidelight:block/basil/basil_flower_age3",
     "side": "muffins_thaidelight:block/basil/basil_leaves_side",
     "stem": "muffins_thaidelight:block/basil/basil_stem",
     "top": "muffins_thaidelight:block/basil/basil_leaves_top"

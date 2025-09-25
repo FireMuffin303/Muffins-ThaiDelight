@@ -377,6 +377,7 @@ public class ThaiDelight implements ModInitializer {
         output.accept(ModItems.FERMENTED_FISH);
         output.accept(ModItems.PAPAYA_JUICE);
         output.accept(ModItems.LIME_JUICE);
+        output.accept(ModItems.COCONUT_WATER);
 
         output.accept(ModItems.LIME_SAPLING);
         output.accept(ModItems.LIME);
@@ -490,6 +491,18 @@ public class ThaiDelight implements ModInitializer {
         output.accept(ModItems.MANGO_STICKY_RICE);
         output.accept(ModItems.COCONUT_MILK_BOTTLE);
         output.accept(ModItems.PHAT_KAPHRAO);
+        output.accept(ModItems.DURIAN_CURRY);
+        output.accept(ModItems.DURIAN_CAKE);
+        output.accept(ModItems.DURIAN_CAKE_SLICE);
+        output.accept(ModItems.MANGO_PUDDING);
+        output.accept(ModItems.MANGO_PUDDING_SLICE);
+
+        output.accept(ModItems.COCONUT_JELLY);
+        output.accept(ModItems.KHANOM_BABIN);
+        output.accept(ModItems.COCONUT_PIE);
+        output.accept(ModItems.COCONUT_PIE_SLICE);
+
+        output.accept(ModItems.BASIL_OMELETTE);
     }
 
     public static ResourceLocation modid(String id){

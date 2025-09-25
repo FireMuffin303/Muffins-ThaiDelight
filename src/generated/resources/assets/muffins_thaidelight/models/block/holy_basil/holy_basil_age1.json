@@ -1,0 +1,10 @@
+{
+  "parent": "muffins_thaidelight:block/basil/template_basil",
+  "textures": {
+    "bottom": "muffins_thaidelight:block/holy_basil/holy_basil_leaves_bottom",
+    "flower": "muffins_thaidelight:block/holy_basil/holy_basil_flower_age1",
+    "side": "muffins_thaidelight:block/holy_basil/holy_basil_leaves_side",
+    "stem": "muffins_thaidelight:block/holy_basil/holy_basil_stem",
+    "top": "muffins_thaidelight:block/holy_basil/holy_basil_leaves_top"
+  }
+}

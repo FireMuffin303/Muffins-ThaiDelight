@@ -42,6 +42,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import vectorwing.farmersdelight.common.block.CabinetBlock;
 import vectorwing.farmersdelight.common.block.FeastBlock;
+import vectorwing.farmersdelight.common.block.PieBlock;
 import vectorwing.farmersdelight.common.block.WildCropBlock;
 
 import static net.minecraft.world.level.block.Blocks.*;
@@ -438,6 +439,9 @@ public class ModBlocks {
         }
     });
     public static final Block POTTED_HOLY_BASIL = register("potted_holy_basil",Blocks.flowerPot(ModBlocks.HOLY_BASIL));
+
+    public static final Block DURIAN_CAKE = register("durian_cake",new PieBlock(BlockBehaviour.Properties.copy(CAKE),() -> ModItems.DURIAN_CAKE_SLICE));
+    public static final Block MANGO_PUDDING = register("mango_pudding",new PieBlock(BlockBehaviour.Properties.copy(CAKE),() -> ModItems.MANGO_PUDDING_SLICE));
 
     //public static final Block SAUCE_BOWL = register("sauce_bowl",new SauceBowlBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BROWN)));
 

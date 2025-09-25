@@ -30,6 +30,7 @@ import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import vectorwing.farmersdelight.common.block.CabinetBlock;
 
 import java.util.Optional;
+import java.util.function.UnaryOperator;
 
 import static net.minecraft.data.models.BlockModelGenerators.createHorizontalFacingDispatchAlt;
 import static net.minecraft.data.models.BlockModelGenerators.createSimpleBlock;
@@ -48,6 +49,7 @@ public class ModelDataGen extends FabricModelProvider {
 
     public static  final  ModelTemplate HANGING_MANGO = new ModelTemplate(Optional.of(ThaiDelight.modid("block/template_hanging_mango")),Optional.empty(),TextureSlot.ALL);
     public static  final  ModelTemplate MANGO = new ModelTemplate(Optional.of(ThaiDelight.modid("block/template_mango")),Optional.empty(),TextureSlot.ALL);
+
 
     private static final BlockFamily DURIAN_PLANKS = BlockFamilies.familyBuilder(ModBlocks.DURIAN_PLANKS)
             .button(ModBlocks.DURIAN_BUTTON)
@@ -97,6 +99,8 @@ public class ModelDataGen extends FabricModelProvider {
 
     @Override
     public void generateBlockStateModels(BlockModelGenerators blockStateModelGenerator) {
+        skipItemBlock(blockStateModelGenerator);
+
         createCrateBlock(ModBlocks.LIME_CRATE,blockStateModelGenerator);
         createCrateBlock(ModBlocks.PEPPER_CRATE,blockStateModelGenerator);
         createCrateBlock(ModBlocks.RAW_PAPAYA_CRATE,blockStateModelGenerator);
@@ -154,7 +158,7 @@ public class ModelDataGen extends FabricModelProvider {
                 )
         );
 
-        blockStateModelGenerator.skipAutoItemBlock(ModBlocks.COCONUT_LEAF);
+
 
         ResourceLocation resourceLocation = ModelTemplates.CUBE_COLUMN.create(ModBlocks.COCONUT_LEAF_BLOCK, TextureMapping.logColumn(ModBlocks.COCONUT_LEAF_BLOCK), blockStateModelGenerator.modelOutput);
         blockStateModelGenerator.blockStateOutput.accept(BlockModelGenerators.createAxisAlignedPillarBlock(ModBlocks.COCONUT_LEAF_BLOCK, resourceLocation));
@@ -232,8 +236,6 @@ public class ModelDataGen extends FabricModelProvider {
                         .with(createHorizontalFacingDispatchAlt()));
 
 
-
-        blockStateModelGenerator.skipAutoItemBlock(ModBlocks.DURIAN_BLOCK);
         blockStateModelGenerator.blockStateOutput.accept(
                 MultiVariantGenerator.multiVariant(ModBlocks.DURIAN_BLOCK)
                         .with(PropertyDispatch.properties(BlockStateProperties.AGE_2,BlockStateProperties.HANGING)
@@ -270,7 +272,7 @@ public class ModelDataGen extends FabricModelProvider {
         createMangoBlock(blockStateModelGenerator);
         createPepperCrop(blockStateModelGenerator);
         createLimeCrop(blockStateModelGenerator);
-        //createBasil(blockStateModelGenerator,ModBlocks.HOLY_BASIL);
+        createBasil(blockStateModelGenerator,ModBlocks.HOLY_BASIL);
         createBasil(blockStateModelGenerator,ModBlocks.BASIL);
 
         blockStateModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.PAPAYA_CROP).with(PropertyDispatch.property(BlockStateProperties.AGE_1).generate((integer) -> {
@@ -361,6 +363,7 @@ public class ModelDataGen extends FabricModelProvider {
 
         itemModelGenerator.generateFlatItem(ModItems.PAPAYA_JUICE, ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.LIME_JUICE, ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.COCONUT_WATER, ModelTemplates.FLAT_ITEM);
 
         itemModelGenerator.generateFlatItem(ModItems.FRIED_DURIAN,ModelTemplates.FLAT_ITEM);
 
@@ -394,6 +397,27 @@ public class ModelDataGen extends FabricModelProvider {
         itemModelGenerator.generateFlatItem(ModItems.HOLY_BASIL,ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.BASIL_SAPLING,ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.BASIL,ModelTemplates.FLAT_ITEM);
+
+        itemModelGenerator.generateFlatItem(ModItems.DURIAN_CURRY,ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.DURIAN_CAKE,ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.DURIAN_CAKE_SLICE,ModelTemplates.FLAT_ITEM);
+
+        itemModelGenerator.generateFlatItem(ModItems.MANGO_PUDDING,ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.MANGO_PUDDING_SLICE,ModelTemplates.FLAT_ITEM);
+
+        itemModelGenerator.generateFlatItem(ModItems.COCONUT_JELLY,ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.KHANOM_BABIN,ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.COCONUT_PIE,ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.COCONUT_PIE_SLICE,ModelTemplates.FLAT_ITEM);
+        
+        itemModelGenerator.generateFlatItem(ModItems.BASIL_OMELETTE,ModelTemplates.FLAT_ITEM);
+    }
+
+    private static void skipItemBlock(BlockModelGenerators blockStateModelGenerator){
+        blockStateModelGenerator.skipAutoItemBlock(ModBlocks.COCONUT_LEAF);
+        blockStateModelGenerator.skipAutoItemBlock(ModBlocks.DURIAN_BLOCK);
+        blockStateModelGenerator.skipAutoItemBlock(ModBlocks.DURIAN_CAKE);
+        blockStateModelGenerator.skipAutoItemBlock(ModBlocks.MANGO_PUDDING);
     }
 
     public static void createCabinet(Block block,BlockModelGenerators blockModelGenerators){
@@ -465,17 +489,36 @@ public class ModelDataGen extends FabricModelProvider {
     }
 
     private static void createBasil(BlockModelGenerators blockModelGenerators,Block block){
-        TextureMapping textureMapping = new TextureMapping()
-                .put(TextureSlot.STEM,ThaiDelight.modid("block/basil/basil_stem"))
-                .put(TextureSlot.SIDE,ThaiDelight.modid("block/basil/basil_leaves_side"))
-                .put(TextureSlot.TOP,ThaiDelight.modid("block/basil/basil_leaves_top"))
-                .put(TextureSlot.BOTTOM,ThaiDelight.modid("block/basil/basil_leaves_bottom"))
-                .put(FLOWER,ThaiDelight.modid("block/basil/basil_flower"));
+        ResourceLocation resourceLocation = BuiltInRegistries.BLOCK.getKey(block);
+        ResourceLocation modelResourceLocation = resourceLocation.withPath(string2 -> "block/" + string2 + "/" + string2);
 
-        ResourceLocation BASIL_AGE0 = BASIL_TEMPLATE.create(ThaiDelight.modid("block/basil/basil_age0"),textureMapping, blockModelGenerators.modelOutput);
-        ResourceLocation BASIL_AGE1 = BASIL_TEMPLATE.create(ThaiDelight.modid("block/basil/basil_age1"),textureMapping, blockModelGenerators.modelOutput);
-        ResourceLocation BASIL_AGE2 = BASIL_TEMPLATE.create(ThaiDelight.modid("block/basil/basil_age2"),textureMapping, blockModelGenerators.modelOutput);
-        ResourceLocation BASIL_AGE3 = BASIL_TEMPLATE.create(ThaiDelight.modid("block/basil/basil_age3"),textureMapping, blockModelGenerators.modelOutput);
+        ResourceLocation BASIL_AGE0 = BASIL_TEMPLATE.create(modelResourceLocation.withSuffix("_age0"),new TextureMapping()
+                .put(TextureSlot.STEM,modelResourceLocation.withSuffix("_stem"))
+                .put(TextureSlot.SIDE,modelResourceLocation.withSuffix("_leaves_side"))
+                .put(TextureSlot.TOP,modelResourceLocation.withSuffix("_leaves_top"))
+                .put(TextureSlot.BOTTOM,modelResourceLocation.withSuffix("_leaves_bottom"))
+                .put(FLOWER,modelResourceLocation.withSuffix("_flower_age0")), blockModelGenerators.modelOutput);
+
+        ResourceLocation BASIL_AGE1 = BASIL_TEMPLATE.create(modelResourceLocation.withSuffix("_age1"),new TextureMapping()
+                .put(TextureSlot.STEM,modelResourceLocation.withSuffix("_stem"))
+                .put(TextureSlot.SIDE,modelResourceLocation.withSuffix("_leaves_side"))
+                .put(TextureSlot.TOP,modelResourceLocation.withSuffix("_leaves_top"))
+                .put(TextureSlot.BOTTOM,modelResourceLocation.withSuffix("_leaves_bottom"))
+                .put(FLOWER,modelResourceLocation.withSuffix("_flower_age1")), blockModelGenerators.modelOutput);
+
+        ResourceLocation BASIL_AGE2 = BASIL_TEMPLATE.create(modelResourceLocation.withSuffix("_age2"),new TextureMapping()
+                .put(TextureSlot.STEM,modelResourceLocation.withSuffix("_stem"))
+                .put(TextureSlot.SIDE,modelResourceLocation.withSuffix("_leaves_side"))
+                .put(TextureSlot.TOP,modelResourceLocation.withSuffix("_leaves_top"))
+                .put(TextureSlot.BOTTOM,modelResourceLocation.withSuffix("_leaves_bottom"))
+                .put(FLOWER,modelResourceLocation.withSuffix("_flower_age2")), blockModelGenerators.modelOutput);
+
+        ResourceLocation BASIL_AGE3 = BASIL_TEMPLATE.create(modelResourceLocation.withSuffix("_age3"),new TextureMapping()
+                .put(TextureSlot.STEM,modelResourceLocation.withSuffix("_stem"))
+                .put(TextureSlot.SIDE,modelResourceLocation.withSuffix("_leaves_side"))
+                .put(TextureSlot.TOP,modelResourceLocation.withSuffix("_leaves_top"))
+                .put(TextureSlot.BOTTOM,modelResourceLocation.withSuffix("_leaves_bottom"))
+                .put(FLOWER,modelResourceLocation.withSuffix("_flower_age3")), blockModelGenerators.modelOutput);
 
         blockModelGenerators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block)
                 .with(PropertyDispatch.property(BasilCropBlock.AGE)
@@ -664,5 +707,6 @@ public class ModelDataGen extends FabricModelProvider {
     private static ModelTemplate createMincraftItem(String string, TextureSlot... textureSlots) {
         return new ModelTemplate(Optional.of(new ResourceLocation("item/" + string)),Optional.empty(), textureSlots);
     }
+
 
 }

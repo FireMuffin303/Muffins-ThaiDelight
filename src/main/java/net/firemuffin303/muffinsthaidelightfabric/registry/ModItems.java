@@ -83,6 +83,14 @@ public class ModItems {
         }
     });
 
+    public static final Item COCONUT_WATER = register("coconut_water",new DrinkableItem(drinkItem().food(ModFood.COCONUT_WATER),false,true){
+        @Override
+        public void affectConsumer(ItemStack stack, Level level, LivingEntity consumer) {
+            super.affectConsumer(stack, level, consumer);
+            consumer.removeEffect(MobEffects.WEAKNESS);
+        }
+    });
+
     //Crops
     //------------- Lime ---------------
     public static final Item LIME_SAPLING = register("lime_sapling",new BlockItem(ModBlocks.LIME_SAPLING,new Item.Properties()));
@@ -224,15 +232,31 @@ public class ModItems {
 
     public static final Item LARB_FEAST = register("larb_feast",new BlockItem(ModBlocks.LARB_FEAST,new Item.Properties()));
     public static final Item LARB = register("larb",new ConsumableItem(bowlFoodItem(ModFood.LARB)));
+
     public static final Item CRAB_FRIED_RICE_FEAST = register("crab_fried_rice_feast",new BlockItem(ModBlocks.CRAB_FRIED_RICE_FEAST,new Item.Properties()));
     public static final Item CRAB_FRIED_RICE = register("crab_fried_rice",new ConsumableItem(bowlFoodItem(ModFood.CRAB_FRIED_RICE)));
+
     public static final Item STIR_FRIED_NOODLE = register("stir_fried_noodle",new ConsumableItem(bowlFoodItem(ModFood.STIR_FRIED_NOODLE)));
 
     public static final Item FRIED_DURIAN = register("fried_durian",new Item(new Item.Properties().food(ModFood.FRIED_DURIAN)));
-    public static final Item MANGO_STICKY_RICE = register("mango_sticky_rice",new Item(new Item.Properties().food(ModFood.FRIED_DURIAN)));
     public static final Item COCONUT_MILK_BOTTLE = register("coconut_milk_bottle",new Item(new Item.Properties()));
     public static final Item COCONUT_SLICE = register("coconut_slice",new ConsumableItem(new Item.Properties().craftRemainder(Items.BOWL).food(ModFood.COCONUT_MEAT)));
     public static final Item PHAT_KAPHRAO = register("phat_kaphrao", new ConsumableItem(bowlFoodItem(ModFood.PHAT_KAPHRAO)));
+
+    public static final Item DURIAN_CURRY = register("durian_curry",new ConsumableItem(bowlFoodItem(ModFood.DURIAN_CURRY)));
+    public static final Item DURIAN_CAKE = register("durian_cake",new BlockItem(ModBlocks.DURIAN_CAKE,new Item.Properties()));
+    public static final Item DURIAN_CAKE_SLICE = register("durian_cake_slice",new Item(new Item.Properties().food(ModFood.MANGO_PIE)));
+
+    public static final Item MANGO_STICKY_RICE = register("mango_sticky_rice",new ConsumableItem(bowlFoodItem(ModFood.MANGO_STICKY_RICE)));
+    public static final Item MANGO_PUDDING = register("mango_pudding",new BlockItem(ModBlocks.MANGO_PUDDING,new Item.Properties()));
+    public static final Item MANGO_PUDDING_SLICE = register("mango_pudding_slice",new Item(new Item.Properties().food(ModFood.MANGO_PIE)));
+
+    public static final Item COCONUT_JELLY = register("coconut_jelly",new Item(new Item.Properties().food(ModFood.MANGO_PIE)));
+    public static final Item KHANOM_BABIN = register("khanom_babin",new Item(new Item.Properties().food(ModFood.MANGO_PIE)));
+    public static final Item COCONUT_PIE = register("coconut_pie",new BlockItem(ModBlocks.MANGO_PUDDING,new Item.Properties()));
+    public static final Item COCONUT_PIE_SLICE = register("coconut_pie_slice",new Item(new Item.Properties().food(ModFood.MANGO_PIE)));
+
+    public static final Item BASIL_OMELETTE = register("basil_omelette",new Item(new Item.Properties()));
 
     public static Item register(String id,Item item){
         ITEMS.add(item);
@@ -272,6 +296,7 @@ public class ModItems {
         public static final FoodProperties SEAFOOD_SAUCE = new FoodProperties.Builder().alwaysEat().effect(new MobEffectInstance(MobEffects.WATER_BREATHING,200,0),1.0f).build();
         public static final FoodProperties PAPAYA_JUICE = new FoodProperties.Builder().alwaysEat().build();
         public static final FoodProperties LIME_JUICE = new FoodProperties.Builder().alwaysEat().build();
+        public static final FoodProperties COCONUT_WATER = new FoodProperties.Builder().alwaysEat().build();
 
         public static final FoodProperties SOMTAM = new FoodProperties.Builder()
                 .nutrition(14)
@@ -296,6 +321,23 @@ public class ModItems {
                 .nutrition(12)
                 .saturationMod(0.8F)
                 .effect(new MobEffectInstance(ModEffects.NOURISHMENT.get(),3600,0),1.0f).build();
+
+        public static final FoodProperties DURIAN_CURRY = new FoodProperties.Builder()
+                .nutrition(12)
+                .saturationMod(0.8F)
+                .effect(new MobEffectInstance(ModEffects.NOURISHMENT.get(),3600,0),1.0f).build();
+
+        public static final FoodProperties MANGO_STICKY_RICE = new FoodProperties.Builder()
+                .nutrition(12)
+                .saturationMod(0.55F)
+                .effect(new MobEffectInstance(ModEffects.COMFORT.get(),5000,0),1.0f).build();
+
+        public static final FoodProperties MANGO_PIE = new FoodProperties.Builder()
+                .nutrition(3)
+                .saturationMod(0.3F)
+                .fast()
+                .effect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 600, 0, false, false), 1.0F).build();
+
 
         public static final FoodProperties FERMENTED_FISH = new FoodProperties.Builder().alwaysEat().effect(new MobEffectInstance(ModMobEffects.STINKY,10*20),0.5f).build();
     }

@@ -49,9 +49,12 @@ public class ModTagDataGen {
                     .add(ModItems.LARB);
 
             getOrCreateTagBuilder(TagKey.create(Registries.ITEM, new ResourceLocation("create", "upright_on_belt")))
-                    .add(ModItems.FISH_SAUCE_BOTTLE)
-                    .add(ModItems.LIME_JUICE)
-                    .add(ModItems.PAPAYA_JUICE);
+                    .add(
+                            ModItems.FISH_SAUCE_BOTTLE,
+                            ModItems.LIME_JUICE,
+                            ModItems.PAPAYA_JUICE,
+                            ModItems.COCONUT_WATER
+                    );
 
             getOrCreateTagBuilder(ModTags.LIME)
                     .add(ModItems.LIME)
