@@ -14,7 +14,9 @@ import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.fabricmc.fabric.api.loot.v2.LootTableSource;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
+import net.fabricmc.fabric.api.registry.FlattenableBlockRegistry;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
+import net.fabricmc.fabric.api.registry.TillableBlockRegistry;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.firemuffin303.muffinsthaidelightfabric.common.entity.DragonflyEntity;
 import net.firemuffin303.muffinsthaidelightfabric.common.entity.FlowerCrabEntity;
@@ -53,6 +55,7 @@ import net.minecraft.world.item.alchemy.PotionBrewing;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.biome.Biomes;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.Heightmap;
@@ -130,6 +133,8 @@ public class ThaiDelight implements ModInitializer {
                 BuiltInLootTables.VILLAGE_DESERT_HOUSE,
                 BuiltInLootTables.ABANDONED_MINESHAFT,
                 BuiltInLootTables.PILLAGER_OUTPOST);
+
+        TillableBlockRegistry.register(Blocks.BAMBOO_SAPLING,useOnContext -> true,Blocks.AIR.defaultBlockState(),ModItems.BAMBOO_SHOOT);
 
 
         LootTableEvents.MODIFY.register(new LootTableEvents.Modify() {
@@ -479,6 +484,8 @@ public class ThaiDelight implements ModInitializer {
         output.accept(ModItems.HOLY_BASIL_SAPLING);
         output.accept(ModItems.BASIL);
         output.accept(ModItems.BASIL_SAPLING);
+
+        output.accept(ModItems.BAMBOO_SHOOT);
 
         output.accept(ModItems.FRIED_DURIAN);
         output.accept(ModItems.SOMTAM_FEAST);

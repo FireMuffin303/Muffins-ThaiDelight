@@ -226,6 +226,8 @@ public class ModItems {
     });
     public static final Item BASIL = register("basil",new Item(new Item.Properties()));
 
+    public static final Item BAMBOO_SHOOT = register("bamboo_shoot",new Item(new Item.Properties()));
+
     //--- 🍔 Food 🍔---
     public static final Item SOMTAM_FEAST = register("somtam_feast",new BlockItem(ModBlocks.SOMTAM_FEAST,new Item.Properties()));
     public static final Item SOMTAM = register("somtam",new ConsumableItem(bowlFoodItem(ModFood.SOMTAM)));

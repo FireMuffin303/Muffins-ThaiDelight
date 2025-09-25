@@ -398,6 +398,8 @@ public class ModelDataGen extends FabricModelProvider {
         itemModelGenerator.generateFlatItem(ModItems.BASIL_SAPLING,ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.BASIL,ModelTemplates.FLAT_ITEM);
 
+        itemModelGenerator.generateFlatItem(ModItems.BAMBOO_SHOOT,ModelTemplates.FLAT_ITEM);
+
         itemModelGenerator.generateFlatItem(ModItems.DURIAN_CURRY,ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.DURIAN_CAKE,ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.DURIAN_CAKE_SLICE,ModelTemplates.FLAT_ITEM);
