@@ -91,7 +91,7 @@ public class LimeBlock extends HorizontalDirectionalBlock implements Bonemealabl
     @Override
     public boolean canSurvive(BlockState blockState, LevelReader levelReader, BlockPos blockPos) {
         BlockState blockState2 = levelReader.getBlockState(blockPos.relative(blockState.getValue(FACING)));
-        return blockState2.is(ModBlocks.LIME_LEAVES);
+        return true;
     }
 
     @Override

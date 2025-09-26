@@ -362,6 +362,7 @@ public class ThaiDelight implements ModInitializer {
         output.accept(ModItems.COCONUT_CRATE);
         output.accept(ModItems.HOLY_BASIL_CRATE);
         output.accept(ModItems.BASIL_CRATE);
+        output.accept(ModItems.BAMBOO_SHOOT_CRATE);
 
         output.accept(ModItems.CRAB_SPAWN_EGG);
         output.accept(ModItems.CRAB_EGG);
@@ -387,7 +388,6 @@ public class ThaiDelight implements ModInitializer {
         output.accept(ModItems.LIME_SAPLING);
         output.accept(ModItems.LIME);
         output.accept(ModItems.SLICED_LIME);
-        output.accept(ModItems.LIME_LEAVES);
 
         output.accept(ModItems.WILD_PEPPER_CROP);
         output.accept(ModItems.PEPPER);
@@ -494,10 +494,12 @@ public class ThaiDelight implements ModInitializer {
         output.accept(ModItems.LARB);
         output.accept(ModItems.CRAB_FRIED_RICE_FEAST);
         output.accept(ModItems.CRAB_FRIED_RICE);
-        output.accept(ModItems.STIR_FRIED_NOODLE);
-        output.accept(ModItems.MANGO_STICKY_RICE);
-        output.accept(ModItems.COCONUT_MILK_BOTTLE);
+        output.accept(ModItems.PHAT_KAPHRAO_FEAST);
         output.accept(ModItems.PHAT_KAPHRAO);
+        output.accept(ModItems.MANGO_STICKY_RICE_FEAST);
+        output.accept(ModItems.MANGO_STICKY_RICE);
+        output.accept(ModItems.STIR_FRIED_NOODLE);
+        output.accept(ModItems.COCONUT_MILK_BOTTLE);
         output.accept(ModItems.DURIAN_CURRY);
         output.accept(ModItems.DURIAN_CAKE);
         output.accept(ModItems.DURIAN_CAKE_SLICE);
@@ -509,7 +511,11 @@ public class ThaiDelight implements ModInitializer {
         output.accept(ModItems.COCONUT_PIE);
         output.accept(ModItems.COCONUT_PIE_SLICE);
 
+        output.accept(ModItems.BASIL_OMELETTE_FEAST);
         output.accept(ModItems.BASIL_OMELETTE);
+
+        output.accept(ModItems.BAMBOO_SHOOT_SOUP);
+        output.accept(ModItems.STEAMED_BAMBOO_SHOOT);
     }
 
     public static ResourceLocation modid(String id){

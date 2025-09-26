@@ -161,9 +161,10 @@ public class ModTagDataGen {
                     .add(ModBlocks.DURIAN_LOG);
 
             getOrCreateTagBuilder(BlockTags.LEAVES)
-                    .add(ModBlocks.PAPAYA_LEAVES)
-                    .add(ModBlocks.DURIAN_LEAVES)
-                    .add(ModBlocks.LIME_LEAVES);
+                    .add(
+                            ModBlocks.PAPAYA_LEAVES,
+                            ModBlocks.DURIAN_LEAVES
+                    );
 
             getOrCreateTagBuilder(ModTags.PAPAYA_LOGS)
                     .add(ModBlocks.PAPAYA_LOG)

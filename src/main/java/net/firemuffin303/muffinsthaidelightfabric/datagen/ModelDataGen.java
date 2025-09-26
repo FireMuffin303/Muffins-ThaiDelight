@@ -30,10 +30,10 @@ import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import vectorwing.farmersdelight.common.block.CabinetBlock;
 
 import java.util.Optional;
+import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
 
-import static net.minecraft.data.models.BlockModelGenerators.createHorizontalFacingDispatchAlt;
-import static net.minecraft.data.models.BlockModelGenerators.createSimpleBlock;
+import static net.minecraft.data.models.BlockModelGenerators.*;
 import static net.minecraft.data.models.model.TextureMapping.getBlockTexture;
 
 public class ModelDataGen extends FabricModelProvider {
@@ -101,63 +101,37 @@ public class ModelDataGen extends FabricModelProvider {
     public void generateBlockStateModels(BlockModelGenerators blockStateModelGenerator) {
         skipItemBlock(blockStateModelGenerator);
 
-        createCrateBlock(ModBlocks.LIME_CRATE,blockStateModelGenerator);
-        createCrateBlock(ModBlocks.PEPPER_CRATE,blockStateModelGenerator);
-        createCrateBlock(ModBlocks.RAW_PAPAYA_CRATE,blockStateModelGenerator);
-        createCrateBlock(ModBlocks.PAPAYA_CRATE,blockStateModelGenerator);
-        createCrateBlock(ModBlocks.DURIAN_CRATE,blockStateModelGenerator);
-        createCrateBlock(ModBlocks.MANGO_CRATE,blockStateModelGenerator);
-        createCrateBlock(ModBlocks.COCONUT_CRATE,blockStateModelGenerator);
-        createCrateBlock(ModBlocks.HOLY_BASIL_CRATE,blockStateModelGenerator);
-        createCrateBlock(ModBlocks.BASIL_CRATE,blockStateModelGenerator);
+        for(Block blockSupplier : ModBlocks.CRATES){
+            createCrateBlock(blockSupplier,blockStateModelGenerator);
+        }
 
-        createCabinet(ModBlocks.DURIAN_CABINET,blockStateModelGenerator);
-        createCabinet(ModBlocks.MANGO_CABINET,blockStateModelGenerator);
-        createCabinet(ModBlocks.COCONUT_CABINET,blockStateModelGenerator);
+        for (Block cabinetBlock : ModBlocks.CABINET){
+            createCabinet(cabinetBlock,blockStateModelGenerator);
+        }
 
-        blockStateModelGenerator.createSimpleFlatItemModel(ModBlocks.CRAB_EGG);
         blockStateModelGenerator.blockStateOutput.accept(createSimpleBlock(ModBlocks.CRAB_EGG,ModelLocationUtils.getModelLocation(ModBlocks.CRAB_EGG)));
 
-        TextureMapping papaya_bottom = new TextureMapping()
-                .put(TextureSlot.SIDE, getBlockTexture(ModBlocks.PAPAYA_LOG,"_bottom"))
-                .put(TextureSlot.END, getBlockTexture(ModBlocks.PAPAYA_LOG, "_top"))
-                .put(TextureSlot.PARTICLE, getBlockTexture(ModBlocks.PAPAYA_LOG,"_bottom"));
-        TextureMapping papaya_log_mapping = new TextureMapping()
-                .put(TextureSlot.SIDE, getBlockTexture(ModBlocks.PAPAYA_LOG))
-                .put(TextureSlot.END, getBlockTexture(ModBlocks.PAPAYA_LOG, "_top"))
-                .put(TextureSlot.PARTICLE, getBlockTexture(ModBlocks.PAPAYA_LOG));
-        ResourceLocation papaya_log_bottom = ModelTemplates.CUBE_COLUMN.createWithSuffix(ModBlocks.PAPAYA_LOG,"_bottom", papaya_bottom, blockStateModelGenerator.modelOutput);
-        ResourceLocation papaya_log = ModelTemplates.CUBE_COLUMN.create(ModBlocks.PAPAYA_LOG,papaya_log_mapping, blockStateModelGenerator.modelOutput);
 
         blockStateModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.PAPAYA_LOG)
-                .with(PropertyDispatch.properties(PapayaLogBlock.AXIS,PapayaLogBlock.BOTTOM)
-                        .select(Direction.Axis.X,true,Variant.variant()
-                                .with(VariantProperties.MODEL,papaya_log_bottom)
-                                .with(VariantProperties.X_ROT,VariantProperties.Rotation.R90)
-                                .with(VariantProperties.Y_ROT,VariantProperties.Rotation.R90)
+                .with(PropertyDispatch.property(PapayaLogBlock.BOTTOM)
+                        .select(true,Variant.variant()
+                                .with(VariantProperties.MODEL,
+                                        ModelTemplates.CUBE_COLUMN.createWithSuffix(ModBlocks.PAPAYA_LOG,"_bottom", new TextureMapping()
+                                                .put(TextureSlot.SIDE, getBlockTexture(ModBlocks.PAPAYA_LOG,"_bottom"))
+                                                .put(TextureSlot.END, getBlockTexture(ModBlocks.PAPAYA_LOG, "_top"))
+                                                .put(TextureSlot.PARTICLE, getBlockTexture(ModBlocks.PAPAYA_LOG,"_bottom")),
+                                                blockStateModelGenerator.modelOutput))
                         )
-                        .select(Direction.Axis.X,false,Variant.variant()
-                                .with(VariantProperties.MODEL,papaya_log)
-                                .with(VariantProperties.X_ROT,VariantProperties.Rotation.R90)
-                                .with(VariantProperties.Y_ROT,VariantProperties.Rotation.R90)
-                        )
-                        .select(Direction.Axis.Y,true,Variant.variant()
-                                .with(VariantProperties.MODEL,papaya_log_bottom)
-                        )
-                        .select(Direction.Axis.Y,false,Variant.variant()
-                                .with(VariantProperties.MODEL,papaya_log)
-                        )
-                        .select(Direction.Axis.Z,true,Variant.variant()
-                                .with(VariantProperties.MODEL,papaya_log_bottom)
-                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R90)
-                        )
-                        .select(Direction.Axis.Z,false,Variant.variant()
-                                .with(VariantProperties.MODEL,papaya_log)
-                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R90)
+                        .select(false,Variant.variant()
+                                .with(VariantProperties.MODEL,
+                                        ModelTemplates.CUBE_COLUMN.create(ModBlocks.PAPAYA_LOG,new TextureMapping()
+                                                .put(TextureSlot.SIDE, getBlockTexture(ModBlocks.PAPAYA_LOG))
+                                                .put(TextureSlot.END, getBlockTexture(ModBlocks.PAPAYA_LOG, "_top"))
+                                                .put(TextureSlot.PARTICLE, getBlockTexture(ModBlocks.PAPAYA_LOG)), blockStateModelGenerator.modelOutput))
                         )
                 )
+                .with(createRotatedPillar())
         );
-
 
 
         ResourceLocation resourceLocation = ModelTemplates.CUBE_COLUMN.create(ModBlocks.COCONUT_LEAF_BLOCK, TextureMapping.logColumn(ModBlocks.COCONUT_LEAF_BLOCK), blockStateModelGenerator.modelOutput);
@@ -177,40 +151,18 @@ public class ModelDataGen extends FabricModelProvider {
         blockStateModelGenerator.woodProvider(ModBlocks.COCONUT_LOG).logWithHorizontal(ModBlocks.COCONUT_LOG).wood(ModBlocks.COCONUT_WOOD);
         blockStateModelGenerator.woodProvider(ModBlocks.STRIPPED_COCONUT_LOG).logWithHorizontal(ModBlocks.STRIPPED_COCONUT_LOG).wood(ModBlocks.STRIPPED_COCONUT_WOOD);
         blockStateModelGenerator.createHangingSign(ModBlocks.STRIPPED_COCONUT_LOG,ModBlocks.COCONUT_HANGING_SIGN,ModBlocks.COCONUT_WALL_HANGING_SIGN);
+
         blockStateModelGenerator.blockStateOutput.accept(
                 MultiVariantGenerator.multiVariant(ModBlocks.COCONUT_LEAF)
-                        .with(PropertyDispatch.properties(CoconutLeafBlock.FACING,CoconutLeafBlock.END)
-                                .select(Direction.NORTH,false,Variant.variant()
+                        .with(PropertyDispatch.property(CoconutLeafBlock.END)
+                                .select(false,Variant.variant()
                                         .with(VariantProperties.MODEL, BuiltInRegistries.BLOCK.getKey(ModBlocks.COCONUT_LEAF).withPrefix("block/coconut/"))
                                 )
-                                .select(Direction.NORTH,true,Variant.variant()
+                                .select(true,Variant.variant()
                                         .with(VariantProperties.MODEL,BuiltInRegistries.BLOCK.getKey(ModBlocks.COCONUT_LEAF).withPrefix("block/coconut/").withSuffix("_end"))
-                                )
-                                .select(Direction.SOUTH,false,Variant.variant()
-                                        .with(VariantProperties.MODEL,BuiltInRegistries.BLOCK.getKey(ModBlocks.COCONUT_LEAF).withPrefix("block/coconut/"))
-                                        .with(VariantProperties.Y_ROT,VariantProperties.Rotation.R180)
-                                )
-                                .select(Direction.SOUTH,true,Variant.variant()
-                                        .with(VariantProperties.MODEL,BuiltInRegistries.BLOCK.getKey(ModBlocks.COCONUT_LEAF).withPrefix("block/coconut/").withSuffix("_end"))
-                                        .with(VariantProperties.Y_ROT,VariantProperties.Rotation.R180)
-                                )
-                                .select(Direction.EAST,false,Variant.variant()
-                                        .with(VariantProperties.MODEL,BuiltInRegistries.BLOCK.getKey(ModBlocks.COCONUT_LEAF).withPrefix("block/coconut/"))
-                                        .with(VariantProperties.Y_ROT,VariantProperties.Rotation.R90)
-                                )
-                                .select(Direction.EAST,true,Variant.variant()
-                                        .with(VariantProperties.MODEL,BuiltInRegistries.BLOCK.getKey(ModBlocks.COCONUT_LEAF).withPrefix("block/coconut/").withSuffix("_end"))
-                                        .with(VariantProperties.Y_ROT,VariantProperties.Rotation.R90)
-                                )
-                                .select(Direction.WEST,false,Variant.variant()
-                                        .with(VariantProperties.MODEL,BuiltInRegistries.BLOCK.getKey(ModBlocks.COCONUT_LEAF).withPrefix("block/coconut/"))
-                                        .with(VariantProperties.Y_ROT,VariantProperties.Rotation.R270)
-                                )
-                                .select(Direction.WEST,true,Variant.variant()
-                                        .with(VariantProperties.MODEL,BuiltInRegistries.BLOCK.getKey(ModBlocks.COCONUT_LEAF).withPrefix("block/coconut/").withSuffix("_end"))
-                                        .with(VariantProperties.Y_ROT,VariantProperties.Rotation.R270)
                                 )
                         )
+                        .with(createHorizontalFacingDispatch())
         );
         blockStateModelGenerator.family(ModBlocks.COCONUT_PLANKS).generateFor(COCONUT_PLANKS);
 
@@ -222,7 +174,6 @@ public class ModelDataGen extends FabricModelProvider {
 
 
         createCubeAll(ModBlocks.PAPAYA_LEAVES,blockStateModelGenerator);
-        //createCubeAll(ModBlocks.LIME_LEAVES,blockStateModelGenerator);
 
         blockStateModelGenerator.blockStateOutput.accept(
                 MultiVariantGenerator.multiVariant(ModBlocks.PAPAYA)
@@ -326,93 +277,25 @@ public class ModelDataGen extends FabricModelProvider {
         blockStateModelGenerator.createPlant(ModBlocks.COCONUT_SAPLING,ModBlocks.POTTED_COCONUT_SAPLING, BlockModelGenerators.TintState.NOT_TINTED);
         blockStateModelGenerator.createPlant(ModBlocks.MANGO_SAPLING,ModBlocks.POTTED_MANGO_SAPLING, BlockModelGenerators.TintState.NOT_TINTED);
 
-        blockStateModelGenerator.createTrivialBlock(ModBlocks.LIME_LEAVES,TexturedModel.LEAVES);
     }
 
 
     @Override
     public void generateItemModels(ItemModelGenerators itemModelGenerator) {
-        //Crab
+        for(Item flatItem : ModItems.FLAT_ITEMS){
+            itemModelGenerator.generateFlatItem(flatItem,ModelTemplates.FLAT_ITEM);
+        }
+
         itemModelGenerator.generateFlatItem(ModItems.CRAB_SPAWN_EGG,SPAWN_EGG);
-        itemModelGenerator.generateFlatItem(ModItems.CRAB_BUCKET, ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.CRAB_MEAT, ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.COOKED_CRAB_MEAT, ModelTemplates.FLAT_ITEM);
-
-        //Dragonfly
         itemModelGenerator.generateFlatItem(ModItems.DRAGONFLY_SPAWN_EGG,SPAWN_EGG);
-        itemModelGenerator.generateFlatItem(ModItems.DRAGONFLY, ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.COOKED_DRAGONFLY, ModelTemplates.FLAT_ITEM);
-
-        //Buffolo
         //itemModelGenerator.generateFlatItem(ModItems.BUFFALO_SPAWN_EGG,SPAWN_EGG);
 
-        itemModelGenerator.generateFlatItem(ModItems.FISH_SAUCE_BOTTLE, ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.FERMENTED_FISH,ModelTemplates.FLAT_ITEM);
-
-        itemModelGenerator.generateFlatItem(ModItems.LIME, ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.SLICED_LIME, ModelTemplates.FLAT_ITEM);
-
-        itemModelGenerator.generateFlatItem(ModItems.PEPPER, ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.PEPPER_SEED, ModelTemplates.FLAT_ITEM);
-
-        itemModelGenerator.generateFlatItem(ModItems.PAPAYA, ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.SLICED_PAPAYA, ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.RAW_PAPAYA, ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.RAW_PAPAYA_SLICE,ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.PAPAYA_SEEDS,ModelTemplates.FLAT_ITEM);
-
-        itemModelGenerator.generateFlatItem(ModItems.PAPAYA_JUICE, ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.LIME_JUICE, ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.COCONUT_WATER, ModelTemplates.FLAT_ITEM);
-
-        itemModelGenerator.generateFlatItem(ModItems.FRIED_DURIAN,ModelTemplates.FLAT_ITEM);
-
-        itemModelGenerator.generateFlatItem(ModItems.SOMTAM, ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.LARB, ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.CRAB_FRIED_RICE, ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.STIR_FRIED_NOODLE, ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.PHAT_KAPHRAO,ModelTemplates.FLAT_ITEM);
-
-
-        itemModelGenerator.generateFlatItem(Item.byBlock(ModBlocks.SOMTAM_FEAST), ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(Item.byBlock(ModBlocks.LARB_FEAST), ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(Item.byBlock(ModBlocks.CRAB_FRIED_RICE_FEAST), ModelTemplates.FLAT_ITEM);
-
-        itemModelGenerator.generateFlatItem(ModItems.DURIAN_PULP,ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.DURIAN_BOAT,ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.DURIAN_CHEST_BOAT,ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.MANGO_BOAT,ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.MANGO_CHEST_BOAT,ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.COCONUT_BOAT,ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.COCONUT_CHEST_BOAT,ModelTemplates.FLAT_ITEM);
-
-        itemModelGenerator.generateFlatItem(ModItems.MANGO,ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.MANGO_SLICE,ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.MANGO_STICKY_RICE,ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.COCONUT,ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.COCONUT_SLICE,ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.COCONUT_MILK_BOTTLE,ModelTemplates.FLAT_ITEM);
-
-        itemModelGenerator.generateFlatItem(ModItems.HOLY_BASIL_SAPLING,ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.HOLY_BASIL,ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.BASIL_SAPLING,ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.BASIL,ModelTemplates.FLAT_ITEM);
-
-        itemModelGenerator.generateFlatItem(ModItems.BAMBOO_SHOOT,ModelTemplates.FLAT_ITEM);
-
-        itemModelGenerator.generateFlatItem(ModItems.DURIAN_CURRY,ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.DURIAN_CAKE,ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.DURIAN_CAKE_SLICE,ModelTemplates.FLAT_ITEM);
-
-        itemModelGenerator.generateFlatItem(ModItems.MANGO_PUDDING,ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.MANGO_PUDDING_SLICE,ModelTemplates.FLAT_ITEM);
-
-        itemModelGenerator.generateFlatItem(ModItems.COCONUT_JELLY,ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.KHANOM_BABIN,ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.COCONUT_PIE,ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.COCONUT_PIE_SLICE,ModelTemplates.FLAT_ITEM);
-        
-        itemModelGenerator.generateFlatItem(ModItems.BASIL_OMELETTE,ModelTemplates.FLAT_ITEM);
     }
 
     private static void skipItemBlock(BlockModelGenerators blockStateModelGenerator){
@@ -581,110 +464,36 @@ public class ModelDataGen extends FabricModelProvider {
 
         blockModelGenerators.blockStateOutput.accept(
                 MultiVariantGenerator.multiVariant(ModBlocks.MANGO_BLOCK)
-                        .with(PropertyDispatch.properties(MangoBlock.AGE,MangoBlock.HANGING,MangoBlock.FACING)
+                        .with(PropertyDispatch.properties(MangoBlock.AGE,MangoBlock.HANGING)
                                 //Hanging Raw Mango
-                                .select(0,false, Direction.NORTH,Variant.variant()
+                                .select(0,false,Variant.variant()
                                         .with(VariantProperties.MODEL,ThaiDelight.modid("block/mango_age0"))
                                 )
-                                .select(0,false,Direction.EAST,Variant.variant()
-                                        .with(VariantProperties.MODEL,ThaiDelight.modid("block/mango_age0"))
-                                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)
+                                //Ground Raw Mango
+                                .select(0,true,Variant.variant()
+                                        .with(VariantProperties.MODEL,ThaiDelight.modid("block/hanging_mango_age0"))
                                 )
-                                .select(0,false,Direction.SOUTH,Variant.variant()
-                                        .with(VariantProperties.MODEL,ThaiDelight.modid("block/mango_age0"))
-                                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180)
-                                )
-                                .select(0,false,Direction.WEST,Variant.variant()
-                                        .with(VariantProperties.MODEL,ThaiDelight.modid("block/mango_age0"))
-                                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)
+
+                                //Hanging Raw Mango
+                                .select(1,false,Variant.variant()
+                                        .with(VariantProperties.MODEL,raw_mango)
                                 )
 
                                 //Ground Raw Mango
-                                .select(0,true, Direction.NORTH,Variant.variant()
-                                        .with(VariantProperties.MODEL,ThaiDelight.modid("block/hanging_mango_age0"))
-                                )
-                                .select(0,true,Direction.EAST,Variant.variant()
-                                        .with(VariantProperties.MODEL,ThaiDelight.modid("block/hanging_mango_age0"))
-                                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)
-                                )
-                                .select(0,true,Direction.SOUTH,Variant.variant()
-                                        .with(VariantProperties.MODEL,ThaiDelight.modid("block/hanging_mango_age0"))
-                                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180)
-                                )
-                                .select(0,true,Direction.WEST,Variant.variant()
-                                        .with(VariantProperties.MODEL,ThaiDelight.modid("block/hanging_mango_age0"))
-                                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)
-                                )
-
-
-                                //Hanging Raw Mango
-                                .select(1,false, Direction.NORTH,Variant.variant()
-                                        .with(VariantProperties.MODEL,raw_mango)
-                                )
-                                .select(1,false,Direction.EAST,Variant.variant()
-                                        .with(VariantProperties.MODEL,raw_mango)
-                                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)
-                                )
-                                .select(1,false,Direction.SOUTH,Variant.variant()
-                                        .with(VariantProperties.MODEL,raw_mango)
-                                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180)
-                                )
-                                .select(1,false,Direction.WEST,Variant.variant()
-                                        .with(VariantProperties.MODEL,raw_mango)
-                                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)
-                                )
-
-                                //Ground Raw Mango
-                                .select(1,true, Direction.NORTH,Variant.variant()
+                                .select(1,true,Variant.variant()
                                         .with(VariantProperties.MODEL,hanging_raw_mango)
-                                )
-                                .select(1,true,Direction.EAST,Variant.variant()
-                                        .with(VariantProperties.MODEL,hanging_raw_mango)
-                                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)
-                                )
-                                .select(1,true,Direction.SOUTH,Variant.variant()
-                                        .with(VariantProperties.MODEL,hanging_raw_mango)
-                                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180)
-                                )
-                                .select(1,true,Direction.WEST,Variant.variant()
-                                        .with(VariantProperties.MODEL,hanging_raw_mango)
-                                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)
                                 )
                                 //--------------------
                                 //Ground Mango
-                                .select(2,false, Direction.NORTH,Variant.variant()
+                                .select(2,false,Variant.variant()
                                         .with(VariantProperties.MODEL,mango)
-                                )
-                                .select(2,false,Direction.EAST,Variant.variant()
-                                        .with(VariantProperties.MODEL,mango)
-                                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)
-                                )
-                                .select(2,false,Direction.SOUTH,Variant.variant()
-                                        .with(VariantProperties.MODEL,mango)
-                                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180)
-                                )
-                                .select(2,false,Direction.WEST,Variant.variant()
-                                        .with(VariantProperties.MODEL,mango)
-                                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)
                                 )
 
                                 //Hanging Mango
-                                .select(2,true, Direction.NORTH,Variant.variant()
+                                .select(2,true,Variant.variant()
                                         .with(VariantProperties.MODEL,hanging_mango)
                                 )
-                                .select(2,true,Direction.EAST,Variant.variant()
-                                        .with(VariantProperties.MODEL,hanging_mango)
-                                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)
-                                )
-                                .select(2,true,Direction.SOUTH,Variant.variant()
-                                        .with(VariantProperties.MODEL,hanging_mango)
-                                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180)
-                                )
-                                .select(2,true,Direction.WEST,Variant.variant()
-                                        .with(VariantProperties.MODEL,hanging_mango)
-                                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)
-                                )
-                        )
+                        ).with(createHorizontalFacingDispatch())
         );
     }
 

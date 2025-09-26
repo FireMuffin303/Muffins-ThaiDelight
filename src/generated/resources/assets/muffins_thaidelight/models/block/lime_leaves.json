@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/leaves",
-  "textures": {
-    "all": "muffins_thaidelight:block/lime_leaves"
-  }
-}

@@ -110,7 +110,7 @@ public class ModFeatures {
                 new TreeConfiguration.TreeConfigurationBuilder(
                         BlockStateProvider.simple(Blocks.OAK_LOG),
                         new StraightTrunkPlacer(4,2,0),
-                        BlockStateProvider.simple(ModBlocks.LIME_LEAVES),
+                        BlockStateProvider.simple(ModBlocks.DURIAN_BLOCK),
                         new BlobFoliagePlacer(ConstantInt.of(2),ConstantInt.of(0),3),
                         new TwoLayersFeatureSize(1,0,1)
                 ).ignoreVines().build()

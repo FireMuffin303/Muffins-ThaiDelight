@@ -26,6 +26,7 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.*;
@@ -45,23 +46,29 @@ import vectorwing.farmersdelight.common.block.FeastBlock;
 import vectorwing.farmersdelight.common.block.PieBlock;
 import vectorwing.farmersdelight.common.block.WildCropBlock;
 
+import java.util.ArrayList;
+import java.util.function.Supplier;
+
 import static net.minecraft.world.level.block.Blocks.*;
 
 public class ModBlocks {
+    public static final ArrayList<Block> CRATES = new ArrayList<>();
+    public static final ArrayList<Block> CABINET = new ArrayList<>();
 
     //Functional Block
     public static final Block MORTAR = register("mortar",new MortarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_RED).strength(0.5f,6.0f).noOcclusion().sound(SoundType.DECORATED_POT)));
 
     //Crate
-    public static final Block LIME_CRATE = register("lime_crate",new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).destroyTime(2.0f).explosionResistance(3.0f).sound(SoundType.WOOD)));
-    public static final Block PEPPER_CRATE = register("pepper_crate",new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).destroyTime(2.0f).explosionResistance(3.0f).sound(SoundType.WOOD)));
-    public static final Block RAW_PAPAYA_CRATE = register("raw_papaya_crate",new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).destroyTime(2.0f).explosionResistance(3.0f).sound(SoundType.WOOD)));
-    public static final Block PAPAYA_CRATE = register("papaya_crate",new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).destroyTime(2.0f).explosionResistance(3.0f).sound(SoundType.WOOD)));
-    public static final Block DURIAN_CRATE = register("durian_crate",new Block(BlockBehaviour.Properties.copy(OAK_PLANKS).destroyTime(2.0f).explosionResistance(3.0f).sound(SoundType.WOOD)));
-    public static final Block MANGO_CRATE = register("mango_crate",new Block(BlockBehaviour.Properties.copy(OAK_PLANKS).destroyTime(2.0f).explosionResistance(3.0f).sound(SoundType.WOOD)));
-    public static final Block COCONUT_CRATE = register("coconut_crate",new Block(BlockBehaviour.Properties.copy(OAK_PLANKS).destroyTime(2.0f).explosionResistance(3.0f).sound(SoundType.WOOD)));
-    public static final Block HOLY_BASIL_CRATE = register("holy_basil_crate",new Block(BlockBehaviour.Properties.copy(OAK_PLANKS).destroyTime(2.0f).explosionResistance(3.0f).sound(SoundType.WOOD)));
-    public static final Block BASIL_CRATE = register("basil_crate",new Block(BlockBehaviour.Properties.copy(OAK_PLANKS).destroyTime(2.0f).explosionResistance(3.0f).sound(SoundType.WOOD)));
+    public static final Block LIME_CRATE = registerCrate("lime_crate");
+    public static final Block PEPPER_CRATE = registerCrate("pepper_crate");
+    public static final Block RAW_PAPAYA_CRATE = registerCrate("raw_papaya_crate");
+    public static final Block PAPAYA_CRATE = registerCrate("papaya_crate");
+    public static final Block DURIAN_CRATE = registerCrate("durian_crate");
+    public static final Block MANGO_CRATE = registerCrate("mango_crate");
+    public static final Block COCONUT_CRATE = registerCrate("coconut_crate");
+    public static final Block HOLY_BASIL_CRATE = registerCrate("holy_basil_crate");
+    public static final Block BASIL_CRATE = registerCrate("basil_crate");
+    public static final Block BAMBOO_SHOOT_CRATE = registerCrate("bamboo_shoot_crate");
 
     //Eggs
     public static final Block CRAB_EGG = register("flower_crab_egg",new CrabEggBlock(BlockBehaviour.Properties.copy(Blocks.FROGSPAWN)));
@@ -73,9 +80,8 @@ public class ModBlocks {
     //## Lime
     public static final Block LIME_PLANT = register("lime_plant",new LimePlantBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).randomTicks().noCollission().sound(SoundType.AZALEA_LEAVES).ignitedByLava().pushReaction(PushReaction.DESTROY)));
 
-   public static final Block LIME_SAPLING = register("lime_sapling",new LimeSaplingBlock(BlockBehaviour.Properties.copy(OAK_SAPLING)));
+    public static final Block LIME_SAPLING = register("lime_sapling",new LimeSaplingBlock(BlockBehaviour.Properties.copy(OAK_SAPLING)));
     public static final Block POTTED_LIME_SAPLING = register("potted_lime_sapling",Blocks.flowerPot(ModBlocks.LIME_SAPLING));
-    public static final Block LIME_LEAVES = register("lime_leaves",new LimeLeavesBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).randomTicks().sound(SoundType.SWEET_BERRY_BUSH).ignitedByLava()));
     public static final Block LIME_BLOCK = register("lime_block",new LimeBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).instabreak().noOcclusion().pushReaction(PushReaction.DESTROY).randomTicks().sound(SoundType.SWEET_BERRY_BUSH)));
 
     public static final Block PEPPER_CROP = register("pepper_crop",new PepperCropBlock(BlockBehaviour.Properties.copy(Blocks.POTATOES)));
@@ -179,7 +185,7 @@ public class ModBlocks {
             .dropsLike(DURIAN_HANGING_SIGN)
     ));
 
-    public static final Block DURIAN_CABINET = register("durian_cabinet",new CabinetBlock(BlockBehaviour.Properties.copy(BARREL)));
+    public static final Block DURIAN_CABINET = registerCabinet("durian_cabinet");
 
     //Coconut
     public static final Block COCONUT_SAPLING = register("coconut_sapling",new SaplingBlock(new DurianTreeGrower(),BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
@@ -279,7 +285,7 @@ public class ModBlocks {
             .ignitedByLava()
             .dropsLike(DURIAN_HANGING_SIGN)
     ));
-    public static final Block COCONUT_CABINET = register("coconut_cabinet",new CabinetBlock(BlockBehaviour.Properties.copy(BARREL)));
+    public static final Block COCONUT_CABINET = registerCabinet("coconut_cabinet");
 
     //----------------- Mango -----------
     public static final Block MANGO_SAPLING = register("mango_sapling",new SaplingBlock(new MangoTreeGrower(),BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
@@ -379,7 +385,7 @@ public class ModBlocks {
             .ignitedByLava()
             .dropsLike(DURIAN_HANGING_SIGN)
     ));
-    public static final Block MANGO_CABINET = register("mango_cabinet",new CabinetBlock(BlockBehaviour.Properties.copy(BARREL)));
+    public static final Block MANGO_CABINET = registerCabinet("mango_cabinet");
 
     //Feast
     public static final Block SOMTAM_FEAST = register("somtam_feast",new FeastBlock(FabricBlockSettings.copyOf(Blocks.CAKE),() -> ModItems.SOMTAM,true){
@@ -443,6 +449,11 @@ public class ModBlocks {
     public static final Block DURIAN_CAKE = register("durian_cake",new PieBlock(BlockBehaviour.Properties.copy(CAKE),() -> ModItems.DURIAN_CAKE_SLICE));
     public static final Block MANGO_PUDDING = register("mango_pudding",new PieBlock(BlockBehaviour.Properties.copy(CAKE),() -> ModItems.MANGO_PUDDING_SLICE));
 
+    public static final Block PHAT_KAPHRAO_FEAST = register("phat_kaphrao_feast",new FeastBlock(BlockBehaviour.Properties.copy(CAKE),() -> ModItems.PHAT_KAPHRAO,true));
+    public static final Block MANGO_STICKY_RICE_FEAST = register("mango_sticky_rice_feast",new FeastBlock(BlockBehaviour.Properties.copy(CAKE),() -> ModItems.MANGO_STICKY_RICE,true));
+    public static final Block BASIL_OMELETTE_FEAST = register("basil_omelette",new FeastBlock(BlockBehaviour.Properties.copy(CAKE),() -> ModItems.BASIL_OMELETTE,true));
+
+
     //public static final Block SAUCE_BOWL = register("sauce_bowl",new SauceBowlBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BROWN)));
 
     //public static final BlockEntityType<SauceBowlBlockEntity> SAUCE_BOWL_BLOCK_ENTITY = Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE,ThaiDelight.modid("sauce_bowl"), FabricBlockEntityTypeBuilder.create(SauceBowlBlockEntity::new,ModBlocks.SAUCE_BOWL).build());
@@ -451,7 +462,19 @@ public class ModBlocks {
         
     }
 
+    public static Block registerCabinet(String id){
+        Block registeredBlock = register(id,new CabinetBlock(BlockBehaviour.Properties.copy(BARREL)));
+        CABINET.add(registeredBlock);
+        return registeredBlock;
+    }
+
+    public static Block registerCrate(String id){
+        Block blockSupplier = register(id,new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).destroyTime(2.0f).explosionResistance(3.0f).sound(SoundType.WOOD)));
+        CRATES.add(blockSupplier);
+        return blockSupplier;
+    }
+
     public static Block register(String id, Block block){
-        return Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(ThaiDelight.MOD_ID,id), block);
+        return Registry.register(BuiltInRegistries.BLOCK, ThaiDelight.modid(id), block);
     }
 }

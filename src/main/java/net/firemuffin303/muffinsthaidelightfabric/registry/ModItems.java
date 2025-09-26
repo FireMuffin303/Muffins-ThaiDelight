@@ -34,7 +34,7 @@ public class ModItems {
     public static final ResourceKey<TerraformBoatType> COCONUT_BOAT_KEY = TerraformBoatTypeRegistry.createKey(ThaiDelight.modid("coconut_boat"));
     public static final ResourceKey<TerraformBoatType> MANGO_BOAT_KEY = TerraformBoatTypeRegistry.createKey(ThaiDelight.modid("mango_boat"));
 
-    public static final ArrayList<Item> ITEMS = new ArrayList<>();
+    public static final ArrayList<Item> FLAT_ITEMS = new ArrayList<>();
 
     public static final Item MORTAR = register("mortar",new BlockItem(ModBlocks.MORTAR,new Item.Properties()));
 
@@ -48,34 +48,35 @@ public class ModItems {
     public static final Item COCONUT_CRATE = register("coconut_crate",new BlockItem(ModBlocks.COCONUT_CRATE,new Item.Properties()));
     public static final Item HOLY_BASIL_CRATE = register("holy_basil_crate",new BlockItem(ModBlocks.HOLY_BASIL_CRATE,new Item.Properties()));
     public static final Item BASIL_CRATE = register("basil_crate",new BlockItem(ModBlocks.BASIL_CRATE,new Item.Properties()));
+    public static final Item BAMBOO_SHOOT_CRATE = register("bamboo_shoot_crate",new BlockItem(ModBlocks.BAMBOO_SHOOT_CRATE,new Item.Properties()));
 
     //Crab
     public static final Item CRAB_SPAWN_EGG = register("flower_crab_spawn_egg",new SpawnEggItem(ModEntityTypes.FLOWER_CRAB,0x93a064,0xac3247,new Item.Properties()));
-    public static final Item CRAB_EGG = register("flower_crab_egg", new BlockItem(ModBlocks.CRAB_EGG,new Item.Properties()));
-    public static final Item CRAB_BUCKET = register("flower_crab_bucket",new MobBucketItem(ModEntityTypes.FLOWER_CRAB,Fluids.WATER,SoundEvents.BUCKET_EMPTY_FISH,new Item.Properties().stacksTo(1)));
-    public static final Item CRAB_MEAT = register("flower_crab",new Item(new Item.Properties().food(ModFood.CRAB)));
-    public static final Item COOKED_CRAB_MEAT = register("cooked_flower_crab",new Item(new Item.Properties().food(ModFood.COOKED_CRAB)));
+    public static final Item CRAB_EGG = registerFlatItem("flower_crab_egg", new BlockItem(ModBlocks.CRAB_EGG,new Item.Properties()));
+    public static final Item CRAB_BUCKET = registerFlatItem("flower_crab_bucket",new MobBucketItem(ModEntityTypes.FLOWER_CRAB,Fluids.WATER,SoundEvents.BUCKET_EMPTY_FISH,new Item.Properties().stacksTo(1)));
+    public static final Item CRAB_MEAT = registerFlatItem("flower_crab",new Item(new Item.Properties().food(ModFood.CRAB)));
+    public static final Item COOKED_CRAB_MEAT = registerFlatItem("cooked_flower_crab",new Item(new Item.Properties().food(ModFood.COOKED_CRAB)));
 
     //Dragonfly
     public static final Item DRAGONFLY_SPAWN_EGG = register("dragonfly_spawn_egg",new SpawnEggItem(ModEntityTypes.DRAGONFLY,0x181d13,0x246011,new Item.Properties()));
-    public static final Item DRAGONFLY = register("dragonfly",new Item(new Item.Properties().food(ModFood.DRAGONFLY)));
+    public static final Item DRAGONFLY = registerFlatItem("dragonfly",new Item(new Item.Properties().food(ModFood.DRAGONFLY)));
     public static final Item DRAGONFLY_BOTTLE = register("dragonfly_bottle",new DragonflyBottleItem(new Item.Properties().stacksTo(1)));
-    public static final Item COOKED_DRAGONFLY = register("cooked_dragonfly",new Item(new Item.Properties().food(ModFood.COOKED_DRAGONFLY)));
+    public static final Item COOKED_DRAGONFLY = registerFlatItem("cooked_dragonfly",new Item(new Item.Properties().food(ModFood.COOKED_DRAGONFLY)));
 
     //Buffalo
     //public static final Item BUFFALO_SPAWN_EGG = register("buffalo_spawn_egg",new SpawnEggItem(ModEntityTypes.BUFFALO,0x343639,0x444444,new Item.Properties()));
 
     //Bucket
-    public static final Item FISH_SAUCE_BOTTLE = register("fish_sauce_bottle",new DrinkableItem(drinkItem().food(ModFood.FISH_SAUCE),true,false)) ;
-    public static final Item FERMENTED_FISH = register("fermented_fish",new ConsumableItem(bowlFoodItem(ModFood.FERMENTED_FISH),true,false));
-    public static final Item PAPAYA_JUICE = register("papaya_juice",new DrinkableItem(drinkItem().food(ModFood.PAPAYA_JUICE),false,true){
+    public static final Item FISH_SAUCE_BOTTLE = registerFlatItem("fish_sauce_bottle",new DrinkableItem(drinkItem().food(ModFood.FISH_SAUCE),true,false)) ;
+    public static final Item FERMENTED_FISH = registerFlatItem("fermented_fish",new ConsumableItem(bowlFoodItem(ModFood.FERMENTED_FISH),true,false));
+    public static final Item PAPAYA_JUICE = registerFlatItem("papaya_juice",new DrinkableItem(drinkItem().food(ModFood.PAPAYA_JUICE),false,true){
         @Override
         public void affectConsumer(ItemStack stack, Level level, LivingEntity consumer) {
             super.affectConsumer(stack, level, consumer);
             consumer.removeEffect(MobEffects.HUNGER);
         }
     });
-    public static final Item LIME_JUICE = register("lime_juice",new DrinkableItem(drinkItem().food(ModFood.LIME_JUICE),false,true){
+    public static final Item LIME_JUICE = registerFlatItem("lime_juice",new DrinkableItem(drinkItem().food(ModFood.LIME_JUICE),false,true){
         @Override
         public void affectConsumer(ItemStack stack, Level level, LivingEntity consumer) {
             super.affectConsumer(stack, level, consumer);
@@ -83,7 +84,7 @@ public class ModItems {
         }
     });
 
-    public static final Item COCONUT_WATER = register("coconut_water",new DrinkableItem(drinkItem().food(ModFood.COCONUT_WATER),false,true){
+    public static final Item COCONUT_WATER = registerFlatItem("coconut_water",new DrinkableItem(drinkItem().food(ModFood.COCONUT_WATER),false,true){
         @Override
         public void affectConsumer(ItemStack stack, Level level, LivingEntity consumer) {
             super.affectConsumer(stack, level, consumer);
@@ -94,13 +95,12 @@ public class ModItems {
     //Crops
     //------------- Lime ---------------
     public static final Item LIME_SAPLING = register("lime_sapling",new BlockItem(ModBlocks.LIME_SAPLING,new Item.Properties()));
-    public static final Item LIME = register("lime",new Item(new Item.Properties().food(ModFood.LIME)));
-    public static final Item SLICED_LIME = register("lime_slice",new Item(new Item.Properties().food(ModFood.LIME_SLICE)));
-    public static final Item LIME_LEAVES = register("lime_leaves",new BlockItem(ModBlocks.LIME_LEAVES,new Item.Properties()));
+    public static final Item LIME = registerFlatItem("lime",new Item(new Item.Properties().food(ModFood.LIME)));
+    public static final Item SLICED_LIME = registerFlatItem("lime_slice",new Item(new Item.Properties().food(ModFood.LIME_SLICE)));
 
     public static final Item WILD_PEPPER_CROP = register("wild_pepper",new BlockItem(ModBlocks.WILD_PEPPER_CROP,new Item.Properties()));
-    public static final Item PEPPER = register("pepper",new Item(new Item.Properties().food(ModFood.PEPPER)));
-    public static final Item PEPPER_SEED = register("pepper_seeds",new ItemNameBlockItem(ModBlocks.PEPPER_CROP,new Item.Properties()){
+    public static final Item PEPPER = registerFlatItem("pepper",new Item(new Item.Properties().food(ModFood.PEPPER)));
+    public static final Item PEPPER_SEED = registerFlatItem("pepper_seeds",new ItemNameBlockItem(ModBlocks.PEPPER_CROP,new Item.Properties()){
         @Override
         public void registerBlocks(Map<Block, Item> map, Item item) {
             super.registerBlocks(map, item);
@@ -113,7 +113,7 @@ public class ModItems {
     public static final Item DURIAN_LEAVES = register("durian_leaves",new BlockItem(ModBlocks.DURIAN_LEAVES,new Item.Properties()));
     public static final Item DURIAN_FLOWER = register("durian_flower",new BlockItem(ModBlocks.DURIAN_FLOWER,new Item.Properties()));
     public static final Item DURIAN = register("durian_block",new BlockItem(ModBlocks.DURIAN_BLOCK,new Item.Properties()));
-    public static final Item DURIAN_PULP = register("durian_pulp",new Item(new Item.Properties().food(ModFood.DURIAN_PULP)));
+    public static final Item DURIAN_PULP = registerFlatItem("durian_pulp",new Item(new Item.Properties().food(ModFood.DURIAN_PULP)));
     //Durian Woodset item
     public static final Item DURIAN_LOG = register("durian_log",new BlockItem(ModBlocks.DURIAN_LOG,new Item.Properties()));
     public static final Item DURIAN_WOOD = register("durian_wood",new BlockItem(ModBlocks.DURIAN_WOOD,new Item.Properties()));
@@ -158,7 +158,7 @@ public class ModItems {
     public static final Item COCONUT_BOAT = TerraformBoatItemHelper.registerBoatItem(ThaiDelight.modid("coconut_boat"),COCONUT_BOAT_KEY,false);
     public static final Item COCONUT_CHEST_BOAT = TerraformBoatItemHelper.registerBoatItem(ThaiDelight.modid("coconut_chest_boat"),COCONUT_BOAT_KEY,true);
 
-    public static final Item COCONUT = register("coconut",new Item(new Item.Properties()));
+    public static final Item COCONUT = registerFlatItem("coconut",new Item(new Item.Properties()));
 
 
     //------------------ 🥭 MANGO 🥭 --------------------
@@ -184,21 +184,21 @@ public class ModItems {
     public static final Item MANGO_BOAT = TerraformBoatItemHelper.registerBoatItem(ThaiDelight.modid("mango_boat"),MANGO_BOAT_KEY,false);
     public static final Item MANGO_CHEST_BOAT = TerraformBoatItemHelper.registerBoatItem(ThaiDelight.modid("mango_chest_boat"),MANGO_BOAT_KEY,true);
 
-    public static final Item MANGO = register("mango",new Item(new Item.Properties()));
-    public static final Item MANGO_SLICE = register("mango_slice",new Item(new Item.Properties()));
+    public static final Item MANGO = registerFlatItem("mango",new Item(new Item.Properties()));
+    public static final Item MANGO_SLICE = registerFlatItem("mango_slice",new Item(new Item.Properties()));
 
     //----- 🍐 Papaya 🍐 -----------------------------------
-    public static final Item PAPAYA = register("papaya",new Item(new Item.Properties().food(ModFood.PAPAYA)));
-    public static final Item SLICED_PAPAYA = register("papaya_slice",new Item(new Item.Properties().food(ModFood.SLICED_PAPAYA)));
-    public static final Item RAW_PAPAYA = register("raw_papaya",new Item(new Item.Properties().food(ModFood.RAW_PAPAYA)));
-    public static final Item RAW_PAPAYA_SLICE = register("raw_papaya_slice",new Item(new Item.Properties().food(ModFood.SLICED_UNRIPE_PAPAYA)));
+    public static final Item PAPAYA = registerFlatItem("papaya",new Item(new Item.Properties().food(ModFood.PAPAYA)));
+    public static final Item SLICED_PAPAYA = registerFlatItem("papaya_slice",new Item(new Item.Properties().food(ModFood.SLICED_PAPAYA)));
+    public static final Item RAW_PAPAYA = registerFlatItem("raw_papaya",new Item(new Item.Properties().food(ModFood.RAW_PAPAYA)));
+    public static final Item RAW_PAPAYA_SLICE = registerFlatItem("raw_papaya_slice",new Item(new Item.Properties().food(ModFood.SLICED_UNRIPE_PAPAYA)));
     public static final Item PAPAYA_LOG = register("papaya_log",new BlockItem(ModBlocks.PAPAYA_LOG,new Item.Properties()));
     public static final Item STRIPPED_PAPAYA_LOG = register("stripped_papaya_log",new BlockItem(ModBlocks.STRIPPED_PAPAYA_LOG,new Item.Properties()));
     public static final Item PAPAYA_WOOD = register("papaya_wood",new BlockItem(ModBlocks.PAPAYA_WOOD,new Item.Properties()));
     public static final Item STRIPPED_PAPAYA_WOOD = register("stripped_papaya_wood",new BlockItem(ModBlocks.STRIPPED_PAPAYA_WOOD,new Item.Properties()));
     public static final Item PAPAYA_LEAVES = register("papaya_leaves",new BlockItem(ModBlocks.PAPAYA_LEAVES,new Item.Properties()));
     public static final Item PAPAYA_SAPLING = register("papaya_sapling",new BlockItem(ModBlocks.PAPAYA_SAPLING,new Item.Properties()));
-    public static final Item PAPAYA_SEEDS = register("papaya_seeds",new ItemNameBlockItem(ModBlocks.PAPAYA_CROP,new Item.Properties()){
+    public static final Item PAPAYA_SEEDS = registerFlatItem("papaya_seeds",new ItemNameBlockItem(ModBlocks.PAPAYA_CROP,new Item.Properties()){
         @Override
         public void registerBlocks(Map<Block, Item> map, Item item) {
             super.registerBlocks(map, item);
@@ -207,61 +207,73 @@ public class ModItems {
     });
 
     // 🌿 HOLY BASIL 🌿
-    public static final Item HOLY_BASIL_SAPLING = register("holy_basil_sapling",new ItemNameBlockItem(ModBlocks.HOLY_BASIL,new Item.Properties()){
+    public static final Item HOLY_BASIL_SAPLING = registerFlatItem("holy_basil_sapling",new ItemNameBlockItem(ModBlocks.HOLY_BASIL,new Item.Properties()){
         @Override
         public void registerBlocks(Map<Block, Item> map, Item item) {
             super.registerBlocks(map, item);
             map.put(ModBlocks.HOLY_BASIL,item);
         }
     });
-    public static final Item HOLY_BASIL = register("holy_basil",new Item(new Item.Properties()));
+    public static final Item HOLY_BASIL = registerFlatItem("holy_basil",new Item(new Item.Properties()));
 
     // 🌿 BASIL 🌿
-    public static final Item BASIL_SAPLING = register("basil_sapling",new ItemNameBlockItem(ModBlocks.BASIL,new Item.Properties()){
+    public static final Item BASIL_SAPLING = registerFlatItem("basil_sapling",new ItemNameBlockItem(ModBlocks.BASIL,new Item.Properties()){
         @Override
         public void registerBlocks(Map<Block, Item> map, Item item) {
             super.registerBlocks(map, item);
             map.put(ModBlocks.BASIL,item);
         }
     });
-    public static final Item BASIL = register("basil",new Item(new Item.Properties()));
+    public static final Item BASIL = registerFlatItem("basil",new Item(new Item.Properties()));
 
-    public static final Item BAMBOO_SHOOT = register("bamboo_shoot",new Item(new Item.Properties()));
+    public static final Item BAMBOO_SHOOT = registerFlatItem("bamboo_shoot",new Item(new Item.Properties()));
 
     //--- 🍔 Food 🍔---
-    public static final Item SOMTAM_FEAST = register("somtam_feast",new BlockItem(ModBlocks.SOMTAM_FEAST,new Item.Properties()));
-    public static final Item SOMTAM = register("somtam",new ConsumableItem(bowlFoodItem(ModFood.SOMTAM)));
+    public static final Item SOMTAM_FEAST = registerFlatItem("somtam_feast",new BlockItem(ModBlocks.SOMTAM_FEAST,new Item.Properties()));
+    public static final Item SOMTAM = registerFlatItem("somtam",new ConsumableItem(bowlFoodItem(ModFood.SOMTAM)));
 
-    public static final Item LARB_FEAST = register("larb_feast",new BlockItem(ModBlocks.LARB_FEAST,new Item.Properties()));
-    public static final Item LARB = register("larb",new ConsumableItem(bowlFoodItem(ModFood.LARB)));
+    public static final Item LARB_FEAST = registerFlatItem("larb_feast",new BlockItem(ModBlocks.LARB_FEAST,new Item.Properties()));
+    public static final Item LARB = registerFlatItem("larb",new ConsumableItem(bowlFoodItem(ModFood.LARB)));
 
-    public static final Item CRAB_FRIED_RICE_FEAST = register("crab_fried_rice_feast",new BlockItem(ModBlocks.CRAB_FRIED_RICE_FEAST,new Item.Properties()));
-    public static final Item CRAB_FRIED_RICE = register("crab_fried_rice",new ConsumableItem(bowlFoodItem(ModFood.CRAB_FRIED_RICE)));
+    public static final Item CRAB_FRIED_RICE_FEAST = registerFlatItem("crab_fried_rice_feast",new BlockItem(ModBlocks.CRAB_FRIED_RICE_FEAST,new Item.Properties()));
+    public static final Item CRAB_FRIED_RICE = registerFlatItem("crab_fried_rice",new ConsumableItem(bowlFoodItem(ModFood.CRAB_FRIED_RICE)));
 
-    public static final Item STIR_FRIED_NOODLE = register("stir_fried_noodle",new ConsumableItem(bowlFoodItem(ModFood.STIR_FRIED_NOODLE)));
+    public static final Item STIR_FRIED_NOODLE = registerFlatItem("stir_fried_noodle",new ConsumableItem(bowlFoodItem(ModFood.STIR_FRIED_NOODLE)));
 
-    public static final Item FRIED_DURIAN = register("fried_durian",new Item(new Item.Properties().food(ModFood.FRIED_DURIAN)));
-    public static final Item COCONUT_MILK_BOTTLE = register("coconut_milk_bottle",new Item(new Item.Properties()));
-    public static final Item COCONUT_SLICE = register("coconut_slice",new ConsumableItem(new Item.Properties().craftRemainder(Items.BOWL).food(ModFood.COCONUT_MEAT)));
-    public static final Item PHAT_KAPHRAO = register("phat_kaphrao", new ConsumableItem(bowlFoodItem(ModFood.PHAT_KAPHRAO)));
+    public static final Item FRIED_DURIAN = registerFlatItem("fried_durian",new Item(new Item.Properties().food(ModFood.FRIED_DURIAN)));
+    public static final Item COCONUT_MILK_BOTTLE = registerFlatItem("coconut_milk_bottle",new Item(new Item.Properties()));
+    public static final Item COCONUT_SLICE = registerFlatItem("coconut_slice",new ConsumableItem(new Item.Properties().craftRemainder(Items.BOWL).food(ModFood.COCONUT_MEAT)));
 
-    public static final Item DURIAN_CURRY = register("durian_curry",new ConsumableItem(bowlFoodItem(ModFood.DURIAN_CURRY)));
-    public static final Item DURIAN_CAKE = register("durian_cake",new BlockItem(ModBlocks.DURIAN_CAKE,new Item.Properties()));
-    public static final Item DURIAN_CAKE_SLICE = register("durian_cake_slice",new Item(new Item.Properties().food(ModFood.MANGO_PIE)));
+    public static final Item PHAT_KAPHRAO_FEAST = registerFlatItem("phat_kaphrao_feast",new BlockItem(ModBlocks.PHAT_KAPHRAO_FEAST,new Item.Properties()));
+    public static final Item PHAT_KAPHRAO = registerFlatItem("phat_kaphrao", new ConsumableItem(bowlFoodItem(ModFood.PHAT_KAPHRAO)));
 
-    public static final Item MANGO_STICKY_RICE = register("mango_sticky_rice",new ConsumableItem(bowlFoodItem(ModFood.MANGO_STICKY_RICE)));
-    public static final Item MANGO_PUDDING = register("mango_pudding",new BlockItem(ModBlocks.MANGO_PUDDING,new Item.Properties()));
-    public static final Item MANGO_PUDDING_SLICE = register("mango_pudding_slice",new Item(new Item.Properties().food(ModFood.MANGO_PIE)));
+    public static final Item DURIAN_CURRY = registerFlatItem("durian_curry",new ConsumableItem(bowlFoodItem(ModFood.DURIAN_CURRY)));
+    public static final Item DURIAN_CAKE = registerFlatItem("durian_cake",new BlockItem(ModBlocks.DURIAN_CAKE,new Item.Properties()));
+    public static final Item DURIAN_CAKE_SLICE = registerFlatItem("durian_cake_slice",new Item(new Item.Properties().food(ModFood.MANGO_PIE)));
 
-    public static final Item COCONUT_JELLY = register("coconut_jelly",new Item(new Item.Properties().food(ModFood.MANGO_PIE)));
-    public static final Item KHANOM_BABIN = register("khanom_babin",new Item(new Item.Properties().food(ModFood.MANGO_PIE)));
-    public static final Item COCONUT_PIE = register("coconut_pie",new BlockItem(ModBlocks.MANGO_PUDDING,new Item.Properties()));
-    public static final Item COCONUT_PIE_SLICE = register("coconut_pie_slice",new Item(new Item.Properties().food(ModFood.MANGO_PIE)));
+    public static final Item MANGO_STICKY_RICE_FEAST = registerFlatItem("mango_sticky_rice_feast",new BlockItem(ModBlocks.MANGO_STICKY_RICE_FEAST,new Item.Properties()));
+    public static final Item MANGO_STICKY_RICE = registerFlatItem("mango_sticky_rice",new ConsumableItem(bowlFoodItem(ModFood.MANGO_STICKY_RICE)));
+    public static final Item MANGO_PUDDING = registerFlatItem("mango_pudding",new BlockItem(ModBlocks.MANGO_PUDDING,new Item.Properties()));
+    public static final Item MANGO_PUDDING_SLICE = registerFlatItem("mango_pudding_slice",new Item(new Item.Properties().food(ModFood.MANGO_PIE)));
 
-    public static final Item BASIL_OMELETTE = register("basil_omelette",new Item(new Item.Properties()));
+    public static final Item COCONUT_JELLY = registerFlatItem("coconut_jelly",new Item(new Item.Properties().food(ModFood.MANGO_PIE)));
+    public static final Item KHANOM_BABIN = registerFlatItem("khanom_babin",new Item(new Item.Properties().food(ModFood.MANGO_PIE)));
+    public static final Item COCONUT_PIE = registerFlatItem("coconut_pie",new BlockItem(ModBlocks.MANGO_PUDDING,new Item.Properties()));
+    public static final Item COCONUT_PIE_SLICE = registerFlatItem("coconut_pie_slice",new Item(new Item.Properties().food(ModFood.MANGO_PIE)));
+
+    public static final Item BASIL_OMELETTE_FEAST = registerFlatItem("basil_omelette_feast",new BlockItem(ModBlocks.BASIL_OMELETTE_FEAST,new Item.Properties()));
+    public static final Item BASIL_OMELETTE = registerFlatItem("basil_omelette",new Item(new Item.Properties()));
+
+    public static final Item BAMBOO_SHOOT_SOUP = registerFlatItem("bamboo_shoot_soup",new Item(new Item.Properties()));
+    public static final Item STEAMED_BAMBOO_SHOOT = registerFlatItem("steamed_bamboo_shoot",new Item(new Item.Properties()));
+
+    public static Item registerFlatItem(String id,Item item){
+        Item registeredItem = register(id,item);
+        FLAT_ITEMS.add(registeredItem);
+        return registeredItem;
+    }
 
     public static Item register(String id,Item item){
-        ITEMS.add(item);
         return Registry.register(BuiltInRegistries.ITEM,new ResourceLocation(ThaiDelight.MOD_ID,id),item);
     }
 
