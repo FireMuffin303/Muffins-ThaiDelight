@@ -452,7 +452,7 @@ public class ModBlocks {
     public static final Block PHAT_KAPHRAO_FEAST = register("phat_kaphrao_feast",new FeastBlock(BlockBehaviour.Properties.copy(CAKE),() -> ModItems.PHAT_KAPHRAO,true));
     public static final Block MANGO_STICKY_RICE_FEAST = register("mango_sticky_rice_feast",new FeastBlock(BlockBehaviour.Properties.copy(CAKE),() -> ModItems.MANGO_STICKY_RICE,true));
     public static final Block BASIL_OMELETTE_FEAST = register("basil_omelette",new FeastBlock(BlockBehaviour.Properties.copy(CAKE),() -> ModItems.BASIL_OMELETTE,true));
-
+    public static final Block PINEAPPLE_FRIED_RICE_FEAST = register("pineapple_fried_rice_feast",new FeastBlock(BlockBehaviour.Properties.copy(CAKE),() -> ModItems.PINEAPPLE_FRIED_RICE,true));
 
     //public static final Block SAUCE_BOWL = register("sauce_bowl",new SauceBowlBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BROWN)));
 

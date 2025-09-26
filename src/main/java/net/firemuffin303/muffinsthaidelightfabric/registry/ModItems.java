@@ -247,6 +247,9 @@ public class ModItems {
     public static final Item PHAT_KAPHRAO_FEAST = registerFlatItem("phat_kaphrao_feast",new BlockItem(ModBlocks.PHAT_KAPHRAO_FEAST,new Item.Properties()));
     public static final Item PHAT_KAPHRAO = registerFlatItem("phat_kaphrao", new ConsumableItem(bowlFoodItem(ModFood.PHAT_KAPHRAO)));
 
+    public static final Item PINEAPPLE_FRIED_RICE_FEAST = registerFlatItem("pineapple_fried_rice_feast",new BlockItem(ModBlocks.PINEAPPLE_FRIED_RICE_FEAST,new Item.Properties()));
+    public static final Item PINEAPPLE_FRIED_RICE = registerFlatItem("pineapple_fried_rice",new Item(new Item.Properties()));
+
     public static final Item DURIAN_CURRY = registerFlatItem("durian_curry",new ConsumableItem(bowlFoodItem(ModFood.DURIAN_CURRY)));
     public static final Item DURIAN_CAKE = registerFlatItem("durian_cake",new BlockItem(ModBlocks.DURIAN_CAKE,new Item.Properties()));
     public static final Item DURIAN_CAKE_SLICE = registerFlatItem("durian_cake_slice",new Item(new Item.Properties().food(ModFood.MANGO_PIE)));
@@ -266,6 +269,10 @@ public class ModItems {
 
     public static final Item BAMBOO_SHOOT_SOUP = registerFlatItem("bamboo_shoot_soup",new Item(new Item.Properties()));
     public static final Item STEAMED_BAMBOO_SHOOT = registerFlatItem("steamed_bamboo_shoot",new Item(new Item.Properties()));
+
+    public static final Item BANANA_IN_COCONUT_MILK = registerFlatItem("banana_in_coconut_milk",new Item(new Item.Properties()));
+
+
 
     public static Item registerFlatItem(String id,Item item){
         Item registeredItem = register(id,item);
