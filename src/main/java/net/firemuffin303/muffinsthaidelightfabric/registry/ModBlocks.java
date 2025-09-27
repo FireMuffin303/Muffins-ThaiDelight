@@ -10,6 +10,7 @@ import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.*;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.coconut.BundledCoconutLeafBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.coconut.CoconutLeafBlock;
+import net.firemuffin303.muffinsthaidelightfabric.common.block.coconut.CoconutLeafEndBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.DurianBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.DurianFlowerBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.DurianLeaveBlock;
@@ -25,6 +26,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.BlockGetter;
@@ -188,9 +190,25 @@ public class ModBlocks {
     public static final Block DURIAN_CABINET = registerCabinet("durian_cabinet");
 
     //Coconut
-    public static final Block COCONUT_SAPLING = register("coconut_sapling",new SaplingBlock(new DurianTreeGrower(),BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
+    public static final Block COCONUT_SAPLING = register("coconut_sapling",new SaplingBlock(new DurianTreeGrower(),BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)){
+        @Override
+        public boolean mayPlaceOn(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
+            return super.mayPlaceOn(blockState, blockGetter, blockPos) || blockState.is(BlockTags.SAND);
+        }
+    });
     public static final Block POTTED_COCONUT_SAPLING = register("potted_coconut_sapling",Blocks.flowerPot(COCONUT_SAPLING));
-    public static final Block COCONUT_LEAF = register("coconut_leaf",new CoconutLeafBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES)));
+    public static final Block COCONUT_LEAF = register("coconut_leaf",new CoconutLeafBlock(BlockBehaviour.Properties.of()
+            .mapColor(MapColor.PLANT)
+            .strength(0.2F)
+            .sound(SoundType.GRASS)
+            .noOcclusion()
+            .isValidSpawn(Blocks::ocelotOrParrot)
+            .isSuffocating(Blocks::never)
+            .isViewBlocking(Blocks::never)
+            .ignitedByLava()
+            .pushReaction(PushReaction.DESTROY)
+            .isRedstoneConductor(Blocks::never)));
+    public static final Block COCONUT_LEAF_END = register("coconut_leaf_end",new CoconutLeafEndBlock(BlockBehaviour.Properties.copy(COCONUT_LEAF).dropsLike(ModBlocks.COCONUT_LEAF)));
     public static final Block COCONUT_LEAF_BLOCK = register("coconut_leaf_block",new BundledCoconutLeafBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GREEN).strength(0.5F, 2.5F).sound(SoundType.GRASS)));
 
     public static final Block COCONUT_LOG = register("coconut_log",Blocks.log(MapColor.COLOR_BROWN,MapColor.COLOR_YELLOW));

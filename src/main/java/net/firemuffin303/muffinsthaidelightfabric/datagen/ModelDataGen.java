@@ -27,11 +27,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
-import vectorwing.farmersdelight.common.block.CabinetBlock;
 
 import java.util.Optional;
-import java.util.function.Supplier;
-import java.util.function.UnaryOperator;
 
 import static net.minecraft.data.models.BlockModelGenerators.*;
 import static net.minecraft.data.models.model.TextureMapping.getBlockTexture;
@@ -154,16 +151,19 @@ public class ModelDataGen extends FabricModelProvider {
 
         blockStateModelGenerator.blockStateOutput.accept(
                 MultiVariantGenerator.multiVariant(ModBlocks.COCONUT_LEAF)
-                        .with(PropertyDispatch.property(CoconutLeafBlock.END)
-                                .select(false,Variant.variant()
-                                        .with(VariantProperties.MODEL, BuiltInRegistries.BLOCK.getKey(ModBlocks.COCONUT_LEAF).withPrefix("block/coconut/"))
-                                )
-                                .select(true,Variant.variant()
-                                        .with(VariantProperties.MODEL,BuiltInRegistries.BLOCK.getKey(ModBlocks.COCONUT_LEAF).withPrefix("block/coconut/").withSuffix("_end"))
-                                )
-                        )
+                        .with(createBooleanModelDispatch(CoconutLeafBlock.COCONUT,
+                                BuiltInRegistries.BLOCK.getKey(ModBlocks.COCONUT_LEAF).withPrefix("block/coconut/").withSuffix("_end"),
+                                BuiltInRegistries.BLOCK.getKey(ModBlocks.COCONUT_LEAF).withPrefix("block/coconut/")
+                                ))
                         .with(createHorizontalFacingDispatch())
         );
+
+        blockStateModelGenerator.blockStateOutput.accept(
+                MultiVariantGenerator.multiVariant(ModBlocks.COCONUT_LEAF_END,
+                                Variant.variant().with(VariantProperties.MODEL,BuiltInRegistries.BLOCK.getKey(ModBlocks.COCONUT_LEAF).withPrefix("block/coconut/").withSuffix("_end")))
+                        .with(createHorizontalFacingDispatch())
+        );
+
         blockStateModelGenerator.family(ModBlocks.COCONUT_PLANKS).generateFor(COCONUT_PLANKS);
 
         blockStateModelGenerator.woodProvider(ModBlocks.MANGO_LOG).logWithHorizontal(ModBlocks.MANGO_LOG).wood(ModBlocks.MANGO_WOOD);

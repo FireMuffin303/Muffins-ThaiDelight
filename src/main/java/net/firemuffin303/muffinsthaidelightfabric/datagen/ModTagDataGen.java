@@ -1,5 +1,6 @@
 package net.firemuffin303.muffinsthaidelightfabric.datagen;
 
+import com.terraformersmc.modmenu.util.mod.Mod;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
@@ -163,7 +164,9 @@ public class ModTagDataGen {
             getOrCreateTagBuilder(BlockTags.LEAVES)
                     .add(
                             ModBlocks.PAPAYA_LEAVES,
-                            ModBlocks.DURIAN_LEAVES
+                            ModBlocks.DURIAN_LEAVES,
+                            ModBlocks.COCONUT_LEAF,
+                            ModBlocks.COCONUT_LEAF_END
                     );
 
             getOrCreateTagBuilder(ModTags.PAPAYA_LOGS)

@@ -248,6 +248,8 @@ public class ThaiDelight implements ModInitializer {
         BiomeModifications.addFeature(context -> BiomeSelectors.tag(ModTagDataGen.ModBiomeTagDataGen.MANGO_TREE_BIOMES).test(context),
                 GenerationStep.Decoration.VEGETAL_DECORATION,ModFeatures.TREES_MANGO);
 
+        BiomeModifications.addFeature(context -> BiomeSelectors.includeByKey(Biomes.BEACH).test(context), GenerationStep.Decoration.VEGETAL_DECORATION,ModFeatures.TREES_COCONUT);
+
         ServerLifecycleEvents.SERVER_STARTING.register(minecraftServer -> {
             addToStructurePool(minecraftServer,
                     new ResourceLocation("minecraft","village/plains/houses"),

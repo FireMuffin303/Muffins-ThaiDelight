@@ -18,6 +18,7 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluids;
 import vectorwing.farmersdelight.common.item.ConsumableItem;
 import vectorwing.farmersdelight.common.item.DrinkableItem;
@@ -136,7 +137,7 @@ public class ModItems {
 
     //------------------ 🥥 COCONUT 🥥 ------------------
     public static final Item COCONUT_SAPLING = register("coconut_sapling",new BlockItem(ModBlocks.COCONUT_SAPLING,new Item.Properties()));
-    public static final Item COCONUT_LEAF = register("coconut_leaf",new BlockItem(ModBlocks.COCONUT_LEAF,new Item.Properties()));
+    public static final Item COCONUT_LEAF = register("coconut_leaf",new BlockItem(ModBlocks.COCONUT_LEAF_END,new Item.Properties()));
     public static final Item COCONUT_LEAF_BLOCK = register("coconut_leaf_block",new BlockItem(ModBlocks.COCONUT_LEAF_BLOCK,new Item.Properties()));
     //COCONUT Woodset item
     public static final Item COCONUT_LOG = register("coconut_log",new BlockItem(ModBlocks.COCONUT_LOG,new Item.Properties()));
@@ -226,7 +227,7 @@ public class ModItems {
     });
     public static final Item BASIL = registerFlatItem("basil",new Item(new Item.Properties()));
 
-    public static final Item BAMBOO_SHOOT = registerFlatItem("bamboo_shoot",new Item(new Item.Properties()));
+    public static final Item BAMBOO_SHOOT = registerFlatItem("bamboo_shoot",new ItemNameBlockItem(Blocks.BAMBOO_SAPLING,new Item.Properties()));
 
     //--- 🍔 Food 🍔---
     public static final Item SOMTAM_FEAST = registerFlatItem("somtam_feast",new BlockItem(ModBlocks.SOMTAM_FEAST,new Item.Properties()));
@@ -285,6 +286,7 @@ public class ModItems {
     }
 
     public static void init() {
+        Item.BY_BLOCK.put(ModBlocks.COCONUT_LEAF,ModItems.COCONUT_LEAF);
     }
 
 

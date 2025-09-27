@@ -1,32 +1,32 @@
 {
   "variants": {
-    "end=false,facing=east": {
+    "coconut=false,facing=east": {
       "model": "muffins_thaidelight:block/coconut/coconut_leaf",
       "y": 90
     },
-    "end=false,facing=north": {
+    "coconut=false,facing=north": {
       "model": "muffins_thaidelight:block/coconut/coconut_leaf"
     },
-    "end=false,facing=south": {
+    "coconut=false,facing=south": {
       "model": "muffins_thaidelight:block/coconut/coconut_leaf",
       "y": 180
     },
-    "end=false,facing=west": {
+    "coconut=false,facing=west": {
       "model": "muffins_thaidelight:block/coconut/coconut_leaf",
       "y": 270
     },
-    "end=true,facing=east": {
+    "coconut=true,facing=east": {
       "model": "muffins_thaidelight:block/coconut/coconut_leaf_end",
       "y": 90
     },
-    "end=true,facing=north": {
+    "coconut=true,facing=north": {
       "model": "muffins_thaidelight:block/coconut/coconut_leaf_end"
     },
-    "end=true,facing=south": {
+    "coconut=true,facing=south": {
       "model": "muffins_thaidelight:block/coconut/coconut_leaf_end",
       "y": 180
     },
-    "end=true,facing=west": {
+    "coconut=true,facing=west": {
       "model": "muffins_thaidelight:block/coconut/coconut_leaf_end",
       "y": 270
     }
