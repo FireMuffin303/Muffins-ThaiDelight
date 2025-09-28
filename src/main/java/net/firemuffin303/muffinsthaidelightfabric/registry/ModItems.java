@@ -187,7 +187,7 @@ public class ModItems {
     public static final Item MANGO_BOAT = TerraformBoatItemHelper.registerBoatItem(ThaiDelight.modid("mango_boat"),MANGO_BOAT_KEY,false);
     public static final Item MANGO_CHEST_BOAT = TerraformBoatItemHelper.registerBoatItem(ThaiDelight.modid("mango_chest_boat"),MANGO_BOAT_KEY,true);
 
-    public static final Item MANGO = registerFlatItem("mango",new Item(new Item.Properties()));
+    public static final Item MANGO = registerFlatItem("mango",new BlockItem(ModBlocks.STACKABLE_MANGO_BLOCK,new Item.Properties()));
     public static final Item MANGO_SLICE = registerFlatItem("mango_slice",new Item(new Item.Properties()));
 
     //----- 🍐 Papaya 🍐 -----------------------------------
@@ -355,7 +355,7 @@ public class ModItems {
         public static final FoodProperties MANGO_STICKY_RICE = new FoodProperties.Builder()
                 .nutrition(12)
                 .saturationMod(0.55F)
-                .effect(new MobEffectInstance(ModEffects.COMFORT.get(),5000,0),1.0f).build();
+                .effect(new MobEffectInstance(ModEffects.COMFORT.get(),9600,0),1.0f).build();
 
         public static final FoodProperties MANGO_PIE = new FoodProperties.Builder()
                 .nutrition(3)

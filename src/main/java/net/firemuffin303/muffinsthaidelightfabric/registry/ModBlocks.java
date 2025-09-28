@@ -14,7 +14,7 @@ import net.firemuffin303.muffinsthaidelightfabric.common.block.coconut.CoconutLe
 import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.HangingDurianBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.DurianFlowerBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.DurianLeaveBlock;
-import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.StackableDurianBlock;
+import net.firemuffin303.muffinsthaidelightfabric.common.block.StackableSmallBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.lime.*;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.mango.MangoBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.PapayaBlock;
@@ -34,7 +34,6 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
-import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
@@ -92,13 +91,11 @@ public class ModBlocks {
     public static final Block POTTED_DURIAN_SAPLING = register("potted_durian_sapling",Blocks.flowerPot(DURIAN_SAPLING));
     public static final Block DURIAN_FLOWER = register("durian_flower",new DurianFlowerBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).instabreak().noCollission().sound(SoundType.SPORE_BLOSSOM).pushReaction(PushReaction.DESTROY).randomTicks()));
 
-    public static final Block SMALL_DURIAN_BLOCK = register("small_durian_block",new StackableDurianBlock(
-            BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).strength(1.0F).sound(SoundType.WOOD).pushReaction(PushReaction.DESTROY),
-            IntegerProperty.create("small_durians",1,3),() -> ModItems.SMALL_DURIAN));
+    public static final Block SMALL_DURIAN_BLOCK = register("small_durian_block",new StackableSmallBlock(
+            BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).strength(1.0F).sound(SoundType.WOOD).pushReaction(PushReaction.DESTROY),() -> ModItems.SMALL_DURIAN));
 
-    public static final Block MEDIUM_DURIAN_BLOCK = register("medium_durian_block",new StackableDurianBlock(
-            BlockBehaviour.Properties.copy(SMALL_DURIAN_BLOCK),
-            IntegerProperty.create("medium_durians",1,2),() -> ModItems.MEDIUM_DURIAN));
+    public static final Block MEDIUM_DURIAN_BLOCK = register("medium_durian_block",new StackableMediumBlock(
+            BlockBehaviour.Properties.copy(SMALL_DURIAN_BLOCK),() -> ModItems.MEDIUM_DURIAN));
 
     public static final Block DURIAN_BLOCK = register("durian_block",new HangingDurianBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).strength(1.0F).sound(SoundType.WOOD).pushReaction(PushReaction.DESTROY).randomTicks()));
     public static final Block DURIAN_LEAVES = register("durian_leaves",new DurianLeaveBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES)));
@@ -317,6 +314,7 @@ public class ModBlocks {
     public static final Block MANGO_SAPLING = register("mango_sapling",new SaplingBlock(new MangoTreeGrower(),BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
     public static final Block POTTED_MANGO_SAPLING = register("potted_mango_sapling",Blocks.flowerPot(ModBlocks.MANGO_SAPLING));
     public static final Block MANGO_LEAVES = register("mango_leaves",new LeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES)));
+    public static final Block STACKABLE_MANGO_BLOCK = register("stackable_mango_block", new StackableSmallBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).strength(1.0F).sound(SoundType.WOOD).pushReaction(PushReaction.DESTROY),() -> ModItems.MANGO));
     public static final Block MANGO_BLOCK = register("mango_block",new MangoBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).strength(1.0F).sound(SoundType.WOOD).pushReaction(PushReaction.DESTROY).noOcclusion().instabreak().randomTicks()));
 
     public static final Block MANGO_LOG = register("mango_log", Blocks.log(MapColor.COLOR_BROWN,MapColor.COLOR_YELLOW));
