@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "muffins_thaidelight:block/butterfly_pea_wall",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "muffins_thaidelight:block/butterfly_pea_wall"
+    },
+    "facing=south": {
+      "model": "muffins_thaidelight:block/butterfly_pea_wall",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "muffins_thaidelight:block/butterfly_pea_wall",
+      "y": 270
+    }
+  }
+}

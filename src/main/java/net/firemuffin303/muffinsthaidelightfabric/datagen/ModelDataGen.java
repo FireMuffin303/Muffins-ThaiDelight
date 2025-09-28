@@ -11,6 +11,7 @@ import net.firemuffin303.muffinsthaidelightfabric.common.block.mango.MangoBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.PapayaLogBlock;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModItems;
+import net.minecraft.client.model.Model;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.BlockFamilies;
@@ -35,6 +36,7 @@ import static net.minecraft.data.models.model.TextureMapping.getBlockTexture;
 
 public class ModelDataGen extends FabricModelProvider {
     private static final TextureSlot FLOWER = TextureSlot.create("flower");
+    private static final TextureSlot VINE = TextureSlot.create("vine");
 
     private static final ModelTemplate PASTLE_3D = createModItem("pastle_3d_template", TextureSlot.LAYER0);
     private static final ModelTemplate SPAWN_EGG = createMincraftItem("template_spawn_egg");
@@ -47,7 +49,7 @@ public class ModelDataGen extends FabricModelProvider {
     public static  final  ModelTemplate HANGING_MANGO = new ModelTemplate(Optional.of(ThaiDelight.modid("block/template_hanging_mango")),Optional.empty(),TextureSlot.ALL);
     public static  final  ModelTemplate MANGO = new ModelTemplate(Optional.of(ThaiDelight.modid("block/template_mango")),Optional.empty(),TextureSlot.ALL);
 
-
+    private static final ModelTemplate WALL_FLOWER = new ModelTemplate(Optional.of(ThaiDelight.modid("block/template_wall_flower")),Optional.empty(),VINE,FLOWER);
 
     private static final BlockFamily DURIAN_PLANKS = BlockFamilies.familyBuilder(ModBlocks.DURIAN_PLANKS)
             .button(ModBlocks.DURIAN_BUTTON)
@@ -109,6 +111,14 @@ public class ModelDataGen extends FabricModelProvider {
 
         blockStateModelGenerator.blockStateOutput.accept(createSimpleBlock(ModBlocks.CRAB_EGG,ModelLocationUtils.getModelLocation(ModBlocks.CRAB_EGG)));
 
+
+        ResourceLocation butterfly_pea_model = WALL_FLOWER.create(ModBlocks.BUTTERFLY_PEA_WALL,new TextureMapping()
+                .put(VINE,ThaiDelight.modid("block/butterfly_pea/butterfly_pea_vine"))
+                .put(FLOWER,ThaiDelight.modid("block/butterfly_pea/butterfly_pea_flower")),blockStateModelGenerator.modelOutput);
+
+        blockStateModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.BUTTERFLY_PEA_WALL,
+                Variant.variant().with(VariantProperties.MODEL,butterfly_pea_model)
+        ).with(createHorizontalFacingDispatch()));
 
         blockStateModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.PAPAYA_LOG)
                 .with(PropertyDispatch.property(PapayaLogBlock.BOTTOM)
