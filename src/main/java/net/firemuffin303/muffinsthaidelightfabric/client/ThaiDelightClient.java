@@ -1,8 +1,8 @@
 package net.firemuffin303.muffinsthaidelightfabric.client;
 
-import com.terraformersmc.modmenu.util.mod.Mod;
 import com.terraformersmc.terraform.boat.api.client.TerraformBoatClientHelper;
 import com.terraformersmc.terraform.sign.SpriteIdentifierRegistry;
+import io.github.fabricators_of_create.porting_lib.recipe_book_categories.RecipeBookRegistry;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.*;
@@ -13,9 +13,13 @@ import net.firemuffin303.muffinsthaidelightfabric.common.block.FermentedFishCaul
 import net.firemuffin303.muffinsthaidelightfabric.common.entity.DragonflyEntity;
 import net.firemuffin303.muffinsthaidelightfabric.common.item.DragonflyBottleItem;
 import net.firemuffin303.muffinsthaidelightfabric.common.item.tooltipComponent.FlavorTooltipClient;
+import net.firemuffin303.muffinsthaidelightfabric.common.recipe.mortar.MortarRecipe;
+import net.firemuffin303.muffinsthaidelightfabric.common.recipe.mortar.MortarRecipeBookTab;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModItems;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModMenuType;
+import net.firemuffin303.muffinsthaidelightfabric.registry.ModRecipes;
+import net.minecraft.client.RecipeBookCategories;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.BiomeColors;
@@ -24,10 +28,13 @@ import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
 import net.minecraft.client.resources.model.Material;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.inventory.RecipeBookType;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.FoliageColor;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class ThaiDelightClient implements ClientModInitializer {
     private static final Block[] CUTOUT = {
@@ -54,6 +61,11 @@ public class ThaiDelightClient implements ClientModInitializer {
             ModBlocks.COCONUT_LEAF,
             ModBlocks.COCONUT_LEAF_END
     };
+
+    public static final RecipeBookType MORTAR_RECIPE_BOOK_TYPE = RecipeBookType.valueOf("MORTAR_RECIPE_BOOK_TYPE");
+    public static final RecipeBookCategories MORTAR_SEARCH = RecipeBookCategories.valueOf("MORTAR_SEARCH");
+    public static final RecipeBookCategories MORTAR_MEALS = RecipeBookCategories.valueOf("MORTAR_MEALS");
+    public static final RecipeBookCategories MORTAR_MISC = RecipeBookCategories.valueOf("MORTAR_MISC");
 
     @Override
     public void onInitializeClient() {
@@ -102,5 +114,23 @@ public class ThaiDelightClient implements ClientModInitializer {
             }
             return null;
         });
+
+        RecipeBookRegistry.registerBookCategories(ThaiDelightClient.MORTAR_RECIPE_BOOK_TYPE,
+                List.of(ThaiDelightClient.MORTAR_SEARCH,ThaiDelightClient.MORTAR_MEALS,ThaiDelightClient.MORTAR_MISC));
+        RecipeBookRegistry.registerAggregateCategory(ThaiDelightClient.MORTAR_SEARCH,List.of(ThaiDelightClient.MORTAR_MEALS,ThaiDelightClient.MORTAR_MISC));
+        RecipeBookRegistry.registerRecipeCategoryFinder(ModRecipes.MORTAR, recipe -> {
+            if(recipe instanceof MortarRecipe mortarRecipe){
+                MortarRecipeBookTab mortarRecipeBookTab = mortarRecipe.getRecipeBookTab();
+                if(mortarRecipeBookTab != null){
+                    return switch (mortarRecipeBookTab){
+                        case MEALS -> MORTAR_MEALS;
+                        case MISC -> MORTAR_MISC;
+                    };
+                }
+            }
+
+            return ThaiDelightClient.MORTAR_MISC;
+        });
+
     }
 }

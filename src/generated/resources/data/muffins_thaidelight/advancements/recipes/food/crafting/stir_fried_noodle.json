@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:crafting/stir_fried_noodle"
+        "recipe": "muffins_thaidelight:crafting/stir_fried_noodle"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:crafting/stir_fried_noodle"
+      "muffins_thaidelight:crafting/stir_fried_noodle"
     ]
   },
   "sends_telemetry_event": false

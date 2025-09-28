@@ -19,13 +19,15 @@ public class RegularMortarRecipe implements MortarRecipe{
     private final NonNullList<Ingredient> ingredients;
     private final ItemStack container;
     private final ItemStack result;
+    private MortarRecipeBookTab mortarRecipeBookTab;
 
-    public RegularMortarRecipe(ResourceLocation id, String group, NonNullList<Ingredient> ingredients,ItemStack container, ItemStack result) {
+    public RegularMortarRecipe(ResourceLocation id, String group, NonNullList<Ingredient> ingredients,ItemStack container, ItemStack result,MortarRecipeBookTab mortarRecipeBookTab) {
         this.id = id;
         this.group = group;
         this.ingredients = ingredients;
         this.container = container;
         this.result = result;
+        this.mortarRecipeBookTab = mortarRecipeBookTab;
     }
 
     @Override
@@ -84,5 +86,10 @@ public class RegularMortarRecipe implements MortarRecipe{
     @Override
     public RecipeSerializer<?> getSerializer() {
         return ModRecipes.ModSerializer.MORTAR_SERIALIZER;
+    }
+
+    @Override
+    public MortarRecipeBookTab getRecipeBookTab() {
+        return this.mortarRecipeBookTab;
     }
 }

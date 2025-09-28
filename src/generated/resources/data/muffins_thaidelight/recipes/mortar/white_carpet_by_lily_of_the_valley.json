@@ -5,6 +5,7 @@
       "item": "minecraft:lily_of_the_valley"
     }
   ],
+  "recipe_book_tab": "misc",
   "result": {
     "count": 2,
     "item": "minecraft:white_dye"

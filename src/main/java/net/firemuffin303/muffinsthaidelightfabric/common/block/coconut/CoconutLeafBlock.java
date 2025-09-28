@@ -1,6 +1,6 @@
 package net.firemuffin303.muffinsthaidelightfabric.common.block.coconut;
 
-import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.DurianBlock;
+import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.HangingDurianBlock;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
 import net.minecraft.BlockUtil;
 import net.minecraft.core.BlockPos;
@@ -31,7 +31,6 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
@@ -79,7 +78,7 @@ public class CoconutLeafBlock extends Block implements SimpleWaterloggedBlock,Bo
     }
 
     private void harvest(ServerLevel level, BlockPos blockPos, BlockState blockState, Entity entity) {
-        FallingBlockEntity fallingBlockEntity = FallingBlockEntity.fall(level, blockPos.below(), ModBlocks.DURIAN_BLOCK.defaultBlockState().setValue(DurianBlock.HANGING,false));
+        FallingBlockEntity fallingBlockEntity = FallingBlockEntity.fall(level, blockPos.below(), ModBlocks.DURIAN_BLOCK.defaultBlockState().setValue(HangingDurianBlock.HANGING,false));
         fallingBlockEntity.setHurtsEntities(0.2f,4);
         level.setBlock(blockPos,blockState.setValue(COCONUT,false),2);
     }

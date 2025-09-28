@@ -3,7 +3,7 @@ package net.firemuffin303.muffinsthaidelightfabric.datagen.loottable;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.BasilCropBlock;
-import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.DurianBlock;
+import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.HangingDurianBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.lime.LimePlantBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.PapayaBlock;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
@@ -82,7 +82,7 @@ public class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
         this.add(ModBlocks.DURIAN_BLOCK,LootTable.lootTable()
                 .withPool(LootPool.lootPool()
                         .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.DURIAN_BLOCK)
-                                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(DurianBlock.AGE,0))
+                                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(HangingDurianBlock.AGE,0))
                         ).add(LootItem.lootTableItem(ModItems.DURIAN_PULP))
                         .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))
                         .apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE))
@@ -90,7 +90,7 @@ public class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
                 )
                 .withPool(LootPool.lootPool()
                         .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.DURIAN_BLOCK)
-                                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(DurianBlock.AGE,1))
+                                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(HangingDurianBlock.AGE,1))
                         ).add(LootItem.lootTableItem(ModItems.DURIAN_PULP))
                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(1,2)))
                         .apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE))
@@ -98,7 +98,7 @@ public class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
                 )
                 .withPool(LootPool.lootPool()
                         .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.DURIAN_BLOCK)
-                                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(DurianBlock.AGE,2))
+                                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(HangingDurianBlock.AGE,2))
                         ).add(LootItem.lootTableItem(ModItems.DURIAN_PULP))
                         .apply(SetItemCountFunction.setCount(ConstantValue.exactly(2)))
                         .apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE))
@@ -109,7 +109,7 @@ public class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
         this.add(ModBlocks.MANGO_BLOCK,LootTable.lootTable()
                 .withPool(LootPool.lootPool()
                         .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.MANGO_BLOCK)
-                                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(DurianBlock.AGE,2))
+                                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(HangingDurianBlock.AGE,2))
                         ).add(LootItem.lootTableItem(ModItems.MANGO))
                         .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))
                 )

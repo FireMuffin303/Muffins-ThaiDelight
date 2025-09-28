@@ -3,7 +3,7 @@ package net.firemuffin303.muffinsthaidelightfabric.registry;
 import com.google.common.collect.ImmutableList;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
-import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.DurianBlock;
+import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.HangingDurianBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.mango.MangoBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.world.feature.*;
 import net.minecraft.core.*;
@@ -26,14 +26,12 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.*;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
-import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.RandomizedIntStateProvider;
 import net.minecraft.world.level.levelgen.feature.treedecorators.AttachedToLeavesDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.BeehiveDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
-import net.minecraft.world.level.levelgen.feature.trunkplacers.BendingTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
 import net.minecraft.world.level.levelgen.placement.*;
@@ -216,7 +214,7 @@ public class ModFeatures {
     private static TreeConfiguration.TreeConfigurationBuilder createDurianTree(List<TreeDecorator> treeDecorators) {
         List<TreeDecorator> decorators = new ArrayList<>();
         decorators.add(new AttachedToLeavesDecorator(0.15f,1,0,
-                BlockStateProvider.simple(ModBlocks.DURIAN_FLOWER.defaultBlockState().setValue(DurianBlock.HANGING,true)),
+                BlockStateProvider.simple(ModBlocks.DURIAN_FLOWER.defaultBlockState().setValue(HangingDurianBlock.HANGING,true)),
                 2,List.of(Direction.DOWN)));
 
         decorators.addAll(treeDecorators);

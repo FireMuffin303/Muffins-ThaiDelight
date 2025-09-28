@@ -17,6 +17,7 @@
       "item": "muffins_thaidelight:fermented_fish"
     }
   ],
+  "recipe_book_tab": "meals",
   "result": {
     "item": "muffins_thaidelight:somtam_feast"
   }

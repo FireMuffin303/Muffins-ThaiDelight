@@ -3,6 +3,8 @@ package net.firemuffin303.muffinsthaidelightfabric.datagen.builder;
 import com.google.common.collect.Lists;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
+import net.firemuffin303.muffinsthaidelightfabric.common.recipe.mortar.MortarRecipeBookTab;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModRecipes;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.CriterionTriggerInstance;
@@ -28,6 +30,8 @@ public class MortarRecipeBuilder implements RecipeBuilder {
     private Item container = Items.AIR;
     private final Item result;
     private final int count;
+    private String modid = ThaiDelight.MOD_ID;
+    private MortarRecipeBookTab mortarRecipeBookTab = MortarRecipeBookTab.MISC;
 
     private final Advancement.Builder advancement = Advancement.Builder.recipeAdvancement();
     @Nullable
@@ -56,6 +60,11 @@ public class MortarRecipeBuilder implements RecipeBuilder {
     @Override
     public RecipeBuilder group(@Nullable String string) {
         this.group = string;
+        return this;
+    }
+
+    public RecipeBuilder recipeTab(MortarRecipeBookTab mortarRecipeBookTab){
+        this.mortarRecipeBookTab = mortarRecipeBookTab;
         return this;
     }
 
@@ -100,8 +109,12 @@ public class MortarRecipeBuilder implements RecipeBuilder {
     @Override
     public void save(Consumer<FinishedRecipe> consumer, ResourceLocation resourceLocation) {
         this.ensureValid(resourceLocation);
-        this.advancement.parent(ROOT_RECIPE_ADVANCEMENT).addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(resourceLocation)).rewards(net.minecraft.advancements.AdvancementRewards.Builder.recipe(resourceLocation)).requirements(RequirementsStrategy.OR);
-        consumer.accept(new MortarRecipeBuilder.Result(resourceLocation,this.group, this.ingredients,this.container,this.result,this.count,this.advancement,resourceLocation.withPrefix("recipes/mortar/")));
+        this.advancement.parent(ROOT_RECIPE_ADVANCEMENT)
+                .addCriterion("has_the_recipe",
+                        RecipeUnlockedTrigger.unlocked(resourceLocation))
+                .rewards(net.minecraft.advancements.AdvancementRewards.Builder.recipe(resourceLocation))
+                .requirements(RequirementsStrategy.OR);
+        consumer.accept(new MortarRecipeBuilder.Result(resourceLocation,this.group, this.ingredients,this.container,this.result,this.count,this.mortarRecipeBookTab,this.advancement,resourceLocation.withPrefix("recipes/")));
     }
 
     private void ensureValid(ResourceLocation arg) {
@@ -117,11 +130,12 @@ public class MortarRecipeBuilder implements RecipeBuilder {
         private final Item container;
         private final Item result;
         private final int count;
+        private final MortarRecipeBookTab mortarRecipeBookTab;
         private final Advancement.Builder advancement;
         private final ResourceLocation advancementId;
 
 
-        public Result(ResourceLocation resourceLocation, String group, List<Ingredient> ingredients,Item container, Item itemStack, int count, Advancement.Builder builder,ResourceLocation advancementId){
+        public Result(ResourceLocation resourceLocation, String group, List<Ingredient> ingredients,Item container, Item itemStack, int count,MortarRecipeBookTab mortarRecipeBookTab, Advancement.Builder builder,ResourceLocation advancementId){
             this.id = resourceLocation;
             this.group = group;
             this.ingredients = ingredients;
@@ -130,6 +144,7 @@ public class MortarRecipeBuilder implements RecipeBuilder {
             this.count = count;
             this.advancement = builder;
             this.advancementId = advancementId;
+            this.mortarRecipeBookTab = mortarRecipeBookTab;
         }
 
         @Override
@@ -160,6 +175,8 @@ public class MortarRecipeBuilder implements RecipeBuilder {
             }
 
             jsonObject.add("result", jsonObject2);
+
+            jsonObject.addProperty("recipe_book_tab",this.mortarRecipeBookTab.name);
 
         }
 

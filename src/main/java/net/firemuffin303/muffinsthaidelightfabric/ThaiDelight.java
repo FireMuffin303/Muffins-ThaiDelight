@@ -4,6 +4,7 @@ import com.mojang.datafixers.util.Pair;
 import com.terraformersmc.terraform.boat.api.TerraformBoatType;
 import com.terraformersmc.terraform.boat.api.TerraformBoatTypeRegistry;
 import eu.midnightdust.lib.config.MidnightConfig;
+import io.github.fabricators_of_create.porting_lib.recipe_book_categories.RecipeBookRegistry;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
@@ -34,6 +35,7 @@ import net.firemuffin303.muffinsthaidelightfabric.mixin.loot.LootPoolBuilderAcce
 import net.firemuffin303.muffinsthaidelightfabric.mixin.loot.LootTableAccessor;
 import net.firemuffin303.muffinsthaidelightfabric.mixin.villager.VillagerAccessor;
 import net.firemuffin303.muffinsthaidelightfabric.registry.*;
+import net.minecraft.client.RecipeBookCategories;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -47,6 +49,7 @@ import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.world.entity.ai.goal.GoalSelector;
+import net.minecraft.world.inventory.RecipeBookType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -70,6 +73,7 @@ import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 
 import java.util.*;
 import java.util.stream.Stream;
@@ -80,6 +84,8 @@ public class ThaiDelight implements ModInitializer {
     public static final String TASTY_NBT = "Tasty";
 
     public static final ResourceLocation SPICY_PAYLOAD_ID = new ResourceLocation(MOD_ID,"spicypayload");
+
+
 
     public static final TerraformBoatType DURIAN = new TerraformBoatType.Builder()
             .item(ModItems.DURIAN_BOAT)
@@ -111,9 +117,11 @@ public class ThaiDelight implements ModInitializer {
         init();
         postInit();
 
+
+
         MidnightConfig.init(MOD_ID, ThaiDelightConfig.class);
 
-        ResourceManagerHelper.get(PackType.SERVER_DATA).registerReloadListener(new FlavorManager());
+        //ResourceManagerHelper.get(PackType.SERVER_DATA).registerReloadListener(new FlavorManager());
 
 
         ServerEntityEvents.ENTITY_LOAD.register((entity, serverLevel) -> {
@@ -398,6 +406,8 @@ public class ThaiDelight implements ModInitializer {
         output.accept(ModItems.DURIAN_SAPLING);
         output.accept(ModItems.DURIAN_LEAVES);
         output.accept(ModItems.DURIAN_FLOWER);
+        output.accept(ModItems.SMALL_DURIAN);
+        output.accept(ModItems.MEDIUM_DURIAN);
         output.accept(ModItems.DURIAN);
         output.accept(ModItems.DURIAN_PULP);
         output.accept(ModItems.DURIAN_LOG);

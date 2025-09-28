@@ -1,6 +1,5 @@
 package net.firemuffin303.muffinsthaidelightfabric.common.block.mango;
 
-import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.DurianBlock;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModItems;
 import net.minecraft.core.BlockPos;
@@ -37,7 +36,6 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class MangoBlock extends FallingBlock implements SimpleWaterloggedBlock, BonemealableBlock {

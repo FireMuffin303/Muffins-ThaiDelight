@@ -5,6 +5,7 @@
       "item": "minecraft:peony"
     }
   ],
+  "recipe_book_tab": "misc",
   "result": {
     "count": 3,
     "item": "minecraft:pink_dye"

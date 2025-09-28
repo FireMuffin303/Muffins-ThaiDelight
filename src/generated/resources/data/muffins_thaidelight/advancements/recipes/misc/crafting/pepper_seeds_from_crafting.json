@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:crafting/pepper_seeds_from_crafting"
+        "recipe": "muffins_thaidelight:crafting/pepper_seeds_from_crafting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:crafting/pepper_seeds_from_crafting"
+      "muffins_thaidelight:crafting/pepper_seeds_from_crafting"
     ]
   },
   "sends_telemetry_event": false

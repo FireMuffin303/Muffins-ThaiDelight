@@ -48,6 +48,7 @@ public class ModelDataGen extends FabricModelProvider {
     public static  final  ModelTemplate MANGO = new ModelTemplate(Optional.of(ThaiDelight.modid("block/template_mango")),Optional.empty(),TextureSlot.ALL);
 
 
+
     private static final BlockFamily DURIAN_PLANKS = BlockFamilies.familyBuilder(ModBlocks.DURIAN_PLANKS)
             .button(ModBlocks.DURIAN_BUTTON)
             .fence(ModBlocks.DURIAN_FENCE)
@@ -129,6 +130,8 @@ public class ModelDataGen extends FabricModelProvider {
                 )
                 .with(createRotatedPillar())
         );
+
+        blockStateModelGenerator.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(ModBlocks.MORTAR,ModelLocationUtils.getModelLocation(ModBlocks.MORTAR)).with(createHorizontalFacingDispatch()));
 
 
         ResourceLocation resourceLocation = ModelTemplates.CUBE_COLUMN.create(ModBlocks.COCONUT_LEAF_BLOCK, TextureMapping.logColumn(ModBlocks.COCONUT_LEAF_BLOCK), blockStateModelGenerator.modelOutput);

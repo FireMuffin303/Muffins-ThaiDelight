@@ -11,9 +11,10 @@ import net.firemuffin303.muffinsthaidelightfabric.common.block.*;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.coconut.BundledCoconutLeafBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.coconut.CoconutLeafBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.coconut.CoconutLeafEndBlock;
-import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.DurianBlock;
+import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.HangingDurianBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.DurianFlowerBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.DurianLeaveBlock;
+import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.StackableDurianBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.lime.*;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.mango.MangoBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.PapayaBlock;
@@ -25,16 +26,15 @@ import net.firemuffin303.muffinsthaidelightfabric.common.world.trees.PapayaTreeG
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
@@ -49,7 +49,6 @@ import vectorwing.farmersdelight.common.block.PieBlock;
 import vectorwing.farmersdelight.common.block.WildCropBlock;
 
 import java.util.ArrayList;
-import java.util.function.Supplier;
 
 import static net.minecraft.world.level.block.Blocks.*;
 
@@ -92,7 +91,16 @@ public class ModBlocks {
     public static final Block DURIAN_SAPLING = register("durian_sapling",new SaplingBlock(new DurianTreeGrower(), BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY)));
     public static final Block POTTED_DURIAN_SAPLING = register("potted_durian_sapling",Blocks.flowerPot(DURIAN_SAPLING));
     public static final Block DURIAN_FLOWER = register("durian_flower",new DurianFlowerBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).instabreak().noCollission().sound(SoundType.SPORE_BLOSSOM).pushReaction(PushReaction.DESTROY).randomTicks()));
-    public static final Block DURIAN_BLOCK = register("durian_block",new DurianBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).strength(1.0F).sound(SoundType.WOOD).pushReaction(PushReaction.DESTROY).randomTicks()));
+
+    public static final Block SMALL_DURIAN_BLOCK = register("small_durian_block",new StackableDurianBlock(
+            BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).strength(1.0F).sound(SoundType.WOOD).pushReaction(PushReaction.DESTROY),
+            IntegerProperty.create("small_durians",1,3),() -> ModItems.SMALL_DURIAN));
+
+    public static final Block MEDIUM_DURIAN_BLOCK = register("medium_durian_block",new StackableDurianBlock(
+            BlockBehaviour.Properties.copy(SMALL_DURIAN_BLOCK),
+            IntegerProperty.create("medium_durians",1,2),() -> ModItems.MEDIUM_DURIAN));
+
+    public static final Block DURIAN_BLOCK = register("durian_block",new HangingDurianBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).strength(1.0F).sound(SoundType.WOOD).pushReaction(PushReaction.DESTROY).randomTicks()));
     public static final Block DURIAN_LEAVES = register("durian_leaves",new DurianLeaveBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES)));
 
     //Durian Woodset

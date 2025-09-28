@@ -22,10 +22,13 @@ public class MortarSerializer implements RecipeSerializer<RegularMortarRecipe> {
             throw new JsonParseException("No ingredients for mortar recipe");
         }else if(inputItemsIn.size() > 4){
             throw new JsonParseException("Too many ingredients for mortar recipe. Maximum at 4");
-        }else{
-            ItemStack results = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(jsonObject, "result"));
-            return new RegularMortarRecipe(resourceLocation,groupIn,inputItemsIn,container,results);
         }
+
+        String tab = GsonHelper.getAsString(jsonObject,"recipe_book_tab",null);
+        MortarRecipeBookTab mortarRecipeBookTab = MortarRecipeBookTab.findByName(tab);
+
+        ItemStack results = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(jsonObject, "result"));
+        return new RegularMortarRecipe(resourceLocation,groupIn,inputItemsIn,container,results,mortarRecipeBookTab);
     }
 
     private static NonNullList<Ingredient> readIngredients(JsonArray ingredientArray) {
@@ -52,8 +55,10 @@ public class MortarSerializer implements RecipeSerializer<RegularMortarRecipe> {
         }
 
         ItemStack container = friendlyByteBuf.readItem();
-        ItemStack itemStack = friendlyByteBuf.readItem();
-        return new RegularMortarRecipe(resourceLocation,group,ingredients,container,itemStack);
+        ItemStack resultItem = friendlyByteBuf.readItem();
+        MortarRecipeBookTab mortarRecipeBookTab = MortarRecipeBookTab.findByName(friendlyByteBuf.readUtf());
+
+        return new RegularMortarRecipe(resourceLocation,group,ingredients,container,resultItem,mortarRecipeBookTab);
     }
 
 
@@ -68,6 +73,7 @@ public class MortarSerializer implements RecipeSerializer<RegularMortarRecipe> {
 
         friendlyByteBuf.writeItem(recipe.getContainer());
         friendlyByteBuf.writeItem(recipe.getResult());
+        friendlyByteBuf.writeUtf(recipe.getRecipeBookTab().name);
 
     }
 }

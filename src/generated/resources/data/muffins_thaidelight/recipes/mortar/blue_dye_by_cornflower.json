@@ -5,6 +5,7 @@
       "item": "minecraft:cornflower"
     }
   ],
+  "recipe_book_tab": "misc",
   "result": {
     "count": 2,
     "item": "minecraft:blue_dye"

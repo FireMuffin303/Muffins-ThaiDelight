@@ -5,6 +5,7 @@
       "item": "minecraft:blue_orchid"
     }
   ],
+  "recipe_book_tab": "misc",
   "result": {
     "count": 2,
     "item": "minecraft:light_blue_dye"

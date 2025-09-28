@@ -5,6 +5,7 @@
       "item": "minecraft:white_tulip"
     }
   ],
+  "recipe_book_tab": "misc",
   "result": {
     "count": 2,
     "item": "minecraft:light_gray_dye"

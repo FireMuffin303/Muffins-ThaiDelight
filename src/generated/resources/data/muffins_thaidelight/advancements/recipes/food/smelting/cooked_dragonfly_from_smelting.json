@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:smelting/cooked_dragonfly_from_smelting"
+        "recipe": "muffins_thaidelight:smelting/cooked_dragonfly_from_smelting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:smelting/cooked_dragonfly_from_smelting"
+      "muffins_thaidelight:smelting/cooked_dragonfly_from_smelting"
     ]
   },
   "sends_telemetry_event": false

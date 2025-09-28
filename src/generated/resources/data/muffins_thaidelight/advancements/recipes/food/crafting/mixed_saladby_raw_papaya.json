@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:crafting/mixed_saladby_raw_papaya"
+        "recipe": "muffins_thaidelight:crafting/mixed_saladby_raw_papaya"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:crafting/mixed_saladby_raw_papaya"
+      "muffins_thaidelight:crafting/mixed_saladby_raw_papaya"
     ]
   },
   "sends_telemetry_event": false

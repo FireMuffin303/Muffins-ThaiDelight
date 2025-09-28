@@ -13,9 +13,15 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 
 public interface MortarRecipe extends Recipe<Container> {
+
+
     @Override
     default RecipeType<?> getType() {
         return ModRecipes.MORTAR;
     }
 
+
+    ItemStack getContainer();
+
+    MortarRecipeBookTab getRecipeBookTab();
 }

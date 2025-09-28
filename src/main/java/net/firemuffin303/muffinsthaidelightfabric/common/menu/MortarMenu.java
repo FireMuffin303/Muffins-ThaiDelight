@@ -1,6 +1,8 @@
 package net.firemuffin303.muffinsthaidelightfabric.common.menu;
 
 import com.mojang.logging.LogUtils;
+import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
+import net.firemuffin303.muffinsthaidelightfabric.client.ThaiDelightClient;
 import net.firemuffin303.muffinsthaidelightfabric.common.recipe.mortar.MortarRecipe;
 import net.firemuffin303.muffinsthaidelightfabric.common.recipe.mortar.RegularMortarRecipe;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
@@ -141,7 +143,7 @@ public class MortarMenu extends RecipeBookMenu<Container> {
 
     @Override
     public RecipeBookType getRecipeBookType() {
-        return RecipeBookType.CRAFTING;
+        return ThaiDelightClient.MORTAR_RECIPE_BOOK_TYPE;
     }
 
     @Override

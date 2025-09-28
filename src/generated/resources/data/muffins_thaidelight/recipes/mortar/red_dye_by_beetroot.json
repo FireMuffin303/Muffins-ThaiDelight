@@ -5,6 +5,7 @@
       "item": "minecraft:beetroot"
     }
   ],
+  "recipe_book_tab": "misc",
   "result": {
     "count": 2,
     "item": "minecraft:red_dye"

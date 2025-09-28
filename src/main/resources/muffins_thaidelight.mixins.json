@@ -14,11 +14,14 @@
     "food.PigFoodAccessor",
     "loot.LootPoolBuilderAccessor",
     "loot.LootTableAccessor",
+    "recipeBookType.RecipeBlockSettingMixin",
+    "recipeBookType.RecipeBookTypeMixin",
     "sticky.SniffingMixin",
     "sticky.VillagerMixin",
     "villager.VillagerAccessor"
   ],
   "client": [
+    "recipeBookType.RecipeBookCategoriesMixin"
   ],
   "injectors": {
     "defaultRequire": 1

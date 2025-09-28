@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:crafting/papaya_sapling_by_papaya_from_crafting"
+        "recipe": "muffins_thaidelight:crafting/papaya_sapling_by_papaya_from_crafting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:crafting/papaya_sapling_by_papaya_from_crafting"
+      "muffins_thaidelight:crafting/papaya_sapling_by_papaya_from_crafting"
     ]
   },
   "sends_telemetry_event": false

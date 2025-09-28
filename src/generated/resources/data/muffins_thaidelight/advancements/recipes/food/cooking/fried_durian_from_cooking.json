@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:cooking/fried_durian_from_cooking"
+        "recipe": "muffins_thaidelight:cooking/fried_durian_from_cooking"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:cooking/fried_durian_from_cooking"
+      "muffins_thaidelight:cooking/fried_durian_from_cooking"
     ]
   },
   "sends_telemetry_event": false

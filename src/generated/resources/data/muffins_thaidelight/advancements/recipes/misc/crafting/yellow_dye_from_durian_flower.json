@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:crafting/yellow_dye_from_durian_flower"
+        "recipe": "muffins_thaidelight:crafting/yellow_dye_from_durian_flower"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:crafting/yellow_dye_from_durian_flower"
+      "muffins_thaidelight:crafting/yellow_dye_from_durian_flower"
     ]
   },
   "sends_telemetry_event": false
