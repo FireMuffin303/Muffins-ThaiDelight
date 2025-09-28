@@ -4,7 +4,6 @@ import com.mojang.datafixers.util.Pair;
 import com.terraformersmc.terraform.boat.api.TerraformBoatType;
 import com.terraformersmc.terraform.boat.api.TerraformBoatTypeRegistry;
 import eu.midnightdust.lib.config.MidnightConfig;
-import io.github.fabricators_of_create.porting_lib.recipe_book_categories.RecipeBookRegistry;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
@@ -15,15 +14,12 @@ import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.fabricmc.fabric.api.loot.v2.LootTableSource;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
-import net.fabricmc.fabric.api.registry.FlattenableBlockRegistry;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.fabricmc.fabric.api.registry.TillableBlockRegistry;
-import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.firemuffin303.muffinsthaidelightfabric.common.entity.DragonflyEntity;
 import net.firemuffin303.muffinsthaidelightfabric.common.entity.FlowerCrabEntity;
 import net.firemuffin303.muffinsthaidelightfabric.common.event.ModVillagerTrades;
 import net.firemuffin303.muffinsthaidelightfabric.common.item.DragonflyBottleItem;
-import net.firemuffin303.muffinsthaidelightfabric.common.manager.FlavorManager;
 import net.firemuffin303.muffinsthaidelightfabric.config.ThaiDelightConfig;
 import net.firemuffin303.muffinsthaidelightfabric.datagen.ModTagDataGen;
 import net.firemuffin303.muffinsthaidelightfabric.mixin.*;
@@ -35,7 +31,6 @@ import net.firemuffin303.muffinsthaidelightfabric.mixin.loot.LootPoolBuilderAcce
 import net.firemuffin303.muffinsthaidelightfabric.mixin.loot.LootTableAccessor;
 import net.firemuffin303.muffinsthaidelightfabric.mixin.villager.VillagerAccessor;
 import net.firemuffin303.muffinsthaidelightfabric.registry.*;
-import net.minecraft.client.RecipeBookCategories;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -44,12 +39,10 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.world.entity.ai.goal.GoalSelector;
-import net.minecraft.world.inventory.RecipeBookType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -73,7 +66,6 @@ import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 
 import java.util.*;
 import java.util.stream.Stream;
@@ -116,8 +108,6 @@ public class ThaiDelight implements ModInitializer {
 
         init();
         postInit();
-
-
 
         MidnightConfig.init(MOD_ID, ThaiDelightConfig.class);
 
@@ -303,9 +293,18 @@ public class ThaiDelight implements ModInitializer {
     private void registerAnimalFood(){
         ParrotTameFoodAccessor.getTameFood().add(Item.byBlock(ModBlocks.PAPAYA_SAPLING));
         ParrotTameFoodAccessor.getTameFood().add(ModItems.PEPPER_SEED);
+        ParrotTameFoodAccessor.getTameFood().add(ModItems.BUTTERFLY_PEA_SEEDS);
 
-        Ingredient newPigFoods = Ingredient.of(ModItems.RAW_PAPAYA,ModItems.PAPAYA,ModItems.SLICED_PAPAYA,ModItems.RAW_PAPAYA_SLICE,ModItems.LIME,ModItems.SLICED_LIME);
-        Ingredient newChickenFoods = Ingredient.of(ModItems.PAPAYA_SEEDS,ModItems.PEPPER_SEED);
+        Ingredient newPigFoods = Ingredient.of(
+                ModItems.RAW_PAPAYA,
+                ModItems.PAPAYA,
+                ModItems.SLICED_PAPAYA,
+                ModItems.RAW_PAPAYA_SLICE,
+                ModItems.LIME,
+                ModItems.SLICED_LIME,
+                ModItems.BAMBOO_SHOOT
+        );
+        Ingredient newChickenFoods = Ingredient.of(ModItems.PAPAYA_SEEDS,ModItems.PEPPER_SEED,ModItems.BUTTERFLY_PEA_SEEDS);
 
         Ingredient newFrogFoods = Ingredient.of(ModItems.DRAGONFLY,ModItems.COOKED_DRAGONFLY);
 
@@ -373,6 +372,7 @@ public class ThaiDelight implements ModInitializer {
         output.accept(ModItems.HOLY_BASIL_CRATE);
         output.accept(ModItems.BASIL_CRATE);
         output.accept(ModItems.BAMBOO_SHOOT_CRATE);
+        output.accept(ModItems.BUTTERFLY_PEA_CRATE);
 
         output.accept(ModItems.CRAB_SPAWN_EGG);
         output.accept(ModItems.CRAB_EGG);
@@ -394,6 +394,7 @@ public class ThaiDelight implements ModInitializer {
         output.accept(ModItems.PAPAYA_JUICE);
         output.accept(ModItems.LIME_JUICE);
         output.accept(ModItems.COCONUT_WATER);
+        output.accept(ModItems.BUTTERFLY_PEA_TEA);
 
         output.accept(ModItems.LIME_SAPLING);
         output.accept(ModItems.LIME);
@@ -497,8 +498,12 @@ public class ThaiDelight implements ModInitializer {
         output.accept(ModItems.BASIL);
         output.accept(ModItems.BASIL_SAPLING);
 
+        output.accept(ModItems.BUTTERFLY_PEA);
+        output.accept(ModItems.BUTTERFLY_PEA_SEEDS);
+
         output.accept(ModItems.BAMBOO_SHOOT);
 
+        output.accept(ModItems.PESTO_SAUCE);
         output.accept(ModItems.FRIED_DURIAN);
         output.accept(ModItems.SOMTAM_FEAST);
         output.accept(ModItems.SOMTAM);
@@ -532,6 +537,14 @@ public class ThaiDelight implements ModInitializer {
         output.accept(ModItems.STEAMED_BAMBOO_SHOOT);
 
         output.accept(ModItems.BANANA_IN_COCONUT_MILK);
+
+        for(Item item : ModItems.KHANOM_CHAN_ARRAY){
+            output.accept(item);
+        }
+
+        for(Item item : ModItems.COCONUT_MILK_ICE_CREAM_ARRAY){
+            output.accept(item);
+        }
     }
 
     public static ResourceLocation modid(String id){

@@ -8,6 +8,9 @@ import com.terraformersmc.terraform.sign.block.TerraformWallSignBlock;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.*;
+import net.firemuffin303.muffinsthaidelightfabric.common.block.butterfly_pea.BuddingButterflyPeaBlock;
+import net.firemuffin303.muffinsthaidelightfabric.common.block.butterfly_pea.ButterflyPeaVineBlock;
+import net.firemuffin303.muffinsthaidelightfabric.common.block.butterfly_pea.WallFlowerBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.coconut.BundledCoconutLeafBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.coconut.CoconutLeafBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.coconut.CoconutLeafEndBlock;
@@ -34,6 +37,7 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
@@ -69,6 +73,7 @@ public class ModBlocks {
     public static final Block HOLY_BASIL_CRATE = registerCrate("holy_basil_crate");
     public static final Block BASIL_CRATE = registerCrate("basil_crate");
     public static final Block BAMBOO_SHOOT_CRATE = registerCrate("bamboo_shoot_crate");
+    public static final Block BUTTERFLY_PEA_CRATE = registerCrate("butterfly_pea_crate");
 
     //Eggs
     public static final Block CRAB_EGG = register("flower_crab_egg",new CrabEggBlock(BlockBehaviour.Properties.copy(Blocks.FROGSPAWN)));
@@ -469,6 +474,10 @@ public class ModBlocks {
         }
     });
     public static final Block POTTED_HOLY_BASIL = register("potted_holy_basil",Blocks.flowerPot(ModBlocks.HOLY_BASIL));
+
+    public static final Block BUDDING_BUTTERFLY_PEA_BLOCK = register("budding_butterfly_pea",new BuddingButterflyPeaBlock(BlockBehaviour.Properties.copy(WHEAT)));
+    public static final Block BUTTERFLY_PEA_BLOCK = register("butterfly_pea_vine",new ButterflyPeaVineBlock(BlockBehaviour.Properties.copy(WHEAT)));
+    public static final Block BUTTERFLY_PEA_WALL = register("butterfly_pea_wall",new WallFlowerBlock(BlockBehaviour.Properties.copy(SPORE_BLOSSOM)));
 
     public static final Block DURIAN_CAKE = register("durian_cake",new PieBlock(BlockBehaviour.Properties.copy(CAKE),() -> ModItems.DURIAN_CAKE_SLICE));
     public static final Block MANGO_PUDDING = register("mango_pudding",new PieBlock(BlockBehaviour.Properties.copy(CAKE),() -> ModItems.MANGO_PUDDING_SLICE));

@@ -95,6 +95,11 @@ public class ModRecipeDataGen extends FabricRecipeProvider {
         bigPackingCraft(ModItems.HOLY_BASIL_CRATE,1,ModItems.HOLY_BASIL,exporter);
         bigPackingCraft(ModItems.BASIL_CRATE,1,ModItems.BASIL,exporter);
         bigPackingCraft(ModItems.BAMBOO_SHOOT_CRATE,1,ModItems.BAMBOO_SHOOT,exporter);
+        bigPackingCraft(ModItems.BUTTERFLY_PEA_CRATE,1,ModItems.BUTTERFLY_PEA,exporter);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,Items.BLUE_DYE,2).requires(ModItems.BUTTERFLY_PEA)
+                .unlockedBy(getHasName(ModItems.BUTTERFLY_PEA),has(ModItems.BUTTERFLY_PEA))
+                .save(exporter,ThaiDelight.modid("crafting/yellow_dye_from_butterfly_pea"));
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,Items.YELLOW_DYE).requires(ModBlocks.DURIAN_FLOWER)
                 .unlockedBy(getHasName(ModBlocks.DURIAN_FLOWER),has(ModBlocks.DURIAN_FLOWER))
@@ -310,6 +315,20 @@ public class ModRecipeDataGen extends FabricRecipeProvider {
                 .unlockedBy(getHasName(Items.PEONY),has(Items.PEONY))
                 .save(exporter,ThaiDelight.modid("mortar/"+getItemName(Items.PINK_DYE)+"_by_peony"));
 
+
+        MortarRecipeBuilder.mortar(ModItems.PESTO_SAUCE)
+                .requires(ModItems.BASIL)
+                .requires(ModItems.BASIL)
+                .container(Items.BOWL)
+                .recipeTab(MortarRecipeBookTab.MEALS)
+                .unlockedBy(getHasName(ModItems.BASIL),has(ModItems.BASIL))
+                .save(exporter,ThaiDelight.modid("mortar/"+getItemName(ModItems.PESTO_SAUCE)));
+
+        MortarRecipeBuilder.mortar(Items.BLUE_DYE,3)
+                .requires(ModItems.BUTTERFLY_PEA)
+                .recipeTab(MortarRecipeBookTab.MISC)
+                .unlockedBy(getHasName(ModItems.BUTTERFLY_PEA),has(ModItems.BUTTERFLY_PEA))
+                .save(exporter,ThaiDelight.modid("mortar/"+getItemName(Items.BLUE_DYE)+"_from_butterfly_pea"));
     }
 }
 
