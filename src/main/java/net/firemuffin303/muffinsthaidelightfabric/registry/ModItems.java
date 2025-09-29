@@ -6,6 +6,7 @@ import com.terraformersmc.terraform.boat.api.TerraformBoatTypeRegistry;
 import com.terraformersmc.terraform.boat.api.item.TerraformBoatItemHelper;
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
 import net.firemuffin303.muffinsthaidelightfabric.common.item.DragonflyBottleItem;
+import net.firemuffin303.muffinsthaidelightfabric.common.item.SneakPlaceItemNameBlock;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
@@ -191,7 +192,13 @@ public class ModItems {
     public static final Item MANGO_BOAT = TerraformBoatItemHelper.registerBoatItem(ThaiDelight.modid("mango_boat"),MANGO_BOAT_KEY,false);
     public static final Item MANGO_CHEST_BOAT = TerraformBoatItemHelper.registerBoatItem(ThaiDelight.modid("mango_chest_boat"),MANGO_BOAT_KEY,true);
 
-    public static final Item MANGO = registerFlatItem("mango",new BlockItem(ModBlocks.STACKABLE_MANGO_BLOCK,new Item.Properties()));
+    public static final Item MANGO = registerFlatItem("mango",new SneakPlaceItemNameBlock(ModBlocks.STACKABLE_MANGO_BLOCK,new Item.Properties()){
+        @Override
+        public void registerBlocks(Map<Block, Item> map, Item item) {
+            super.registerBlocks(map, item);
+            map.put(ModBlocks.STACKABLE_MANGO_BLOCK,item);
+        }
+    });
     public static final Item MANGO_SLICE = registerFlatItem("mango_slice",new Item(new Item.Properties()));
 
     //----- 🍐 Papaya 🍐 -----------------------------------
