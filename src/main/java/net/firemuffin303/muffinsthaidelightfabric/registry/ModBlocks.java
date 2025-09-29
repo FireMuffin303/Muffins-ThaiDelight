@@ -87,7 +87,7 @@ public class ModBlocks {
 
     public static final Block LIME_SAPLING = register("lime_sapling",new LimeSaplingBlock(BlockBehaviour.Properties.copy(OAK_SAPLING)));
     public static final Block POTTED_LIME_SAPLING = register("potted_lime_sapling",Blocks.flowerPot(ModBlocks.LIME_SAPLING));
-    public static final Block LIME_BLOCK = register("lime_block",new LimeBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).instabreak().noOcclusion().pushReaction(PushReaction.DESTROY).randomTicks().sound(SoundType.SWEET_BERRY_BUSH)));
+    public static final Block LIME_BLOCK = register("lime_block",new LimeBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).strength(1.0F).sound(SoundType.WOOD).noOcclusion().pushReaction(PushReaction.DESTROY)));
 
     public static final Block PEPPER_CROP = register("pepper_crop",new PepperCropBlock(BlockBehaviour.Properties.copy(Blocks.POTATOES)));
 
@@ -96,8 +96,8 @@ public class ModBlocks {
     public static final Block POTTED_DURIAN_SAPLING = register("potted_durian_sapling",Blocks.flowerPot(DURIAN_SAPLING));
     public static final Block DURIAN_FLOWER = register("durian_flower",new DurianFlowerBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).instabreak().noCollission().sound(SoundType.SPORE_BLOSSOM).pushReaction(PushReaction.DESTROY).randomTicks()));
 
-    public static final Block SMALL_DURIAN_BLOCK = register("small_durian_block",new StackableSmallBlock(
-            BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).strength(1.0F).sound(SoundType.WOOD).pushReaction(PushReaction.DESTROY),() -> ModItems.SMALL_DURIAN));
+    public static final Block SMALL_DURIAN_BLOCK = register("small_durian_block",new SmallDurianBlock(
+            BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).strength(1.0F).sound(SoundType.WOOD).noOcclusion().pushReaction(PushReaction.DESTROY)));
 
     public static final Block MEDIUM_DURIAN_BLOCK = register("medium_durian_block",new StackableMediumBlock(
             BlockBehaviour.Properties.copy(SMALL_DURIAN_BLOCK),() -> ModItems.MEDIUM_DURIAN));

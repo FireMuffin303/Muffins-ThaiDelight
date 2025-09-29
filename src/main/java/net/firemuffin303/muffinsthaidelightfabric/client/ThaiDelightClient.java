@@ -62,7 +62,8 @@ public class ThaiDelightClient implements ClientModInitializer {
             ModBlocks.COCONUT_LEAF_END,
             ModBlocks.BUTTERFLY_PEA_WALL,
             ModBlocks.BUTTERFLY_PEA_BLOCK,
-            ModBlocks.BUDDING_BUTTERFLY_PEA_BLOCK
+            ModBlocks.BUDDING_BUTTERFLY_PEA_BLOCK,
+            ModBlocks.SMALL_DURIAN_BLOCK
     };
 
     public static final RecipeBookType MORTAR_RECIPE_BOOK_TYPE = RecipeBookType.valueOf("MORTAR_RECIPE_BOOK_TYPE");

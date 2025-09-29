@@ -101,7 +101,7 @@ public class ModItems {
     //Crops
     //------------- Lime ---------------
     public static final Item LIME_SAPLING = register("lime_sapling",new BlockItem(ModBlocks.LIME_SAPLING,new Item.Properties()));
-    public static final Item LIME = registerFlatItem("lime",new Item(new Item.Properties().food(ModFood.LIME)));
+    public static final Item LIME = registerFlatItem("lime",new ItemNameBlockItem(ModBlocks.LIME_BLOCK,new Item.Properties().food(ModFood.LIME)));
     public static final Item SLICED_LIME = registerFlatItem("lime_slice",new Item(new Item.Properties().food(ModFood.LIME_SLICE)));
 
     public static final Item WILD_PEPPER_CROP = register("wild_pepper",new BlockItem(ModBlocks.WILD_PEPPER_CROP,new Item.Properties()));

@@ -1,0 +1,37 @@
+{
+	"format_version": "1.9.0",
+	"credit": "Made with Blockbench",
+	"textures": {
+		"all": "muffins_thaidelight:block/lime/lime"
+	},
+	"elements": [
+		{
+			"from": [9, 0, 3],
+			"to": [13, 4, 7],
+			"rotation": {"angle": 0, "axis": "y", "origin": [11, 2, 5]},
+			"color": 9,
+			"faces": {
+				"north": {"uv": [0, 0, 4, 4], "texture": "#all"},
+				"east": {"uv": [0, 0, 4, 4], "texture": "#all"},
+				"south": {"uv": [0, 0, 4, 4], "texture": "#all"},
+				"west": {"uv": [0, 0, 4, 4], "texture": "#all"},
+				"up": {"uv": [4, 0, 8, 4], "texture": "#all"},
+				"down": {"uv": [0, 4, 4, 8], "texture": "#all"}
+			}
+		},
+		{
+			"from": [3, 0, 8],
+			"to": [7, 4, 12],
+			"rotation": {"angle": 0, "axis": "y", "origin": [5, 2, 10]},
+			"color": 9,
+			"faces": {
+				"north": {"uv": [0, 0, 4, 4], "texture": "#all"},
+				"east": {"uv": [0, 0, 4, 4], "texture": "#all"},
+				"south": {"uv": [0, 0, 4, 4], "texture": "#all"},
+				"west": {"uv": [0, 0, 4, 4], "texture": "#all"},
+				"up": {"uv": [4, 0, 8, 4], "texture": "#all"},
+				"down": {"uv": [0, 4, 4, 8], "texture": "#all"}
+			}
+		}
+	]
+}

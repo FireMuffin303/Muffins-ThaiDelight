@@ -5,8 +5,10 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.BasilCropBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.FermentedFishCauldronBlock;
+import net.firemuffin303.muffinsthaidelightfabric.common.block.SmallDurianBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.butterfly_pea.ButterflyPeaVineBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.coconut.CoconutLeafBlock;
+import net.firemuffin303.muffinsthaidelightfabric.common.block.lime.LimeBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.lime.LimePlantBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.mango.MangoBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.PapayaLogBlock;
@@ -114,6 +116,16 @@ public class ModelDataGen extends FabricModelProvider {
         for (Block cabinetBlock : ModBlocks.CABINET){
             createCabinet(cabinetBlock,blockStateModelGenerator);
         }
+
+        blockStateModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.SMALL_DURIAN_BLOCK)
+                .with(PropertyDispatch.property(SmallDurianBlock.STACKS)
+                        .generate(integer -> Variant.variant().with(VariantProperties.MODEL,ThaiDelight.modid("block/durian/stackable_durian_%d".formatted(integer))))
+                ).with(createHorizontalFacingDispatch()));
+
+        blockStateModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.LIME_BLOCK)
+                .with(PropertyDispatch.property(LimeBlock.STACKS)
+                        .generate(integer -> Variant.variant().with(VariantProperties.MODEL,ThaiDelight.modid("block/lime/stackable_lime_%d".formatted(integer))))
+                ).with(createHorizontalFacingDispatch()));
 
         blockStateModelGenerator.blockStateOutput.accept(createSimpleBlock(ModBlocks.CRAB_EGG,ModelLocationUtils.getModelLocation(ModBlocks.CRAB_EGG)));
 
@@ -321,6 +333,7 @@ public class ModelDataGen extends FabricModelProvider {
     private static void skipItemBlock(BlockModelGenerators blockStateModelGenerator){
         blockStateModelGenerator.skipAutoItemBlock(ModBlocks.COCONUT_LEAF);
         blockStateModelGenerator.skipAutoItemBlock(ModBlocks.DURIAN_BLOCK);
+        blockStateModelGenerator.skipAutoItemBlock(ModBlocks.SMALL_DURIAN_BLOCK);
         blockStateModelGenerator.skipAutoItemBlock(ModBlocks.DURIAN_CAKE);
         blockStateModelGenerator.skipAutoItemBlock(ModBlocks.MANGO_PUDDING);
     }
