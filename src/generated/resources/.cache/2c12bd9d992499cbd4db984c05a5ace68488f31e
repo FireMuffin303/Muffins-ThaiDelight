@@ -1,4 +1,4 @@
-// 1.20.1	2025-09-28T23:43:07.4837819	Muffin's Thai's Delight Refabricated/Block Loot Tables
+// 1.20.1	2025-09-29T13:11:54.4121444	Muffin's Thai's Delight Refabricated/Block Loot Tables
 f7ac7d4aedfcd4228bf5892ec5baa708a45b1941 data\muffins_thaidelight\loot_tables\blocks\durian_sapling.json
 427b7059fdd778995b86ec60c05e5e8d24d74eb1 data\muffins_thaidelight\loot_tables\blocks\durian_crate.json
 fcb3f4a51d9e0a85aa33fc8b0e629ce366fcdc16 data\muffins_thaidelight\loot_tables\blocks\pepper_crop.json
@@ -21,8 +21,8 @@ dfca1008499c0d5cf0f761bf5fa99f0258ff3af1 data\muffins_thaidelight\loot_tables\bl
 c7429ec0b961a53898041655656b9a3d6062efad data\muffins_thaidelight\loot_tables\blocks\lime_crate.json
 49e1d87969c98c89c78663862505d720e148cf85 data\muffins_thaidelight\loot_tables\blocks\coconut_door.json
 bce63a7799f903e5c19dda64b97980322304e7a3 data\muffins_thaidelight\loot_tables\blocks\papaya_log.json
-1a907f82dcfd4b4a1128a1e7d7a92ac7ccc191c9 data\muffins_thaidelight\loot_tables\blocks\holy_basil.json
 d3a5d4286be9d6305afa2217fd7507ed01e2c123 data\muffins_thaidelight\loot_tables\blocks\mango_cabinet.json
+1a907f82dcfd4b4a1128a1e7d7a92ac7ccc191c9 data\muffins_thaidelight\loot_tables\blocks\holy_basil.json
 0b74d6f70f393f85584d1e3e69410aae0d68abc0 data\muffins_thaidelight\loot_tables\blocks\papaya_leaves.json
 7d31df1e8dfe4b47b95f62030e1c32c2e4eac41d data\muffins_thaidelight\loot_tables\blocks\coconut_stairs.json
 aad3c240825cd59239f4b86106805921741a8918 data\muffins_thaidelight\loot_tables\blocks\wild_pepper.json
@@ -78,5 +78,5 @@ fe4a166f10d626f0de1a4786bce484c1521195fb data\muffins_thaidelight\loot_tables\bl
 d7c1023d52fc52ad4dd5a61fa47f4642b90023be data\muffins_thaidelight\loot_tables\blocks\mango_door.json
 fb7f8e416b0b07bff7e8918c2d481e8b59d7d106 data\muffins_thaidelight\loot_tables\blocks\basil_crate.json
 110c1103d534fbc022222eb0d834fb3de79783f4 data\muffins_thaidelight\loot_tables\blocks\stripped_papaya_wood.json
-027cc5114127c6fdc3b472105e724fef21f138f4 data\muffins_thaidelight\loot_tables\blocks\basil.json
 c858d14d427693c2b30c5236a4c900e7898d4841 data\muffins_thaidelight\loot_tables\blocks\stripped_coconut_wood.json
+027cc5114127c6fdc3b472105e724fef21f138f4 data\muffins_thaidelight\loot_tables\blocks\basil.json

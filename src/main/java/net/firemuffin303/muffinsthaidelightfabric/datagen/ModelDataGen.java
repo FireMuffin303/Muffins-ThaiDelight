@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.BasilCropBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.FermentedFishCauldronBlock;
+import net.firemuffin303.muffinsthaidelightfabric.common.block.butterfly_pea.ButterflyPeaVineBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.coconut.CoconutLeafBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.lime.LimePlantBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.mango.MangoBlock;
@@ -37,6 +38,8 @@ import static net.minecraft.data.models.model.TextureMapping.getBlockTexture;
 public class ModelDataGen extends FabricModelProvider {
     private static final TextureSlot FLOWER = TextureSlot.create("flower");
     private static final TextureSlot VINE = TextureSlot.create("vine");
+    private static final TextureSlot ROPE_SIDE = TextureSlot.create("rope_side");
+    private static final TextureSlot ROPE_TOP = TextureSlot.create("rope_top");
 
     private static final ModelTemplate PASTLE_3D = createModItem("pastle_3d_template", TextureSlot.LAYER0);
     private static final ModelTemplate SPAWN_EGG = createMincraftItem("template_spawn_egg");
@@ -50,6 +53,9 @@ public class ModelDataGen extends FabricModelProvider {
     public static  final  ModelTemplate MANGO = new ModelTemplate(Optional.of(ThaiDelight.modid("block/template_mango")),Optional.empty(),TextureSlot.ALL);
 
     private static final ModelTemplate WALL_FLOWER = new ModelTemplate(Optional.of(ThaiDelight.modid("block/template_wall_flower")),Optional.empty(),VINE,FLOWER);
+
+    private static final ModelTemplate CROP_WITH_ROPE = new ModelTemplate(Optional.of(new ResourceLocation("farmersdelight","block/crop_with_rope")),Optional.empty(),TextureSlot.CROP,ROPE_SIDE,ROPE_TOP);
+    private static final ModelTemplate CROP_CROSS = new ModelTemplate(Optional.of(new ResourceLocation("farmersdelight","block/crop_cross")),Optional.empty(),TextureSlot.CROSS);
 
     private static final BlockFamily DURIAN_PLANKS = BlockFamilies.familyBuilder(ModBlocks.DURIAN_PLANKS)
             .button(ModBlocks.DURIAN_BUTTON)
@@ -111,9 +117,10 @@ public class ModelDataGen extends FabricModelProvider {
 
         blockStateModelGenerator.blockStateOutput.accept(createSimpleBlock(ModBlocks.CRAB_EGG,ModelLocationUtils.getModelLocation(ModBlocks.CRAB_EGG)));
 
+        createCropRope(ModBlocks.BUTTERFLY_PEA_BLOCK,blockStateModelGenerator);
 
         ResourceLocation butterfly_pea_model = WALL_FLOWER.create(ModBlocks.BUTTERFLY_PEA_WALL,new TextureMapping()
-                .put(VINE,ThaiDelight.modid("block/butterfly_pea/butterfly_pea_vine"))
+                .put(VINE,ThaiDelight.modid("block/butterfly_pea/butterfly_pea_wall_vine"))
                 .put(FLOWER,ThaiDelight.modid("block/butterfly_pea/butterfly_pea_flower")),blockStateModelGenerator.modelOutput);
 
         blockStateModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.BUTTERFLY_PEA_WALL,
@@ -316,6 +323,29 @@ public class ModelDataGen extends FabricModelProvider {
         blockStateModelGenerator.skipAutoItemBlock(ModBlocks.DURIAN_BLOCK);
         blockStateModelGenerator.skipAutoItemBlock(ModBlocks.DURIAN_CAKE);
         blockStateModelGenerator.skipAutoItemBlock(ModBlocks.MANGO_PUDDING);
+    }
+
+    private static void createCropRope(Block block,BlockModelGenerators blockModelGenerators){
+        blockModelGenerators.blockStateOutput.accept(
+                MultiVariantGenerator.multiVariant(block)
+                        .with(PropertyDispatch.properties(ButterflyPeaVineBlock.VINE_AGE,ButterflyPeaVineBlock.ROPELOGGED)
+                                .generate((integer, aBoolean) -> {
+                                    if(aBoolean){
+                                        return Variant.variant().with(VariantProperties.MODEL,CROP_WITH_ROPE.createWithSuffix(block,"_stage%d_with_rope".formatted(integer),
+                                                new TextureMapping()
+                                                        .put(TextureSlot.CROP,BuiltInRegistries.BLOCK.getKey(block).withPrefix("block/butterfly_pea/").withSuffix("_stage%d".formatted(integer)))
+                                                        .put(ROPE_SIDE,new ResourceLocation("farmersdelight","block/tomatoes_coiled_rope"))
+                                                        .put(ROPE_TOP,new ResourceLocation("farmersdelight","block/rope_top"))
+                                                ,blockModelGenerators.modelOutput)
+                                        );
+                                    }
+                                    return Variant.variant().with(VariantProperties.MODEL,CROP_CROSS.createWithSuffix(block,"_stage%d".formatted(integer),
+                                            new TextureMapping()
+                                                    .put(TextureSlot.CROSS,BuiltInRegistries.BLOCK.getKey(block).withPrefix("block/butterfly_pea/").withSuffix("_stage%d".formatted(integer)))
+                                            ,blockModelGenerators.modelOutput));
+                                })
+                        )
+        );
     }
 
     public static void createCabinet(Block block,BlockModelGenerators blockModelGenerators){

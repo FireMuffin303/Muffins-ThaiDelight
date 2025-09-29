@@ -1,20 +1,19 @@
 package net.firemuffin303.muffinsthaidelightfabric.common.block.durian;
 
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
+import net.firemuffin303.muffinsthaidelightfabric.registry.ModMobEffects;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.BonemealableBlock;
-import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -24,7 +23,7 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class DurianFlowerBlock extends Block implements SimpleWaterloggedBlock, BonemealableBlock {
+public class DurianFlowerBlock extends Block implements SimpleWaterloggedBlock, BonemealableBlock, SuspiciousEffectHolder {
     private static final VoxelShape HANGING_SHAPE = Block.box(2.0, 13.0, 2.0, 14.0, 16.0, 14.0);
     private static final VoxelShape SHAPE = Block.box(2.0, 0.0, 2.0, 14.0, 3.0, 14.0);
     public static final BooleanProperty HANGING = BlockStateProperties.HANGING;
@@ -118,5 +117,15 @@ public class DurianFlowerBlock extends Block implements SimpleWaterloggedBlock, 
     @Override
     public void performBonemeal(ServerLevel serverLevel, RandomSource randomSource, BlockPos blockPos, BlockState blockState) {
         grow(serverLevel,blockPos,blockState);
+    }
+
+    @Override
+    public MobEffect getSuspiciousEffect() {
+        return ModMobEffects.STINKY;
+    }
+
+    @Override
+    public int getEffectDuration() {
+        return 11*20;
     }
 }

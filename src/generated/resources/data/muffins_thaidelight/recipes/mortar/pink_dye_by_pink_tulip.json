@@ -1,5 +1,6 @@
 {
   "type": "muffins_thaidelight:mortar",
+  "group": "pink_dye",
   "ingredients": [
     {
       "item": "minecraft:pink_tulip"

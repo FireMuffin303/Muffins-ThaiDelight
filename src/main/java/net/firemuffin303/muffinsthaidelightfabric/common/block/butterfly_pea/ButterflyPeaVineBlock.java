@@ -45,7 +45,7 @@ import vectorwing.farmersdelight.common.tag.ModTags;
 import java.util.List;
 
 public class ButterflyPeaVineBlock extends CropBlock {
-    public static final IntegerProperty VINE_AGE = BlockStateProperties.AGE_3;
+    public static final IntegerProperty VINE_AGE = BlockStateProperties.AGE_2;
     public static final BooleanProperty ROPELOGGED = BooleanProperty.create("ropelogged");
     private static final VoxelShape SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 16.0D, 14.0D);
 
@@ -150,7 +150,7 @@ public class ButterflyPeaVineBlock extends CropBlock {
 
     @Override
     public int getMaxAge() {
-        return 3;
+        return 2;
     }
 
     @Override

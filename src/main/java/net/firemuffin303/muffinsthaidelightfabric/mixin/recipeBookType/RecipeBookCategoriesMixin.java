@@ -33,7 +33,7 @@ public class RecipeBookCategoriesMixin {
         List<RecipeBookCategories> recipeBookTypeList = new ArrayList<>(List.of($VALUES));
         recipeBookTypeList.add(createRecipeBookCategory("MORTAR_SEARCH", $VALUES.length, new ItemStack(Items.COMPASS)));
         recipeBookTypeList.add(createRecipeBookCategory("MORTAR_MEALS", $VALUES.length + 1, new ItemStack(ModItems.SOMTAM_FEAST)));
-        recipeBookTypeList.add(createRecipeBookCategory("MORTAR_MISC", $VALUES.length + 2, new ItemStack(ModItems.PEPPER)));
+        recipeBookTypeList.add(createRecipeBookCategory("MORTAR_MISC", $VALUES.length + 2, new ItemStack(ModItems.PEPPER),new ItemStack(Items.BONE_MEAL)));
         $VALUES = recipeBookTypeList.toArray(RecipeBookCategories[]::new);
     }
 }

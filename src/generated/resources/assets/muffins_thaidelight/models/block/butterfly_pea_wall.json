@@ -2,6 +2,6 @@
   "parent": "muffins_thaidelight:block/template_wall_flower",
   "textures": {
     "flower": "muffins_thaidelight:block/butterfly_pea/butterfly_pea_flower",
-    "vine": "muffins_thaidelight:block/butterfly_pea/butterfly_pea_vine"
+    "vine": "muffins_thaidelight:block/butterfly_pea/butterfly_pea_wall_vine"
   }
 }

@@ -1,7 +1,6 @@
-// 1.20.1	2025-09-28T23:43:07.4817664	Muffin's Thai's Delight Refabricated/Tags for minecraft:item
+// 1.20.1	2025-09-29T13:11:54.4088217	Muffin's Thai's Delight Refabricated/Tags for minecraft:item
 32b2e80c4f617f2c9d13775b6f03518a19e68ce6 data\crabbersdelight\tags\items\cooked_seafood.json
 de3c4dbc11c6afe12b3f3ad2ec4b0e47ddda1d4d data\muffins_thaidelight\tags\items\durian_logs.json
-d2afbd8e0e2bcf8bbb10adbd0778528cb1ea8a51 data\minecraft\tags\items\flowers.json
 ea245bcc88673ba87ae5700240886a1010cda139 data\muffins_thaidelight\tags\items\dragonfly_food.json
 87ef45be87411bf3880d6685b5d9f9942f5cfe8a data\alexsmobs\tags\items\insect_items.json
 6123bb37a9aaba7d3b504e4f410c4873d813bcc4 data\muffins_thaidelight\tags\items\spicy_level_50.json
@@ -21,5 +20,6 @@ ef49636b903d9674248855ccb22459dbbaa3f380 data\forge\tags\items\seeds.json
 4e52cdb5e76f2551f2119d4801802d527470f327 data\muffins_thaidelight\tags\items\flower_crab_meat.json
 4c70cb9c8f7794685e3d57b98c24dc9d4ca2b19c data\muffins_thaidelight\tags\items\flower_crab_food.json
 91ab8538297ce7467e1a2856c66099e73c66845e data\minecraft\tags\items\planks.json
+c98566dee96d7654aa5dadefc1adafbee0f0f1bf data\minecraft\tags\items\small_flowers.json
 1c48a8a9c3d0a1e66b7d6dd6152429f0a1319ba7 data\muffins_thaidelight\tags\items\raw_papaya.json
 7028843ce20d59c4752dd0b702956cec16ee5e3a data\muffins_thaidelight\tags\items\spicy_level_5.json

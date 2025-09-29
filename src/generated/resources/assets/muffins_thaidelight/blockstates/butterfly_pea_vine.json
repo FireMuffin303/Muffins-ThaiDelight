@@ -1,0 +1,22 @@
+{
+  "variants": {
+    "age=0,ropelogged=false": {
+      "model": "muffins_thaidelight:block/butterfly_pea_vine_stage0"
+    },
+    "age=0,ropelogged=true": {
+      "model": "muffins_thaidelight:block/butterfly_pea_vine_stage0_with_rope"
+    },
+    "age=1,ropelogged=false": {
+      "model": "muffins_thaidelight:block/butterfly_pea_vine_stage1"
+    },
+    "age=1,ropelogged=true": {
+      "model": "muffins_thaidelight:block/butterfly_pea_vine_stage1_with_rope"
+    },
+    "age=2,ropelogged=false": {
+      "model": "muffins_thaidelight:block/butterfly_pea_vine_stage2"
+    },
+    "age=2,ropelogged=true": {
+      "model": "muffins_thaidelight:block/butterfly_pea_vine_stage2_with_rope"
+    }
+  }
+}

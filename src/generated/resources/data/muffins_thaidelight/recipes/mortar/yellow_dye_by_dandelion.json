@@ -1,5 +1,6 @@
 {
   "type": "muffins_thaidelight:mortar",
+  "group": "yellow_dye",
   "ingredients": [
     {
       "item": "minecraft:dandelion"

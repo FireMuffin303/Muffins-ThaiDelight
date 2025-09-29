@@ -1,5 +1,6 @@
 {
   "type": "muffins_thaidelight:mortar",
+  "group": "blue_dye",
   "ingredients": [
     {
       "item": "muffins_thaidelight:butterfly_pea"

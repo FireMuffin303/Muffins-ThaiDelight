@@ -1,5 +1,6 @@
 {
   "type": "muffins_thaidelight:mortar",
+  "group": "bone_meal",
   "ingredients": [
     {
       "item": "minecraft:bone"

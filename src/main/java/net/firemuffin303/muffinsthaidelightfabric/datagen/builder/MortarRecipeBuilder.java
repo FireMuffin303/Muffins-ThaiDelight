@@ -114,7 +114,15 @@ public class MortarRecipeBuilder implements RecipeBuilder {
                         RecipeUnlockedTrigger.unlocked(resourceLocation))
                 .rewards(net.minecraft.advancements.AdvancementRewards.Builder.recipe(resourceLocation))
                 .requirements(RequirementsStrategy.OR);
-        consumer.accept(new MortarRecipeBuilder.Result(resourceLocation,this.group, this.ingredients,this.container,this.result,this.count,this.mortarRecipeBookTab,this.advancement,resourceLocation.withPrefix("recipes/")));
+        consumer.accept(new MortarRecipeBuilder.Result(resourceLocation,
+                this.group == null ? "":this.group,
+                this.ingredients,
+                this.container,
+                this.result,
+                this.count,
+                this.mortarRecipeBookTab,
+                this.advancement,
+                resourceLocation.withPrefix("recipes/")));
     }
 
     private void ensureValid(ResourceLocation arg) {
@@ -149,9 +157,9 @@ public class MortarRecipeBuilder implements RecipeBuilder {
 
         @Override
         public void serializeRecipeData(JsonObject jsonObject) {
-            //if(!this.group.isEmpty()){
-            //    jsonObject.addProperty("group",this.group);
-            //}
+            if(!this.group.isEmpty()){
+                jsonObject.addProperty("group",this.group);
+            }
 
             JsonArray jsonArray = new JsonArray();
 

@@ -186,10 +186,12 @@ public class ModRecipeDataGen extends FabricRecipeProvider {
 
         MortarRecipeBuilder.mortar(Items.BONE_MEAL,4).requires(Items.BONE,1)
                 .unlockedBy(getHasName(Items.BONE),has(Items.BONE))
+                .group("bone_meal")
                 .save(exporter,ThaiDelight.modid("mortar/"+getItemName(Items.BONE_MEAL)+"_by_bone"));
 
         MortarRecipeBuilder.mortar(Items.BONE_MEAL,2)
                 .requires(Items.NAUTILUS_SHELL,1)
+                .group("bone_meal")
                 .unlockedBy(getHasName(Items.NAUTILUS_SHELL),has(Items.NAUTILUS_SHELL))
                 .save(exporter,ThaiDelight.modid("mortar/"+getItemName(Items.BONE_MEAL)+"_by_nautilus_shell"));
 
@@ -206,113 +208,142 @@ public class ModRecipeDataGen extends FabricRecipeProvider {
         MortarRecipeBuilder.mortar(Items.BLACK_DYE,2)
                 .requires(Items.COAL,1)
                 .unlockedBy(getHasName(Items.COAL),has(Items.COAL))
+                .group("black_dye")
                 .save(exporter,ThaiDelight.modid("mortar/"+getItemName(Items.BLACK_DYE)+"_by_coal"));
 
         MortarRecipeBuilder.mortar(Items.BLACK_DYE,2)
                 .requires(Items.CHARCOAL,1)
                 .unlockedBy(getHasName(Items.CHARCOAL),has(Items.CHARCOAL))
+                .group("black_dye")
                 .save(exporter,ThaiDelight.modid("mortar/"+getItemName(Items.BLACK_DYE)+"_by_charcoal"));
 
         MortarRecipeBuilder.mortar(Items.WHITE_DYE,2)
                 .requires(Items.BONE_MEAL,1)
                 .unlockedBy(getHasName(Items.BONE_MEAL),has(Items.BONE_MEAL))
+                .group("white_dye")
                 .save(exporter,ThaiDelight.modid("mortar/"+getItemName(Items.WHITE_CARPET)+"_by_bone_meal"));
 
         MortarRecipeBuilder.mortar(Items.WHITE_DYE,2).requires(Items.LILY_OF_THE_VALLEY,1)
                 .unlockedBy(getHasName(Items.LILY_OF_THE_VALLEY),has(Items.LILY_OF_THE_VALLEY))
+                .group("white_dye")
                 .save(exporter,ThaiDelight.modid("mortar/"+getItemName(Items.WHITE_CARPET)+"_by_lily_of_the_valley"));
 
         MortarRecipeBuilder.mortar(Items.LIGHT_GRAY_DYE,2)
                 .requires(Items.OXEYE_DAISY,1)
+                .group("light_gray_dye")
                 .unlockedBy(getHasName(Items.OXEYE_DAISY),has(Items.OXEYE_DAISY))
                 .save(exporter,ThaiDelight.modid("mortar/"+getItemName(Items.LIGHT_GRAY_DYE)+"_by_oxeye_daisy"));
 
         MortarRecipeBuilder.mortar(Items.LIGHT_GRAY_DYE,2)
                 .requires(Items.AZURE_BLUET,1)
+                .group("light_gray_dye")
                 .unlockedBy(getHasName(Items.AZURE_BLUET),has(Items.AZURE_BLUET))
                 .save(exporter,ThaiDelight.modid("mortar/"+getItemName(Items.LIGHT_GRAY_DYE)+"_by_azure_bluet"));
         MortarRecipeBuilder.mortar(Items.LIGHT_GRAY_DYE,2)
                 .requires(Items.WHITE_TULIP,1)
+                .group("light_gray_dye")
                 .unlockedBy(getHasName(Items.WHITE_TULIP),has(Items.WHITE_TULIP))
                 .save(exporter, ThaiDelight.modid("mortar/"+getItemName(Items.LIGHT_GRAY_DYE)+"_by_white_tulip"));
 
         MortarRecipeBuilder.mortar(Items.BLACK_DYE,2).requires(Items.INK_SAC,1)
                 .unlockedBy(getHasName(Items.INK_SAC),has(Items.INK_SAC))
+                .group("black_dye")
                 .save(exporter,ThaiDelight.modid("mortar/"+getItemName(Items.BLACK_DYE)+"_by_ink_sac"));
         MortarRecipeBuilder.mortar(Items.BLACK_DYE,2).requires(Items.WITHER_ROSE,1)
                 .unlockedBy(getHasName(Items.WITHER_ROSE),has(Items.WITHER_ROSE))
+                .group("black_dye")
                 .save(exporter,ThaiDelight.modid("mortar/"+getItemName(Items.BLACK_DYE)+"_by_wither_rose"));
 
         MortarRecipeBuilder.mortar(Items.BROWN_DYE,2).requires(Items.COCOA_BEANS,1)
                 .unlockedBy(getHasName(Items.COCOA_BEANS),has(Items.COCOA_BEANS))
+                .group("brown_dye")
                 .save(exporter,ThaiDelight.modid("mortar/"+getItemName(Items.BROWN_DYE)+"_by_cocoa"));
 
         MortarRecipeBuilder.mortar(Items.RED_DYE,2).requires(Items.POPPY,1)
                 .unlockedBy(getHasName(Items.POPPY),has(Items.POPPY))
+                .group("red_dye")
                 .save(exporter,ThaiDelight.modid("mortar/"+getItemName(Items.RED_DYE)+"_by_poppy"));
 
         MortarRecipeBuilder.mortar(Items.RED_DYE,2).requires(Items.BEETROOT,1)
                 .unlockedBy(getHasName(Items.BEETROOT),has(Items.BEETROOT))
+                .group("red_dye")
                 .save(exporter,ThaiDelight.modid("mortar/"+getItemName(Items.RED_DYE)+"_by_beetroot"));
 
         MortarRecipeBuilder.mortar(Items.RED_DYE,2).requires(Items.RED_TULIP,1)
                 .unlockedBy(getHasName(Items.RED_TULIP),has(Items.RED_TULIP))
+                .group("red_dye")
                 .save(exporter,ThaiDelight.modid("mortar/"+getItemName(Items.RED_DYE)+"_by_red_tulip"));
 
         MortarRecipeBuilder.mortar(Items.RED_DYE,2).requires(Items.ROSE_BUSH,1)
                 .unlockedBy(getHasName(Items.ROSE_BUSH),has(Items.ROSE_BUSH))
+                .group("red_dye")
                 .save(exporter,ThaiDelight.modid("mortar/"+getItemName(Items.RED_DYE)+"_by_rose_bush"));
 
         MortarRecipeBuilder.mortar(Items.ORANGE_DYE,2).requires(Items.TORCHFLOWER,1)
                 .unlockedBy(getHasName(Items.TORCHFLOWER),has(Items.TORCHFLOWER))
+                .group("orange_dye")
                 .save(exporter,ThaiDelight.modid("mortar/"+getItemName(Items.ORANGE_DYE)+"_by_torchflower"));
 
         MortarRecipeBuilder.mortar(Items.ORANGE_DYE,2).requires(Items.ORANGE_TULIP,1)
                 .unlockedBy(getHasName(Items.ORANGE_TULIP),has(Items.ORANGE_TULIP))
+                .group("orange_dye")
                 .save(exporter,ThaiDelight.modid("mortar/"+getItemName(Items.ORANGE_DYE)+"_by_orange_tulip"));
 
         MortarRecipeBuilder.mortar(Items.YELLOW_DYE,2).requires(Items.DANDELION,1)
                 .unlockedBy(getHasName(Items.DANDELION),has(Items.DANDELION))
+                .group("yellow_dye")
                 .save(exporter,ThaiDelight.modid("mortar/"+getItemName(Items.YELLOW_DYE)+"_by_dandelion"));
         MortarRecipeBuilder.mortar(Items.YELLOW_DYE,3).requires(Items.SUNFLOWER,1)
                 .unlockedBy(getHasName(Items.SUNFLOWER),has(Items.SUNFLOWER))
+                .group("yellow_dye")
                 .save(exporter,ThaiDelight.modid("mortar/"+getItemName(Items.YELLOW_DYE)+"_by_sunflower"));
 
         MortarRecipeBuilder.mortar(Items.CYAN_DYE,3).requires(Items.PITCHER_PLANT,1)
                 .unlockedBy(getHasName(Items.PITCHER_PLANT),has(Items.PITCHER_PLANT))
+                .group("cyan_dye")
                 .save(exporter,ThaiDelight.modid("mortar/"+getItemName(Items.CYAN_DYE)+"_by_pitcher_plant"));
 
         MortarRecipeBuilder.mortar(Items.LIGHT_BLUE_DYE,2).requires(Items.BLUE_ORCHID,1)
                 .unlockedBy(getHasName(Items.BLUE_ORCHID),has(Items.BLUE_ORCHID))
+                .group("light_blue_dye")
                 .save(exporter,ThaiDelight.modid("mortar/"+getItemName(Items.LIGHT_BLUE_DYE)+"_by_blue_orchid"));
 
         MortarRecipeBuilder.mortar(Items.BLUE_DYE,2).requires(Items.CORNFLOWER,1)
                 .unlockedBy(getHasName(Items.CORNFLOWER),has(Items.CORNFLOWER))
+                .group("blue_dye")
                 .save(exporter,ThaiDelight.modid("mortar/"+getItemName(Items.BLUE_DYE)+"_by_cornflower"));
 
         MortarRecipeBuilder.mortar(Items.BLUE_DYE,2).requires(Items.LAPIS_LAZULI,1)
                 .unlockedBy(getHasName(Items.LAPIS_LAZULI),has(Items.LAPIS_LAZULI))
+                .group("blue_dye")
                 .save(exporter,ThaiDelight.modid("mortar/"+getItemName(Items.BLUE_DYE)+"_by_lapis_lazuli"));
 
         MortarRecipeBuilder.mortar(Items.PURPLE_DYE,1).requires(Items.CHORUS_FRUIT,1)
                 .unlockedBy(getHasName(Items.CHORUS_FRUIT),has(Items.CHORUS_FRUIT))
+                .group("purple_dye")
                 .save(exporter,ThaiDelight.modid("mortar/"+getItemName(Items.PURPLE_DYE)+"_by_chorus_fruit"));
 
         MortarRecipeBuilder.mortar(Items.MAGENTA_DYE,2).requires(Items.ALLIUM,1)
                 .unlockedBy(getHasName(Items.ALLIUM),has(Items.ALLIUM))
+                .group("magenta_dye")
                 .save(exporter,ThaiDelight.modid("mortar/"+getItemName(Items.MAGENTA_DYE)+"_by_allium"));
         MortarRecipeBuilder.mortar(Items.MAGENTA_DYE,3).requires(Items.LILAC,1)
                 .unlockedBy(getHasName(Items.LILAC),has(Items.LILAC))
+                .group("magenta_dye")
                 .save(exporter,ThaiDelight.modid("mortar/"+getItemName(Items.MAGENTA_DYE)+"_by_lilac"));
 
         MortarRecipeBuilder.mortar(Items.PINK_DYE,2).requires(Items.PINK_PETALS,1)
                 .unlockedBy(getHasName(Items.PINK_PETALS),has(Items.PINK_PETALS))
+                .group("pink_dye")
                 .save(exporter,ThaiDelight.modid("mortar/"+getItemName(Items.PINK_DYE)+"_by_pink_petals"));
         MortarRecipeBuilder.mortar(Items.PINK_DYE,2).requires(Items.PINK_TULIP,1)
+                .group("pink_dye")
                 .unlockedBy(getHasName(Items.PINK_TULIP),has(Items.PINK_TULIP))
+                .group("pink_dye")
                 .save(exporter,ThaiDelight.modid("mortar/"+getItemName(Items.PINK_DYE)+"_by_pink_tulip"));
         MortarRecipeBuilder.mortar(Items.PINK_DYE,3).requires(Items.PEONY,1)
                 .unlockedBy(getHasName(Items.PEONY),has(Items.PEONY))
+                .group("pink_dye")
                 .save(exporter,ThaiDelight.modid("mortar/"+getItemName(Items.PINK_DYE)+"_by_peony"));
 
 
@@ -328,7 +359,22 @@ public class ModRecipeDataGen extends FabricRecipeProvider {
                 .requires(ModItems.BUTTERFLY_PEA)
                 .recipeTab(MortarRecipeBookTab.MISC)
                 .unlockedBy(getHasName(ModItems.BUTTERFLY_PEA),has(ModItems.BUTTERFLY_PEA))
+                .group("blue_dye")
                 .save(exporter,ThaiDelight.modid("mortar/"+getItemName(Items.BLUE_DYE)+"_from_butterfly_pea"));
+
+        MortarRecipeBuilder.mortar(Items.LIME_DYE,2)
+                .requires(ModItems.LIME)
+                .recipeTab(MortarRecipeBookTab.MISC)
+                .unlockedBy(getHasName(ModItems.LIME),has(ModItems.LIME))
+                .group("lime_dye")
+                .save(exporter,ThaiDelight.modid("mortar/"+getItemName(Items.LIME_DYE)+"_from_lime"));
+
+        MortarRecipeBuilder.mortar(Items.LIME_DYE,1)
+                .requires(ModItems.SLICED_LIME)
+                .recipeTab(MortarRecipeBookTab.MISC)
+                .unlockedBy(getHasName(ModItems.SLICED_LIME),has(ModItems.SLICED_LIME))
+                .group("lime_dye")
+                .save(exporter,ThaiDelight.modid("mortar/"+getItemName(Items.LIME_DYE)+"_from_lime_slice"));
     }
 }
 
