@@ -18,7 +18,7 @@ import net.firemuffin303.muffinsthaidelightfabric.common.block.coconut.CoconutLe
 import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.HangingDurianBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.DurianFlowerBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.DurianLeaveBlock;
-import net.firemuffin303.muffinsthaidelightfabric.common.block.StackableSmallBlock;
+import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.SmallDurianBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.lime.*;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.mango.MangoBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.mango.StackableMangoBlock;
@@ -26,6 +26,8 @@ import net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.PapayaBloc
 import net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.PapayaCropBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.PapayaLogBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.StackablePapayaBlock;
+import net.firemuffin303.muffinsthaidelightfabric.common.block.pepper.BuddingPepperBlock;
+import net.firemuffin303.muffinsthaidelightfabric.common.block.pepper.PepperCropBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.world.trees.DurianTreeGrower;
 import net.firemuffin303.muffinsthaidelightfabric.common.world.trees.MangoTreeGrower;
 import net.firemuffin303.muffinsthaidelightfabric.common.world.trees.PapayaTreeGrower;
@@ -40,7 +42,6 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
@@ -93,6 +94,7 @@ public class ModBlocks {
     public static final Block LIME_BLOCK = register("lime_block",new LimeBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).strength(1.0F).sound(SoundType.WOOD).noOcclusion().pushReaction(PushReaction.DESTROY)));
 
     public static final Block PEPPER_CROP = register("pepper_crop",new PepperCropBlock(BlockBehaviour.Properties.copy(Blocks.POTATOES)));
+    public static final Block BUDDING_PEPPER_CROP = register("budding_pepper_crop",new BuddingPepperBlock(BlockBehaviour.Properties.copy(PEPPER_CROP)));
 
     //Durian
     public static final Block DURIAN_SAPLING = register("durian_sapling",new SaplingBlock(new DurianTreeGrower(), BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY)));

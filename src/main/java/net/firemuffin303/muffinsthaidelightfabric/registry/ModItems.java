@@ -58,7 +58,7 @@ public class ModItems {
 
     //Crab
     public static final Item CRAB_SPAWN_EGG = register("flower_crab_spawn_egg",new SpawnEggItem(ModEntityTypes.FLOWER_CRAB,0x93a064,0xac3247,new Item.Properties()));
-    public static final Item CRAB_EGG = registerFlatItem("flower_crab_egg", new BlockItem(ModBlocks.CRAB_EGG,new Item.Properties()));
+    public static final Item CRAB_EGG = register("flower_crab_egg", new BlockItem(ModBlocks.CRAB_EGG,new Item.Properties()));
     public static final Item CRAB_BUCKET = registerFlatItem("flower_crab_bucket",new MobBucketItem(ModEntityTypes.FLOWER_CRAB,Fluids.WATER,SoundEvents.BUCKET_EMPTY_FISH,new Item.Properties().stacksTo(1)));
     public static final Item CRAB_MEAT = registerFlatItem("flower_crab",new Item(new Item.Properties().food(ModFood.CRAB)));
     public static final Item COOKED_CRAB_MEAT = registerFlatItem("cooked_flower_crab",new Item(new Item.Properties().food(ModFood.COOKED_CRAB)));
@@ -106,7 +106,7 @@ public class ModItems {
 
     public static final Item WILD_PEPPER_CROP = register("wild_pepper",new BlockItem(ModBlocks.WILD_PEPPER_CROP,new Item.Properties()));
     public static final Item PEPPER = registerFlatItem("pepper",new Item(new Item.Properties().food(ModFood.PEPPER)));
-    public static final Item PEPPER_SEED = registerFlatItem("pepper_seeds",new ItemNameBlockItem(ModBlocks.PEPPER_CROP,new Item.Properties()){
+    public static final Item PEPPER_SEED = registerFlatItem("pepper_seeds",new ItemNameBlockItem(ModBlocks.BUDDING_PEPPER_CROP,new Item.Properties()){
         @Override
         public void registerBlocks(Map<Block, Item> map, Item item) {
             super.registerBlocks(map, item);

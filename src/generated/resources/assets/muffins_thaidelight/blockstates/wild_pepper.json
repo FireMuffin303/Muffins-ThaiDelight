@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "muffins_thaidelight:block/wild_pepper"
+      "model": "muffins_thaidelight:block/pepper/wild_pepper_crop"
     }
   }
 }

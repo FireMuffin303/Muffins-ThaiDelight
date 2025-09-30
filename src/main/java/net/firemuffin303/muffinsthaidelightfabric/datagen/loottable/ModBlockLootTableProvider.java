@@ -6,6 +6,7 @@ import net.firemuffin303.muffinsthaidelightfabric.common.block.BasilCropBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.HangingDurianBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.lime.LimePlantBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.PapayaBlock;
+import net.firemuffin303.muffinsthaidelightfabric.common.block.pepper.PepperCropBlock;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModItems;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
@@ -198,8 +199,26 @@ public class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
         );
 
 
-        net.minecraft.world.level.storage.loot.predicates.LootItemCondition.Builder checkPepperLevel = LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.PEPPER_CROP).setProperties(net.minecraft.advancements.critereon.StatePropertiesPredicate.Builder.properties().hasProperty(CarrotBlock.AGE, 7));
-        this.add(ModBlocks.PEPPER_CROP, (net.minecraft.world.level.storage.loot.LootTable.Builder)this.applyExplosionDecay(ModBlocks.PEPPER_CROP, LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.PEPPER))).withPool(LootPool.lootPool().when(checkPepperLevel).add(LootItem.lootTableItem(ModItems.PEPPER).apply(ApplyBonusCount.addBonusBinomialDistributionCount(Enchantments.BLOCK_FORTUNE, 0.5714286F, 3))))));
+        this.add(ModBlocks.PEPPER_CROP,
+                this.applyExplosionDecay(ModBlocks.PEPPER_CROP,
+                        LootTable.lootTable()
+                                .withPool(LootPool.lootPool()
+                                        .add(LootItem.lootTableItem(ModItems.PEPPER_SEED)))
+                                .withPool(LootPool.lootPool()
+                                        .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.PEPPER_CROP)
+                                                .setProperties(
+                                                        StatePropertiesPredicate.Builder.properties()
+                                                                .hasProperty(PepperCropBlock.AGE, 2)
+                                                )
+                                        )
+                                        .add(LootItem.lootTableItem(ModItems.PEPPER)
+                                                .apply(ApplyBonusCount.addBonusBinomialDistributionCount(Enchantments.BLOCK_FORTUNE, 0.5714286F, 3))
+                                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(2,3)))
+                                                .apply(LimitCount.limitCount(IntRange.upperBound(6)))
+                                        )
+                                )
+                )
+        );
 
 
         this.add(ModBlocks.WILD_PEPPER_CROP,this.applyExplosionDecay(ModBlocks.WILD_PEPPER_CROP,

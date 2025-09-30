@@ -5,7 +5,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.BasilCropBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.FermentedFishCauldronBlock;
-import net.firemuffin303.muffinsthaidelightfabric.common.block.SmallDurianBlock;
+import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.SmallDurianBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.butterfly_pea.ButterflyPeaVineBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.coconut.CoconutLeafBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.lime.LimeBlock;
@@ -14,9 +14,10 @@ import net.firemuffin303.muffinsthaidelightfabric.common.block.mango.MangoBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.mango.StackableMangoBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.PapayaLogBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.StackablePapayaBlock;
+import net.firemuffin303.muffinsthaidelightfabric.common.block.pepper.BuddingPepperBlock;
+import net.firemuffin303.muffinsthaidelightfabric.common.block.pepper.PepperCropBlock;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModItems;
-import net.minecraft.client.model.Model;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.BlockFamilies;
@@ -154,6 +155,12 @@ public class ModelDataGen extends FabricModelProvider {
 
         blockStateModelGenerator.blockStateOutput.accept(createSimpleBlock(ModBlocks.COCONUT,ThaiDelight.modid("block/coconut/coconut_block")));
 
+        ModelTemplates.FLAT_ITEM
+                .create(
+                        ModelLocationUtils.getModelLocation(ModBlocks.CRAB_EGG.asItem()),
+                        TextureMapping.layer0(getBlockTexture(ModBlocks.CRAB_EGG)),
+                        blockStateModelGenerator.modelOutput
+                );
         blockStateModelGenerator.blockStateOutput.accept(createSimpleBlock(ModBlocks.CRAB_EGG,ModelLocationUtils.getModelLocation(ModBlocks.CRAB_EGG)));
 
         createCropRope(ModBlocks.BUTTERFLY_PEA_BLOCK,blockStateModelGenerator);
@@ -275,7 +282,7 @@ public class ModelDataGen extends FabricModelProvider {
                         )
         );
 
-        blockStateModelGenerator.createCrossBlockWithDefaultItem(ModBlocks.WILD_PEPPER_CROP, BlockModelGenerators.TintState.NOT_TINTED);
+
         blockStateModelGenerator.createCrossBlockWithDefaultItem(ModBlocks.PAPAYA_SAPLING, BlockModelGenerators.TintState.NOT_TINTED);
 
         createMangoBlock(blockStateModelGenerator);
@@ -323,6 +330,7 @@ public class ModelDataGen extends FabricModelProvider {
         blockStateModelGenerator.skipAutoItemBlock(ModBlocks.SMALL_DURIAN_BLOCK);
         blockStateModelGenerator.skipAutoItemBlock(ModBlocks.DURIAN_CAKE);
         blockStateModelGenerator.skipAutoItemBlock(ModBlocks.MANGO_PUDDING);
+        blockStateModelGenerator.skipAutoItemBlock(ModBlocks.CRAB_EGG);
     }
 
     private static void createFermentedFishCauldron(BlockModelGenerators blockStateModelGenerator){
@@ -415,10 +423,44 @@ public class ModelDataGen extends FabricModelProvider {
     }
 
     private static void createPepperCrop(BlockModelGenerators blockModelGenerators){
-        blockModelGenerators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.PEPPER_CROP).with(PropertyDispatch.property(BlockStateProperties.AGE_7).generate((integer) -> {
-            return net.minecraft.data.models.blockstates.Variant.variant().with(VariantProperties.MODEL,
-                    blockModelGenerators.createSuffixedVariant(ModBlocks.PEPPER_CROP, "_stage" + integer, new ModelTemplate(Optional.of(new ResourceLocation(ThaiDelight.MOD_ID,"block/crop_cross")),Optional.empty(),TextureSlot.CROSS), TextureMapping::cross));
+
+        blockModelGenerators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.BUDDING_PEPPER_CROP)
+                .with(PropertyDispatch.property(BuddingPepperBlock.PEPPER_AGE).generate(integer -> {
+                    return Variant.variant().with(VariantProperties.MODEL,
+                            CROP_CROSS.create(
+                                    ThaiDelight.modid("block/pepper/budding_pepper_age%d".formatted(integer)),
+                                    TextureMapping.cross(ThaiDelight.modid("block/pepper/budding_pepper_age%d".formatted(integer))),
+                                    blockModelGenerators.modelOutput
+                            )
+                    );
+                })
+        ));
+
+        blockModelGenerators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.PEPPER_CROP)
+                .with(PropertyDispatch.property(PepperCropBlock.AGE).generate((integer) -> {
+            return Variant.variant().with(VariantProperties.MODEL,
+                        CROP_CROSS.create(
+                                ThaiDelight.modid("block/pepper/pepper_age%d".formatted(integer)),
+                                TextureMapping.cross(ThaiDelight.modid("block/pepper/pepper_age%d".formatted(integer))),
+                                blockModelGenerators.modelOutput
+                        )
+                    );
         })));
+
+        ModelTemplates.FLAT_ITEM
+                .create(
+                        ModelLocationUtils.getModelLocation(ModBlocks.WILD_PEPPER_CROP.asItem()),
+                        TextureMapping.layer0(ThaiDelight.modid("block/pepper/pepper_age2")),
+                        blockModelGenerators.modelOutput
+                );
+
+        blockModelGenerators.blockStateOutput.accept(createSimpleBlock(ModBlocks.WILD_PEPPER_CROP,
+                ModelTemplates.CROSS.create(
+                        ThaiDelight.modid("block/pepper/wild_pepper_crop"),
+                        TextureMapping.cross(ThaiDelight.modid("block/pepper/pepper_age2")),
+                        blockModelGenerators.modelOutput
+                )
+        ));
     }
 
     private static TextureMapping upperLimeMapping(int age){

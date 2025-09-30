@@ -82,6 +82,14 @@ public class ModCustomLootTableProvider extends SimpleFabricLootTableProvider {
                         .apply(LimitCount.limitCount(IntRange.upperBound(6)))
                 ));
 
+        biConsumer.accept(ModLootTables.PEPPER_HARVEST,
+                new LootTable.Builder().withPool(LootPool.lootPool()
+                        .add(LootItem.lootTableItem(ModItems.PEPPER))
+                        .apply(ApplyBonusCount.addBonusBinomialDistributionCount(Enchantments.BLOCK_FORTUNE, 0.5714286F, 3))
+                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(2,3)))
+                        .apply(LimitCount.limitCount(IntRange.upperBound(6)))
+                ));
+
         biConsumer.accept(ModLootTables.BUTTERFLY_PEA_SHEARS,
                 new LootTable.Builder().withPool(LootPool.lootPool()
                         .add(LootItem.lootTableItem(ModItems.BUTTERFLY_PEA_SEEDS))

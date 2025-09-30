@@ -12,6 +12,7 @@ public class ModLootTables {
     public static final ResourceLocation HOLY_BASIL_SHEARS = ThaiDelight.modid("harvest/holy_basil_shears");
     public static final ResourceLocation BUTTERFLY_PEA_HARVEST = ThaiDelight.modid("harvest/butterfly_pea_harvest");
     public static final ResourceLocation BUTTERFLY_PEA_SHEARS = ThaiDelight.modid("harvest/butterfly_pea_shears");
+    public static final ResourceLocation PEPPER_HARVEST = ThaiDelight.modid("harvest/pepper_harvest");
     //ENTITY
     public static final ResourceLocation DRAGONFLY = ThaiDelight.modid("entities/dragonfly");
     public static final ResourceLocation FLOWER_CRAB = ThaiDelight.modid("entities/flower_crab");

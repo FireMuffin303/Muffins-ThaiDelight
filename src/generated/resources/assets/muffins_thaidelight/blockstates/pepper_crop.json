@@ -1,28 +1,13 @@
 {
   "variants": {
     "age=0": {
-      "model": "muffins_thaidelight:block/pepper_crop_stage0"
+      "model": "muffins_thaidelight:block/pepper/pepper_age0"
     },
     "age=1": {
-      "model": "muffins_thaidelight:block/pepper_crop_stage1"
+      "model": "muffins_thaidelight:block/pepper/pepper_age1"
     },
     "age=2": {
-      "model": "muffins_thaidelight:block/pepper_crop_stage2"
-    },
-    "age=3": {
-      "model": "muffins_thaidelight:block/pepper_crop_stage3"
-    },
-    "age=4": {
-      "model": "muffins_thaidelight:block/pepper_crop_stage4"
-    },
-    "age=5": {
-      "model": "muffins_thaidelight:block/pepper_crop_stage5"
-    },
-    "age=6": {
-      "model": "muffins_thaidelight:block/pepper_crop_stage6"
-    },
-    "age=7": {
-      "model": "muffins_thaidelight:block/pepper_crop_stage7"
+      "model": "muffins_thaidelight:block/pepper/pepper_age2"
     }
   }
 }

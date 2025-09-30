@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "muffins_thaidelight:pepper"
+          "name": "muffins_thaidelight:pepper_seeds"
         }
       ],
       "rolls": 1.0
@@ -23,7 +23,7 @@
           "block": "muffins_thaidelight:pepper_crop",
           "condition": "minecraft:block_state_property",
           "properties": {
-            "age": "7"
+            "age": "2"
           }
         }
       ],
@@ -38,6 +38,21 @@
               "parameters": {
                 "extra": 3,
                 "probability": 0.5714286
+              }
+            },
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 3.0,
+                "min": 2.0
+              },
+              "function": "minecraft:set_count"
+            },
+            {
+              "function": "minecraft:limit_count",
+              "limit": {
+                "max": 6.0
               }
             }
           ],

@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "muffins_thaidelight:item/flower_crab_egg"
+    "layer0": "muffins_thaidelight:block/flower_crab_egg"
   }
 }
