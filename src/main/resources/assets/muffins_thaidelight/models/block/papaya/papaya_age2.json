@@ -3,8 +3,8 @@
 	"render_type": "minecraft:cutout",
 	"texture_size": [32, 32],
 	"textures": {
-		"0": "muffins_thaidelight:block/papaya_2",
-		"particle": "muffins_thaidelight:block/papaya_2"
+		"0": "muffins_thaidelight:block/papaya/papaya_2",
+		"particle": "muffins_thaidelight:block/papaya/papaya_2"
 	},
 	"elements": [
 		{
@@ -23,12 +23,8 @@
 			"from": [8, 10, 10],
 			"to": [8, 14, 16],
 			"faces": {
-				"north": {"uv": [0, 0, 0, 2], "texture": "#missing"},
 				"east": {"uv": [9, 2, 12, 4], "texture": "#0"},
-				"south": {"uv": [0, 0, 0, 2], "texture": "#missing"},
-				"west": {"uv": [9, 0, 12, 2], "texture": "#0"},
-				"up": {"uv": [0, 0, 0, 3], "texture": "#missing"},
-				"down": {"uv": [0, 0, 0, 3], "texture": "#missing"}
+				"west": {"uv": [9, 0, 12, 2], "texture": "#0"}
 			}
 		}
 	]

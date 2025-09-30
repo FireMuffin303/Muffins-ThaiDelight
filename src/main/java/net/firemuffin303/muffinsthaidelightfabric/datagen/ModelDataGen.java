@@ -133,10 +133,10 @@ public class ModelDataGen extends FabricModelProvider {
                         .generate(integer -> Variant.variant().with(VariantProperties.MODEL,ThaiDelight.modid("block/lime/stackable_lime_%d".formatted(integer))))
                 ).with(createHorizontalFacingDispatch()));
 
-        STACKABLE_PAPAYA_1.create(ThaiDelight.modid("block/papaya/stackable_papaya_1"),new TextureMapping().put(TextureSlot.ALL,ThaiDelight.modid("block/papaya_fruit")), blockStateModelGenerator.modelOutput);
-        STACKABLE_PAPAYA_2.create(ThaiDelight.modid("block/papaya/stackable_papaya_2"),new TextureMapping().put(TextureSlot.ALL,ThaiDelight.modid("block/papaya_fruit")), blockStateModelGenerator.modelOutput);
-        STACKABLE_PAPAYA_1.create(ThaiDelight.modid("block/papaya/stackable_raw_papaya_1"),new TextureMapping().put(TextureSlot.ALL,ThaiDelight.modid("block/unripe_papaya_fruit")), blockStateModelGenerator.modelOutput);
-        STACKABLE_PAPAYA_2.create(ThaiDelight.modid("block/papaya/stackable_raw_papaya_2"),new TextureMapping().put(TextureSlot.ALL,ThaiDelight.modid("block/unripe_papaya_fruit")), blockStateModelGenerator.modelOutput);
+        STACKABLE_PAPAYA_1.create(ThaiDelight.modid("block/papaya/stackable_papaya_1"),new TextureMapping().put(TextureSlot.ALL,ThaiDelight.modid("block/papaya/papaya_fruit")), blockStateModelGenerator.modelOutput);
+        STACKABLE_PAPAYA_2.create(ThaiDelight.modid("block/papaya/stackable_papaya_2"),new TextureMapping().put(TextureSlot.ALL,ThaiDelight.modid("block/papaya/papaya_fruit")), blockStateModelGenerator.modelOutput);
+        STACKABLE_PAPAYA_1.create(ThaiDelight.modid("block/papaya/stackable_raw_papaya_1"),new TextureMapping().put(TextureSlot.ALL,ThaiDelight.modid("block/papaya/unripe_papaya_fruit")), blockStateModelGenerator.modelOutput);
+        STACKABLE_PAPAYA_2.create(ThaiDelight.modid("block/papaya/stackable_raw_papaya_2"),new TextureMapping().put(TextureSlot.ALL,ThaiDelight.modid("block/papaya/unripe_papaya_fruit")), blockStateModelGenerator.modelOutput);
 
         blockStateModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.STACKABLE_PAPAYA)
                 .with(PropertyDispatch.property(StackablePapayaBlock.STACKS)
@@ -178,21 +178,28 @@ public class ModelDataGen extends FabricModelProvider {
                         .select(true,Variant.variant()
                                 .with(VariantProperties.MODEL,
                                         ModelTemplates.CUBE_COLUMN.createWithSuffix(ModBlocks.PAPAYA_LOG,"_bottom", new TextureMapping()
-                                                .put(TextureSlot.SIDE, getBlockTexture(ModBlocks.PAPAYA_LOG,"_bottom"))
-                                                .put(TextureSlot.END, getBlockTexture(ModBlocks.PAPAYA_LOG, "_top"))
-                                                .put(TextureSlot.PARTICLE, getBlockTexture(ModBlocks.PAPAYA_LOG,"_bottom")),
+                                                .put(TextureSlot.SIDE, ThaiDelight.modid("block/papaya/papaya_log_bottom"))
+                                                .put(TextureSlot.END, ThaiDelight.modid("block/papaya/papaya_log_top"))
+                                                .put(TextureSlot.PARTICLE, ThaiDelight.modid("block/papaya/papaya_log_bottom")),
                                                 blockStateModelGenerator.modelOutput))
                         )
                         .select(false,Variant.variant()
                                 .with(VariantProperties.MODEL,
                                         ModelTemplates.CUBE_COLUMN.create(ModBlocks.PAPAYA_LOG,new TextureMapping()
-                                                .put(TextureSlot.SIDE, getBlockTexture(ModBlocks.PAPAYA_LOG))
-                                                .put(TextureSlot.END, getBlockTexture(ModBlocks.PAPAYA_LOG, "_top"))
-                                                .put(TextureSlot.PARTICLE, getBlockTexture(ModBlocks.PAPAYA_LOG)), blockStateModelGenerator.modelOutput))
+                                                .put(TextureSlot.SIDE, ThaiDelight.modid("block/papaya/papaya_log"))
+                                                .put(TextureSlot.END, ThaiDelight.modid("block/papaya/papaya_log_top"))
+                                                .put(TextureSlot.PARTICLE, ThaiDelight.modid("block/papaya/papaya_log")), blockStateModelGenerator.modelOutput))
                         )
                 )
                 .with(createRotatedPillar())
         );
+
+        blockStateModelGenerator.blockStateOutput.accept(BlockModelGenerators.createAxisAlignedPillarBlock(ModBlocks.PAPAYA_WOOD,
+                ModelTemplates.CUBE_COLUMN.create(ModBlocks.PAPAYA_WOOD,
+                        new TextureMapping()
+                                .put(TextureSlot.END,ThaiDelight.modid("block/papaya/papaya_log"))
+                                .put(TextureSlot.SIDE,ThaiDelight.modid("block/papaya/papaya_log")),
+                        blockStateModelGenerator.modelOutput)));
 
 
 
@@ -202,7 +209,6 @@ public class ModelDataGen extends FabricModelProvider {
         ResourceLocation resourceLocation = ModelTemplates.CUBE_COLUMN.create(ModBlocks.COCONUT_LEAF_BLOCK, TextureMapping.logColumn(ModBlocks.COCONUT_LEAF_BLOCK), blockStateModelGenerator.modelOutput);
         blockStateModelGenerator.blockStateOutput.accept(BlockModelGenerators.createAxisAlignedPillarBlock(ModBlocks.COCONUT_LEAF_BLOCK, resourceLocation));
 
-        blockStateModelGenerator.woodProvider(ModBlocks.PAPAYA_LOG).wood(ModBlocks.PAPAYA_WOOD);
         blockStateModelGenerator.woodProvider(ModBlocks.STRIPPED_PAPAYA_LOG).logWithHorizontal(ModBlocks.STRIPPED_PAPAYA_LOG).wood(ModBlocks.STRIPPED_PAPAYA_WOOD);
 
         //Durian Model
@@ -246,8 +252,13 @@ public class ModelDataGen extends FabricModelProvider {
         blockStateModelGenerator.blockStateOutput.accept(
                 MultiVariantGenerator.multiVariant(ModBlocks.PAPAYA)
                         .with(PropertyDispatch.property(BlockStateProperties.AGE_2).generate(integer -> {
+                            if(integer == 0){
+                                return Variant.variant().with(VariantProperties.MODEL,
+                                        ThaiDelight.modid("block/papaya/papaya_flower"));
+                            }
+
                             return Variant.variant().with(VariantProperties.MODEL,
-                                    ModelLocationUtils.getModelLocation(ModBlocks.PAPAYA, "_stage%d".formatted(integer)));
+                                    ThaiDelight.modid("block/papaya/papaya_age%d".formatted(integer)));
                                 }))
                         .with(createHorizontalFacingDispatchAlt()));
 
