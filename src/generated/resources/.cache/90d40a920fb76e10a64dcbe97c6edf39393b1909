@@ -1,4 +1,4 @@
-// 1.20.1	2025-09-29T23:42:06.210046	Muffin's Thai's Delight Refabricated/Recipes
+// 1.20.1	2025-09-30T11:25:25.8325983	Muffin's Thai's Delight Refabricated/Recipes
 6bb67d275913c0a7a26f168a3eff355df6123b2d data\muffins_thaidelight\recipes\mortar\bone_meal_by_nautilus_shell.json
 833d9b11d227d28a58f6b952568eef4b812d6ce7 data\muffins_thaidelight\advancements\recipes\mortar\brown_dye_by_cocoa.json
 129f03f235429fcbd9d1ff8e349859d531414342 data\muffins_thaidelight\advancements\recipes\misc\crafting\papaya_sapling_by_sliced_papaya_from_crafting.json
@@ -88,8 +88,8 @@ e363fdb1dea457a9905a5e5fd7855ac27465b0e7 data\muffins_thaidelight\recipes\durian
 522f91e59fd11c941bef88eaa8ebfd79f20a1015 data\muffins_thaidelight\recipes\crafting\mortar.json
 6e6de81446343137591275482d882ae163d7262e data\muffins_thaidelight\advancements\recipes\building_blocks\coconut_wood.json
 9f226fe8163ee6b882a0ddd17462785ac63e7066 data\muffins_thaidelight\recipes\coconut_planks.json
-d7bf4e628c3862d3d88eda868ff96f8b61642b70 data\muffins_thaidelight\recipes\crafting\durian_cabinet.json
 a92c6ceaf5f68f04992194eb09dafcae244eb11e data\muffins_thaidelight\recipes\durian_chest_boat.json
+d7bf4e628c3862d3d88eda868ff96f8b61642b70 data\muffins_thaidelight\recipes\crafting\durian_cabinet.json
 2c7c9b201feaa5e89233bd231bd1f22fed9ade43 data\muffins_thaidelight\advancements\recipes\transportation\durian_chest_boat.json
 a8495cef54d60891063cff54fc3bd313d868eabb data\muffins_thaidelight\advancements\recipes\building_blocks\durian_planks.json
 2eb68844a5ede163bfdc7f7924e65ae96070a663 data\muffins_thaidelight\recipes\crafting\papaya_sapling_by_unripe_papaya_from_crafting.json

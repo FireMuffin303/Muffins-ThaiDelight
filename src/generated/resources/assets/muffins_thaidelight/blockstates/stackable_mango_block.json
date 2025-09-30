@@ -1,0 +1,49 @@
+{
+  "variants": {
+    "facing=east,mangoes=1": {
+      "model": "muffins_thaidelight:block/mango/stackable_mango_1",
+      "y": 90
+    },
+    "facing=east,mangoes=2": {
+      "model": "muffins_thaidelight:block/mango/stackable_mango_2",
+      "y": 90
+    },
+    "facing=east,mangoes=3": {
+      "model": "muffins_thaidelight:block/mango/stackable_mango_3",
+      "y": 90
+    },
+    "facing=north,mangoes=1": {
+      "model": "muffins_thaidelight:block/mango/stackable_mango_1"
+    },
+    "facing=north,mangoes=2": {
+      "model": "muffins_thaidelight:block/mango/stackable_mango_2"
+    },
+    "facing=north,mangoes=3": {
+      "model": "muffins_thaidelight:block/mango/stackable_mango_3"
+    },
+    "facing=south,mangoes=1": {
+      "model": "muffins_thaidelight:block/mango/stackable_mango_1",
+      "y": 180
+    },
+    "facing=south,mangoes=2": {
+      "model": "muffins_thaidelight:block/mango/stackable_mango_2",
+      "y": 180
+    },
+    "facing=south,mangoes=3": {
+      "model": "muffins_thaidelight:block/mango/stackable_mango_3",
+      "y": 180
+    },
+    "facing=west,mangoes=1": {
+      "model": "muffins_thaidelight:block/mango/stackable_mango_1",
+      "y": 270
+    },
+    "facing=west,mangoes=2": {
+      "model": "muffins_thaidelight:block/mango/stackable_mango_2",
+      "y": 270
+    },
+    "facing=west,mangoes=3": {
+      "model": "muffins_thaidelight:block/mango/stackable_mango_3",
+      "y": 270
+    }
+  }
+}

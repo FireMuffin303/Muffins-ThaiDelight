@@ -1,45 +1,40 @@
-package net.firemuffin303.muffinsthaidelightfabric.common.block.lime;
+package net.firemuffin303.muffinsthaidelightfabric.common.block.papaya;
 
 import net.firemuffin303.muffinsthaidelightfabric.common.block.AbstractStackableBlock;
-import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.RandomSource;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import net.minecraft.world.level.gameevent.GameEvent;
-import net.minecraft.world.level.pathfinder.PathComputationType;
-import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class LimeBlock extends AbstractStackableBlock {
+import java.util.function.Supplier;
 
-    public static final IntegerProperty STACKS = IntegerProperty.create("limes",1,4);
+public class StackablePapayaBlock extends AbstractStackableBlock {
+    public static final IntegerProperty STACKS = IntegerProperty.create("papayas",1,2);
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
-    public LimeBlock(Properties properties) {
+    private final Supplier<ItemLike> itemLike;
+
+    public StackablePapayaBlock(Properties properties, Supplier<ItemLike> item) {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(WATERLOGGED,false)
                 .setValue(STACKS,1)
-                .setValue(FACING,Direction.NORTH)
-        );
+                .setValue(FACING, Direction.NORTH));
+
+        this.itemLike = item;
     }
 
     @Override
@@ -64,17 +59,17 @@ public class LimeBlock extends AbstractStackableBlock {
 
     @Override
     public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
-        return switch (blockState.getValue(STACKS)) {
-            case 2 -> Block.box(3.0, 0.0, 3.0, 13.0, 4.0, 13.0);
-            case 3 -> Block.box(2.0, 0.0, 2.0, 14.0, 4.0, 14.0);
-            case 4 -> Block.box(2.0, 0.0, 2.0, 14.0, 8.0, 14.0);
-            default -> Block.box(6.0, 0.0, 6.0, 10.0, 4.0, 10.0);
-        };
+        boolean bl = blockState.getValue(FACING) == Direction.EAST || blockState.getValue(FACING) == Direction.WEST;
+        if(blockState.getValue(STACKS) == 2){
+            return bl ? Block.box(3.0, 0.0, 1.0, 14.0, 6.0, 15.0) : Block.box(1.0, 0.0, 2.0, 15.0, 6.0, 13.0);
+        }
+
+        return bl ? Block.box(3.0, 0.0, 5.0, 13.0, 6.0, 11.0) : Block.box(5.0, 0.0, 3.0, 11.0, 6.0, 13.0);
     }
 
     @Override
     protected int getMaxStack() {
-        return 4;
+        return 2;
     }
 
     @Override
@@ -84,6 +79,6 @@ public class LimeBlock extends AbstractStackableBlock {
 
     @Override
     public ItemLike getPickUpItem() {
-        return ModItems.LIME;
+        return this.itemLike.get();
     }
 }

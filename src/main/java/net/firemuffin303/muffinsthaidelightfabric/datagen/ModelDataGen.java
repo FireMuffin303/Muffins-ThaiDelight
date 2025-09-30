@@ -11,7 +11,9 @@ import net.firemuffin303.muffinsthaidelightfabric.common.block.coconut.CoconutLe
 import net.firemuffin303.muffinsthaidelightfabric.common.block.lime.LimeBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.lime.LimePlantBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.mango.MangoBlock;
+import net.firemuffin303.muffinsthaidelightfabric.common.block.mango.StackableMangoBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.PapayaLogBlock;
+import net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.StackablePapayaBlock;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModItems;
 import net.minecraft.client.model.Model;
@@ -58,6 +60,9 @@ public class ModelDataGen extends FabricModelProvider {
 
     private static final ModelTemplate CROP_WITH_ROPE = new ModelTemplate(Optional.of(new ResourceLocation("farmersdelight","block/crop_with_rope")),Optional.empty(),TextureSlot.CROP,ROPE_SIDE,ROPE_TOP);
     private static final ModelTemplate CROP_CROSS = new ModelTemplate(Optional.of(new ResourceLocation("farmersdelight","block/crop_cross")),Optional.empty(),TextureSlot.CROSS);
+
+    private static final ModelTemplate STACKABLE_PAPAYA_1 = new ModelTemplate(Optional.of(ThaiDelight.modid("block/papaya/template_stackable_papaya_1")),Optional.empty(),TextureSlot.ALL);
+    private static final ModelTemplate STACKABLE_PAPAYA_2 = new ModelTemplate(Optional.of(ThaiDelight.modid("block/papaya/template_stackable_papaya_2")),Optional.empty(),TextureSlot.ALL);
 
     private static final BlockFamily DURIAN_PLANKS = BlockFamilies.familyBuilder(ModBlocks.DURIAN_PLANKS)
             .button(ModBlocks.DURIAN_BUTTON)
@@ -127,6 +132,28 @@ public class ModelDataGen extends FabricModelProvider {
                         .generate(integer -> Variant.variant().with(VariantProperties.MODEL,ThaiDelight.modid("block/lime/stackable_lime_%d".formatted(integer))))
                 ).with(createHorizontalFacingDispatch()));
 
+        STACKABLE_PAPAYA_1.create(ThaiDelight.modid("block/papaya/stackable_papaya_1"),new TextureMapping().put(TextureSlot.ALL,ThaiDelight.modid("block/papaya_fruit")), blockStateModelGenerator.modelOutput);
+        STACKABLE_PAPAYA_2.create(ThaiDelight.modid("block/papaya/stackable_papaya_2"),new TextureMapping().put(TextureSlot.ALL,ThaiDelight.modid("block/papaya_fruit")), blockStateModelGenerator.modelOutput);
+        STACKABLE_PAPAYA_1.create(ThaiDelight.modid("block/papaya/stackable_raw_papaya_1"),new TextureMapping().put(TextureSlot.ALL,ThaiDelight.modid("block/unripe_papaya_fruit")), blockStateModelGenerator.modelOutput);
+        STACKABLE_PAPAYA_2.create(ThaiDelight.modid("block/papaya/stackable_raw_papaya_2"),new TextureMapping().put(TextureSlot.ALL,ThaiDelight.modid("block/unripe_papaya_fruit")), blockStateModelGenerator.modelOutput);
+
+        blockStateModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.STACKABLE_PAPAYA)
+                .with(PropertyDispatch.property(StackablePapayaBlock.STACKS)
+                        .generate(integer -> Variant.variant().with(VariantProperties.MODEL,ThaiDelight.modid("block/papaya/stackable_papaya_%d".formatted(integer))))
+                ).with(createHorizontalFacingDispatch()));
+
+        blockStateModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.STACKABLE_RAW_PAPAYA)
+                .with(PropertyDispatch.property(StackablePapayaBlock.STACKS)
+                        .generate(integer -> Variant.variant().with(VariantProperties.MODEL,ThaiDelight.modid("block/papaya/stackable_raw_papaya_%d".formatted(integer))))
+                ).with(createHorizontalFacingDispatch()));
+
+        blockStateModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.STACKABLE_MANGO_BLOCK)
+                .with(PropertyDispatch.property(StackableMangoBlock.STACKS)
+                        .generate(integer -> Variant.variant().with(VariantProperties.MODEL,ThaiDelight.modid("block/mango/stackable_mango_%d".formatted(integer))))
+                ).with(createHorizontalFacingDispatch()));
+
+        blockStateModelGenerator.blockStateOutput.accept(createSimpleBlock(ModBlocks.COCONUT,ThaiDelight.modid("block/coconut/coconut_block")));
+
         blockStateModelGenerator.blockStateOutput.accept(createSimpleBlock(ModBlocks.CRAB_EGG,ModelLocationUtils.getModelLocation(ModBlocks.CRAB_EGG)));
 
         createCropRope(ModBlocks.BUTTERFLY_PEA_BLOCK,blockStateModelGenerator);
@@ -159,6 +186,8 @@ public class ModelDataGen extends FabricModelProvider {
                 )
                 .with(createRotatedPillar())
         );
+
+
 
         blockStateModelGenerator.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(ModBlocks.MORTAR,ModelLocationUtils.getModelLocation(ModBlocks.MORTAR)).with(createHorizontalFacingDispatch()));
 
@@ -209,13 +238,10 @@ public class ModelDataGen extends FabricModelProvider {
 
         blockStateModelGenerator.blockStateOutput.accept(
                 MultiVariantGenerator.multiVariant(ModBlocks.PAPAYA)
-                        .with(PropertyDispatch.property(BlockStateProperties.AGE_2)
-                                .select(0, net.minecraft.data.models.blockstates.Variant.variant()
-                                        .with(VariantProperties.MODEL, ModelLocationUtils.getModelLocation(ModBlocks.PAPAYA, "_stage0")))
-                                .select(1, net.minecraft.data.models.blockstates.Variant.variant()
-                                        .with(VariantProperties.MODEL, ModelLocationUtils.getModelLocation(ModBlocks.PAPAYA, "_stage1")))
-                                .select(2, net.minecraft.data.models.blockstates.Variant.variant()
-                                        .with(VariantProperties.MODEL, ModelLocationUtils.getModelLocation(ModBlocks.PAPAYA, "_stage2"))))
+                        .with(PropertyDispatch.property(BlockStateProperties.AGE_2).generate(integer -> {
+                            return Variant.variant().with(VariantProperties.MODEL,
+                                    ModelLocationUtils.getModelLocation(ModBlocks.PAPAYA, "_stage%d".formatted(integer)));
+                                }))
                         .with(createHorizontalFacingDispatchAlt()));
 
 
@@ -263,47 +289,8 @@ public class ModelDataGen extends FabricModelProvider {
                     blockStateModelGenerator.createSuffixedVariant(ModBlocks.PAPAYA_CROP, "_stage" + integer, new ModelTemplate(Optional.of(new ResourceLocation(ThaiDelight.MOD_ID,"block/crop_cross")),Optional.empty(),TextureSlot.CROSS), TextureMapping::cross));
         })));
 
-        ResourceLocation fermentedLevel0 = new ResourceLocation(ThaiDelight.MOD_ID,"block/fermented_fish_cauldron_fermented0");
-        ResourceLocation fermentedLevel1 = new ResourceLocation(ThaiDelight.MOD_ID,"block/fermented_fish_cauldron_fermented1");
-        ResourceLocation fermentedLevel2 = new ResourceLocation(ThaiDelight.MOD_ID,"block/fermented_fish_cauldron_fermented2");
 
-        blockStateModelGenerator.blockStateOutput.accept(
-                MultiVariantGenerator.multiVariant(ModBlocks.FERMENTED_FISH_CAULDRON)
-                        .with(PropertyDispatch.properties(FermentedFishCauldronBlock.LEVEL,FermentedFishCauldronBlock.FERMENT)
-                                .select(1,0, Variant.variant().with(VariantProperties.MODEL,
-                                        ModelTemplates.CAULDRON_LEVEL1.createWithSuffix(ModBlocks.FERMENTED_FISH_CAULDRON,"_fermented0_level1",
-                                                TextureMapping.cauldron(fermentedLevel0), blockStateModelGenerator.modelOutput)))
-                                .select(1,1,Variant.variant().with(VariantProperties.MODEL,
-                                        ModelTemplates.CAULDRON_LEVEL1.createWithSuffix(ModBlocks.FERMENTED_FISH_CAULDRON,"_fermented1_level1",
-                                                TextureMapping.cauldron(fermentedLevel1), blockStateModelGenerator.modelOutput)))
-                                .select(1,2,Variant.variant().with(VariantProperties.MODEL,
-                                        ModelTemplates.CAULDRON_LEVEL1.createWithSuffix(ModBlocks.FERMENTED_FISH_CAULDRON,"_fermented2_level1",
-                                                TextureMapping.cauldron(fermentedLevel2), blockStateModelGenerator.modelOutput)))
-
-                                .select(2,0, Variant.variant().with(VariantProperties.MODEL,
-                                        ModelTemplates.CAULDRON_LEVEL2.createWithSuffix(ModBlocks.FERMENTED_FISH_CAULDRON,"_fermented0_level2",
-                                                TextureMapping.cauldron(fermentedLevel0), blockStateModelGenerator.modelOutput)))
-                                .select(2,1,Variant.variant().with(VariantProperties.MODEL,
-                                        ModelTemplates.CAULDRON_LEVEL2.createWithSuffix(ModBlocks.FERMENTED_FISH_CAULDRON,"_fermented1_level2",
-                                                TextureMapping.cauldron(fermentedLevel1), blockStateModelGenerator.modelOutput)))
-                                .select(2,2,Variant.variant().with(VariantProperties.MODEL,
-                                        ModelTemplates.CAULDRON_LEVEL2.createWithSuffix(ModBlocks.FERMENTED_FISH_CAULDRON,"_fermented2_level2",
-                                                TextureMapping.cauldron(fermentedLevel2), blockStateModelGenerator.modelOutput)))
-
-                                .select(3,0, Variant.variant().with(VariantProperties.MODEL,
-                                        ModelTemplates.CAULDRON_FULL.createWithSuffix(ModBlocks.FERMENTED_FISH_CAULDRON,"_fermented0_level3",
-                                                TextureMapping.cauldron(fermentedLevel0), blockStateModelGenerator.modelOutput)))
-                                .select(3,1,Variant.variant().with(VariantProperties.MODEL,
-                                        ModelTemplates.CAULDRON_FULL.createWithSuffix(ModBlocks.FERMENTED_FISH_CAULDRON,"_fermented1_level3",
-                                                TextureMapping.cauldron(fermentedLevel1), blockStateModelGenerator.modelOutput)))
-                                .select(3,2,Variant.variant().with(VariantProperties.MODEL,
-                                        ModelTemplates.CAULDRON_FULL.createWithSuffix(ModBlocks.FERMENTED_FISH_CAULDRON,"_fermented2_level3",
-                                                TextureMapping.cauldron(fermentedLevel2), blockStateModelGenerator.modelOutput)))
-                        )
-        );
-
-
-
+        createFermentedFishCauldron(blockStateModelGenerator);
 
         blockStateModelGenerator.createPlant(ModBlocks.LIME_SAPLING,ModBlocks.POTTED_LIME_SAPLING, BlockModelGenerators.TintState.NOT_TINTED);
         blockStateModelGenerator.createPlant(ModBlocks.COCONUT_SAPLING,ModBlocks.POTTED_COCONUT_SAPLING, BlockModelGenerators.TintState.NOT_TINTED);
@@ -336,6 +323,26 @@ public class ModelDataGen extends FabricModelProvider {
         blockStateModelGenerator.skipAutoItemBlock(ModBlocks.SMALL_DURIAN_BLOCK);
         blockStateModelGenerator.skipAutoItemBlock(ModBlocks.DURIAN_CAKE);
         blockStateModelGenerator.skipAutoItemBlock(ModBlocks.MANGO_PUDDING);
+    }
+
+    private static void createFermentedFishCauldron(BlockModelGenerators blockStateModelGenerator){
+        blockStateModelGenerator.blockStateOutput.accept(
+                MultiVariantGenerator.multiVariant(ModBlocks.FERMENTED_FISH_CAULDRON)
+                        .with(PropertyDispatch.properties(FermentedFishCauldronBlock.LEVEL,FermentedFishCauldronBlock.FERMENT)
+                                .generate((heightLevel, fermentedLevel) -> {
+                                    ModelTemplate cauldronLevel = ModelTemplates.CAULDRON_LEVEL1;
+                                    switch (heightLevel){
+                                        case 2 -> cauldronLevel = ModelTemplates.CAULDRON_LEVEL2;
+                                        case 3 -> cauldronLevel = ModelTemplates.CAULDRON_FULL;
+                                    }
+
+                                    return Variant.variant().with(VariantProperties.MODEL,
+                                            cauldronLevel.createWithSuffix(ModBlocks.FERMENTED_FISH_CAULDRON,"_fermented%d_level%d".formatted(fermentedLevel,heightLevel),
+                                                    TextureMapping.cauldron(ThaiDelight.modid("block/fermented_fish_cauldron_fermented%d".formatted(fermentedLevel))),
+                                                    blockStateModelGenerator.modelOutput));
+                                })
+                        )
+        );
     }
 
     private static void createCropRope(Block block,BlockModelGenerators blockModelGenerators){

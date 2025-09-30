@@ -166,7 +166,7 @@ public class ModItems {
     public static final Item COCONUT_BOAT = TerraformBoatItemHelper.registerBoatItem(ThaiDelight.modid("coconut_boat"),COCONUT_BOAT_KEY,false);
     public static final Item COCONUT_CHEST_BOAT = TerraformBoatItemHelper.registerBoatItem(ThaiDelight.modid("coconut_chest_boat"),COCONUT_BOAT_KEY,true);
 
-    public static final Item COCONUT = registerFlatItem("coconut",new Item(new Item.Properties()));
+    public static final Item COCONUT = registerFlatItem("coconut",new BlockItem(ModBlocks.COCONUT,new Item.Properties()));
 
 
     //------------------ 🥭 MANGO 🥭 --------------------
@@ -192,19 +192,13 @@ public class ModItems {
     public static final Item MANGO_BOAT = TerraformBoatItemHelper.registerBoatItem(ThaiDelight.modid("mango_boat"),MANGO_BOAT_KEY,false);
     public static final Item MANGO_CHEST_BOAT = TerraformBoatItemHelper.registerBoatItem(ThaiDelight.modid("mango_chest_boat"),MANGO_BOAT_KEY,true);
 
-    public static final Item MANGO = registerFlatItem("mango",new SneakPlaceItemNameBlock(ModBlocks.STACKABLE_MANGO_BLOCK,new Item.Properties()){
-        @Override
-        public void registerBlocks(Map<Block, Item> map, Item item) {
-            super.registerBlocks(map, item);
-            map.put(ModBlocks.STACKABLE_MANGO_BLOCK,item);
-        }
-    });
+    public static final Item MANGO = registerFlatItem("mango",new ItemNameBlockItem(ModBlocks.STACKABLE_MANGO_BLOCK,new Item.Properties()));
     public static final Item MANGO_SLICE = registerFlatItem("mango_slice",new Item(new Item.Properties()));
 
     //----- 🍐 Papaya 🍐 -----------------------------------
-    public static final Item PAPAYA = registerFlatItem("papaya",new Item(new Item.Properties().food(ModFood.PAPAYA)));
+    public static final Item PAPAYA = registerFlatItem("papaya",new ItemNameBlockItem(ModBlocks.STACKABLE_PAPAYA,new Item.Properties().food(ModFood.PAPAYA)));
     public static final Item SLICED_PAPAYA = registerFlatItem("papaya_slice",new Item(new Item.Properties().food(ModFood.SLICED_PAPAYA)));
-    public static final Item RAW_PAPAYA = registerFlatItem("raw_papaya",new Item(new Item.Properties().food(ModFood.RAW_PAPAYA)));
+    public static final Item RAW_PAPAYA = registerFlatItem("raw_papaya",new ItemNameBlockItem(ModBlocks.STACKABLE_RAW_PAPAYA,new Item.Properties().food(ModFood.RAW_PAPAYA)));
     public static final Item RAW_PAPAYA_SLICE = registerFlatItem("raw_papaya_slice",new Item(new Item.Properties().food(ModFood.SLICED_UNRIPE_PAPAYA)));
     public static final Item PAPAYA_LOG = register("papaya_log",new BlockItem(ModBlocks.PAPAYA_LOG,new Item.Properties()));
     public static final Item STRIPPED_PAPAYA_LOG = register("stripped_papaya_log",new BlockItem(ModBlocks.STRIPPED_PAPAYA_LOG,new Item.Properties()));

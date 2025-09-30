@@ -8,10 +8,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.ItemLike;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
@@ -24,6 +21,8 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 public class SmallDurianBlock extends HorizontalDirectionalBlock implements SimpleWaterloggedBlock, StackableBlock {
@@ -94,6 +93,16 @@ public class SmallDurianBlock extends HorizontalDirectionalBlock implements Simp
     @Override
     public FluidState getFluidState(BlockState blockState) {
         return blockState.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(blockState);
+    }
+
+    @Override
+    public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
+        boolean bl = blockState.getValue(FACING) == Direction.EAST || blockState.getValue(FACING) == Direction.WEST;
+        return switch (blockState.getValue(STACKS)) {
+            case 2 -> bl ? Block.box(2.0, 0.0, 0.0, 14.0, 8.0, 16.0) : Block.box(0.0, 0.0, 2.0, 16.0, 8.0, 14.0);
+            case 3 -> bl ? Block.box(2.0, 0.0, 0.0, 14.0, 16.0, 16.0) : Block.box(0.0, 0.0, 2.0, 16.0, 16.0, 14.0);
+            default -> Block.box(4.0, 0.0, 4.0, 12.0, 8.0, 12.0);
+        };
     }
 
     @Override

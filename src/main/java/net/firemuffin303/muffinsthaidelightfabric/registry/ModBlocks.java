@@ -12,6 +12,7 @@ import net.firemuffin303.muffinsthaidelightfabric.common.block.butterfly_pea.Bud
 import net.firemuffin303.muffinsthaidelightfabric.common.block.butterfly_pea.ButterflyPeaVineBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.butterfly_pea.WallFlowerBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.coconut.BundledCoconutLeafBlock;
+import net.firemuffin303.muffinsthaidelightfabric.common.block.coconut.CoconutBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.coconut.CoconutLeafBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.coconut.CoconutLeafEndBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.HangingDurianBlock;
@@ -20,9 +21,11 @@ import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.DurianLeav
 import net.firemuffin303.muffinsthaidelightfabric.common.block.StackableSmallBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.lime.*;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.mango.MangoBlock;
+import net.firemuffin303.muffinsthaidelightfabric.common.block.mango.StackableMangoBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.PapayaBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.PapayaCropBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.PapayaLogBlock;
+import net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.StackablePapayaBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.world.trees.DurianTreeGrower;
 import net.firemuffin303.muffinsthaidelightfabric.common.world.trees.MangoTreeGrower;
 import net.firemuffin303.muffinsthaidelightfabric.common.world.trees.PapayaTreeGrower;
@@ -200,6 +203,8 @@ public class ModBlocks {
     public static final Block DURIAN_CABINET = registerCabinet("durian_cabinet");
 
     //Coconut
+    public static final Block COCONUT = register("coconut",new CoconutBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).strength(1.0F).sound(SoundType.WOOD).noOcclusion().pushReaction(PushReaction.DESTROY)));
+
     public static final Block COCONUT_SAPLING = register("coconut_sapling",new SaplingBlock(new DurianTreeGrower(),BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)){
         @Override
         public boolean mayPlaceOn(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
@@ -319,7 +324,7 @@ public class ModBlocks {
     public static final Block MANGO_SAPLING = register("mango_sapling",new SaplingBlock(new MangoTreeGrower(),BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
     public static final Block POTTED_MANGO_SAPLING = register("potted_mango_sapling",Blocks.flowerPot(ModBlocks.MANGO_SAPLING));
     public static final Block MANGO_LEAVES = register("mango_leaves",new LeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES)));
-    public static final Block STACKABLE_MANGO_BLOCK = register("stackable_mango_block", new StackableSmallBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).strength(1.0F).sound(SoundType.WOOD).pushReaction(PushReaction.DESTROY),() -> ModItems.MANGO));
+    public static final Block STACKABLE_MANGO_BLOCK = register("stackable_mango_block", new StackableMangoBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).strength(1.0F).sound(SoundType.WOOD).noOcclusion().pushReaction(PushReaction.DESTROY)));
     public static final Block MANGO_BLOCK = register("mango_block",new MangoBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).strength(1.0F).sound(SoundType.WOOD).pushReaction(PushReaction.DESTROY).noOcclusion().instabreak().randomTicks()));
 
     public static final Block MANGO_LOG = register("mango_log", Blocks.log(MapColor.COLOR_BROWN,MapColor.COLOR_YELLOW));
@@ -455,6 +460,9 @@ public class ModBlocks {
     public static final Block PAPAYA = register("papaya",new PapayaBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).randomTicks().strength(0.2F, 3.0F).sound(SoundType.WOOD).noOcclusion().pushReaction(PushReaction.DESTROY)));
     public static final Block PAPAYA_SAPLING = register("papaya_sapling",new SaplingBlock(new PapayaTreeGrower(), BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY)));
     public static final Block PAPAYA_CROP = register("papaya_crop",new PapayaCropBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY)));
+
+    public static final Block STACKABLE_PAPAYA = register("stackable_papaya",new StackablePapayaBlock(BlockBehaviour.Properties.copy(ModBlocks.LIME_BLOCK),() -> ModItems.PAPAYA));
+    public static final Block STACKABLE_RAW_PAPAYA = register("stackable_raw_papaya",new StackablePapayaBlock(BlockBehaviour.Properties.copy(ModBlocks.LIME_BLOCK),() -> ModItems.RAW_PAPAYA));
 
     //Cauldron
     public static final Block FERMENTED_FISH_CAULDRON = register("fermented_fish_cauldron",new FermentedFishCauldronBlock(BlockBehaviour.Properties.copy(Blocks.CAULDRON),ModCauldronInteraction.FERMENTED_FISH));
