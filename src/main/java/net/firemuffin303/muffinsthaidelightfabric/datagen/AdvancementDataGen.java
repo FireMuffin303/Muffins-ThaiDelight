@@ -8,11 +8,10 @@ import net.firemuffin303.muffinsthaidelightfabric.registry.ModItems;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModMobEffects;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.FrameType;
-import net.minecraft.advancements.critereon.EffectsChangedTrigger;
-import net.minecraft.advancements.critereon.InventoryChangeTrigger;
-import net.minecraft.advancements.critereon.MobEffectsPredicate;
+import net.minecraft.advancements.critereon.*;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 
 import java.util.function.Consumer;
@@ -124,6 +123,24 @@ public class AdvancementDataGen extends FabricAdvancementProvider {
             .build(new ResourceLocation(ThaiDelight.MOD_ID,"being_stinky"));
 
 
+    Advancement SUSIE_PRIZE = Advancement.Builder.advancement()
+            .display(ModItems.PAPAYA_FLOWER,
+                    Component.translatable("advancement.muffins_thaidelight.susie_prize"),
+                    Component.translatable("advancement.muffins_thaidelight.susie_prize.description"),
+                    BACKGROUND,
+                    FrameType.TASK,
+                    true,true,false
+                    )
+            .addCriterion("susie_prize",
+                    ItemUsedOnLocationTrigger.TriggerInstance.itemUsedOnBlock(
+                            LocationPredicate.Builder.location().setBlock(BlockPredicate.Builder.block().of(
+                                    ModBlocks.WALL_PAPAYA_FLOWER,
+                                    ModBlocks.PAPAYA_FLOWER).build()),
+                            ItemPredicate.Builder.item().of(Items.GLOW_INK_SAC)
+                    )
+            ).parent(ROOT)
+            .build(ThaiDelight.modid("susie_prize"));
+
     @Override
     public void generateAdvancement(Consumer<Advancement> consumer) {
         consumer.accept(ROOT);
@@ -133,5 +150,6 @@ public class AdvancementDataGen extends FabricAdvancementProvider {
         consumer.accept(GOT_SPICY_MEAT_SALAD);
         consumer.accept(GOT_SOMTAM);
         consumer.accept(BEING_STINKY);
+        consumer.accept(SUSIE_PRIZE);
     }
 }

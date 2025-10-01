@@ -469,7 +469,10 @@ public class ModBlocks {
             .noCollission()
             .instabreak()
             .sound(SoundType.SPORE_BLOSSOM)
-            .pushReaction(PushReaction.DESTROY)));
+            .pushReaction(PushReaction.DESTROY)
+            .emissiveRendering((blockState, blockGetter, blockPos) -> blockState.getValue(PapayaFlowerBlock.LIT))
+            .lightLevel(blockstate -> blockstate.getValue(PapayaFlowerBlock.LIT) ? 1 : 0)
+    ));
     public static final Block WALL_PAPAYA_FLOWER = register("wall_papaya_flower",new WallPapayaFlowerBlock(BlockBehaviour.Properties.copy(PAPAYA_FLOWER)));
 
     public static final Block PAPAYA_SAPLING = register("papaya_sapling",new SaplingBlock(new PapayaTreeGrower(), BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY)));

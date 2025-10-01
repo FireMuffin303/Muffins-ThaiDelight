@@ -4,10 +4,16 @@ import net.firemuffin303.muffinsthaidelightfabric.registry.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -21,6 +27,7 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
@@ -28,6 +35,7 @@ import org.jetbrains.annotations.Nullable;
 public class PapayaFlowerBlock extends HorizontalDirectionalBlock implements SimpleWaterloggedBlock, SuspiciousEffectHolder, BonemealableBlock {
     public static final IntegerProperty FLOWERS = IntegerProperty.create("flowers",1,3);
     public static final BooleanProperty HANGING = BlockStateProperties.HANGING;
+    public static final BooleanProperty LIT = BlockStateProperties.LIT;
     private static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
     public PapayaFlowerBlock(Properties properties) {
@@ -37,12 +45,24 @@ public class PapayaFlowerBlock extends HorizontalDirectionalBlock implements Sim
                 .setValue(WATERLOGGED,false)
                 .setValue(FLOWERS,1)
                 .setValue(HANGING,false)
+                .setValue(LIT,false)
         );
     }
 
     @Override
+    public InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
+        if(player.getItemInHand(interactionHand).is(Items.GLOW_INK_SAC) && !blockState.getValue(LIT)){
+            level.setBlock(blockPos,blockState.setValue(LIT,true),2);
+            level.playSound(null, blockPos, SoundEvents.GLOW_INK_SAC_USE, SoundSource.BLOCKS, 1.0F, 1.0F);
+            return InteractionResult.SUCCESS;
+        }
+
+        return super.use(blockState, level, blockPos, player, interactionHand, blockHitResult);
+    }
+
+    @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING,WATERLOGGED,FLOWERS,HANGING);
+        builder.add(FACING,WATERLOGGED,FLOWERS,HANGING,LIT);
     }
 
     @Override

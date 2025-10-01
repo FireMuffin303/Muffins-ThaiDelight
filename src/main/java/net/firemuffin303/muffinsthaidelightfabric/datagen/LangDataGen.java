@@ -39,6 +39,9 @@ public class LangDataGen extends FabricLanguageProvider {
         translationBuilder.add("advancement.muffins_thaidelight.being_stinky","Uh Oh Stinky");
         translationBuilder.add("advancement.muffins_thaidelight.being_stinky.description","Has Stinky effect. Take a bath.");
 
+        translationBuilder.add("advancement.muffins_thaidelight.susie_prize","The Susie Prize");
+        translationBuilder.add("advancement.muffins_thaidelight.susie_prize.description","Light a papaya flower with glow ink sac. C'mon you deserve one.");
+
         translationBuilder.add("item.muffins_thaidelight.tasty","Tasty");
 
         translationBuilder.add("farmersdelight.tooltip.papaya_juice","Clear Hunger Effect");
@@ -248,6 +251,9 @@ public class LangDataGen extends FabricLanguageProvider {
 
             translationBuilder.add("advancement.muffins_thaidelight.being_stinky","โอ๊ะ โอ่ ตัวเหม็น");
             translationBuilder.add("advancement.muffins_thaidelight.being_stinky.description","ได้รับสถานะ เหม็น. ไปอาบน้ำบ้างนะ.");
+
+            translationBuilder.add("advancement.muffins_thaidelight.susie_prize","ของรางวัลซูซี่");
+            translationBuilder.add("advancement.muffins_thaidelight.susie_prize.description","ทำให้ดอกมะละกอสว่างขึ้นด้วยหมึกเรืองแสง เอาน่าคุณควรได้รางวัลบ้างนะ");
 
             translationBuilder.add("farmersdelight.tooltip.papaya_juice","ล้างหิวเร็ว");
             translationBuilder.add("farmersdelight.tooltip.lime_juice","ล้างตาบอด");

@@ -138,6 +138,8 @@ public class ModTagDataGen {
                     ModItems.BASIL_SAPLING,
                     ModItems.PEPPER_SEED
             );
+
+
         }
     }
 
@@ -197,6 +199,8 @@ public class ModTagDataGen {
                     ModBlocks.PAPAYA_FLOWER,
                     ModBlocks.WALL_PAPAYA_FLOWER
             );
+
+
         }
     }
 
