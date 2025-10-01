@@ -58,7 +58,7 @@ public class PapayaFlowerBlock extends HorizontalDirectionalBlock implements Sim
             levelAccessor.scheduleTick(blockPos, Fluids.WATER, Fluids.WATER.getTickDelay(levelAccessor));
         }
 
-        return direction == blockState.getValue(FACING).getOpposite() && !blockState.canSurvive(levelAccessor, blockPos)
+        return direction == (blockState.getValue(HANGING) ? Direction.UP: Direction.DOWN) && !blockState.canSurvive(levelAccessor, blockPos)
                 ? Blocks.AIR.defaultBlockState()
                 : super.updateShape(blockState, direction, blockState2, levelAccessor, blockPos, blockPos2);
     }
@@ -104,7 +104,7 @@ public class PapayaFlowerBlock extends HorizontalDirectionalBlock implements Sim
 
     @Override
     public boolean canSurvive(BlockState blockState, LevelReader levelReader, BlockPos blockPos) {
-        Direction direction = (blockState.getValue(HANGING) ? Direction.DOWN : Direction.UP).getOpposite();
+        Direction direction = (blockState.getValue(HANGING) ? Direction.UP: Direction.DOWN);
         return Block.canSupportCenter(levelReader, blockPos.relative(direction), direction.getOpposite());
     }
 
