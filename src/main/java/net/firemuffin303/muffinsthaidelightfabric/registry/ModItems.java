@@ -7,6 +7,7 @@ import com.terraformersmc.terraform.boat.api.item.TerraformBoatItemHelper;
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
 import net.firemuffin303.muffinsthaidelightfabric.common.item.DragonflyBottleItem;
 import net.firemuffin303.muffinsthaidelightfabric.common.item.SneakPlaceItemNameBlock;
+import net.firemuffin303.muffinsthaidelightfabric.common.item.papaya.PapayaFlowerItem;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
@@ -197,6 +198,7 @@ public class ModItems {
 
     //----- 🍐 Papaya 🍐 -----------------------------------
     public static final Item PAPAYA = registerFlatItem("papaya",new ItemNameBlockItem(ModBlocks.STACKABLE_PAPAYA,new Item.Properties().food(ModFood.PAPAYA)));
+    public static final Item PAPAYA_FLOWER = register("papaya_flower",new PapayaFlowerItem(new Item.Properties()));
     public static final Item SLICED_PAPAYA = registerFlatItem("papaya_slice",new Item(new Item.Properties().food(ModFood.SLICED_PAPAYA)));
     public static final Item RAW_PAPAYA = registerFlatItem("raw_papaya",new ItemNameBlockItem(ModBlocks.STACKABLE_RAW_PAPAYA,new Item.Properties().food(ModFood.RAW_PAPAYA)));
     public static final Item RAW_PAPAYA_SLICE = registerFlatItem("raw_papaya_slice",new Item(new Item.Properties().food(ModFood.SLICED_UNRIPE_PAPAYA)));

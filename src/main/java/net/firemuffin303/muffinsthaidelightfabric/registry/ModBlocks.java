@@ -22,10 +22,7 @@ import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.SmallDuria
 import net.firemuffin303.muffinsthaidelightfabric.common.block.lime.*;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.mango.MangoBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.mango.StackableMangoBlock;
-import net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.PapayaBlock;
-import net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.PapayaCropBlock;
-import net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.PapayaLogBlock;
-import net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.StackablePapayaBlock;
+import net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.*;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.pepper.BuddingPepperBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.pepper.PepperCropBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.world.trees.DurianTreeGrower;
@@ -459,7 +456,22 @@ public class ModBlocks {
     public static final Block STRIPPED_PAPAYA_WOOD = register("stripped_papaya_wood",new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava()));
     public static final Block PAPAYA_LEAVES = register("papaya_leaves",leaves(SoundType.AZALEA_LEAVES));
 
+    public static final Block BUDDING_PAPAYA_FLOWER = register("budding_papaya_flower",new BuddingPapayaFlowerBlock(BlockBehaviour.Properties.of()
+            .mapColor(MapColor.PLANT)
+            .sound(SoundType.SPORE_BLOSSOM)
+            .instabreak()
+            .noCollission()
+            .randomTicks()
+            .pushReaction(PushReaction.DESTROY)));
     public static final Block PAPAYA = register("papaya",new PapayaBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).randomTicks().strength(0.2F, 3.0F).sound(SoundType.WOOD).noOcclusion().pushReaction(PushReaction.DESTROY)));
+    public static final Block PAPAYA_FLOWER = register("papaya_flower",new PapayaFlowerBlock(BlockBehaviour.Properties.of()
+            .mapColor(MapColor.PLANT)
+            .noCollission()
+            .instabreak()
+            .sound(SoundType.SPORE_BLOSSOM)
+            .pushReaction(PushReaction.DESTROY)));
+    public static final Block WALL_PAPAYA_FLOWER = register("wall_papaya_flower",new WallPapayaFlowerBlock(BlockBehaviour.Properties.copy(PAPAYA_FLOWER)));
+
     public static final Block PAPAYA_SAPLING = register("papaya_sapling",new SaplingBlock(new PapayaTreeGrower(), BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY)));
     public static final Block PAPAYA_CROP = register("papaya_crop",new PapayaCropBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY)));
 

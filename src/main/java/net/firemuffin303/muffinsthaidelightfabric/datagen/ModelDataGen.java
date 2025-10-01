@@ -12,6 +12,8 @@ import net.firemuffin303.muffinsthaidelightfabric.common.block.lime.LimeBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.lime.LimePlantBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.mango.MangoBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.mango.StackableMangoBlock;
+import net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.PapayaFlowerBlock;
+import net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.WallPapayaFlowerBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.PapayaLogBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.StackablePapayaBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.pepper.BuddingPepperBlock;
@@ -64,6 +66,10 @@ public class ModelDataGen extends FabricModelProvider {
 
     private static final ModelTemplate STACKABLE_PAPAYA_1 = new ModelTemplate(Optional.of(ThaiDelight.modid("block/papaya/template_stackable_papaya_1")),Optional.empty(),TextureSlot.ALL);
     private static final ModelTemplate STACKABLE_PAPAYA_2 = new ModelTemplate(Optional.of(ThaiDelight.modid("block/papaya/template_stackable_papaya_2")),Optional.empty(),TextureSlot.ALL);
+
+    private static final ModelTemplate TEMPLATE_WALL_PAPAYA_FLOWER = new ModelTemplate(Optional.of(ThaiDelight.modid("block/papaya/template_wall_papaya_flower")),Optional.empty(),FLOWER);
+    private static final ModelTemplate TEMPLATE_PAPAYA_FLOWER = new ModelTemplate(Optional.of(ThaiDelight.modid("block/papaya/template_papaya_flower")),Optional.empty(),FLOWER);
+    private static final ModelTemplate TEMPLATE_HANGING_PAPAYA_FLOWER = new ModelTemplate(Optional.of(ThaiDelight.modid("block/papaya/template_hanging_papaya_flower")),Optional.empty(),FLOWER);
 
     private static final BlockFamily DURIAN_PLANKS = BlockFamilies.familyBuilder(ModBlocks.DURIAN_PLANKS)
             .button(ModBlocks.DURIAN_BUTTON)
@@ -248,6 +254,51 @@ public class ModelDataGen extends FabricModelProvider {
 
 
         createCubeAll(ModBlocks.PAPAYA_LEAVES,blockStateModelGenerator);
+
+        ModelTemplates.FLAT_ITEM.create(
+                ModelLocationUtils.getModelLocation(ModItems.PAPAYA_FLOWER),
+                TextureMapping.layer0(ThaiDelight.modid("block/papaya/papaya_flower")),
+                blockStateModelGenerator.modelOutput);
+
+        blockStateModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.BUDDING_PAPAYA_FLOWER,
+                        Variant.variant().with(VariantProperties.MODEL,ThaiDelight.modid("block/papaya/papaya_flower"))
+                ).with(createHorizontalFacingDispatchAlt()));
+
+        blockStateModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.PAPAYA_FLOWER)
+                        .with(PropertyDispatch.properties(PapayaFlowerBlock.FLOWERS,PapayaFlowerBlock.HANGING)
+                                .generate((integer, hangning) -> {
+
+                                    if(hangning){
+                                        return Variant.variant().with(VariantProperties.MODEL,TEMPLATE_HANGING_PAPAYA_FLOWER.create(
+                                                ThaiDelight.modid("block/papaya/hanging_papaya_flower%d".formatted(integer)),
+
+                                                integer == 1 ? new TextureMapping().put(FLOWER,ThaiDelight.modid("block/papaya/papaya_flower")) :
+                                                        new TextureMapping().put(FLOWER,ThaiDelight.modid("block/papaya/papaya_flower%d".formatted(integer))),
+                                                blockStateModelGenerator.modelOutput));
+                                    }
+                                    return Variant.variant().with(VariantProperties.MODEL,TEMPLATE_PAPAYA_FLOWER.create(
+                                            ThaiDelight.modid("block/papaya/papaya_flower%d".formatted(integer)),
+
+                                            integer == 1 ? new TextureMapping().put(FLOWER,ThaiDelight.modid("block/papaya/papaya_flower")) :
+                                            new TextureMapping().put(FLOWER,ThaiDelight.modid("block/papaya/papaya_flower%d".formatted(integer))),
+                                            blockStateModelGenerator.modelOutput));
+                                })
+                        )
+                .with(createHorizontalFacingDispatch()));
+
+        blockStateModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.WALL_PAPAYA_FLOWER)
+                .with(PropertyDispatch.property(WallPapayaFlowerBlock.FLOWERS)
+                        .generate(integer -> {
+                            if(integer == 1){
+                                return Variant.variant().with(VariantProperties.MODEL,ThaiDelight.modid("block/papaya/papaya_flower"));
+                            }
+                            return Variant.variant().with(VariantProperties.MODEL,TEMPLATE_WALL_PAPAYA_FLOWER.create(
+                                    ThaiDelight.modid("block/papaya/wall_papaya_flower%d".formatted(integer)),
+                                    new TextureMapping().put(FLOWER,ThaiDelight.modid("block/papaya/papaya_flower%d".formatted(integer))),
+                                    blockStateModelGenerator.modelOutput));
+                        })
+                )
+                .with(createHorizontalFacingDispatch()));
 
         blockStateModelGenerator.blockStateOutput.accept(
                 MultiVariantGenerator.multiVariant(ModBlocks.PAPAYA)

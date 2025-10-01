@@ -1,0 +1,94 @@
+{
+  "variants": {
+    "facing=east,flowers=1,hanging=false": {
+      "model": "muffins_thaidelight:block/papaya/papaya_flower1",
+      "y": 90
+    },
+    "facing=east,flowers=1,hanging=true": {
+      "model": "muffins_thaidelight:block/papaya/hanging_papaya_flower1",
+      "y": 90
+    },
+    "facing=east,flowers=2,hanging=false": {
+      "model": "muffins_thaidelight:block/papaya/papaya_flower2",
+      "y": 90
+    },
+    "facing=east,flowers=2,hanging=true": {
+      "model": "muffins_thaidelight:block/papaya/hanging_papaya_flower2",
+      "y": 90
+    },
+    "facing=east,flowers=3,hanging=false": {
+      "model": "muffins_thaidelight:block/papaya/papaya_flower3",
+      "y": 90
+    },
+    "facing=east,flowers=3,hanging=true": {
+      "model": "muffins_thaidelight:block/papaya/hanging_papaya_flower3",
+      "y": 90
+    },
+    "facing=north,flowers=1,hanging=false": {
+      "model": "muffins_thaidelight:block/papaya/papaya_flower1"
+    },
+    "facing=north,flowers=1,hanging=true": {
+      "model": "muffins_thaidelight:block/papaya/hanging_papaya_flower1"
+    },
+    "facing=north,flowers=2,hanging=false": {
+      "model": "muffins_thaidelight:block/papaya/papaya_flower2"
+    },
+    "facing=north,flowers=2,hanging=true": {
+      "model": "muffins_thaidelight:block/papaya/hanging_papaya_flower2"
+    },
+    "facing=north,flowers=3,hanging=false": {
+      "model": "muffins_thaidelight:block/papaya/papaya_flower3"
+    },
+    "facing=north,flowers=3,hanging=true": {
+      "model": "muffins_thaidelight:block/papaya/hanging_papaya_flower3"
+    },
+    "facing=south,flowers=1,hanging=false": {
+      "model": "muffins_thaidelight:block/papaya/papaya_flower1",
+      "y": 180
+    },
+    "facing=south,flowers=1,hanging=true": {
+      "model": "muffins_thaidelight:block/papaya/hanging_papaya_flower1",
+      "y": 180
+    },
+    "facing=south,flowers=2,hanging=false": {
+      "model": "muffins_thaidelight:block/papaya/papaya_flower2",
+      "y": 180
+    },
+    "facing=south,flowers=2,hanging=true": {
+      "model": "muffins_thaidelight:block/papaya/hanging_papaya_flower2",
+      "y": 180
+    },
+    "facing=south,flowers=3,hanging=false": {
+      "model": "muffins_thaidelight:block/papaya/papaya_flower3",
+      "y": 180
+    },
+    "facing=south,flowers=3,hanging=true": {
+      "model": "muffins_thaidelight:block/papaya/hanging_papaya_flower3",
+      "y": 180
+    },
+    "facing=west,flowers=1,hanging=false": {
+      "model": "muffins_thaidelight:block/papaya/papaya_flower1",
+      "y": 270
+    },
+    "facing=west,flowers=1,hanging=true": {
+      "model": "muffins_thaidelight:block/papaya/hanging_papaya_flower1",
+      "y": 270
+    },
+    "facing=west,flowers=2,hanging=false": {
+      "model": "muffins_thaidelight:block/papaya/papaya_flower2",
+      "y": 270
+    },
+    "facing=west,flowers=2,hanging=true": {
+      "model": "muffins_thaidelight:block/papaya/hanging_papaya_flower2",
+      "y": 270
+    },
+    "facing=west,flowers=3,hanging=false": {
+      "model": "muffins_thaidelight:block/papaya/papaya_flower3",
+      "y": 270
+    },
+    "facing=west,flowers=3,hanging=true": {
+      "model": "muffins_thaidelight:block/papaya/hanging_papaya_flower3",
+      "y": 270
+    }
+  }
+}

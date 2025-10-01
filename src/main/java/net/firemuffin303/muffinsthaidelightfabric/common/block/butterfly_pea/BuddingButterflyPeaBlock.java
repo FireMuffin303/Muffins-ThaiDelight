@@ -66,7 +66,7 @@ public class BuddingButterflyPeaBlock extends BuddingBushBlock implements Boneme
     @Override
     public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {
         int maxAge = getMaxAge();
-        int ageGrowth = Math.min(getAge(state) + getBonemealAgeIncrease(level), 4);
+        int ageGrowth = Math.min(getAge(state) + getBonemealAgeIncrease(level), 7);
         if (ageGrowth <= maxAge) {
             level.setBlockAndUpdate(pos, state.setValue(AGE, ageGrowth));
         } else {

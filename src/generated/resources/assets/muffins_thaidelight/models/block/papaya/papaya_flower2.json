@@ -1,0 +1,6 @@
+{
+  "parent": "muffins_thaidelight:block/papaya/template_papaya_flower",
+  "textures": {
+    "flower": "muffins_thaidelight:block/papaya/papaya_flower2"
+  }
+}

@@ -43,7 +43,7 @@ public class PapayaBlock extends HorizontalDirectionalBlock implements Bonemeala
 
     public PapayaBlock(Properties properties) {
         super(properties);
-        this.registerDefaultState((BlockState)((BlockState)((BlockState)this.stateDefinition.any()).setValue(FACING, Direction.NORTH)).setValue(AGE, 0));
+        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(AGE, 0));
     }
 
     public boolean isRandomlyTicking(BlockState blockState) {
@@ -68,7 +68,8 @@ public class PapayaBlock extends HorizontalDirectionalBlock implements Bonemeala
         } else if (i > 0) {
             popResource(level, blockPos, new ItemStack(flag ? ModItems.PAPAYA : ModItems.RAW_PAPAYA, 1));
             level.playSound((Player)null, blockPos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
-            BlockState afterHarvestState = blockState.setValue(AGE,0);
+
+            BlockState afterHarvestState = ModBlocks.BUDDING_PAPAYA_FLOWER.defaultBlockState().setValue(FACING,blockState.getValue(FACING));
             level.setBlock(blockPos, afterHarvestState, 2);
             level.gameEvent(GameEvent.BLOCK_CHANGE, blockPos, GameEvent.Context.of(player, afterHarvestState));
             return InteractionResult.sidedSuccess(level.isClientSide);
@@ -141,6 +142,8 @@ public class PapayaBlock extends HorizontalDirectionalBlock implements Bonemeala
     public boolean isPathfindable(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, PathComputationType pathComputationType) {
         return false;
     }
+
+
 
     static {
         EAST_AABB = new VoxelShape[]{Block.box(9.0D, 5.0D, 6.0D, 13.0D, 10.D, 10.0D), Block.box(8.0D, 0.0D, 5.0D, 14.0D, 10.0D, 11.0D), Block.box(8.0D, 0.0D, 5.0D, 14.0D, 10.0D, 11.0D)};

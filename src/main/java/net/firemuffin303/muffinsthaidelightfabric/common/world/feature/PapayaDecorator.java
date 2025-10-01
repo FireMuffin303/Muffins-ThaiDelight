@@ -45,7 +45,8 @@ public class PapayaDecorator extends TreeDecorator {
                         Direction direction2 = direction.getOpposite();
                         BlockPos blockPos2 = blockPos.offset(direction2.getStepX(), 0, direction2.getStepZ());
                         if (context.isAir(blockPos2)) {
-                            context.setBlock(blockPos2, (BlockState)((BlockState) ModBlocks.PAPAYA.defaultBlockState().setValue(PapayaBlock.AGE, randomSource.nextInt(2))).setValue(PapayaBlock.FACING, direction));
+                            context.setBlock(blockPos2, ModBlocks.BUDDING_PAPAYA_FLOWER.defaultBlockState()
+                                    .setValue(PapayaBlock.FACING, direction));
                         }
                     }
                 }
