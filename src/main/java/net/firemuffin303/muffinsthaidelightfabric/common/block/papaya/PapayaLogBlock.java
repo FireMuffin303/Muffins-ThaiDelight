@@ -67,7 +67,7 @@ public class PapayaLogBlock extends RotatedPillarBlock implements BonemealableBl
             Direction direction2 = direction.getOpposite();
             BlockPos blockPos2 = blockPos.offset(direction2.getStepX(), 0, direction2.getStepZ());
             if (serverLevel.getBlockState(blockPos2).isAir()) {
-                serverLevel.setBlock(blockPos2, (BlockState) ((BlockState) ModBlocks.PAPAYA.defaultBlockState().setValue(PapayaBlock.AGE, 0).setValue(PapayaBlock.FACING, direction)), 2);
+                serverLevel.setBlock(blockPos2, ModBlocks.BUDDING_PAPAYA_FLOWER.defaultBlockState().setValue(PapayaBlock.FACING, direction), 2);
                 return;
             }
         }

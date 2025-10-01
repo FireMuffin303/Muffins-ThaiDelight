@@ -35,7 +35,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 public class PapayaBlock extends HorizontalDirectionalBlock implements BonemealableBlock {
-    public static final IntegerProperty AGE = BlockStateProperties.AGE_2;
+    public static final IntegerProperty AGE = IntegerProperty.create("age",1,2);
     protected static final VoxelShape[] EAST_AABB;
     protected static final VoxelShape[] WEST_AABB;
     protected static final VoxelShape[] NORTH_AABB;
@@ -43,7 +43,7 @@ public class PapayaBlock extends HorizontalDirectionalBlock implements Bonemeala
 
     public PapayaBlock(Properties properties) {
         super(properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(AGE, 0));
+        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(AGE, 1));
     }
 
     public boolean isRandomlyTicking(BlockState blockState) {
@@ -65,16 +65,14 @@ public class PapayaBlock extends HorizontalDirectionalBlock implements Bonemeala
         boolean flag = i == 2;
         if (!flag && player.getItemInHand(interactionHand).is(Items.BONE_MEAL)) {
             return InteractionResult.PASS;
-        } else if (i > 0) {
+        } else {
             popResource(level, blockPos, new ItemStack(flag ? ModItems.PAPAYA : ModItems.RAW_PAPAYA, 1));
-            level.playSound((Player)null, blockPos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
+            level.playSound(null, blockPos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
 
             BlockState afterHarvestState = ModBlocks.BUDDING_PAPAYA_FLOWER.defaultBlockState().setValue(FACING,blockState.getValue(FACING));
             level.setBlock(blockPos, afterHarvestState, 2);
             level.gameEvent(GameEvent.BLOCK_CHANGE, blockPos, GameEvent.Context.of(player, afterHarvestState));
             return InteractionResult.sidedSuccess(level.isClientSide);
-        } else {
-            return super.use(blockState, level, blockPos, player, interactionHand, blockHitResult);
         }
     }
 

@@ -12,10 +12,7 @@ import net.firemuffin303.muffinsthaidelightfabric.common.block.lime.LimeBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.lime.LimePlantBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.mango.MangoBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.mango.StackableMangoBlock;
-import net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.PapayaFlowerBlock;
-import net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.WallPapayaFlowerBlock;
-import net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.PapayaLogBlock;
-import net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.StackablePapayaBlock;
+import net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.*;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.pepper.BuddingPepperBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.pepper.PepperCropBlock;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
@@ -139,20 +136,7 @@ public class ModelDataGen extends FabricModelProvider {
                         .generate(integer -> Variant.variant().with(VariantProperties.MODEL,ThaiDelight.modid("block/lime/stackable_lime_%d".formatted(integer))))
                 ).with(createHorizontalFacingDispatch()));
 
-        STACKABLE_PAPAYA_1.create(ThaiDelight.modid("block/papaya/stackable_papaya_1"),new TextureMapping().put(TextureSlot.ALL,ThaiDelight.modid("block/papaya/papaya_fruit")), blockStateModelGenerator.modelOutput);
-        STACKABLE_PAPAYA_2.create(ThaiDelight.modid("block/papaya/stackable_papaya_2"),new TextureMapping().put(TextureSlot.ALL,ThaiDelight.modid("block/papaya/papaya_fruit")), blockStateModelGenerator.modelOutput);
-        STACKABLE_PAPAYA_1.create(ThaiDelight.modid("block/papaya/stackable_raw_papaya_1"),new TextureMapping().put(TextureSlot.ALL,ThaiDelight.modid("block/papaya/unripe_papaya_fruit")), blockStateModelGenerator.modelOutput);
-        STACKABLE_PAPAYA_2.create(ThaiDelight.modid("block/papaya/stackable_raw_papaya_2"),new TextureMapping().put(TextureSlot.ALL,ThaiDelight.modid("block/papaya/unripe_papaya_fruit")), blockStateModelGenerator.modelOutput);
 
-        blockStateModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.STACKABLE_PAPAYA)
-                .with(PropertyDispatch.property(StackablePapayaBlock.STACKS)
-                        .generate(integer -> Variant.variant().with(VariantProperties.MODEL,ThaiDelight.modid("block/papaya/stackable_papaya_%d".formatted(integer))))
-                ).with(createHorizontalFacingDispatch()));
-
-        blockStateModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.STACKABLE_RAW_PAPAYA)
-                .with(PropertyDispatch.property(StackablePapayaBlock.STACKS)
-                        .generate(integer -> Variant.variant().with(VariantProperties.MODEL,ThaiDelight.modid("block/papaya/stackable_raw_papaya_%d".formatted(integer))))
-                ).with(createHorizontalFacingDispatch()));
 
         blockStateModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.STACKABLE_MANGO_BLOCK)
                 .with(PropertyDispatch.property(StackableMangoBlock.STACKS)
@@ -179,43 +163,12 @@ public class ModelDataGen extends FabricModelProvider {
                 Variant.variant().with(VariantProperties.MODEL,butterfly_pea_model)
         ).with(createHorizontalFacingDispatch()));
 
-        blockStateModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.PAPAYA_LOG)
-                .with(PropertyDispatch.property(PapayaLogBlock.BOTTOM)
-                        .select(true,Variant.variant()
-                                .with(VariantProperties.MODEL,
-                                        ModelTemplates.CUBE_COLUMN.createWithSuffix(ModBlocks.PAPAYA_LOG,"_bottom", new TextureMapping()
-                                                .put(TextureSlot.SIDE, ThaiDelight.modid("block/papaya/papaya_log_bottom"))
-                                                .put(TextureSlot.END, ThaiDelight.modid("block/papaya/papaya_log_top"))
-                                                .put(TextureSlot.PARTICLE, ThaiDelight.modid("block/papaya/papaya_log_bottom")),
-                                                blockStateModelGenerator.modelOutput))
-                        )
-                        .select(false,Variant.variant()
-                                .with(VariantProperties.MODEL,
-                                        ModelTemplates.CUBE_COLUMN.create(ModBlocks.PAPAYA_LOG,new TextureMapping()
-                                                .put(TextureSlot.SIDE, ThaiDelight.modid("block/papaya/papaya_log"))
-                                                .put(TextureSlot.END, ThaiDelight.modid("block/papaya/papaya_log_top"))
-                                                .put(TextureSlot.PARTICLE, ThaiDelight.modid("block/papaya/papaya_log")), blockStateModelGenerator.modelOutput))
-                        )
-                )
-                .with(createRotatedPillar())
-        );
-
-        blockStateModelGenerator.blockStateOutput.accept(BlockModelGenerators.createAxisAlignedPillarBlock(ModBlocks.PAPAYA_WOOD,
-                ModelTemplates.CUBE_COLUMN.create(ModBlocks.PAPAYA_WOOD,
-                        new TextureMapping()
-                                .put(TextureSlot.END,ThaiDelight.modid("block/papaya/papaya_log"))
-                                .put(TextureSlot.SIDE,ThaiDelight.modid("block/papaya/papaya_log")),
-                        blockStateModelGenerator.modelOutput)));
-
-
-
         blockStateModelGenerator.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(ModBlocks.MORTAR,ModelLocationUtils.getModelLocation(ModBlocks.MORTAR)).with(createHorizontalFacingDispatch()));
 
 
         ResourceLocation resourceLocation = ModelTemplates.CUBE_COLUMN.create(ModBlocks.COCONUT_LEAF_BLOCK, TextureMapping.logColumn(ModBlocks.COCONUT_LEAF_BLOCK), blockStateModelGenerator.modelOutput);
         blockStateModelGenerator.blockStateOutput.accept(BlockModelGenerators.createAxisAlignedPillarBlock(ModBlocks.COCONUT_LEAF_BLOCK, resourceLocation));
 
-        blockStateModelGenerator.woodProvider(ModBlocks.STRIPPED_PAPAYA_LOG).logWithHorizontal(ModBlocks.STRIPPED_PAPAYA_LOG).wood(ModBlocks.STRIPPED_PAPAYA_WOOD);
 
         //Durian Model
         blockStateModelGenerator.woodProvider(ModBlocks.DURIAN_LOG).logWithHorizontal(ModBlocks.DURIAN_LOG).wood(ModBlocks.DURIAN_WOOD);
@@ -253,65 +206,12 @@ public class ModelDataGen extends FabricModelProvider {
         blockStateModelGenerator.family(ModBlocks.MANGO_PLANKS).generateFor(MANGO_PLANKS);
 
 
-        createCubeAll(ModBlocks.PAPAYA_LEAVES,blockStateModelGenerator);
 
-        ModelTemplates.FLAT_ITEM.create(
-                ModelLocationUtils.getModelLocation(ModItems.PAPAYA_FLOWER),
-                TextureMapping.layer0(ThaiDelight.modid("block/papaya/papaya_flower")),
-                blockStateModelGenerator.modelOutput);
 
-        blockStateModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.BUDDING_PAPAYA_FLOWER,
-                        Variant.variant().with(VariantProperties.MODEL,ThaiDelight.modid("block/papaya/papaya_flower"))
-                ).with(createHorizontalFacingDispatchAlt()));
 
-        blockStateModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.PAPAYA_FLOWER)
-                        .with(PropertyDispatch.properties(PapayaFlowerBlock.FLOWERS,PapayaFlowerBlock.HANGING)
-                                .generate((integer, hangning) -> {
 
-                                    if(hangning){
-                                        return Variant.variant().with(VariantProperties.MODEL,TEMPLATE_HANGING_PAPAYA_FLOWER.create(
-                                                ThaiDelight.modid("block/papaya/hanging_papaya_flower%d".formatted(integer)),
 
-                                                integer == 1 ? new TextureMapping().put(FLOWER,ThaiDelight.modid("block/papaya/papaya_flower")) :
-                                                        new TextureMapping().put(FLOWER,ThaiDelight.modid("block/papaya/papaya_flower%d".formatted(integer))),
-                                                blockStateModelGenerator.modelOutput));
-                                    }
-                                    return Variant.variant().with(VariantProperties.MODEL,TEMPLATE_PAPAYA_FLOWER.create(
-                                            ThaiDelight.modid("block/papaya/papaya_flower%d".formatted(integer)),
 
-                                            integer == 1 ? new TextureMapping().put(FLOWER,ThaiDelight.modid("block/papaya/papaya_flower")) :
-                                            new TextureMapping().put(FLOWER,ThaiDelight.modid("block/papaya/papaya_flower%d".formatted(integer))),
-                                            blockStateModelGenerator.modelOutput));
-                                })
-                        )
-                .with(createHorizontalFacingDispatch()));
-
-        blockStateModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.WALL_PAPAYA_FLOWER)
-                .with(PropertyDispatch.property(WallPapayaFlowerBlock.FLOWERS)
-                        .generate(integer -> {
-                            if(integer == 1){
-                                return Variant.variant().with(VariantProperties.MODEL,ThaiDelight.modid("block/papaya/papaya_flower"));
-                            }
-                            return Variant.variant().with(VariantProperties.MODEL,TEMPLATE_WALL_PAPAYA_FLOWER.create(
-                                    ThaiDelight.modid("block/papaya/wall_papaya_flower%d".formatted(integer)),
-                                    new TextureMapping().put(FLOWER,ThaiDelight.modid("block/papaya/papaya_flower%d".formatted(integer))),
-                                    blockStateModelGenerator.modelOutput));
-                        })
-                )
-                .with(createHorizontalFacingDispatch()));
-
-        blockStateModelGenerator.blockStateOutput.accept(
-                MultiVariantGenerator.multiVariant(ModBlocks.PAPAYA)
-                        .with(PropertyDispatch.property(BlockStateProperties.AGE_2).generate(integer -> {
-                            if(integer == 0){
-                                return Variant.variant().with(VariantProperties.MODEL,
-                                        ThaiDelight.modid("block/papaya/papaya_flower"));
-                            }
-
-                            return Variant.variant().with(VariantProperties.MODEL,
-                                    ThaiDelight.modid("block/papaya/papaya_age%d".formatted(integer)));
-                                }))
-                        .with(createHorizontalFacingDispatchAlt()));
 
 
         blockStateModelGenerator.blockStateOutput.accept(
@@ -345,18 +245,14 @@ public class ModelDataGen extends FabricModelProvider {
         );
 
 
-        blockStateModelGenerator.createCrossBlockWithDefaultItem(ModBlocks.PAPAYA_SAPLING, BlockModelGenerators.TintState.NOT_TINTED);
-
+        createPapaya(blockStateModelGenerator);
         createMangoBlock(blockStateModelGenerator);
         createPepperCrop(blockStateModelGenerator);
         createLimeCrop(blockStateModelGenerator);
         createBasil(blockStateModelGenerator,ModBlocks.HOLY_BASIL);
         createBasil(blockStateModelGenerator,ModBlocks.BASIL);
 
-        blockStateModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.PAPAYA_CROP).with(PropertyDispatch.property(BlockStateProperties.AGE_1).generate((integer) -> {
-            return net.minecraft.data.models.blockstates.Variant.variant().with(VariantProperties.MODEL,
-                    blockStateModelGenerator.createSuffixedVariant(ModBlocks.PAPAYA_CROP, "_stage" + integer, new ModelTemplate(Optional.of(new ResourceLocation(ThaiDelight.MOD_ID,"block/crop_cross")),Optional.empty(),TextureSlot.CROSS), TextureMapping::cross));
-        })));
+
 
 
         createFermentedFishCauldron(blockStateModelGenerator);
@@ -477,6 +373,138 @@ public class ModelDataGen extends FabricModelProvider {
                                 )
 
         ));
+    }
+
+    private static void createPapaya(BlockModelGenerators blockStateModelGenerator){
+
+        STACKABLE_PAPAYA_1.create(ThaiDelight.modid("block/papaya/stackable_papaya_1"),new TextureMapping().put(TextureSlot.ALL,ThaiDelight.modid("block/papaya/papaya_fruit")), blockStateModelGenerator.modelOutput);
+        STACKABLE_PAPAYA_2.create(ThaiDelight.modid("block/papaya/stackable_papaya_2"),new TextureMapping().put(TextureSlot.ALL,ThaiDelight.modid("block/papaya/papaya_fruit")), blockStateModelGenerator.modelOutput);
+        STACKABLE_PAPAYA_1.create(ThaiDelight.modid("block/papaya/stackable_raw_papaya_1"),new TextureMapping().put(TextureSlot.ALL,ThaiDelight.modid("block/papaya/unripe_papaya_fruit")), blockStateModelGenerator.modelOutput);
+        STACKABLE_PAPAYA_2.create(ThaiDelight.modid("block/papaya/stackable_raw_papaya_2"),new TextureMapping().put(TextureSlot.ALL,ThaiDelight.modid("block/papaya/unripe_papaya_fruit")), blockStateModelGenerator.modelOutput);
+
+        blockStateModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.STACKABLE_PAPAYA)
+                .with(PropertyDispatch.property(StackablePapayaBlock.STACKS)
+                        .generate(integer -> Variant.variant().with(VariantProperties.MODEL,ThaiDelight.modid("block/papaya/stackable_papaya_%d".formatted(integer))))
+                ).with(createHorizontalFacingDispatch()));
+
+        blockStateModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.STACKABLE_RAW_PAPAYA)
+                .with(PropertyDispatch.property(StackablePapayaBlock.STACKS)
+                        .generate(integer -> Variant.variant().with(VariantProperties.MODEL,ThaiDelight.modid("block/papaya/stackable_raw_papaya_%d".formatted(integer))))
+                ).with(createHorizontalFacingDispatch()));
+
+        blockStateModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.PAPAYA_LOG)
+                .with(PropertyDispatch.property(PapayaLogBlock.BOTTOM)
+                        .select(true,Variant.variant()
+                                .with(VariantProperties.MODEL,
+                                        ModelTemplates.CUBE_COLUMN.createWithSuffix(ModBlocks.PAPAYA_LOG,"_bottom", new TextureMapping()
+                                                        .put(TextureSlot.SIDE, ThaiDelight.modid("block/papaya/papaya_log_bottom"))
+                                                        .put(TextureSlot.END, ThaiDelight.modid("block/papaya/papaya_log_top"))
+                                                        .put(TextureSlot.PARTICLE, ThaiDelight.modid("block/papaya/papaya_log_bottom")),
+                                                blockStateModelGenerator.modelOutput))
+                        )
+                        .select(false,Variant.variant()
+                                .with(VariantProperties.MODEL,
+                                        ModelTemplates.CUBE_COLUMN.create(ModBlocks.PAPAYA_LOG,new TextureMapping()
+                                                .put(TextureSlot.SIDE, ThaiDelight.modid("block/papaya/papaya_log"))
+                                                .put(TextureSlot.END, ThaiDelight.modid("block/papaya/papaya_log_top"))
+                                                .put(TextureSlot.PARTICLE, ThaiDelight.modid("block/papaya/papaya_log")), blockStateModelGenerator.modelOutput))
+                        )
+                )
+                .with(createRotatedPillar())
+        );
+
+        blockStateModelGenerator.blockStateOutput.accept(BlockModelGenerators.createAxisAlignedPillarBlock(ModBlocks.PAPAYA_WOOD,
+                ModelTemplates.CUBE_COLUMN.create(ModBlocks.PAPAYA_WOOD,
+                        new TextureMapping()
+                                .put(TextureSlot.END,ThaiDelight.modid("block/papaya/papaya_log"))
+                                .put(TextureSlot.SIDE,ThaiDelight.modid("block/papaya/papaya_log")),
+                        blockStateModelGenerator.modelOutput)));
+
+        blockStateModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.STRIPPED_PAPAYA_LOG,Variant.variant()
+                        .with(VariantProperties.MODEL,
+                                ModelTemplates.CUBE_COLUMN.create(ModBlocks.STRIPPED_PAPAYA_LOG,new TextureMapping()
+                                        .put(TextureSlot.SIDE, ThaiDelight.modid("block/papaya/stripped_papaya_log"))
+                                        .put(TextureSlot.END, ThaiDelight.modid("block/papaya/papaya_log_top"))
+                                        .put(TextureSlot.PARTICLE, ThaiDelight.modid("block/papaya/stripped_papaya_log")), blockStateModelGenerator.modelOutput)))
+                .with(createRotatedPillar())
+        );
+
+        blockStateModelGenerator.blockStateOutput.accept(BlockModelGenerators.createAxisAlignedPillarBlock(ModBlocks.STRIPPED_PAPAYA_WOOD,
+                ModelTemplates.CUBE_COLUMN.create(ModBlocks.STRIPPED_PAPAYA_WOOD,
+                        new TextureMapping()
+                                .put(TextureSlot.END,ThaiDelight.modid("block/papaya/stripped_papaya_log"))
+                                .put(TextureSlot.SIDE,ThaiDelight.modid("block/papaya/stripped_papaya_log")),
+                        blockStateModelGenerator.modelOutput)));
+
+
+        //blockStateModelGenerator.woodProvider(ModBlocks.STRIPPED_PAPAYA_LOG).logWithHorizontal(ModBlocks.STRIPPED_PAPAYA_LOG).wood(ModBlocks.STRIPPED_PAPAYA_WOOD);
+        createCubeAll(ModBlocks.PAPAYA_LEAVES,blockStateModelGenerator);
+
+        ModelTemplates.FLAT_ITEM.create(
+                ModelLocationUtils.getModelLocation(ModItems.PAPAYA_FLOWER),
+                TextureMapping.layer0(ThaiDelight.modid("block/papaya/papaya_flower")),
+                blockStateModelGenerator.modelOutput);
+
+        blockStateModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.BUDDING_PAPAYA_FLOWER,
+                Variant.variant().with(VariantProperties.MODEL,ThaiDelight.modid("block/papaya/papaya_flower"))
+        ).with(createHorizontalFacingDispatchAlt()));
+
+        blockStateModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.PAPAYA_FLOWER)
+                .with(PropertyDispatch.properties(PapayaFlowerBlock.FLOWERS,PapayaFlowerBlock.HANGING)
+                        .generate((integer, hangning) -> {
+
+                            if(hangning){
+                                return Variant.variant().with(VariantProperties.MODEL,TEMPLATE_HANGING_PAPAYA_FLOWER.create(
+                                        ThaiDelight.modid("block/papaya/hanging_papaya_flower%d".formatted(integer)),
+
+                                        integer == 1 ? new TextureMapping().put(FLOWER,ThaiDelight.modid("block/papaya/papaya_flower")) :
+                                                new TextureMapping().put(FLOWER,ThaiDelight.modid("block/papaya/papaya_flower%d".formatted(integer))),
+                                        blockStateModelGenerator.modelOutput));
+                            }
+                            return Variant.variant().with(VariantProperties.MODEL,TEMPLATE_PAPAYA_FLOWER.create(
+                                    ThaiDelight.modid("block/papaya/papaya_flower%d".formatted(integer)),
+
+                                    integer == 1 ? new TextureMapping().put(FLOWER,ThaiDelight.modid("block/papaya/papaya_flower")) :
+                                            new TextureMapping().put(FLOWER,ThaiDelight.modid("block/papaya/papaya_flower%d".formatted(integer))),
+                                    blockStateModelGenerator.modelOutput));
+                        })
+                )
+                .with(createHorizontalFacingDispatch()));
+
+        blockStateModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.WALL_PAPAYA_FLOWER)
+                .with(PropertyDispatch.property(WallPapayaFlowerBlock.FLOWERS)
+                        .generate(integer -> {
+                            if(integer == 1){
+                                return Variant.variant().with(VariantProperties.MODEL,ThaiDelight.modid("block/papaya/papaya_flower"));
+                            }
+                            return Variant.variant().with(VariantProperties.MODEL,TEMPLATE_WALL_PAPAYA_FLOWER.create(
+                                    ThaiDelight.modid("block/papaya/wall_papaya_flower%d".formatted(integer)),
+                                    new TextureMapping().put(FLOWER,ThaiDelight.modid("block/papaya/papaya_flower%d".formatted(integer))),
+                                    blockStateModelGenerator.modelOutput));
+                        })
+                )
+                .with(createHorizontalFacingDispatch()));
+
+        blockStateModelGenerator.blockStateOutput.accept(
+                MultiVariantGenerator.multiVariant(ModBlocks.PAPAYA)
+                        .with(PropertyDispatch.property(PapayaBlock.AGE).generate(integer -> {
+                            return Variant.variant().with(VariantProperties.MODEL,
+                                    ThaiDelight.modid("block/papaya/papaya_age%d".formatted(integer)));
+                        }))
+                        .with(createHorizontalFacingDispatchAlt()));
+
+
+        blockStateModelGenerator.blockStateOutput.accept(
+                MultiVariantGenerator.multiVariant(ModBlocks.PAPAYA_CROP)
+                        .with(PropertyDispatch.property(BlockStateProperties.AGE_1).generate((integer) -> {
+            return Variant.variant().with(VariantProperties.MODEL,
+                    CROP_CROSS.create(
+                            ThaiDelight.modid("block/papaya/papaya_crop_stage%d".formatted(integer)),
+                            new TextureMapping().put(TextureSlot.CROSS,ThaiDelight.modid("block/papaya/papaya_crop_stage%d".formatted(integer))),
+                            blockStateModelGenerator.modelOutput));
+        })));
+
+        blockStateModelGenerator.createCrossBlockWithDefaultItem(ModBlocks.PAPAYA_SAPLING, BlockModelGenerators.TintState.NOT_TINTED);
     }
 
     private static void createBlock(Block block, ModelTemplate modelTemplate, TextureMapping textureMapping, BlockModelGenerators blockModelGenerator){
@@ -664,7 +692,6 @@ public class ModelDataGen extends FabricModelProvider {
         );
     }
 
-
     private static void createCubeAll(Block block, BlockModelGenerators blockModelGenerator){
         TextureMapping textureMapping = TextureMapping.cube(block);
         createBlock(block,ModelTemplates.CUBE_ALL,textureMapping,blockModelGenerator);
@@ -685,6 +712,5 @@ public class ModelDataGen extends FabricModelProvider {
     private static ModelTemplate createMincraftItem(String string, TextureSlot... textureSlots) {
         return new ModelTemplate(Optional.of(new ResourceLocation("item/" + string)),Optional.empty(), textureSlots);
     }
-
 
 }
