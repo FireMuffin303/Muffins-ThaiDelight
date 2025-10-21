@@ -11,6 +11,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -141,7 +142,13 @@ public class PapayaBlock extends HorizontalDirectionalBlock implements Bonemeala
         return false;
     }
 
-
+    @Override
+    public ItemStack getCloneItemStack(BlockGetter blockGetter, BlockPos blockPos, BlockState blockState) {
+        return switch (blockState.getValue(AGE)){
+            case 2 -> new ItemStack(ModItems.PAPAYA);
+            default -> new ItemStack(ModItems.RAW_PAPAYA);
+        };
+    }
 
     static {
         EAST_AABB = new VoxelShape[]{Block.box(9.0D, 5.0D, 6.0D, 13.0D, 10.D, 10.0D), Block.box(8.0D, 0.0D, 5.0D, 14.0D, 10.0D, 11.0D), Block.box(8.0D, 0.0D, 5.0D, 14.0D, 10.0D, 11.0D)};

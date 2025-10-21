@@ -440,6 +440,56 @@ public class ModelDataGen extends FabricModelProvider {
         //blockStateModelGenerator.woodProvider(ModBlocks.STRIPPED_PAPAYA_LOG).logWithHorizontal(ModBlocks.STRIPPED_PAPAYA_LOG).wood(ModBlocks.STRIPPED_PAPAYA_WOOD);
         createCubeAll(ModBlocks.PAPAYA_LEAVES,blockStateModelGenerator);
 
+
+        blockStateModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.PAPAYA_LEAVES_STEM,Variant.variant()
+                .with(VariantProperties.MODEL,ModelTemplates.CROSS.create(
+                        ThaiDelight.modid("block/papaya/papaya_leaves_stem"),
+                        new TextureMapping().put(TextureSlot.CROSS,ThaiDelight.modid("block/papaya/papaya_leaves_stem")),
+                        blockStateModelGenerator.modelOutput
+                ))
+        ).with(PropertyDispatch.property(PapayaLeavesStemBlock.PAPAYA_LEAVES_FACING)
+                .select(Direction.UP,Variant.variant())
+                .select(Direction.NORTH,Variant.variant().with(VariantProperties.X_ROT, VariantProperties.Rotation.R90))
+                .select(Direction.EAST,Variant.variant()
+                        .with(VariantProperties.X_ROT, VariantProperties.Rotation.R90)
+                        .with(VariantProperties.Y_ROT,VariantProperties.Rotation.R90)
+                )
+                .select(Direction.WEST,Variant.variant()
+                        .with(VariantProperties.X_ROT, VariantProperties.Rotation.R90)
+                        .with(VariantProperties.Y_ROT,VariantProperties.Rotation.R270)
+                )
+                .select(Direction.SOUTH,Variant.variant()
+                        .with(VariantProperties.X_ROT, VariantProperties.Rotation.R90)
+                        .with(VariantProperties.Y_ROT,VariantProperties.Rotation.R180)
+                )
+        ));
+
+        blockStateModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.WALL_PAPAYA_LEAVES,Variant.variant()
+                .with(VariantProperties.MODEL,ThaiDelight.modid("block/papaya/wall_papaya_leaves"))
+        ).with(createHorizontalFacingDispatch()));
+
+        blockStateModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.GROUND_PAPAYA_LEAVES)
+                .with(PropertyDispatch.property(PapayaLeavesStemBlock.PAPAYA_LEAVES_FACING)
+                        .select(Direction.UP,Variant.variant()
+                                .with(VariantProperties.MODEL,ThaiDelight.modid("block/papaya/ground_papaya_leaves"))
+                        )
+                        .select(Direction.NORTH,Variant.variant()
+                                .with(VariantProperties.MODEL,ThaiDelight.modid("block/papaya/wall_papaya_leaves"))
+                        )
+                        .select(Direction.EAST,Variant.variant()
+                                .with(VariantProperties.Y_ROT,VariantProperties.Rotation.R90)
+                                .with(VariantProperties.MODEL,ThaiDelight.modid("block/papaya/wall_papaya_leaves"))
+                        )
+                        .select(Direction.WEST,Variant.variant()
+                                .with(VariantProperties.Y_ROT,VariantProperties.Rotation.R270)
+                                .with(VariantProperties.MODEL,ThaiDelight.modid("block/papaya/wall_papaya_leaves"))
+                        )
+                        .select(Direction.SOUTH,Variant.variant()
+                                .with(VariantProperties.Y_ROT,VariantProperties.Rotation.R180)
+                                .with(VariantProperties.MODEL,ThaiDelight.modid("block/papaya/wall_papaya_leaves"))
+                        )
+        ));
+
         ModelTemplates.FLAT_ITEM.create(
                 ModelLocationUtils.getModelLocation(ModItems.PAPAYA_FLOWER),
                 TextureMapping.layer0(ThaiDelight.modid("block/papaya/papaya_flower")),

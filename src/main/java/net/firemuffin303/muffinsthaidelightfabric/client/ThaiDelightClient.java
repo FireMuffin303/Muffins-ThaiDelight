@@ -4,6 +4,8 @@ import com.terraformersmc.terraform.boat.api.client.TerraformBoatClientHelper;
 import com.terraformersmc.terraform.sign.SpriteIdentifierRegistry;
 import io.github.fabricators_of_create.porting_lib.recipe_book_categories.RecipeBookRegistry;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.*;
 import net.fabricmc.fabric.api.object.builder.v1.client.model.FabricModelPredicateProviderRegistry;
@@ -36,6 +38,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
+@Environment(EnvType.CLIENT)
 public class ThaiDelightClient implements ClientModInitializer {
     private static final Block[] CUTOUT = {
             ModBlocks.SOMTAM_FEAST,
@@ -69,7 +72,10 @@ public class ThaiDelightClient implements ClientModInitializer {
             ModBlocks.BUDDING_PEPPER_CROP,
             ModBlocks.BUDDING_PAPAYA_FLOWER,
             ModBlocks.PAPAYA_FLOWER,
-            ModBlocks.WALL_PAPAYA_FLOWER
+            ModBlocks.WALL_PAPAYA_FLOWER,
+            ModBlocks.WALL_PAPAYA_LEAVES,
+            ModBlocks.GROUND_PAPAYA_LEAVES,
+            ModBlocks.PAPAYA_LEAVES_STEM
     };
 
     public static final RecipeBookType MORTAR_RECIPE_BOOK_TYPE = RecipeBookType.valueOf("MORTAR_RECIPE_BOOK_TYPE");

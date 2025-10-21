@@ -77,8 +77,6 @@ public class ThaiDelight implements ModInitializer {
 
     public static final ResourceLocation SPICY_PAYLOAD_ID = new ResourceLocation(MOD_ID,"spicypayload");
 
-
-
     public static final TerraformBoatType DURIAN = new TerraformBoatType.Builder()
             .item(ModItems.DURIAN_BOAT)
             .chestItem(ModItems.DURIAN_CHEST_BOAT)
@@ -491,6 +489,7 @@ public class ThaiDelight implements ModInitializer {
         output.accept(ModItems.PAPAYA_WOOD);
         output.accept(ModItems.STRIPPED_PAPAYA_WOOD);
         output.accept(ModItems.PAPAYA_LEAVES);
+        output.accept(ModItems.NEW_PAPAYA_LEAVES);
         output.accept(ModItems.PAPAYA_SAPLING);
         output.accept(ModItems.PAPAYA_SEEDS);
 

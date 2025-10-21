@@ -7,7 +7,7 @@ public class ThaiDelightConfig extends MidnightConfig {
     public static final String CREDITS = "credits";
 
     //Gameplay
-
+    @Entry(category = GAMEPLAY) public static boolean shouldThaiHouseSpawn = true;
 
     //Credits
     @Comment(category = CREDITS,centered = true) public static Comment developer;

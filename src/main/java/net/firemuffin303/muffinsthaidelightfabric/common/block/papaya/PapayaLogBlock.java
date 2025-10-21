@@ -1,5 +1,6 @@
 package net.firemuffin303.muffinsthaidelightfabric.common.block.papaya;
 
+import net.firemuffin303.muffinsthaidelightfabric.common.block.DirectionBonemealableBlock;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -17,31 +18,13 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 
-public class PapayaLogBlock extends RotatedPillarBlock implements BonemealableBlock {
+public class PapayaLogBlock extends RotatedPillarBlock implements DirectionBonemealableBlock {
     public static final BooleanProperty BOTTOM = BlockStateProperties.BOTTOM;
 
 
     public PapayaLogBlock(Properties properties) {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(BOTTOM,false));
-    }
-
-
-    @Override
-    public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState, boolean bl) {
-        for(Direction direction : Direction.Plane.HORIZONTAL){
-            Direction direction2 = direction.getOpposite();
-            BlockPos blockPos2 = blockPos.offset(direction2.getStepX(), 0, direction2.getStepZ());
-            if(levelReader.getBlockState(blockPos2).isAir()){
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean isBonemealSuccess(Level level, RandomSource randomSource, BlockPos blockPos, BlockState blockState) {
-        return true;
     }
 
     @Override
@@ -62,14 +45,22 @@ public class PapayaLogBlock extends RotatedPillarBlock implements BonemealableBl
     }
 
     @Override
-    public void performBonemeal(ServerLevel serverLevel, RandomSource randomSource, BlockPos blockPos, BlockState blockState) {
-        for (Direction direction : Direction.Plane.HORIZONTAL) {
-            Direction direction2 = direction.getOpposite();
-            BlockPos blockPos2 = blockPos.offset(direction2.getStepX(), 0, direction2.getStepZ());
-            if (serverLevel.getBlockState(blockPos2).isAir()) {
-                serverLevel.setBlock(blockPos2, ModBlocks.BUDDING_PAPAYA_FLOWER.defaultBlockState().setValue(PapayaBlock.FACING, direction), 2);
-                return;
-            }
+    public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState,Direction clickedFace, boolean isClient) {
+        BlockPos blockPos2 = blockPos.offset(clickedFace.getStepX(), 0, clickedFace.getStepZ());
+        return levelReader.getBlockState(blockPos2).isAir();
+    }
+
+
+    @Override
+    public boolean isBonemealSuccess(Level level, RandomSource randomSource, BlockPos blockPos, BlockState blockState,Direction clickedFace) {
+        return true;
+    }
+
+    @Override
+    public void performBonemeal(ServerLevel serverLevel, RandomSource randomSource, BlockPos blockPos, BlockState blockState,Direction clickedFace) {
+        BlockPos blockPos2 = blockPos.offset(clickedFace.getStepX(), 0, clickedFace.getStepZ());
+        if (serverLevel.getBlockState(blockPos2).isAir()) {
+            serverLevel.setBlock(blockPos2, ModBlocks.BUDDING_PAPAYA_FLOWER.defaultBlockState().setValue(PapayaBlock.FACING, clickedFace.getOpposite()), 2);
         }
     }
 }
