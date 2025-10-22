@@ -1,7 +1,9 @@
 package net.firemuffin303.muffinsthaidelightfabric.common.block.papaya;
 
 import net.firemuffin303.muffinsthaidelightfabric.common.block.ModBlockStateProperties;
+import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModTags;
+import net.minecraft.BlockUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -22,6 +24,10 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Optional;
+
+import static net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.PapayaLeavesBlock.FULLNESS;
 
 public class PapayaLeavesStemBlock extends BushBlock implements SimpleWaterloggedBlock, BonemealableBlock {
     public static final DirectionProperty PAPAYA_LEAVES_FACING = ModBlockStateProperties.PAPAYA_LEAVES_FACING;
@@ -79,7 +85,8 @@ public class PapayaLeavesStemBlock extends BushBlock implements SimpleWaterlogge
     public boolean canSurvive(BlockState blockState, LevelReader levelReader, BlockPos blockPos) {
         Direction direction = blockState.getValue(PAPAYA_LEAVES_FACING);
         BlockState parentState = levelReader.getBlockState(blockPos.relative(direction.getOpposite()));
-        return mayPlaceOn(parentState,levelReader,blockPos);
+        BlockState nextBlockState = levelReader.getBlockState(blockPos.relative(direction));
+        return mayPlaceOn(parentState,levelReader,blockPos) && ( mayPlaceOn(nextBlockState,levelReader,blockPos) || nextBlockState.is(ModBlocks.GROUND_PAPAYA_LEAVES) );
     }
 
     @Override
@@ -94,16 +101,37 @@ public class PapayaLeavesStemBlock extends BushBlock implements SimpleWaterlogge
 
     @Override
     public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState, boolean bl) {
-        return false;
+        Direction direction = blockState.getValue(PAPAYA_LEAVES_FACING);
+        Optional<BlockPos> optional = BlockUtil.getTopConnectedBlock(levelReader, blockPos, blockState.getBlock(), direction, ModBlocks.GROUND_PAPAYA_LEAVES);
+        if (optional.isEmpty()) {
+            return false;
+        }
+        BlockPos blockPos2 = optional.get().relative(direction);
+        BlockState blockState2 = levelReader.getBlockState(blockPos2);
+        return !levelReader.isOutsideBuildHeight(blockPos) && blockState2.isAir() || blockState2.is(Blocks.WATER);
     }
 
     @Override
     public boolean isBonemealSuccess(Level level, RandomSource randomSource, BlockPos blockPos, BlockState blockState) {
-        return false;
+        return true;
     }
 
     @Override
     public void performBonemeal(ServerLevel serverLevel, RandomSource randomSource, BlockPos blockPos, BlockState blockState) {
+        Direction direction = blockState.getValue(PAPAYA_LEAVES_FACING);
+        Optional<BlockPos> optional = BlockUtil.getTopConnectedBlock(serverLevel, blockPos, blockState.getBlock(), direction, ModBlocks.GROUND_PAPAYA_LEAVES);
+        if(optional.isEmpty()){
+            return;
+        }
 
+        BlockPos blockPos2 = optional.get();
+
+        serverLevel.setBlock(blockPos2,blockState
+                .setValue(PapayaLeavesStemBlock.PAPAYA_LEAVES_FACING,direction),2);
+
+        serverLevel.setBlock(blockPos2.relative(direction,1),
+                ModBlocks.GROUND_PAPAYA_LEAVES.defaultBlockState().setValue(PapayaLeavesBlock.PAPAYA_LEAVES_FACING,direction).setValue(FULLNESS,false),
+                2
+        );
     }
 }

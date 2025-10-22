@@ -27,7 +27,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class PapayaLeavesBlock extends BushBlock implements SimpleWaterloggedBlock, BonemealableBlock {
     private static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
-    private static final BooleanProperty FULLNESS = BooleanProperty.create("fullness");
+    public static final BooleanProperty FULLNESS = BooleanProperty.create("fullness");
     public static final DirectionProperty PAPAYA_LEAVES_FACING = ModBlockStateProperties.PAPAYA_LEAVES_FACING;
 
     public PapayaLeavesBlock(Properties properties) {
