@@ -234,7 +234,7 @@ public class ThaiDelight implements ModInitializer {
 
         BiomeModifications.addFeature((context) ->{
             return BiomeSelectors.includeByKey(Biomes.SAVANNA,Biomes.SAVANNA_PLATEAU,Biomes.WINDSWEPT_SAVANNA).test(context);
-        }, GenerationStep.Decoration.VEGETAL_DECORATION, ModFeatures.PAPAYA_TREE_CHECKED);
+        }, GenerationStep.Decoration.VEGETAL_DECORATION, ModFeatures.TREES_PAPAYA);
 
         BiomeModifications.addFeature(context -> BiomeSelectors.includeByKey(Biomes.JUNGLE).test(context),
                 GenerationStep.Decoration.VEGETAL_DECORATION,ModFeatures.TREES_DURIAN);

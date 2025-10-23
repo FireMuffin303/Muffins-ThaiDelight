@@ -18,6 +18,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.util.valueproviders.ClampedInt;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.util.valueproviders.WeightedListInt;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
@@ -49,13 +50,13 @@ public class ModFeatures {
     public static final FoliagePlacerType<DurianTreeFoliagePlacer> DURIAN_FOLIAGE_PLACER = Registry.register(BuiltInRegistries.FOLIAGE_PLACER_TYPE,ThaiDelight.modid("durian_foliage_placer"),new FoliagePlacerType<>(DurianTreeFoliagePlacer.CODEC));
     public static final FoliagePlacerType<HangingBlobFoliagePlacer> HANGING_BLOB_FOLIAGE_PLACER = Registry.register(BuiltInRegistries.FOLIAGE_PLACER_TYPE,ThaiDelight.modid("hanging_blob_foliage_placer"),new FoliagePlacerType<>(HangingBlobFoliagePlacer.CODEC));
     public static final FoliagePlacerType<CoconutLeavesFoliagePlacer> COCONUT_FOLIAGE_PLACER = Registry.register(BuiltInRegistries.FOLIAGE_PLACER_TYPE,ThaiDelight.modid("coconut_foliage_placer"),new FoliagePlacerType<>(CoconutLeavesFoliagePlacer.CODEC));
-
+    public static final FoliagePlacerType<PapayaLeavesFoliagePlacer> PAPAYA_FOLIAGE_PLACER = Registry.register(BuiltInRegistries.FOLIAGE_PLACER_TYPE,ThaiDelight.modid("papaya_foliage_placer"),new FoliagePlacerType<>(PapayaLeavesFoliagePlacer.CODEC));
 
     public static final ResourceKey<ConfiguredFeature<?,?>> FEATURE_PATCH_LIME_BUSH;
     public static final ResourceKey<ConfiguredFeature<?,?>> FEATURE_PATCH_WILD_PEPPER;
 
     //Papaya
-    public static final ResourceKey<ConfiguredFeature<?, ?>> FEATURE_PAPAYA_TREE;
+    public static final ResourceKey<ConfiguredFeature<?, ?>> FEATURE_PAPAYA_TREE = ResourceKey.create(Registries.CONFIGURED_FEATURE,new ResourceLocation(ThaiDelight.MOD_ID,"papaya_tree"));
 
     //Durian
     public static final ResourceKey<ConfiguredFeature<?, ?>> FEATURE_DURIAN_TREE = ResourceKey.create(Registries.CONFIGURED_FEATURE,ThaiDelight.modid("durian_tree"));
@@ -72,7 +73,7 @@ public class ModFeatures {
 
     public static final ResourceKey<PlacedFeature> PATCH_LIME_BUSH;
     public static final ResourceKey<PlacedFeature> PATCH_WILD_PEPPER;
-    public static final ResourceKey<PlacedFeature> PAPAYA_TREE_CHECKED;
+    public static final ResourceKey<PlacedFeature> TREES_PAPAYA = ResourceKey.create(Registries.PLACED_FEATURE,new ResourceLocation(ThaiDelight.MOD_ID,"trees_papaya"));
     public static final ResourceKey<PlacedFeature> TREES_DURIAN = ResourceKey.create(Registries.PLACED_FEATURE,ThaiDelight.modid("trees_durian"));
     public static final ResourceKey<PlacedFeature> TREES_DURIAN_SPARSE_JUNGLE = ResourceKey.create(Registries.PLACED_FEATURE,ThaiDelight.modid("trees_durian_sparse"));
     public static final ResourceKey<PlacedFeature> TREES_MANGO = ResourceKey.create(Registries.PLACED_FEATURE,ThaiDelight.modid("trees_mango"));
@@ -133,14 +134,19 @@ public class ModFeatures {
         bootstapContext.register(ModFeatures.FEATURE_COCONUT_TREE_BEE,new ConfiguredFeature<>(Feature.TREE,createCoconutTree(List.of(
                 new BeehiveDecorator(0.05f)
         )).build()));
+
+        bootstapContext.register(ModFeatures.FEATURE_PAPAYA_TREE,new ConfiguredFeature<>(Feature.TREE, createPapayaTree(List.of()).build() ));
     }
 
     public static void bootstrapPlacedFeature(BootstapContext<PlacedFeature> bootstapContext){
         var config_lime_bush = bootstapContext.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(ModFeatures.FEATURE_PATCH_LIME_BUSH);
         var config_wild_pepper = bootstapContext.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(ModFeatures.FEATURE_PATCH_WILD_PEPPER);
+
         Holder.Reference<ConfiguredFeature<?,?>> durian_tree_checked = bootstapContext.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(ModFeatures.FEATURE_DURIAN_TREE);
         Holder.Reference<ConfiguredFeature<?,?>> mango_tree_checked = bootstapContext.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(ModFeatures.FEATURE_MANGO_TREE);
         Holder.Reference<ConfiguredFeature<?,?>> coconut_tree_checked = bootstapContext.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(ModFeatures.FEATURE_COCONUT_TREE);
+        Holder.Reference<ConfiguredFeature<?,?>> papaya_tree_checked = bootstapContext.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(ModFeatures.FEATURE_PAPAYA_TREE);
+
 
         bootstapContext.register(ModFeatures.PATCH_LIME_BUSH,new PlacedFeature(config_lime_bush,
                 List.of(
@@ -160,10 +166,10 @@ public class ModFeatures {
                 )
         ));
 
-        bootstapContext.register(ModFeatures.TREES_DURIAN,
-                new PlacedFeature(durian_tree_checked, VegetationPlacements.treePlacement(PlacementUtils.countExtra(1,0.02f,1),ModBlocks.DURIAN_SAPLING)));
-        bootstapContext.register(ModFeatures.TREES_DURIAN_SPARSE_JUNGLE,
-                new PlacedFeature(durian_tree_checked,VegetationPlacements.treePlacement(RarityFilter.onAverageOnceEvery(50),ModBlocks.DURIAN_SAPLING)));
+        bootstapContext.register(ModFeatures.TREES_DURIAN, new PlacedFeature(durian_tree_checked,
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(1,0.02f,1),ModBlocks.DURIAN_SAPLING)));
+        bootstapContext.register(ModFeatures.TREES_DURIAN_SPARSE_JUNGLE, new PlacedFeature(durian_tree_checked,
+                VegetationPlacements.treePlacement(RarityFilter.onAverageOnceEvery(50),ModBlocks.DURIAN_SAPLING)));
 
         bootstapContext.register(ModFeatures.TREES_MANGO,new PlacedFeature(mango_tree_checked, ImmutableList.<PlacementModifier>builder()
                 .add(CountPlacement.of(ClampedInt.of(UniformInt.of(-3,1),0,1)))
@@ -183,6 +189,15 @@ public class ModFeatures {
                 .add(PlacementUtils.HEIGHTMAP_OCEAN_FLOOR)
                 .add(BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(ModBlocks.COCONUT_SAPLING.defaultBlockState(), BlockPos.ZERO)))
                 .add(BiomeFilter.biome()).build()));
+
+        bootstapContext.register(ModFeatures.TREES_PAPAYA,new PlacedFeature(papaya_tree_checked,ImmutableList.<PlacementModifier>builder()
+                .add(RarityFilter.onAverageOnceEvery(20))
+                .add(InSquarePlacement.spread())
+                .add(SurfaceWaterDepthFilter.forMaxDepth(0))
+                .add(PlacementUtils.HEIGHTMAP_OCEAN_FLOOR)
+                .add(BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(ModBlocks.PAPAYA_SAPLING.defaultBlockState(), BlockPos.ZERO)))
+                .add(BiomeFilter.biome())
+                .build()));
     }
 
     public static void dataGen(HolderLookup.Provider provider, FabricDynamicRegistryProvider.Entries entries){
@@ -201,6 +216,8 @@ public class ModFeatures {
         entries.add(provider.lookupOrThrow(Registries.CONFIGURED_FEATURE),ModFeatures.FEATURE_COCONUT_TREE);
         entries.add(provider.lookupOrThrow(Registries.CONFIGURED_FEATURE),ModFeatures.FEATURE_COCONUT_TREE_BEE);
 
+        entries.add(provider.lookupOrThrow(Registries.CONFIGURED_FEATURE),ModFeatures.FEATURE_PAPAYA_TREE);
+
         entries.add(provider.lookupOrThrow(Registries.CONFIGURED_FEATURE),ModFeatures.FEATURE_LIME_TREE);
         entries.add(provider.lookupOrThrow(Registries.PLACED_FEATURE),ModFeatures.PATCH_LIME_BUSH);
         entries.add(provider.lookupOrThrow(Registries.PLACED_FEATURE),ModFeatures.PATCH_WILD_PEPPER);
@@ -208,6 +225,7 @@ public class ModFeatures {
         entries.add(provider.lookupOrThrow(Registries.PLACED_FEATURE),ModFeatures.TREES_DURIAN_SPARSE_JUNGLE);
         entries.add(provider.lookupOrThrow(Registries.PLACED_FEATURE),ModFeatures.TREES_MANGO);
         entries.add(provider.lookupOrThrow(Registries.PLACED_FEATURE),ModFeatures.TREES_COCONUT);
+        entries.add(provider.lookupOrThrow(Registries.PLACED_FEATURE),ModFeatures.TREES_PAPAYA);
 
     }
 
@@ -260,14 +278,26 @@ public class ModFeatures {
                 .decorators(decorators);
     }
 
+    private static TreeConfiguration.TreeConfigurationBuilder createPapayaTree(List<TreeDecorator> treeDecorators){
+        List<TreeDecorator> decorators = new ArrayList<>(treeDecorators);
+
+        decorators.add(new PapayaDecorator(0.8f));
+
+        return new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBlocks.PAPAYA_LOG),
+                new StraightTrunkPlacer(5,1,2),
+                BlockStateProvider.simple(ModBlocks.GROUND_PAPAYA_LEAVES),
+                new PapayaLeavesFoliagePlacer(UniformInt.of(2,3),ConstantInt.of(0),2,BlockStateProvider.simple(ModBlocks.PAPAYA_LEAVES_STEM)),
+                new TwoLayersFeatureSize(1,0,1)
+        ).ignoreVines().decorators(decorators);
+    }
+
     static {
         FEATURE_PATCH_LIME_BUSH = ResourceKey.create(Registries.CONFIGURED_FEATURE,new ResourceLocation(ThaiDelight.MOD_ID,"patch_lime_bush"));
         FEATURE_PATCH_WILD_PEPPER = ResourceKey.create(Registries.CONFIGURED_FEATURE,new ResourceLocation(ThaiDelight.MOD_ID,"patch_wild_pepper"));
-        FEATURE_PAPAYA_TREE = ResourceKey.create(Registries.CONFIGURED_FEATURE,new ResourceLocation(ThaiDelight.MOD_ID,"papaya_tree"));
 
         PATCH_LIME_BUSH = ResourceKey.create(Registries.PLACED_FEATURE,new ResourceLocation(ThaiDelight.MOD_ID,"patch_lime_bush"));
         PATCH_WILD_PEPPER = ResourceKey.create(Registries.PLACED_FEATURE,new ResourceLocation(ThaiDelight.MOD_ID,"patch_wild_pepper"));
-        PAPAYA_TREE_CHECKED = ResourceKey.create(Registries.PLACED_FEATURE,new ResourceLocation(ThaiDelight.MOD_ID,"papaya_tree_checked"));
 
 
     }

@@ -24,7 +24,7 @@ public class PapayaLogBlock extends RotatedPillarBlock implements DirectionBonem
 
     public PapayaLogBlock(Properties properties) {
         super(properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(BOTTOM,false));
+        this.registerDefaultState(this.stateDefinition.any().setValue(AXIS, Direction.Axis.Y).setValue(BOTTOM,false));
     }
 
     @Override
