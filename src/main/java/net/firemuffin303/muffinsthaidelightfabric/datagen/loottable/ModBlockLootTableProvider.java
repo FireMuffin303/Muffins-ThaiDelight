@@ -155,7 +155,9 @@ public class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
         this.createSimpleLoot(ModBlocks.COCONUT_LEAF_BLOCK);
         this.createSimpleLoot(ModBlocks.COCONUT_LEAF);
 
-        this.add(ModBlocks.PAPAYA_LEAVES, (block) -> this.createLeavesDrops(block, ModBlocks.PAPAYA_SAPLING, NORMAL_LEAVES_SAPLING_CHANCES));
+        this.dropSelf(ModBlocks.PAPAYA_LEAVES);
+        this.dropOther(ModBlocks.PAPAYA_LEAVES_STEM,ModBlocks.PAPAYA_LEAVES);
+
 
         this.add(ModBlocks.PAPAYA,this.applyExplosionDecay(ModBlocks.PAPAYA,
                 LootTable.lootTable()

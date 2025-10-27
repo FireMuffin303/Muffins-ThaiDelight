@@ -280,6 +280,7 @@ public class ModelDataGen extends FabricModelProvider {
         itemModelGenerator.generateFlatItem(ModItems.MANGO_CHEST_BOAT,ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.COCONUT_BOAT,ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.COCONUT_CHEST_BOAT,ModelTemplates.FLAT_ITEM);
+
     }
 
     private static void skipItemBlock(BlockModelGenerators blockStateModelGenerator){
@@ -289,6 +290,7 @@ public class ModelDataGen extends FabricModelProvider {
         blockStateModelGenerator.skipAutoItemBlock(ModBlocks.DURIAN_CAKE);
         blockStateModelGenerator.skipAutoItemBlock(ModBlocks.MANGO_PUDDING);
         blockStateModelGenerator.skipAutoItemBlock(ModBlocks.CRAB_EGG);
+        blockStateModelGenerator.skipAutoItemBlock(ModBlocks.PAPAYA_LEAVES);
     }
 
     private static void createFermentedFishCauldron(BlockModelGenerators blockStateModelGenerator){
@@ -436,11 +438,6 @@ public class ModelDataGen extends FabricModelProvider {
                                 .put(TextureSlot.SIDE,ThaiDelight.modid("block/papaya/stripped_papaya_log")),
                         blockStateModelGenerator.modelOutput)));
 
-
-        //blockStateModelGenerator.woodProvider(ModBlocks.STRIPPED_PAPAYA_LOG).logWithHorizontal(ModBlocks.STRIPPED_PAPAYA_LOG).wood(ModBlocks.STRIPPED_PAPAYA_WOOD);
-        createCubeAll(ModBlocks.PAPAYA_LEAVES,blockStateModelGenerator);
-
-
         blockStateModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.PAPAYA_LEAVES_STEM,Variant.variant()
                 .with(VariantProperties.MODEL,ModelTemplates.CROSS.create(
                         ThaiDelight.modid("block/papaya/papaya_leaves_stem"),
@@ -468,10 +465,10 @@ public class ModelDataGen extends FabricModelProvider {
                 .with(VariantProperties.MODEL,ThaiDelight.modid("block/papaya/wall_papaya_leaves"))
         ).with(createHorizontalFacingDispatch()));
 
-        blockStateModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.GROUND_PAPAYA_LEAVES)
+        blockStateModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.PAPAYA_LEAVES)
                 .with(PropertyDispatch.property(PapayaLeavesStemBlock.PAPAYA_LEAVES_FACING)
                         .select(Direction.UP,Variant.variant()
-                                .with(VariantProperties.MODEL,ThaiDelight.modid("block/papaya/ground_papaya_leaves"))
+                                .with(VariantProperties.MODEL,ThaiDelight.modid("block/papaya/papaya_leaves"))
                         )
                         .select(Direction.NORTH,Variant.variant()
                                 .with(VariantProperties.MODEL,ThaiDelight.modid("block/papaya/wall_papaya_leaves"))

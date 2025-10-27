@@ -1,9 +1,7 @@
 package net.firemuffin303.muffinsthaidelightfabric.common.block.papaya;
 
-import com.mojang.logging.LogUtils;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.ModBlockStateProperties;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
-import net.firemuffin303.muffinsthaidelightfabric.registry.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -58,12 +56,15 @@ public class PapayaLeavesBlock extends BushBlock implements SimpleWaterloggedBlo
     public boolean canSurvive(BlockState blockState, LevelReader levelReader, BlockPos blockPos) {
         Direction direction = blockState.getValue(PAPAYA_LEAVES_FACING);
         BlockState parentState = levelReader.getBlockState(blockPos.relative(direction.getOpposite()));
-        return mayPlaceOn(parentState,levelReader,blockPos);
+        return mayPlaceOn(parentState,levelReader,blockPos,direction);
     }
 
-    @Override
-    public boolean mayPlaceOn(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
-        return blockState.is(ModTags.PAPAYA_LOGS) || blockState.is(ModBlocks.PAPAYA_LEAVES_STEM) || blockState.is(ModBlocks.GROUND_PAPAYA_LEAVES) || super.mayPlaceOn(blockState, blockGetter, blockPos);
+    public boolean mayPlaceOn(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos,Direction direction) {
+        if(blockState.is(ModBlocks.PAPAYA_LEAVES) || blockState.is(ModBlocks.PAPAYA_LEAVES_STEM)){
+            return blockState.getValue(PAPAYA_LEAVES_FACING) == direction;
+        }
+
+        return blockState.isFaceSturdy(blockGetter,blockPos,direction) || super.mayPlaceOn(blockState, blockGetter, blockPos);
     }
 
     @Override

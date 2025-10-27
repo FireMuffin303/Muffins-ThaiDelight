@@ -74,7 +74,7 @@ public class ThaiDelightClient implements ClientModInitializer {
             ModBlocks.PAPAYA_FLOWER,
             ModBlocks.WALL_PAPAYA_FLOWER,
             ModBlocks.WALL_PAPAYA_LEAVES,
-            ModBlocks.GROUND_PAPAYA_LEAVES,
+            ModBlocks.PAPAYA_LEAVES,
             ModBlocks.PAPAYA_LEAVES_STEM
     };
 

@@ -86,7 +86,7 @@ public class PapayaLeavesStemBlock extends BushBlock implements SimpleWaterlogge
         Direction direction = blockState.getValue(PAPAYA_LEAVES_FACING);
         BlockState parentState = levelReader.getBlockState(blockPos.relative(direction.getOpposite()));
         BlockState nextBlockState = levelReader.getBlockState(blockPos.relative(direction));
-        return mayPlaceOn(parentState,levelReader,blockPos) && ( mayPlaceOn(nextBlockState,levelReader,blockPos) || nextBlockState.is(ModBlocks.GROUND_PAPAYA_LEAVES) );
+        return mayPlaceOn(parentState,levelReader,blockPos) && ( mayPlaceOn(nextBlockState,levelReader,blockPos) || nextBlockState.is(ModBlocks.PAPAYA_LEAVES) );
     }
 
     @Override
@@ -102,7 +102,7 @@ public class PapayaLeavesStemBlock extends BushBlock implements SimpleWaterlogge
     @Override
     public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState, boolean bl) {
         Direction direction = blockState.getValue(PAPAYA_LEAVES_FACING);
-        Optional<BlockPos> optional = BlockUtil.getTopConnectedBlock(levelReader, blockPos, blockState.getBlock(), direction, ModBlocks.GROUND_PAPAYA_LEAVES);
+        Optional<BlockPos> optional = BlockUtil.getTopConnectedBlock(levelReader, blockPos, blockState.getBlock(), direction, ModBlocks.PAPAYA_LEAVES);
         if (optional.isEmpty()) {
             return false;
         }
@@ -119,7 +119,7 @@ public class PapayaLeavesStemBlock extends BushBlock implements SimpleWaterlogge
     @Override
     public void performBonemeal(ServerLevel serverLevel, RandomSource randomSource, BlockPos blockPos, BlockState blockState) {
         Direction direction = blockState.getValue(PAPAYA_LEAVES_FACING);
-        Optional<BlockPos> optional = BlockUtil.getTopConnectedBlock(serverLevel, blockPos, blockState.getBlock(), direction, ModBlocks.GROUND_PAPAYA_LEAVES);
+        Optional<BlockPos> optional = BlockUtil.getTopConnectedBlock(serverLevel, blockPos, blockState.getBlock(), direction, ModBlocks.PAPAYA_LEAVES);
         if(optional.isEmpty()){
             return;
         }
@@ -130,7 +130,7 @@ public class PapayaLeavesStemBlock extends BushBlock implements SimpleWaterlogge
                 .setValue(PapayaLeavesStemBlock.PAPAYA_LEAVES_FACING,direction),2);
 
         serverLevel.setBlock(blockPos2.relative(direction,1),
-                ModBlocks.GROUND_PAPAYA_LEAVES.defaultBlockState().setValue(PapayaLeavesBlock.PAPAYA_LEAVES_FACING,direction).setValue(FULLNESS,false),
+                ModBlocks.PAPAYA_LEAVES.defaultBlockState().setValue(PapayaLeavesBlock.PAPAYA_LEAVES_FACING,direction).setValue(FULLNESS,false),
                 2
         );
     }

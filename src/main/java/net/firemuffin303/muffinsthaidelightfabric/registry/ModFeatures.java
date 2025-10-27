@@ -18,7 +18,6 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.util.valueproviders.ClampedInt;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformInt;
-import net.minecraft.util.valueproviders.WeightedListInt;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
@@ -286,7 +285,7 @@ public class ModFeatures {
         return new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBlocks.PAPAYA_LOG),
                 new StraightTrunkPlacer(5,1,2),
-                BlockStateProvider.simple(ModBlocks.GROUND_PAPAYA_LEAVES),
+                BlockStateProvider.simple(ModBlocks.PAPAYA_LEAVES),
                 new PapayaLeavesFoliagePlacer(UniformInt.of(2,3),ConstantInt.of(0),2,BlockStateProvider.simple(ModBlocks.PAPAYA_LEAVES_STEM)),
                 new TwoLayersFeatureSize(1,0,1)
         ).ignoreVines().decorators(decorators);

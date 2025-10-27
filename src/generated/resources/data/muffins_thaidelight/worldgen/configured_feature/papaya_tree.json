@@ -38,7 +38,7 @@
     "foliage_provider": {
       "type": "minecraft:simple_state_provider",
       "state": {
-        "Name": "muffins_thaidelight:ground_papaya_leaves",
+        "Name": "muffins_thaidelight:papaya_leaves",
         "Properties": {
           "fullness": "false",
           "papaya_leaves_facing": "up",

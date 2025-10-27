@@ -11,10 +11,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.BonemealableBlock;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.material.Fluids;
@@ -43,14 +40,19 @@ public class BuddingPapayaFlowerBlock extends HorizontalDirectionalBlock impleme
 
     @Override
     public void randomTick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource) {
-        if(serverLevel.random.nextInt(5) == 0){
-            serverLevel.setBlock(blockPos,
-                    ModBlocks.PAPAYA.defaultBlockState()
-                            .setValue(FACING,blockState.getValue(FACING))
-                            .setValue(PapayaBlock.AGE,1),
-                    2
-            );
+        if (serverLevel.getRawBrightness(blockPos, 0) >= 9) {
+            float f = CropBlock.getGrowthSpeed(this, serverLevel, blockPos);
+            if(randomSource.nextInt((int)(25.0F / f) + 1) == 0){
+                serverLevel.setBlock(blockPos,
+                        ModBlocks.PAPAYA.defaultBlockState()
+                                .setValue(FACING,blockState.getValue(FACING))
+                                .setValue(PapayaBlock.AGE,1),
+                        2
+                );
+            }
+
         }
+
     }
 
     @Override

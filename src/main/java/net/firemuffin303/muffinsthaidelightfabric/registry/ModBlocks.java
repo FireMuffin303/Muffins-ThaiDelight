@@ -454,8 +454,7 @@ public class ModBlocks {
     public static final Block STRIPPED_PAPAYA_LOG = register("stripped_papaya_log",log(MapColor.COLOR_CYAN,MapColor.COLOR_CYAN));
     public static final Block PAPAYA_WOOD = register("papaya_wood",new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava()));
     public static final Block STRIPPED_PAPAYA_WOOD = register("stripped_papaya_wood",new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava()));
-    public static final Block PAPAYA_LEAVES = register("papaya_leaves",leaves(SoundType.AZALEA_LEAVES));
-    public static final Block GROUND_PAPAYA_LEAVES = register("ground_papaya_leaves",new PapayaLeavesBlock(BlockBehaviour.Properties.of()
+    public static final Block PAPAYA_LEAVES = register("papaya_leaves",new PapayaLeavesBlock(BlockBehaviour.Properties.of()
             .mapColor(MapColor.PLANT)
             .strength(0.2F)
             .sound(SoundType.AZALEA_LEAVES)
@@ -467,7 +466,7 @@ public class ModBlocks {
             .pushReaction(PushReaction.DESTROY)
             .isRedstoneConductor(Blocks::never)));
 
-    public static final Block PAPAYA_LEAVES_STEM = register("papaya_leaves_stem",new PapayaLeavesStemBlock(BlockBehaviour.Properties.copy(GROUND_PAPAYA_LEAVES)));
+    public static final Block PAPAYA_LEAVES_STEM = register("papaya_leaves_stem",new PapayaLeavesStemBlock(BlockBehaviour.Properties.copy(PAPAYA_LEAVES)));
 
     public static final Block WALL_PAPAYA_LEAVES = register("wall_papaya_leaves",new WallPapayaLeavesBlock(BlockBehaviour.Properties.of()
             .mapColor(MapColor.PLANT)

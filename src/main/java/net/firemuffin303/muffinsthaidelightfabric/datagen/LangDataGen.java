@@ -63,7 +63,6 @@ public class LangDataGen extends FabricLanguageProvider {
         translationBuilder.add(ModBlocks.PAPAYA_WOOD, "Papaya Wood");
         translationBuilder.add(ModBlocks.STRIPPED_PAPAYA_LOG, "Stripped Papaya Log");
         translationBuilder.add(ModBlocks.STRIPPED_PAPAYA_WOOD, "Stripped Papaya Wood");
-        translationBuilder.add(ModBlocks.PAPAYA_LEAVES, "Papaya Leaves");
 
         //translationBuilder.add(ModItems.ESAN_MUSIC_DISC,"Music Disc");
         //translationBuilder.add("item.muffins_thaidelight.music_disc_northeast.desc","FireMuffin303 - untitled");
@@ -89,6 +88,7 @@ public class LangDataGen extends FabricLanguageProvider {
         translationBuilder.add(ModItems.RAW_PAPAYA_SLICE,"Raw Papaya Slice");
         translationBuilder.add(ModBlocks.PAPAYA_SAPLING,"Papaya Sapling");
         translationBuilder.add(ModItems.PAPAYA_SEEDS,"Papaya Seeds");
+        translationBuilder.add(ModBlocks.PAPAYA_LEAVES,"Papaya Leaves");
 
         translationBuilder.add(ModItems.DURIAN_SAPLING,"Durian Sapling");
         translationBuilder.add(ModItems.DURIAN_LEAVES,"Durian Leaves");
@@ -276,7 +276,7 @@ public class LangDataGen extends FabricLanguageProvider {
             translationBuilder.add(ModBlocks.PAPAYA_WOOD, "ไม้มะละกอ");
             translationBuilder.add(ModBlocks.STRIPPED_PAPAYA_LOG, "ท่อนไม้มะละกอลอกเปลือก");
             translationBuilder.add(ModBlocks.STRIPPED_PAPAYA_WOOD, "ไม้มะละกอลอกเปลือก");
-            translationBuilder.add(ModBlocks.PAPAYA_LEAVES, "ใบไม้มะละกอ");
+            translationBuilder.add(ModBlocks.PAPAYA_LEAVES,"ใบไม้มะละกอ");
 
             //translationBuilder.add(ModItems.ESAN_MUSIC_DISC,"แผ่นเพลง");
             //translationBuilder.add("item.muffins_thaidelight.music_disc_northeast.desc","FireMuffin303 - untitled");
