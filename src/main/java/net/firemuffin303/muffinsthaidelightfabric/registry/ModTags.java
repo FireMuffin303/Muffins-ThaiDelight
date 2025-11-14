@@ -24,4 +24,16 @@ public class ModTags {
     public static final TagKey<Item> SPICY_LEVEL_10 = TagKey.create(Registries.ITEM, new ResourceLocation(ThaiDelight.MOD_ID,"spicy_level_10"));
     public static final TagKey<Item> SPICY_LEVEL_50 = TagKey.create(Registries.ITEM, new ResourceLocation(ThaiDelight.MOD_ID,"spicy_level_50"));
 
+    public static final TagKey<Item> DURIAN_LOGS_ITEM = TagKey.create(Registries.ITEM,ThaiDelight.modid("durian_logs"));
+    public static final TagKey<Item> MANGO_LOGS_ITEM = TagKey.create(Registries.ITEM,ThaiDelight.modid("mango_logs"));
+    public static final TagKey<Item> COCONUT_LOGS_ITEM = TagKey.create(Registries.ITEM,ThaiDelight.modid("coconut_logs"));
+
+    public static final TagKey<Block> DURIAN_LOGS_BLOCK = TagKey.create(Registries.BLOCK,ThaiDelight.modid("durian_logs"));
+    public static final TagKey<Block> MANGO_LOGS_BLOCK = TagKey.create(Registries.BLOCK,ThaiDelight.modid("mango_logs"));
+    public static final TagKey<Block> COCONUT_LOGS_BLOCK = TagKey.create(Registries.BLOCK,ThaiDelight.modid("coconut_logs"));
+
+    public static final TagKey<Block> DURIAN_RICH_SOIL = TagKey.create(Registries.BLOCK,ThaiDelight.modid("durian_rich_soil"));
+    public static final TagKey<Block> MANGO_RICH_SOIL = TagKey.create(Registries.BLOCK,ThaiDelight.modid("mango_rich_soil"));
+    public static final TagKey<Block> COCONUT_RICH_SOIL = TagKey.create(Registries.BLOCK,ThaiDelight.modid("coconut_rich_soil"));
+    public static final TagKey<Block> COMMON_RICH_SOIL = TagKey.create(Registries.BLOCK,ThaiDelight.modid("common_rich_soil"));
 }

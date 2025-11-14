@@ -15,10 +15,7 @@ import net.firemuffin303.muffinsthaidelightfabric.common.block.coconut.BundledCo
 import net.firemuffin303.muffinsthaidelightfabric.common.block.coconut.CoconutBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.coconut.CoconutLeafBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.coconut.CoconutLeafEndBlock;
-import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.HangingDurianBlock;
-import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.DurianFlowerBlock;
-import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.DurianLeaveBlock;
-import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.SmallDurianBlock;
+import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.*;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.lime.*;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.mango.MangoBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.mango.StackableMangoBlock;
@@ -59,7 +56,6 @@ import static net.minecraft.world.level.block.Blocks.*;
 public class ModBlocks {
     public static final ArrayList<Block> CRATES = new ArrayList<>();
     public static final ArrayList<Block> CABINET = new ArrayList<>();
-
     //Functional Block
     public static final Block MORTAR = register("mortar",new MortarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_RED).strength(0.5f,6.0f).noOcclusion().sound(SoundType.DECORATED_POT)));
 
@@ -102,7 +98,7 @@ public class ModBlocks {
 
     public static final Block SMALL_DURIAN_BLOCK = register("small_durian_block",new SmallDurianBlock(
             BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).strength(1.0F).sound(SoundType.WOOD).noOcclusion().pushReaction(PushReaction.DESTROY)));
-    public static final Block DURIAN_BLOCK = register("durian_block",new Block(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).strength(1.0F).sound(SoundType.WOOD).pushReaction(PushReaction.DESTROY)));
+    public static final Block DURIAN_BLOCK = register("durian_block",new DurianBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).strength(1.0F).sound(SoundType.WOOD).pushReaction(PushReaction.DESTROY)));
     public static final Block DURIAN_LEAVES = register("durian_leaves",new DurianLeaveBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES)));
 
     //Durian Woodset
@@ -558,4 +554,5 @@ public class ModBlocks {
     public static Block register(String id, Block block){
         return Registry.register(BuiltInRegistries.BLOCK, ThaiDelight.modid(id), block);
     }
+
 }

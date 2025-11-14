@@ -1,7 +1,7 @@
 package net.firemuffin303.muffinsthaidelightfabric.mixin.bonemeal;
 
 import com.llamalad7.mixinextras.sugar.Local;
-import net.firemuffin303.muffinsthaidelightfabric.common.block.DirectionBonemealableBlock;
+import net.firemuffin303.muffinsthaidelightfabric.util.DirectionBonemealableBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;

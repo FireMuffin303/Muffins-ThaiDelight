@@ -1,6 +1,6 @@
 package net.firemuffin303.muffinsthaidelightfabric.common.block.durian;
 
-import net.firemuffin303.muffinsthaidelightfabric.common.StackableBlock;
+import net.firemuffin303.muffinsthaidelightfabric.util.StackableBlock;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

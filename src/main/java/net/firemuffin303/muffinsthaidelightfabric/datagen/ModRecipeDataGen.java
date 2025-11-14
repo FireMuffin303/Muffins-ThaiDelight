@@ -12,7 +12,6 @@ import net.minecraft.data.recipes.*;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.level.ItemLike;
 
 import java.util.function.Consumer;
@@ -48,7 +47,7 @@ public class ModRecipeDataGen extends FabricRecipeProvider {
     }
 
     private void craft(Consumer<FinishedRecipe> exporter){
-        RecipeProvider.planksFromLog(exporter,ModBlocks.DURIAN_PLANKS, ModTagDataGen.ModItemTagDataGen.DURIAN_LOGS,4);
+        RecipeProvider.planksFromLog(exporter,ModBlocks.DURIAN_PLANKS, ModTags.DURIAN_LOGS_ITEM,4);
         RecipeProvider.woodFromLogs(exporter,ModBlocks.DURIAN_WOOD, ModBlocks.DURIAN_LOG);
         RecipeProvider.woodenBoat(exporter,ModItems.DURIAN_BOAT,ModBlocks.DURIAN_PLANKS);
         RecipeProvider.chestBoat(exporter,ModItems.DURIAN_CHEST_BOAT,ModItems.DURIAN_BOAT);
@@ -61,7 +60,7 @@ public class ModRecipeDataGen extends FabricRecipeProvider {
                 .unlockedBy(getHasName(ModItems.DURIAN_PLANKS),has(ModItems.DURIAN_PLANKS))
                 .save(exporter,ThaiDelight.modid("crafting/"+getItemName(ModItems.DURIAN_CABINET)));
 
-        RecipeProvider.planksFromLog(exporter,ModBlocks.MANGO_PLANKS, ModTagDataGen.ModItemTagDataGen.MANGO_LOGS,4);
+        RecipeProvider.planksFromLog(exporter,ModBlocks.MANGO_PLANKS, ModTags.MANGO_LOGS_ITEM,4);
         RecipeProvider.woodFromLogs(exporter,ModBlocks.MANGO_WOOD, ModBlocks.MANGO_LOG);
         RecipeProvider.woodenBoat(exporter,ModItems.MANGO_BOAT,ModBlocks.MANGO_PLANKS);
         RecipeProvider.chestBoat(exporter,ModItems.MANGO_CHEST_BOAT,ModItems.MANGO_BOAT);
@@ -74,7 +73,7 @@ public class ModRecipeDataGen extends FabricRecipeProvider {
                 .unlockedBy(getHasName(ModItems.MANGO_PLANKS),has(ModItems.MANGO_PLANKS))
                 .save(exporter,ThaiDelight.modid("crafting/"+getItemName(ModItems.MANGO_CABINET)));
 
-        RecipeProvider.planksFromLog(exporter,ModBlocks.COCONUT_PLANKS, ModTagDataGen.ModItemTagDataGen.COCONUT_LOGS,4);
+        RecipeProvider.planksFromLog(exporter,ModBlocks.COCONUT_PLANKS, ModTags.COCONUT_LOGS_ITEM,4);
         RecipeProvider.woodFromLogs(exporter,ModBlocks.COCONUT_WOOD, ModBlocks.COCONUT_LOG);
         RecipeProvider.woodenBoat(exporter,ModItems.COCONUT_BOAT,ModBlocks.COCONUT_PLANKS);
         RecipeProvider.chestBoat(exporter,ModItems.COCONUT_CHEST_BOAT,ModItems.COCONUT_BOAT);

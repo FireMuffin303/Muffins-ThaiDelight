@@ -4,6 +4,7 @@ package net.firemuffin303.muffinsthaidelightfabric.registry;
 import com.terraformersmc.terraform.boat.api.TerraformBoatType;
 import com.terraformersmc.terraform.boat.api.TerraformBoatTypeRegistry;
 import com.terraformersmc.terraform.boat.api.item.TerraformBoatItemHelper;
+import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
 import net.firemuffin303.muffinsthaidelightfabric.common.item.DragonflyBottleItem;
 import net.firemuffin303.muffinsthaidelightfabric.common.item.papaya.PapayaFlowerItem;
@@ -26,6 +27,7 @@ import vectorwing.farmersdelight.common.item.DrinkableItem;
 import vectorwing.farmersdelight.common.registry.ModEffects;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import static vectorwing.farmersdelight.common.registry.ModItems.bowlFoodItem;
@@ -140,6 +142,9 @@ public class ModItems {
     public static final Item DURIAN_BOAT = TerraformBoatItemHelper.registerBoatItem(ThaiDelight.modid("durian_boat"),DURIAN_BOAT_KEY,false);
     public static final Item DURIAN_CHEST_BOAT = TerraformBoatItemHelper.registerBoatItem(ThaiDelight.modid("durian_chest_boat"),DURIAN_BOAT_KEY,true);
 
+
+    public static final Item DURIAN_PEEL = register("durian_peel",new Item(new Item.Properties()));
+    public static final Item DURIAN_HELMET = register("durian_helmet",new Item(new Item.Properties()));
     //------------------ 🥥 COCONUT 🥥 ------------------
     public static final Item COCONUT_SAPLING = register("coconut_sapling",new BlockItem(ModBlocks.COCONUT_SAPLING,new Item.Properties()));
     public static final Item COCONUT_LEAF = register("coconut_leaf",new BlockItem(ModBlocks.COCONUT_LEAF_END,new Item.Properties()));
@@ -342,6 +347,13 @@ public class ModItems {
 
     public static void init() {
         Item.BY_BLOCK.put(ModBlocks.COCONUT_LEAF,ModItems.COCONUT_LEAF);
+    }
+
+    public static void addFuel(){
+        FuelRegistry.INSTANCE.add(ModItems.LIME,200);
+        FuelRegistry.INSTANCE.add(ModItems.SLICED_LIME,200);
+        FuelRegistry.INSTANCE.add(ModItems.,200);
+        FuelRegistry.INSTANCE.add(ModItems.DURIAN_PEEL,200);
     }
 
     static {

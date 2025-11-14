@@ -1,6 +1,6 @@
 package net.firemuffin303.muffinsthaidelightfabric.common.entity;
 
-import net.firemuffin303.muffinsthaidelightfabric.common.Bottleable;
+import net.firemuffin303.muffinsthaidelightfabric.util.Bottleable;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModEntityTypes;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModItems;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModTags;
@@ -12,7 +12,6 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.util.ByIdMap;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;

@@ -1,6 +1,6 @@
 package net.firemuffin303.muffinsthaidelightfabric.common.block;
 
-import net.firemuffin303.muffinsthaidelightfabric.common.StackableBlock;
+import net.firemuffin303.muffinsthaidelightfabric.util.StackableBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;

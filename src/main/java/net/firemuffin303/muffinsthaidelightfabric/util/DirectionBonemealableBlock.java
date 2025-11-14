@@ -1,4 +1,4 @@
-package net.firemuffin303.muffinsthaidelightfabric.common.block;
+package net.firemuffin303.muffinsthaidelightfabric.util;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

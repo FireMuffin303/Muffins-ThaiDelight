@@ -61,6 +61,9 @@ public class ModFeatures {
     //Durian
     public static final ResourceKey<ConfiguredFeature<?, ?>> FEATURE_DURIAN_TREE = ResourceKey.create(Registries.CONFIGURED_FEATURE,ThaiDelight.modid("durian_tree"));
     public static final ResourceKey<ConfiguredFeature<?, ?>> FEATURE_DURAIN_TREE_BEE = ResourceKey.create(Registries.CONFIGURED_FEATURE,ThaiDelight.modid("durian_tree_bee"));
+    public static final ResourceKey<ConfiguredFeature<?, ?>> FEATURE_TALL_DURIAN_TREE = ResourceKey.create(Registries.CONFIGURED_FEATURE,ThaiDelight.modid("tall_durian_tree"));
+    public static final ResourceKey<ConfiguredFeature<?, ?>> FEATURE_TALL_DURIAN_TREE_BEE = ResourceKey.create(Registries.CONFIGURED_FEATURE,ThaiDelight.modid("tall_durian_tree_bee"));
+
     //Mango
     public static final ResourceKey<ConfiguredFeature<?, ?>> FEATURE_MANGO_TREE = ResourceKey.create(Registries.CONFIGURED_FEATURE,ThaiDelight.modid("mango_tree"));
     public static final ResourceKey<ConfiguredFeature<?, ?>> FEATURE_MANGO_TREE_BEE = ResourceKey.create(Registries.CONFIGURED_FEATURE,ThaiDelight.modid("mango_tree_bee"));
@@ -108,8 +111,11 @@ public class ModFeatures {
 
 
         //Durian
-        bootstapContext.register(ModFeatures.FEATURE_DURIAN_TREE,new ConfiguredFeature<>(Feature.TREE,createDurianTree(List.of()).build()));
-        bootstapContext.register(ModFeatures.FEATURE_DURAIN_TREE_BEE,new ConfiguredFeature<>(Feature.TREE,createDurianTree(
+        bootstapContext.register(ModFeatures.FEATURE_DURIAN_TREE,new ConfiguredFeature<>(Feature.TREE,createShortDurianTree(List.of()).build()));
+        bootstapContext.register(ModFeatures.FEATURE_DURAIN_TREE_BEE,new ConfiguredFeature<>(Feature.TREE,createShortDurianTree(
+                List.of(new BeehiveDecorator(0.05f))).build()));
+        bootstapContext.register(ModFeatures.FEATURE_TALL_DURIAN_TREE,new ConfiguredFeature<>(Feature.TREE,createDurianTree(15,3,List.of()).build()));
+        bootstapContext.register(ModFeatures.FEATURE_TALL_DURIAN_TREE_BEE,new ConfiguredFeature<>(Feature.TREE,createDurianTree(15,3,
                 List.of(new BeehiveDecorator(0.05f))).build()));
 
 
@@ -143,6 +149,7 @@ public class ModFeatures {
         var config_wild_pepper = bootstapContext.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(ModFeatures.FEATURE_PATCH_WILD_PEPPER);
 
         Holder.Reference<ConfiguredFeature<?,?>> durian_tree_checked = bootstapContext.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(ModFeatures.FEATURE_DURIAN_TREE);
+        Holder.Reference<ConfiguredFeature<?,?>> tall_durian_tree_checked = bootstapContext.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(ModFeatures.FEATURE_TALL_DURIAN_TREE);
         Holder.Reference<ConfiguredFeature<?,?>> mango_tree_checked = bootstapContext.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(ModFeatures.FEATURE_MANGO_TREE);
         Holder.Reference<ConfiguredFeature<?,?>> coconut_tree_checked = bootstapContext.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(ModFeatures.FEATURE_COCONUT_TREE);
         Holder.Reference<ConfiguredFeature<?,?>> papaya_tree_checked = bootstapContext.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(ModFeatures.FEATURE_PAPAYA_TREE);
@@ -166,7 +173,7 @@ public class ModFeatures {
                 )
         ));
 
-        bootstapContext.register(ModFeatures.TREES_DURIAN, new PlacedFeature(durian_tree_checked,
+        bootstapContext.register(ModFeatures.TREES_DURIAN, new PlacedFeature(tall_durian_tree_checked,
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(1,0.02f,1),ModBlocks.DURIAN_SAPLING)));
         bootstapContext.register(ModFeatures.TREES_DURIAN_SPARSE_JUNGLE, new PlacedFeature(durian_tree_checked,
                 VegetationPlacements.treePlacement(RarityFilter.onAverageOnceEvery(50),ModBlocks.DURIAN_SAPLING)));
@@ -207,6 +214,8 @@ public class ModFeatures {
         //Durian
         entries.add(provider.lookupOrThrow(Registries.CONFIGURED_FEATURE),ModFeatures.FEATURE_DURIAN_TREE);
         entries.add(provider.lookupOrThrow(Registries.CONFIGURED_FEATURE),ModFeatures.FEATURE_DURAIN_TREE_BEE);
+        entries.add(provider.lookupOrThrow(Registries.CONFIGURED_FEATURE),ModFeatures.FEATURE_TALL_DURIAN_TREE);
+        entries.add(provider.lookupOrThrow(Registries.CONFIGURED_FEATURE),ModFeatures.FEATURE_TALL_DURIAN_TREE_BEE);
 
         //Mango
         entries.add(provider.lookupOrThrow(Registries.CONFIGURED_FEATURE),ModFeatures.FEATURE_MANGO_TREE);
@@ -229,7 +238,12 @@ public class ModFeatures {
 
     }
 
-    private static TreeConfiguration.TreeConfigurationBuilder createDurianTree(List<TreeDecorator> treeDecorators) {
+    private static TreeConfiguration.TreeConfigurationBuilder createShortDurianTree(List<TreeDecorator> treeDecorators){
+        return createDurianTree(8,2,treeDecorators);
+    }
+
+
+    private static TreeConfiguration.TreeConfigurationBuilder createDurianTree(int baseHeight,int heightRandA,List<TreeDecorator> treeDecorators) {
         List<TreeDecorator> decorators = new ArrayList<>();
         decorators.add(new AttachedToLeavesDecorator(0.15f,1,0,
                 BlockStateProvider.simple(ModBlocks.DURIAN_FLOWER.defaultBlockState().setValue(DurianFlowerBlock.HANGING,true)),
@@ -240,7 +254,7 @@ public class ModFeatures {
 
         return new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBlocks.DURIAN_LOG),
-                new DurianTreeTrunkPlacer(6,2,0, UniformInt.of(-4,-2), UniformInt.of(2,4),UniformInt.of(2,4)),
+                new DurianTreeTrunkPlacer(baseHeight,heightRandA,0, UniformInt.of(-4,-2), UniformInt.of(2,4),UniformInt.of(2,4)),
                 BlockStateProvider.simple(ModBlocks.DURIAN_LEAVES),
                 new DurianTreeFoliagePlacer(ConstantInt.of(2),ConstantInt.of(0),0.4f,0.12f),
                 new TwoLayersFeatureSize(1,0,1)

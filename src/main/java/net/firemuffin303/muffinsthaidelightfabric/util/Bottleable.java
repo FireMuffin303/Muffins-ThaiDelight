@@ -1,4 +1,4 @@
-package net.firemuffin303.muffinsthaidelightfabric.common;
+package net.firemuffin303.muffinsthaidelightfabric.util;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvent;
