@@ -172,13 +172,15 @@ public class ModTagDataGen {
             getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_HOE)
                     .add(ModBlocks.DURIAN_BLOCK);
 
+            getOrCreateTagBuilder(DURIAN_LOGS_BLOCK).add(ModBlocks.DURIAN_LOG,ModBlocks.DURIAN_WOOD,ModBlocks.STRIPPED_DURIAN_LOG,ModBlocks.STRIPPED_DURIAN_WOOD);
+            getOrCreateTagBuilder(MANGO_LOGS_BLOCK).add(ModBlocks.MANGO_LOG,ModBlocks.MANGO_WOOD,ModBlocks.STRIPPED_MANGO_LOG,ModBlocks.STRIPPED_MANGO_WOOD);
+            getOrCreateTagBuilder(COCONUT_LOGS_BLOCK).add(ModBlocks.COCONUT_LOG,ModBlocks.COCONUT_WOOD,ModBlocks.STRIPPED_COCONUT_LOG,ModBlocks.STRIPPED_COCONUT_WOOD);
             getOrCreateTagBuilder(BlockTags.LOGS_THAT_BURN)
                     .addTag(PAPAYA_LOGS)
                     .addTag(DURIAN_LOGS_BLOCK)
                     .addTag(MANGO_LOGS_BLOCK)
                     .addTag(COCONUT_LOGS_BLOCK);
 
-            getOrCreateTagBuilder(DURIAN_LOGS_BLOCK).add(ModBlocks.DURIAN_LOG,ModBlocks.DURIAN_WOOD,ModBlocks.STRIPPED_DURIAN_LOG,ModBlocks.STRIPPED_DURIAN_WOOD);
 
             getOrCreateTagBuilder(BlockTags.LEAVES)
                     .add(
@@ -240,14 +242,19 @@ public class ModTagDataGen {
     }
 
     public static class ModBiomeTagDataGen extends FabricTagProvider<Biome> {
-        public static final TagKey<Biome> MANGO_TREE_BIOMES = TagKey.create(Registries.BIOME, ThaiDelight.modid("mango_tree_biomes"));
+
         public ModBiomeTagDataGen(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
             super(output, Registries.BIOME, registriesFuture);
         }
 
         @Override
         protected void addTags(HolderLookup.Provider provider) {
+            getOrCreateTagBuilder(LIME_TREE_BIOMES).add(Biomes.FOREST, Biomes.BIRCH_FOREST, Biomes.FLOWER_FOREST);
+            getOrCreateTagBuilder(PAPAYA_TREE_BIOMES).add(Biomes.SAVANNA,Biomes.SAVANNA_PLATEAU,Biomes.WINDSWEPT_SAVANNA);
+            getOrCreateTagBuilder(PEPPER_TREE_BIOMES).add(Biomes.SAVANNA,Biomes.SAVANNA_PLATEAU,Biomes.WINDSWEPT_SAVANNA);
+            getOrCreateTagBuilder(DURIAN_TREE_BIOMES).add(Biomes.JUNGLE);
             getOrCreateTagBuilder(MANGO_TREE_BIOMES).add(Biomes.BIRCH_FOREST,Biomes.OLD_GROWTH_BIRCH_FOREST,Biomes.FLOWER_FOREST,Biomes.FOREST);
+            getOrCreateTagBuilder(COCONUT_TREE_BIOMES).add(Biomes.BEACH);
         }
     }
 }

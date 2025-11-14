@@ -142,7 +142,6 @@ public class ModItems {
     public static final Item DURIAN_BOAT = TerraformBoatItemHelper.registerBoatItem(ThaiDelight.modid("durian_boat"),DURIAN_BOAT_KEY,false);
     public static final Item DURIAN_CHEST_BOAT = TerraformBoatItemHelper.registerBoatItem(ThaiDelight.modid("durian_chest_boat"),DURIAN_BOAT_KEY,true);
 
-
     public static final Item DURIAN_PEEL = register("durian_peel",new Item(new Item.Properties()));
     public static final Item DURIAN_HELMET = register("durian_helmet",new Item(new Item.Properties()));
     //------------------ 🥥 COCONUT 🥥 ------------------
@@ -352,7 +351,6 @@ public class ModItems {
     public static void addFuel(){
         FuelRegistry.INSTANCE.add(ModItems.LIME,200);
         FuelRegistry.INSTANCE.add(ModItems.SLICED_LIME,200);
-        FuelRegistry.INSTANCE.add(ModItems.,200);
         FuelRegistry.INSTANCE.add(ModItems.DURIAN_PEEL,200);
     }
 

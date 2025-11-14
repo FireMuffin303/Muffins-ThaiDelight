@@ -228,26 +228,26 @@ public class ThaiDelight implements ModInitializer {
         BiomeModifications.addSpawn(BiomeSelectors.includeByKey(Biomes.MANGROVE_SWAMP,Biomes.SWAMP), MobCategory.CREATURE,ModEntityTypes.DRAGONFLY,2,1,3);
 
         BiomeModifications.addFeature((context) ->{
-            return BiomeSelectors.includeByKey(Biomes.FOREST, Biomes.BIRCH_FOREST, Biomes.FLOWER_FOREST).test(context);
+            return BiomeSelectors.tag(ModTags.LIME_TREE_BIOMES).test(context);
         }, GenerationStep.Decoration.VEGETAL_DECORATION, ModFeatures.PATCH_LIME_BUSH);
 
         BiomeModifications.addFeature((context) ->{
-            return BiomeSelectors.includeByKey(Biomes.SAVANNA,Biomes.SAVANNA_PLATEAU,Biomes.WINDSWEPT_SAVANNA).test(context);
+            return BiomeSelectors.tag(ModTags.PEPPER_TREE_BIOMES).test(context);
         }, GenerationStep.Decoration.VEGETAL_DECORATION, ModFeatures.PATCH_WILD_PEPPER);
 
         BiomeModifications.addFeature((context) ->{
-            return BiomeSelectors.includeByKey(Biomes.SAVANNA,Biomes.SAVANNA_PLATEAU,Biomes.WINDSWEPT_SAVANNA).test(context);
+            return BiomeSelectors.tag(ModTags.PAPAYA_TREE_BIOMES).test(context);
         }, GenerationStep.Decoration.VEGETAL_DECORATION, ModFeatures.TREES_PAPAYA);
 
-        BiomeModifications.addFeature(context -> BiomeSelectors.includeByKey(Biomes.JUNGLE).test(context),
+        BiomeModifications.addFeature(context -> BiomeSelectors.tag(ModTags.DURIAN_TREE_BIOMES).test(context),
                 GenerationStep.Decoration.VEGETAL_DECORATION,ModFeatures.TREES_DURIAN);
 
         BiomeModifications.addFeature(context -> BiomeSelectors.includeByKey(Biomes.SPARSE_JUNGLE).test(context), GenerationStep.Decoration.VEGETAL_DECORATION,ModFeatures.TREES_DURIAN_SPARSE_JUNGLE);
 
-        BiomeModifications.addFeature(context -> BiomeSelectors.tag(ModTagDataGen.ModBiomeTagDataGen.MANGO_TREE_BIOMES).test(context),
+        BiomeModifications.addFeature(context -> BiomeSelectors.tag(ModTags.MANGO_TREE_BIOMES).test(context),
                 GenerationStep.Decoration.VEGETAL_DECORATION,ModFeatures.TREES_MANGO);
 
-        BiomeModifications.addFeature(context -> BiomeSelectors.includeByKey(Biomes.BEACH).test(context), GenerationStep.Decoration.VEGETAL_DECORATION,ModFeatures.TREES_COCONUT);
+        BiomeModifications.addFeature(context -> BiomeSelectors.tag(ModTags.COCONUT_TREE_BIOMES).test(context), GenerationStep.Decoration.VEGETAL_DECORATION,ModFeatures.TREES_COCONUT);
 
         ServerLifecycleEvents.SERVER_STARTING.register(minecraftServer -> {
             addToStructurePool(minecraftServer,
@@ -278,6 +278,7 @@ public class ThaiDelight implements ModInitializer {
         ComposterBlock.COMPOSTABLES.put(Item.byBlock(ModBlocks.STRIPPED_PAPAYA_LOG),0.8f);
         ComposterBlock.COMPOSTABLES.put(Item.byBlock(ModBlocks.PAPAYA_WOOD),0.8f);
         ComposterBlock.COMPOSTABLES.put(Item.byBlock(ModBlocks.STRIPPED_PAPAYA_WOOD),0.8f);
+        ComposterBlock.COMPOSTABLES.put(ModItems.DURIAN_PEEL,0.8f);
     }
 
     private void registerStrippable(){

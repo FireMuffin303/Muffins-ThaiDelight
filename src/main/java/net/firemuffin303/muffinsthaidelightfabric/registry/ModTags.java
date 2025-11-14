@@ -5,6 +5,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 
 public class ModTags {
@@ -36,4 +37,11 @@ public class ModTags {
     public static final TagKey<Block> MANGO_RICH_SOIL = TagKey.create(Registries.BLOCK,ThaiDelight.modid("mango_rich_soil"));
     public static final TagKey<Block> COCONUT_RICH_SOIL = TagKey.create(Registries.BLOCK,ThaiDelight.modid("coconut_rich_soil"));
     public static final TagKey<Block> COMMON_RICH_SOIL = TagKey.create(Registries.BLOCK,ThaiDelight.modid("common_rich_soil"));
+
+    public static final TagKey<Biome> LIME_TREE_BIOMES = TagKey.create(Registries.BIOME, ThaiDelight.modid("lime_tree_biomes"));
+    public static final TagKey<Biome> PAPAYA_TREE_BIOMES = TagKey.create(Registries.BIOME, ThaiDelight.modid("papaya_tree_biomes"));
+    public static final TagKey<Biome> PEPPER_TREE_BIOMES = TagKey.create(Registries.BIOME, ThaiDelight.modid("pepper_tree_biomes"));
+    public static final TagKey<Biome> DURIAN_TREE_BIOMES = TagKey.create(Registries.BIOME, ThaiDelight.modid("durian_tree_biomes"));
+    public static final TagKey<Biome> MANGO_TREE_BIOMES = TagKey.create(Registries.BIOME, ThaiDelight.modid("mango_tree_biomes"));
+    public static final TagKey<Biome> COCONUT_TREE_BIOMES = TagKey.create(Registries.BIOME, ThaiDelight.modid("coconut_tree_biomes"));
 }
