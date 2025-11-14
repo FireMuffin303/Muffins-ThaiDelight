@@ -205,34 +205,22 @@ public class ModelDataGen extends FabricModelProvider {
         blockStateModelGenerator.createTrivialBlock(ModBlocks.MANGO_LEAVES,TexturedModel.LEAVES);
         blockStateModelGenerator.family(ModBlocks.MANGO_PLANKS).generateFor(MANGO_PLANKS);
 
-
-
-
-
-
-
-
-
-
         blockStateModelGenerator.blockStateOutput.accept(
-                MultiVariantGenerator.multiVariant(ModBlocks.DURIAN_BLOCK)
-                        .with(PropertyDispatch.properties(BlockStateProperties.AGE_2,BlockStateProperties.HANGING)
-                                .select(0,true,Variant.variant()
+                MultiVariantGenerator.multiVariant(ModBlocks.HANGING_DURIAN)
+                        .with(PropertyDispatch.property(BlockStateProperties.AGE_1)
+                                .select(0,Variant.variant()
                                         .with(VariantProperties.MODEL,ModelLocationUtils.getModelLocation(ModBlocks.DURIAN_BLOCK,"_stage0_hanging")))
-                                .select(1,true,Variant.variant()
-                                        .with(VariantProperties.MODEL,ModelLocationUtils.getModelLocation(ModBlocks.DURIAN_BLOCK,"_stage1_hanging")))
-                                .select(2,true,Variant.variant()
+                                .select(1,Variant.variant()
                                         .with(VariantProperties.MODEL,ModelLocationUtils.getModelLocation(ModBlocks.DURIAN_BLOCK,"_stage2_hanging")))
-                                .select(0,false,Variant.variant()
-                                        .with(VariantProperties.MODEL,ModelLocationUtils.getModelLocation(ModBlocks.DURIAN_BLOCK,"_stage0")))
-                                .select(1,false,Variant.variant()
-                                        .with(VariantProperties.MODEL,ModelLocationUtils.getModelLocation(ModBlocks.DURIAN_BLOCK,"_stage1")))
-                                .select(2,false,Variant.variant()
-                                        .with(VariantProperties.MODEL,ModelLocationUtils.getModelLocation(ModBlocks.DURIAN_BLOCK,"_stage2")))
+
                         )
         );
 
-
+        blockStateModelGenerator.blockStateOutput.accept(
+                BlockModelGenerators.createSimpleBlock(
+                        ModBlocks.DURIAN_BLOCK,
+                        ThaiDelight.modid("block/durian_block_stage2")
+                ));
 
         blockStateModelGenerator.createSimpleFlatItemModel(ModBlocks.DURIAN_FLOWER);
         ResourceLocation durian_flower_resource = BlockModelGenerators.TintState.NOT_TINTED.getCross().create(ModBlocks.DURIAN_FLOWER, TextureMapping.cross(ModBlocks.DURIAN_FLOWER), blockStateModelGenerator.modelOutput);

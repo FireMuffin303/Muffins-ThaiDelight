@@ -3,6 +3,7 @@ package net.firemuffin303.muffinsthaidelightfabric.registry;
 import com.google.common.collect.ImmutableList;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
+import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.DurianFlowerBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.HangingDurianBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.mango.MangoBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.world.feature.*;
@@ -231,7 +232,7 @@ public class ModFeatures {
     private static TreeConfiguration.TreeConfigurationBuilder createDurianTree(List<TreeDecorator> treeDecorators) {
         List<TreeDecorator> decorators = new ArrayList<>();
         decorators.add(new AttachedToLeavesDecorator(0.15f,1,0,
-                BlockStateProvider.simple(ModBlocks.DURIAN_FLOWER.defaultBlockState().setValue(HangingDurianBlock.HANGING,true)),
+                BlockStateProvider.simple(ModBlocks.DURIAN_FLOWER.defaultBlockState().setValue(DurianFlowerBlock.HANGING,true)),
                 2,List.of(Direction.DOWN)));
 
         decorators.addAll(treeDecorators);

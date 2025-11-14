@@ -81,8 +81,7 @@ public class DurianFlowerBlock extends Block implements SimpleWaterloggedBlock, 
     }
 
     private void grow(Level level,BlockPos blockPos,BlockState blockState){
-        level.setBlock(blockPos,ModBlocks.DURIAN_BLOCK.defaultBlockState()
-                        .setValue(HangingDurianBlock.HANGING,true)
+        level.setBlock(blockPos,ModBlocks.HANGING_DURIAN.defaultBlockState()
                         .setValue(HangingDurianBlock.AGE,0)
                         .setValue(HangingDurianBlock.WATERLOGGED,blockState.getValue(WATERLOGGED))
                 ,2);

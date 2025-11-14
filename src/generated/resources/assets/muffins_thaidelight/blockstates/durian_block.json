@@ -1,22 +1,7 @@
 {
   "variants": {
-    "age=0,hanging=false": {
-      "model": "muffins_thaidelight:block/durian_block_stage0"
-    },
-    "age=0,hanging=true": {
-      "model": "muffins_thaidelight:block/durian_block_stage0_hanging"
-    },
-    "age=1,hanging=false": {
-      "model": "muffins_thaidelight:block/durian_block_stage1"
-    },
-    "age=1,hanging=true": {
-      "model": "muffins_thaidelight:block/durian_block_stage1_hanging"
-    },
-    "age=2,hanging=false": {
+    "": {
       "model": "muffins_thaidelight:block/durian_block_stage2"
-    },
-    "age=2,hanging=true": {
-      "model": "muffins_thaidelight:block/durian_block_stage2_hanging"
     }
   }
 }

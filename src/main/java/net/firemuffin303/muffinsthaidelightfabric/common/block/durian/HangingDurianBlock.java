@@ -39,17 +39,10 @@ import org.jetbrains.annotations.Nullable;
 
 public class HangingDurianBlock extends FallingBlock implements SimpleWaterloggedBlock, BonemealableBlock {
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
-    public static final BooleanProperty HANGING = BlockStateProperties.HANGING;
-    public static final IntegerProperty AGE = BlockStateProperties.AGE_2;
+    public static final IntegerProperty AGE = BlockStateProperties.AGE_1;
 
-    protected static final VoxelShape[] SHAPES = {
-            Block.box(4.0,0.0,4.0,12.0,8.0,12.0),
-            Block.box(3.0,0.0,3.0,13.0,10.0,13.0),
-            Block.box(2.0,0.0,2.0,14.0,14.0,14.0)
-    };
     protected static final VoxelShape[] HANGING_SHAPES = {
             Block.box(4.0,8.0,4.0,12.0,16.0,12.0),
-            Block.box(3.0,6.0,3.0,13.0,16.0,13.0),
             Block.box(2.0,2.0,2.0,14.0,16.0,14.0)
     };
     public HangingDurianBlock(Properties properties) {
@@ -57,7 +50,6 @@ public class HangingDurianBlock extends FallingBlock implements SimpleWaterlogge
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(WATERLOGGED,false)
                 .setValue(AGE,0)
-                .setValue(HANGING,false)
         );
     }
 
@@ -77,7 +69,7 @@ public class HangingDurianBlock extends FallingBlock implements SimpleWaterlogge
     @Override
     public InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
         if(!level.isClientSide){
-            if(blockState.getValue(HANGING) && blockState.getValue(AGE) >= 2 && level.getBlockState(blockPos.below()).isAir() && level.getBlockState(blockPos.above()).is(ModBlocks.DURIAN_LEAVES)){
+            if(blockState.getValue(AGE) >= 1 && level.getBlockState(blockPos.below()).isAir() && level.getBlockState(blockPos.above()).is(ModBlocks.DURIAN_LEAVES)){
                 level.playSound(null,blockPos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS);
                 this.harvest((ServerLevel) level,blockPos,blockState,player);
                 return InteractionResult.SUCCESS;
@@ -99,12 +91,12 @@ public class HangingDurianBlock extends FallingBlock implements SimpleWaterlogge
     @Override
     public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
         int age = blockState.getValue(AGE);
-        return blockState.getValue(HANGING) ? HANGING_SHAPES[age] : SHAPES[age];
+        return HANGING_SHAPES[age];
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(WATERLOGGED).add(AGE).add(HANGING);
+        builder.add(WATERLOGGED).add(AGE);
     }
 
 
@@ -117,7 +109,7 @@ public class HangingDurianBlock extends FallingBlock implements SimpleWaterlogge
 
     @Override
     public void randomTick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource) {
-        if(blockState.getValue(HANGING) && blockState.getValue(AGE) < 2 && randomSource.nextInt(7) == 0 && serverLevel.getBlockState(blockPos.above()).is(ModBlocks.DURIAN_LEAVES)){
+        if(blockState.getValue(AGE) < 1 && randomSource.nextInt(7) == 0 && serverLevel.getBlockState(blockPos.above()).is(ModBlocks.DURIAN_LEAVES)){
             serverLevel.setBlock(blockPos,blockState.cycle(AGE),2);
         }
     }
@@ -145,30 +137,29 @@ public class HangingDurianBlock extends FallingBlock implements SimpleWaterlogge
 
     @Override
     public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState, boolean bl) {
-        return blockState.getValue(AGE) < 2 && blockState.getValue(HANGING);
+        return blockState.getValue(AGE) < 1;
     }
 
     @Override
     public boolean isBonemealSuccess(Level level, RandomSource randomSource, BlockPos blockPos, BlockState blockState) {
-        return blockState.getValue(HANGING) && blockState.getValue(AGE) < 2;
+        return blockState.getValue(AGE) < 1;
     }
 
     @Override
     public void performBonemeal(ServerLevel serverLevel, RandomSource randomSource, BlockPos blockPos, BlockState blockState) {
-        if(blockState.getValue(HANGING) && blockState.getValue(AGE) < 2){
-            int i = Math.min(2,blockState.getValue(AGE) + randomSource.nextInt(1,3));
-            serverLevel.setBlock(blockPos,blockState.setValue(AGE, i),2);
+        if( blockState.getValue(AGE) < 1){
+            serverLevel.setBlock(blockPos,blockState.setValue(AGE, 1),2);
         }
     }
 
     private void setFlower(ServerLevel serverLevel,BlockPos blockPos,Entity entity){
-        BlockState blockState = ModBlocks.DURIAN_FLOWER.defaultBlockState().setValue(HANGING,true);
+        BlockState blockState = ModBlocks.DURIAN_FLOWER.defaultBlockState().setValue(DurianFlowerBlock.HANGING,true);
         serverLevel.setBlock(blockPos, blockState,2);
         serverLevel.gameEvent(GameEvent.BLOCK_CHANGE, blockPos, GameEvent.Context.of(entity, blockState));
     }
 
     private void harvest(ServerLevel serverLevel, BlockPos blockPos, BlockState blockState, Entity entity){
-        FallingBlockEntity fallingBlockEntity = FallingBlockEntity.fall(serverLevel, blockPos, blockState.setValue(HangingDurianBlock.HANGING,false));
+        FallingBlockEntity fallingBlockEntity = FallingBlockEntity.fall(serverLevel, blockPos, ModBlocks.DURIAN_BLOCK.defaultBlockState());
         this.falling(fallingBlockEntity);
         if(serverLevel.getBlockState(blockPos.above(1)).is(ModBlocks.DURIAN_LEAVES)){
             this.setFlower(serverLevel,blockPos,entity);

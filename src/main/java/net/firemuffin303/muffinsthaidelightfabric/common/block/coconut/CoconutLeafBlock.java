@@ -78,7 +78,7 @@ public class CoconutLeafBlock extends Block implements SimpleWaterloggedBlock,Bo
     }
 
     private void harvest(ServerLevel level, BlockPos blockPos, BlockState blockState, Entity entity) {
-        FallingBlockEntity fallingBlockEntity = FallingBlockEntity.fall(level, blockPos.below(), ModBlocks.DURIAN_BLOCK.defaultBlockState().setValue(HangingDurianBlock.HANGING,false));
+        FallingBlockEntity fallingBlockEntity = FallingBlockEntity.fall(level, blockPos.below(), ModBlocks.HANGING_DURIAN.defaultBlockState());
         fallingBlockEntity.setHurtsEntities(0.2f,4);
         level.setBlock(blockPos,blockState.setValue(COCONUT,false),2);
     }

@@ -406,7 +406,6 @@ public class ThaiDelight implements ModInitializer {
         output.accept(ModItems.DURIAN_LEAVES);
         output.accept(ModItems.DURIAN_FLOWER);
         output.accept(ModItems.SMALL_DURIAN);
-        output.accept(ModItems.MEDIUM_DURIAN);
         output.accept(ModItems.DURIAN);
         output.accept(ModItems.DURIAN_PULP);
         output.accept(ModItems.DURIAN_LOG);

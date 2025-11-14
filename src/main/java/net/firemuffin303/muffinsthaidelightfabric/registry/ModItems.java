@@ -117,8 +117,7 @@ public class ModItems {
     public static final Item DURIAN_SAPLING = register("durian_sapling",new BlockItem(ModBlocks.DURIAN_SAPLING,new Item.Properties()));
     public static final Item DURIAN_LEAVES = register("durian_leaves",new BlockItem(ModBlocks.DURIAN_LEAVES,new Item.Properties()));
     public static final Item DURIAN_FLOWER = register("durian_flower",new BlockItem(ModBlocks.DURIAN_FLOWER,new Item.Properties()));
-    public static final Item SMALL_DURIAN = register("small_durian",new BlockItem(ModBlocks.SMALL_DURIAN_BLOCK,new Item.Properties()));
-    public static final Item MEDIUM_DURIAN = register("medium_durian",new BlockItem(ModBlocks.MEDIUM_DURIAN_BLOCK,new Item.Properties()));
+    public static final Item SMALL_DURIAN = register("small_durian_block",new BlockItem(ModBlocks.SMALL_DURIAN_BLOCK,new Item.Properties()));
     public static final Item DURIAN = register("durian_block",new BlockItem(ModBlocks.DURIAN_BLOCK,new Item.Properties()));
     public static final Item DURIAN_PULP = registerFlatItem("durian_pulp",new Item(new Item.Properties().food(ModFood.DURIAN_PULP)));
     //Durian Woodset item

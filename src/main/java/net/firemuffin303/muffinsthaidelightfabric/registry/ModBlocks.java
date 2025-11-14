@@ -98,13 +98,11 @@ public class ModBlocks {
     public static final Block POTTED_DURIAN_SAPLING = register("potted_durian_sapling",Blocks.flowerPot(DURIAN_SAPLING));
     public static final Block DURIAN_FLOWER = register("durian_flower",new DurianFlowerBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).instabreak().noCollission().sound(SoundType.SPORE_BLOSSOM).pushReaction(PushReaction.DESTROY).randomTicks()));
 
+    public static final Block HANGING_DURIAN = register("hanging_durian",new HangingDurianBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).strength(1.0F).sound(SoundType.WOOD).pushReaction(PushReaction.DESTROY).randomTicks()));
+
     public static final Block SMALL_DURIAN_BLOCK = register("small_durian_block",new SmallDurianBlock(
             BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).strength(1.0F).sound(SoundType.WOOD).noOcclusion().pushReaction(PushReaction.DESTROY)));
-
-    public static final Block MEDIUM_DURIAN_BLOCK = register("medium_durian_block",new StackableMediumBlock(
-            BlockBehaviour.Properties.copy(SMALL_DURIAN_BLOCK),() -> ModItems.MEDIUM_DURIAN));
-
-    public static final Block DURIAN_BLOCK = register("durian_block",new HangingDurianBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).strength(1.0F).sound(SoundType.WOOD).pushReaction(PushReaction.DESTROY).randomTicks()));
+    public static final Block DURIAN_BLOCK = register("durian_block",new Block(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).strength(1.0F).sound(SoundType.WOOD).pushReaction(PushReaction.DESTROY)));
     public static final Block DURIAN_LEAVES = register("durian_leaves",new DurianLeaveBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES)));
 
     //Durian Woodset

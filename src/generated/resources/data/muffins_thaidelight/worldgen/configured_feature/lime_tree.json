@@ -17,12 +17,7 @@
     "foliage_provider": {
       "type": "minecraft:simple_state_provider",
       "state": {
-        "Name": "muffins_thaidelight:durian_block",
-        "Properties": {
-          "age": "0",
-          "hanging": "false",
-          "waterlogged": "false"
-        }
+        "Name": "muffins_thaidelight:durian_block"
       }
     },
     "force_dirt": false,
