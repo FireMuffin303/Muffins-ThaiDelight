@@ -95,6 +95,7 @@ public class ModRecipeDataGen extends FabricRecipeProvider {
         bigPackingCraft(ModItems.BASIL_CRATE,1,ModItems.BASIL,exporter);
         bigPackingCraft(ModItems.BAMBOO_SHOOT_CRATE,1,ModItems.BAMBOO_SHOOT,exporter);
         bigPackingCraft(ModItems.BUTTERFLY_PEA_CRATE,1,ModItems.BUTTERFLY_PEA,exporter);
+        bigPackingCraft(ModItems.DURIAN_PEEL_BLOCK,1,ModItems.DURIAN_PEEL,exporter);
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,Items.BLUE_DYE,2).requires(ModItems.BUTTERFLY_PEA)
                 .unlockedBy(getHasName(ModItems.BUTTERFLY_PEA),has(ModItems.BUTTERFLY_PEA))

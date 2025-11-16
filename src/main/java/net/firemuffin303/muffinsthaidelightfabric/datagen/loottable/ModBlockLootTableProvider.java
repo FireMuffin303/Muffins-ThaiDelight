@@ -126,12 +126,21 @@ public class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
                                                 integer -> SetItemCountFunction.setCount(ConstantValue.exactly(integer))
                                                         .when(
                                                                 LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
-                                                                        .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(SmallDurianBlock.STACKS,integer))
+                                                                        .setProperties(StatePropertiesPredicate.Builder.properties()
+                                                                                .hasProperty(SmallDurianBlock.STACKS,integer)
+                                                                        )
                                                         )
                                         )
                                         .otherwise(this.applyExplosionDecay(block,
                                         LootItem.lootTableItem(ModItems.DURIAN_PULP)
-                                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))
+                                                .apply(List.of(2,3), integer -> SetItemCountFunction.setCount(ConstantValue.exactly(integer))
+                                                        .when(
+                                                                LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
+                                                                        .setProperties(StatePropertiesPredicate.Builder.properties()
+                                                                                .hasProperty(SmallDurianBlock.STACKS,integer)
+                                                                        )
+                                                        )
+                                                )
                                                 .apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE))
                                                 .apply(LimitCount.limitCount(IntRange.upperBound(2)))
                                 )))

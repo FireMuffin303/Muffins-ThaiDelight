@@ -126,6 +126,8 @@ public class ModelDataGen extends FabricModelProvider {
             createCabinet(cabinetBlock,blockStateModelGenerator);
         }
 
+        blockStateModelGenerator.createTrivialCube(ModBlocks.DURIAN_PEEL_BLOCK);
+
         blockStateModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.SMALL_DURIAN_BLOCK)
                 .with(PropertyDispatch.property(SmallDurianBlock.STACKS)
                         .generate(integer -> Variant.variant().with(VariantProperties.MODEL,ThaiDelight.modid("block/durian/stackable_durian_%d".formatted(integer))))

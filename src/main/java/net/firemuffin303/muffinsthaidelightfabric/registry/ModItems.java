@@ -142,8 +142,9 @@ public class ModItems {
     public static final Item DURIAN_BOAT = TerraformBoatItemHelper.registerBoatItem(ThaiDelight.modid("durian_boat"),DURIAN_BOAT_KEY,false);
     public static final Item DURIAN_CHEST_BOAT = TerraformBoatItemHelper.registerBoatItem(ThaiDelight.modid("durian_chest_boat"),DURIAN_BOAT_KEY,true);
 
-    public static final Item DURIAN_PEEL = register("durian_peel",new Item(new Item.Properties()));
-    public static final Item DURIAN_HELMET = register("durian_helmet",new Item(new Item.Properties()));
+    public static final Item DURIAN_PEEL = registerFlatItem("durian_peel",new Item(new Item.Properties()));
+    public static final Item DURIAN_PEEL_BLOCK = register("durian_peel_block",new BlockItem(ModBlocks.DURIAN_PEEL_BLOCK,new Item.Properties()));
+    public static final Item DURIAN_HELMET = register("durian_helmet",new DyeableArmorItem(ArmorMaterials.TURTLE, ArmorItem.Type.HELMET,new Item.Properties()));
     //------------------ 🥥 COCONUT 🥥 ------------------
     public static final Item COCONUT_SAPLING = register("coconut_sapling",new BlockItem(ModBlocks.COCONUT_SAPLING,new Item.Properties()));
     public static final Item COCONUT_LEAF = register("coconut_leaf",new BlockItem(ModBlocks.COCONUT_LEAF_END,new Item.Properties()));

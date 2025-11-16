@@ -194,8 +194,10 @@ public class ModBlocks {
     ));
 
     public static final Block DURIAN_CABINET = registerCabinet("durian_cabinet");
+    public static final Block DURIAN_PEEL_BLOCK = register("durian_peel_block",new Block(BlockBehaviour.Properties.copy(ModBlocks.DURIAN_PLANKS)));
 
-    //Coconut
+
+    //----------------------Coconut
     public static final Block COCONUT = register("coconut",new CoconutBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).strength(1.0F).sound(SoundType.WOOD).noOcclusion().pushReaction(PushReaction.DESTROY)));
 
     public static final Block COCONUT_SAPLING = register("coconut_sapling",new SaplingBlock(new DurianTreeGrower(),BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)){

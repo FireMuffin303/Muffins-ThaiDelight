@@ -21,10 +21,6 @@ public class ModTags {
     public static final TagKey<Item> DRAGONFLY_FOOD = TagKey.create(Registries.ITEM, new ResourceLocation(ThaiDelight.MOD_ID,"dragonfly_food"));
     public static final TagKey<Item> WATER_BUFFALO_FOOD = TagKey.create(Registries.ITEM, new ResourceLocation(ThaiDelight.MOD_ID,"water_buffalo_food"));
 
-    public static final TagKey<Item> SPICY_LEVEL_5 = TagKey.create(Registries.ITEM, new ResourceLocation(ThaiDelight.MOD_ID,"spicy_level_5"));
-    public static final TagKey<Item> SPICY_LEVEL_10 = TagKey.create(Registries.ITEM, new ResourceLocation(ThaiDelight.MOD_ID,"spicy_level_10"));
-    public static final TagKey<Item> SPICY_LEVEL_50 = TagKey.create(Registries.ITEM, new ResourceLocation(ThaiDelight.MOD_ID,"spicy_level_50"));
-
     public static final TagKey<Item> DURIAN_LOGS_ITEM = TagKey.create(Registries.ITEM,ThaiDelight.modid("durian_logs"));
     public static final TagKey<Item> MANGO_LOGS_ITEM = TagKey.create(Registries.ITEM,ThaiDelight.modid("mango_logs"));
     public static final TagKey<Item> COCONUT_LOGS_ITEM = TagKey.create(Registries.ITEM,ThaiDelight.modid("coconut_logs"));

@@ -61,7 +61,30 @@
               "functions": [
                 {
                   "add": false,
-                  "count": 1.0,
+                  "conditions": [
+                    {
+                      "block": "muffins_thaidelight:small_durian_block",
+                      "condition": "minecraft:block_state_property",
+                      "properties": {
+                        "durians": "2"
+                      }
+                    }
+                  ],
+                  "count": 2.0,
+                  "function": "minecraft:set_count"
+                },
+                {
+                  "add": false,
+                  "conditions": [
+                    {
+                      "block": "muffins_thaidelight:small_durian_block",
+                      "condition": "minecraft:block_state_property",
+                      "properties": {
+                        "durians": "3"
+                      }
+                    }
+                  ],
+                  "count": 3.0,
                   "function": "minecraft:set_count"
                 },
                 {

@@ -46,6 +46,7 @@ public class ModFeatures {
     public static final TrunkPlacerType<LimeTreeTrunkPlacer> LIME_TRUNK_PLACER = Registry.register(BuiltInRegistries.TRUNK_PLACER_TYPE, ThaiDelight.modid("lime_trunk_placer"),new TrunkPlacerType<>(LimeTreeTrunkPlacer.CODEC));
     public static final TrunkPlacerType<DurianTreeTrunkPlacer> DURIAN_TRUNK_PLACER = Registry.register(BuiltInRegistries.TRUNK_PLACER_TYPE,ThaiDelight.modid("durian_trunk_placer"),new TrunkPlacerType<>(DurianTreeTrunkPlacer.CODEC));
     public static final TrunkPlacerType<CoconutTreeTrunkPlacer> COCONUT_TRUNK_PLACER = Registry.register(BuiltInRegistries.TRUNK_PLACER_TYPE,ThaiDelight.modid("coconut_trunk_placer"),new TrunkPlacerType<>(CoconutTreeTrunkPlacer.CODEC));
+    public static final TrunkPlacerType<MegaDurianTrunkPlacer> MEGA_DURIAN_TRUNK_PLACER = Registry.register(BuiltInRegistries.TRUNK_PLACER_TYPE,ThaiDelight.modid("mega_durian_trunk_placer"),new TrunkPlacerType<>(MegaDurianTrunkPlacer.CODEC));
 
     public static final FoliagePlacerType<DurianTreeFoliagePlacer> DURIAN_FOLIAGE_PLACER = Registry.register(BuiltInRegistries.FOLIAGE_PLACER_TYPE,ThaiDelight.modid("durian_foliage_placer"),new FoliagePlacerType<>(DurianTreeFoliagePlacer.CODEC));
     public static final FoliagePlacerType<HangingBlobFoliagePlacer> HANGING_BLOB_FOLIAGE_PLACER = Registry.register(BuiltInRegistries.FOLIAGE_PLACER_TYPE,ThaiDelight.modid("hanging_blob_foliage_placer"),new FoliagePlacerType<>(HangingBlobFoliagePlacer.CODEC));
@@ -114,8 +115,8 @@ public class ModFeatures {
         bootstapContext.register(ModFeatures.FEATURE_DURIAN_TREE,new ConfiguredFeature<>(Feature.TREE,createShortDurianTree(List.of()).build()));
         bootstapContext.register(ModFeatures.FEATURE_DURAIN_TREE_BEE,new ConfiguredFeature<>(Feature.TREE,createShortDurianTree(
                 List.of(new BeehiveDecorator(0.05f))).build()));
-        bootstapContext.register(ModFeatures.FEATURE_TALL_DURIAN_TREE,new ConfiguredFeature<>(Feature.TREE,createDurianTree(15,3,List.of()).build()));
-        bootstapContext.register(ModFeatures.FEATURE_TALL_DURIAN_TREE_BEE,new ConfiguredFeature<>(Feature.TREE,createDurianTree(15,3,
+        bootstapContext.register(ModFeatures.FEATURE_TALL_DURIAN_TREE,new ConfiguredFeature<>(Feature.TREE,createTallDurianTree(List.of()).build()));
+        bootstapContext.register(ModFeatures.FEATURE_TALL_DURIAN_TREE_BEE,new ConfiguredFeature<>(Feature.TREE,createTallDurianTree(
                 List.of(new BeehiveDecorator(0.05f))).build()));
 
 
@@ -242,6 +243,24 @@ public class ModFeatures {
         return createDurianTree(8,2,treeDecorators);
     }
 
+
+    private static TreeConfiguration.TreeConfigurationBuilder createTallDurianTree(List<TreeDecorator> treeDecorators){
+        List<TreeDecorator> decorators = new ArrayList<>();
+        decorators.add(new AttachedToLeavesDecorator(0.15f,1,0,
+                BlockStateProvider.simple(ModBlocks.DURIAN_FLOWER.defaultBlockState().setValue(DurianFlowerBlock.HANGING,true)),
+                2,List.of(Direction.DOWN)));
+
+        decorators.addAll(treeDecorators);
+
+
+        return new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBlocks.DURIAN_LOG),
+                new MegaDurianTrunkPlacer(15,1,0, 2,UniformInt.of(-5,-4), UniformInt.of(4,6),UniformInt.of(2,4)),
+                BlockStateProvider.simple(ModBlocks.DURIAN_LEAVES),
+                new DurianTreeFoliagePlacer(ConstantInt.of(2),ConstantInt.of(0),0.4f,0.12f),
+                new TwoLayersFeatureSize(1,0,1)
+        ).ignoreVines().decorators(decorators);
+    }
 
     private static TreeConfiguration.TreeConfigurationBuilder createDurianTree(int baseHeight,int heightRandA,List<TreeDecorator> treeDecorators) {
         List<TreeDecorator> decorators = new ArrayList<>();

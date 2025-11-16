@@ -107,13 +107,6 @@ public class ModTagDataGen {
                     .add(ModItems.PEPPER_SEED)
                     .add(ModItems.PAPAYA_SEEDS);
 
-            getOrCreateTagBuilder(ModTags.SPICY_LEVEL_5)
-                    .add(ModItems.PEPPER);
-
-            getOrCreateTagBuilder(ModTags.SPICY_LEVEL_50)
-                    .add(ModItems.LARB)
-                    .add(ModItems.SOMTAM);
-
             getOrCreateTagBuilder(TagKey.create(Registries.ITEM, new ResourceLocation("c","foods/cooked_meats")))
                     .add(ModItems.COOKED_CRAB_MEAT)
                     .add(ModItems.COOKED_DRAGONFLY);
