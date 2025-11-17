@@ -157,6 +157,16 @@ public class ModRecipeDataGen extends FabricRecipeProvider {
                 .pattern("AAA")
                 .unlockedBy(getHasName(Items.STICK),has(Items.STICK))
                 .save(exporter,ThaiDelight.modid("crafting/"+getItemName(ModBlocks.MORTAR)));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS,ModItems.CATCHER_BAG)
+                .define('A', vectorwing.farmersdelight.common.registry.ModItems.CANVAS.get())
+                .define('S',Items.STRING)
+                .pattern("ASA")
+                .pattern("A A")
+                .pattern(" A ")
+                .unlockedBy(getHasName(vectorwing.farmersdelight.common.registry.ModItems.CANVAS.get()),has(vectorwing.farmersdelight.common.registry.ModItems.CANVAS.get()))
+                .save(exporter,ThaiDelight.modid("crafting/"+getItemName(ModItems.CATCHER_BAG)));
+
     }
 
     private void smithing(Consumer<FinishedRecipe> exporter){

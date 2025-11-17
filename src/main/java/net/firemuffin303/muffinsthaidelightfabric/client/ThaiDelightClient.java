@@ -7,9 +7,12 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.model.loading.v1.ModelLoadingPlugin;
 import net.fabricmc.fabric.api.client.rendering.v1.*;
 import net.fabricmc.fabric.api.object.builder.v1.client.model.FabricModelPredicateProviderRegistry;
+import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
+import net.firemuffin303.muffinsthaidelightfabric.client.renderer.CatcherBagItemRenderer;
 import net.firemuffin303.muffinsthaidelightfabric.client.sceens.MortarScreen;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.FermentedFishCauldronBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.entity.DragonflyEntity;
@@ -28,7 +31,10 @@ import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
+import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.client.resources.model.Material;
+import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.server.packs.PackType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.inventory.RecipeBookType;
 import net.minecraft.world.item.ItemStack;
@@ -79,6 +85,10 @@ public class ThaiDelightClient implements ClientModInitializer {
             ModBlocks.PAPAYA_LEAVES_STEM
     };
 
+    public static final ModelResourceLocation CATCHER_IN_HAND_MODEL = new ModelResourceLocation(ThaiDelight.MOD_ID,"catcher_bag_in_hand","inventory");
+    public static final ModelResourceLocation CATCHER_MODEL = new ModelResourceLocation(ThaiDelight.MOD_ID,"catcher_bag","inventory");
+
+
     public static final RecipeBookType MORTAR_RECIPE_BOOK_TYPE = RecipeBookType.valueOf("MORTAR_RECIPE_BOOK_TYPE");
     public static final RecipeBookCategories MORTAR_SEARCH = RecipeBookCategories.valueOf("MORTAR_SEARCH");
     public static final RecipeBookCategories MORTAR_MEALS = RecipeBookCategories.valueOf("MORTAR_MEALS");
@@ -92,6 +102,25 @@ public class ThaiDelightClient implements ClientModInitializer {
         TerraformBoatClientHelper.registerModelLayers(ThaiDelight.modid("coconut_boat"),false);
         TerraformBoatClientHelper.registerModelLayers(ThaiDelight.modid("mango_boat"),false);
 
+        ModelLoadingPlugin.register(new ModelLoadingPlugin() {
+            @Override
+            public void onInitializeModelLoader(Context context) {
+                context.addModels(ThaiDelightClient.CATCHER_MODEL);
+                context.addModels(ThaiDelightClient.CATCHER_IN_HAND_MODEL);
+            }
+        });
+
+        /*
+        ItemProperties.register(ModItems.CATCHER_BAG, ThaiDelight.modid("using"), new ClampedItemPropertyFunction() {
+            @Override
+            public float unclampedCall(ItemStack itemStack, @Nullable ClientLevel clientLevel, @Nullable LivingEntity livingEntity, int i) {
+                return livingEntity != null && livingEntity.getUseItem() == itemStack ? 1F : 0F;
+            }
+
+
+        });
+
+         */
 
         SpriteIdentifierRegistry.INSTANCE.addIdentifier(new Material(Sheets.SIGN_SHEET, ThaiDelight.modid("entity/signs/durian")));
         SpriteIdentifierRegistry.INSTANCE.addIdentifier(new Material(Sheets.SIGN_SHEET, ThaiDelight.modid("entity/signs/coconut")));

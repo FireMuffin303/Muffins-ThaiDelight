@@ -4,6 +4,7 @@
   "package": "net.firemuffin303.muffinsthaidelightfabric.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "FallingBlockEntityMixin",
     "LootItemAccessor",
     "MobAccessor",
     "StructurePoolAccessor",
@@ -22,6 +23,10 @@
     "villager.VillagerAccessor"
   ],
   "client": [
+    "holdingAnimation.HumanoidModelMixin",
+    "holdingAnimation.ItemInHandRendererMixin",
+    "holdingAnimation.ItemRendererMixin",
+    "holdingAnimation.PlayerRendererMixin",
     "recipeBookType.RecipeBookCategoriesMixin"
   ],
   "injectors": {

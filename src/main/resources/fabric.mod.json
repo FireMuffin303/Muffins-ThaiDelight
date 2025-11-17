@@ -31,6 +31,9 @@
     ],
     "modmenu": [
       "net.firemuffin303.muffinsthaidelightfabric.integration.ThaiDelightModMenu"
+    ],
+    "mm:early_risers": [
+      "net.firemuffin303.muffinsthaidelightfabric.util.ModASMEarlyRiser"
     ]
   },
   "mixins": [

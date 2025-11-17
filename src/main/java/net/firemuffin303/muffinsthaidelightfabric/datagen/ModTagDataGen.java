@@ -29,9 +29,6 @@ public class ModTagDataGen {
         TagKey<Item> FORGE_RAW_FISHES = TagKey.create(Registries.ITEM, new ResourceLocation("forge", "raw_fishes"));
         TagKey<Item> C_RAW_FISHES = TagKey.create(Registries.ITEM, new ResourceLocation("c", "raw_fishes"));
 
-
-
-
         public ModItemTagDataGen(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> completableFuture) {
             super(output, completableFuture, null);
         }
@@ -217,6 +214,12 @@ public class ModTagDataGen {
             getOrCreateTagBuilder(DURIAN_RICH_SOIL).addTag(COMMON_RICH_SOIL);
             getOrCreateTagBuilder(MANGO_RICH_SOIL).addTag(COMMON_RICH_SOIL);
             getOrCreateTagBuilder(COCONUT_RICH_SOIL).addTag(COMMON_RICH_SOIL);
+
+            getOrCreateTagBuilder(CATCHER_BAG_CATCHABLE).add(
+                    ModBlocks.SMALL_DURIAN_BLOCK,
+                    ModBlocks.DURIAN_BLOCK,
+                    ModBlocks.HANGING_DURIAN
+            );
 
         }
     }

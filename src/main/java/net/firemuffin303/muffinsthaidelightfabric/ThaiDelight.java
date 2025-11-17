@@ -1,6 +1,7 @@
 package net.firemuffin303.muffinsthaidelightfabric;
 
 import com.mojang.datafixers.util.Pair;
+import com.mojang.logging.LogUtils;
 import com.terraformersmc.terraform.boat.api.TerraformBoatType;
 import com.terraformersmc.terraform.boat.api.TerraformBoatTypeRegistry;
 import eu.midnightdust.lib.config.MidnightConfig;
@@ -22,7 +23,6 @@ import net.firemuffin303.muffinsthaidelightfabric.common.entity.FlowerCrabEntity
 import net.firemuffin303.muffinsthaidelightfabric.common.event.ModVillagerTrades;
 import net.firemuffin303.muffinsthaidelightfabric.common.item.DragonflyBottleItem;
 import net.firemuffin303.muffinsthaidelightfabric.config.ThaiDelightConfig;
-import net.firemuffin303.muffinsthaidelightfabric.datagen.ModTagDataGen;
 import net.firemuffin303.muffinsthaidelightfabric.mixin.*;
 import net.firemuffin303.muffinsthaidelightfabric.mixin.food.ChickenFoodAccessor;
 import net.firemuffin303.muffinsthaidelightfabric.mixin.food.FrogFoodAccessor;
@@ -66,13 +66,12 @@ import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.*;
 import java.util.stream.Stream;
 
 public class ThaiDelight implements ModInitializer {
-    public static final Logger LOGGER = LoggerFactory.getLogger(ThaiDelight.MOD_ID);
+    public static final Logger LOGGER = LogUtils.getLogger();
     public static final String MOD_ID = "muffins_thaidelight";
     public static final String TASTY_NBT = "Tasty";
 
@@ -364,6 +363,7 @@ public class ThaiDelight implements ModInitializer {
 
     private static void itemsGenerator(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output output){
         output.accept(ModItems.MORTAR);
+        output.accept(ModItems.CATCHER_BAG);
         output.accept(ModItems.LIME_CRATE);
         output.accept(ModItems.PEPPER_CRATE);
         output.accept(ModItems.RAW_PAPAYA_CRATE);
