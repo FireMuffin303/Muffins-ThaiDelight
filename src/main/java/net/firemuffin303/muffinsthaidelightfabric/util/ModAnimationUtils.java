@@ -23,6 +23,14 @@ public class ModAnimationUtils {
         other.xRot = (float) (-Math.PI/2) + 0.2f;
     }
 
+    public static <T extends LivingEntity> void handleSackShoulderHold(HumanoidModel<T> model,boolean isRightHand){
+        ModelPart holdingArm = isRightHand ? model.rightArm : model.leftArm;
+        ModelPart other = isRightHand ? model.leftArm : model.rightArm;
+        holdingArm.xRot = (float) (Math.PI);
+        holdingArm.zRot =  isRightHand ? -1.35f : 1.35F;
+        //other.xRot = (float) (Math.PI/2);
+    }
+
     public static void handleUsingCatchingBag(PoseStack poseStack, HumanoidArm humanoidArm,float i){
         poseStack.translate(0.56,-0.22 + (i * -0.55f),-0.72F);
     }

@@ -7,7 +7,7 @@ import com.terraformersmc.terraform.boat.api.item.TerraformBoatItemHelper;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
 import net.firemuffin303.muffinsthaidelightfabric.common.item.DragonflyBottleItem;
-import net.firemuffin303.muffinsthaidelightfabric.common.item.DurianCatchBagItem;
+import net.firemuffin303.muffinsthaidelightfabric.common.item.SackItem;
 import net.firemuffin303.muffinsthaidelightfabric.common.item.papaya.PapayaFlowerItem;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -43,7 +43,7 @@ public class ModItems {
     public static final Item[] COCONUT_MILK_ICE_CREAM_ARRAY;
 
     public static final Item MORTAR = register("mortar",new BlockItem(ModBlocks.MORTAR,new Item.Properties()));
-    public static final Item CATCHER_BAG = registerFlatItem("catcher_bag",new DurianCatchBagItem(new Item.Properties().stacksTo(16)));
+    public static final Item SACK = registerFlatItem("sack",new SackItem(new Item.Properties().stacksTo(16)));
 
     //Blocks
     public static final Item LIME_CRATE = register("lime_crate",new BlockItem(ModBlocks.LIME_CRATE,new Item.Properties()));

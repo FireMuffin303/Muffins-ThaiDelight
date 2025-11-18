@@ -22,8 +22,12 @@ public abstract class HumanoidModelMixin {
         HumanoidModel<T> humanoidModel = (HumanoidModel<T>) (Object)this;
         if(this.rightArmPose == ModASMEarlyRiser.getDurianCatcherHoldArmPose()){
             ModAnimationUtils.handleCatcherBagHold(humanoidModel,true);
+
         } else if (this.rightArmPose == ModASMEarlyRiser.getDurianCatcherSwingArmPose()) {
             ModAnimationUtils.handleCatcherBagReady(humanoidModel,true);
+
+        } else if (this.rightArmPose == ModASMEarlyRiser.getSackShoulderArmPose()) {
+            ModAnimationUtils.handleSackShoulderHold(humanoidModel,true);
         }
     }
 
@@ -34,6 +38,9 @@ public abstract class HumanoidModelMixin {
             ModAnimationUtils.handleCatcherBagHold(humanoidModel,false);
         } else if (this.leftArmPose == ModASMEarlyRiser.getDurianCatcherSwingArmPose()) {
             ModAnimationUtils.handleCatcherBagReady(humanoidModel,false);
+
+        } else if (this.leftArmPose == ModASMEarlyRiser.getSackShoulderArmPose()) {
+            ModAnimationUtils.handleSackShoulderHold(humanoidModel,false);
         }
     }
 }

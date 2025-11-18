@@ -12,7 +12,6 @@ import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
-import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -27,8 +26,8 @@ public abstract class ItemRendererMixin {
 
     @ModifyExpressionValue(method = "getModel",at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/ItemModelShaper;getItemModel(Lnet/minecraft/world/item/ItemStack;)Lnet/minecraft/client/resources/model/BakedModel;"))
     public BakedModel muffins$getModel(BakedModel original,@Local(argsOnly = true) ItemStack itemStack){
-        if(itemStack.is(ModItems.CATCHER_BAG)){
-            original = this.itemModelShaper.getModelManager().getModel(ThaiDelightClient.CATCHER_IN_HAND_MODEL);
+        if(itemStack.is(ModItems.SACK)){
+            original = this.itemModelShaper.getModelManager().getModel(ThaiDelightClient.SACK_MODEL_IN_HAND);
         }
         return original;
     }
@@ -39,8 +38,8 @@ public abstract class ItemRendererMixin {
                                           PoseStack poseStack, MultiBufferSource multiBufferSource, int i, int j,
                                           BakedModel bakedModel, CallbackInfo ci,@Local(argsOnly = true) LocalRef<BakedModel> bakedModel2
     ){
-        if( itemStack.is(ModItems.CATCHER_BAG)){
-            bakedModel2.set(this.itemModelShaper.getModelManager().getModel(ThaiDelightClient.CATCHER_MODEL));
+        if( itemStack.is(ModItems.SACK)){
+            bakedModel2.set(this.itemModelShaper.getModelManager().getModel(ThaiDelightClient.SACK_MODEL));
         }
     }
 }

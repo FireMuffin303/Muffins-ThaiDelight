@@ -2,10 +2,10 @@
 	"format_version": "1.9.0",
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "muffins_thaidelight:item/bag_side",
-		"1": "muffins_thaidelight:item/bag_down",
-		"2": "muffins_thaidelight:item/bag_top",
-		"3": "muffins_thaidelight:item/bag_top_down"
+		"0": "muffins_thaidelight:item/sack_side",
+		"1": "muffins_thaidelight:item/sack_down",
+		"2": "muffins_thaidelight:item/sack_top",
+		"3": "muffins_thaidelight:item/sack_top_down"
 	},
 	"elements": [
 		{
@@ -40,7 +40,7 @@
 			"translation": [-6, -2.5, -0.5]
 		},
 		"thirdperson_lefthand": {
-			"translation": [-6, -2.5, 4]
+			"translation": [-6, -2.5, -0.5]
 		},
 		"firstperson_righthand": {
 			"translation": [-9, 0, 0]
@@ -57,9 +57,9 @@
 	"overrides": [
 		{
 			"predicate": {
-				"muffins_thaidelight:using": 1
+				"muffins_thaidelight:fullness": 1
 			},
-			"model": "muffins_thaidelight:item/catcher_bag_in_hand_use"
+			"model": "muffins_thaidelight:item/full_sack_in_hand_builtin"
 		}
 	]
 }

@@ -16,7 +16,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -44,7 +43,7 @@ public abstract class FallingBlockEntityMixin extends Entity {
         if(bl){
             return original.and(entity -> {
                 if(entity instanceof Player player){
-                    return !player.isUsingItem() || !player.getItemInHand(player.getUsedItemHand()).is(ModItems.CATCHER_BAG);
+                    return !player.isUsingItem() || !player.getItemInHand(player.getUsedItemHand()).is(ModItems.SACK);
                 }
                 return true;
             });
@@ -65,7 +64,7 @@ public abstract class FallingBlockEntityMixin extends Entity {
 
             Predicate<Entity> predicate = EntitySelector.NO_SPECTATORS.and(EntitySelector.LIVING_ENTITY_STILL_ALIVE).and(entity -> {
                 if(entity instanceof Player player){
-                    return player.isUsingItem() && player.getItemInHand(player.getUsedItemHand()).is(ModItems.CATCHER_BAG);
+                    return player.isUsingItem() && player.getItemInHand(player.getUsedItemHand()).is(ModItems.SACK);
                 }
                 return false;
             });
@@ -75,7 +74,7 @@ public abstract class FallingBlockEntityMixin extends Entity {
                     this.spawnAtLocation(block.get());
                 }
                 this.discard();
-                list.forEach(entity -> ((Player)entity).getCooldowns().addCooldown(ModItems.CATCHER_BAG,10));
+                list.forEach(entity -> ((Player)entity).getCooldowns().addCooldown(ModItems.SACK,10));
                 this.level().levelEvent(1045,this.blockPosition(),0);
             }
         }

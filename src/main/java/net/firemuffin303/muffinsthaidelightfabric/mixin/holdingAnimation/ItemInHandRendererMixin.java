@@ -18,7 +18,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Debug(export = true)
 @Mixin(ItemInHandRenderer.class)
 public abstract class ItemInHandRendererMixin {
 
@@ -35,8 +34,10 @@ public abstract class ItemInHandRendererMixin {
 
     @ModifyReturnValue(method = "evaluateWhichHandsToRender",at = @At(value = "RETURN",ordinal = 0))
     private static ItemInHandRenderer.HandRenderSelection muffins$renderHands(ItemInHandRenderer.HandRenderSelection original, @Local(ordinal = 0) ItemStack itemStack, @Local(ordinal = 1) ItemStack itemStack2){
-        if(itemStack.isEmpty() && itemStack2.is(ModItems.CATCHER_BAG)){
+        if(itemStack.isEmpty() && itemStack2.is(ModItems.SACK)){
             return ItemInHandRenderer.HandRenderSelection.RENDER_OFF_HAND_ONLY;
+        }else if(itemStack.is(ModItems.SACK) && itemStack2.is(ModItems.SACK)){
+            return ItemInHandRenderer.HandRenderSelection.RENDER_MAIN_HAND_ONLY;
         }
         return original;
     }

@@ -3,6 +3,8 @@ package net.firemuffin303.muffinsthaidelightfabric.mixin.holdingAnimation;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.Share;
 import com.llamalad7.mixinextras.sugar.ref.LocalRef;
+import com.mojang.logging.LogUtils;
+import net.firemuffin303.muffinsthaidelightfabric.common.item.SackItem;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModItems;
 import net.firemuffin303.muffinsthaidelightfabric.util.ModASMEarlyRiser;
 import net.minecraft.client.model.HumanoidModel;
@@ -37,8 +39,12 @@ public abstract class PlayerRendererMixin {
                                                     CallbackInfoReturnable<HumanoidModel.ArmPose> cir,
                                                     @Share("shareItemStack") LocalRef<ItemStack> itemStackLocalRef
                                                 ){
-        if(!abstractClientPlayer.swinging && itemStackLocalRef.get().is(ModItems.CATCHER_BAG)){
-            cir.setReturnValue(ModASMEarlyRiser.getDurianCatcherHoldArmPose());
+        if(!abstractClientPlayer.swinging && itemStackLocalRef.get().is(ModItems.SACK)){
+            if(SackItem.isFull(itemStackLocalRef.get())){
+                cir.setReturnValue(ModASMEarlyRiser.getSackShoulderArmPose());
+            }else{
+                cir.setReturnValue(ModASMEarlyRiser.getDurianCatcherHoldArmPose());
+            }
         }
     }
 

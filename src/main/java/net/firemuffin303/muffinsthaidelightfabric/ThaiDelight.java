@@ -160,6 +160,7 @@ public class ThaiDelight implements ModInitializer {
 
     private void init(){
         ModEntityTypes.init();
+        ModBlockEntityTypes.init();
         ModBlocks.init();
         ModItems.init();
         ModSoundEvents.init();
@@ -363,7 +364,7 @@ public class ThaiDelight implements ModInitializer {
 
     private static void itemsGenerator(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output output){
         output.accept(ModItems.MORTAR);
-        output.accept(ModItems.CATCHER_BAG);
+        output.accept(ModItems.SACK);
         output.accept(ModItems.LIME_CRATE);
         output.accept(ModItems.PEPPER_CRATE);
         output.accept(ModItems.RAW_PAPAYA_CRATE);

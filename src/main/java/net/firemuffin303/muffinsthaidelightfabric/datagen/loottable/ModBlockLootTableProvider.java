@@ -3,11 +3,13 @@ package net.firemuffin303.muffinsthaidelightfabric.datagen.loottable;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.BasilCropBlock;
+import net.firemuffin303.muffinsthaidelightfabric.common.block.SackBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.HangingDurianBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.SmallDurianBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.lime.LimePlantBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.PapayaBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.pepper.PepperCropBlock;
+import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlockEntityTypes;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModItems;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
@@ -16,15 +18,21 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.CarrotBlock;
+import net.minecraft.world.level.block.ShulkerBoxBlock;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.storage.loot.IntRange;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.entries.DynamicLoot;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
+import net.minecraft.world.level.storage.loot.entries.LootPoolSingletonContainer;
 import net.minecraft.world.level.storage.loot.functions.*;
 import net.minecraft.world.level.storage.loot.predicates.BonusLevelTableCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
+import net.minecraft.world.level.storage.loot.providers.nbt.ContextNbtProvider;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
@@ -43,6 +51,20 @@ public class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
     @Override
     public void generate() {
         this.createSimpleLoot(ModBlocks.MORTAR);
+
+        this.add(ModBlocks.SACK,block -> LootTable.lootTable().withPool(
+                this.applyExplosionCondition(block,
+                        LootPool.lootPool().setRolls(ConstantValue.exactly(1.0f))
+                                .add(((
+                                        LootItem.lootTableItem(block).apply(CopyNameFunction.copyName(CopyNameFunction.NameSource.BLOCK_ENTITY))
+                                ).apply(
+                                        CopyNbtFunction.copyData(ContextNbtProvider.BLOCK_ENTITY)
+                                                .copy("Lock", "BlockEntityTag.Lock")
+                                                .copy("LootTable", "BlockEntityTag.LootTable")
+                                                .copy("LootTableSeed", "BlockEntityTag.LootTableSeed"))
+                                ).apply(
+                                        SetContainerContents.setContents(ModBlockEntityTypes.SACK_BLOCK_ENTITY)
+                                                .withEntry(DynamicLoot.dynamicEntry(SackBlock.CONTENTS)))))));
 
         this.createSimpleLoot(ModBlocks.LIME_CRATE);
         this.createSimpleLoot(ModBlocks.PEPPER_CRATE);

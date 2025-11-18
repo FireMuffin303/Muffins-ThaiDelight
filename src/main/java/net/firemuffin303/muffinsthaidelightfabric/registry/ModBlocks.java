@@ -58,6 +58,7 @@ public class ModBlocks {
     public static final ArrayList<Block> CABINET = new ArrayList<>();
     //Functional Block
     public static final Block MORTAR = register("mortar",new MortarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_RED).strength(0.5f,6.0f).noOcclusion().sound(SoundType.DECORATED_POT)));
+    public static final Block SACK = register("sack",new SackBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW).instrument(NoteBlockInstrument.BANJO).strength(0.5F).sound(SoundType.GRASS)));
 
     //Crate
     public static final Block LIME_CRATE = registerCrate("lime_crate");

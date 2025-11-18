@@ -9,34 +9,36 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.model.loading.v1.ModelLoadingPlugin;
 import net.fabricmc.fabric.api.client.rendering.v1.*;
-import net.fabricmc.fabric.api.object.builder.v1.client.model.FabricModelPredicateProviderRegistry;
-import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
-import net.firemuffin303.muffinsthaidelightfabric.client.renderer.CatcherBagItemRenderer;
+import net.firemuffin303.muffinsthaidelightfabric.client.renderer.blocks.SackBlockEntityRenderer;
+import net.firemuffin303.muffinsthaidelightfabric.client.renderer.items.SackItemRenderer;
+import net.firemuffin303.muffinsthaidelightfabric.client.renderer.component.SackTooltipComponent;
 import net.firemuffin303.muffinsthaidelightfabric.client.sceens.MortarScreen;
+import net.firemuffin303.muffinsthaidelightfabric.client.sceens.SackScreen;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.FermentedFishCauldronBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.entity.DragonflyEntity;
 import net.firemuffin303.muffinsthaidelightfabric.common.item.DragonflyBottleItem;
+import net.firemuffin303.muffinsthaidelightfabric.common.item.SackItem;
 import net.firemuffin303.muffinsthaidelightfabric.common.item.tooltipComponent.FlavorTooltipClient;
 import net.firemuffin303.muffinsthaidelightfabric.common.recipe.mortar.MortarRecipe;
 import net.firemuffin303.muffinsthaidelightfabric.common.recipe.mortar.MortarRecipeBookTab;
-import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
-import net.firemuffin303.muffinsthaidelightfabric.registry.ModItems;
-import net.firemuffin303.muffinsthaidelightfabric.registry.ModMenuType;
-import net.firemuffin303.muffinsthaidelightfabric.registry.ModRecipes;
+import net.firemuffin303.muffinsthaidelightfabric.registry.*;
 import net.minecraft.client.RecipeBookCategories;
 import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.Sheets;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.client.resources.model.Material;
 import net.minecraft.client.resources.model.ModelResourceLocation;
-import net.minecraft.server.packs.PackType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.inventory.RecipeBookType;
+import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.FoliageColor;
 import net.minecraft.world.level.block.Block;
@@ -85,8 +87,9 @@ public class ThaiDelightClient implements ClientModInitializer {
             ModBlocks.PAPAYA_LEAVES_STEM
     };
 
-    public static final ModelResourceLocation CATCHER_IN_HAND_MODEL = new ModelResourceLocation(ThaiDelight.MOD_ID,"catcher_bag_in_hand","inventory");
-    public static final ModelResourceLocation CATCHER_MODEL = new ModelResourceLocation(ThaiDelight.MOD_ID,"catcher_bag","inventory");
+    public static final ModelResourceLocation SACK_MODEL_IN_HAND = new ModelResourceLocation(ThaiDelight.MOD_ID,"sack_in_hand","inventory");
+    public static final ModelResourceLocation FULL_SACK_MODEL_IN_HAND = new ModelResourceLocation(ThaiDelight.MOD_ID,"full_sack_in_hand","inventory");
+    public static final ModelResourceLocation SACK_MODEL = new ModelResourceLocation(ThaiDelight.MOD_ID,"sack","inventory");
 
 
     public static final RecipeBookType MORTAR_RECIPE_BOOK_TYPE = RecipeBookType.valueOf("MORTAR_RECIPE_BOOK_TYPE");
@@ -102,30 +105,33 @@ public class ThaiDelightClient implements ClientModInitializer {
         TerraformBoatClientHelper.registerModelLayers(ThaiDelight.modid("coconut_boat"),false);
         TerraformBoatClientHelper.registerModelLayers(ThaiDelight.modid("mango_boat"),false);
 
+        BuiltinItemRendererRegistry.INSTANCE.register(ModItems.SACK,new SackItemRenderer());
+        BlockEntityRenderers.register(ModBlockEntityTypes.SACK_BLOCK_ENTITY, SackBlockEntityRenderer::new);
+
         ModelLoadingPlugin.register(new ModelLoadingPlugin() {
             @Override
             public void onInitializeModelLoader(Context context) {
-                context.addModels(ThaiDelightClient.CATCHER_MODEL);
-                context.addModels(ThaiDelightClient.CATCHER_IN_HAND_MODEL);
+                context.addModels(ThaiDelightClient.SACK_MODEL);
+                context.addModels(ThaiDelightClient.SACK_MODEL_IN_HAND);
+                context.addModels(ThaiDelightClient.FULL_SACK_MODEL_IN_HAND);
             }
         });
 
-        /*
-        ItemProperties.register(ModItems.CATCHER_BAG, ThaiDelight.modid("using"), new ClampedItemPropertyFunction() {
+        TooltipComponentCallback.EVENT.register(new TooltipComponentCallback() {
             @Override
-            public float unclampedCall(ItemStack itemStack, @Nullable ClientLevel clientLevel, @Nullable LivingEntity livingEntity, int i) {
-                return livingEntity != null && livingEntity.getUseItem() == itemStack ? 1F : 0F;
+            public @Nullable ClientTooltipComponent getComponent(TooltipComponent data) {
+                if(data instanceof SackTooltipComponent.SackToolTip sackTooltipComponent){
+                    return new SackTooltipComponent(sackTooltipComponent);
+                }
+                return null;
             }
-
-
         });
-
-         */
 
         SpriteIdentifierRegistry.INSTANCE.addIdentifier(new Material(Sheets.SIGN_SHEET, ThaiDelight.modid("entity/signs/durian")));
         SpriteIdentifierRegistry.INSTANCE.addIdentifier(new Material(Sheets.SIGN_SHEET, ThaiDelight.modid("entity/signs/coconut")));
         SpriteIdentifierRegistry.INSTANCE.addIdentifier(new Material(Sheets.SIGN_SHEET, ThaiDelight.modid("entity/signs/mango")));
         MenuScreens.register(ModMenuType.MORTAR, MortarScreen::new);
+        MenuScreens.register(ModMenuType.SACK, SackScreen::new);
 
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutout(),CUTOUT);
 
@@ -145,10 +151,17 @@ public class ThaiDelightClient implements ClientModInitializer {
 
         ColorProviderRegistry.ITEM.register((itemStack, i) -> FoliageColor.getDefaultColor(), ModItems.DURIAN_LEAVES,ModItems.MANGO_LEAVES);
 
-        FabricModelPredicateProviderRegistry.register(ModItems.DRAGONFLY_BOTTLE, ThaiDelight.modid("variant"), new ClampedItemPropertyFunction() {
+        ItemProperties.register(ModItems.DRAGONFLY_BOTTLE, ThaiDelight.modid("variant"), new ClampedItemPropertyFunction() {
             @Override
             public float unclampedCall(ItemStack itemStack, @Nullable ClientLevel clientLevel, @Nullable LivingEntity livingEntity, int i) {
                 return ((float)DragonflyBottleItem.getVariant(itemStack)) / ((float)DragonflyEntity.DragonflyVariant.values().length);
+            }
+        });
+
+        ItemProperties.register(ModItems.SACK, ThaiDelight.modid("fullness"), new ClampedItemPropertyFunction() {
+            @Override
+            public float unclampedCall(ItemStack itemStack, @Nullable ClientLevel clientLevel, @Nullable LivingEntity livingEntity, int i) {
+                return SackItem.isFull(itemStack) ? 1f : 0f;
             }
         });
 
