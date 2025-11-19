@@ -43,7 +43,7 @@ public class ModItems {
     public static final Item[] COCONUT_MILK_ICE_CREAM_ARRAY;
 
     public static final Item MORTAR = register("mortar",new BlockItem(ModBlocks.MORTAR,new Item.Properties()));
-    public static final Item SACK = registerFlatItem("sack",new SackItem(new Item.Properties().stacksTo(16)));
+    public static final Item SACK = registerFlatItem("sack",new SackItem(new Item.Properties().stacksTo(1)));
 
     //Blocks
     public static final Item LIME_CRATE = register("lime_crate",new BlockItem(ModBlocks.LIME_CRATE,new Item.Properties()));
@@ -145,7 +145,7 @@ public class ModItems {
 
     public static final Item DURIAN_PEEL = registerFlatItem("durian_peel",new Item(new Item.Properties()));
     public static final Item DURIAN_PEEL_BLOCK = register("durian_peel_block",new BlockItem(ModBlocks.DURIAN_PEEL_BLOCK,new Item.Properties()));
-    public static final Item DURIAN_HELMET = register("durian_helmet",new DyeableArmorItem(ArmorMaterials.TURTLE, ArmorItem.Type.HELMET,new Item.Properties()));
+    public static final Item DURIAN_HELMET = registerFlatItem("durian_helmet",new DyeableArmorItem(ArmorMaterials.TURTLE, ArmorItem.Type.HELMET,new Item.Properties()));
     //------------------ 🥥 COCONUT 🥥 ------------------
     public static final Item COCONUT_SAPLING = register("coconut_sapling",new BlockItem(ModBlocks.COCONUT_SAPLING,new Item.Properties()));
     public static final Item COCONUT_LEAF = register("coconut_leaf",new BlockItem(ModBlocks.COCONUT_LEAF_END,new Item.Properties()));

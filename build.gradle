@@ -92,6 +92,7 @@ dependencies {
     modRuntimeOnly("maven.modrinth:appleskin:${project.apple_skin_version}")
 
     modRuntimeOnly("maven.modrinth:cloth-config:y0kQixP8")
+    modRuntimeOnly("maven.modrinth:cloth-config:dKy60O1Y")
 }
 
 processResources {

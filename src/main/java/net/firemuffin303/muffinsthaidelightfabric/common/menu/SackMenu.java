@@ -22,6 +22,7 @@ public class SackMenu extends AbstractContainerMenu {
 
         ChestMenu.checkContainerSize(container, 5);
         this.container = container;
+        container.startOpen(inventory.player);
         for(int m = 0; m < this.container.getContainerSize(); ++m) {
             this.addSlot(new Slot(container, m, 44 + m * 18, 18));
         }
@@ -81,6 +82,10 @@ public class SackMenu extends AbstractContainerMenu {
 
     public int getSize(){
         return this.container.getContainerSize();
+    }
+
+    public Container getContainer() {
+        return this.container;
     }
 
     private static class SackSlot extends Slot{

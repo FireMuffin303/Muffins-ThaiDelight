@@ -1,5 +1,6 @@
 package net.firemuffin303.muffinsthaidelightfabric.client;
 
+import com.mojang.logging.LogUtils;
 import com.terraformersmc.terraform.boat.api.client.TerraformBoatClientHelper;
 import com.terraformersmc.terraform.sign.SpriteIdentifierRegistry;
 import io.github.fabricators_of_create.porting_lib.recipe_book_categories.RecipeBookRegistry;
@@ -7,8 +8,10 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
 import net.fabricmc.fabric.api.client.model.loading.v1.ModelLoadingPlugin;
 import net.fabricmc.fabric.api.client.rendering.v1.*;
+import net.fabricmc.loader.api.FabricLoader;
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
 import net.firemuffin303.muffinsthaidelightfabric.client.renderer.blocks.SackBlockEntityRenderer;
 import net.firemuffin303.muffinsthaidelightfabric.client.renderer.items.SackItemRenderer;
@@ -22,7 +25,10 @@ import net.firemuffin303.muffinsthaidelightfabric.common.item.SackItem;
 import net.firemuffin303.muffinsthaidelightfabric.common.item.tooltipComponent.FlavorTooltipClient;
 import net.firemuffin303.muffinsthaidelightfabric.common.recipe.mortar.MortarRecipe;
 import net.firemuffin303.muffinsthaidelightfabric.common.recipe.mortar.MortarRecipeBookTab;
+import net.firemuffin303.muffinsthaidelightfabric.mixin.BlockEntityTypeAccessor;
+import net.firemuffin303.muffinsthaidelightfabric.util.BlockEntityTypeAdder;
 import net.firemuffin303.muffinsthaidelightfabric.registry.*;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.RecipeBookCategories;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
@@ -30,21 +36,23 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.Sheets;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.client.resources.model.Material;
 import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.inventory.RecipeBookType;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.FoliageColor;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
+import java.util.*;
 
 @Environment(EnvType.CLIENT)
 public class ThaiDelightClient implements ClientModInitializer {
@@ -84,7 +92,13 @@ public class ThaiDelightClient implements ClientModInitializer {
             ModBlocks.WALL_PAPAYA_FLOWER,
             ModBlocks.WALL_PAPAYA_LEAVES,
             ModBlocks.PAPAYA_LEAVES,
-            ModBlocks.PAPAYA_LEAVES_STEM
+            ModBlocks.PAPAYA_LEAVES_STEM,
+            ModBlocks.DURIAN_DOOR,
+            ModBlocks.DURIAN_TRAPDOOR,
+            ModBlocks.MANGO_DOOR,
+            ModBlocks.MANGO_TRAPDOOR,
+            ModBlocks.COCONUT_DOOR,
+            ModBlocks.COCONUT_TRAPDOOR
     };
 
     public static final ModelResourceLocation SACK_MODEL_IN_HAND = new ModelResourceLocation(ThaiDelight.MOD_ID,"sack_in_hand","inventory");
@@ -116,6 +130,20 @@ public class ThaiDelightClient implements ClientModInitializer {
                 context.addModels(ThaiDelightClient.FULL_SACK_MODEL_IN_HAND);
             }
         });
+
+
+        if(FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT){
+            ClientLifecycleEvents.CLIENT_STARTED.register(new ClientLifecycleEvents.ClientStarted() {
+                @Override
+                public void onClientStarted(Minecraft minecraft) {
+                    Optional<BlockEntityType<?>> blockEntityTypeOptional = BuiltInRegistries.BLOCK_ENTITY_TYPE.getOptional(new ResourceLocation("farmersdelight","cabinet"));
+                    if(blockEntityTypeOptional.isPresent()){
+                        BlockEntityTypeAdder cabinetAccessor = (BlockEntityTypeAdder) blockEntityTypeOptional.get();
+                        ModBlocks.CABINET.forEach(cabinetAccessor::addSupportBlock);
+                    }
+                }
+            });
+        }
 
         TooltipComponentCallback.EVENT.register(new TooltipComponentCallback() {
             @Override

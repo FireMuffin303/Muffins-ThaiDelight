@@ -1,4 +1,4 @@
-package net.firemuffin303.muffinsthaidelightfabric.client.model;
+package net.firemuffin303.muffinsthaidelightfabric.client.model.entity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;

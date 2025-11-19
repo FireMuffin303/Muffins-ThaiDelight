@@ -4,10 +4,12 @@
   "package": "net.firemuffin303.muffinsthaidelightfabric.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "BlockEntityTypeAccessor",
     "FallingBlockEntityMixin",
     "LootItemAccessor",
     "MobAccessor",
     "StructurePoolAccessor",
+    "blockEntityType.BlockEntityTypeMixin",
     "bonemeal.BoneMealItemMixin",
     "fermentedFish.LayeredCauldronBlockMixin",
     "food.ChickenFoodAccessor",
@@ -23,6 +25,8 @@
     "villager.VillagerAccessor"
   ],
   "client": [
+    "durianHelmet.HumanoidArmorLayerMixin",
+    "durianHelmet.LivingEntityRendererMixin",
     "holdingAnimation.HumanoidModelMixin",
     "holdingAnimation.ItemInHandRendererMixin",
     "holdingAnimation.ItemRendererMixin",

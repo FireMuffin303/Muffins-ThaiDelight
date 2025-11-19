@@ -1,0 +1,6 @@
+{
+  "parent": "muffins_thaidelight:block/template_full_sack",
+  "textures": {
+    "top": "muffins_thaidelight:block/full_sack_top"
+  }
+}

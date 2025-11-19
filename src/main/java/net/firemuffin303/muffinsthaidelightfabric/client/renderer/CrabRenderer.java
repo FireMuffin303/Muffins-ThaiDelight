@@ -1,7 +1,7 @@
 package net.firemuffin303.muffinsthaidelightfabric.client.renderer;
 
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
-import net.firemuffin303.muffinsthaidelightfabric.client.model.FlowerCrabModel;
+import net.firemuffin303.muffinsthaidelightfabric.client.model.entity.FlowerCrabModel;
 import net.firemuffin303.muffinsthaidelightfabric.common.entity.FlowerCrabEntity;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;

@@ -1,12 +1,10 @@
 package net.firemuffin303.muffinsthaidelightfabric.client.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.logging.LogUtils;
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
-import net.firemuffin303.muffinsthaidelightfabric.client.model.BabyBuffoloModel;
-import net.firemuffin303.muffinsthaidelightfabric.client.model.BuffoloModel;
+import net.firemuffin303.muffinsthaidelightfabric.client.model.entity.BabyBuffoloModel;
+import net.firemuffin303.muffinsthaidelightfabric.client.model.entity.BuffoloModel;
 import net.firemuffin303.muffinsthaidelightfabric.common.entity.BuffaloEntity;
-import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;

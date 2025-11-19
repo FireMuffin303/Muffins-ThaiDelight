@@ -83,6 +83,11 @@ public class SackItem extends BlockItem {
     }
 
     @Override
+    public boolean canFitInsideContainerItems() {
+        return false;
+    }
+
+    @Override
     public void releaseUsing(ItemStack itemStack, Level level, LivingEntity livingEntity, int i) {
         super.releaseUsing(itemStack, level, livingEntity, i);
     }

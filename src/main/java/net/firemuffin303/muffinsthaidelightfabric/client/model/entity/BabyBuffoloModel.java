@@ -1,4 +1,4 @@
-package net.firemuffin303.muffinsthaidelightfabric.client.model;
+package net.firemuffin303.muffinsthaidelightfabric.client.model.entity;
 
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
 import net.firemuffin303.muffinsthaidelightfabric.common.entity.BuffaloEntity;

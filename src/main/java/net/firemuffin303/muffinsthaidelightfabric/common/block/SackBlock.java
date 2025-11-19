@@ -5,7 +5,8 @@ import net.firemuffin303.muffinsthaidelightfabric.registry.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.stats.Stats;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -18,9 +19,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.entity.BarrelBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.ShulkerBoxBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -38,15 +37,17 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class SackBlock extends BaseEntityBlock implements SimpleWaterloggedBlock {
-    private static final VoxelShape BOX = Block.box(3.0,0.0,3.0,13.0,14.0,13.0);
+    private static final VoxelShape BOX = Block.box(1.0,0.0,1.0,15.0,16.0,15.0);
     public static final DirectionProperty HORIZONTAL_FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+    public static final BooleanProperty OPEN = BlockStateProperties.OPEN;
     public static final ResourceLocation CONTENTS = new ResourceLocation("contents");
     public SackBlock(Properties properties) {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(HORIZONTAL_FACING,Direction.NORTH)
                 .setValue(WATERLOGGED,false)
+                .setValue(OPEN,false)
         );
     }
 
@@ -61,6 +62,14 @@ public class SackBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
             PiglinAi.angerNearbyPiglins(player, true);
         }
         return InteractionResult.CONSUME;
+    }
+
+    @Override
+    public void tick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource) {
+        BlockEntity blockEntity = serverLevel.getBlockEntity(blockPos);
+        if (blockEntity instanceof SackBlockEntity sackBlockEntity) {
+            sackBlockEntity.recheckOpen();
+        }
     }
 
     @Override
@@ -121,7 +130,7 @@ public class SackBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(HORIZONTAL_FACING,WATERLOGGED);
+        builder.add(HORIZONTAL_FACING,WATERLOGGED,OPEN);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package net.firemuffin303.muffinsthaidelightfabric.common.block.blockEntity;
 
 import com.mojang.logging.LogUtils;
+import net.firemuffin303.muffinsthaidelightfabric.common.block.SackBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.menu.SackMenu;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlockEntityTypes;
 import net.minecraft.core.BlockPos;
@@ -10,16 +11,49 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ChestMenu;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BarrelBlock;
+import net.minecraft.world.level.block.entity.BarrelBlockEntity;
+import net.minecraft.world.level.block.entity.ContainerOpenersCounter;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
 public class SackBlockEntity extends RandomizableContainerBlockEntity {
     private NonNullList<ItemStack> items;
+    private final ContainerOpenersCounter openersCounter = new ContainerOpenersCounter() {
+        @Override
+        protected void onOpen(Level level, BlockPos blockPos, BlockState blockState) {
+            SackBlockEntity.this.updateBlockState(blockState,true);
+        }
+
+        @Override
+        protected void onClose(Level level, BlockPos blockPos, BlockState blockState) {
+            SackBlockEntity.this.updateBlockState(blockState,false);
+        }
+
+        @Override
+        protected void openerCountChanged(Level level, BlockPos blockPos, BlockState blockState, int i, int j) {
+
+        }
+
+        @Override
+        protected boolean isOwnContainer(Player player) {
+            if (player.containerMenu instanceof SackMenu) {
+                Container container = ((SackMenu)player.containerMenu).getContainer();
+                return container == SackBlockEntity.this;
+            }
+            return false;
+        }
+    };
+
     public SackBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlockEntityTypes.SACK_BLOCK_ENTITY, blockPos, blockState);
         this.items = NonNullList.withSize(5,ItemStack.EMPTY);
@@ -49,6 +83,26 @@ public class SackBlockEntity extends RandomizableContainerBlockEntity {
         ItemStack itemStack = super.removeItem(i,j);
         this.markUpdated();
         return itemStack;
+    }
+
+    @Override
+    public void startOpen(Player player) {
+        if (!this.remove && !player.isSpectator()) {
+            this.openersCounter.incrementOpeners(player, this.getLevel(), this.getBlockPos(), this.getBlockState());
+        }
+    }
+
+    @Override
+    public void stopOpen(Player player) {
+        if (!this.remove && !player.isSpectator()) {
+            this.openersCounter.decrementOpeners(player, this.getLevel(), this.getBlockPos(), this.getBlockState());
+        }
+    }
+
+    public void recheckOpen() {
+        if (!this.remove) {
+            this.openersCounter.recheckOpeners(this.getLevel(), this.getBlockPos(), this.getBlockState());
+        }
     }
 
     @Override
@@ -99,5 +153,9 @@ public class SackBlockEntity extends RandomizableContainerBlockEntity {
 
     private void markUpdated() {
         this.getLevel().sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), 3);
+    }
+
+    void updateBlockState(BlockState blockState, boolean bl) {
+        this.level.setBlock(this.getBlockPos(), blockState.setValue(SackBlock.OPEN, bl), 3);
     }
 }

@@ -24,6 +24,7 @@ import net.firemuffin303.muffinsthaidelightfabric.common.event.ModVillagerTrades
 import net.firemuffin303.muffinsthaidelightfabric.common.item.DragonflyBottleItem;
 import net.firemuffin303.muffinsthaidelightfabric.config.ThaiDelightConfig;
 import net.firemuffin303.muffinsthaidelightfabric.mixin.*;
+import net.firemuffin303.muffinsthaidelightfabric.util.BlockEntityTypeAdder;
 import net.firemuffin303.muffinsthaidelightfabric.mixin.food.ChickenFoodAccessor;
 import net.firemuffin303.muffinsthaidelightfabric.mixin.food.FrogFoodAccessor;
 import net.firemuffin303.muffinsthaidelightfabric.mixin.food.ParrotTameFoodAccessor;
@@ -54,6 +55,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ComposterBlock;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.structure.pools.SinglePoolElement;
@@ -257,7 +259,18 @@ public class ThaiDelight implements ModInitializer {
             addToStructurePool(minecraftServer,
                     new ResourceLocation("minecraft","village/savanna/houses"),
                     ThaiDelight.modid("village/savanna/houses/savanna_small_thai_house_1"),2);
+
+            if(minecraftServer.isDedicatedServer()){
+                Optional<BlockEntityType<?>> blockEntityTypeOptional = BuiltInRegistries.BLOCK_ENTITY_TYPE.getOptional(new ResourceLocation("farmersdelight","cabinet"));
+                if(blockEntityTypeOptional.isPresent()){
+                    BlockEntityTypeAdder cabinetAccessor = (BlockEntityTypeAdder) blockEntityTypeOptional.get();
+                    ModBlocks.CABINET.forEach(cabinetAccessor::addSupportBlock);
+                }
+            }
         });
+
+
+
     }
 
     private void registerComposter(){

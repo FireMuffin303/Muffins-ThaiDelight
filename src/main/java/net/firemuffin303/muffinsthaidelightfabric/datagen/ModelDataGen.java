@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.BasilCropBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.FermentedFishCauldronBlock;
+import net.firemuffin303.muffinsthaidelightfabric.common.block.SackBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.SmallDurianBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.butterfly_pea.ButterflyPeaVineBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.coconut.CoconutLeafBlock;
@@ -68,6 +69,8 @@ public class ModelDataGen extends FabricModelProvider {
     private static final ModelTemplate TEMPLATE_WALL_PAPAYA_FLOWER = new ModelTemplate(Optional.of(ThaiDelight.modid("block/papaya/template_wall_papaya_flower")),Optional.empty(),FLOWER);
     private static final ModelTemplate TEMPLATE_PAPAYA_FLOWER = new ModelTemplate(Optional.of(ThaiDelight.modid("block/papaya/template_papaya_flower")),Optional.empty(),FLOWER);
     private static final ModelTemplate TEMPLATE_HANGING_PAPAYA_FLOWER = new ModelTemplate(Optional.of(ThaiDelight.modid("block/papaya/template_hanging_papaya_flower")),Optional.empty(),FLOWER);
+
+    private static final ModelTemplate FULL_SACK_BLOCK = new ModelTemplate(Optional.of(ThaiDelight.modid("block/template_full_sack")),Optional.empty(),TextureSlot.TOP);
 
     private static final BlockFamily DURIAN_PLANKS = BlockFamilies.familyBuilder(ModBlocks.DURIAN_PLANKS)
             .button(ModBlocks.DURIAN_BUTTON)
@@ -243,7 +246,7 @@ public class ModelDataGen extends FabricModelProvider {
         createBasil(blockStateModelGenerator,ModBlocks.HOLY_BASIL);
         createBasil(blockStateModelGenerator,ModBlocks.BASIL);
 
-
+        createSackBlock(blockStateModelGenerator);
 
 
         createFermentedFishCauldron(blockStateModelGenerator);
@@ -252,6 +255,18 @@ public class ModelDataGen extends FabricModelProvider {
         blockStateModelGenerator.createPlant(ModBlocks.COCONUT_SAPLING,ModBlocks.POTTED_COCONUT_SAPLING, BlockModelGenerators.TintState.NOT_TINTED);
         blockStateModelGenerator.createPlant(ModBlocks.MANGO_SAPLING,ModBlocks.POTTED_MANGO_SAPLING, BlockModelGenerators.TintState.NOT_TINTED);
 
+    }
+
+    private void createSackBlock(BlockModelGenerators blockStateModelGenerator) {
+        ResourceLocation closeModel = FULL_SACK_BLOCK.create(ThaiDelight.modid("block/full_sack"),new TextureMapping().put(TextureSlot.TOP,ThaiDelight.modid("block/full_sack_top")),blockStateModelGenerator.modelOutput);
+        ResourceLocation openModel =  FULL_SACK_BLOCK.create(ThaiDelight.modid("block/full_sack_open"),new TextureMapping().put(TextureSlot.TOP,ThaiDelight.modid("block/full_sack_top_open")),blockStateModelGenerator.modelOutput);
+
+        blockStateModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.SACK)
+                        .with(PropertyDispatch.property(SackBlock.OPEN)
+                                .select(true,Variant.variant().with(VariantProperties.MODEL,openModel))
+                                .select(false,Variant.variant().with(VariantProperties.MODEL,closeModel))
+                        )
+                .with(createHorizontalFacingDispatch()));
     }
 
 
@@ -329,7 +344,13 @@ public class ModelDataGen extends FabricModelProvider {
 
     public static void createCabinet(Block block,BlockModelGenerators blockModelGenerators){
         ResourceLocation cabinet = ModelTemplates.CUBE_ORIENTABLE.create(block,TextureMapping.orientableCube(block), blockModelGenerators.modelOutput);
-        ResourceLocation cabinet_open = ModelTemplates.CUBE_ORIENTABLE.createWithSuffix(block,"_open",TextureMapping.orientableCube(block), blockModelGenerators.modelOutput);
+        ResourceLocation cabinet_open = ModelTemplates.CUBE_ORIENTABLE.createWithSuffix(block,"_open",
+                new TextureMapping()
+                        .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(block, "_side"))
+                        .put(TextureSlot.FRONT, TextureMapping.getBlockTexture(block, "_front_open"))
+                        .put(TextureSlot.TOP, TextureMapping.getBlockTexture(block, "_top"))
+                        .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(block, "_bottom"))
+                , blockModelGenerators.modelOutput);
         blockModelGenerators.blockStateOutput.accept(
                 MultiVariantGenerator.multiVariant(block)
                         .with(PropertyDispatch.properties(BlockStateProperties.HORIZONTAL_FACING,BlockStateProperties.OPEN)

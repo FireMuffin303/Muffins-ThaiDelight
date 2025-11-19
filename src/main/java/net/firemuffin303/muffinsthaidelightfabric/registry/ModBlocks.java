@@ -25,6 +25,7 @@ import net.firemuffin303.muffinsthaidelightfabric.common.block.pepper.PepperCrop
 import net.firemuffin303.muffinsthaidelightfabric.common.world.trees.DurianTreeGrower;
 import net.firemuffin303.muffinsthaidelightfabric.common.world.trees.MangoTreeGrower;
 import net.firemuffin303.muffinsthaidelightfabric.common.world.trees.PapayaTreeGrower;
+import net.firemuffin303.muffinsthaidelightfabric.mixin.BlockEntityTypeAccessor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -48,6 +49,7 @@ import vectorwing.farmersdelight.common.block.CabinetBlock;
 import vectorwing.farmersdelight.common.block.FeastBlock;
 import vectorwing.farmersdelight.common.block.PieBlock;
 import vectorwing.farmersdelight.common.block.WildCropBlock;
+import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
 
 import java.util.ArrayList;
 
@@ -539,11 +541,10 @@ public class ModBlocks {
     //public static final BlockEntityType<SauceBowlBlockEntity> SAUCE_BOWL_BLOCK_ENTITY = Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE,ThaiDelight.modid("sauce_bowl"), FabricBlockEntityTypeBuilder.create(SauceBowlBlockEntity::new,ModBlocks.SAUCE_BOWL).build());
 
     public static void init() {
-        
     }
 
     public static Block registerCabinet(String id){
-        Block registeredBlock = register(id,new CabinetBlock(BlockBehaviour.Properties.copy(BARREL)));
+        Block registeredBlock = register(id,new CabinetBlock(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(2.5f).sound(SoundType.WOOD).ignitedByLava()));
         CABINET.add(registeredBlock);
         return registeredBlock;
     }

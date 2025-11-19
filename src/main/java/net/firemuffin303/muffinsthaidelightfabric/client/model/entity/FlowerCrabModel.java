@@ -1,4 +1,4 @@
-package net.firemuffin303.muffinsthaidelightfabric.client.model;
+package net.firemuffin303.muffinsthaidelightfabric.client.model.entity;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.vertex.PoseStack;

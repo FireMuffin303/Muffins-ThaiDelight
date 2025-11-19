@@ -1,7 +1,7 @@
 package net.firemuffin303.muffinsthaidelightfabric.client.renderer;
 
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
-import net.firemuffin303.muffinsthaidelightfabric.client.model.DragonflyModel;
+import net.firemuffin303.muffinsthaidelightfabric.client.model.entity.DragonflyModel;
 import net.firemuffin303.muffinsthaidelightfabric.common.entity.DragonflyEntity;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
