@@ -39,7 +39,7 @@ public abstract class FallingBlockEntityMixin extends Entity {
 
     @ModifyExpressionValue(method = "causeFallDamage",at = @At(value = "INVOKE", target = "Ljava/util/function/Predicate;and(Ljava/util/function/Predicate;)Ljava/util/function/Predicate;"))
     public Predicate<Entity> muffins$ModifyPredicate(Predicate<Entity> original){
-        boolean bl = this.blockState.is(ModTags.CATCHER_BAG_CATCHABLE);
+        boolean bl = this.blockState.is(ModTags.SACK_CATCHABLE);
         if(bl){
             return original.and(entity -> {
                 if(entity instanceof Player player){
@@ -60,7 +60,7 @@ public abstract class FallingBlockEntityMixin extends Entity {
     @Inject(method = "tick",at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/item/FallingBlockEntity;onGround()Z")
     )
     public void muffins$checkBagDrop(CallbackInfo ci, @Share("shareBlock") LocalRef<Block> block, @Local BlockPos blockPos){
-        if(!this.onGround() && this.blockState.is(ModTags.CATCHER_BAG_CATCHABLE)){
+        if(!this.onGround() && this.blockState.is(ModTags.SACK_CATCHABLE)){
 
             Predicate<Entity> predicate = EntitySelector.NO_SPECTATORS.and(EntitySelector.LIVING_ENTITY_STILL_ALIVE).and(entity -> {
                 if(entity instanceof Player player){

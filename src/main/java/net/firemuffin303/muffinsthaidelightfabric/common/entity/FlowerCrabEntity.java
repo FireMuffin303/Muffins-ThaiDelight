@@ -225,7 +225,7 @@ public class FlowerCrabEntity extends Animal implements Bucketable {
     }
 
     public static boolean checkSpawnRules(EntityType<FlowerCrabEntity> crabEntityEntityType, ServerLevelAccessor serverLevelAccessor, MobSpawnType mobSpawnType, BlockPos blockPos, RandomSource randomSource) {
-        return serverLevelAccessor.getBlockState(blockPos.below()).is(BlockTags.FROGS_SPAWNABLE_ON) && isBrightEnoughToSpawn(serverLevelAccessor,blockPos);
+        return serverLevelAccessor.getBlockState(blockPos.below()).is(ModTags.FLOWER_CRAB_SPAWNABLE_ON) && isBrightEnoughToSpawn(serverLevelAccessor,blockPos);
     }
 
 

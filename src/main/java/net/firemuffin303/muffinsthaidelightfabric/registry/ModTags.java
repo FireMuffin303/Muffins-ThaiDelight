@@ -25,11 +25,13 @@ public class ModTags {
     public static final TagKey<Item> MANGO_LOGS_ITEM = TagKey.create(Registries.ITEM,ThaiDelight.modid("mango_logs"));
     public static final TagKey<Item> COCONUT_LOGS_ITEM = TagKey.create(Registries.ITEM,ThaiDelight.modid("coconut_logs"));
 
+    public static final TagKey<Block> FLOWER_CRAB_SPAWNABLE_ON = TagKey.create(Registries.BLOCK,ThaiDelight.modid("flower_crab_spawnable_on"));
+
     public static final TagKey<Block> DURIAN_LOGS_BLOCK = TagKey.create(Registries.BLOCK,ThaiDelight.modid("durian_logs"));
     public static final TagKey<Block> MANGO_LOGS_BLOCK = TagKey.create(Registries.BLOCK,ThaiDelight.modid("mango_logs"));
     public static final TagKey<Block> COCONUT_LOGS_BLOCK = TagKey.create(Registries.BLOCK,ThaiDelight.modid("coconut_logs"));
 
-    public static final TagKey<Block> CATCHER_BAG_CATCHABLE = TagKey.create(Registries.BLOCK,ThaiDelight.modid("catcher_bag_catchable"));
+    public static final TagKey<Block> SACK_CATCHABLE = TagKey.create(Registries.BLOCK,ThaiDelight.modid("sack_catchable"));
 
     public static final TagKey<Block> DURIAN_RICH_SOIL = TagKey.create(Registries.BLOCK,ThaiDelight.modid("durian_rich_soil"));
     public static final TagKey<Block> MANGO_RICH_SOIL = TagKey.create(Registries.BLOCK,ThaiDelight.modid("mango_rich_soil"));

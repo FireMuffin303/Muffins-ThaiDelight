@@ -2,7 +2,6 @@ package net.firemuffin303.muffinsthaidelightfabric.datagen;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
-import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModEntityTypes;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModItems;
@@ -18,6 +17,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
+import net.minecraft.world.level.block.Blocks;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -162,9 +162,24 @@ public class ModTagDataGen {
             getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_HOE)
                     .add(ModBlocks.DURIAN_BLOCK);
 
-            getOrCreateTagBuilder(DURIAN_LOGS_BLOCK).add(ModBlocks.DURIAN_LOG,ModBlocks.DURIAN_WOOD,ModBlocks.STRIPPED_DURIAN_LOG,ModBlocks.STRIPPED_DURIAN_WOOD);
-            getOrCreateTagBuilder(MANGO_LOGS_BLOCK).add(ModBlocks.MANGO_LOG,ModBlocks.MANGO_WOOD,ModBlocks.STRIPPED_MANGO_LOG,ModBlocks.STRIPPED_MANGO_WOOD);
-            getOrCreateTagBuilder(COCONUT_LOGS_BLOCK).add(ModBlocks.COCONUT_LOG,ModBlocks.COCONUT_WOOD,ModBlocks.STRIPPED_COCONUT_LOG,ModBlocks.STRIPPED_COCONUT_WOOD);
+            getOrCreateTagBuilder(DURIAN_LOGS_BLOCK).add(
+                    ModBlocks.DURIAN_LOG,
+                    ModBlocks.DURIAN_WOOD,
+                    ModBlocks.STRIPPED_DURIAN_LOG,
+                    ModBlocks.STRIPPED_DURIAN_WOOD
+            );
+            getOrCreateTagBuilder(MANGO_LOGS_BLOCK).add(
+                    ModBlocks.MANGO_LOG,
+                    ModBlocks.MANGO_WOOD,
+                    ModBlocks.STRIPPED_MANGO_LOG,
+                    ModBlocks.STRIPPED_MANGO_WOOD
+            );
+            getOrCreateTagBuilder(COCONUT_LOGS_BLOCK).add(
+                    ModBlocks.COCONUT_LOG,
+                    ModBlocks.COCONUT_WOOD,
+                    ModBlocks.STRIPPED_COCONUT_LOG,
+                    ModBlocks.STRIPPED_COCONUT_WOOD
+            );
             getOrCreateTagBuilder(BlockTags.LOGS_THAT_BURN)
                     .addTag(PAPAYA_LOGS)
                     .addTag(DURIAN_LOGS_BLOCK)
@@ -205,6 +220,14 @@ public class ModTagDataGen {
                     ModBlocks.WALL_PAPAYA_FLOWER
             );
 
+            getOrCreateTagBuilder(FLOWER_CRAB_SPAWNABLE_ON).add(
+                    Blocks.GRASS_BLOCK,
+                    Blocks.MUD,
+                    Blocks.MANGROVE_ROOTS,
+                    Blocks.MUDDY_MANGROVE_ROOTS,
+                    Blocks.SAND,
+                    Blocks.CLAY
+            );
 
             getOrCreateTagBuilder(COMMON_RICH_SOIL).add(
                     vectorwing.farmersdelight.common.registry.ModBlocks.RICH_SOIL.get(),
@@ -215,7 +238,7 @@ public class ModTagDataGen {
             getOrCreateTagBuilder(MANGO_RICH_SOIL).addTag(COMMON_RICH_SOIL);
             getOrCreateTagBuilder(COCONUT_RICH_SOIL).addTag(COMMON_RICH_SOIL);
 
-            getOrCreateTagBuilder(CATCHER_BAG_CATCHABLE).add(
+            getOrCreateTagBuilder(SACK_CATCHABLE).add(
                     ModBlocks.SMALL_DURIAN_BLOCK,
                     ModBlocks.DURIAN_BLOCK,
                     ModBlocks.HANGING_DURIAN

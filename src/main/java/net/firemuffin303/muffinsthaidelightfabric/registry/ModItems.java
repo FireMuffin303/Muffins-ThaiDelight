@@ -9,16 +9,19 @@ import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
 import net.firemuffin303.muffinsthaidelightfabric.common.item.DragonflyBottleItem;
 import net.firemuffin303.muffinsthaidelightfabric.common.item.SackItem;
 import net.firemuffin303.muffinsthaidelightfabric.common.item.papaya.PapayaFlowerItem;
+import net.firemuffin303.muffinsthaidelightfabric.util.CommonEvents;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -41,6 +44,7 @@ public class ModItems {
     public static final ArrayList<Item> FLAT_ITEMS = new ArrayList<>();
     public static final Item[] KHANOM_CHAN_ARRAY;
     public static final Item[] COCONUT_MILK_ICE_CREAM_ARRAY;
+
 
     public static final Item MORTAR = register("mortar",new BlockItem(ModBlocks.MORTAR,new Item.Properties()));
     public static final Item SACK = registerFlatItem("sack",new SackItem(new Item.Properties().stacksTo(1)));
@@ -145,7 +149,7 @@ public class ModItems {
 
     public static final Item DURIAN_PEEL = registerFlatItem("durian_peel",new Item(new Item.Properties()));
     public static final Item DURIAN_PEEL_BLOCK = register("durian_peel_block",new BlockItem(ModBlocks.DURIAN_PEEL_BLOCK,new Item.Properties()));
-    public static final Item DURIAN_HELMET = registerFlatItem("durian_helmet",new DyeableArmorItem(ArmorMaterials.TURTLE, ArmorItem.Type.HELMET,new Item.Properties()));
+    public static final Item DURIAN_HELMET = registerFlatItem("durian_helmet",new ArmorItem(CommonEvents.getDurianMaterial(), ArmorItem.Type.HELMET,new Item.Properties()));
     //------------------ 🥥 COCONUT 🥥 ------------------
     public static final Item COCONUT_SAPLING = register("coconut_sapling",new BlockItem(ModBlocks.COCONUT_SAPLING,new Item.Properties()));
     public static final Item COCONUT_LEAF = register("coconut_leaf",new BlockItem(ModBlocks.COCONUT_LEAF_END,new Item.Properties()));
