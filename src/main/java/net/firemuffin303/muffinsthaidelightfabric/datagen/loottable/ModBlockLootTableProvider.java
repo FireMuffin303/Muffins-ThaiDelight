@@ -70,7 +70,6 @@ public class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
         this.createSimpleLoot(ModBlocks.PEPPER_CRATE);
         this.createSimpleLoot(ModBlocks.RAW_PAPAYA_CRATE);
         this.createSimpleLoot(ModBlocks.PAPAYA_CRATE);
-        this.createSimpleLoot(ModBlocks.DURIAN_CRATE);
         this.createSimpleLoot(ModBlocks.MANGO_CRATE);
         this.createSimpleLoot(ModBlocks.COCONUT_CRATE);
         this.createSimpleLoot(ModBlocks.HOLY_BASIL_CRATE);

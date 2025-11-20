@@ -54,7 +54,6 @@ public class ModItems {
     public static final Item PEPPER_CRATE = register("pepper_crate",new BlockItem(ModBlocks.PEPPER_CRATE,new Item.Properties()));
     public static final Item RAW_PAPAYA_CRATE = register("raw_papaya_crate",new BlockItem(ModBlocks.RAW_PAPAYA_CRATE,new Item.Properties()));
     public static final Item PAPAYA_CRATE = register("papaya_crate",new BlockItem(ModBlocks.PAPAYA_CRATE,new Item.Properties()));
-    public static final Item DURIAN_CRATE = register("durian_crate",new BlockItem(ModBlocks.DURIAN_CRATE,new Item.Properties()));
     public static final Item MANGO_CRATE = register("mango_crate",new BlockItem(ModBlocks.MANGO_CRATE,new Item.Properties()));
     public static final Item COCONUT_CRATE = register("coconut_crate",new BlockItem(ModBlocks.COCONUT_CRATE,new Item.Properties()));
     public static final Item HOLY_BASIL_CRATE = register("holy_basil_crate",new BlockItem(ModBlocks.HOLY_BASIL_CRATE,new Item.Properties()));
@@ -420,7 +419,7 @@ public class ModItems {
         public static final FoodProperties PAPAYA = new FoodProperties.Builder().nutrition(5).saturationMod(0.4F).build();
         public static final FoodProperties RAW_PAPAYA = new FoodProperties.Builder().nutrition(4).saturationMod(0.2F).build();
 
-        public static final FoodProperties DURIAN_PULP = new FoodProperties.Builder().nutrition(2).saturationMod(0.2f).build();
+        public static final FoodProperties DURIAN_PULP = new FoodProperties.Builder().nutrition(4).saturationMod(0.2f).build();
         public static final FoodProperties FRIED_DURIAN = new FoodProperties.Builder().alwaysEat().fast().nutrition(3).saturationMod(0.4f).build();
 
         public static final FoodProperties COCONUT_MEAT = new FoodProperties.Builder().nutrition(2).saturationMod(0.2f).build();

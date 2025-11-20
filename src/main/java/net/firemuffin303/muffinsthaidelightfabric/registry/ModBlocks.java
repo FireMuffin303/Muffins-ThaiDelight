@@ -67,7 +67,6 @@ public class ModBlocks {
     public static final Block PEPPER_CRATE = registerCrate("pepper_crate");
     public static final Block RAW_PAPAYA_CRATE = registerCrate("raw_papaya_crate");
     public static final Block PAPAYA_CRATE = registerCrate("papaya_crate");
-    public static final Block DURIAN_CRATE = registerCrate("durian_crate");
     public static final Block MANGO_CRATE = registerCrate("mango_crate");
     public static final Block COCONUT_CRATE = registerCrate("coconut_crate");
     public static final Block HOLY_BASIL_CRATE = registerCrate("holy_basil_crate");
