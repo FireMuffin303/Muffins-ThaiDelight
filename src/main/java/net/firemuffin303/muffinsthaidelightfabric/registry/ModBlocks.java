@@ -17,7 +17,8 @@ import net.firemuffin303.muffinsthaidelightfabric.common.block.coconut.CoconutLe
 import net.firemuffin303.muffinsthaidelightfabric.common.block.coconut.CoconutLeafEndBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.*;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.lime.*;
-import net.firemuffin303.muffinsthaidelightfabric.common.block.mango.MangoBlock;
+import net.firemuffin303.muffinsthaidelightfabric.common.block.mango.HangingMangoBlock;
+import net.firemuffin303.muffinsthaidelightfabric.common.block.mango.MangoLeavesBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.mango.StackableMangoBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.*;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.pepper.BuddingPepperBlock;
@@ -25,12 +26,12 @@ import net.firemuffin303.muffinsthaidelightfabric.common.block.pepper.PepperCrop
 import net.firemuffin303.muffinsthaidelightfabric.common.world.trees.DurianTreeGrower;
 import net.firemuffin303.muffinsthaidelightfabric.common.world.trees.MangoTreeGrower;
 import net.firemuffin303.muffinsthaidelightfabric.common.world.trees.PapayaTreeGrower;
-import net.firemuffin303.muffinsthaidelightfabric.mixin.BlockEntityTypeAccessor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.*;
@@ -49,7 +50,6 @@ import vectorwing.farmersdelight.common.block.CabinetBlock;
 import vectorwing.farmersdelight.common.block.FeastBlock;
 import vectorwing.farmersdelight.common.block.PieBlock;
 import vectorwing.farmersdelight.common.block.WildCropBlock;
-import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
 
 import java.util.ArrayList;
 
@@ -320,9 +320,17 @@ public class ModBlocks {
     //----------------- Mango -----------
     public static final Block MANGO_SAPLING = register("mango_sapling",new SaplingBlock(new MangoTreeGrower(),BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
     public static final Block POTTED_MANGO_SAPLING = register("potted_mango_sapling",Blocks.flowerPot(ModBlocks.MANGO_SAPLING));
-    public static final Block MANGO_LEAVES = register("mango_leaves",new LeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES)));
+    public static final Block MANGO_LEAVES = register("mango_leaves",new MangoLeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES)));
     public static final Block STACKABLE_MANGO_BLOCK = register("stackable_mango_block", new StackableMangoBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).strength(1.0F).sound(SoundType.WOOD).noOcclusion().pushReaction(PushReaction.DESTROY)));
-    public static final Block MANGO_BLOCK = register("mango_block",new MangoBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).strength(1.0F).sound(SoundType.WOOD).pushReaction(PushReaction.DESTROY).noOcclusion().instabreak().randomTicks()));
+    public static final Block HANGING_MANGO_BLOCK = register("mango_block",new HangingMangoBlock(
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_LIGHT_GREEN)
+                    .strength(1.0F)
+                    .sound(SoundType.WOOD)
+                    .pushReaction(PushReaction.DESTROY)
+                    .noOcclusion()
+                    .instabreak()
+                    .randomTicks()));
 
     public static final Block MANGO_LOG = register("mango_log", Blocks.log(MapColor.COLOR_BROWN,MapColor.COLOR_YELLOW));
     public static final Block MANGO_WOOD = register("mango_wood",new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava()));

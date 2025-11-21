@@ -4,6 +4,8 @@ import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.Share;
 import com.llamalad7.mixinextras.sugar.ref.LocalRef;
+import com.mojang.logging.LogUtils;
+import net.firemuffin303.muffinsthaidelightfabric.common.block.FallableExtension;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModItems;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModTags;
 import net.minecraft.core.BlockPos;
@@ -16,6 +18,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -26,6 +29,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.List;
 import java.util.function.Predicate;
 
+@Debug(export = true)
 @Mixin(FallingBlockEntity.class)
 public abstract class FallingBlockEntityMixin extends Entity {
     @Shadow private BlockState blockState;
@@ -77,6 +81,14 @@ public abstract class FallingBlockEntityMixin extends Entity {
                 list.forEach(entity -> ((Player)entity).getCooldowns().addCooldown(ModItems.SACK,10));
                 this.level().levelEvent(1045,this.blockPosition(),0);
             }
+        }
+    }
+
+    @Inject(method = "tick",at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/item/FallingBlockEntity;discard()V",ordinal = 3))
+    public void muffins$checkLandOnBlock(CallbackInfo ci,@Local Block block,@Local BlockPos blockPos){
+        BlockState blockState1 = this.level().getBlockState(blockPos);
+        if(block instanceof FallableExtension fallableExtension && fallableExtension.checkFallenOnBlock(this.level(),this.blockState,blockState1,blockPos)){
+            this.dropItem = !fallableExtension.onLandOnBlock(this.level(),this.blockState,blockState1,blockPos);
         }
     }
 

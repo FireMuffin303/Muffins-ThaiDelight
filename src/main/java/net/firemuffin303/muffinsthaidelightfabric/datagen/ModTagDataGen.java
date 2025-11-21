@@ -191,6 +191,7 @@ public class ModTagDataGen {
                     .add(
                             ModBlocks.PAPAYA_LEAVES,
                             ModBlocks.DURIAN_LEAVES,
+                            ModBlocks.MANGO_LEAVES,
                             ModBlocks.COCONUT_LEAF,
                             ModBlocks.COCONUT_LEAF_END
                     );

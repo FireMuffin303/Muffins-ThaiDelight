@@ -351,6 +351,9 @@ public class ModItems {
 
     public static void init() {
         Item.BY_BLOCK.put(ModBlocks.COCONUT_LEAF,ModItems.COCONUT_LEAF);
+        Item.BY_BLOCK.put(ModBlocks.HANGING_DURIAN,ModItems.DURIAN);
+        Item.BY_BLOCK.put(ModBlocks.HANGING_MANGO_BLOCK,ModItems.MANGO);
+        Item.BY_BLOCK.put(ModBlocks.PAPAYA,ModItems.PAPAYA);
     }
 
     public static void addFuel(){

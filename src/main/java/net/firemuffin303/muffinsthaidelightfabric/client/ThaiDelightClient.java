@@ -1,6 +1,5 @@
 package net.firemuffin303.muffinsthaidelightfabric.client;
 
-import com.mojang.logging.LogUtils;
 import com.terraformersmc.terraform.boat.api.client.TerraformBoatClientHelper;
 import com.terraformersmc.terraform.sign.SpriteIdentifierRegistry;
 import io.github.fabricators_of_create.porting_lib.recipe_book_categories.RecipeBookRegistry;
@@ -25,7 +24,6 @@ import net.firemuffin303.muffinsthaidelightfabric.common.item.SackItem;
 import net.firemuffin303.muffinsthaidelightfabric.common.item.tooltipComponent.FlavorTooltipClient;
 import net.firemuffin303.muffinsthaidelightfabric.common.recipe.mortar.MortarRecipe;
 import net.firemuffin303.muffinsthaidelightfabric.common.recipe.mortar.MortarRecipeBookTab;
-import net.firemuffin303.muffinsthaidelightfabric.mixin.BlockEntityTypeAccessor;
 import net.firemuffin303.muffinsthaidelightfabric.util.BlockEntityTypeAdder;
 import net.firemuffin303.muffinsthaidelightfabric.registry.*;
 import net.minecraft.client.Minecraft;
@@ -71,7 +69,7 @@ public class ThaiDelightClient implements ClientModInitializer {
             ModBlocks.DURIAN_FLOWER,
             ModBlocks.DURIAN_LEAVES,
             ModBlocks.DURIAN_SAPLING,
-            ModBlocks.MANGO_BLOCK,
+            ModBlocks.HANGING_MANGO_BLOCK,
             ModBlocks.LIME_PLANT,
             ModBlocks.POTTED_LIME_SAPLING,
             ModBlocks.POTTED_COCONUT_SAPLING,

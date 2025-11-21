@@ -56,7 +56,7 @@ public class SackBlockEntityRenderer implements BlockEntityRenderer<SackBlockEnt
         poseStack.scale(0.6f,0.6f,0.6f);
         poseStack.mulPoseMatrix(new Matrix4f().scale(1, 1, 0.01f));
 
-        this.itemRenderer.render(itemStack,ItemDisplayContext.GUI,false,poseStack,multiBufferSource,0xF000F0,OverlayTexture.NO_OVERLAY,bakedModel);
+        this.itemRenderer.render(itemStack,ItemDisplayContext.GUI,false,poseStack,multiBufferSource,i,OverlayTexture.NO_OVERLAY,bakedModel);
         RenderSystem.disableDepthTest();
         multibuffersource$buffersource.endBatch();
         RenderSystem.enableDepthTest();

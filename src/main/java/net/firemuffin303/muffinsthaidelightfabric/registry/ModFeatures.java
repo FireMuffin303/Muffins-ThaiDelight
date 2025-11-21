@@ -1,12 +1,10 @@
 package net.firemuffin303.muffinsthaidelightfabric.registry;
 
 import com.google.common.collect.ImmutableList;
-import com.sun.source.tree.Tree;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.DurianFlowerBlock;
-import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.HangingDurianBlock;
-import net.firemuffin303.muffinsthaidelightfabric.common.block.mango.MangoBlock;
+import net.firemuffin303.muffinsthaidelightfabric.common.block.mango.HangingMangoBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.world.feature.*;
 import net.minecraft.core.*;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -28,7 +26,6 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.*;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
-import net.minecraft.world.level.levelgen.feature.foliageplacers.FancyFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.RandomizedIntStateProvider;
@@ -296,16 +293,16 @@ public class ModFeatures {
     private static TreeConfiguration.TreeConfigurationBuilder createMangoTree(List<TreeDecorator> treeDecorators){
         List<TreeDecorator> decorators = new ArrayList<>();
         decorators.add(new AttachedToLeavesDecorator(0.24f,1,0,new RandomizedIntStateProvider(
-                BlockStateProvider.simple(ModBlocks.MANGO_BLOCK.defaultBlockState().setValue(MangoBlock.HANGING,true)),
-                MangoBlock.AGE,UniformInt.of(0,1)
+                BlockStateProvider.simple(ModBlocks.HANGING_MANGO_BLOCK.defaultBlockState()),
+                HangingMangoBlock.AGE,UniformInt.of(0,1)
         ),2,List.of(Direction.DOWN)));
         decorators.addAll(treeDecorators);
 
         return new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBlocks.MANGO_LOG),
-                new StraightTrunkPlacer(6,1,0),
+                new StraightTrunkPlacer(7,1,0),
                 BlockStateProvider.simple(ModBlocks.MANGO_LEAVES),
-                new HangingBlobFoliagePlacer(UniformInt.of(2,3),ConstantInt.of(0),3,0.35f,0.1f),
+                new HangingBlobFoliagePlacer(ConstantInt.of(2),ConstantInt.of(0),3,0.35f,0.1f),
                 new TwoLayersFeatureSize(1,0,1)
         ).ignoreVines()
                 .decorators(decorators);
@@ -314,8 +311,8 @@ public class ModFeatures {
     public static TreeConfiguration.TreeConfigurationBuilder createFancyMangoTree(List<TreeDecorator> treeDecorators){
         List<TreeDecorator> decorators = new ArrayList<>();
         decorators.add(new AttachedToLeavesDecorator(0.24f,1,0,new RandomizedIntStateProvider(
-                BlockStateProvider.simple(ModBlocks.MANGO_BLOCK.defaultBlockState().setValue(MangoBlock.HANGING,true)),
-                MangoBlock.AGE,UniformInt.of(0,1)
+                BlockStateProvider.simple(ModBlocks.HANGING_MANGO_BLOCK.defaultBlockState()),
+                HangingMangoBlock.AGE,UniformInt.of(0,1)
         ),2,List.of(Direction.DOWN)));
         decorators.addAll(treeDecorators);
 
@@ -323,7 +320,7 @@ public class ModFeatures {
                 BlockStateProvider.simple(ModBlocks.MANGO_LOG),
                 new FancyTrunkPlacer(11, 13, 0),
                 BlockStateProvider.simple(ModBlocks.MANGO_LEAVES),
-                new HangingBlobFoliagePlacer(UniformInt.of(3,4),ConstantInt.of(2),3,0.15f,0.1f),
+                new HangingBlobFoliagePlacer(ConstantInt.of(3),ConstantInt.of(2),3,0.15f,0.1f),
                 new TwoLayersFeatureSize(0, 0, 0, OptionalInt.of(4)))
                 .ignoreVines().decorators(decorators);
     }

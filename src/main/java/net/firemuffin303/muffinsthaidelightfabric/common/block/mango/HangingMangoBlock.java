@@ -1,5 +1,6 @@
 package net.firemuffin303.muffinsthaidelightfabric.common.block.mango;
 
+import net.firemuffin303.muffinsthaidelightfabric.common.block.FallableExtension;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModItems;
 import net.minecraft.core.BlockPos;
@@ -21,10 +22,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.BonemealableBlock;
-import net.minecraft.world.level.block.FallingBlock;
-import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -38,9 +36,8 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class MangoBlock extends FallingBlock implements SimpleWaterloggedBlock, BonemealableBlock {
+public class HangingMangoBlock extends FallingBlock implements SimpleWaterloggedBlock, BonemealableBlock, FallableExtension {
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
-    public static final BooleanProperty HANGING = BlockStateProperties.HANGING;
     public static final IntegerProperty AGE = BlockStateProperties.AGE_2;
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
@@ -55,25 +52,35 @@ public class MangoBlock extends FallingBlock implements SimpleWaterloggedBlock, 
             Block.box(5.0, 6.0, 5.0,11.0, 14.0, 11.0)
     };
 
-    public MangoBlock(Properties properties) {
+    public HangingMangoBlock(Properties properties) {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(WATERLOGGED,false)
-                .setValue(HANGING,false)
                 .setValue(AGE,0)
                 .setValue(FACING,Direction.NORTH)
         );
     }
 
+
+    @Override
+    public boolean canSurvive(BlockState blockState, LevelReader levelReader, BlockPos blockPos) {
+        return levelReader.getBlockState(blockPos.above()).is(BlockTags.LEAVES) || levelReader.getBlockState(blockPos.above()).isFaceSturdy(levelReader, blockPos.above(), Direction.DOWN, SupportType.CENTER);
+    }
+
+    @Override
+    public ItemStack getCloneItemStack(BlockGetter blockGetter, BlockPos blockPos, BlockState blockState) {
+        return new ItemStack(ModItems.MANGO);
+    }
+
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(WATERLOGGED).add(AGE).add(HANGING).add(FACING);
+        builder.add(WATERLOGGED).add(AGE).add(FACING);
     }
 
     @Override
     public InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
         if(!level.isClientSide){
-            if(blockState.getValue(HANGING) && blockState.getValue(AGE) >= 2 && level.getBlockState(blockPos.above()).is(ModBlocks.MANGO_LEAVES)){
+            if(blockState.getValue(AGE) >= 2 && level.getBlockState(blockPos.above()).is(ModBlocks.MANGO_LEAVES)){
                 this.harvest((ServerLevel) level,blockPos,blockState,player);
                 return InteractionResult.SUCCESS;
             }
@@ -84,7 +91,11 @@ public class MangoBlock extends FallingBlock implements SimpleWaterloggedBlock, 
 
     @Override
     public void tick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource) {
-        if (shouldFall(serverLevel.getBlockState(blockPos.below())) && shouldFall(serverLevel.getBlockState(blockPos.above())) && blockPos.getY() >= serverLevel.getMinBuildHeight()) {
+        if (
+                shouldFall(serverLevel.getBlockState(blockPos.above())) &&
+                blockPos.getY() >= serverLevel.getMinBuildHeight() &&
+                blockState.getValue(AGE) == 2
+        ) {
             FallingBlockEntity fallingBlockEntity = FallingBlockEntity.fall(serverLevel, blockPos, blockState);
             this.falling(fallingBlockEntity);
         }
@@ -93,11 +104,16 @@ public class MangoBlock extends FallingBlock implements SimpleWaterloggedBlock, 
     @Override
     public void onProjectileHit(Level level, BlockState blockState, BlockHitResult blockHitResult, Projectile projectile) {
         BlockPos blockPos = blockHitResult.getBlockPos();
-        if (!level.isClientSide && projectile.mayInteract(level, blockPos) && projectile.getType().is(EntityTypeTags.IMPACT_PROJECTILES) && level.getBlockState(blockPos.below()).isAir() && blockState.getValue(AGE) == 2) {
-            FallingBlockEntity fallingBlockEntity = FallingBlockEntity.fall(level, blockPos, blockState.setValue(HANGING,false));
+        if (!level.isClientSide && projectile.mayInteract(level, blockPos) &&
+                projectile.getType().is(EntityTypeTags.IMPACT_PROJECTILES) &&
+                level.getBlockState(blockPos.below()).isAir() && blockState.getValue(AGE) == 2) {
+
+            FallingBlockEntity fallingBlockEntity = FallingBlockEntity.fall(level, blockPos, blockState);
             this.falling(fallingBlockEntity);
+            level.setBlock(blockPos,blockState.setValue(AGE,0),2);
         }
     }
+
 
     @Override
     public void animateTick(BlockState blockState, Level level, BlockPos blockPos, RandomSource randomSource) {
@@ -106,23 +122,29 @@ public class MangoBlock extends FallingBlock implements SimpleWaterloggedBlock, 
 
     @Override
     public void randomTick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource) {
-        if(blockState.getValue(HANGING) && blockState.getValue(AGE) < 2 && randomSource.nextInt(7) == 0 && serverLevel.getBlockState(blockPos.above()).is(ModBlocks.MANGO_LEAVES)){
+        if(blockState.getValue(AGE) < 2 && randomSource.nextInt(7) == 0 && serverLevel.getBlockState(blockPos.above()).is(ModBlocks.MANGO_LEAVES)){
             serverLevel.setBlock(blockPos,blockState.cycle(AGE),2);
         }
     }
 
     @Override
     public BlockState updateShape(BlockState blockState, Direction direction, BlockState blockState2, LevelAccessor levelAccessor, BlockPos blockPos, BlockPos blockPos2) {
+        if (!blockState.canSurvive(levelAccessor, blockPos) && blockState.getValue(AGE) < 2) {
+            return Blocks.AIR.defaultBlockState();
+        }
+
         if ((Boolean)blockState.getValue(WATERLOGGED)) {
             levelAccessor.scheduleTick(blockPos, Fluids.WATER, Fluids.WATER.getTickDelay(levelAccessor));
         }
+
+
         return super.updateShape(blockState, direction, blockState2, levelAccessor, blockPos, blockPos2);
     }
 
     @Override
     public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
         int age = blockState.getValue(AGE);
-        return blockState.getValue(HANGING) ? HANGING_SHAPES[age] : SHAPES[age];
+        return HANGING_SHAPES[age];
     }
 
     @Override
@@ -137,17 +159,17 @@ public class MangoBlock extends FallingBlock implements SimpleWaterloggedBlock, 
 
     @Override
     public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState, boolean bl) {
-        return blockState.getValue(AGE) < 2 && blockState.getValue(HANGING);
+        return blockState.getValue(AGE) < 2;
     }
 
     @Override
     public boolean isBonemealSuccess(Level level, RandomSource randomSource, BlockPos blockPos, BlockState blockState) {
-        return blockState.getValue(HANGING) && blockState.getValue(AGE) < 2;
+        return blockState.getValue(AGE) < 2;
     }
 
     @Override
     public void performBonemeal(ServerLevel serverLevel, RandomSource randomSource, BlockPos blockPos, BlockState blockState) {
-        if(blockState.getValue(HANGING) && blockState.getValue(AGE) < 2){
+        if(blockState.getValue(AGE) < 2){
             serverLevel.setBlock(blockPos,blockState.cycle(AGE),2);
         }
     }
@@ -158,5 +180,25 @@ public class MangoBlock extends FallingBlock implements SimpleWaterloggedBlock, 
         serverLevel.setBlock(blockPos,afterHarvest,2);
         popResource(serverLevel,blockPos,new ItemStack(ModItems.MANGO));
         serverLevel.gameEvent(GameEvent.BLOCK_CHANGE, blockPos, GameEvent.Context.of(entity, afterHarvest));
+    }
+
+    @Override
+    public boolean checkFallenOnBlock(Level level, BlockState fallingBlock, BlockState fallenOnBlock, BlockPos blockPos) {
+        if((fallenOnBlock.is(ModBlocks.STACKABLE_MANGO_BLOCK) && fallenOnBlock.getValue(StackableMangoBlock.STACKS) < 3)){
+            return true;
+        }
+         return level.getBlockState(blockPos.below()).isFaceSturdy(level,blockPos.below(), Direction.UP) && fallenOnBlock.is(Blocks.AIR);
+    }
+
+    @Override
+    public boolean onLandOnBlock(Level level, BlockState fallingBlock,BlockState fallenOnBlock, BlockPos blockPos) {
+        if(!fallenOnBlock.is(ModBlocks.STACKABLE_MANGO_BLOCK)){
+            BlockState blockState = ModBlocks.STACKABLE_MANGO_BLOCK.defaultBlockState();
+            level.setBlock(blockPos,blockState.setValue(StackableMangoBlock.FACING,fallingBlock.getValue(FACING)).setValue(StackableMangoBlock.STACKS,1),2);
+            return true;
+        }
+
+        level.setBlock(blockPos,fallenOnBlock.cycle(StackableMangoBlock.STACKS),2);
+        return true;
     }
 }

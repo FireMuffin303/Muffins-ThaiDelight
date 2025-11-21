@@ -1,6 +1,5 @@
 package net.firemuffin303.muffinsthaidelightfabric.datagen;
 
-import com.terraformersmc.modmenu.util.mod.Mod;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
@@ -12,7 +11,7 @@ import net.firemuffin303.muffinsthaidelightfabric.common.block.butterfly_pea.But
 import net.firemuffin303.muffinsthaidelightfabric.common.block.coconut.CoconutLeafBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.lime.LimeBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.lime.LimePlantBlock;
-import net.firemuffin303.muffinsthaidelightfabric.common.block.mango.MangoBlock;
+import net.firemuffin303.muffinsthaidelightfabric.common.block.mango.HangingMangoBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.mango.StackableMangoBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.*;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.pepper.BuddingPepperBlock;
@@ -717,34 +716,20 @@ public class ModelDataGen extends FabricModelProvider {
         ResourceLocation hanging_mango = HANGING_MANGO.create(ThaiDelight.modid("block/hanging_mango_age2"),mango_texture, blockModelGenerators.modelOutput);
 
         blockModelGenerators.blockStateOutput.accept(
-                MultiVariantGenerator.multiVariant(ModBlocks.MANGO_BLOCK)
-                        .with(PropertyDispatch.properties(MangoBlock.AGE,MangoBlock.HANGING)
-                                //Hanging Raw Mango
-                                .select(0,false,Variant.variant()
-                                        .with(VariantProperties.MODEL,ThaiDelight.modid("block/mango_age0"))
-                                )
+                MultiVariantGenerator.multiVariant(ModBlocks.HANGING_MANGO_BLOCK)
+                        .with(PropertyDispatch.property(HangingMangoBlock.AGE)
                                 //Ground Raw Mango
-                                .select(0,true,Variant.variant()
+                                .select(0,Variant.variant()
                                         .with(VariantProperties.MODEL,ThaiDelight.modid("block/hanging_mango_age0"))
                                 )
 
-                                //Hanging Raw Mango
-                                .select(1,false,Variant.variant()
-                                        .with(VariantProperties.MODEL,raw_mango)
-                                )
-
                                 //Ground Raw Mango
-                                .select(1,true,Variant.variant()
+                                .select(1,Variant.variant()
                                         .with(VariantProperties.MODEL,hanging_raw_mango)
-                                )
-                                //--------------------
-                                //Ground Mango
-                                .select(2,false,Variant.variant()
-                                        .with(VariantProperties.MODEL,mango)
                                 )
 
                                 //Hanging Mango
-                                .select(2,true,Variant.variant()
+                                .select(2,Variant.variant()
                                         .with(VariantProperties.MODEL,hanging_mango)
                                 )
                         ).with(createHorizontalFacingDispatch())

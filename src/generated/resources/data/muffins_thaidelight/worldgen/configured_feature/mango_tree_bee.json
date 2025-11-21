@@ -14,7 +14,6 @@
               "Properties": {
                 "age": "0",
                 "facing": "north",
-                "hanging": "true",
                 "waterlogged": "false"
               }
             }
@@ -52,13 +51,7 @@
       "hanging_leaves_extension_chance": 0.1,
       "height": 3,
       "offset": 0,
-      "radius": {
-        "type": "minecraft:uniform",
-        "value": {
-          "max_inclusive": 3,
-          "min_inclusive": 2
-        }
-      }
+      "radius": 2
     },
     "foliage_provider": {
       "type": "minecraft:simple_state_provider",
@@ -81,7 +74,7 @@
     },
     "trunk_placer": {
       "type": "minecraft:straight_trunk_placer",
-      "base_height": 6,
+      "base_height": 7,
       "height_rand_a": 1,
       "height_rand_b": 0
     },

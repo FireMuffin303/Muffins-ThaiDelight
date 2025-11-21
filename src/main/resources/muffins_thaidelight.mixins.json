@@ -12,6 +12,7 @@
     "blockEntityType.BlockEntityTypeMixin",
     "bonemeal.BoneMealItemMixin",
     "durianHelmet.EnchantmentHelperMixin",
+    "durianHelmet.LivingEntityMixin",
     "durianHelmet.ThornsEnchantmentMixin",
     "fermentedFish.LayeredCauldronBlockMixin",
     "food.ChickenFoodAccessor",
