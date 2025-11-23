@@ -1,5 +1,6 @@
 package net.firemuffin303.muffinsthaidelightfabric.common.world.trees;
 
+import net.firemuffin303.muffinsthaidelightfabric.registry.ModFeatures;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.grower.AbstractTreeGrower;
@@ -9,6 +10,6 @@ import org.jetbrains.annotations.Nullable;
 public class CoconutTreeGrower extends AbstractTreeGrower {
     @Override
     protected @Nullable ResourceKey<ConfiguredFeature<?, ?>> getConfiguredFeature(RandomSource randomSource, boolean bl) {
-        return null;
+        return bl ? ModFeatures.FEATURE_COCONUT_TREE_BEE : ModFeatures.FEATURE_COCONUT_TREE;
     }
 }

@@ -6,6 +6,7 @@ import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.BasilCropBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.FermentedFishCauldronBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.SackBlock;
+import net.firemuffin303.muffinsthaidelightfabric.common.block.coconut.BuddingCoconutLeafBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.SmallDurianBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.butterfly_pea.ButterflyPeaVineBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.coconut.CoconutLeafBlock;
@@ -189,10 +190,19 @@ public class ModelDataGen extends FabricModelProvider {
 
         blockStateModelGenerator.blockStateOutput.accept(
                 MultiVariantGenerator.multiVariant(ModBlocks.COCONUT_LEAF)
-                        .with(createBooleanModelDispatch(CoconutLeafBlock.COCONUT,
+                        .with(createBooleanModelDispatch(CoconutLeafBlock.END,
                                 BuiltInRegistries.BLOCK.getKey(ModBlocks.COCONUT_LEAF).withPrefix("block/coconut/").withSuffix("_end"),
                                 BuiltInRegistries.BLOCK.getKey(ModBlocks.COCONUT_LEAF).withPrefix("block/coconut/")
                                 ))
+                        .with(createHorizontalFacingDispatch())
+        );
+
+        blockStateModelGenerator.blockStateOutput.accept(
+                MultiVariantGenerator.multiVariant(ModBlocks.BUDDING_COCONUT_LEAF)
+                        .with(createBooleanModelDispatch(BuddingCoconutLeafBlock.COCONUT,
+                                BuiltInRegistries.BLOCK.getKey(ModBlocks.BUDDING_COCONUT_LEAF).withPrefix("block/coconut/").withSuffix("_coconut"),
+                                BuiltInRegistries.BLOCK.getKey(ModBlocks.BUDDING_COCONUT_LEAF).withPrefix("block/coconut/")
+                        ))
                         .with(createHorizontalFacingDispatch())
         );
 
@@ -290,6 +300,7 @@ public class ModelDataGen extends FabricModelProvider {
 
     private static void skipItemBlock(BlockModelGenerators blockStateModelGenerator){
         blockStateModelGenerator.skipAutoItemBlock(ModBlocks.COCONUT_LEAF);
+        blockStateModelGenerator.skipAutoItemBlock(ModBlocks.BUDDING_COCONUT_LEAF);
         blockStateModelGenerator.skipAutoItemBlock(ModBlocks.DURIAN_BLOCK);
         blockStateModelGenerator.skipAutoItemBlock(ModBlocks.SMALL_DURIAN_BLOCK);
         blockStateModelGenerator.skipAutoItemBlock(ModBlocks.DURIAN_CAKE);

@@ -2,6 +2,7 @@ package net.firemuffin303.muffinsthaidelightfabric.common.world.feature;
 
 import com.google.common.collect.Lists;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModFeatures;
 import net.minecraft.core.BlockPos;
@@ -23,11 +24,15 @@ import java.util.function.BiConsumer;
 public class CoconutTreeTrunkPlacer extends TrunkPlacer {
     public static final Codec<CoconutTreeTrunkPlacer> CODEC = RecordCodecBuilder.create(instance ->{
         return trunkPlacerParts(instance)
+                .and(IntProvider.codec(1,16).fieldOf("trunk_section_height").forGetter(getter -> getter.trunkSectionHeight))
                 .apply(instance,CoconutTreeTrunkPlacer::new);
     });
 
-    public CoconutTreeTrunkPlacer(int i, int j, int k) {
+    IntProvider trunkSectionHeight;
+
+    public CoconutTreeTrunkPlacer(int i, int j, int k,IntProvider trunkSectionHeight) {
         super(i, j, k);
+        this.trunkSectionHeight = trunkSectionHeight;
     }
 
     @Override
@@ -44,8 +49,9 @@ public class CoconutTreeTrunkPlacer extends TrunkPlacer {
         setDirtAt(levelSimulatedReader, biConsumer, randomSource, blockPos2, treeConfiguration);
         List<FoliagePlacer.FoliageAttachment> list = Lists.newArrayList();
 
+        int i = this.trunkSectionHeight.sample(randomSource);
         for (int k = 0; k <= j; k++) {
-            if (k + 1 >= j + randomSource.nextInt(2)) {
+            if (k == i) {
                 mutableBlockPos.move(direction);
             }
 

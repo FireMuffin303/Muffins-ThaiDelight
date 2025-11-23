@@ -11,10 +11,7 @@ import net.firemuffin303.muffinsthaidelightfabric.common.block.*;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.butterfly_pea.BuddingButterflyPeaBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.butterfly_pea.ButterflyPeaVineBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.butterfly_pea.WallFlowerBlock;
-import net.firemuffin303.muffinsthaidelightfabric.common.block.coconut.BundledCoconutLeafBlock;
-import net.firemuffin303.muffinsthaidelightfabric.common.block.coconut.CoconutBlock;
-import net.firemuffin303.muffinsthaidelightfabric.common.block.coconut.CoconutLeafBlock;
-import net.firemuffin303.muffinsthaidelightfabric.common.block.coconut.CoconutLeafEndBlock;
+import net.firemuffin303.muffinsthaidelightfabric.common.block.coconut.*;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.*;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.lime.*;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.mango.HangingMangoBlock;
@@ -23,6 +20,7 @@ import net.firemuffin303.muffinsthaidelightfabric.common.block.mango.StackableMa
 import net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.*;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.pepper.BuddingPepperBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.pepper.PepperCropBlock;
+import net.firemuffin303.muffinsthaidelightfabric.common.world.trees.CoconutTreeGrower;
 import net.firemuffin303.muffinsthaidelightfabric.common.world.trees.DurianTreeGrower;
 import net.firemuffin303.muffinsthaidelightfabric.common.world.trees.MangoTreeGrower;
 import net.firemuffin303.muffinsthaidelightfabric.common.world.trees.PapayaTreeGrower;
@@ -31,7 +29,6 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.*;
@@ -202,7 +199,7 @@ public class ModBlocks {
     //----------------------Coconut
     public static final Block COCONUT = register("coconut",new CoconutBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).strength(1.0F).sound(SoundType.WOOD).noOcclusion().pushReaction(PushReaction.DESTROY)));
 
-    public static final Block COCONUT_SAPLING = register("coconut_sapling",new SaplingBlock(new DurianTreeGrower(),BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)){
+    public static final Block COCONUT_SAPLING = register("coconut_sapling",new SaplingBlock(new CoconutTreeGrower(),BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)){
         @Override
         public boolean mayPlaceOn(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
             return super.mayPlaceOn(blockState, blockGetter, blockPos) || blockState.is(BlockTags.SAND);
@@ -221,6 +218,8 @@ public class ModBlocks {
             .pushReaction(PushReaction.DESTROY)
             .isRedstoneConductor(Blocks::never)));
     public static final Block COCONUT_LEAF_END = register("coconut_leaf_end",new CoconutLeafEndBlock(BlockBehaviour.Properties.copy(COCONUT_LEAF).dropsLike(ModBlocks.COCONUT_LEAF)));
+    public static final Block BUDDING_COCONUT_LEAF = register("budding_coconut_leaf",new BuddingCoconutLeafBlock(BlockBehaviour.Properties.copy(COCONUT_LEAF).randomTicks()));
+
     public static final Block COCONUT_LEAF_BLOCK = register("coconut_leaf_block",new BundledCoconutLeafBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GREEN).strength(0.5F, 2.5F).sound(SoundType.GRASS)));
 
     public static final Block COCONUT_LOG = register("coconut_log",Blocks.log(MapColor.COLOR_BROWN,MapColor.COLOR_YELLOW));

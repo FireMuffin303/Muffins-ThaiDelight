@@ -3,6 +3,7 @@ package net.firemuffin303.muffinsthaidelightfabric.common.world.feature;
 import com.mojang.logging.LogUtils;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.firemuffin303.muffinsthaidelightfabric.common.block.coconut.CoconutLeafBlock;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModFeatures;
 import net.minecraft.core.BlockPos;
@@ -56,7 +57,10 @@ public class CoconutLeavesFoliagePlacer extends FoliagePlacer {
             int foliageRadius,
             int offset
     ) {
-        this.placeLeaves(levelSimulatedReader, foliageSetter, randomSource, treeConfiguration, foliageAttachment.pos(), foliageRadius, offset, foliageAttachment.doubleTrunk());
+        for(int layer = 0;layer < 2;layer++) {
+            int newOffset = offset - layer;
+            this.placeLeaves(levelSimulatedReader, foliageSetter, randomSource, treeConfiguration, foliageAttachment.pos(), foliageRadius, newOffset, foliageAttachment.doubleTrunk(),layer);
+        }
     }
 
     @Override
@@ -77,24 +81,30 @@ public class CoconutLeavesFoliagePlacer extends FoliagePlacer {
             BlockPos centerPos,
             int radius,
             int yPos,
-            boolean bl
+            boolean bl,
+            int layer
     ) {
         int k = bl ? 1 : 0;
         BlockPos.MutableBlockPos mutableBlockPos = new BlockPos.MutableBlockPos();
 
-
-
         for(int i = 0; i < 2; i++){
-            int newRadius = radius + randomSource.nextInt(rand_radius_a,rand_radius_b);
+            int newRadius = radius + randomSource.nextInt(rand_radius_a,rand_radius_b) - layer;
             for(int l = -newRadius; l <= newRadius;l++){
                 int xPos = i == 0 ? l : 0;
                 int zPos = i == 1 ? l : 0;
                 if (!this.shouldSkipLocationSigned(randomSource, xPos, yPos, zPos, newRadius, bl)){
                     mutableBlockPos.setWithOffset(centerPos,xPos,yPos,zPos);
-                    tryPlaceCoconutLeaf(levelSimulatedReader, foliageSetter, randomSource, treeConfiguration, mutableBlockPos,centerPos,(l == -newRadius || l == newRadius));
+                    LeafState leafState = LeafState.MIDDLE;
+                    if(l == -newRadius || l == newRadius){
+                        leafState = LeafState.END;
+                    }else if(l == -1 || l == 1){
+                        leafState = LeafState.BASE;
+                    }
+                    tryPlaceCoconutLeaf(levelSimulatedReader, foliageSetter, randomSource, treeConfiguration, mutableBlockPos,centerPos,leafState);
                 }
             }
         }
+
     }
 
     protected static boolean tryPlaceCoconutLeaf(
@@ -104,18 +114,23 @@ public class CoconutLeavesFoliagePlacer extends FoliagePlacer {
             TreeConfiguration treeConfiguration,
             BlockPos foliagePos,
             BlockPos centerPos,
-            boolean isEnd
+            LeafState leafState
     ) {
         if (!TreeFeature.validTreePos(levelSimulatedReader, foliagePos)) {
             return false;
         } else {
-            if(isEnd){
+            if(leafState == LeafState.END){
                 if(levelSimulatedReader.isStateAtPosition(foliagePos,blockState -> blockState.is(ModBlocks.COCONUT_LEAF))){
                     return false;
                 }
             }
 
-            BlockState blockState = isEnd ? ModBlocks.COCONUT_LEAF_END.defaultBlockState() : ModBlocks.COCONUT_LEAF.defaultBlockState();
+            BlockState blockState = ModBlocks.COCONUT_LEAF.defaultBlockState().setValue(CoconutLeafBlock.END,leafState == LeafState.END);
+
+            if(leafState == LeafState.BASE){
+                blockState = ModBlocks.BUDDING_COCONUT_LEAF.defaultBlockState();
+            }
+
             if (blockState.hasProperty(BlockStateProperties.WATERLOGGED)) {
                 blockState = blockState.setValue(
                         BlockStateProperties.WATERLOGGED, levelSimulatedReader.isFluidAtPosition(foliagePos, fluidState -> fluidState.isSourceOfType(Fluids.WATER))
@@ -123,7 +138,7 @@ public class CoconutLeavesFoliagePlacer extends FoliagePlacer {
             }
 
             if(blockState.hasProperty(BlockStateProperties.HORIZONTAL_FACING)){
-                BlockPos blockPos = new BlockPos(centerPos.getX() - foliagePos.getX(),centerPos.getY() - foliagePos.getY(),centerPos.getZ() - foliagePos.getZ());
+                BlockPos blockPos = new BlockPos(centerPos.getX() - foliagePos.getX(),0,centerPos.getZ() - foliagePos.getZ());
                 Direction direction = Direction.getNearest(blockPos.getX(),blockPos.getY(),blockPos.getZ());
                 blockState = blockState.setValue(BlockStateProperties.HORIZONTAL_FACING,direction.getOpposite());
             }
@@ -132,5 +147,11 @@ public class CoconutLeavesFoliagePlacer extends FoliagePlacer {
             foliageSetter.set(foliagePos, blockState);
             return true;
         }
+    }
+
+    public enum LeafState{
+        BASE,
+        MIDDLE,
+        END
     }
 }

@@ -1,10 +1,7 @@
 package net.firemuffin303.muffinsthaidelightfabric.common.block.coconut;
 
-import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.HangingDurianBlock;
-import net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.PapayaLeavesBlock;
-import net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.PapayaLeavesStemBlock;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
-import net.minecraft.BlockUtil;
+import net.firemuffin303.muffinsthaidelightfabric.registry.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -18,8 +15,8 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
@@ -32,40 +29,72 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Optional;
-
-import static net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.PapayaLeavesBlock.FULLNESS;
-
-public class CoconutLeafBlock extends Block implements SimpleWaterloggedBlock,BonemealableBlock {
+public class BuddingCoconutLeafBlock extends Block implements SimpleWaterloggedBlock, BonemealableBlock {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
+    public static final BooleanProperty COCONUT = BooleanProperty.create("coconut");
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
-    public static final BooleanProperty END = BooleanProperty.create("end");
 
-    public CoconutLeafBlock(Properties properties) {
+    public BuddingCoconutLeafBlock(Properties properties) {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(FACING, Direction.NORTH)
+                .setValue(COCONUT,false)
                 .setValue(WATERLOGGED,false)
-                .setValue(END,true)
         );
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING,WATERLOGGED,END);
+        builder.add(FACING, COCONUT,WATERLOGGED);
     }
 
-    // State Logic
+    @Override
+    public InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
+        if(!level.isClientSide){
+            if(blockState.getValue(COCONUT)){
+                level.playSound(null,blockPos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS);
+                if(level.getBlockState(blockPos.below()).isAir()){
+                    this.harvest((ServerLevel) level,blockPos,blockState,player);
+                }else{
+                    popResource(level,blockPos,new ItemStack(ModItems.COCONUT));
+                    level.setBlock(blockPos,blockState.setValue(COCONUT,false),2);
+                }
+                return InteractionResult.SUCCESS;
+            }
+        }
+
+        return super.use(blockState, level, blockPos, player, interactionHand, blockHitResult);
+    }
+
+    @Override
+    public void randomTick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource) {
+        if(serverLevel.getMaxLocalRawBrightness(blockPos.above()) >= 9 && randomSource.nextInt(7) == 0 && !blockState.getValue(COCONUT)){
+            serverLevel.setBlock(blockPos,blockState.setValue(COCONUT,true),2);
+        }
+    }
+
+    @Override
+    public void onProjectileHit(Level level, BlockState blockState, BlockHitResult blockHitResult, Projectile projectile) {
+        BlockPos blockPos = blockHitResult.getBlockPos();
+        if (!level.isClientSide && blockState.getValue(COCONUT) && projectile.mayInteract(level, blockPos) && projectile.getType().is(EntityTypeTags.IMPACT_PROJECTILES)) {
+            level.playSound(null,blockPos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS);
+            if(level.getBlockState(blockPos.below()).isAir()){
+                this.harvest((ServerLevel) level,blockPos,blockState,projectile.getOwner());
+            }else{
+                popResource(level,blockPos,new ItemStack(ModItems.COCONUT));
+                level.setBlock(blockPos,blockState.setValue(COCONUT,false),2);
+            }
+        }
+    }
+
     @Override
     public boolean canSurvive(BlockState blockState, LevelReader levelReader, BlockPos blockPos) {
         Direction direction = blockState.getValue(FACING).getOpposite();
         BlockPos blockPos2 = blockPos.relative(direction);
         BlockState blockState2 = levelReader.getBlockState(blockPos2);
-        return blockState2.isFaceSturdy(levelReader, blockPos2, direction) || (blockState2.is(ModBlocks.COCONUT_LEAF) && blockState2.getValue(FACING) == blockState.getValue(FACING) );
+        return blockState2.isFaceSturdy(levelReader, blockPos2, direction) || ( blockState2.is(ModBlocks.COCONUT_LEAF) || blockState2.is(ModBlocks.BUDDING_COCONUT_LEAF) );
     }
 
     @Override
@@ -74,22 +103,7 @@ public class CoconutLeafBlock extends Block implements SimpleWaterloggedBlock,Bo
             levelAccessor.scheduleTick(blockPos, Fluids.WATER, Fluids.WATER.getTickDelay(levelAccessor));
         }
 
-        if(direction == blockState.getValue(FACING)){
-            return blockState.setValue(END,!blockState2.is(this));
-        }
-
-        if ((direction == blockState.getValue(FACING) || direction == blockState.getValue(FACING).getOpposite() && !blockState.canSurvive(levelAccessor, blockPos))) {
-            levelAccessor.scheduleTick(blockPos, this, 1);
-        }
-
         return super.updateShape(blockState, direction, blockState2, levelAccessor, blockPos, blockPos2);
-    }
-
-    @Override
-    public void tick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource) {
-        if (!blockState.canSurvive(serverLevel, blockPos)) {
-            serverLevel.destroyBlock(blockPos, true);
-        }
     }
 
     @Override
@@ -118,27 +132,16 @@ public class CoconutLeafBlock extends Block implements SimpleWaterloggedBlock,Bo
         return blockState.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(blockState);
     }
 
-    @Override
-    public VoxelShape getCollisionShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
-        return Block.box(0.0, 13.0, 0.0, 16.0, 16.0, 16.0);
+    private void harvest(ServerLevel level, BlockPos blockPos, BlockState blockState, Entity entity) {
+        FallingBlockEntity fallingBlockEntity = FallingBlockEntity.fall(level, blockPos, ModBlocks.COCONUT.defaultBlockState());
+        fallingBlockEntity.setHurtsEntities(0.2f,4);
+        level.setBlock(blockPos,blockState.setValue(COCONUT,false),2);
     }
 
-    protected static boolean canReplace(BlockState blockState) {
-        return blockState.isAir() || blockState.is(Blocks.WATER);
-    }
 
     @Override
     public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState, boolean bl) {
-        Direction direction = blockState.getValue(FACING);
-        Optional<BlockPos> optional = BlockUtil.getTopConnectedBlock(levelReader,blockPos,blockState.getBlock(),blockState.getValue(FACING),ModBlocks.COCONUT_LEAF_END);
-
-        if(optional.isEmpty()){
-            return false;
-        } else {
-            BlockPos blockPos2 = optional.get().relative(direction);
-            BlockState blockState2 = levelReader.getBlockState(blockPos2);
-            return !levelReader.isOutsideBuildHeight(blockPos) && canReplace(blockState);
-        }
+        return !blockState.getValue(COCONUT);
     }
 
     @Override
@@ -148,16 +151,10 @@ public class CoconutLeafBlock extends Block implements SimpleWaterloggedBlock,Bo
 
     @Override
     public void performBonemeal(ServerLevel serverLevel, RandomSource randomSource, BlockPos blockPos, BlockState blockState) {
-        Direction direction = blockState.getValue(FACING);
-        Optional<BlockPos> optional = BlockUtil.getTopConnectedBlock(serverLevel,blockPos,blockState.getBlock(),blockState.getValue(FACING),ModBlocks.COCONUT_LEAF_END);
-        if(optional.isEmpty()){
+        if(blockState.getValue(COCONUT)){
             return;
         }
 
-        BlockPos blockPos2 = optional.get();
-        serverLevel.setBlock(blockPos2,blockState.setValue(CoconutLeafBlock.FACING,direction).setValue(END,false),2);
-
-        serverLevel.setBlock(blockPos2.relative(direction,1), blockState.setValue(CoconutLeafBlock.FACING,direction).setValue(END,true), 2
-        );
+        serverLevel.setBlock(blockPos,blockState.setValue(COCONUT,true),2);
     }
 }

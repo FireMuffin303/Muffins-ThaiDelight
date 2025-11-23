@@ -329,8 +329,8 @@ public class ModFeatures {
         List<TreeDecorator> decorators = new ArrayList<>(treeDecorators);
 
         return new TreeConfiguration.TreeConfigurationBuilder(
-                BlockStateProvider.simple(Blocks.JUNGLE_LOG),
-                new CoconutTreeTrunkPlacer(6,1,2),
+                BlockStateProvider.simple(ModBlocks.COCONUT_LOG),
+                new CoconutTreeTrunkPlacer(7,1,2,UniformInt.of(3,5)),
                 BlockStateProvider.simple(ModBlocks.COCONUT_LEAF_END),
                 new CoconutLeavesFoliagePlacer(UniformInt.of(2,3),ConstantInt.of(0),2,1,2),
                 new TwoLayersFeatureSize(1,0,1)

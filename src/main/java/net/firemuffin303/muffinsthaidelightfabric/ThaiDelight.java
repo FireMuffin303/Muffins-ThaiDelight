@@ -272,6 +272,7 @@ public class ThaiDelight implements ModInitializer {
 
         output.accept(ModItems.COCONUT_SAPLING);
         output.accept(ModItems.COCONUT_LEAF);
+        output.accept(ModItems.BUDDING_COCONUT_LEAF);
         output.accept(ModItems.COCONUT_LEAF_BLOCK);
 
         output.accept(ModItems.COCONUT_LOG);

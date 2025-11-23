@@ -14,14 +14,12 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -151,7 +149,8 @@ public class ModItems {
     public static final Item DURIAN_HELMET = registerFlatItem("durian_helmet",new ArmorItem(CommonEvents.getDurianMaterial(), ArmorItem.Type.HELMET,new Item.Properties()));
     //------------------ 🥥 COCONUT 🥥 ------------------
     public static final Item COCONUT_SAPLING = register("coconut_sapling",new BlockItem(ModBlocks.COCONUT_SAPLING,new Item.Properties()));
-    public static final Item COCONUT_LEAF = register("coconut_leaf",new BlockItem(ModBlocks.COCONUT_LEAF_END,new Item.Properties()));
+    public static final Item COCONUT_LEAF = register("coconut_leaf",new BlockItem(ModBlocks.COCONUT_LEAF,new Item.Properties()));
+    public static final Item BUDDING_COCONUT_LEAF = register("budding_coconut_leaf",new BlockItem(ModBlocks.BUDDING_COCONUT_LEAF,new Item.Properties()));
     public static final Item COCONUT_LEAF_BLOCK = register("coconut_leaf_block",new BlockItem(ModBlocks.COCONUT_LEAF_BLOCK,new Item.Properties()));
     //COCONUT Woodset item
     public static final Item COCONUT_LOG = register("coconut_log",new BlockItem(ModBlocks.COCONUT_LOG,new Item.Properties()));
