@@ -7,6 +7,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModFeatures;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.util.ExtraCodecs;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.world.level.LevelSimulatedReader;
@@ -24,15 +25,19 @@ import java.util.function.BiConsumer;
 public class CoconutTreeTrunkPlacer extends TrunkPlacer {
     public static final Codec<CoconutTreeTrunkPlacer> CODEC = RecordCodecBuilder.create(instance ->{
         return trunkPlacerParts(instance)
-                .and(IntProvider.codec(1,16).fieldOf("trunk_section_height").forGetter(getter -> getter.trunkSectionHeight))
+                .and(instance.group(
+                        IntProvider.codec(1,16).fieldOf("trunk_section_height").forGetter(getter -> getter.trunkSectionHeight),
+                        Codec.floatRange(0,1).fieldOf("trunk_bend_chance").forGetter(g -> g.trunkBendChance)))
                 .apply(instance,CoconutTreeTrunkPlacer::new);
     });
 
+    float trunkBendChance;
     IntProvider trunkSectionHeight;
 
-    public CoconutTreeTrunkPlacer(int i, int j, int k,IntProvider trunkSectionHeight) {
+    public CoconutTreeTrunkPlacer(int i, int j, int k,IntProvider trunkSectionHeight,float trunkBendChance) {
         super(i, j, k);
         this.trunkSectionHeight = trunkSectionHeight;
+        this.trunkBendChance = trunkBendChance;
     }
 
     @Override
@@ -51,7 +56,7 @@ public class CoconutTreeTrunkPlacer extends TrunkPlacer {
 
         int i = this.trunkSectionHeight.sample(randomSource);
         for (int k = 0; k <= j; k++) {
-            if (k == i) {
+            if (k == i && randomSource.nextFloat() < this.trunkBendChance) {
                 mutableBlockPos.move(direction);
             }
 

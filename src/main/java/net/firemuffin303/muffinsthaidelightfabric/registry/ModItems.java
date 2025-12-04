@@ -6,6 +6,7 @@ import com.terraformersmc.terraform.boat.api.TerraformBoatTypeRegistry;
 import com.terraformersmc.terraform.boat.api.item.TerraformBoatItemHelper;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
+import net.firemuffin303.muffinsthaidelightfabric.common.item.CoconutItem;
 import net.firemuffin303.muffinsthaidelightfabric.common.item.DragonflyBottleItem;
 import net.firemuffin303.muffinsthaidelightfabric.common.item.SackItem;
 import net.firemuffin303.muffinsthaidelightfabric.common.item.papaya.PapayaFlowerItem;
@@ -172,7 +173,8 @@ public class ModItems {
     public static final Item COCONUT_BOAT = TerraformBoatItemHelper.registerBoatItem(ThaiDelight.modid("coconut_boat"),COCONUT_BOAT_KEY,false);
     public static final Item COCONUT_CHEST_BOAT = TerraformBoatItemHelper.registerBoatItem(ThaiDelight.modid("coconut_chest_boat"),COCONUT_BOAT_KEY,true);
 
-    public static final Item COCONUT = registerFlatItem("coconut",new BlockItem(ModBlocks.COCONUT,new Item.Properties()));
+    public static final Item COCONUT = registerFlatItem("coconut",new CoconutItem(new Item.Properties()));
+    public static final Item COCONUT_LEAF_MAT = register("coconut_leaf_mat",new BlockItem(ModBlocks.COCONUT_LEAF_MAT,new Item.Properties()));
 
 
     //------------------ 🥭 MANGO 🥭 --------------------

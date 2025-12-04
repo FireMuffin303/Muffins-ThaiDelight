@@ -198,7 +198,7 @@ public class ModBlocks {
 
     //----------------------Coconut
     public static final Block COCONUT = register("coconut",new CoconutBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).strength(1.0F).sound(SoundType.WOOD).noOcclusion().pushReaction(PushReaction.DESTROY)));
-
+    public static final Block COCONUT_SAPLING_CROP = register("coconut_sapling_crop",new CoconutSaplingCropBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY)));
     public static final Block COCONUT_SAPLING = register("coconut_sapling",new SaplingBlock(new CoconutTreeGrower(),BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)){
         @Override
         public boolean mayPlaceOn(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
@@ -315,6 +315,7 @@ public class ModBlocks {
             .dropsLike(DURIAN_HANGING_SIGN)
     ));
     public static final Block COCONUT_CABINET = registerCabinet("coconut_cabinet");
+    public static final Block COCONUT_LEAF_MAT = register("coconut_leaf_mat",new CarpetBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GREEN).strength(0.1f).sound(SoundType.MOSS_CARPET).pushReaction(PushReaction.DESTROY)));
 
     //----------------- Mango -----------
     public static final Block MANGO_SAPLING = register("mango_sapling",new SaplingBlock(new MangoTreeGrower(),BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));

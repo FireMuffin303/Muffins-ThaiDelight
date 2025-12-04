@@ -5,9 +5,9 @@
 	"textures": {
 		"0": "muffins_thaidelight:block/coconut/coconut_leaf_top",
 		"1": "muffins_thaidelight:block/coconut/coconut_leaf_side",
-		"coconut_side": "muffins_thaidelight:block/coconut/coconut_side",
-		"coconut_bottom": "muffins_thaidelight:block/coconut/coconut_bottom",
-		"coconut_top": "muffins_thaidelight:block/coconut/coconut_top",
+		"coconut_side": "muffins_thaidelight:block/coconut/green_coconut_side",
+		"coconut_bottom": "muffins_thaidelight:block/coconut/green_coconut_bottom",
+		"coconut_top": "muffins_thaidelight:block/coconut/green_coconut_top",
 		"particle": "muffins_thaidelight:block/coconut/coconut_leaf_top"
 	},
 	"elements": [
@@ -39,17 +39,17 @@
 			}
 		},
 		{
-			"from": [1, 0.9, 2],
-			"to": [15, 14.9, 16],
+			"from": [3, 3.9, 6],
+			"to": [13, 13.9, 16],
 			"rotation": {"angle": 0, "axis": "y", "origin": [1, 1, 2]},
 			"color": 7,
 			"faces": {
-				"north": {"uv": [0, 0, 14, 14], "texture": "#coconut_side"},
-				"east": {"uv": [0, 0, 14, 14], "texture": "#coconut_side"},
-				"south": {"uv": [0, 0, 14, 14], "texture": "#coconut_side"},
-				"west": {"uv": [0, 0, 14, 14], "texture": "#coconut_side"},
-				"up": {"uv": [0, 0, 14, 14], "texture": "#coconut_top"},
-				"down": {"uv": [0, 0, 14, 14], "texture": "#coconut_bottom"}
+				"north": {"uv": [0, 0, 10, 10], "texture": "#coconut_side"},
+				"east": {"uv": [0, 0, 10, 10], "texture": "#coconut_side"},
+				"south": {"uv": [0, 0, 10, 10], "texture": "#coconut_side"},
+				"west": {"uv": [0, 0, 10, 10], "texture": "#coconut_side"},
+				"up": {"uv": [0, 0, 10, 10], "texture": "#coconut_top"},
+				"down": {"uv": [0, 0, 10, 10], "texture": "#coconut_bottom"}
 			}
 		}
 	],

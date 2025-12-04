@@ -1,9 +1,11 @@
 package net.firemuffin303.muffinsthaidelightfabric.common.block.coconut;
 
+import com.mojang.logging.LogUtils;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.HangingDurianBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.PapayaLeavesBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.PapayaLeavesStemBlock;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
+import net.firemuffin303.muffinsthaidelightfabric.util.CommonEvents;
 import net.minecraft.BlockUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -75,7 +77,11 @@ public class CoconutLeafBlock extends Block implements SimpleWaterloggedBlock,Bo
         }
 
         if(direction == blockState.getValue(FACING)){
-            return blockState.setValue(END,!blockState2.is(this));
+            boolean bl = false;
+            if(blockState2.is(this)){
+                bl = blockState2.getValue(FACING) == blockState.getValue(FACING);
+            }
+            return blockState.setValue(END,!bl);
         }
 
         if ((direction == blockState.getValue(FACING) || direction == blockState.getValue(FACING).getOpposite() && !blockState.canSurvive(levelAccessor, blockPos))) {
@@ -120,7 +126,7 @@ public class CoconutLeafBlock extends Block implements SimpleWaterloggedBlock,Bo
 
     @Override
     public VoxelShape getCollisionShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
-        return Block.box(0.0, 13.0, 0.0, 16.0, 16.0, 16.0);
+        return blockState.getValue(END) ? Block.box(0.0, 11.0, 0.0, 16.0, 13.0, 16.0) : Block.box(0.0, 13.0, 0.0, 16.0, 16.0, 16.0);
     }
 
     protected static boolean canReplace(BlockState blockState) {
@@ -130,15 +136,27 @@ public class CoconutLeafBlock extends Block implements SimpleWaterloggedBlock,Bo
     @Override
     public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState, boolean bl) {
         Direction direction = blockState.getValue(FACING);
-        Optional<BlockPos> optional = BlockUtil.getTopConnectedBlock(levelReader,blockPos,blockState.getBlock(),blockState.getValue(FACING),ModBlocks.COCONUT_LEAF_END);
+        if(!blockState.getValue(END)){
+            Optional<BlockPos> optional = CommonEvents.getTopConnectedBlock(
+                    levelReader,
+                    blockPos,
+                    blockState.setValue(CoconutLeafBlock.FACING,direction).setValue(END,false),
+                    blockState.getValue(FACING),
+                    blockState.setValue(FACING,direction).setValue(END,true));
 
-        if(optional.isEmpty()){
-            return false;
-        } else {
+            if(optional.isEmpty()){
+                return false;
+            }
+
             BlockPos blockPos2 = optional.get().relative(direction);
             BlockState blockState2 = levelReader.getBlockState(blockPos2);
-            return !levelReader.isOutsideBuildHeight(blockPos) && canReplace(blockState);
+            return !levelReader.isOutsideBuildHeight(blockPos) && canReplace(blockState2);
+
         }
+
+        BlockPos blockPos2 = blockPos.relative(direction);
+        BlockState blockState2 = levelReader.getBlockState(blockPos2);
+        return !levelReader.isOutsideBuildHeight(blockPos) && canReplace(blockState2);
     }
 
     @Override
@@ -149,15 +167,28 @@ public class CoconutLeafBlock extends Block implements SimpleWaterloggedBlock,Bo
     @Override
     public void performBonemeal(ServerLevel serverLevel, RandomSource randomSource, BlockPos blockPos, BlockState blockState) {
         Direction direction = blockState.getValue(FACING);
-        Optional<BlockPos> optional = BlockUtil.getTopConnectedBlock(serverLevel,blockPos,blockState.getBlock(),blockState.getValue(FACING),ModBlocks.COCONUT_LEAF_END);
-        if(optional.isEmpty()){
+        if(!blockState.getValue(END)){
+            Optional<BlockPos> optional = CommonEvents.getTopConnectedBlock(
+                    serverLevel,
+                    blockPos,
+                    blockState.setValue(CoconutLeafBlock.FACING,direction).setValue(END,false),
+                    blockState.getValue(FACING),
+                    blockState.setValue(FACING,direction).setValue(END,true));
+
+            if(optional.isEmpty()){
+                return;
+            }
+
+            BlockPos blockPos2 = optional.get();
+            serverLevel.setBlock(blockPos2,blockState.setValue(CoconutLeafBlock.FACING,direction).setValue(END,false),2);
+
+            serverLevel.setBlock(blockPos2.relative(direction,1), blockState.setValue(CoconutLeafBlock.FACING,direction).setValue(END,true), 2);
             return;
         }
 
-        BlockPos blockPos2 = optional.get();
-        serverLevel.setBlock(blockPos2,blockState.setValue(CoconutLeafBlock.FACING,direction).setValue(END,false),2);
+        serverLevel.setBlock(blockPos,blockState.setValue(CoconutLeafBlock.FACING,direction).setValue(END,false),2);
 
-        serverLevel.setBlock(blockPos2.relative(direction,1), blockState.setValue(CoconutLeafBlock.FACING,direction).setValue(END,true), 2
+        serverLevel.setBlock(blockPos.relative(direction,1), blockState.setValue(CoconutLeafBlock.FACING,direction).setValue(END,true), 2
         );
     }
 }

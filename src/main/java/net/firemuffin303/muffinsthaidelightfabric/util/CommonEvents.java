@@ -1,6 +1,7 @@
 package net.firemuffin303.muffinsthaidelightfabric.util;
 
 import com.mojang.datafixers.util.Pair;
+import com.mojang.logging.LogUtils;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
@@ -19,6 +20,8 @@ import net.firemuffin303.muffinsthaidelightfabric.mixin.food.ParrotTameFoodAcces
 import net.firemuffin303.muffinsthaidelightfabric.mixin.food.PigFoodAccessor;
 import net.firemuffin303.muffinsthaidelightfabric.mixin.villager.VillagerAccessor;
 import net.firemuffin303.muffinsthaidelightfabric.registry.*;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -38,9 +41,12 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.item.enchantment.ThornsEnchantment;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.biome.Biomes;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.structure.pools.SinglePoolElement;
@@ -317,4 +323,18 @@ public class CommonEvents {
             }
         };
     }
+
+    public static Optional<BlockPos> getTopConnectedBlock(BlockGetter blockGetter, BlockPos blockPos, BlockState middleBlock, Direction direction, BlockState endBlock) {
+        BlockState blockState;
+        BlockPos.MutableBlockPos mutableBlockPos = blockPos.mutable();
+        do {
+            mutableBlockPos.move(direction);
+            blockState = blockGetter.getBlockState(mutableBlockPos);
+        } while (blockState == middleBlock);
+        if (blockState == endBlock) {
+            return Optional.of(mutableBlockPos);
+        }
+        return Optional.empty();
+    }
+
 }

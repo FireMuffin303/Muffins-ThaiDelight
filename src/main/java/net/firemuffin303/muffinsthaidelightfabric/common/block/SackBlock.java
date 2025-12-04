@@ -73,6 +73,11 @@ public class SackBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
     }
 
     @Override
+    public boolean useShapeForLightOcclusion(BlockState blockState) {
+        return true;
+    }
+
+    @Override
     public void playerWillDestroy(Level level, BlockPos blockPos, BlockState blockState, Player player) {
         BlockEntity blockEntity = level.getBlockEntity(blockPos);
         if (blockEntity instanceof SackBlockEntity sackBlockEntity) {
