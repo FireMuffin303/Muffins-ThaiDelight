@@ -1,0 +1,79 @@
+{
+  "variants": {
+    "facing=east,servings=0": {
+      "model": "muffins_thaidelight:block/pineapple_fried_rice",
+      "y": 90
+    },
+    "facing=east,servings=1": {
+      "model": "muffins_thaidelight:block/pineapple_fried_rice",
+      "y": 90
+    },
+    "facing=east,servings=2": {
+      "model": "muffins_thaidelight:block/pineapple_fried_rice",
+      "y": 90
+    },
+    "facing=east,servings=3": {
+      "model": "muffins_thaidelight:block/pineapple_fried_rice",
+      "y": 90
+    },
+    "facing=east,servings=4": {
+      "model": "muffins_thaidelight:block/pineapple_fried_rice",
+      "y": 90
+    },
+    "facing=north,servings=0": {
+      "model": "muffins_thaidelight:block/pineapple_fried_rice"
+    },
+    "facing=north,servings=1": {
+      "model": "muffins_thaidelight:block/pineapple_fried_rice"
+    },
+    "facing=north,servings=2": {
+      "model": "muffins_thaidelight:block/pineapple_fried_rice"
+    },
+    "facing=north,servings=3": {
+      "model": "muffins_thaidelight:block/pineapple_fried_rice"
+    },
+    "facing=north,servings=4": {
+      "model": "muffins_thaidelight:block/pineapple_fried_rice"
+    },
+    "facing=south,servings=0": {
+      "model": "muffins_thaidelight:block/pineapple_fried_rice",
+      "y": 180
+    },
+    "facing=south,servings=1": {
+      "model": "muffins_thaidelight:block/pineapple_fried_rice",
+      "y": 180
+    },
+    "facing=south,servings=2": {
+      "model": "muffins_thaidelight:block/pineapple_fried_rice",
+      "y": 180
+    },
+    "facing=south,servings=3": {
+      "model": "muffins_thaidelight:block/pineapple_fried_rice",
+      "y": 180
+    },
+    "facing=south,servings=4": {
+      "model": "muffins_thaidelight:block/pineapple_fried_rice",
+      "y": 180
+    },
+    "facing=west,servings=0": {
+      "model": "muffins_thaidelight:block/pineapple_fried_rice",
+      "y": 270
+    },
+    "facing=west,servings=1": {
+      "model": "muffins_thaidelight:block/pineapple_fried_rice",
+      "y": 270
+    },
+    "facing=west,servings=2": {
+      "model": "muffins_thaidelight:block/pineapple_fried_rice",
+      "y": 270
+    },
+    "facing=west,servings=3": {
+      "model": "muffins_thaidelight:block/pineapple_fried_rice",
+      "y": 270
+    },
+    "facing=west,servings=4": {
+      "model": "muffins_thaidelight:block/pineapple_fried_rice",
+      "y": 270
+    }
+  }
+}

@@ -35,6 +35,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import vectorwing.farmersdelight.common.block.FeastBlock;
 
 import java.util.Optional;
 
@@ -141,6 +142,13 @@ public class ModelDataGen extends FabricModelProvider {
                 .with(PropertyDispatch.property(LimeBlock.STACKS)
                         .generate(integer -> Variant.variant().with(VariantProperties.MODEL,ThaiDelight.modid("block/lime/stackable_lime_%d".formatted(integer))))
                 ).with(createHorizontalFacingDispatch()));
+
+
+        blockStateModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.PINEAPPLE_FRIED_RICE_FEAST)
+                .with(PropertyDispatch.property(FeastBlock.SERVINGS)
+                        .generate(integer -> Variant.variant().with(VariantProperties.MODEL,ThaiDelight.modid("block/pineapple_fried_rice")))
+                ).with(createHorizontalFacingDispatch())
+        );
 
 
 
