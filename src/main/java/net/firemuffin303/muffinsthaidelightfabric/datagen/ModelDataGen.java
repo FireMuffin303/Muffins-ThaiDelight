@@ -150,7 +150,7 @@ public class ModelDataGen extends FabricModelProvider {
                 ).with(createHorizontalFacingDispatch())
         );
 
-
+        blockStateModelGenerator.blockStateOutput.accept(BlockModelGenerators.createFence(ModBlocks.FENCE_LOGGED_BUTTERFLY_PEA,ThaiDelight.modid("block/butterfly_pea_fence_post"),ThaiDelight.modid("block/butterfly_pea_fence_side")));
 
         blockStateModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.STACKABLE_MANGO_BLOCK)
                 .with(PropertyDispatch.property(StackableMangoBlock.STACKS)
@@ -158,6 +158,7 @@ public class ModelDataGen extends FabricModelProvider {
                 ).with(createHorizontalFacingDispatch()));
 
         blockStateModelGenerator.blockStateOutput.accept(createSimpleBlock(ModBlocks.COCONUT,ThaiDelight.modid("block/coconut/coconut_block")));
+        blockStateModelGenerator.blockStateOutput.accept(createSimpleBlock(ModBlocks.STRIPPED_COCONUT,ThaiDelight.modid("block/coconut/coconut_block")));
 
         ModelTemplates.FLAT_ITEM
                 .create(

@@ -12,6 +12,7 @@ import net.fabricmc.fabric.api.client.model.loading.v1.ModelLoadingPlugin;
 import net.fabricmc.fabric.api.client.rendering.v1.*;
 import net.fabricmc.loader.api.FabricLoader;
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
+import net.firemuffin303.muffinsthaidelightfabric.client.renderer.blocks.FenceLoggedButterflyPeaRenderer;
 import net.firemuffin303.muffinsthaidelightfabric.client.renderer.blocks.SackBlockEntityRenderer;
 import net.firemuffin303.muffinsthaidelightfabric.client.renderer.items.SackItemRenderer;
 import net.firemuffin303.muffinsthaidelightfabric.client.renderer.component.SackTooltipComponent;
@@ -98,7 +99,9 @@ public class ThaiDelightClient implements ClientModInitializer {
             ModBlocks.COCONUT_DOOR,
             ModBlocks.COCONUT_TRAPDOOR,
             ModBlocks.BUDDING_COCONUT_LEAF,
-            ModBlocks.PINEAPPLE_FRIED_RICE_FEAST
+            ModBlocks.PINEAPPLE_FRIED_RICE_FEAST,
+            ModBlocks.STRIPPED_COCONUT,
+            ModBlocks.FENCE_LOGGED_BUTTERFLY_PEA
     };
 
     public static final ModelResourceLocation SACK_MODEL_IN_HAND = new ModelResourceLocation(ThaiDelight.MOD_ID,"sack_in_hand","inventory");
@@ -121,6 +124,7 @@ public class ThaiDelightClient implements ClientModInitializer {
 
         BuiltinItemRendererRegistry.INSTANCE.register(ModItems.SACK,new SackItemRenderer());
         BlockEntityRenderers.register(ModBlockEntityTypes.SACK_BLOCK_ENTITY, SackBlockEntityRenderer::new);
+        BlockEntityRenderers.register(ModBlockEntityTypes.FENCE_LOGGED_BUTTERFLY_PEA_BLOCK_ENTITY, FenceLoggedButterflyPeaRenderer::new);
 
         ModelLoadingPlugin.register(new ModelLoadingPlugin() {
             @Override

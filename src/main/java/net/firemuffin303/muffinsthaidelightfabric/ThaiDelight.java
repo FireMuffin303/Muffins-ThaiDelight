@@ -296,6 +296,7 @@ public class ThaiDelight implements ModInitializer {
         output.accept(ModItems.COCONUT_CABINET);
 
         output.accept(ModItems.COCONUT);
+        output.accept(ModItems.STRIPPED_COCONUT);
         output.accept(ModItems.COCONUT_SLICE);
 
         output.accept(ModItems.MANGO_SAPLING);

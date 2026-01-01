@@ -2,15 +2,20 @@ package net.firemuffin303.muffinsthaidelightfabric.common.block.butterfly_pea;
 
 import net.fabricmc.fabric.api.tag.convention.v1.ConventionalItemTags;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.blockEntity.FenceLoggedButterflyPeaBlockEntity;
+import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.FenceBlock;
+import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
@@ -45,10 +50,19 @@ public class FenceLoggedButterflyPeaBlock extends FenceBlock implements EntityBl
         return blockEntity.triggerEvent(i, j);
     }
 
-    private void setNormalFence(Level level,BlockPos blockPos,BlockState currentState){
+    @Override
+    public ItemStack getCloneItemStack(BlockGetter blockGetter, BlockPos blockPos, BlockState blockState) {
+        if(blockGetter.getBlockEntity(blockPos) instanceof FenceLoggedButterflyPeaBlockEntity fenceLoggedButterflyPeaBlockEntity){
+            return new ItemStack(fenceLoggedButterflyPeaBlockEntity.fenceState.getBlock().asItem());
+        }
+
+        return super.getCloneItemStack(blockGetter, blockPos, blockState);
+    }
+
+    private void setNormalFence(Level level, BlockPos blockPos, BlockState currentState){
         BlockState fenceState = Blocks.OAK_FENCE.defaultBlockState();
        if(level.getBlockEntity(blockPos) instanceof FenceLoggedButterflyPeaBlockEntity fenceLoggedButterflyPeaBlockEntity){
-           fenceState = fenceLoggedButterflyPeaBlockEntity.blockState;
+           fenceState = fenceLoggedButterflyPeaBlockEntity.fenceState;
        }
 
         fenceState = fenceState.setValue(NORTH,currentState.getValue(NORTH))
@@ -60,8 +74,23 @@ public class FenceLoggedButterflyPeaBlock extends FenceBlock implements EntityBl
         level.setBlock(blockPos,fenceState,3);
     }
 
+    public static BlockState copyFence(BlockState blockState){
+        BlockState fenceState = ModBlocks.FENCE_LOGGED_BUTTERFLY_PEA.defaultBlockState();
+
+        fenceState = fenceState.setValue(NORTH,blockState.getValue(NORTH))
+                .setValue(EAST,blockState.getValue(EAST))
+                .setValue(SOUTH,blockState.getValue(SOUTH))
+                .setValue(WEST,blockState.getValue(WEST))
+                .setValue(WATERLOGGED,blockState.getValue(WATERLOGGED));
+        return fenceState;
+    }
+
     @Override
     public @Nullable BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
         return new FenceLoggedButterflyPeaBlockEntity(blockPos,blockState);
+    }
+
+    public RenderShape getRenderShape(BlockState blockState) {
+        return RenderShape.MODEL;
     }
 }

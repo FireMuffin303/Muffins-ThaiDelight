@@ -199,6 +199,7 @@ public class ModBlocks {
 
     //----------------------Coconut
     public static final Block COCONUT = register("coconut",new CoconutBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).strength(1.0F).sound(SoundType.WOOD).noOcclusion().pushReaction(PushReaction.DESTROY)));
+    public static final Block STRIPPED_COCONUT = register("stripped_coconut",new CoconutBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BROWN).strength(1.0f).sound(SoundType.WOOD).noOcclusion().pushReaction(PushReaction.DESTROY)));
     public static final Block COCONUT_SAPLING_CROP = register("coconut_sapling_crop",new CoconutSaplingCropBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY)));
     public static final Block COCONUT_SAPLING = register("coconut_sapling",new SaplingBlock(new CoconutTreeGrower(),BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)){
         @Override
