@@ -183,9 +183,9 @@ public class ModItems {
     public static final Item COCONUT_BOAT = TerraformBoatItemHelper.registerBoatItem(ThaiDelight.modid("coconut_boat"),COCONUT_BOAT_KEY,false);
     public static final Item COCONUT_CHEST_BOAT = TerraformBoatItemHelper.registerBoatItem(ThaiDelight.modid("coconut_chest_boat"),COCONUT_BOAT_KEY,true);
 
-    public static final Item COCONUT = registerFlatItem("coconut",new CoconutItem(new Item.Properties()));
-    public static final Item STRIPPED_COCONUT = registerFlatItem("stripped_coconut",new BlockItem(ModBlocks.STRIPPED_COCONUT,new Item.Properties()));
-    public static final Item COCONUT_LEAF_MAT = register("coconut_leaf_mat",new BlockItem(ModBlocks.COCONUT_LEAF_MAT,new Item.Properties()));
+    public static final Item COCONUT = register("coconut",new CoconutItem(new Item.Properties()));
+    public static final Item STRIPPED_COCONUT = register("stripped_coconut",new BlockItem(ModBlocks.STRIPPED_COCONUT,new Item.Properties()));
+    public static final Item COCONUT_LEAF_MAT = register("coconut_leaf_mat",new BlockItem(ModBlocks.COCONUT_LEAF_CARPET,new Item.Properties()));
 
 
     //------------------ 🥭 MANGO 🥭 --------------------

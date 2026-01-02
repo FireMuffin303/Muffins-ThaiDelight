@@ -1,6 +1,6 @@
 {
-  "parent": "minecraft:block/cross",
+  "parent": "minecraft:item/generated",
   "textures": {
-    "cross": "muffins_thaidelight:block/coconut_sapling"
+    "layer0": "muffins_thaidelight:block/coconut/coconut_sapling"
   }
 }

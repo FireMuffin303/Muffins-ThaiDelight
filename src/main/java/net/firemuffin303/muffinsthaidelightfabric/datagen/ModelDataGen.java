@@ -158,7 +158,17 @@ public class ModelDataGen extends FabricModelProvider {
                 ).with(createHorizontalFacingDispatch()));
 
         blockStateModelGenerator.blockStateOutput.accept(createSimpleBlock(ModBlocks.COCONUT,ThaiDelight.modid("block/coconut/coconut_block")));
-        blockStateModelGenerator.blockStateOutput.accept(createSimpleBlock(ModBlocks.STRIPPED_COCONUT,ThaiDelight.modid("block/coconut/coconut_block")));
+        blockStateModelGenerator.modelOutput.accept(ModelLocationUtils.getModelLocation(ModBlocks.COCONUT.asItem()),new DelegatedModel(ThaiDelight.modid("block/coconut/coconut_block")));
+        blockStateModelGenerator.blockStateOutput.accept(createSimpleBlock(ModBlocks.STRIPPED_COCONUT,ThaiDelight.modid("block/coconut/stripped_coconut_block")));
+        blockStateModelGenerator.modelOutput.accept(ModelLocationUtils.getModelLocation(ModBlocks.STRIPPED_COCONUT.asItem()),new DelegatedModel(ThaiDelight.modid("block/coconut/stripped_coconut_block")));
+
+        ModelTemplates.FLAT_ITEM.create(ModelLocationUtils.getModelLocation(ModBlocks.COCONUT_SAPLING),
+                TextureMapping.layer0(ThaiDelight.modid("block/coconut/coconut_sapling")),
+                blockStateModelGenerator.modelOutput
+                );
+
+        blockStateModelGenerator.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(ModBlocks.COCONUT_LEAF_CARPET,
+                ModelTemplates.CARPET.create(ModBlocks.COCONUT_LEAF_CARPET,TextureMapping.wool(ThaiDelight.modid("block/coconut_leaf_block_top")), blockStateModelGenerator.modelOutput)));
 
         ModelTemplates.FLAT_ITEM
                 .create(
@@ -270,9 +280,10 @@ public class ModelDataGen extends FabricModelProvider {
         createFermentedFishCauldron(blockStateModelGenerator);
 
         blockStateModelGenerator.createPlant(ModBlocks.LIME_SAPLING,ModBlocks.POTTED_LIME_SAPLING, BlockModelGenerators.TintState.NOT_TINTED);
-        blockStateModelGenerator.createPlant(ModBlocks.COCONUT_SAPLING,ModBlocks.POTTED_COCONUT_SAPLING, BlockModelGenerators.TintState.NOT_TINTED);
+        //blockStateModelGenerator.createPlant(ModBlocks.COCONUT_SAPLING,ModBlocks.POTTED_COCONUT_SAPLING, BlockModelGenerators.TintState.NOT_TINTED);
         blockStateModelGenerator.createPlant(ModBlocks.MANGO_SAPLING,ModBlocks.POTTED_MANGO_SAPLING, BlockModelGenerators.TintState.NOT_TINTED);
-
+        blockStateModelGenerator.blockStateOutput.accept(createSimpleBlock(ModBlocks.COCONUT_SAPLING,ThaiDelight.modid("block/coconut/coconut_sapling")));
+        blockStateModelGenerator.blockStateOutput.accept(createSimpleBlock(ModBlocks.COCONUT_SAPLING_CROP,ThaiDelight.modid("block/coconut/coconut_sapling_crop")));
     }
 
     private void createSackBlock(BlockModelGenerators blockStateModelGenerator) {
@@ -316,6 +327,9 @@ public class ModelDataGen extends FabricModelProvider {
         blockStateModelGenerator.skipAutoItemBlock(ModBlocks.MANGO_PUDDING);
         blockStateModelGenerator.skipAutoItemBlock(ModBlocks.CRAB_EGG);
         blockStateModelGenerator.skipAutoItemBlock(ModBlocks.PAPAYA_LEAVES);
+        blockStateModelGenerator.skipAutoItemBlock(ModBlocks.COCONUT);
+        blockStateModelGenerator.skipAutoItemBlock(ModBlocks.STRIPPED_COCONUT);
+
     }
 
     private static void createFermentedFishCauldron(BlockModelGenerators blockStateModelGenerator){

@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "muffins_thaidelight:block/coconut_sapling"
+      "model": "muffins_thaidelight:block/coconut/coconut_sapling"
     }
   }
 }

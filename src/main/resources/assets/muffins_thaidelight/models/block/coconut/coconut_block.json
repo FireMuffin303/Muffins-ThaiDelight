@@ -1,4 +1,5 @@
 {
+	"parent": "minecraft:block/block",
 	"format_version": "1.9.0",
 	"credit": "Made with Blockbench",
 	"textures": {
@@ -6,7 +7,7 @@
 		"coconut_bottom": "muffins_thaidelight:block/coconut/green_coconut_bottom",
 		"coconut_top": "muffins_thaidelight:block/coconut/green_coconut_top",
 		"3": "muffins_thaidelight:block/coconut/coconut_stem",
-		"particle": "muffins_thaidelight:block/coconut/coconut_side"
+		"particle": "muffins_thaidelight:block/coconut/green_coconut_side"
 	},
 	"elements": [
 		{

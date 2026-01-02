@@ -1,48 +1,61 @@
 package net.firemuffin303.muffinsthaidelightfabric.common.block.coconut;
 
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
-import net.minecraft.world.level.ItemLike;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class CoconutSaplingCropBlock extends CropBlock {
-    public static final IntegerProperty AGE = BlockStateProperties.AGE_2;
+public class CoconutSaplingCropBlock extends Block implements BonemealableBlock {
     public CoconutSaplingCropBlock(Properties properties) {
         super(properties);
     }
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(AGE);
+    public void randomTick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource) {
+        if(serverLevel.getRawBrightness(blockPos,0) >= 9 && randomSource.nextInt( (int)(25.0f/ CropBlock.getGrowthSpeed(this,serverLevel,blockPos)) + 1) == 0){
+            serverLevel.setBlock(blockPos, ModBlocks.COCONUT_SAPLING.defaultBlockState(),2);
+        }
     }
 
     @Override
-    protected IntegerProperty getAgeProperty() {
-        return AGE;
+    public boolean canSurvive(BlockState blockState, LevelReader levelReader, BlockPos blockPos) {
+        BlockPos blockPos2 = blockPos.below();
+        BlockState belowState = levelReader.getBlockState(blockPos2);
+        return belowState.is(Blocks.FARMLAND) || belowState.is(vectorwing.farmersdelight.common.registry.ModBlocks.RICH_SOIL_FARMLAND.get());
     }
 
     @Override
-    protected ItemLike getBaseSeedId() {
-        return ModBlocks.COCONUT;
+    public VoxelShape getCollisionShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
+        return Block.box(3.0, -1.0, 3.0, 13.0, 4.0, 13.0);
     }
 
     @Override
-    public int getMaxAge() {
-        return 3;
+    public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
+        return Block.box(3.0, -1.0, 3.0, 13.0, 4.0, 13.0);
     }
 
     @Override
-    public BlockState getStateForAge(int i) {
-        return i == 3 ? ModBlocks.COCONUT_SAPLING.defaultBlockState() : super.getStateForAge(i);
+    public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState, boolean bl) {
+        return true;
     }
 
     @Override
-    protected int getBonemealAgeIncrease(Level level) {
-        return 1;
+    public boolean isBonemealSuccess(Level level, RandomSource randomSource, BlockPos blockPos, BlockState blockState) {
+        return true;
+    }
+
+    @Override
+    public void performBonemeal(ServerLevel serverLevel, RandomSource randomSource, BlockPos blockPos, BlockState blockState) {
+        serverLevel.setBlock(blockPos, ModBlocks.COCONUT_SAPLING.defaultBlockState(),2);
     }
 }

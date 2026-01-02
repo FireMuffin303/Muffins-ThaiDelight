@@ -101,7 +101,8 @@ public class ThaiDelightClient implements ClientModInitializer {
             ModBlocks.BUDDING_COCONUT_LEAF,
             ModBlocks.PINEAPPLE_FRIED_RICE_FEAST,
             ModBlocks.STRIPPED_COCONUT,
-            ModBlocks.FENCE_LOGGED_BUTTERFLY_PEA
+            ModBlocks.FENCE_LOGGED_BUTTERFLY_PEA,
+            ModBlocks.COCONUT_SAPLING
     };
 
     public static final ModelResourceLocation SACK_MODEL_IN_HAND = new ModelResourceLocation(ThaiDelight.MOD_ID,"sack_in_hand","inventory");

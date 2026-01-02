@@ -4,24 +4,32 @@ import net.fabricmc.fabric.api.tag.convention.v1.ConventionalItemTags;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.blockEntity.FenceLoggedButterflyPeaBlockEntity;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.EntityBlock;
-import net.minecraft.world.level.block.FenceBlock;
-import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 
-public class FenceLoggedButterflyPeaBlock extends FenceBlock implements EntityBlock {
+import java.util.HashMap;
+import java.util.Map;
+
+public class FenceLoggedButterflyPeaBlock extends FenceBlock implements EntityBlock,BonemealableBlock {
     public FenceLoggedButterflyPeaBlock(Properties properties) {
         super(properties);
     }
@@ -86,11 +94,66 @@ public class FenceLoggedButterflyPeaBlock extends FenceBlock implements EntityBl
     }
 
     @Override
+    public BlockState updateShape(BlockState blockState, Direction direction, BlockState blockState2, LevelAccessor levelAccessor, BlockPos blockPos, BlockPos blockPos2) {
+        BlockState fenceState = Blocks.OAK_FENCE.defaultBlockState();
+        BlockEntity blockEntity = levelAccessor.getBlockEntity(blockPos);
+        if(blockEntity instanceof FenceLoggedButterflyPeaBlockEntity fenceLoggedButterflyPeaBlockEntity){
+            fenceState = fenceLoggedButterflyPeaBlockEntity.fenceState;
+        }
+
+        BlockState updateState = super.updateShape(blockState, direction, blockState2, levelAccessor, blockPos, blockPos2);
+
+        BlockEntity blockEntity1 = levelAccessor.getBlockEntity(blockPos);
+        if(blockEntity1 instanceof FenceLoggedButterflyPeaBlockEntity fenceLoggedButterflyPeaBlockEntity){
+            fenceLoggedButterflyPeaBlockEntity.fenceState = fenceState;
+        }
+
+        return updateState;
+    }
+
+    @Override
     public @Nullable BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
         return new FenceLoggedButterflyPeaBlockEntity(blockPos,blockState);
     }
 
     public RenderShape getRenderShape(BlockState blockState) {
         return RenderShape.MODEL;
+    }
+
+    @Override
+    public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState, boolean bl) {
+        return true;
+    }
+
+    @Override
+    public boolean isBonemealSuccess(Level level, RandomSource randomSource, BlockPos blockPos, BlockState blockState) {
+        return true;
+    }
+
+    @Override
+    public void performBonemeal(ServerLevel serverLevel, RandomSource randomSource, BlockPos blockPos, BlockState blockState) {
+        for(Direction direction : Direction.Plane.HORIZONTAL){
+            if(blockState.getValue(PROPERTY_BY_DIRECTION.get(direction))){
+                BlockState fenceState = serverLevel.getBlockState(blockPos.relative(direction));
+
+                serverLevel.setBlock(blockPos.relative(direction),copyFence(fenceState),3);
+
+                BlockEntity blockEntity = serverLevel.getBlockEntity(blockPos.relative(direction));
+                if(blockEntity instanceof FenceLoggedButterflyPeaBlockEntity fenceLoggedButterflyPeaBlockEntity){
+                    fenceLoggedButterflyPeaBlockEntity.fenceState = fenceState;
+                }
+            }
+        }
+
+        for(Direction direction : Direction.Plane.VERTICAL){
+            BlockState verticalBlockState = serverLevel.getBlockState(blockPos.relative(direction));
+            if(verticalBlockState.is(BlockTags.FENCES)){
+                serverLevel.setBlock(blockPos.relative(direction),copyFence(verticalBlockState),3);
+                BlockEntity blockEntity = serverLevel.getBlockEntity(blockPos.relative(direction));
+                if(blockEntity instanceof FenceLoggedButterflyPeaBlockEntity fenceLoggedButterflyPeaBlockEntity){
+                    fenceLoggedButterflyPeaBlockEntity.fenceState = verticalBlockState;
+                }
+            }
+        }
     }
 }
