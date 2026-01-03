@@ -61,6 +61,8 @@ public class CoconutLeavesFoliagePlacer extends FoliagePlacer {
             int newOffset = offset - layer;
             this.placeLeaves(levelSimulatedReader, foliageSetter, randomSource, treeConfiguration, foliageAttachment.pos(), foliageRadius, newOffset, foliageAttachment.doubleTrunk(),layer);
         }
+
+        foliageSetter.set(foliageAttachment.pos().above(),ModBlocks.COCONUT_LEAF_CARPET.defaultBlockState());
     }
 
     @Override

@@ -21,7 +21,6 @@ import net.firemuffin303.muffinsthaidelightfabric.common.block.mango.StackableMa
 import net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.*;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.pepper.BuddingPepperBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.pepper.PepperCropBlock;
-import net.firemuffin303.muffinsthaidelightfabric.common.world.trees.CoconutTreeGrower;
 import net.firemuffin303.muffinsthaidelightfabric.common.world.trees.DurianTreeGrower;
 import net.firemuffin303.muffinsthaidelightfabric.common.world.trees.MangoTreeGrower;
 import net.firemuffin303.muffinsthaidelightfabric.common.world.trees.PapayaTreeGrower;
@@ -66,7 +65,7 @@ public class ModBlocks {
     public static final Block RAW_PAPAYA_CRATE = registerCrate("raw_papaya_crate");
     public static final Block PAPAYA_CRATE = registerCrate("papaya_crate");
     public static final Block MANGO_CRATE = registerCrate("mango_crate");
-    public static final Block COCONUT_CRATE = registerCrate("coconut_crate");
+    //public static final Block COCONUT_CRATE = registerCrate("coconut_crate");
     public static final Block HOLY_BASIL_CRATE = registerCrate("holy_basil_crate");
     public static final Block BASIL_CRATE = registerCrate("basil_crate");
     public static final Block BAMBOO_SHOOT_CRATE = registerCrate("bamboo_shoot_crate");
@@ -283,7 +282,7 @@ public class ModBlocks {
             .ignitedByLava()
     ));
     public static final Block COCONUT_WALL_SIGN = register("coconut_wall_sign",new TerraformWallSignBlock(
-            ThaiDelight.modid("entity/signs/durian"),
+            ThaiDelight.modid("entity/signs/coconut"),
             BlockBehaviour.Properties.of()
             .mapColor(ModBlocks.COCONUT_PLANKS.defaultMapColor())
             .forceSolidOn()

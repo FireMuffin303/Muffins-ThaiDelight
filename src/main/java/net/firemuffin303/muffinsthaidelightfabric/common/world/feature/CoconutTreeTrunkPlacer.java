@@ -11,7 +11,9 @@ import net.minecraft.util.ExtraCodecs;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.world.level.LevelSimulatedReader;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.TreeFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
@@ -51,7 +53,9 @@ public class CoconutTreeTrunkPlacer extends TrunkPlacer {
         int j = treeHeight - 1;
         BlockPos.MutableBlockPos mutableBlockPos = lowestLogPos.mutable();
         BlockPos blockPos2 = mutableBlockPos.below();
-        setDirtAt(levelSimulatedReader, biConsumer, randomSource, blockPos2, treeConfiguration);
+        if(this.isDirt(levelSimulatedReader,blockPos2)){
+            biConsumer.accept(blockPos2,treeConfiguration.dirtProvider.getState(randomSource,blockPos2));
+        }
         List<FoliagePlacer.FoliageAttachment> list = Lists.newArrayList();
 
         int i = this.trunkSectionHeight.sample(randomSource);
@@ -74,5 +78,9 @@ public class CoconutTreeTrunkPlacer extends TrunkPlacer {
 
 
         return list;
+    }
+
+    private boolean isDirt(LevelSimulatedReader levelSimulatedReader, BlockPos blockPos) {
+        return levelSimulatedReader.isStateAtPosition(blockPos, Feature::isDirt);
     }
 }

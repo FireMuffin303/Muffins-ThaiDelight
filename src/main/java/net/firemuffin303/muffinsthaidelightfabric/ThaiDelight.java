@@ -206,7 +206,7 @@ public class ThaiDelight implements ModInitializer {
         output.accept(ModItems.RAW_PAPAYA_CRATE);
         output.accept(ModItems.PAPAYA_CRATE);
         output.accept(ModItems.MANGO_CRATE);
-        output.accept(ModItems.COCONUT_CRATE);
+        //output.accept(ModItems.COCONUT_CRATE);
         output.accept(ModItems.HOLY_BASIL_CRATE);
         output.accept(ModItems.BASIL_CRATE);
         output.accept(ModItems.BAMBOO_SHOOT_CRATE);
