@@ -236,6 +236,7 @@ public class ModItems {
     });
 
     // 🌿 HOLY BASIL 🌿
+    /*
     public static final Item HOLY_BASIL_SAPLING = registerFlatItem("holy_basil_sapling",new ItemNameBlockItem(ModBlocks.HOLY_BASIL,new Item.Properties()){
         @Override
         public void registerBlocks(Map<Block, Item> map, Item item) {
@@ -243,9 +244,14 @@ public class ModItems {
             map.put(ModBlocks.HOLY_BASIL,item);
         }
     });
-    public static final Item HOLY_BASIL = registerFlatItem("holy_basil",new Item(new Item.Properties()));
+    
+     */
+
+
+    public static final Item HOLY_BASIL = registerFlatItem("holy_basil",new BlockItem(ModBlocks.HOLY_BASIL ,new Item.Properties()));
 
     // 🌿 BASIL 🌿
+    /*
     public static final Item BASIL_SAPLING = registerFlatItem("basil_sapling",new ItemNameBlockItem(ModBlocks.BASIL,new Item.Properties()){
         @Override
         public void registerBlocks(Map<Block, Item> map, Item item) {
@@ -253,7 +259,11 @@ public class ModItems {
             map.put(ModBlocks.BASIL,item);
         }
     });
-    public static final Item BASIL = registerFlatItem("basil",new Item(new Item.Properties()));
+
+     */
+
+
+    public static final Item BASIL = registerFlatItem("basil",new BlockItem(ModBlocks.BASIL,new Item.Properties()));
 
     public static final Item BAMBOO_SHOOT = registerFlatItem("bamboo_shoot",new ItemNameBlockItem(Blocks.BAMBOO_SAPLING,new Item.Properties()));
 

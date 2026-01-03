@@ -1,8 +1,8 @@
-// 1.20.1	2026-01-02T18:11:45.431076	Muffin's Thai's Delight Refabricated/Tags for minecraft:item
+// 1.20.1	2026-01-03T21:52:25.4514574	Muffin's Thai's Delight Refabricated/Tags for minecraft:item
 81dd85d651f0a0e9b4b4762e7d264117f16a05c8 data\c\tags\items\foods\cooked_meats.json
 32b2e80c4f617f2c9d13775b6f03518a19e68ce6 data\crabbersdelight\tags\items\cooked_seafood.json
 de3c4dbc11c6afe12b3f3ad2ec4b0e47ddda1d4d data\muffins_thaidelight\tags\items\durian_logs.json
-8ce7ce480ff2b44739509a37751709ea91c8ddf8 data\minecraft\tags\items\saplings.json
+e47099cc79d74a686639d32e7b8a96140ade72aa data\minecraft\tags\items\saplings.json
 ea245bcc88673ba87ae5700240886a1010cda139 data\muffins_thaidelight\tags\items\dragonfly_food.json
 87ef45be87411bf3880d6685b5d9f9942f5cfe8a data\alexsmobs\tags\items\insect_items.json
 8a23702b05296c8af5014d6aa6e9265ded85c7d9 data\c\tags\items\raw_fishes.json
@@ -20,5 +20,5 @@ d45f8e77edd3c6d47aa78e691f604e8f91834423 data\muffins_thaidelight\tags\items\lim
 0f4c41a55bfd377026d2fabb073ee72429e10d86 data\minecraft\tags\items\small_flowers.json
 b86b5ed44294037342281f19ad8b9335f128e089 data\muffins_thaidelight\tags\items\mango_logs.json
 8802cc3aafe6081a937869502b012eccb2a214ce data\muffins_thaidelight\tags\items\papaya.json
-dedd26f00e2ff509f6fcd0edcbf20d9137ba1c0b data\minecraft\tags\items\villager_plantable_seeds.json
+b8b0b516baead8b0dfbd700382f2d702f5bd2d85 data\minecraft\tags\items\villager_plantable_seeds.json
 1c48a8a9c3d0a1e66b7d6dd6152429f0a1319ba7 data\muffins_thaidelight\tags\items\raw_papaya.json

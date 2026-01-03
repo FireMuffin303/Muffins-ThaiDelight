@@ -82,8 +82,6 @@ public class CommonEvents {
         villagerWantedItems.add(ModItems.HOLY_BASIL);
         villagerWantedItems.add(ModItems.MANGO);
         villagerWantedItems.add(ModItems.COCONUT_SLICE);
-        villagerWantedItems.add(ModItems.BASIL_SAPLING);
-        villagerWantedItems.add(ModItems.HOLY_BASIL_SAPLING);
         VillagerAccessor.setWantedItems(villagerWantedItems);
     }
 

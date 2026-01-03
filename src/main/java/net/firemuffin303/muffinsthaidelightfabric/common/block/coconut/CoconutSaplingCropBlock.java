@@ -2,10 +2,12 @@ package net.firemuffin303.muffinsthaidelightfabric.common.block.coconut;
 
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -32,6 +34,14 @@ public class CoconutSaplingCropBlock extends Block implements BonemealableBlock 
         BlockPos blockPos2 = blockPos.below();
         BlockState belowState = levelReader.getBlockState(blockPos2);
         return belowState.is(Blocks.FARMLAND) || belowState.is(vectorwing.farmersdelight.common.registry.ModBlocks.RICH_SOIL_FARMLAND.get());
+    }
+
+    @Override
+    public BlockState updateShape(BlockState blockState, Direction direction, BlockState blockState2, LevelAccessor levelAccessor, BlockPos blockPos, BlockPos blockPos2) {
+        if (!blockState.canSurvive(levelAccessor, blockPos)) {
+            return Blocks.AIR.defaultBlockState();
+        }
+        return super.updateShape(blockState, direction, blockState2, levelAccessor, blockPos, blockPos2);
     }
 
     @Override

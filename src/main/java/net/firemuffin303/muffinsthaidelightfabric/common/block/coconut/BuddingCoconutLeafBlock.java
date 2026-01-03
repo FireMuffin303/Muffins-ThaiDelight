@@ -17,6 +17,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
@@ -29,6 +30,10 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.BooleanOp;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 public class BuddingCoconutLeafBlock extends Block implements SimpleWaterloggedBlock, BonemealableBlock {
@@ -130,6 +135,21 @@ public class BuddingCoconutLeafBlock extends Block implements SimpleWaterloggedB
     @Override
     public FluidState getFluidState(BlockState blockState) {
         return blockState.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(blockState);
+    }
+
+    @Override
+    public VoxelShape getCollisionShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
+        VoxelShape shape;
+        shape = switch (blockState.getValue(FACING)){
+            case NORTH -> Block.box(3.0, 4.0, 6.0,13.0 , 14.0, 16.0);
+            case SOUTH -> Block.box(3.0, 4.0, 0.0,13.0 , 14.0, 10.0);
+            case WEST -> Block.box(6.0, 4.0, 3.0, 16.0, 14.0, 13.0);
+            default -> Block.box(0.0, 4.0, 3.0, 10.0, 14.0, 13.0);
+        };
+
+        return blockState.getValue(COCONUT) ? Shapes.or(
+                Block.box(0.0, 13.0, 0.0, 16.0, 16.0, 16.0), shape) :
+                Block.box(0.0, 13.0, 0.0, 16.0, 16.0, 16.0);
     }
 
     private void harvest(ServerLevel level, BlockPos blockPos, BlockState blockState, Entity entity) {

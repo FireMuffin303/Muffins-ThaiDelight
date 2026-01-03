@@ -519,14 +519,14 @@ public class ModBlocks {
     public static final Block BASIL = register("basil",new BasilCropBlock(BlockBehaviour.Properties.copy(Blocks.POTATOES),ModLootTables.BASIL_HARVEST,ModLootTables.BASIL_SHEARS){
         @Override
         protected ItemLike getBaseSeedId() {
-            return ModItems.BASIL_SAPLING;
+            return ModItems.BASIL;
         }
     });
     public static final Block POTTED_BASIL = register("potted_basil",Blocks.flowerPot(ModBlocks.BASIL));
     public static final Block HOLY_BASIL = register("holy_basil",new BasilCropBlock(BlockBehaviour.Properties.copy(Blocks.POTATOES),ModLootTables.HOLY_BASIL_HARVEST,ModLootTables.HOLY_BASIL_SHEARS){
         @Override
         protected ItemLike getBaseSeedId() {
-            return ModItems.HOLY_BASIL_SAPLING;
+            return ModItems.HOLY_BASIL;
         }
     });
     public static final Block POTTED_HOLY_BASIL = register("potted_holy_basil",Blocks.flowerPot(ModBlocks.HOLY_BASIL));

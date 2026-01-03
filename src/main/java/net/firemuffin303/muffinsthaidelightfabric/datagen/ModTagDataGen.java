@@ -121,8 +121,8 @@ public class ModTagDataGen {
             );
 
             getOrCreateTagBuilder(ItemTags.VILLAGER_PLANTABLE_SEEDS).add(
-                    ModItems.HOLY_BASIL_SAPLING,
-                    ModItems.BASIL_SAPLING,
+                    ModItems.HOLY_BASIL,
+                    ModItems.BASIL,
                     ModItems.PEPPER_SEED
             );
 
@@ -132,9 +132,7 @@ public class ModTagDataGen {
                     ModItems.PAPAYA_SAPLING,
                     ModItems.DURIAN_SAPLING,
                     ModItems.MANGO_SAPLING,
-                    ModItems.COCONUT_SAPLING,
-                    ModItems.BASIL_SAPLING,
-                    ModItems.HOLY_BASIL_SAPLING
+                    ModItems.COCONUT_SAPLING
             );
 
         }

@@ -35,6 +35,7 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
@@ -67,7 +68,7 @@ public class CoconutLeafBlock extends Block implements SimpleWaterloggedBlock,Bo
         Direction direction = blockState.getValue(FACING).getOpposite();
         BlockPos blockPos2 = blockPos.relative(direction);
         BlockState blockState2 = levelReader.getBlockState(blockPos2);
-        return blockState2.isFaceSturdy(levelReader, blockPos2, direction) || (blockState2.is(ModBlocks.COCONUT_LEAF) && blockState2.getValue(FACING) == blockState.getValue(FACING) );
+        return blockState2.isFaceSturdy(levelReader, blockPos2, direction) || ((blockState2.is(ModBlocks.COCONUT_LEAF) || blockState2.is(ModBlocks.BUDDING_COCONUT_LEAF) ) && blockState2.getValue(FACING) == blockState.getValue(FACING) );
     }
 
     @Override
@@ -126,7 +127,7 @@ public class CoconutLeafBlock extends Block implements SimpleWaterloggedBlock,Bo
 
     @Override
     public VoxelShape getCollisionShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
-        return blockState.getValue(END) ? Block.box(0.0, 11.0, 0.0, 16.0, 13.0, 16.0) : Block.box(0.0, 13.0, 0.0, 16.0, 16.0, 16.0);
+        return blockState.getValue(END) ? Shapes.empty() : Block.box(0.0, 13.0, 0.0, 16.0, 16.0, 16.0);
     }
 
     protected static boolean canReplace(BlockState blockState) {

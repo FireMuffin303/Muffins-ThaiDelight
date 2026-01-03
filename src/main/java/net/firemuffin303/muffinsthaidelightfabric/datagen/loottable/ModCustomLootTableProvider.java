@@ -50,6 +50,7 @@ public class ModCustomLootTableProvider extends SimpleFabricLootTableProvider {
                         .apply(LimitCount.limitCount(IntRange.upperBound(6)))
                 ));
 
+        /*
         biConsumer.accept(ModLootTables.BASIL_SHEARS,
                 new LootTable.Builder().withPool(LootPool.lootPool()
                         .add(LootItem.lootTableItem(ModItems.BASIL_SAPLING))
@@ -57,6 +58,7 @@ public class ModCustomLootTableProvider extends SimpleFabricLootTableProvider {
                         .apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE))
                         .apply(LimitCount.limitCount(IntRange.upperBound(2)))
                 ));
+         */
 
         biConsumer.accept(ModLootTables.HOLY_BASIL_HARVEST,
                 new LootTable.Builder().withPool(LootPool.lootPool()
@@ -66,6 +68,7 @@ public class ModCustomLootTableProvider extends SimpleFabricLootTableProvider {
                         .apply(LimitCount.limitCount(IntRange.upperBound(6)))
                 ));
 
+        /*
         biConsumer.accept(ModLootTables.HOLY_BASIL_SHEARS,
                 new LootTable.Builder().withPool(LootPool.lootPool()
                         .add(LootItem.lootTableItem(ModItems.HOLY_BASIL_SAPLING))
@@ -73,6 +76,8 @@ public class ModCustomLootTableProvider extends SimpleFabricLootTableProvider {
                         .apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE))
                         .apply(LimitCount.limitCount(IntRange.upperBound(2)))
                 ));
+
+         */
 
         biConsumer.accept(ModLootTables.BUTTERFLY_PEA_HARVEST,
                 new LootTable.Builder().withPool(LootPool.lootPool()
