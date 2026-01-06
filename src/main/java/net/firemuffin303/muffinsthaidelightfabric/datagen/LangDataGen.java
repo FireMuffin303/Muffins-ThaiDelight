@@ -53,49 +53,48 @@ public class LangDataGen extends FabricLanguageProvider {
         translationBuilder.add("itemGroup.muffins_thaidelight.main","Muffin's Thai Delight");
 
         //Blocks
-        translationBuilder.add(ModBlocks.MORTAR,"Mortar");
-
-        translationBuilder.add(ModBlocks.LIME_CRATE, "Lime Crate");
-        translationBuilder.add(ModBlocks.PEPPER_CRATE, "Pepper Crate");
-        translationBuilder.add(ModBlocks.RAW_PAPAYA_CRATE, "Raw Papaya Crate");
-        translationBuilder.add(ModBlocks.PAPAYA_CRATE, "Papaya Crate");
-        translationBuilder.add(ModBlocks.PAPAYA_LOG, "Papaya Log");
-        translationBuilder.add(ModBlocks.PAPAYA_WOOD, "Papaya Wood");
-        translationBuilder.add(ModBlocks.STRIPPED_PAPAYA_LOG, "Stripped Papaya Log");
-        translationBuilder.add(ModBlocks.STRIPPED_PAPAYA_WOOD, "Stripped Papaya Wood");
-
-        //translationBuilder.add(ModItems.ESAN_MUSIC_DISC,"Music Disc");
-        //translationBuilder.add("item.muffins_thaidelight.music_disc_northeast.desc","FireMuffin303 - untitled");
-
-        //Feast
-        translationBuilder.add(ModBlocks.SOMTAM_FEAST,"Somtam");
-        translationBuilder.add(ModBlocks.LARB_FEAST,"Larb");
-        translationBuilder.add(ModBlocks.CRAB_FRIED_RICE_FEAST,"Crab Fried Rice");
-
-
-        translationBuilder.add(ModBlocks.WILD_PEPPER_CROP,"Wild Pepper");
-        translationBuilder.add(ModItems.PEPPER,"Pepper");
-        translationBuilder.add(ModItems.PEPPER_SEED,"Pepper Seeds");
-
-        translationBuilder.add(ModBlocks.LIME_PLANT,"Lime Bush");
-        translationBuilder.add(ModBlocks.LIME_SAPLING,"Lime Sapling");
+        translationBuilder.add(ModItems.MORTAR,"Mortar");
+        translationBuilder.add(ModItems.SACK,"Sack");
+        translationBuilder.add(ModItems.LIME_CRATE,"Lime Crate");
+        translationBuilder.add(ModItems.PEPPER_CRATE,"Pepper Crate");
+        translationBuilder.add(ModItems.RAW_PAPAYA_CRATE,"Raw Papaya Crate");
+        translationBuilder.add(ModItems.PAPAYA_CRATE,"Papaya Crate");
+        translationBuilder.add(ModItems.MANGO_CRATE,"Mango Crate");
+        translationBuilder.add(ModItems.HOLY_BASIL_CRATE,"Holy Basil Crate");
+        translationBuilder.add(ModItems.BASIL_CRATE,"Basil Crate");
+        translationBuilder.add(ModItems.BAMBOO_SHOOT_CRATE,"Bamboo Shoot Crate");
+        translationBuilder.add(ModItems.BUTTERFLY_PEA_CRATE,"Butterfly Pea Crate");
+        translationBuilder.add(ModItems.CRAB_SPAWN_EGG,"Flower Crab Spawn Egg");
+        translationBuilder.add(ModItems.CRAB_EGG,"Flower Crab Egg");
+        translationBuilder.add(ModItems.CRAB_BUCKET,"Flower Crab Bucket");
+        translationBuilder.add(ModItems.CRAB_MEAT,"Raw Flower Crab");
+        translationBuilder.add(ModItems.COOKED_CRAB_MEAT,"Cooked Flower Crab");
+        translationBuilder.add(ModItems.DRAGONFLY_SPAWN_EGG,"Dragonfly Spawn Egg");
+        translationBuilder.add(ModItems.DRAGONFLY_BOTTLE,"Bottle of Dragonfly");
+        translationBuilder.add(ModItems.DRAGONFLY,"Dragonfly");
+        translationBuilder.add(ModItems.COOKED_DRAGONFLY,"Cooked Dragonfly");
+        translationBuilder.add(ModItems.FISH_SAUCE_BOTTLE,"Fish Sauce Bottle");
+        translationBuilder.add(ModItems.FERMENTED_FISH,"Fermented Fish");
+        translationBuilder.add(ModItems.PAPAYA_JUICE,"Papaya Juice");
+        translationBuilder.add(ModItems.LIME_JUICE,"Lime Juice");
+        translationBuilder.add(ModItems.COCONUT_WATER,"Coconut Water");
+        translationBuilder.add(ModItems.BUTTERFLY_PEA_TEA,"Butterfly Pea Tea");
+        translationBuilder.add(ModItems.LIME_SAPLING,"Lime Sapling");
         translationBuilder.add(ModItems.LIME,"Lime");
         translationBuilder.add(ModItems.SLICED_LIME,"Lime Slice");
-
-        translationBuilder.add(ModItems.PAPAYA,"Papaya");
-        translationBuilder.add(ModItems.SLICED_PAPAYA,"Papaya Slice");
-        translationBuilder.add(ModItems.RAW_PAPAYA,"Raw Papaya");
-        translationBuilder.add(ModItems.RAW_PAPAYA_SLICE,"Raw Papaya Slice");
-        translationBuilder.add(ModBlocks.PAPAYA_SAPLING,"Papaya Sapling");
-        translationBuilder.add(ModItems.PAPAYA_SEEDS,"Papaya Seeds");
-        translationBuilder.add(ModBlocks.PAPAYA_LEAVES,"Papaya Leaves");
+        translationBuilder.add(ModItems.WILD_PEPPER_CROP,"Wild Pepper");
+        translationBuilder.add(ModItems.PEPPER,"Pepper");
+        translationBuilder.add(ModItems.PEPPER_SEED,"Pepper Seeds");
 
         translationBuilder.add(ModItems.DURIAN_SAPLING,"Durian Sapling");
         translationBuilder.add(ModItems.DURIAN_LEAVES,"Durian Leaves");
         translationBuilder.add(ModItems.DURIAN_FLOWER,"Durian Flower");
+        translationBuilder.add(ModItems.SMALL_DURIAN,"Small Durian");
         translationBuilder.add(ModItems.DURIAN,"Durian");
         translationBuilder.add(ModItems.DURIAN_PULP,"Durian Pulp");
-
+        translationBuilder.add(ModItems.DURIAN_PEEL,"Durian Peel");
+        translationBuilder.add(ModItems.DURIAN_PEEL_BLOCK,"Durian Peel Block");
+        translationBuilder.add(ModItems.DURIAN_HELMET,"Durian Helmet");
         translationBuilder.add(ModItems.DURIAN_LOG,"Durian Log");
         translationBuilder.add(ModItems.DURIAN_WOOD,"Durian Wood");
         translationBuilder.add(ModItems.STRIPPED_DURIAN_LOG,"Stripped Durian Log");
@@ -113,28 +112,12 @@ public class LangDataGen extends FabricLanguageProvider {
         translationBuilder.add(ModItems.DURIAN_HANGING_SIGN,"Durian Hanging Sign");
         translationBuilder.add(ModItems.DURIAN_CABINET,"Durian Cabinet");
         translationBuilder.add(ModItems.DURIAN_BOAT,"Durian Boat");
-        translationBuilder.add(ModItems.DURIAN_CHEST_BOAT,"Durian Boat with Chest");
-        translationBuilder.add(ModItems.FRIED_DURIAN,"Fried Durian");
-
-        translationBuilder.add(ModItems.MANGO_LOG,"Mango Log");
-        translationBuilder.add(ModItems.MANGO_WOOD,"Mango Wood");
-        translationBuilder.add(ModItems.STRIPPED_MANGO_LOG,"Stripped Mango Log");
-        translationBuilder.add(ModItems.STRIPPED_MANGO_WOOD,"Stripped Mango Wood");
-        translationBuilder.add(ModItems.MANGO_PLANKS,"Mango Planks");
-        translationBuilder.add(ModItems.MANGO_STAIRS,"Mango Stairs");
-        translationBuilder.add(ModItems.MANGO_SLAB,"Mango Slab");
-        translationBuilder.add(ModItems.MANGO_FENCE,"Mango Fence");
-        translationBuilder.add(ModItems.MANGO_FENCE_GATE,"Mango Fence Gate");
-        translationBuilder.add(ModItems.MANGO_DOOR,"Mango Door");
-        translationBuilder.add(ModItems.MANGO_TRAPDOOR,"Mango Trapdoor");
-        translationBuilder.add(ModItems.MANGO_PRESSURE_PLATE,"Mango Pressure Plate");
-        translationBuilder.add(ModItems.MANGO_BUTTON,"Mango Button");
-        translationBuilder.add(ModItems.MANGO_SIGN,"Mango Sign");
-        translationBuilder.add(ModItems.MANGO_HANGING_SIGN,"Mango Hanging Sign");
-        translationBuilder.add(ModItems.MANGO_CABINET,"Mango Cabinet");
-        translationBuilder.add(ModItems.MANGO_BOAT,"Mango Boat");
-        translationBuilder.add(ModItems.MANGO_CHEST_BOAT,"Mango Boat with Chest");
-
+        translationBuilder.add(ModItems.DURIAN_CHEST_BOAT,"Durian Chest Boat");
+        translationBuilder.add(ModItems.COCONUT_SAPLING,"Coconut Sapling");
+        translationBuilder.add(ModItems.COCONUT_LEAF,"Coconut Leaf");
+        translationBuilder.add(ModItems.BUDDING_COCONUT_LEAF,"Budding Coconut Leaf");
+        translationBuilder.add(ModItems.COCONUT_LEAF_BLOCK,"Coconut Leaf Block");
+        translationBuilder.add(ModItems.COCONUT_LEAF_MAT,"Coconut Leaf Carpet");
         translationBuilder.add(ModItems.COCONUT_LOG,"Coconut Log");
         translationBuilder.add(ModItems.COCONUT_WOOD,"Coconut Wood");
         translationBuilder.add(ModItems.STRIPPED_COCONUT_LOG,"Stripped Coconut Log");
@@ -150,34 +133,88 @@ public class LangDataGen extends FabricLanguageProvider {
         translationBuilder.add(ModItems.COCONUT_BUTTON,"Coconut Button");
         translationBuilder.add(ModItems.COCONUT_SIGN,"Coconut Sign");
         translationBuilder.add(ModItems.COCONUT_HANGING_SIGN,"Coconut Hanging Sign");
-        translationBuilder.add(ModItems.COCONUT_CABINET,"Coconut Cabinet");
         translationBuilder.add(ModItems.COCONUT_BOAT,"Coconut Boat");
-        translationBuilder.add(ModItems.COCONUT_CHEST_BOAT,"Coconut Boat with Chest");
+        translationBuilder.add(ModItems.COCONUT_CHEST_BOAT,"Coconut Chest Boat");
+        translationBuilder.add(ModItems.COCONUT_CABINET,"Coconut Cabinet");
+        translationBuilder.add(ModItems.COCONUT,"Coconut");
+        translationBuilder.add(ModItems.STRIPPED_COCONUT,"Stripped Coconut");
+        translationBuilder.add(ModItems.COCONUT_SLICE,"Coconut Slice");
+        translationBuilder.add(ModItems.MANGO_SAPLING,"Mango Sapling");
+        translationBuilder.add(ModItems.MANGO_LEAVES,"Mango Leaves");
+        translationBuilder.add(ModItems.MANGO_LOG,"Mango Log");
+        translationBuilder.add(ModItems.MANGO_WOOD,"Mango Wood");
+        translationBuilder.add(ModItems.STRIPPED_MANGO_LOG,"Stripped Mango Log");
+        translationBuilder.add(ModItems.STRIPPED_MANGO_WOOD,"Stripped Mango Wood");
+        translationBuilder.add(ModItems.MANGO_PLANKS,"Mango Planks");
+        translationBuilder.add(ModItems.MANGO_STAIRS,"Mango Stairs");
+        translationBuilder.add(ModItems.MANGO_SLAB,"Mango Slab");
+        translationBuilder.add(ModItems.MANGO_FENCE,"Mango Fence");
+        translationBuilder.add(ModItems.MANGO_FENCE_GATE,"Mango Fence Gate");
+        translationBuilder.add(ModItems.MANGO_DOOR,"Mango Door");
+        translationBuilder.add(ModItems.MANGO_TRAPDOOR,"Mango Trapdoor");
+        translationBuilder.add(ModItems.MANGO_PRESSURE_PLATE,"Mango Pressure Plate");
+        translationBuilder.add(ModItems.MANGO_BUTTON,"Mango Button");
+        translationBuilder.add(ModItems.MANGO_SIGN,"Mango Sign");
+        translationBuilder.add(ModItems.MANGO_HANGING_SIGN,"Mango Hanging Sign");
+        translationBuilder.add(ModItems.MANGO_BOAT,"Mango Boat");
+        translationBuilder.add(ModItems.MANGO_CHEST_BOAT,"Mango Chest Boat");
+        translationBuilder.add(ModItems.MANGO_CABINET,"Mango Cabinet");
+        translationBuilder.add(ModItems.MANGO,"Mango");
+        translationBuilder.add(ModItems.MANGO_SLICE,"Mango Slice");
+        translationBuilder.add(ModItems.PAPAYA,"Papaya");
+        translationBuilder.add(ModItems.PAPAYA_FLOWER,"Papaya Flower");
+        translationBuilder.add(ModItems.SLICED_PAPAYA,"Papaya Slice");
+        translationBuilder.add(ModItems.RAW_PAPAYA,"Raw Papaya");
+        translationBuilder.add(ModItems.RAW_PAPAYA_SLICE,"Raw Papaya Slice");
+        translationBuilder.add(ModItems.PAPAYA_LOG,"Papaya Log");
+        translationBuilder.add(ModItems.STRIPPED_PAPAYA_LOG,"Stripped Papaya Log");
+        translationBuilder.add(ModItems.PAPAYA_WOOD,"Papaya Wood");
+        translationBuilder.add(ModItems.STRIPPED_PAPAYA_WOOD,"Stripped Papaya Wood");
+        translationBuilder.add(ModItems.PAPAYA_LEAVES,"Papaya Leaves");
+        translationBuilder.add(ModItems.PAPAYA_SAPLING,"Papaya Sapling");
+        translationBuilder.add(ModItems.PAPAYA_SEEDS,"Papaya Seeds");
+        translationBuilder.add(ModItems.WILD_HOLY_BASIL,"Wild Holy Basil");
+        translationBuilder.add(ModItems.HOLY_BASIL,"Holy Basil");
+        translationBuilder.add(ModItems.WILD_BASIL,"Wild Basil");
+        translationBuilder.add(ModItems.BASIL,"Basil");
 
-        //Food
+        translationBuilder.add(ModItems.BUTTERFLY_PEA,"Butterfly Pea");
+        translationBuilder.add(ModItems.BUTTERFLY_PEA_SEEDS,"Butterfly Pea Seeds");
+        translationBuilder.add(ModItems.BAMBOO_SHOOT,"Bamboo Shoot");
+        translationBuilder.add(ModItems.PESTO_SAUCE,"Pesto Sauce");
+        translationBuilder.add(ModItems.FRIED_DURIAN,"Fried Durian");
+        translationBuilder.add(ModItems.SOMTAM_FEAST,"Somtam");
         translationBuilder.add(ModItems.SOMTAM,"Plate of Somtam");
+        translationBuilder.add(ModItems.LARB_FEAST,"Larb");
         translationBuilder.add(ModItems.LARB,"Plate of Larb");
+        translationBuilder.add(ModItems.CRAB_FRIED_RICE_FEAST,"Crab Fried Rice");
         translationBuilder.add(ModItems.CRAB_FRIED_RICE,"Plate of Crab Fried Rice");
+        translationBuilder.add(ModItems.PHAT_KAPHRAO_FEAST,"Phat Kaphrao");
+        translationBuilder.add(ModItems.PHAT_KAPHRAO,"Plate of Phat Kaphrao");
+        translationBuilder.add(ModItems.MANGO_STICKY_RICE_FEAST,"Mango Sticky Rice");
+        translationBuilder.add(ModItems.MANGO_STICKY_RICE,"Plate of Mango Sticky Rice");
+        translationBuilder.add(ModItems.PINEAPPLE_FRIED_RICE_FEAST,"Pineapple Fried Rice");
+        translationBuilder.add(ModItems.PINEAPPLE_FRIED_RICE,"Plate of Pineapple Fried Rice");
         translationBuilder.add(ModItems.STIR_FRIED_NOODLE,"Stir Fried Noodle");
-        translationBuilder.add(ModItems.PAPAYA_JUICE,"Papaya Juice");
-        translationBuilder.add(ModItems.LIME_JUICE,"Lime Juice");
-        translationBuilder.add(ModItems.COCONUT_WATER,"Coconut Water");
+        translationBuilder.add(ModItems.COCONUT_MILK_BOTTLE,"Coconut Milk Bottle");
+        translationBuilder.add(ModItems.DURIAN_CURRY,"Durian Curry");
+        translationBuilder.add(ModItems.DURIAN_CAKE,"Durian Cake");
+        translationBuilder.add(ModItems.DURIAN_CAKE_SLICE,"Durian Cake Slice");
+        translationBuilder.add(ModItems.MANGO_PUDDING,"Mango Pudding");
+        translationBuilder.add(ModItems.MANGO_PUDDING_SLICE,"Mango Pudding Slice");
+        translationBuilder.add(ModItems.COCONUT_JELLY,"Coconut Jelly");
+        translationBuilder.add(ModItems.KHANOM_BABIN,"Khanom Babin");
+        translationBuilder.add(ModItems.COCONUT_PIE,"Coconut Pie");
+        translationBuilder.add(ModItems.COCONUT_PIE_SLICE,"Coconut Pie Slice");
+        translationBuilder.add(ModItems.BASIL_OMELETTE_FEAST,"Basil Omelette");
+        translationBuilder.add(ModItems.BASIL_OMELETTE,"Plate of Basil Omelette");
+        translationBuilder.add(ModItems.BAMBOO_SHOOT_SOUP,"Bamboo Shoot Soup");
+        translationBuilder.add(ModItems.STEAMED_BAMBOO_SHOOT,"Steamed Bamboo Shoot");
+        translationBuilder.add(ModItems.BANANA_IN_COCONUT_MILK,"Banana in Coconut Milk");
+        translationBuilder.add(ModItems.WHITE_KHANOM_CHAN,"Khanom Chan");
+        translationBuilder.add(ModItems.COCONUT_MILK_ICE_CREAM,"Coconut Milk Ice Cream");
 
-        translationBuilder.add(ModItems.FISH_SAUCE_BOTTLE,"Fish Sauce Bottle");
-        translationBuilder.add(ModItems.FERMENTED_FISH,"Fermented Fish");
-        translationBuilder.add(ModBlocks.FERMENTED_FISH_CAULDRON,"Fermented Fish Cauldron");
 
-        //Mobs
-        translationBuilder.add(ModBlocks.CRAB_EGG,"Flower Crab Egg");
-        translationBuilder.add(ModItems.CRAB_SPAWN_EGG,"Flower Crab Spawn Egg");
-        translationBuilder.add(ModItems.CRAB_BUCKET,"Bucket of Flower Crab");
-        translationBuilder.add(ModItems.CRAB_MEAT,"Raw Flower Crab");
-        translationBuilder.add(ModItems.COOKED_CRAB_MEAT,"Cooked Flower Crab");
-
-        translationBuilder.add(ModItems.DRAGONFLY_SPAWN_EGG,"Dragonfly Spawn Egg");
-        translationBuilder.add(ModItems.DRAGONFLY,"Dragonfly");
-        translationBuilder.add(ModItems.DRAGONFLY_BOTTLE,"Bottle of Dragonfly");
-        translationBuilder.add(ModItems.COOKED_DRAGONFLY,"Cooked Dragonfly");
         translationBuilder.add("dragonfly.variant.muffins_thaidelight.red","Red");
         translationBuilder.add("dragonfly.variant.muffins_thaidelight.yellow","Yellow");
         translationBuilder.add("dragonfly.variant.muffins_thaidelight.green","Green");
@@ -265,71 +302,174 @@ public class LangDataGen extends FabricLanguageProvider {
 
 
             translationBuilder.add("itemGroup.muffins_thaidelight.main","Muffin's Thai Delight");
-            //Block
-            translationBuilder.add(ModBlocks.MORTAR,"ครก");
 
-            translationBuilder.add(ModBlocks.LIME_CRATE, "ลังมะนาว");
-            translationBuilder.add(ModBlocks.PEPPER_CRATE, "ลังพริก");
-            translationBuilder.add(ModBlocks.RAW_PAPAYA_CRATE, "ลังมะละกอดิบ");
-            translationBuilder.add(ModBlocks.PAPAYA_CRATE, "ลังมะละกอ");
-            translationBuilder.add(ModBlocks.PAPAYA_LOG, "ท่อนไม้มะละกอ");
-            translationBuilder.add(ModBlocks.PAPAYA_WOOD, "ไม้มะละกอ");
-            translationBuilder.add(ModBlocks.STRIPPED_PAPAYA_LOG, "ท่อนไม้มะละกอลอกเปลือก");
-            translationBuilder.add(ModBlocks.STRIPPED_PAPAYA_WOOD, "ไม้มะละกอลอกเปลือก");
-            translationBuilder.add(ModBlocks.PAPAYA_LEAVES,"ใบไม้มะละกอ");
 
-            //translationBuilder.add(ModItems.ESAN_MUSIC_DISC,"แผ่นเพลง");
-            //translationBuilder.add("item.muffins_thaidelight.music_disc_northeast.desc","FireMuffin303 - untitled");
+            translationBuilder.add(ModItems.MORTAR,"ครก");
+            translationBuilder.add(ModItems.SACK,"กระสอบ");
 
-            //Feast
-            translationBuilder.add(ModBlocks.SOMTAM_FEAST,"ส้มตำ");
-            translationBuilder.add(ModBlocks.LARB_FEAST,"ลาบ");
-            translationBuilder.add(ModBlocks.CRAB_FRIED_RICE_FEAST,"ข้าวผัดปู");
+            translationBuilder.add(ModItems.LIME_CRATE,"ลังมะนาว");
+            translationBuilder.add(ModItems.PEPPER_CRATE,"ลังพริก");
+            translationBuilder.add(ModItems.RAW_PAPAYA_CRATE,"ลังมะละกอดิบ");
+            translationBuilder.add(ModItems.PAPAYA_CRATE,"ลังมะละกอ");
+            translationBuilder.add(ModItems.MANGO_CRATE,"ลังมะม่วง");
+            translationBuilder.add(ModItems.HOLY_BASIL_CRATE,"ลังกะเพรา");
+            translationBuilder.add(ModItems.BASIL_CRATE,"ลังโหระพา");
+            translationBuilder.add(ModItems.BAMBOO_SHOOT_CRATE,"ลังหน่อไม้ไผ่");
+            translationBuilder.add(ModItems.BUTTERFLY_PEA_CRATE,"ลังดอกอัญชัญ");
 
-            //Crops
-            translationBuilder.add(ModBlocks.WILD_PEPPER_CROP, "ต้นพริกป่า");
-
-            translationBuilder.add(ModBlocks.PAPAYA_SAPLING,"ต้นอ่อนมะละกอ");
-            translationBuilder.add(ModItems.PAPAYA_SEEDS,"เมล็ดมะละกอ");
-            translationBuilder.add(ModItems.PAPAYA,"มะละกอ");
-            translationBuilder.add(ModItems.SLICED_PAPAYA,"มะละกอหั่น");
-            translationBuilder.add(ModItems.RAW_PAPAYA,"มะละกอดิบ");
-            translationBuilder.add(ModItems.RAW_PAPAYA_SLICE,"มะละกอดิบหั่น");
-
-            translationBuilder.add(ModItems.PEPPER,"พริก");
-            translationBuilder.add(ModItems.PEPPER_SEED,"เมล็ดพริก");
-
-            translationBuilder.add(ModBlocks.LIME_PLANT,"ต้นมะนาว");
-            translationBuilder.add(ModBlocks.LIME_SAPLING,"ต้นอ่อนมะนาว");
-            translationBuilder.add(ModItems.LIME,"มะนาว");
-            translationBuilder.add(ModItems.SLICED_LIME,"มะนาวหั่น");
-
-            translationBuilder.add(ModItems.DURIAN_PULP,"เนื้อทุเรียน");
-
-            //Food
-            translationBuilder.add(ModItems.FISH_SAUCE_BOTTLE,"ขวดน้ำปลา");
-            translationBuilder.add(ModItems.FERMENTED_FISH,"ปลาร้า");
-            translationBuilder.add(ModBlocks.FERMENTED_FISH_CAULDRON,"หม้อปลาร้า");
-            translationBuilder.add(ModItems.PAPAYA_JUICE,"น้ำมะละกอ");
-            translationBuilder.add(ModItems.LIME_JUICE,"น้ำมะนาว");
-            translationBuilder.add(ModItems.COCONUT_WATER,"น้ำมะพร้าว");
-
-            translationBuilder.add(ModItems.SOMTAM,"ถ้วยส้มตำ");
-            translationBuilder.add(ModItems.CRAB_FRIED_RICE,"ถ้วยข้าวผัดปู");
-            translationBuilder.add(ModItems.LARB,"ถ้วยลาบ");
-            translationBuilder.add(ModItems.STIR_FRIED_NOODLE,"ผัดหมี่");
-
-            //Mobs
-            translationBuilder.add(ModBlocks.CRAB_EGG,"ไข่ปูม้า");
             translationBuilder.add(ModItems.CRAB_SPAWN_EGG,"ไข่เกิดปูม้า");
+            translationBuilder.add(ModItems.CRAB_EGG,"ไข่ปูม้า");
             translationBuilder.add(ModItems.CRAB_BUCKET,"ถังปูม้า");
-            translationBuilder.add(ModItems.CRAB_MEAT,"เนื้อปูม้าสด");
+            translationBuilder.add(ModItems.CRAB_MEAT,"เนื้อปูม้า");
             translationBuilder.add(ModItems.COOKED_CRAB_MEAT,"เนื้อปูม้าสุก");
 
             translationBuilder.add(ModItems.DRAGONFLY_SPAWN_EGG,"ไข่เกิดแมลงปอ");
-            translationBuilder.add(ModItems.DRAGONFLY,"แมลงปอสด");
-            translationBuilder.add(ModItems.DRAGONFLY_BOTTLE,"ขวดแก้วแมลงปอ");
-            translationBuilder.add(ModItems.COOKED_DRAGONFLY,"แมลงปอทอด");
+            translationBuilder.add(ModItems.DRAGONFLY_BOTTLE,"ขวดแมลงปอ");
+            translationBuilder.add(ModItems.DRAGONFLY,"แมลงปอ");
+            translationBuilder.add(ModItems.COOKED_DRAGONFLY,"แมลงปอสุก");
+
+            translationBuilder.add(ModItems.FISH_SAUCE_BOTTLE,"ขวดน้ำปลา");
+            translationBuilder.add(ModItems.FERMENTED_FISH,"ปลาร้า");
+            translationBuilder.add(ModItems.PAPAYA_JUICE,"น้ำมะละกอ");
+            translationBuilder.add(ModItems.LIME_JUICE,"น้ำมะนาว");
+            translationBuilder.add(ModItems.COCONUT_WATER,"น้ำมะพร้าว");
+            translationBuilder.add(ModItems.BUTTERFLY_PEA_TEA,"ชาดอกอัญชัญ");
+
+            translationBuilder.add(ModItems.LIME_SAPLING,"ต้นนอ่อนมะนาว");
+            translationBuilder.add(ModItems.LIME,"มะนาว");
+            translationBuilder.add(ModItems.SLICED_LIME,"มะนาวหั่น");
+            translationBuilder.add(ModItems.WILD_PEPPER_CROP,"พริกป่า");
+            translationBuilder.add(ModItems.PEPPER,"พริก");
+            translationBuilder.add(ModItems.PEPPER_SEED,"เมล็ดพริก");
+
+            translationBuilder.add(ModItems.DURIAN_SAPLING,"ต้นอ่อนทุเรียน");
+            translationBuilder.add(ModItems.DURIAN_LEAVES,"ใบไม้ทุเรียน");
+            translationBuilder.add(ModItems.DURIAN_FLOWER,"ดอกทุเรียน");
+            translationBuilder.add(ModItems.SMALL_DURIAN,"ทุเรียนผลเล็ก");
+            translationBuilder.add(ModItems.DURIAN,"ทุเรียน");
+            translationBuilder.add(ModItems.DURIAN_PULP,"เนื้อทุเรียน");
+            translationBuilder.add(ModItems.DURIAN_PEEL,"เปลือกทุเรียน");
+            translationBuilder.add(ModItems.DURIAN_PEEL_BLOCK,"บล็อกเปลือกทุเรียน");
+            translationBuilder.add(ModItems.DURIAN_HELMET,"เกราะหมวกทุเรียน");
+            translationBuilder.add(ModItems.DURIAN_LOG,"ท่อนไม้ทุเรียน");
+            translationBuilder.add(ModItems.DURIAN_WOOD,"ไม้ทุเรียน");
+            translationBuilder.add(ModItems.STRIPPED_DURIAN_LOG,"ท่อนไม้ทุเรียนลอกเปลือก");
+            translationBuilder.add(ModItems.STRIPPED_DURIAN_WOOD,"ไม้ทุเรียนลอกเปลือก");
+            translationBuilder.add(ModItems.DURIAN_PLANKS,"แผ่นไม้กระดานทุเรียน");
+            translationBuilder.add(ModItems.DURIAN_STAIRS,"บันไดไม้ทุเรียน");
+            translationBuilder.add(ModItems.DURIAN_SLAB,"แผ่นไม้ทุเรียน");
+            translationBuilder.add(ModItems.DURIAN_FENCE,"รั้วไม้ทุเรียน");
+            translationBuilder.add(ModItems.DURIAN_FENCE_GATE,"ประตูรั้วไม้ทุเรียน");
+            translationBuilder.add(ModItems.DURIAN_DOOR,"ประตูไม้ทุเรียน");
+            translationBuilder.add(ModItems.DURIAN_TRAPDOOR,"ประตูกับดักไม้ทุเรียน");
+            translationBuilder.add(ModItems.DURIAN_PRESSURE_PLATE,"แป้นเหยียบไม้ทุเรียน");
+            translationBuilder.add(ModItems.DURIAN_BUTTON,"ปุ่มไม้ทุเรียน");
+            translationBuilder.add(ModItems.DURIAN_SIGN,"ป้ายไม้ทุเรียน");
+            translationBuilder.add(ModItems.DURIAN_HANGING_SIGN,"ป้ายแขวนทุเรียน");
+            translationBuilder.add(ModItems.DURIAN_CABINET,"ตู้เก็บของทุเรียน");
+            translationBuilder.add(ModItems.DURIAN_BOAT,"เรือไม้ทุเรียน");
+            translationBuilder.add(ModItems.DURIAN_CHEST_BOAT,"เรือไม้ทุเรียนพร้อมหีบ");
+            translationBuilder.add(ModItems.COCONUT_SAPLING,"ต้นอ่อนมะพร้าว");
+            translationBuilder.add(ModItems.COCONUT_LEAF,"ใบไม้มะพร้าว");
+            translationBuilder.add(ModItems.BUDDING_COCONUT_LEAF,"ต้นกำเนิดใบไม้มะพร้าว");
+            translationBuilder.add(ModItems.COCONUT_LEAF_BLOCK,"บล็อกใบไม้มะพร้าว");
+            translationBuilder.add(ModItems.COCONUT_LEAF_MAT,"พรมใบไม้มะพร้าว");
+            translationBuilder.add(ModItems.COCONUT_LOG,"ท่อนไม้มะพร้าว");
+            translationBuilder.add(ModItems.COCONUT_WOOD,"ไม้มะพร้าว");
+            translationBuilder.add(ModItems.STRIPPED_COCONUT_LOG,"ท่อนไม้มะพร้าวลอกเปลือก");
+            translationBuilder.add(ModItems.STRIPPED_COCONUT_WOOD,"ไม้มะพร้าวลอกเปลือก");
+            translationBuilder.add(ModItems.COCONUT_PLANKS,"แผ่นกระดานไม้มะพร้าว");
+            translationBuilder.add(ModItems.COCONUT_STAIRS,"บันไดไม้มะพร้าว");
+            translationBuilder.add(ModItems.COCONUT_SLAB,"แผ่นไม้มะพร้าว");
+            translationBuilder.add(ModItems.COCONUT_FENCE,"รั้วไม้มะพร้าว");
+            translationBuilder.add(ModItems.COCONUT_FENCE_GATE,"ประตูรั้วไม้มะพร้าว");
+            translationBuilder.add(ModItems.COCONUT_DOOR,"ประตูไม้มะพร้าว");
+            translationBuilder.add(ModItems.COCONUT_TRAPDOOR,"ประตูกับดักไม้มะพร้าว");
+            translationBuilder.add(ModItems.COCONUT_PRESSURE_PLATE,"แป้นเหยียบไม้มะพร้าว");
+            translationBuilder.add(ModItems.COCONUT_BUTTON,"ปุ่มไม้มะพร้าว");
+            translationBuilder.add(ModItems.COCONUT_SIGN,"ป้ายไม้มะพร้าว");
+            translationBuilder.add(ModItems.COCONUT_HANGING_SIGN,"ป้ายแขวนไม้มะพร้าว");
+            translationBuilder.add(ModItems.COCONUT_BOAT,"เรือไม้มะพร้าว");
+            translationBuilder.add(ModItems.COCONUT_CHEST_BOAT,"เรือไม้มะพร้าวพร้อมหีบ");
+            translationBuilder.add(ModItems.COCONUT_CABINET,"ตู้เก็บของไม้มะพร้าว");
+            translationBuilder.add(ModItems.COCONUT,"มะพร้าว");
+            translationBuilder.add(ModItems.STRIPPED_COCONUT,"มะพร้าวลอกเปลือก");
+            translationBuilder.add(ModItems.COCONUT_SLICE,"มะพร้าวหั่น");
+            translationBuilder.add(ModItems.MANGO_SAPLING,"ต้นอ่อนมะม่วง");
+            translationBuilder.add(ModItems.MANGO_LEAVES,"ใบไม้มะม่วง");
+            translationBuilder.add(ModItems.MANGO_LOG,"ท่อนไม้มะม่วง");
+            translationBuilder.add(ModItems.MANGO_WOOD,"ไม้มะม่วง");
+            translationBuilder.add(ModItems.STRIPPED_MANGO_LOG,"ท่อนไม้มะม่วง");
+            translationBuilder.add(ModItems.STRIPPED_MANGO_WOOD,"ไม้มะม่วง");
+            translationBuilder.add(ModItems.MANGO_PLANKS,"แผ่นกระดานไม้มะม่วง");
+            translationBuilder.add(ModItems.MANGO_STAIRS,"บันไดไม้มะม่วง");
+            translationBuilder.add(ModItems.MANGO_SLAB,"แผ่นไม้มะม่วง");
+            translationBuilder.add(ModItems.MANGO_FENCE,"รั้วไม้มะม่วง");
+            translationBuilder.add(ModItems.MANGO_FENCE_GATE,"ประตูรั้วไม้มะม่วง");
+            translationBuilder.add(ModItems.MANGO_DOOR,"ประตูไม้มะม่วง");
+            translationBuilder.add(ModItems.MANGO_TRAPDOOR,"ประตูกับดักไม้มะม่วง");
+            translationBuilder.add(ModItems.MANGO_PRESSURE_PLATE,"แป้นเหยียบไม้มะม่วง");
+            translationBuilder.add(ModItems.MANGO_BUTTON,"ปุ่มไม้มะม่วง");
+            translationBuilder.add(ModItems.MANGO_SIGN,"ป้ายไม้มะม่วง");
+            translationBuilder.add(ModItems.MANGO_HANGING_SIGN,"ป้ายแขวนไม้มะม่วง");
+            translationBuilder.add(ModItems.MANGO_BOAT,"เรือไม้มะม่วง");
+            translationBuilder.add(ModItems.MANGO_CHEST_BOAT,"เรือไม้มะม่วงพร้อมหีบ");
+            translationBuilder.add(ModItems.MANGO_CABINET,"ตู้เก็บของไม้มะม่วง");
+            translationBuilder.add(ModItems.MANGO,"มะม่วง");
+            translationBuilder.add(ModItems.MANGO_SLICE,"มะม่วงหั่น");
+            translationBuilder.add(ModItems.PAPAYA,"มะละกอ");
+            translationBuilder.add(ModItems.PAPAYA_FLOWER,"ดอกมะละกอ");
+            translationBuilder.add(ModItems.SLICED_PAPAYA,"มะละกอหั่น");
+            translationBuilder.add(ModItems.RAW_PAPAYA,"มะละกอดิบ");
+            translationBuilder.add(ModItems.RAW_PAPAYA_SLICE,"มะละกอดิบหั่น");
+            translationBuilder.add(ModItems.PAPAYA_LOG,"ท่อนไม้มะละกอ");
+            translationBuilder.add(ModItems.STRIPPED_PAPAYA_LOG,"ท่อนไม้มะละกอลอกเปลือก");
+            translationBuilder.add(ModItems.PAPAYA_WOOD,"ไม้มะละกอ");
+            translationBuilder.add(ModItems.STRIPPED_PAPAYA_WOOD,"ไม้มะละกอลอกเปลือก");
+            translationBuilder.add(ModItems.PAPAYA_LEAVES,"ใบไม้มะละกอ");
+            translationBuilder.add(ModItems.PAPAYA_SAPLING,"ต้นอ่อนมะละกอ");
+            translationBuilder.add(ModItems.PAPAYA_SEEDS,"เมล็ดมะละกอ");
+            translationBuilder.add(ModItems.WILD_HOLY_BASIL,"ต้นกะเพราป่า");
+            translationBuilder.add(ModItems.HOLY_BASIL,"กะเพรา");
+            translationBuilder.add(ModItems.WILD_BASIL,"ต้นโหระพาป่า");
+            translationBuilder.add(ModItems.BASIL,"โหระพา");
+            translationBuilder.add(ModItems.BUTTERFLY_PEA,"ดอกอัญชัญ");
+            translationBuilder.add(ModItems.BUTTERFLY_PEA_SEEDS,"เมล็ดดอกอัญชัญ");
+            translationBuilder.add(ModItems.BAMBOO_SHOOT,"หน่อไม้ไผ่");
+            translationBuilder.add(ModItems.PESTO_SAUCE,"ซอสเพสโต้");
+            translationBuilder.add(ModItems.FRIED_DURIAN,"ทุเรียนทอด");
+            translationBuilder.add(ModItems.SOMTAM_FEAST,"ส้มตำ");
+            translationBuilder.add(ModItems.SOMTAM,"จานส้มตำ");
+            translationBuilder.add(ModItems.LARB_FEAST,"ลาบ");
+            translationBuilder.add(ModItems.LARB,"จานลาบ");
+            translationBuilder.add(ModItems.CRAB_FRIED_RICE_FEAST,"ข้าวผัดปู");
+            translationBuilder.add(ModItems.CRAB_FRIED_RICE,"จานข้าวผัดปู");
+            translationBuilder.add(ModItems.PHAT_KAPHRAO_FEAST,"ข้าวผัดกะเพรา");
+            translationBuilder.add(ModItems.PHAT_KAPHRAO,"จานข้าวผัดกะเพรา");
+            translationBuilder.add(ModItems.MANGO_STICKY_RICE_FEAST,"ข้าวเหนียวมะม่วง");
+            translationBuilder.add(ModItems.MANGO_STICKY_RICE,"จานข้าวเหนียวมะม่วง");
+            translationBuilder.add(ModItems.PINEAPPLE_FRIED_RICE_FEAST,"ข้าวผัดสัปปะรด");
+            translationBuilder.add(ModItems.PINEAPPLE_FRIED_RICE,"จานข้าวผัดสัปปะรด");
+            translationBuilder.add(ModItems.STIR_FRIED_NOODLE,"ผัดหมี่");
+            translationBuilder.add(ModItems.COCONUT_MILK_BOTTLE,"ขวดน้ำกะทิ");
+            translationBuilder.add(ModItems.DURIAN_CURRY,"แกงทุเรียน");
+            translationBuilder.add(ModItems.DURIAN_CAKE,"เค้กทุเรียน");
+            translationBuilder.add(ModItems.DURIAN_CAKE_SLICE,"สไลด์เค้กทุเรียน");
+            translationBuilder.add(ModItems.MANGO_PUDDING,"พุดดิ้งมะม่วง");
+            translationBuilder.add(ModItems.MANGO_PUDDING_SLICE,"สไลด์เค้กมะม่วง");
+            translationBuilder.add(ModItems.COCONUT_JELLY,"วุ้นมะพร้าว");
+            translationBuilder.add(ModItems.KHANOM_BABIN,"ขนมบ้าบิ่น");
+            translationBuilder.add(ModItems.COCONUT_PIE,"พายมะพร้าว");
+            translationBuilder.add(ModItems.COCONUT_PIE_SLICE,"สไลด์พายมะพร้าว");
+            translationBuilder.add(ModItems.BASIL_OMELETTE_FEAST,"ไข่เจียวโหระพา");
+            translationBuilder.add(ModItems.BASIL_OMELETTE,"จานไข่เจียวโหระพา");
+            translationBuilder.add(ModItems.BAMBOO_SHOOT_SOUP,"แกงหน่อไม้");
+            translationBuilder.add(ModItems.STEAMED_BAMBOO_SHOOT,"ห่อหมก");
+            translationBuilder.add(ModItems.BANANA_IN_COCONUT_MILK,"กล้วยบวชชี");
+            translationBuilder.add(ModItems.WHITE_KHANOM_CHAN,"ขนมชั้น");
+            translationBuilder.add(ModItems.COCONUT_MILK_ICE_CREAM,"ไอศกรีมกะทิ");
+
+
 
 
             translationBuilder.add("dragonfly.variant.muffins_thaidelight.red","สีแดง");

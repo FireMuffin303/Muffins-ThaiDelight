@@ -1,10 +1,6 @@
 {
-  "parent": "muffins_thaidelight:block/basil/template_basil",
+  "parent": "farmersdelight:block/crop_cross",
   "textures": {
-    "bottom": "muffins_thaidelight:block/basil/basil_leaves_bottom",
-    "flower": "muffins_thaidelight:block/basil/basil_flower_age0",
-    "side": "muffins_thaidelight:block/basil/basil_leaves_side",
-    "stem": "muffins_thaidelight:block/basil/basil_stem",
-    "top": "muffins_thaidelight:block/basil/basil_leaves_top"
+    "cross": "muffins_thaidelight:block/basil/basil_age0"
   }
 }

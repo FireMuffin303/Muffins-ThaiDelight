@@ -249,7 +249,7 @@ public class ModItems {
 
 
     public static final Item HOLY_BASIL = registerFlatItem("holy_basil",new BlockItem(ModBlocks.HOLY_BASIL ,new Item.Properties()));
-
+    public static final Item WILD_HOLY_BASIL = register("wild_holy_basil",new BlockItem(ModBlocks.WILD_HOLY_BASIL,new Item.Properties()));
     // 🌿 BASIL 🌿
     /*
     public static final Item BASIL_SAPLING = registerFlatItem("basil_sapling",new ItemNameBlockItem(ModBlocks.BASIL,new Item.Properties()){
@@ -264,6 +264,7 @@ public class ModItems {
 
 
     public static final Item BASIL = registerFlatItem("basil",new BlockItem(ModBlocks.BASIL,new Item.Properties()));
+    public static final Item WILD_BASIL = register("wild_basil",new BlockItem(ModBlocks.WILD_BASIL,new Item.Properties()));
 
     public static final Item BAMBOO_SHOOT = registerFlatItem("bamboo_shoot",new ItemNameBlockItem(Blocks.BAMBOO_SAPLING,new Item.Properties()));
 
@@ -300,7 +301,7 @@ public class ModItems {
 
     public static final Item COCONUT_JELLY = registerFlatItem("coconut_jelly",new Item(new Item.Properties().food(ModFood.MANGO_PIE)));
     public static final Item KHANOM_BABIN = registerFlatItem("khanom_babin",new Item(new Item.Properties().food(ModFood.MANGO_PIE)));
-    public static final Item COCONUT_PIE = registerFlatItem("coconut_pie",new BlockItem(ModBlocks.MANGO_PUDDING,new Item.Properties()));
+    public static final Item COCONUT_PIE = registerFlatItem("coconut_pie",new BlockItem(ModBlocks.COCONUT_PIE,new Item.Properties()));
     public static final Item COCONUT_PIE_SLICE = registerFlatItem("coconut_pie_slice",new Item(new Item.Properties().food(ModFood.MANGO_PIE)));
 
     public static final Item BASIL_OMELETTE_FEAST = registerFlatItem("basil_omelette_feast",new BlockItem(ModBlocks.BASIL_OMELETTE_FEAST,new Item.Properties()));

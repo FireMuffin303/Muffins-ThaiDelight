@@ -178,6 +178,8 @@ public class ModelDataGen extends FabricModelProvider {
                 );
         blockStateModelGenerator.blockStateOutput.accept(createSimpleBlock(ModBlocks.CRAB_EGG,ModelLocationUtils.getModelLocation(ModBlocks.CRAB_EGG)));
 
+
+
         createCropRope(ModBlocks.BUTTERFLY_PEA_BLOCK,blockStateModelGenerator);
 
         ResourceLocation butterfly_pea_model = WALL_FLOWER.create(ModBlocks.BUTTERFLY_PEA_WALL,new TextureMapping()
@@ -273,6 +275,34 @@ public class ModelDataGen extends FabricModelProvider {
         createLimeCrop(blockStateModelGenerator);
         createBasil(blockStateModelGenerator,ModBlocks.HOLY_BASIL);
         createBasil(blockStateModelGenerator,ModBlocks.BASIL);
+
+        ModelTemplates.FLAT_ITEM
+                .create(
+                        ModelLocationUtils.getModelLocation(ModBlocks.WILD_HOLY_BASIL.asItem()),
+                        TextureMapping.layer0(ThaiDelight.modid("block/holy_basil/holy_basil_age3")),
+                        blockStateModelGenerator.modelOutput
+                );
+
+        ModelTemplates.FLAT_ITEM
+                .create(
+                        ModelLocationUtils.getModelLocation(ModBlocks.WILD_BASIL.asItem()),
+                        TextureMapping.layer0(ThaiDelight.modid("block/basil/basil_age3")),
+                        blockStateModelGenerator.modelOutput
+                );
+
+        blockStateModelGenerator.blockStateOutput.accept(createSimpleBlock(ModBlocks.WILD_HOLY_BASIL,
+                ModelTemplates.CROSS.create(
+                ThaiDelight.modid("block/holy_basil/wild_holy_basil"),
+                TextureMapping.cross(ThaiDelight.modid("block/holy_basil/holy_basil_age3")),
+                blockStateModelGenerator.modelOutput
+        )));
+
+        blockStateModelGenerator.blockStateOutput.accept(createSimpleBlock(ModBlocks.WILD_BASIL,
+                ModelTemplates.CROSS.create(
+                        ThaiDelight.modid("block/basil/wild_basil"),
+                        TextureMapping.cross(ThaiDelight.modid("block/basil/basil_age3")),
+                        blockStateModelGenerator.modelOutput
+                )));
 
         createSackBlock(blockStateModelGenerator);
 
@@ -664,6 +694,7 @@ public class ModelDataGen extends FabricModelProvider {
         ResourceLocation resourceLocation = BuiltInRegistries.BLOCK.getKey(block);
         ResourceLocation modelResourceLocation = resourceLocation.withPath(string2 -> "block/" + string2 + "/" + string2);
 
+        /*
         ResourceLocation BASIL_AGE0 = BASIL_TEMPLATE.create(modelResourceLocation.withSuffix("_age0"),new TextureMapping()
                 .put(TextureSlot.STEM,modelResourceLocation.withSuffix("_stem"))
                 .put(TextureSlot.SIDE,modelResourceLocation.withSuffix("_leaves_side"))
@@ -691,13 +722,14 @@ public class ModelDataGen extends FabricModelProvider {
                 .put(TextureSlot.TOP,modelResourceLocation.withSuffix("_leaves_top"))
                 .put(TextureSlot.BOTTOM,modelResourceLocation.withSuffix("_leaves_bottom"))
                 .put(FLOWER,modelResourceLocation.withSuffix("_flower_age3")), blockModelGenerators.modelOutput);
+         */
+
 
         blockModelGenerators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block)
-                .with(PropertyDispatch.property(BasilCropBlock.AGE)
-                        .select(0,Variant.variant().with(VariantProperties.MODEL,BASIL_AGE0))
-                        .select(1,Variant.variant().with(VariantProperties.MODEL,BASIL_AGE1))
-                        .select(2,Variant.variant().with(VariantProperties.MODEL,BASIL_AGE2))
-                        .select(3,Variant.variant().with(VariantProperties.MODEL,BASIL_AGE3))
+                .with(PropertyDispatch.property(BasilCropBlock.AGE).generate(integer -> {
+                    return Variant.variant().with(VariantProperties.MODEL,CROP_CROSS.create(modelResourceLocation.withSuffix("_age"+integer),
+                            new TextureMapping().put(TextureSlot.CROSS,modelResourceLocation.withSuffix("_age"+integer)),blockModelGenerators.modelOutput));
+                        })
                 )
         );
     }

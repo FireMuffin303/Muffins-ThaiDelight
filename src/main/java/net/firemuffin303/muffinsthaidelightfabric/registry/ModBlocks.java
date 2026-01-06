@@ -523,6 +523,8 @@ public class ModBlocks {
         }
     });
     public static final Block POTTED_BASIL = register("potted_basil",Blocks.flowerPot(ModBlocks.BASIL));
+    public static final Block WILD_BASIL = register("wild_basil",new WildCropBlock(MobEffects.HUNGER,6,BlockBehaviour.Properties.copy(Blocks.TALL_GRASS)));
+
     public static final Block HOLY_BASIL = register("holy_basil",new BasilCropBlock(BlockBehaviour.Properties.copy(Blocks.POTATOES),ModLootTables.HOLY_BASIL_HARVEST,ModLootTables.HOLY_BASIL_SHEARS){
         @Override
         protected ItemLike getBaseSeedId() {
@@ -530,6 +532,8 @@ public class ModBlocks {
         }
     });
     public static final Block POTTED_HOLY_BASIL = register("potted_holy_basil",Blocks.flowerPot(ModBlocks.HOLY_BASIL));
+    public static final Block WILD_HOLY_BASIL = register("wild_holy_basil",new WildCropBlock(MobEffects.HUNGER,6,BlockBehaviour.Properties.copy(Blocks.TALL_GRASS)));
+
 
     public static final Block BUDDING_BUTTERFLY_PEA_BLOCK = register("budding_butterfly_pea",new BuddingButterflyPeaBlock(BlockBehaviour.Properties.copy(WHEAT)));
     public static final Block BUTTERFLY_PEA_BLOCK = register("butterfly_pea_vine",new ButterflyPeaVineBlock(BlockBehaviour.Properties.copy(WHEAT)));
@@ -538,6 +542,7 @@ public class ModBlocks {
 
     public static final Block DURIAN_CAKE = register("durian_cake",new PieBlock(BlockBehaviour.Properties.copy(CAKE),() -> ModItems.DURIAN_CAKE_SLICE));
     public static final Block MANGO_PUDDING = register("mango_pudding",new PieBlock(BlockBehaviour.Properties.copy(CAKE),() -> ModItems.MANGO_PUDDING_SLICE));
+    public static final Block COCONUT_PIE = register("coconut_pie",new PieBlock(BlockBehaviour.Properties.copy(CAKE),() -> ModItems.COCONUT_SLICE));
 
     public static final Block PHAT_KAPHRAO_FEAST = register("phat_kaphrao_feast",new FeastBlock(BlockBehaviour.Properties.copy(CAKE),() -> ModItems.PHAT_KAPHRAO,true));
     public static final Block MANGO_STICKY_RICE_FEAST = register("mango_sticky_rice_feast",new FeastBlock(BlockBehaviour.Properties.copy(CAKE),() -> ModItems.MANGO_STICKY_RICE,true));
