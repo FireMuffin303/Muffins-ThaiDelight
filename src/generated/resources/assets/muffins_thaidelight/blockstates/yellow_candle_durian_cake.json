@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "muffins_thaidelight:block/yellow_candle_durian_cake"
+    },
+    "lit=true": {
+      "model": "muffins_thaidelight:block/yellow_candle_durian_cake_lit"
+    }
+  }
+}

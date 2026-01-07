@@ -27,16 +27,25 @@ import net.firemuffin303.muffinsthaidelightfabric.common.world.trees.PapayaTreeG
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -539,8 +548,46 @@ public class ModBlocks {
     public static final Block BUTTERFLY_PEA_WALL = register("butterfly_pea_wall",new WallFlowerBlock(BlockBehaviour.Properties.copy(SPORE_BLOSSOM),MobEffects.HEAL,1));
 
     public static final Block DURIAN_CAKE = register("durian_cake",new DurianCakeBlock(BlockBehaviour.Properties.copy(CAKE)));
+    public static final Block CANDLE_DURIAN_CAKE = register("candle_durian_cake",new CandleDurianCakeBlock(CANDLE,BlockBehaviour.Properties.copy(CANDLE_CAKE)));
+    public static final Block WHITE_CANDLE_DURIAN_CAKE = register("white_candle_durian_cake",new CandleDurianCakeBlock(WHITE_CANDLE,BlockBehaviour.Properties.copy(CANDLE_CAKE)));
+    public static final Block ORANGE_CANDLE_DURIAN_CAKE = register("orange_candle_durian_cake",new CandleDurianCakeBlock(ORANGE_CANDLE,BlockBehaviour.Properties.copy(CANDLE_CAKE)));
+    public static final Block MAGENTA_CANDLE_DURIAN_CAKE = register("magenta_candle_durian_cake",new CandleDurianCakeBlock(MAGENTA_CANDLE,BlockBehaviour.Properties.copy(CANDLE_CAKE)));
+    public static final Block LIGHT_BLUE_CANDLE_DURIAN_CAKE = register("light_blue_candle_durian_cake",new CandleDurianCakeBlock(LIGHT_BLUE_CANDLE,BlockBehaviour.Properties.copy(CANDLE_CAKE)));
+    public static final Block YELLOW_CANDLE_DURIAN_CAKE = register("yellow_candle_durian_cake",new CandleDurianCakeBlock(YELLOW_CANDLE,BlockBehaviour.Properties.copy(CANDLE_CAKE)));
+    public static final Block LIME_CANDLE_DURIAN_CAKE = register("lime_candle_durian_cake",new CandleDurianCakeBlock(LIME_CANDLE,BlockBehaviour.Properties.copy(CANDLE_CAKE)));
+    public static final Block PINK_CANDLE_DURIAN_CAKE = register("pink_candle_durian_cake",new CandleDurianCakeBlock(PINK_CANDLE,BlockBehaviour.Properties.copy(CANDLE_CAKE)));
+    public static final Block GRAY_CANDLE_DURIAN_CAKE = register("gray_candle_durian_cake",new CandleDurianCakeBlock(GRAY_CANDLE,BlockBehaviour.Properties.copy(CANDLE_CAKE)));
+    public static final Block LIGHT_GRAY_CANDLE_DURIAN_CAKE = register("light_gray_candle_durian_cake",new CandleDurianCakeBlock(LIGHT_GRAY_CANDLE,BlockBehaviour.Properties.copy(CANDLE_CAKE)));
+    public static final Block CYAN_CANDLE_DURIAN_CAKE = register("cyan_candle_durian_cake",new CandleDurianCakeBlock(CYAN_CANDLE,BlockBehaviour.Properties.copy(CANDLE_CAKE)));
+    public static final Block PURPLE_CANDLE_DURIAN_CAKE = register("purple_candle_durian_cake",new CandleDurianCakeBlock(PURPLE_CANDLE,BlockBehaviour.Properties.copy(CANDLE_CAKE)));
+    public static final Block BLUE_CANDLE_DURIAN_CAKE = register("blue_candle_durian_cake",new CandleDurianCakeBlock(BLUE_CANDLE,BlockBehaviour.Properties.copy(CANDLE_CAKE)));
+    public static final Block BROWN_CANDLE_DURIAN_CAKE = register("brown_candle_durian_cake",new CandleDurianCakeBlock(BROWN_CANDLE,BlockBehaviour.Properties.copy(CANDLE_CAKE)));
+    public static final Block GREEN_CANDLE_DURIAN_CAKE = register("green_candle_durian_cake",new CandleDurianCakeBlock(GREEN_CANDLE,BlockBehaviour.Properties.copy(CANDLE_CAKE)));
+    public static final Block RED_CANDLE_DURIAN_CAKE = register("red_candle_durian_cake",new CandleDurianCakeBlock(RED_CANDLE,BlockBehaviour.Properties.copy(CANDLE_CAKE)));
+    public static final Block BLACK_CANDLE_DURIAN_CAKE = register("black_candle_durian_cake",new CandleDurianCakeBlock(BLACK_CANDLE,BlockBehaviour.Properties.copy(CANDLE_CAKE)));
+
+
     public static final Block MANGO_PUDDING = register("mango_pudding",new PieBlock(BlockBehaviour.Properties.copy(CAKE),() -> ModItems.MANGO_PUDDING_SLICE));
-    public static final Block COCONUT_PIE = register("coconut_pie",new PieBlock(BlockBehaviour.Properties.copy(CAKE),() -> ModItems.COCONUT_SLICE));
+    public static final Block COCONUT_PIE = register("coconut_pie",new PieBlock(BlockBehaviour.Properties.copy(CAKE),() -> ModItems.COCONUT_SLICE){
+        @Override
+        public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+            ItemStack itemStack = player.getItemInHand(hand);
+            if(level.isClientSide){
+                if(itemStack.is(Items.HONEY_BOTTLE)){
+                    return InteractionResult.SUCCESS;
+                }
+            }
+
+            if(itemStack.is(Items.HONEY_BOTTLE)){
+                level.setBlock(pos,ModBlocks.HONEY_COCONUT_PIE.defaultBlockState().setValue(BITES,state.getValue(BITES)).setValue(FACING,state.getValue(FACING)), 3);
+                level.playSound(null, pos, SoundEvents.HONEY_BLOCK_PLACE, SoundSource.PLAYERS, 0.8F, 0.8F);
+                return InteractionResult.SUCCESS;
+            }
+
+            return super.use(state, level, pos, player, hand, hit);
+        }
+    });
+    public static final Block HONEY_COCONUT_PIE = register("honey_coconut_pie",new PieBlock(BlockBehaviour.Properties.copy(CAKE), () -> ModItems.HONEY_COCONUT_PIE_SLICE));
 
     public static final Block PHAT_KAPHRAO_FEAST = register("phat_kaphrao_feast",new FeastBlock(BlockBehaviour.Properties.copy(CAKE),() -> ModItems.PHAT_KAPHRAO,true));
     public static final Block MANGO_STICKY_RICE_FEAST = register("mango_sticky_rice_feast",new FeastBlock(BlockBehaviour.Properties.copy(CAKE),() -> ModItems.MANGO_STICKY_RICE,true));

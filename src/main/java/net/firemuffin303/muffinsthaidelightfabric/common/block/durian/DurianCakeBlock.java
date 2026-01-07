@@ -6,6 +6,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
@@ -16,9 +17,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.CakeBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -50,7 +49,19 @@ public class DurianCakeBlock extends Block {
 
     @Override
     public InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
+        Block block;
         ItemStack itemStack = player.getItemInHand(interactionHand);
+        Item item = itemStack.getItem();
+        if (itemStack.is(ItemTags.CANDLES) && blockState.getValue(BITES) == 0 && (block = Block.byItem(item)) instanceof CandleBlock) {
+            if (!player.isCreative()) {
+                itemStack.shrink(1);
+            }
+            level.playSound(null, blockPos, SoundEvents.CAKE_ADD_CANDLE, SoundSource.BLOCKS, 1.0f, 1.0f);
+            level.setBlockAndUpdate(blockPos, CandleDurianCakeBlock.byCandle(block));
+            level.gameEvent((Entity)player, GameEvent.BLOCK_CHANGE, blockPos);
+            player.awardStat(Stats.ITEM_USED.get(item));
+            return InteractionResult.SUCCESS;
+        }
 
         if (level.isClientSide) {
             if(itemStack.is(ModTags.KNIVES)){

@@ -245,6 +245,25 @@ public class ModTagDataGen {
                     ModBlocks.HANGING_MANGO_BLOCK
             );
 
+            getOrCreateTagBuilder(BlockTags.CANDLE_CAKES).add(
+                    ModBlocks.CANDLE_DURIAN_CAKE,
+                    ModBlocks.LIGHT_GRAY_CANDLE_DURIAN_CAKE,
+                    ModBlocks.GRAY_CANDLE_DURIAN_CAKE,
+                    ModBlocks.BLACK_CANDLE_DURIAN_CAKE,
+                    ModBlocks.BROWN_CANDLE_DURIAN_CAKE,
+                    ModBlocks.RED_CANDLE_DURIAN_CAKE,
+                    ModBlocks.ORANGE_CANDLE_DURIAN_CAKE,
+                    ModBlocks.YELLOW_CANDLE_DURIAN_CAKE,
+                    ModBlocks.LIME_CANDLE_DURIAN_CAKE,
+                    ModBlocks.GREEN_CANDLE_DURIAN_CAKE,
+                    ModBlocks.CYAN_CANDLE_DURIAN_CAKE,
+                    ModBlocks.LIGHT_BLUE_CANDLE_DURIAN_CAKE,
+                    ModBlocks.BLUE_CANDLE_DURIAN_CAKE,
+                    ModBlocks.MAGENTA_CANDLE_DURIAN_CAKE,
+                    ModBlocks.PURPLE_CANDLE_DURIAN_CAKE,
+                    ModBlocks.PINK_CANDLE_DURIAN_CAKE
+            );
+
         }
     }
 

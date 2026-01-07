@@ -347,6 +347,24 @@ public class ModelDataGen extends FabricModelProvider {
                         )
         );
 
+        createCandleDurianCake(ModBlocks.CANDLE_DURIAN_CAKE,Blocks.CANDLE,blockStateModelGenerator);
+        createCandleDurianCake(ModBlocks.WHITE_CANDLE_DURIAN_CAKE,Blocks.WHITE_CANDLE,blockStateModelGenerator);
+        createCandleDurianCake(ModBlocks.LIGHT_GRAY_CANDLE_DURIAN_CAKE,Blocks.LIGHT_GRAY_CANDLE,blockStateModelGenerator);
+        createCandleDurianCake(ModBlocks.GRAY_CANDLE_DURIAN_CAKE,Blocks.GRAY_CANDLE,blockStateModelGenerator);
+        createCandleDurianCake(ModBlocks.BLACK_CANDLE_DURIAN_CAKE,Blocks.BLACK_CANDLE,blockStateModelGenerator);
+        createCandleDurianCake(ModBlocks.BROWN_CANDLE_DURIAN_CAKE,Blocks.BROWN_CANDLE,blockStateModelGenerator);
+        createCandleDurianCake(ModBlocks.RED_CANDLE_DURIAN_CAKE,Blocks.RED_CANDLE,blockStateModelGenerator);
+        createCandleDurianCake(ModBlocks.ORANGE_CANDLE_DURIAN_CAKE,Blocks.ORANGE_CANDLE,blockStateModelGenerator);
+        createCandleDurianCake(ModBlocks.YELLOW_CANDLE_DURIAN_CAKE,Blocks.YELLOW_CANDLE,blockStateModelGenerator);
+        createCandleDurianCake(ModBlocks.LIME_CANDLE_DURIAN_CAKE,Blocks.LIME_CANDLE,blockStateModelGenerator);
+        createCandleDurianCake(ModBlocks.GREEN_CANDLE_DURIAN_CAKE,Blocks.GREEN_CANDLE,blockStateModelGenerator);
+        createCandleDurianCake(ModBlocks.CYAN_CANDLE_DURIAN_CAKE,Blocks.CYAN_CANDLE,blockStateModelGenerator);
+        createCandleDurianCake(ModBlocks.LIGHT_BLUE_CANDLE_DURIAN_CAKE,Blocks.LIGHT_BLUE_CANDLE,blockStateModelGenerator);
+        createCandleDurianCake(ModBlocks.BLUE_CANDLE_DURIAN_CAKE,Blocks.BLUE_CANDLE,blockStateModelGenerator);
+        createCandleDurianCake(ModBlocks.MAGENTA_CANDLE_DURIAN_CAKE,Blocks.MAGENTA_CANDLE,blockStateModelGenerator);
+        createCandleDurianCake(ModBlocks.PURPLE_CANDLE_DURIAN_CAKE,Blocks.PURPLE_CANDLE,blockStateModelGenerator);
+        createCandleDurianCake(ModBlocks.PINK_CANDLE_DURIAN_CAKE,Blocks.PINK_CANDLE,blockStateModelGenerator);
+
         blockStateModelGenerator.blockStateOutput.accept(
                 MultiVariantGenerator.multiVariant(ModBlocks.COCONUT_PIE)
                         .with(PropertyDispatch.property(PieBlock.BITES)
@@ -383,6 +401,47 @@ public class ModelDataGen extends FabricModelProvider {
                                                 .put(TextureSlot.BOTTOM,new ResourceLocation("farmersdelight","block/pie_bottom"))
                                                 .put(INNER,ThaiDelight.modid("block/coconut_pie_inside"))
                                                 .put(TextureSlot.PARTICLE,ThaiDelight.modid("block/coconut_pie_top"))
+                                        ,blockStateModelGenerator.modelOutput))
+                                )
+                        ).with(createHorizontalFacingDispatch())
+        );
+
+        blockStateModelGenerator.blockStateOutput.accept(
+                MultiVariantGenerator.multiVariant(ModBlocks.HONEY_COCONUT_PIE)
+                        .with(PropertyDispatch.property(PieBlock.BITES)
+                                .select(0,Variant.variant().with(VariantProperties.MODEL,PIE.create(ThaiDelight.modid("block/feast/honey_coconut_pie"),
+                                        new TextureMapping()
+                                                .put(TextureSlot.TOP,ThaiDelight.modid("block/honey_coconut_pie_top"))
+                                                .put(TextureSlot.SIDE,new ResourceLocation("farmersdelight","block/pie_side"))
+                                                .put(TextureSlot.BOTTOM,new ResourceLocation("farmersdelight","block/pie_bottom"))
+                                                .put(TextureSlot.PARTICLE,ThaiDelight.modid("block/honey_coconut_pie_top"))
+                                        ,blockStateModelGenerator.modelOutput))
+                                )
+                                .select(1,Variant.variant().with(VariantProperties.MODEL,PIE_SLICE1.create(ThaiDelight.modid("block/feast/honey_coconut_pie_slice1"),
+                                        new TextureMapping()
+                                                .put(TextureSlot.TOP,ThaiDelight.modid("block/honey_coconut_pie_top"))
+                                                .put(TextureSlot.SIDE,new ResourceLocation("farmersdelight","block/pie_side"))
+                                                .put(TextureSlot.BOTTOM,new ResourceLocation("farmersdelight","block/pie_bottom"))
+                                                .put(INNER,ThaiDelight.modid("block/coconut_pie_inside"))
+                                                .put(TextureSlot.PARTICLE,ThaiDelight.modid("block/honey_coconut_pie_top"))
+                                        ,blockStateModelGenerator.modelOutput))
+                                )
+                                .select(2,Variant.variant().with(VariantProperties.MODEL,PIE_SLICE2.create(ThaiDelight.modid("block/feast/honey_coconut_pie_slice2"),
+                                        new TextureMapping()
+                                                .put(TextureSlot.TOP,ThaiDelight.modid("block/honey_coconut_pie_top"))
+                                                .put(TextureSlot.SIDE,new ResourceLocation("farmersdelight","block/pie_side"))
+                                                .put(TextureSlot.BOTTOM,new ResourceLocation("farmersdelight","block/pie_bottom"))
+                                                .put(INNER,ThaiDelight.modid("block/coconut_pie_inside"))
+                                                .put(TextureSlot.PARTICLE,ThaiDelight.modid("block/honey_coconut_pie_top"))
+                                        ,blockStateModelGenerator.modelOutput))
+                                )
+                                .select(3,Variant.variant().with(VariantProperties.MODEL,PIE_SLICE3.create(ThaiDelight.modid("block/feast/honey_coconut_pie_slice3"),
+                                        new TextureMapping()
+                                                .put(TextureSlot.TOP,ThaiDelight.modid("block/honey_coconut_pie_top"))
+                                                .put(TextureSlot.SIDE,new ResourceLocation("farmersdelight","block/pie_side"))
+                                                .put(TextureSlot.BOTTOM,new ResourceLocation("farmersdelight","block/pie_bottom"))
+                                                .put(INNER,ThaiDelight.modid("block/coconut_pie_inside"))
+                                                .put(TextureSlot.PARTICLE,ThaiDelight.modid("block/honey_coconut_pie_top"))
                                         ,blockStateModelGenerator.modelOutput))
                                 )
                         ).with(createHorizontalFacingDispatch())
@@ -466,6 +525,29 @@ public class ModelDataGen extends FabricModelProvider {
                 .with(createHorizontalFacingDispatch()));
     }
 
+
+    private void createCandleDurianCake(Block candleCakeBlock,Block candle,BlockModelGenerators blockModelGenerators){
+        TextureMapping litTextureMapping = new TextureMapping()
+                .put(TextureSlot.PARTICLE,ThaiDelight.modid("block/durian_cake_side"))
+                .put(TextureSlot.BOTTOM,ThaiDelight.modid("block/durian_cake_bottom"))
+                .put(TextureSlot.TOP,ThaiDelight.modid("block/durian_cake_top"))
+                .put(TextureSlot.SIDE,ThaiDelight.modid("block/durian_cake_side"))
+                .put(TextureSlot.CANDLE,TextureMapping.getBlockTexture(candle,"_lit"));
+
+        TextureMapping unlitTextureMapping = new TextureMapping()
+                .put(TextureSlot.PARTICLE,ThaiDelight.modid("block/durian_cake_side"))
+                .put(TextureSlot.BOTTOM,ThaiDelight.modid("block/durian_cake_bottom"))
+                .put(TextureSlot.TOP,ThaiDelight.modid("block/durian_cake_top"))
+                .put(TextureSlot.SIDE,ThaiDelight.modid("block/durian_cake_side"))
+                .put(TextureSlot.CANDLE,TextureMapping.getBlockTexture(candle));
+
+        blockModelGenerators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(candleCakeBlock)
+                .with(BlockModelGenerators.createBooleanModelDispatch(BlockStateProperties.LIT,
+                        ModelTemplates.CANDLE_CAKE.createWithSuffix(candleCakeBlock,"_lit", litTextureMapping,blockModelGenerators.modelOutput),
+                        ModelTemplates.CANDLE_CAKE.create(candleCakeBlock,unlitTextureMapping,blockModelGenerators.modelOutput)
+                        ))
+        );
+    }
 
     @Override
     public void generateItemModels(ItemModelGenerators itemModelGenerator) {

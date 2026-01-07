@@ -373,6 +373,8 @@ public class ThaiDelight implements ModInitializer {
         output.accept(ModItems.KHANOM_BABIN);
         output.accept(ModItems.COCONUT_PIE);
         output.accept(ModItems.COCONUT_PIE_SLICE);
+        output.accept(ModItems.HONEY_COCONUT_PIE);
+        output.accept(ModItems.HONEY_COCONUT_PIE_SLICE);
 
         output.accept(ModItems.BASIL_OMELETTE_FEAST);
         output.accept(ModItems.BASIL_OMELETTE);

@@ -282,7 +282,7 @@ public class ModItems {
 
     public static final Item FRIED_DURIAN = registerFlatItem("fried_durian",new Item(new Item.Properties().food(ModFood.FRIED_DURIAN)));
     public static final Item COCONUT_MILK_BOTTLE = registerFlatItem("coconut_milk_bottle",new Item(new Item.Properties()));
-    public static final Item COCONUT_SLICE = registerFlatItem("coconut_slice",new ConsumableItem(new Item.Properties().craftRemainder(Items.BOWL).food(ModFood.COCONUT_MEAT)));
+    public static final Item COCONUT_SLICE = registerFlatItem("coconut_slice",new ConsumableItem(new Item.Properties().food(ModFood.COCONUT_MEAT)));
 
     public static final Item PHAT_KAPHRAO_FEAST = registerFlatItem("phat_kaphrao_feast",new BlockItem(ModBlocks.PHAT_KAPHRAO_FEAST,new Item.Properties()));
     public static final Item PHAT_KAPHRAO = registerFlatItem("phat_kaphrao", new ConsumableItem(bowlFoodItem(ModFood.PHAT_KAPHRAO)));
@@ -302,7 +302,17 @@ public class ModItems {
     public static final Item COCONUT_JELLY = registerFlatItem("coconut_jelly",new Item(new Item.Properties().food(ModFood.MANGO_PIE)));
     public static final Item KHANOM_BABIN = registerFlatItem("khanom_babin",new Item(new Item.Properties().food(ModFood.MANGO_PIE)));
     public static final Item COCONUT_PIE = registerFlatItem("coconut_pie",new BlockItem(ModBlocks.COCONUT_PIE,new Item.Properties()));
-    public static final Item COCONUT_PIE_SLICE = registerFlatItem("coconut_pie_slice",new Item(new Item.Properties().food(ModFood.MANGO_PIE)));
+    public static final Item COCONUT_PIE_SLICE = registerFlatItem("coconut_pie_slice",new Item(new Item.Properties().food(ModFood.COCONUT_PIE_SLICE)));
+    public static final Item HONEY_COCONUT_PIE = registerFlatItem("honey_coconut_pie",new BlockItem(ModBlocks.HONEY_COCONUT_PIE,new Item.Properties()));
+    public static final Item HONEY_COCONUT_PIE_SLICE = registerFlatItem("honey_coconut_pie_slice",new Item(new Item.Properties().food(ModFood.COCONUT_PIE_SLICE)){
+        @Override
+        public ItemStack finishUsingItem(ItemStack itemStack, Level level, LivingEntity livingEntity) {
+            if (!level.isClientSide) {
+                livingEntity.removeEffect(MobEffects.POISON);
+            }
+            return super.finishUsingItem(itemStack, level, livingEntity);
+        }
+    });
 
     public static final Item BASIL_OMELETTE_FEAST = registerFlatItem("basil_omelette_feast",new BlockItem(ModBlocks.BASIL_OMELETTE_FEAST,new Item.Properties()));
     public static final Item BASIL_OMELETTE = registerFlatItem("basil_omelette",new Item(new Item.Properties()));
@@ -470,6 +480,10 @@ public class ModItems {
         public static final FoodProperties FRIED_DURIAN = new FoodProperties.Builder().alwaysEat().fast().nutrition(3).saturationMod(0.4f).build();
 
         public static final FoodProperties COCONUT_MEAT = new FoodProperties.Builder().nutrition(2).saturationMod(0.2f).build();
+
+        public static final FoodProperties COCONUT_PIE_SLICE = new FoodProperties.Builder()
+                .nutrition(3).saturationMod(0.3f).fast()
+                .effect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED,600,0,false,false),1.0f).build();
 
         public static final FoodProperties FISH_SAUCE = new FoodProperties.Builder().alwaysEat().effect(new MobEffectInstance(MobEffects.HUNGER,200,0),1.0f).build();
         public static final FoodProperties SEAFOOD_SAUCE = new FoodProperties.Builder().alwaysEat().effect(new MobEffectInstance(MobEffects.WATER_BREATHING,200,0),1.0f).build();

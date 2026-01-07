@@ -1,0 +1,9 @@
+{
+  "parent": "farmersdelight:block/pie",
+  "textures": {
+    "bottom": "farmersdelight:block/pie_bottom",
+    "particle": "muffins_thaidelight:block/honey_coconut_pie_top",
+    "side": "farmersdelight:block/pie_side",
+    "top": "muffins_thaidelight:block/honey_coconut_pie_top"
+  }
+}
