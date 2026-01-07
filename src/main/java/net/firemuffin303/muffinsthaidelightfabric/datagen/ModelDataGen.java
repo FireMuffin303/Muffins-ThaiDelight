@@ -33,9 +33,11 @@ import net.minecraft.data.models.model.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import vectorwing.farmersdelight.common.block.FeastBlock;
+import vectorwing.farmersdelight.common.block.PieBlock;
 
 import java.util.Optional;
 
@@ -47,6 +49,7 @@ public class ModelDataGen extends FabricModelProvider {
     private static final TextureSlot VINE = TextureSlot.create("vine");
     private static final TextureSlot ROPE_SIDE = TextureSlot.create("rope_side");
     private static final TextureSlot ROPE_TOP = TextureSlot.create("rope_top");
+    private static final TextureSlot INNER = TextureSlot.create("inner");
 
     private static final ModelTemplate PASTLE_3D = createModItem("pastle_3d_template", TextureSlot.LAYER0);
     private static final ModelTemplate SPAWN_EGG = createMincraftItem("template_spawn_egg");
@@ -72,6 +75,20 @@ public class ModelDataGen extends FabricModelProvider {
     private static final ModelTemplate TEMPLATE_HANGING_PAPAYA_FLOWER = new ModelTemplate(Optional.of(ThaiDelight.modid("block/papaya/template_hanging_papaya_flower")),Optional.empty(),FLOWER);
 
     private static final ModelTemplate FULL_SACK_BLOCK = new ModelTemplate(Optional.of(ThaiDelight.modid("block/template_full_sack")),Optional.empty(),TextureSlot.TOP);
+
+    private static final ModelTemplate CAKE = new ModelTemplate(Optional.of(ThaiDelight.modid("block/feast/template_cake")),Optional.empty(),TextureSlot.TOP,TextureSlot.SIDE,TextureSlot.BOTTOM);
+    private static final ModelTemplate CAKE_SLICE1 = new ModelTemplate(Optional.of(ThaiDelight.modid("block/feast/template_cake_slice1")),Optional.empty(),TextureSlot.TOP,TextureSlot.SIDE,TextureSlot.BOTTOM,TextureSlot.INSIDE);
+    private static final ModelTemplate CAKE_SLICE2 = new ModelTemplate(Optional.of(ThaiDelight.modid("block/feast/template_cake_slice2")),Optional.empty(),TextureSlot.TOP,TextureSlot.SIDE,TextureSlot.BOTTOM,TextureSlot.INSIDE);
+    private static final ModelTemplate CAKE_SLICE3 = new ModelTemplate(Optional.of(ThaiDelight.modid("block/feast/template_cake_slice3")),Optional.empty(),TextureSlot.TOP,TextureSlot.SIDE,TextureSlot.BOTTOM,TextureSlot.INSIDE);
+    private static final ModelTemplate CAKE_SLICE4 = new ModelTemplate(Optional.of(ThaiDelight.modid("block/feast/template_cake_slice4")),Optional.empty(),TextureSlot.TOP,TextureSlot.SIDE,TextureSlot.BOTTOM,TextureSlot.INSIDE);
+    private static final ModelTemplate CAKE_SLICE5 = new ModelTemplate(Optional.of(ThaiDelight.modid("block/feast/template_cake_slice5")),Optional.empty(),TextureSlot.TOP,TextureSlot.SIDE,TextureSlot.BOTTOM,TextureSlot.INSIDE);
+    private static final ModelTemplate CAKE_SLICE6 = new ModelTemplate(Optional.of(ThaiDelight.modid("block/feast/template_cake_slice6")),Optional.empty(),TextureSlot.TOP,TextureSlot.SIDE,TextureSlot.BOTTOM,TextureSlot.INSIDE);
+
+    private static final ModelTemplate PIE = new ModelTemplate(Optional.of(new ResourceLocation("farmersdelight","block/pie")),Optional.empty(),TextureSlot.TOP,TextureSlot.SIDE,TextureSlot.BOTTOM,TextureSlot.PARTICLE);
+    private static final ModelTemplate PIE_SLICE1 = new ModelTemplate(Optional.of(new ResourceLocation("farmersdelight","block/pie_slice1")),Optional.empty(),TextureSlot.TOP,TextureSlot.SIDE,TextureSlot.BOTTOM,TextureSlot.PARTICLE,INNER);
+    private static final ModelTemplate PIE_SLICE2 = new ModelTemplate(Optional.of(new ResourceLocation("farmersdelight","block/pie_slice2")),Optional.empty(),TextureSlot.TOP,TextureSlot.SIDE,TextureSlot.BOTTOM,TextureSlot.PARTICLE,INNER);
+    private static final ModelTemplate PIE_SLICE3 = new ModelTemplate(Optional.of(new ResourceLocation("farmersdelight","block/pie_slice3")),Optional.empty(),TextureSlot.TOP,TextureSlot.SIDE,TextureSlot.BOTTOM,TextureSlot.PARTICLE,INNER);
+
 
     private static final BlockFamily DURIAN_PLANKS = BlockFamilies.familyBuilder(ModBlocks.DURIAN_PLANKS)
             .button(ModBlocks.DURIAN_BUTTON)
@@ -146,7 +163,19 @@ public class ModelDataGen extends FabricModelProvider {
 
         blockStateModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.PINEAPPLE_FRIED_RICE_FEAST)
                 .with(PropertyDispatch.property(FeastBlock.SERVINGS)
-                        .generate(integer -> Variant.variant().with(VariantProperties.MODEL,ThaiDelight.modid("block/pineapple_fried_rice")))
+                        .generate(integer -> Variant.variant().with(VariantProperties.MODEL,ThaiDelight.modid("block/feast/pineapple_fried_rice_feast")))
+                ).with(createHorizontalFacingDispatch())
+        );
+
+        blockStateModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.PHAT_KAPHRAO_FEAST)
+                .with(PropertyDispatch.property(FeastBlock.SERVINGS)
+                        .generate(integer -> Variant.variant().with(VariantProperties.MODEL,ThaiDelight.modid("block/feast/phat_kaphrao_feast")))
+                ).with(createHorizontalFacingDispatch())
+        );
+
+        blockStateModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.MANGO_STICKY_RICE_FEAST)
+                .with(PropertyDispatch.property(FeastBlock.SERVINGS)
+                        .generate(integer -> Variant.variant().with(VariantProperties.MODEL,ThaiDelight.modid("block/feast/mango_sticky_rice_feast")))
                 ).with(createHorizontalFacingDispatch())
         );
 
@@ -268,6 +297,96 @@ public class ModelDataGen extends FabricModelProvider {
                         )
         );
 
+        blockStateModelGenerator.blockStateOutput.accept(
+                MultiVariantGenerator.multiVariant(ModBlocks.DURIAN_CAKE)
+                        .with(PropertyDispatch.property(BlockStateProperties.BITES)
+                                .select(0, Variant.variant().with(VariantProperties.MODEL, CAKE.create(ThaiDelight.modid("block/feast/durian_cake"),
+                                        new TextureMapping()
+                                                .put(TextureSlot.TOP,ThaiDelight.modid("block/durian_cake_top"))
+                                                .put(TextureSlot.SIDE,ThaiDelight.modid("block/durian_cake_side"))
+                                                .put(TextureSlot.BOTTOM,new ResourceLocation("minecraft","block/cake_bottom")),blockStateModelGenerator.modelOutput)
+                                ))
+                                .select(1, Variant.variant().with(VariantProperties.MODEL, CAKE_SLICE1.create(ThaiDelight.modid("block/feast/durian_cake_slice1"),
+                                        new TextureMapping()
+                                                .put(TextureSlot.TOP,ThaiDelight.modid("block/durian_cake_top"))
+                                                .put(TextureSlot.SIDE,ThaiDelight.modid("block/durian_cake_side"))
+                                                .put(TextureSlot.BOTTOM,new ResourceLocation("minecraft","block/cake_bottom"))
+                                                .put(TextureSlot.INSIDE,ThaiDelight.modid("block/durian_cake_inside")),blockStateModelGenerator.modelOutput)
+                                ))
+                                .select(2, Variant.variant().with(VariantProperties.MODEL, CAKE_SLICE2.create(ThaiDelight.modid("block/feast/durian_cake_slice2"),
+                                        new TextureMapping()
+                                                .put(TextureSlot.TOP,ThaiDelight.modid("block/durian_cake_top"))
+                                                .put(TextureSlot.SIDE,ThaiDelight.modid("block/durian_cake_side"))
+                                                .put(TextureSlot.BOTTOM,new ResourceLocation("minecraft","block/cake_bottom"))
+                                                .put(TextureSlot.INSIDE,ThaiDelight.modid("block/durian_cake_inside")),blockStateModelGenerator.modelOutput)
+                                ))
+                                .select(3, Variant.variant().with(VariantProperties.MODEL, CAKE_SLICE3.create(ThaiDelight.modid("block/feast/durian_cake_slice3"),
+                                        new TextureMapping()
+                                                .put(TextureSlot.TOP,ThaiDelight.modid("block/durian_cake_top"))
+                                                .put(TextureSlot.SIDE,ThaiDelight.modid("block/durian_cake_side"))
+                                                .put(TextureSlot.BOTTOM,new ResourceLocation("minecraft","block/cake_bottom"))
+                                                .put(TextureSlot.INSIDE,ThaiDelight.modid("block/durian_cake_inside")),blockStateModelGenerator.modelOutput)))
+                                .select(4, Variant.variant().with(VariantProperties.MODEL, CAKE_SLICE4.create(ThaiDelight.modid("block/feast/durian_cake_slice4"),
+                                        new TextureMapping()
+                                                .put(TextureSlot.TOP,ThaiDelight.modid("block/durian_cake_top"))
+                                                .put(TextureSlot.SIDE,ThaiDelight.modid("block/durian_cake_side"))
+                                                .put(TextureSlot.BOTTOM,new ResourceLocation("minecraft","block/cake_bottom"))
+                                                .put(TextureSlot.INSIDE,ThaiDelight.modid("block/durian_cake_inside")),blockStateModelGenerator.modelOutput)))
+                                .select(5, Variant.variant().with(VariantProperties.MODEL, CAKE_SLICE5.create(ThaiDelight.modid("block/feast/durian_cake_slice5"),
+                                        new TextureMapping()
+                                                .put(TextureSlot.TOP,ThaiDelight.modid("block/durian_cake_top"))
+                                                .put(TextureSlot.SIDE,ThaiDelight.modid("block/durian_cake_side"))
+                                                .put(TextureSlot.BOTTOM,new ResourceLocation("minecraft","block/cake_bottom"))
+                                                .put(TextureSlot.INSIDE,ThaiDelight.modid("block/durian_cake_inside")),blockStateModelGenerator.modelOutput)))
+                                .select(6, Variant.variant().with(VariantProperties.MODEL, CAKE_SLICE6.create(ThaiDelight.modid("block/feast/durian_cake_slice6"),
+                                        new TextureMapping()
+                                                .put(TextureSlot.TOP,ThaiDelight.modid("block/durian_cake_top"))
+                                                .put(TextureSlot.SIDE,ThaiDelight.modid("block/durian_cake_side"))
+                                                .put(TextureSlot.BOTTOM,new ResourceLocation("minecraft","block/cake_bottom"))
+                                                .put(TextureSlot.INSIDE,ThaiDelight.modid("block/durian_cake_inside")),blockStateModelGenerator.modelOutput)))
+                        )
+        );
+
+        blockStateModelGenerator.blockStateOutput.accept(
+                MultiVariantGenerator.multiVariant(ModBlocks.COCONUT_PIE)
+                        .with(PropertyDispatch.property(PieBlock.BITES)
+                                .select(0,Variant.variant().with(VariantProperties.MODEL,PIE.create(ThaiDelight.modid("block/feast/coconut_pie"),
+                                        new TextureMapping()
+                                                .put(TextureSlot.TOP,ThaiDelight.modid("block/coconut_pie_top"))
+                                                .put(TextureSlot.SIDE,new ResourceLocation("farmersdelight","block/pie_side"))
+                                                .put(TextureSlot.BOTTOM,new ResourceLocation("farmersdelight","block/pie_bottom"))
+                                                .put(TextureSlot.PARTICLE,ThaiDelight.modid("block/coconut_pie_top"))
+                                        ,blockStateModelGenerator.modelOutput))
+                                )
+                                .select(1,Variant.variant().with(VariantProperties.MODEL,PIE_SLICE1.create(ThaiDelight.modid("block/feast/coconut_pie_slice1"),
+                                        new TextureMapping()
+                                                .put(TextureSlot.TOP,ThaiDelight.modid("block/coconut_pie_top"))
+                                                .put(TextureSlot.SIDE,new ResourceLocation("farmersdelight","block/pie_side"))
+                                                .put(TextureSlot.BOTTOM,new ResourceLocation("farmersdelight","block/pie_bottom"))
+                                                .put(INNER,ThaiDelight.modid("block/coconut_pie_inside"))
+                                                .put(TextureSlot.PARTICLE,ThaiDelight.modid("block/coconut_pie_top"))
+                                        ,blockStateModelGenerator.modelOutput))
+                                )
+                                .select(2,Variant.variant().with(VariantProperties.MODEL,PIE_SLICE2.create(ThaiDelight.modid("block/feast/coconut_pie_slice2"),
+                                        new TextureMapping()
+                                                .put(TextureSlot.TOP,ThaiDelight.modid("block/coconut_pie_top"))
+                                                .put(TextureSlot.SIDE,new ResourceLocation("farmersdelight","block/pie_side"))
+                                                .put(TextureSlot.BOTTOM,new ResourceLocation("farmersdelight","block/pie_bottom"))
+                                                .put(INNER,ThaiDelight.modid("block/coconut_pie_inside"))
+                                                .put(TextureSlot.PARTICLE,ThaiDelight.modid("block/coconut_pie_top"))
+                                        ,blockStateModelGenerator.modelOutput))
+                                )
+                                .select(3,Variant.variant().with(VariantProperties.MODEL,PIE_SLICE3.create(ThaiDelight.modid("block/feast/coconut_pie_slice3"),
+                                        new TextureMapping()
+                                                .put(TextureSlot.TOP,ThaiDelight.modid("block/coconut_pie_top"))
+                                                .put(TextureSlot.SIDE,new ResourceLocation("farmersdelight","block/pie_side"))
+                                                .put(TextureSlot.BOTTOM,new ResourceLocation("farmersdelight","block/pie_bottom"))
+                                                .put(INNER,ThaiDelight.modid("block/coconut_pie_inside"))
+                                                .put(TextureSlot.PARTICLE,ThaiDelight.modid("block/coconut_pie_top"))
+                                        ,blockStateModelGenerator.modelOutput))
+                                )
+                        ).with(createHorizontalFacingDispatch())
+        );
 
         createPapaya(blockStateModelGenerator);
         createMangoBlock(blockStateModelGenerator);
@@ -304,6 +423,19 @@ public class ModelDataGen extends FabricModelProvider {
                         blockStateModelGenerator.modelOutput
                 )));
 
+
+        blockStateModelGenerator.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(ModBlocks.POTTED_HOLY_BASIL,
+                TintState.NOT_TINTED.getCrossPot().create(
+                        ModBlocks.POTTED_HOLY_BASIL,
+                        TextureMapping.plant(ThaiDelight.modid("block/holy_basil/holy_basil_age3")),
+                        blockStateModelGenerator.modelOutput)));
+
+        blockStateModelGenerator.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(ModBlocks.POTTED_BASIL,
+                TintState.NOT_TINTED.getCrossPot().create(
+                        ModBlocks.POTTED_BASIL,
+                        TextureMapping.plant(ThaiDelight.modid("block/basil/basil_age3")),
+                        blockStateModelGenerator.modelOutput)));
+
         createSackBlock(blockStateModelGenerator);
 
 
@@ -314,6 +446,12 @@ public class ModelDataGen extends FabricModelProvider {
         blockStateModelGenerator.createPlant(ModBlocks.MANGO_SAPLING,ModBlocks.POTTED_MANGO_SAPLING, BlockModelGenerators.TintState.NOT_TINTED);
         blockStateModelGenerator.blockStateOutput.accept(createSimpleBlock(ModBlocks.COCONUT_SAPLING,ThaiDelight.modid("block/coconut/coconut_sapling")));
         blockStateModelGenerator.blockStateOutput.accept(createSimpleBlock(ModBlocks.COCONUT_SAPLING_CROP,ThaiDelight.modid("block/coconut/coconut_sapling_crop")));
+
+        blockStateModelGenerator.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(ModBlocks.POTTED_COCONUT_SAPLING,
+                TintState.NOT_TINTED.getCrossPot().create(
+                        ModBlocks.POTTED_COCONUT_SAPLING,
+                        TextureMapping.plant(ThaiDelight.modid("block/coconut/coconut_sapling")),
+                        blockStateModelGenerator.modelOutput)));
     }
 
     private void createSackBlock(BlockModelGenerators blockStateModelGenerator) {

@@ -34,9 +34,7 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockSetType;
-import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
-import net.minecraft.world.level.block.state.properties.WoodType;
+import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.shapes.BooleanOp;
@@ -522,8 +520,8 @@ public class ModBlocks {
             return ModItems.BASIL;
         }
     });
-    public static final Block POTTED_BASIL = register("potted_basil",Blocks.flowerPot(ModBlocks.BASIL));
     public static final Block WILD_BASIL = register("wild_basil",new WildCropBlock(MobEffects.HUNGER,6,BlockBehaviour.Properties.copy(Blocks.TALL_GRASS)));
+    public static final Block POTTED_BASIL = register("potted_basil",Blocks.flowerPot(ModBlocks.WILD_BASIL));
 
     public static final Block HOLY_BASIL = register("holy_basil",new BasilCropBlock(BlockBehaviour.Properties.copy(Blocks.POTATOES),ModLootTables.HOLY_BASIL_HARVEST,ModLootTables.HOLY_BASIL_SHEARS){
         @Override
@@ -531,8 +529,8 @@ public class ModBlocks {
             return ModItems.HOLY_BASIL;
         }
     });
-    public static final Block POTTED_HOLY_BASIL = register("potted_holy_basil",Blocks.flowerPot(ModBlocks.HOLY_BASIL));
     public static final Block WILD_HOLY_BASIL = register("wild_holy_basil",new WildCropBlock(MobEffects.HUNGER,6,BlockBehaviour.Properties.copy(Blocks.TALL_GRASS)));
+    public static final Block POTTED_HOLY_BASIL = register("potted_holy_basil",Blocks.flowerPot(ModBlocks.WILD_HOLY_BASIL));
 
 
     public static final Block BUDDING_BUTTERFLY_PEA_BLOCK = register("budding_butterfly_pea",new BuddingButterflyPeaBlock(BlockBehaviour.Properties.copy(WHEAT)));
@@ -540,7 +538,7 @@ public class ModBlocks {
     public static final Block FENCE_LOGGED_BUTTERFLY_PEA = register("fence_logged_butterfly_pea",new FenceLoggedButterflyPeaBlock(BlockBehaviour.Properties.copy(OAK_FENCE)));
     public static final Block BUTTERFLY_PEA_WALL = register("butterfly_pea_wall",new WallFlowerBlock(BlockBehaviour.Properties.copy(SPORE_BLOSSOM),MobEffects.HEAL,1));
 
-    public static final Block DURIAN_CAKE = register("durian_cake",new PieBlock(BlockBehaviour.Properties.copy(CAKE),() -> ModItems.DURIAN_CAKE_SLICE));
+    public static final Block DURIAN_CAKE = register("durian_cake",new DurianCakeBlock(BlockBehaviour.Properties.copy(CAKE)));
     public static final Block MANGO_PUDDING = register("mango_pudding",new PieBlock(BlockBehaviour.Properties.copy(CAKE),() -> ModItems.MANGO_PUDDING_SLICE));
     public static final Block COCONUT_PIE = register("coconut_pie",new PieBlock(BlockBehaviour.Properties.copy(CAKE),() -> ModItems.COCONUT_SLICE));
 
