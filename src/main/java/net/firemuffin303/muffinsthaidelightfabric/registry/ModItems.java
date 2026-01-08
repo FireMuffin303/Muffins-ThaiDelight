@@ -10,6 +10,7 @@ import net.firemuffin303.muffinsthaidelightfabric.common.block.blockEntity.Fence
 import net.firemuffin303.muffinsthaidelightfabric.common.block.butterfly_pea.FenceLoggedButterflyPeaBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.item.CoconutItem;
 import net.firemuffin303.muffinsthaidelightfabric.common.item.DragonflyBottleItem;
+import net.firemuffin303.muffinsthaidelightfabric.common.item.DyeableItem;
 import net.firemuffin303.muffinsthaidelightfabric.common.item.SackItem;
 import net.firemuffin303.muffinsthaidelightfabric.common.item.papaya.PapayaFlowerItem;
 import net.firemuffin303.muffinsthaidelightfabric.util.CommonEvents;
@@ -51,8 +52,6 @@ public class ModItems {
     public static final ResourceKey<TerraformBoatType> MANGO_BOAT_KEY = TerraformBoatTypeRegistry.createKey(ThaiDelight.modid("mango_boat"));
 
     public static final ArrayList<Item> FLAT_ITEMS = new ArrayList<>();
-    public static final Item[] KHANOM_CHAN_ARRAY;
-    public static final Item[] COCONUT_MILK_ICE_CREAM_ARRAY;
 
 
     public static final Item MORTAR = register("mortar",new BlockItem(ModBlocks.MORTAR,new Item.Properties()));
@@ -347,42 +346,12 @@ public class ModItems {
     //I KNOW IT'S NOT THAI. BUT THERE IS MORTAR AND BASIL IN THE SAME MOD. HOW COULD I MISS THIS OPPORTUNITY.
     public static final Item PESTO_SAUCE = registerFlatItem("pesto_sauce",new ConsumableItem(new Item.Properties().food(ModFood.PESTO_SAUCE).craftRemainder(Items.BOWL)));
 
-    public static final Item WHITE_KHANOM_CHAN = registerKhanomChan("white_khanom_chan");
-    public static final Item LIGHT_GRAY_KHANOM_CHAN = registerKhanomChan("light_gray_khanom_chan");
-    public static final Item GRAY_KHANOM_CHAN = registerKhanomChan("gray_khanom_chan");
-    public static final Item BLACK_KHANOM_CHAN = registerKhanomChan("black_khanom_chan");
-    public static final Item BROWN_KHANOM_CHAN = registerKhanomChan("brown_khanom_chan");
-    public static final Item RED_KHANOM_CHAN = registerKhanomChan("red_khanom_chan");
-    public static final Item ORANGE_KHANOM_CHAN = registerKhanomChan("orange_khanom_chan");
-    public static final Item YELLOW_KHANOM_CHAN = registerKhanomChan("yellow_khanom_chan");
-    public static final Item LIME_KHANOM_CHAN = registerKhanomChan("lime_khanom_chan");
-    public static final Item GREEN_KHANOM_CHAN = registerKhanomChan("green_khanom_chan");
-    public static final Item CYAN_KHANOM_CHAN = registerKhanomChan("cyan_khanom_chan");
-    public static final Item LIGHT_BLUE_KHANOM_CHAN = registerKhanomChan("light_blue_khanom_chan");
-    public static final Item BLUE_KHANOM_CHAN = registerKhanomChan("blue_khanom_chan");
-    public static final Item PURPLE_KHANOM_CHAN = registerKhanomChan("purple_khanom_chan");
-    public static final Item MAGENTA_KHANOM_CHAN = registerKhanomChan("magenta_khanom_chan");
-    public static final Item PINK_KHANOM_CHAN = registerKhanomChan("pink_khanom_chan");
 
     public static final Item BUTTERFLY_PEA_SEEDS = registerFlatItem("butterfly_pea_seeds",new ItemNameBlockItem(ModBlocks.BUDDING_BUTTERFLY_PEA_BLOCK,new Item.Properties()));
     public static final Item BUTTERFLY_PEA_TEA = registerFlatItem("butterfly_pea_tea",new Item(drinkItem()));
 
-    public static final Item COCONUT_MILK_ICE_CREAM = registerCoconutMilkIceCream("white_coconut_milk_ice_cream");
-    public static final Item LIGHT_GRAY_COCONUT_MILK_ICE_CREAM = registerCoconutMilkIceCream("light_gray_coconut_milk_ice_cream");
-    public static final Item GRAY_COCONUT_MILK_ICE_CREAM = registerCoconutMilkIceCream("gray_coconut_milk_ice_cream");
-    public static final Item BLACK_COCONUT_MILK_ICE_CREAM = registerCoconutMilkIceCream("black_coconut_milk_ice_cream");
-    public static final Item BROWN_COCONUT_MILK_ICE_CREAM = registerCoconutMilkIceCream("brown_coconut_milk_ice_cream");
-    public static final Item RED_COCONUT_MILK_ICE_CREAM = registerCoconutMilkIceCream("red_coconut_milk_ice_cream");
-    public static final Item ORANGE_COCONUT_MILK_ICE_CREAM = registerCoconutMilkIceCream("orange_coconut_milk_ice_cream");
-    public static final Item YELLOW_COCONUT_MILK_ICE_CREAM = registerCoconutMilkIceCream("yellow_coconut_milk_ice_cream");
-    public static final Item LIME_COCONUT_MILK_ICE_CREAM = registerCoconutMilkIceCream("lime_coconut_milk_ice_cream");
-    public static final Item GREEN_COCONUT_MILK_ICE_CREAM = registerCoconutMilkIceCream("green_coconut_milk_ice_cream");
-    public static final Item CYAN_COCONUT_MILK_ICE_CREAM = registerCoconutMilkIceCream("cyan_coconut_milk_ice_cream");
-    public static final Item LIGHT_BLUE_COCONUT_MILK_ICE_CREAM = registerCoconutMilkIceCream("light_blue_coconut_milk_ice_cream");
-    public static final Item BLUE_COCONUT_MILK_ICE_CREAM = registerCoconutMilkIceCream("blue_coconut_milk_ice_cream");
-    public static final Item PURPLE_COCONUT_MILK_ICE_CREAM = registerCoconutMilkIceCream("purple_coconut_milk_ice_cream");
-    public static final Item MAGENTA_COCONUT_MILK_ICE_CREAM = registerCoconutMilkIceCream("magenta_coconut_milk_ice_cream");
-    public static final Item PINK_COCONUT_MILK_ICE_CREAM = registerCoconutMilkIceCream("pink_coconut_milk_ice_cream");
+    public static final Item KHANOM_CHAN = registerFlatItem("khanom_chan",new DyeableItem(new Item.Properties().food(ModFood.MANGO_PIE)));
+    public static final Item COCONUT_MILK_ICE_CREAM = register("coconut_milk_ice_cream",new DyeableItem(bowlFoodItem(ModFood.COCONUT_MILK_ICE_CREAM)));
 
     public static final Item BANANA_IN_COCONUT_MILK = registerFlatItem("banana_in_coconut_milk",new Item(new Item.Properties()));
 
@@ -416,46 +385,6 @@ public class ModItems {
         FuelRegistry.INSTANCE.add(ModItems.LIME,200);
         FuelRegistry.INSTANCE.add(ModItems.SLICED_LIME,200);
         FuelRegistry.INSTANCE.add(ModItems.DURIAN_PEEL,200);
-    }
-
-    static {
-        KHANOM_CHAN_ARRAY = new Item[]{
-                ModItems.WHITE_KHANOM_CHAN,
-                ModItems.LIGHT_GRAY_KHANOM_CHAN,
-                ModItems.GRAY_KHANOM_CHAN,
-                ModItems.BLACK_KHANOM_CHAN,
-                ModItems.BROWN_KHANOM_CHAN,
-                ModItems.RED_KHANOM_CHAN,
-                ModItems.ORANGE_KHANOM_CHAN,
-                ModItems.YELLOW_KHANOM_CHAN,
-                ModItems.LIME_KHANOM_CHAN,
-                ModItems.GREEN_KHANOM_CHAN,
-                ModItems.CYAN_KHANOM_CHAN,
-                ModItems.LIGHT_BLUE_KHANOM_CHAN,
-                ModItems.BLUE_KHANOM_CHAN,
-                ModItems.PURPLE_KHANOM_CHAN,
-                ModItems.MAGENTA_KHANOM_CHAN,
-                ModItems.PINK_KHANOM_CHAN
-        };
-
-        COCONUT_MILK_ICE_CREAM_ARRAY = new Item[]{
-                ModItems.COCONUT_MILK_ICE_CREAM,
-                ModItems.LIGHT_GRAY_COCONUT_MILK_ICE_CREAM,
-                ModItems.GRAY_COCONUT_MILK_ICE_CREAM,
-                ModItems.BLACK_COCONUT_MILK_ICE_CREAM,
-                ModItems.BROWN_COCONUT_MILK_ICE_CREAM,
-                ModItems.RED_COCONUT_MILK_ICE_CREAM,
-                ModItems.ORANGE_COCONUT_MILK_ICE_CREAM,
-                ModItems.YELLOW_COCONUT_MILK_ICE_CREAM,
-                ModItems.LIME_COCONUT_MILK_ICE_CREAM,
-                ModItems.GREEN_COCONUT_MILK_ICE_CREAM,
-                ModItems.CYAN_COCONUT_MILK_ICE_CREAM,
-                ModItems.LIGHT_BLUE_COCONUT_MILK_ICE_CREAM,
-                ModItems.BLUE_COCONUT_MILK_ICE_CREAM,
-                ModItems.PURPLE_COCONUT_MILK_ICE_CREAM,
-                ModItems.MAGENTA_COCONUT_MILK_ICE_CREAM,
-                ModItems.PINK_COCONUT_MILK_ICE_CREAM
-        };
     }
 
 

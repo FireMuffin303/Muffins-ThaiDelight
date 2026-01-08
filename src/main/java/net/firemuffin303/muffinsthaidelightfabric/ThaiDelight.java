@@ -23,6 +23,7 @@ import net.firemuffin303.muffinsthaidelightfabric.common.entity.DragonflyEntity;
 import net.firemuffin303.muffinsthaidelightfabric.common.entity.FlowerCrabEntity;
 import net.firemuffin303.muffinsthaidelightfabric.common.event.ModVillagerTrades;
 import net.firemuffin303.muffinsthaidelightfabric.common.item.DragonflyBottleItem;
+import net.firemuffin303.muffinsthaidelightfabric.common.item.DyeableItem;
 import net.firemuffin303.muffinsthaidelightfabric.config.ThaiDelightConfig;
 import net.firemuffin303.muffinsthaidelightfabric.mixin.*;
 import net.firemuffin303.muffinsthaidelightfabric.util.BlockEntityTypeAdder;
@@ -47,10 +48,7 @@ import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.world.entity.ai.goal.GoalSelector;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.alchemy.PotionBrewing;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -386,12 +384,22 @@ public class ThaiDelight implements ModInitializer {
 
         output.accept(ModItems.BANANA_IN_COCONUT_MILK);
 
-        for(Item item : ModItems.KHANOM_CHAN_ARRAY){
-            output.accept(item);
+        Item[] dyeItems = new Item[]{
+                Items.LIGHT_GRAY_DYE,Items.GRAY_DYE,Items.BLACK_DYE,
+                Items.BROWN_DYE,Items.RED_DYE,Items.ORANGE_DYE,Items.YELLOW_DYE,
+                Items.LIME_DYE,Items.GREEN_DYE,Items.CYAN_DYE,Items.LIGHT_BLUE_DYE,
+                Items.BLUE_DYE,Items.MAGENTA_DYE,Items.PURPLE_DYE,Items.PINK_DYE
+        };
+
+        output.accept(ModItems.KHANOM_CHAN);
+        for(Item dyeItem: dyeItems){
+            output.accept(DyeableLeatherItem.dyeArmor(new ItemStack(ModItems.KHANOM_CHAN),List.of((DyeItem) dyeItem)));
         }
 
-        for(Item item : ModItems.COCONUT_MILK_ICE_CREAM_ARRAY){
-            output.accept(item);
+
+        output.accept(ModItems.COCONUT_MILK_ICE_CREAM);
+        for(Item dyeItem: dyeItems){
+            output.accept(DyeableLeatherItem.dyeArmor(new ItemStack(ModItems.COCONUT_MILK_ICE_CREAM),List.of((DyeItem) dyeItem)));
         }
     }
 

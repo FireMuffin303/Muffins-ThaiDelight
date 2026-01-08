@@ -29,6 +29,7 @@ import net.firemuffin303.muffinsthaidelightfabric.util.BlockEntityTypeAdder;
 import net.firemuffin303.muffinsthaidelightfabric.registry.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.RecipeBookCategories;
+import net.minecraft.client.color.item.ItemColors;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -45,6 +46,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.inventory.RecipeBookType;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
+import net.minecraft.world.item.DyeableLeatherItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.FoliageColor;
 import net.minecraft.world.level.block.Block;
@@ -187,6 +189,9 @@ public class ThaiDelightClient implements ClientModInitializer {
         },ModBlocks.DURIAN_LEAVES,ModBlocks.MANGO_LEAVES);
 
         ColorProviderRegistry.ITEM.register((itemStack, i) -> FoliageColor.getDefaultColor(), ModItems.DURIAN_LEAVES,ModItems.MANGO_LEAVES);
+        ColorProviderRegistry.ITEM.register((itemStack, i) -> i > 0 ? -1 : ((DyeableLeatherItem) itemStack.getItem()).getColor(itemStack), ModItems.COCONUT_MILK_ICE_CREAM);
+        ColorProviderRegistry.ITEM.register((itemStack, i) -> ((DyeableLeatherItem) itemStack.getItem()).getColor(itemStack), ModItems.KHANOM_CHAN);
+
 
         ItemProperties.register(ModItems.DRAGONFLY_BOTTLE, ThaiDelight.modid("variant"), new ClampedItemPropertyFunction() {
             @Override

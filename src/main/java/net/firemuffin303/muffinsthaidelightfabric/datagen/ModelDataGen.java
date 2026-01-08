@@ -591,6 +591,11 @@ public class ModelDataGen extends FabricModelProvider {
         itemModelGenerator.generateFlatItem(ModItems.COCONUT_BOAT,ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.COCONUT_CHEST_BOAT,ModelTemplates.FLAT_ITEM);
 
+        itemModelGenerator.generateLayeredItem(
+                ModelLocationUtils.getModelLocation(ModItems.COCONUT_MILK_ICE_CREAM),
+                ThaiDelight.modid("item/coconut_milk_ice_cream"),
+                ThaiDelight.modid("item/coconut_milk_ice_cream_bowl"));
+
     }
 
     private static void skipItemBlock(BlockModelGenerators blockStateModelGenerator){

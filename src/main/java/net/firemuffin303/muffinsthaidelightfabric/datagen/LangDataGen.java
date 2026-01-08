@@ -2,7 +2,6 @@ package net.firemuffin303.muffinsthaidelightfabric.datagen;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
-import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModItems;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModMobEffects;
 
@@ -211,7 +210,7 @@ public class LangDataGen extends FabricLanguageProvider {
         translationBuilder.add(ModItems.BAMBOO_SHOOT_SOUP,"Bamboo Shoot Soup");
         translationBuilder.add(ModItems.STEAMED_BAMBOO_SHOOT,"Steamed Bamboo Shoot");
         translationBuilder.add(ModItems.BANANA_IN_COCONUT_MILK,"Banana in Coconut Milk");
-        translationBuilder.add(ModItems.WHITE_KHANOM_CHAN,"Khanom Chan");
+        translationBuilder.add(ModItems.KHANOM_CHAN,"Khanom Chan");
         translationBuilder.add(ModItems.COCONUT_MILK_ICE_CREAM,"Coconut Milk Ice Cream");
 
 
@@ -466,7 +465,7 @@ public class LangDataGen extends FabricLanguageProvider {
             translationBuilder.add(ModItems.BAMBOO_SHOOT_SOUP,"แกงหน่อไม้");
             translationBuilder.add(ModItems.STEAMED_BAMBOO_SHOOT,"ห่อหมก");
             translationBuilder.add(ModItems.BANANA_IN_COCONUT_MILK,"กล้วยบวชชี");
-            translationBuilder.add(ModItems.WHITE_KHANOM_CHAN,"ขนมชั้น");
+            translationBuilder.add(ModItems.KHANOM_CHAN,"ขนมชั้น");
             translationBuilder.add(ModItems.COCONUT_MILK_ICE_CREAM,"ไอศกรีมกะทิ");
 
 
