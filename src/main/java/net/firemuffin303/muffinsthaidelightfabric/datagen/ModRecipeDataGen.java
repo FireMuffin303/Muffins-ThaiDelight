@@ -2,6 +2,7 @@ package net.firemuffin303.muffinsthaidelightfabric.datagen;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
+import net.fabricmc.fabric.api.tag.convention.v1.ConventionalItemTags;
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
 import net.firemuffin303.muffinsthaidelightfabric.common.recipe.mortar.MortarRecipeBookTab;
 import net.firemuffin303.muffinsthaidelightfabric.datagen.builder.MortarRecipeBuilder;
@@ -9,6 +10,7 @@ import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModItems;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModTags;
 import net.minecraft.data.recipes.*;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -47,8 +49,45 @@ public class ModRecipeDataGen extends FabricRecipeProvider {
     }
 
     private void craft(Consumer<FinishedRecipe> exporter){
-        RecipeProvider.planksFromLog(exporter,ModBlocks.DURIAN_PLANKS, ModTags.DURIAN_LOGS_ITEM,4);
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModBlocks.MORTAR)
+                .define('A',Items.BRICK)
+                .define('B',Items.STICK)
+                .pattern("ABA")
+                .pattern("AAA")
+                .unlockedBy(getHasName(Items.STICK),has(Items.STICK))
+                .save(exporter,ThaiDelight.modid("crafting/"+getItemName(ModBlocks.MORTAR)));
+
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS,ModItems.SACK)
+                .define('S', Items.STRING)
+                .define('C', vectorwing.farmersdelight.common.registry.ModItems.CANVAS.get())
+                .pattern(" S ")
+                .pattern("C C")
+                .pattern("CCC")
+                .unlockedBy(getHasName(vectorwing.farmersdelight.common.registry.ModItems.CANVAS.get()),has(vectorwing.farmersdelight.common.registry.ModItems.CANVAS.get()))
+                .save(exporter,ThaiDelight.modid("crafting/"+getItemName(ModItems.SACK)));
+
+        bigPackingCraft(ModItems.LIME_CRATE,1,ModItems.LIME,exporter);
+        bigPackingCraft(ModItems.PEPPER_CRATE,1,ModItems.PEPPER,exporter);
+        bigPackingCraft(ModItems.RAW_PAPAYA_CRATE,1,ModItems.RAW_PAPAYA,exporter);
+        bigPackingCraft(ModItems.PAPAYA_CRATE,1,ModItems.PAPAYA,exporter);
+        bigPackingCraft(ModItems.HOLY_BASIL_CRATE,1,ModItems.HOLY_BASIL,exporter);
+        bigPackingCraft(ModItems.BASIL_CRATE,1,ModItems.BASIL,exporter);
+        bigPackingCraft(ModItems.BAMBOO_SHOOT_CRATE,1,ModItems.BAMBOO_SHOOT,exporter);
+        bigPackingCraft(ModItems.BUTTERFLY_PEA_CRATE,1,ModItems.BUTTERFLY_PEA,exporter);
+
+        bigPackingCraft(ModItems.DURIAN_PEEL_BLOCK,1,ModItems.DURIAN_PEEL,exporter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT,ModItems.DURIAN_HELMET)
+                .define('L',Items.LEATHER_HELMET)
+                .define('D', ModItems.DURIAN_PEEL)
+                .pattern(" D ")
+                .pattern("DLD")
+                .unlockedBy(getHasName(ModItems.DURIAN_PEEL),has(ModItems.DURIAN_PEEL))
+                .save(exporter,ThaiDelight.modid("crafting/"+getItemName(ModItems.DURIAN_HELMET)));
+
         RecipeProvider.woodFromLogs(exporter,ModBlocks.DURIAN_WOOD, ModBlocks.DURIAN_LOG);
+        RecipeProvider.planksFromLog(exporter,ModBlocks.DURIAN_PLANKS, ModTags.DURIAN_LOGS_ITEM,4);
         RecipeProvider.woodenBoat(exporter,ModItems.DURIAN_BOAT,ModBlocks.DURIAN_PLANKS);
         RecipeProvider.chestBoat(exporter,ModItems.DURIAN_CHEST_BOAT,ModItems.DURIAN_BOAT);
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC,ModItems.DURIAN_CABINET)
@@ -87,15 +126,7 @@ public class ModRecipeDataGen extends FabricRecipeProvider {
                 .save(exporter,ThaiDelight.modid("crafting/"+getItemName(ModItems.COCONUT_CABINET)));
 
 
-        bigPackingCraft(Item.byBlock(ModBlocks.LIME_CRATE),1,ModItems.LIME,exporter);
-        bigPackingCraft(Item.byBlock(ModBlocks.PEPPER_CRATE),1,ModItems.PEPPER,exporter);
-        bigPackingCraft(Item.byBlock(ModBlocks.RAW_PAPAYA_CRATE),1,ModItems.RAW_PAPAYA,exporter);
-        bigPackingCraft(Item.byBlock(ModBlocks.PAPAYA_CRATE),1,ModItems.PAPAYA,exporter);
-        bigPackingCraft(ModItems.HOLY_BASIL_CRATE,1,ModItems.HOLY_BASIL,exporter);
-        bigPackingCraft(ModItems.BASIL_CRATE,1,ModItems.BASIL,exporter);
-        bigPackingCraft(ModItems.BAMBOO_SHOOT_CRATE,1,ModItems.BAMBOO_SHOOT,exporter);
-        bigPackingCraft(ModItems.BUTTERFLY_PEA_CRATE,1,ModItems.BUTTERFLY_PEA,exporter);
-        bigPackingCraft(ModItems.DURIAN_PEEL_BLOCK,1,ModItems.DURIAN_PEEL,exporter);
+
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,Items.BLUE_DYE,2).requires(ModItems.BUTTERFLY_PEA)
                 .unlockedBy(getHasName(ModItems.BUTTERFLY_PEA),has(ModItems.BUTTERFLY_PEA))
@@ -150,22 +181,6 @@ public class ModRecipeDataGen extends FabricRecipeProvider {
                 .unlockedBy(getHasName(Items.BOWL),has(Items.BOWL))
                 .save(exporter,ThaiDelight.modid("crafting/"+getItemName(vectorwing.farmersdelight.common.registry.ModItems.MIXED_SALAD.get())+"by_raw_papaya"));
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModBlocks.MORTAR)
-                .define('A',Items.BRICK)
-                .define('B',Items.STICK)
-                .pattern("ABA")
-                .pattern("AAA")
-                .unlockedBy(getHasName(Items.STICK),has(Items.STICK))
-                .save(exporter,ThaiDelight.modid("crafting/"+getItemName(ModBlocks.MORTAR)));
-
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS,ModItems.SACK)
-                .define('A', vectorwing.farmersdelight.common.registry.ModItems.CANVAS.get())
-                .define('S',Items.STRING)
-                .pattern("ASA")
-                .pattern("A A")
-                .pattern(" A ")
-                .unlockedBy(getHasName(vectorwing.farmersdelight.common.registry.ModItems.CANVAS.get()),has(vectorwing.farmersdelight.common.registry.ModItems.CANVAS.get()))
-                .save(exporter,ThaiDelight.modid("crafting/"+getItemName(ModItems.SACK)));
 
     }
 

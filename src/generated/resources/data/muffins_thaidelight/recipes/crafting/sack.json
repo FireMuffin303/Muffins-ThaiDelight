@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "A": {
+    "C": {
       "item": "farmersdelight:canvas"
     },
     "S": {
@@ -10,9 +10,9 @@
     }
   },
   "pattern": [
-    "ASA",
-    "A A",
-    " A "
+    " S ",
+    "C C",
+    "CCC"
   ],
   "result": {
     "item": "muffins_thaidelight:sack"
