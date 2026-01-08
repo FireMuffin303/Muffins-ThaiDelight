@@ -29,12 +29,14 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.stats.Stats;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.ItemLike;
@@ -568,7 +570,7 @@ public class ModBlocks {
 
 
     public static final Block MANGO_PUDDING = register("mango_pudding",new PieBlock(BlockBehaviour.Properties.copy(CAKE),() -> ModItems.MANGO_PUDDING_SLICE));
-    public static final Block COCONUT_PIE = register("coconut_pie",new PieBlock(BlockBehaviour.Properties.copy(CAKE),() -> ModItems.COCONUT_SLICE){
+    public static final Block COCONUT_PIE = register("coconut_pie",new PieBlock(BlockBehaviour.Properties.copy(CAKE),() -> ModItems.COCONUT_PIE_SLICE){
         @Override
         public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
             ItemStack itemStack = player.getItemInHand(hand);
@@ -581,6 +583,9 @@ public class ModBlocks {
             if(itemStack.is(Items.HONEY_BOTTLE)){
                 level.setBlock(pos,ModBlocks.HONEY_COCONUT_PIE.defaultBlockState().setValue(BITES,state.getValue(BITES)).setValue(FACING,state.getValue(FACING)), 3);
                 level.playSound(null, pos, SoundEvents.HONEY_BLOCK_PLACE, SoundSource.PLAYERS, 0.8F, 0.8F);
+                player.awardStat(Stats.ITEM_USED.get(itemStack.getItem()));
+                player.setItemInHand(hand, ItemUtils.createFilledResult(itemStack,player,new ItemStack(Items.GLASS_BOTTLE)));
+
                 return InteractionResult.SUCCESS;
             }
 
@@ -591,6 +596,7 @@ public class ModBlocks {
 
     public static final Block PHAT_KAPHRAO_FEAST = register("phat_kaphrao_feast",new FeastBlock(BlockBehaviour.Properties.copy(CAKE),() -> ModItems.PHAT_KAPHRAO,true));
     public static final Block MANGO_STICKY_RICE_FEAST = register("mango_sticky_rice_feast",new FeastBlock(BlockBehaviour.Properties.copy(CAKE),() -> ModItems.MANGO_STICKY_RICE,true));
+    public static final Block OMELETTE_FEAST = register("omelette",new FeastBlock(BlockBehaviour.Properties.copy(CAKE),() -> ModItems.OMELETTE,false));
     public static final Block BASIL_OMELETTE_FEAST = register("basil_omelette",new FeastBlock(BlockBehaviour.Properties.copy(CAKE),() -> ModItems.BASIL_OMELETTE,true));
     public static final Block PINEAPPLE_FRIED_RICE_FEAST = register("pineapple_fried_rice_feast",new FeastBlock(BlockBehaviour.Properties.copy(CAKE),() -> ModItems.PINEAPPLE_FRIED_RICE,true));
 

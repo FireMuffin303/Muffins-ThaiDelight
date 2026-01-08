@@ -50,6 +50,7 @@ public class ModelDataGen extends FabricModelProvider {
     private static final TextureSlot ROPE_SIDE = TextureSlot.create("rope_side");
     private static final TextureSlot ROPE_TOP = TextureSlot.create("rope_top");
     private static final TextureSlot INNER = TextureSlot.create("inner");
+    private static final TextureSlot OMELETTE = TextureSlot.create("omelette");
 
     private static final ModelTemplate PASTLE_3D = createModItem("pastle_3d_template", TextureSlot.LAYER0);
     private static final ModelTemplate SPAWN_EGG = createMincraftItem("template_spawn_egg");
@@ -88,6 +89,8 @@ public class ModelDataGen extends FabricModelProvider {
     private static final ModelTemplate PIE_SLICE1 = new ModelTemplate(Optional.of(new ResourceLocation("farmersdelight","block/pie_slice1")),Optional.empty(),TextureSlot.TOP,TextureSlot.SIDE,TextureSlot.BOTTOM,TextureSlot.PARTICLE,INNER);
     private static final ModelTemplate PIE_SLICE2 = new ModelTemplate(Optional.of(new ResourceLocation("farmersdelight","block/pie_slice2")),Optional.empty(),TextureSlot.TOP,TextureSlot.SIDE,TextureSlot.BOTTOM,TextureSlot.PARTICLE,INNER);
     private static final ModelTemplate PIE_SLICE3 = new ModelTemplate(Optional.of(new ResourceLocation("farmersdelight","block/pie_slice3")),Optional.empty(),TextureSlot.TOP,TextureSlot.SIDE,TextureSlot.BOTTOM,TextureSlot.PARTICLE,INNER);
+
+    private static final ModelTemplate TEMPLATE_OMELETTE = new ModelTemplate(Optional.of(ThaiDelight.modid("block/feast/template_omelette")),Optional.empty(),OMELETTE);
 
 
     private static final BlockFamily DURIAN_PLANKS = BlockFamilies.familyBuilder(ModBlocks.DURIAN_PLANKS)
@@ -170,6 +173,26 @@ public class ModelDataGen extends FabricModelProvider {
         blockStateModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.PHAT_KAPHRAO_FEAST)
                 .with(PropertyDispatch.property(FeastBlock.SERVINGS)
                         .generate(integer -> Variant.variant().with(VariantProperties.MODEL,ThaiDelight.modid("block/feast/phat_kaphrao_feast")))
+                ).with(createHorizontalFacingDispatch())
+        );
+
+        ResourceLocation omelette = TEMPLATE_OMELETTE.create(
+                ThaiDelight.modid("block/feast/omelette_feast"),
+                new TextureMapping().put(OMELETTE,ThaiDelight.modid("block/omelette")), blockStateModelGenerator.modelOutput);
+
+        blockStateModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.OMELETTE_FEAST)
+                .with(PropertyDispatch.property(FeastBlock.SERVINGS)
+                        .generate(integer -> Variant.variant().with(VariantProperties.MODEL,omelette))
+                ).with(createHorizontalFacingDispatch())
+        );
+
+        ResourceLocation basil_omelette = TEMPLATE_OMELETTE.create(
+                ThaiDelight.modid("block/feast/basil_omelette_feast"),
+                new TextureMapping().put(OMELETTE,ThaiDelight.modid("block/basil_omelette")), blockStateModelGenerator.modelOutput);
+
+        blockStateModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.BASIL_OMELETTE_FEAST)
+                .with(PropertyDispatch.property(FeastBlock.SERVINGS)
+                        .generate(integer -> Variant.variant().with(VariantProperties.MODEL,basil_omelette))
                 ).with(createHorizontalFacingDispatch())
         );
 
@@ -446,6 +469,8 @@ public class ModelDataGen extends FabricModelProvider {
                                 )
                         ).with(createHorizontalFacingDispatch())
         );
+
+
 
         createPapaya(blockStateModelGenerator);
         createMangoBlock(blockStateModelGenerator);

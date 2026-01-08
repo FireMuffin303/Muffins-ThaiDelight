@@ -3,7 +3,7 @@
 	"credit": "Made with Blockbench",
 	"textures": {
 		"0": "muffins_thaidelight:block/phat_kaphrao_feast",
-		"1": "muffins_thaidelight:block/omelette",
+		"1": "muffins_thaidelight:block/fried_egg",
 		"tray_side": "farmersdelight:block/tray_bottom",
 		"tray_top": "muffins_thaidelight:block/leaf_tray_top",
 		"particle": "muffins_thaidelight:block/phat_kaphrao_feast"

@@ -314,6 +314,8 @@ public class ModItems {
         }
     });
 
+    public static final Item OMELETTE_FEAST = registerFlatItem("omelette_feast",new BlockItem(ModBlocks.OMELETTE_FEAST,new Item.Properties()));
+    public static final Item OMELETTE = registerFlatItem("omelette",new Item(new Item.Properties()));
     public static final Item BASIL_OMELETTE_FEAST = registerFlatItem("basil_omelette_feast",new BlockItem(ModBlocks.BASIL_OMELETTE_FEAST,new Item.Properties()));
     public static final Item BASIL_OMELETTE = registerFlatItem("basil_omelette",new Item(new Item.Properties()));
 
