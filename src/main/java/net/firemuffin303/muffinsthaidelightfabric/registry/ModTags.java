@@ -15,6 +15,12 @@ public class ModTags {
     public static final TagKey<Item> PAPAYA = TagKey.create(Registries.ITEM, new ResourceLocation(ThaiDelight.MOD_ID,"papaya"));
     public static final TagKey<Item> RIPE_PAPAYA = TagKey.create(Registries.ITEM, new ResourceLocation(ThaiDelight.MOD_ID,"ripe_papaya"));
     public static final TagKey<Item> RAW_PAPAYA = TagKey.create(Registries.ITEM, new ResourceLocation(ThaiDelight.MOD_ID,"raw_papaya"));
+    public static final TagKey<Item> DURIAN = TagKey.create(Registries.ITEM,ThaiDelight.modid("durian"));
+    public static final TagKey<Item> MANGO = TagKey.create(Registries.ITEM,ThaiDelight.modid("mango"));
+    public static final TagKey<Item> COCONUT = TagKey.create(Registries.ITEM,ThaiDelight.modid("coconut"));
+    public static final TagKey<Item> PINEAPPLE = TagKey.create(Registries.ITEM,ThaiDelight.modid("pineapple"));
+    public static final TagKey<Item> BANANA = TagKey.create(Registries.ITEM,ThaiDelight.modid("banana"));
+
     public static final TagKey<Item> FLOWER_CRAB_MEAT = TagKey.create(Registries.ITEM, new ResourceLocation(ThaiDelight.MOD_ID,"flower_crab_meat"));
 
     public static final TagKey<Item> FLOWER_CRAB_FOOD = TagKey.create(Registries.ITEM, new ResourceLocation(ThaiDelight.MOD_ID,"flower_crab_food"));
@@ -24,6 +30,9 @@ public class ModTags {
     public static final TagKey<Item> DURIAN_LOGS_ITEM = TagKey.create(Registries.ITEM,ThaiDelight.modid("durian_logs"));
     public static final TagKey<Item> MANGO_LOGS_ITEM = TagKey.create(Registries.ITEM,ThaiDelight.modid("mango_logs"));
     public static final TagKey<Item> COCONUT_LOGS_ITEM = TagKey.create(Registries.ITEM,ThaiDelight.modid("coconut_logs"));
+
+    public static final TagKey<Item> COMMON_MILKS = TagKey.create(Registries.ITEM,new ResourceLocation("c","milks"));
+    public static final TagKey<Item> COMMON_MEATS =  TagKey.create(Registries.ITEM,new ResourceLocation("c","foods/cooked_meats"));
 
     public static final TagKey<Block> FLOWER_CRAB_SPAWNABLE_ON = TagKey.create(Registries.BLOCK,ThaiDelight.modid("flower_crab_spawnable_on"));
 

@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_coconut_leaf_block": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "muffins_thaidelight:coconut_leaf_block"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "muffins_thaidelight:crafting/coconut_leaf_mat"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_coconut_leaf_block",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "muffins_thaidelight:crafting/coconut_leaf_mat"
+    ]
+  },
+  "sends_telemetry_event": false
+}

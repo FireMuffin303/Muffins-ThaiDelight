@@ -93,7 +93,7 @@ public class ModelDataGen extends FabricModelProvider {
     private static final ModelTemplate TEMPLATE_OMELETTE = new ModelTemplate(Optional.of(ThaiDelight.modid("block/feast/template_omelette")),Optional.empty(),OMELETTE);
 
 
-    private static final BlockFamily DURIAN_PLANKS = BlockFamilies.familyBuilder(ModBlocks.DURIAN_PLANKS)
+    public static final BlockFamily DURIAN_PLANKS = BlockFamilies.familyBuilder(ModBlocks.DURIAN_PLANKS)
             .button(ModBlocks.DURIAN_BUTTON)
             .fence(ModBlocks.DURIAN_FENCE)
             .fenceGate(ModBlocks.DURIAN_FENCE_GATE)
@@ -107,7 +107,7 @@ public class ModelDataGen extends FabricModelProvider {
             .recipeUnlockedBy("has_planks")
             .getFamily();
 
-    private static final BlockFamily COCONUT_PLANKS = BlockFamilies.familyBuilder(ModBlocks.COCONUT_PLANKS)
+    public static final BlockFamily COCONUT_PLANKS = BlockFamilies.familyBuilder(ModBlocks.COCONUT_PLANKS)
             .button(ModBlocks.COCONUT_BUTTON)
             .fence(ModBlocks.COCONUT_FENCE)
             .fenceGate(ModBlocks.COCONUT_FENCE_GATE)
@@ -121,7 +121,7 @@ public class ModelDataGen extends FabricModelProvider {
             .recipeUnlockedBy("has_planks")
             .getFamily();
 
-    private static final BlockFamily MANGO_PLANKS = BlockFamilies.familyBuilder(ModBlocks.MANGO_PLANKS)
+    public static final BlockFamily MANGO_PLANKS = BlockFamilies.familyBuilder(ModBlocks.MANGO_PLANKS)
             .button(ModBlocks.MANGO_BUTTON)
             .fence(ModBlocks.MANGO_FENCE)
             .fenceGate(ModBlocks.MANGO_FENCE_GATE)

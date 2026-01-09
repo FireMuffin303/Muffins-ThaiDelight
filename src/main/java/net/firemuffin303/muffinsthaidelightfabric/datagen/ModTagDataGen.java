@@ -67,6 +67,16 @@ public class ModTagDataGen {
                     .addTag(ModTags.RIPE_PAPAYA)
                     .addTag(ModTags.RAW_PAPAYA);
 
+            getOrCreateTagBuilder(DURIAN)
+                    .add(ModItems.DURIAN,ModItems.SMALL_DURIAN);
+
+            getOrCreateTagBuilder(MANGO)
+                    .add(ModItems.MANGO,ModItems.MANGO_SLICE);
+
+            getOrCreateTagBuilder(COCONUT)
+                    .add(ModItems.COCONUT,ModItems.STRIPPED_COCONUT,ModItems.COCONUT_SLICE);
+
+
             getOrCreateTagBuilder(ModTags.FLOWER_CRAB_MEAT)
                     .add(ModItems.CRAB_MEAT)
                     .add(ModItems.COOKED_CRAB_MEAT)

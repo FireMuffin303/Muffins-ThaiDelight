@@ -1,0 +1,30 @@
+{
+  "type": "farmersdelight:cooking",
+  "container": {
+    "item": "minecraft:bowl"
+  },
+  "cookingtime": 200,
+  "experience": 1.0,
+  "ingredients": [
+    {
+      "item": "minecraft:egg"
+    },
+    {
+      "item": "minecraft:egg"
+    },
+    {
+      "item": "muffins_thaidelight:fish_sauce_bottle"
+    },
+    {
+      "item": "muffins_thaidelight:basil"
+    },
+    {
+      "item": "muffins_thaidelight:pepper"
+    }
+  ],
+  "recipe_book_tab": "meals",
+  "result": {
+    "count": 1,
+    "item": "muffins_thaidelight:basil_omelette_feast"
+  }
+}

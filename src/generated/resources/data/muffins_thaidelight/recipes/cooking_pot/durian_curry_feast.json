@@ -1,0 +1,30 @@
+{
+  "type": "farmersdelight:cooking",
+  "container": {
+    "item": "minecraft:bowl"
+  },
+  "cookingtime": 200,
+  "experience": 1.0,
+  "ingredients": [
+    {
+      "tag": "muffins_thaidelight:durian"
+    },
+    {
+      "item": "muffins_thaidelight:coconut_milk_bottle"
+    },
+    {
+      "item": "muffins_thaidelight:pepper"
+    },
+    {
+      "item": "muffins_thaidelight:fish_sauce_bottle"
+    },
+    {
+      "tag": "c:foods/cooked_meats"
+    }
+  ],
+  "recipe_book_tab": "meals",
+  "result": {
+    "count": 1,
+    "item": "muffins_thaidelight:durian_curry"
+  }
+}
