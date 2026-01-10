@@ -8,6 +8,7 @@ import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRe
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
+import net.fabricmc.fabric.api.resource.conditions.v1.ResourceConditions;
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
 import net.firemuffin303.muffinsthaidelightfabric.common.entity.DragonflyEntity;
 import net.firemuffin303.muffinsthaidelightfabric.common.entity.FlowerCrabEntity;
@@ -57,6 +58,9 @@ import java.util.*;
 import java.util.stream.Stream;
 
 public class CommonEvents {
+    public static ResourceLocation HAS_PINEAPPLE = ThaiDelight.modid("has_pineapple");
+    public static ResourceLocation HAS_BANANA = ThaiDelight.modid("has_banana");
+
 
     public static void setVillagerItem(){
         Map<Item,Integer> villagerFoodPoint = new HashMap<>(VillagerAccessor.getFoodPoints());
@@ -331,6 +335,11 @@ public class CommonEvents {
             return Optional.of(mutableBlockPos);
         }
         return Optional.empty();
+    }
+
+    public static void setResourceConditions(){
+        ResourceConditions.register(HAS_PINEAPPLE, jsonObject -> BuiltInRegistries.ITEM.stream().anyMatch(item -> item.builtInRegistryHolder().is(ModTags.PINEAPPLE)));
+        ResourceConditions.register(HAS_BANANA,jsonObject -> BuiltInRegistries.ITEM.stream().anyMatch(item -> item.builtInRegistryHolder().is(ModTags.BANANA)));
     }
 
 }

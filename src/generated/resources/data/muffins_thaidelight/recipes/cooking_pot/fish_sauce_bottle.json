@@ -10,8 +10,8 @@
       "tag": "c:raw_fishes"
     }
   ],
-  "recipe_book_tab": "drinks",
   "result": {
+    "count": 1,
     "item": "muffins_thaidelight:fish_sauce_bottle"
   }
 }

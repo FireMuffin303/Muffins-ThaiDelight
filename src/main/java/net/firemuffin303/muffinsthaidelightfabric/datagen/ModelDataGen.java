@@ -539,13 +539,21 @@ public class ModelDataGen extends FabricModelProvider {
     }
 
     private void createSackBlock(BlockModelGenerators blockStateModelGenerator) {
-        ResourceLocation closeModel = FULL_SACK_BLOCK.create(ThaiDelight.modid("block/full_sack"),new TextureMapping().put(TextureSlot.TOP,ThaiDelight.modid("block/full_sack_top")),blockStateModelGenerator.modelOutput);
-        ResourceLocation openModel =  FULL_SACK_BLOCK.create(ThaiDelight.modid("block/full_sack_open"),new TextureMapping().put(TextureSlot.TOP,ThaiDelight.modid("block/full_sack_top_open")),blockStateModelGenerator.modelOutput);
+        //ResourceLocation closeModel = FULL_SACK_BLOCK.create(ThaiDelight.modid("block/full_sack"),new TextureMapping().put(TextureSlot.TOP,ThaiDelight.modid("block/full_sack_top")),blockStateModelGenerator.modelOutput);
+        //ResourceLocation openModel =  FULL_SACK_BLOCK.create(ThaiDelight.modid("block/full_sack_open"),new TextureMapping().put(TextureSlot.TOP,ThaiDelight.modid("block/full_sack_top_open")),blockStateModelGenerator.modelOutput);
 
         blockStateModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.SACK)
-                        .with(PropertyDispatch.property(SackBlock.OPEN)
-                                .select(true,Variant.variant().with(VariantProperties.MODEL,openModel))
-                                .select(false,Variant.variant().with(VariantProperties.MODEL,closeModel))
+                        .with(PropertyDispatch.properties(BlockStateProperties.OPEN,SackBlock.FILLED)
+                                .generate((open,fullness) -> {
+                                    if(fullness){
+                                        if(open){
+                                            return Variant.variant().with(VariantProperties.MODEL,ThaiDelight.modid("block/sack/sack_full_open"));
+                                        }
+                                        return Variant.variant().with(VariantProperties.MODEL,ThaiDelight.modid("block/sack/sack_full_close"));
+                                    }
+                                    return Variant.variant().with(VariantProperties.MODEL,ThaiDelight.modid("block/sack/sack"));
+
+                                })
                         )
                 .with(createHorizontalFacingDispatch()));
     }

@@ -1,7 +1,10 @@
 {
   "type": "farmersdelight:cooking",
+  "container": {
+    "item": "minecraft:glass_bottle"
+  },
   "cookingtime": 200,
-  "experience": 1.0,
+  "experience": 0.35,
   "ingredients": [
     {
       "tag": "muffins_thaidelight:ripe_papaya"
@@ -15,6 +18,7 @@
   ],
   "recipe_book_tab": "drinks",
   "result": {
+    "count": 1,
     "item": "muffins_thaidelight:papaya_juice"
   }
 }

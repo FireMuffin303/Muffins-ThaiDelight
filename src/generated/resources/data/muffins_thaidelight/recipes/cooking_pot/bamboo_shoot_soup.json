@@ -1,0 +1,33 @@
+{
+  "type": "farmersdelight:cooking",
+  "container": {
+    "item": "minecraft:bowl"
+  },
+  "cookingtime": 200,
+  "experience": 1.0,
+  "ingredients": [
+    {
+      "item": "muffins_thaidelight:bamboo_shoot"
+    },
+    {
+      "item": "muffins_thaidelight:pepper"
+    },
+    {
+      "item": "muffins_thaidelight:fermented_fish"
+    },
+    {
+      "item": "farmersdelight:pumpkin_slice"
+    },
+    {
+      "item": "muffins_thaidelight:basil"
+    },
+    {
+      "item": "minecraft:brown_mushroom"
+    }
+  ],
+  "recipe_book_tab": "meals",
+  "result": {
+    "count": 1,
+    "item": "muffins_thaidelight:bamboo_shoot_soup"
+  }
+}

@@ -1,18 +1,24 @@
 package net.firemuffin303.muffinsthaidelightfabric.common.block;
 
+import com.mojang.logging.LogUtils;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.blockEntity.SackBlockEntity;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
+import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.piglin.PiglinAi;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -25,6 +31,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.storage.loot.LootParams;
@@ -40,6 +47,8 @@ public class SackBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
     private static final VoxelShape BOX = Block.box(1.0,0.0,1.0,15.0,16.0,15.0);
     public static final DirectionProperty HORIZONTAL_FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+    public static final BooleanProperty FILLED = BooleanProperty.create("filled");
+
     public static final BooleanProperty OPEN = BlockStateProperties.OPEN;
     public static final ResourceLocation CONTENTS = new ResourceLocation("contents");
     public SackBlock(Properties properties) {
@@ -47,6 +56,7 @@ public class SackBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(HORIZONTAL_FACING,Direction.NORTH)
                 .setValue(WATERLOGGED,false)
+                .setValue(FILLED,false)
                 .setValue(OPEN,false)
         );
     }
@@ -125,17 +135,41 @@ public class SackBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
         return blockState.rotate(mirror.getRotation(blockState.getValue(HORIZONTAL_FACING)));
     }
 
+    @Override
+    public void onPlace(BlockState blockState, Level level, BlockPos blockPos, BlockState blockState2, boolean bl) {
+        if(blockState2.is(blockState.getBlock())){
+            return;
+        }
+    }
+
     public BlockState getStateForPlacement(BlockPlaceContext blockPlaceContext) {
         LevelAccessor levelAccessor = blockPlaceContext.getLevel();
         BlockPos blockPos = blockPlaceContext.getClickedPos();
+
+        CompoundTag compoundTag = BlockItem.getBlockEntityData(blockPlaceContext.getItemInHand());
+        int amount = 0;
+
+        if(compoundTag != null){
+            ListTag itemListTag = (ListTag) compoundTag.get("Items");
+            if(itemListTag != null && !itemListTag.isEmpty()){
+                for(int i = 0; i < itemListTag.size(); i++){
+                    ItemStack itemStack = ItemStack.of(itemListTag.getCompound(i));
+                    if(itemStack.getCount() >= itemStack.getMaxStackSize()){
+                        amount++;
+                    }
+                }
+            }
+        }
+
         return this.defaultBlockState()
                 .setValue(WATERLOGGED, levelAccessor.getFluidState(blockPos).getType() == Fluids.WATER)
-                .setValue(HORIZONTAL_FACING, blockPlaceContext.getHorizontalDirection().getOpposite());
+                .setValue(HORIZONTAL_FACING, blockPlaceContext.getHorizontalDirection().getOpposite())
+                .setValue(FILLED,amount >= 5);
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(HORIZONTAL_FACING,WATERLOGGED,OPEN);
+        builder.add(HORIZONTAL_FACING,WATERLOGGED,OPEN,FILLED);
     }
 
     @Override
@@ -155,5 +189,22 @@ public class SackBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
     @Override
     public @Nullable BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
         return new SackBlockEntity(blockPos,blockState);
+    }
+
+    public static enum SackFullness implements StringRepresentable {
+        EMPTY("empty"),
+        HALF("half"),
+        FULL("full");
+
+        String name;
+
+        SackFullness(String id){
+            this.name = id;
+        }
+
+        @Override
+        public String getSerializedName() {
+            return this.name;
+        }
     }
 }

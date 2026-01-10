@@ -45,6 +45,7 @@ public class LangDataGen extends FabricLanguageProvider {
 
         translationBuilder.add("farmersdelight.tooltip.papaya_juice","Clear Hunger Effect");
         translationBuilder.add("farmersdelight.tooltip.lime_juice","Clear Blindness Effect");
+        translationBuilder.add("farmersdelight.tooltip.honey_lime_juice","Clear Blindness and Poison Effect");
         translationBuilder.add("farmersdelight.tooltip.coconut_water","Clear Weakness Effect");
         translationBuilder.add("jei.info.papaya_log","Right click with bone meal to grow papayas.");
 
@@ -76,6 +77,7 @@ public class LangDataGen extends FabricLanguageProvider {
         translationBuilder.add(ModItems.FERMENTED_FISH,"Fermented Fish");
         translationBuilder.add(ModItems.PAPAYA_JUICE,"Papaya Juice");
         translationBuilder.add(ModItems.LIME_JUICE,"Lime Juice");
+        translationBuilder.add(ModItems.HONEY_LIME_JUICE,"Honey Lime Juice");
         translationBuilder.add(ModItems.COCONUT_WATER,"Coconut Water");
         translationBuilder.add(ModItems.BUTTERFLY_PEA_TEA,"Butterfly Pea Tea");
         translationBuilder.add(ModItems.LIME_SAPLING,"Lime Sapling");
@@ -293,6 +295,7 @@ public class LangDataGen extends FabricLanguageProvider {
 
             translationBuilder.add("farmersdelight.tooltip.papaya_juice","ล้างหิวเร็ว");
             translationBuilder.add("farmersdelight.tooltip.lime_juice","ล้างตาบอด");
+            translationBuilder.add("farmersdelight.tooltip.honey_lime_juice","ล้างตาบอดและพิษ");
             translationBuilder.add("farmersdelight.tooltip.coconut_water","ล้างโจมตีเบา");
             translationBuilder.add("jei.info.papaya_log","คลิ๊กขวาด้วยผงกระดูกเพื่อโตผลมะละกอ");
 
@@ -331,6 +334,7 @@ public class LangDataGen extends FabricLanguageProvider {
             translationBuilder.add(ModItems.FERMENTED_FISH,"ปลาร้า");
             translationBuilder.add(ModItems.PAPAYA_JUICE,"น้ำมะละกอ");
             translationBuilder.add(ModItems.LIME_JUICE,"น้ำมะนาว");
+            translationBuilder.add(ModItems.HONEY_LIME_JUICE,"น้ำผึ้งมะนาว");
             translationBuilder.add(ModItems.COCONUT_WATER,"น้ำมะพร้าว");
             translationBuilder.add(ModItems.BUTTERFLY_PEA_TEA,"ชาดอกอัญชัญ");
 

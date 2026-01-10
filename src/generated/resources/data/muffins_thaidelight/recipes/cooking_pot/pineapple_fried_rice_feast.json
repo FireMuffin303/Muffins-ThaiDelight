@@ -1,19 +1,24 @@
 {
+  "fabric:load_conditions": [
+    {
+      "condition": "muffins_thaidelight:has_pineapple"
+    }
+  ],
   "type": "farmersdelight:cooking",
   "container": {
     "item": "minecraft:bowl"
   },
   "cookingtime": 200,
-  "experience": 0.35,
+  "experience": 1.0,
   "ingredients": [
     {
-      "tag": "muffins_thaidelight:flower_crab_meat"
+      "tag": "muffins_thaidelight:pineapple"
     },
     {
       "item": "farmersdelight:rice"
     },
     {
-      "tag": "c:eggs"
+      "item": "minecraft:egg"
     },
     {
       "item": "minecraft:carrot"
@@ -24,6 +29,7 @@
   ],
   "recipe_book_tab": "meals",
   "result": {
-    "item": "muffins_thaidelight:crab_fried_rice_feast"
+    "count": 1,
+    "item": "muffins_thaidelight:pineapple_fried_rice_feast"
   }
 }

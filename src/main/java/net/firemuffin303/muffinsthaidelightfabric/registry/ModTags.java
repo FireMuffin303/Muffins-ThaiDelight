@@ -31,8 +31,6 @@ public class ModTags {
     public static final TagKey<Item> MANGO_LOGS_ITEM = TagKey.create(Registries.ITEM,ThaiDelight.modid("mango_logs"));
     public static final TagKey<Item> COCONUT_LOGS_ITEM = TagKey.create(Registries.ITEM,ThaiDelight.modid("coconut_logs"));
 
-    public static final TagKey<Item> COMMON_MILKS = TagKey.create(Registries.ITEM,new ResourceLocation("c","milks"));
-    public static final TagKey<Item> COMMON_MEATS =  TagKey.create(Registries.ITEM,new ResourceLocation("c","foods/cooked_meats"));
 
     public static final TagKey<Block> FLOWER_CRAB_SPAWNABLE_ON = TagKey.create(Registries.BLOCK,ThaiDelight.modid("flower_crab_spawnable_on"));
 
@@ -53,4 +51,11 @@ public class ModTags {
     public static final TagKey<Biome> DURIAN_TREE_BIOMES = TagKey.create(Registries.BIOME, ThaiDelight.modid("durian_tree_biomes"));
     public static final TagKey<Biome> MANGO_TREE_BIOMES = TagKey.create(Registries.BIOME, ThaiDelight.modid("mango_tree_biomes"));
     public static final TagKey<Biome> COCONUT_TREE_BIOMES = TagKey.create(Registries.BIOME, ThaiDelight.modid("coconut_tree_biomes"));
+
+    //----- Covenience Tag ----
+    public static final TagKey<Item> COMMON_MILKS = TagKey.create(Registries.ITEM,new ResourceLocation("c","milks"));
+    public static final TagKey<Item> COMMON_COOKED_MEATS =  TagKey.create(Registries.ITEM,new ResourceLocation("c","foods/cooked_meats"));
+    public static final TagKey<Item> KNIVES = TagKey.create(Registries.ITEM,new ResourceLocation("c","tools/knives"));
+    public static final TagKey<Item> COMMON_EGGS = TagKey.create(Registries.ITEM,new ResourceLocation("c","eggs"));
+    public static final TagKey<Item> COMMON_FISHES = TagKey.create(Registries.ITEM,new ResourceLocation("c","raw_fishes"));
 }

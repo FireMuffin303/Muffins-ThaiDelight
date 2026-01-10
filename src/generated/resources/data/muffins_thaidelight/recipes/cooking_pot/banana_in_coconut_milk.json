@@ -1,0 +1,29 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "muffins_thaidelight:has_banana"
+    }
+  ],
+  "type": "farmersdelight:cooking",
+  "container": {
+    "item": "minecraft:bowl"
+  },
+  "cookingtime": 200,
+  "experience": 1.0,
+  "ingredients": [
+    {
+      "tag": "muffins_thaidelight:banana"
+    },
+    {
+      "item": "muffins_thaidelight:coconut_milk_bottle"
+    },
+    {
+      "item": "minecraft:sugar"
+    }
+  ],
+  "recipe_book_tab": "meals",
+  "result": {
+    "count": 1,
+    "item": "muffins_thaidelight:banana_in_coconut_milk"
+  }
+}

@@ -3,6 +3,7 @@ package net.firemuffin303.muffinsthaidelightfabric.datagen.builder;
 import com.google.common.collect.Lists;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import net.fabricmc.fabric.api.resource.conditions.v1.ResourceConditions;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.CriterionTriggerInstance;
@@ -22,6 +23,7 @@ import org.jetbrains.annotations.Nullable;
 import vectorwing.farmersdelight.client.recipebook.CookingPotRecipeBookTab;
 import vectorwing.farmersdelight.common.registry.ModRecipeSerializers;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -36,6 +38,8 @@ public class CookingPotRecipeBuilder implements RecipeBuilder {
     private Item container;
     private CookingPotRecipeBookTab cookingPotRecipeBookTab;
     private final Advancement.Builder advancement = Advancement.Builder.recipeAdvancement();
+
+    private final List<ResourceLocation> conditions = new ArrayList<>();
 
     public CookingPotRecipeBuilder(ItemLike result,int count,float experience,int cookTime){
         this.result = result.asItem();
@@ -95,6 +99,11 @@ public class CookingPotRecipeBuilder implements RecipeBuilder {
         return this;
     }
 
+    public CookingPotRecipeBuilder conditions(ResourceLocation resourceLocation){
+        this.conditions.add(resourceLocation);
+        return this;
+    }
+
     @Override
     public RecipeBuilder unlockedBy(String string, CriterionTriggerInstance criterionTriggerInstance) {
         this.advancement.addCriterion(string,criterionTriggerInstance);
@@ -135,7 +144,8 @@ public class CookingPotRecipeBuilder implements RecipeBuilder {
                 this.container,
                 this.cookingPotRecipeBookTab,
                 this.advancement,
-                resourceLocation.withPrefix("recipes/")
+                resourceLocation.withPrefix("recipes/"),
+                this.conditions
                 ));
     }
 
@@ -153,6 +163,8 @@ public class CookingPotRecipeBuilder implements RecipeBuilder {
         private final Advancement.Builder advancement;
         private final ResourceLocation advancementId;
 
+        private final List<ResourceLocation> conditions;
+
         public Result(ResourceLocation id,
                       String group,
                       Item result,
@@ -163,7 +175,8 @@ public class CookingPotRecipeBuilder implements RecipeBuilder {
                       Item container,
                       @Nullable CookingPotRecipeBookTab cookingPotRecipeBookTab,
                       Advancement.Builder advancement,
-                      ResourceLocation advancementId
+                      ResourceLocation advancementId,
+                      List<ResourceLocation> conditions
                       ){
             this.id = id;
             this.group = group;
@@ -176,6 +189,7 @@ public class CookingPotRecipeBuilder implements RecipeBuilder {
             this.cookingPotRecipeBookTab = cookingPotRecipeBookTab;
             this.advancement = advancement;
             this.advancementId = advancementId;
+            this.conditions = conditions;
         }
 
         @Override
@@ -208,6 +222,16 @@ public class CookingPotRecipeBuilder implements RecipeBuilder {
                 JsonObject container = new JsonObject();
                 container.addProperty("item", BuiltInRegistries.ITEM.getKey(this.container).toString());
                 jsonObject.add("container", container);
+            }
+
+            if(!this.conditions.isEmpty()){
+                JsonArray conditionsArray = new JsonArray();
+                for(ResourceLocation resourceLocation : this.conditions){
+                    JsonObject conditionContainer = new JsonObject();
+                    conditionContainer.addProperty("condition",resourceLocation.toString());
+                    conditionsArray.add(conditionContainer);
+                }
+                jsonObject.add("fabric:load_conditions",conditionsArray);
             }
         }
 

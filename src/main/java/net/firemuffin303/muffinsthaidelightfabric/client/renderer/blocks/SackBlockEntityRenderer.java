@@ -43,7 +43,11 @@ public class SackBlockEntityRenderer implements BlockEntityRenderer<SackBlockEnt
         poseStack.mulPose(Axis.YP.rotationDegrees(-g + 90));
 
         //RenderSystem.applyModelViewMatrix();
-        poseStack.translate(0f,0.5f,0f);
+        if(blockState.getValue(SackBlock.FILLED)){
+            poseStack.translate(0f,0.5f,0f);
+        }else{
+            poseStack.translate(0f,0.35f,0f);
+        }
 
         switch (direction){
             case SOUTH -> poseStack.translate(0.5f,0f,0.94375f);

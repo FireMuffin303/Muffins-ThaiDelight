@@ -103,6 +103,15 @@ public class ModItems {
         }
     });
 
+    public static final Item HONEY_LIME_JUICE = registerFlatItem("honey_lime_juice",new DrinkableItem(drinkItem().food(ModFood.HONEY_LIME_JUICE),false,true){
+        @Override
+        public void affectConsumer(ItemStack stack, Level level, LivingEntity consumer) {
+            super.affectConsumer(stack, level, consumer);
+            consumer.removeEffect(MobEffects.BLINDNESS);
+            consumer.removeEffect(MobEffects.POISON);
+        }
+    });
+
     public static final Item COCONUT_WATER = registerFlatItem("coconut_water",new DrinkableItem(drinkItem().food(ModFood.COCONUT_WATER),false,true){
         @Override
         public void affectConsumer(ItemStack stack, Level level, LivingEntity consumer) {
@@ -234,33 +243,8 @@ public class ModItems {
         }
     });
 
-    // 🌿 HOLY BASIL 🌿
-    /*
-    public static final Item HOLY_BASIL_SAPLING = registerFlatItem("holy_basil_sapling",new ItemNameBlockItem(ModBlocks.HOLY_BASIL,new Item.Properties()){
-        @Override
-        public void registerBlocks(Map<Block, Item> map, Item item) {
-            super.registerBlocks(map, item);
-            map.put(ModBlocks.HOLY_BASIL,item);
-        }
-    });
-    
-     */
-
-
     public static final Item HOLY_BASIL = registerFlatItem("holy_basil",new BlockItem(ModBlocks.HOLY_BASIL ,new Item.Properties()));
     public static final Item WILD_HOLY_BASIL = register("wild_holy_basil",new BlockItem(ModBlocks.WILD_HOLY_BASIL,new Item.Properties()));
-    // 🌿 BASIL 🌿
-    /*
-    public static final Item BASIL_SAPLING = registerFlatItem("basil_sapling",new ItemNameBlockItem(ModBlocks.BASIL,new Item.Properties()){
-        @Override
-        public void registerBlocks(Map<Block, Item> map, Item item) {
-            super.registerBlocks(map, item);
-            map.put(ModBlocks.BASIL,item);
-        }
-    });
-
-     */
-
 
     public static final Item BASIL = registerFlatItem("basil",new BlockItem(ModBlocks.BASIL,new Item.Properties()));
     public static final Item WILD_BASIL = register("wild_basil",new BlockItem(ModBlocks.WILD_BASIL,new Item.Properties()));
@@ -281,7 +265,7 @@ public class ModItems {
 
     public static final Item FRIED_DURIAN = registerFlatItem("fried_durian",new Item(new Item.Properties().food(ModFood.FRIED_DURIAN)));
     public static final Item COCONUT_MILK_BOTTLE = registerFlatItem("coconut_milk_bottle",new Item(new Item.Properties()));
-    public static final Item COCONUT_SLICE = registerFlatItem("coconut_slice",new ConsumableItem(new Item.Properties().food(ModFood.COCONUT_MEAT)));
+    public static final Item COCONUT_SLICE = registerFlatItem("coconut_slice",new ConsumableItem(new Item.Properties().food(ModFood.COCONUT_MEAT).craftRemainder(Items.BOWL)));
 
     public static final Item PHAT_KAPHRAO_FEAST = registerFlatItem("phat_kaphrao_feast",new BlockItem(ModBlocks.PHAT_KAPHRAO_FEAST,new Item.Properties()));
     public static final Item PHAT_KAPHRAO = registerFlatItem("phat_kaphrao", new ConsumableItem(bowlFoodItem(ModFood.PHAT_KAPHRAO)));
@@ -420,6 +404,7 @@ public class ModItems {
         public static final FoodProperties SEAFOOD_SAUCE = new FoodProperties.Builder().alwaysEat().effect(new MobEffectInstance(MobEffects.WATER_BREATHING,200,0),1.0f).build();
         public static final FoodProperties PAPAYA_JUICE = new FoodProperties.Builder().alwaysEat().build();
         public static final FoodProperties LIME_JUICE = new FoodProperties.Builder().alwaysEat().build();
+        public static final FoodProperties HONEY_LIME_JUICE = new FoodProperties.Builder().alwaysEat().build();
         public static final FoodProperties COCONUT_WATER = new FoodProperties.Builder().alwaysEat().build();
 
         public static final FoodProperties SOMTAM = new FoodProperties.Builder()

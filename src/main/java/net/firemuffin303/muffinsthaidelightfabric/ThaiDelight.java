@@ -190,10 +190,13 @@ public class ThaiDelight implements ModInitializer {
         CommonEvents.worldGeneration();
         CommonEvents.entityInit();
         CommonEvents.setVillagerItem();
+        CommonEvents.setResourceConditions();
 
         PotionBrewing.addMix(Potions.AWKWARD,ModItems.FERMENTED_FISH,ModMobEffects.STINKY_POTION);
         PotionBrewing.addMix(ModMobEffects.STINKY_POTION, Items.REDSTONE,ModMobEffects.LONG_STINKY_POTION);
         PotionBrewing.addMix(ModMobEffects.STINKY_POTION, Items.GLOWSTONE_DUST,ModMobEffects.STRONG_STINKY_POTION);
+
+
     }
 
     private static void itemsGenerator(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output output){
@@ -229,6 +232,7 @@ public class ThaiDelight implements ModInitializer {
         output.accept(ModItems.FERMENTED_FISH);
         output.accept(ModItems.PAPAYA_JUICE);
         output.accept(ModItems.LIME_JUICE);
+        output.accept(ModItems.HONEY_LIME_JUICE);
         output.accept(ModItems.COCONUT_WATER);
         output.accept(ModItems.BUTTERFLY_PEA_TEA);
 

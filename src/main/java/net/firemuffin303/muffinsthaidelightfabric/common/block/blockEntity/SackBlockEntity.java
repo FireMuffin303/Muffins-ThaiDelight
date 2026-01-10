@@ -1,6 +1,5 @@
 package net.firemuffin303.muffinsthaidelightfabric.common.block.blockEntity;
 
-import com.mojang.logging.LogUtils;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.SackBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.menu.SackMenu;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlockEntityTypes;
@@ -16,11 +15,8 @@ import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.ChestMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.BarrelBlock;
-import net.minecraft.world.level.block.entity.BarrelBlockEntity;
 import net.minecraft.world.level.block.entity.ContainerOpenersCounter;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -112,7 +108,7 @@ public class SackBlockEntity extends RandomizableContainerBlockEntity {
     }
 
     @Override
-    protected NonNullList<ItemStack> getItems() {
+    public NonNullList<ItemStack> getItems() {
         return this.items;
     }
 
@@ -151,7 +147,18 @@ public class SackBlockEntity extends RandomizableContainerBlockEntity {
     }
 
 
-    private void markUpdated() {
+    public void markUpdated() {
+        BlockState blockState = this.getBlockState();
+
+        if (this.items.stream().allMatch(itemStack -> itemStack.getCount() == itemStack.getMaxStackSize())) {
+            blockState = blockState.setValue(SackBlock.FILLED, true);
+        }else {
+            blockState = blockState.setValue(SackBlock.FILLED, false);
+        }
+
+        if(blockState != this.getBlockState()){
+            this.level.setBlock(this.getBlockPos(),blockState,3);
+        }
         this.getLevel().sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), 3);
     }
 

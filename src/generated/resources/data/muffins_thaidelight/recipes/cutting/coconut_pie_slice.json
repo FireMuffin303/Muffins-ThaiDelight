@@ -1,0 +1,17 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "muffins_thaidelight:coconut_pie"
+    }
+  ],
+  "result": [
+    {
+      "count": 4,
+      "item": "muffins_thaidelight:coconut_pie_slice"
+    }
+  ],
+  "tool": {
+    "tag": "c:tools/knives"
+  }
+}

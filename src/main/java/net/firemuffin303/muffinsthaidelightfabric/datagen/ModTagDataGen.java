@@ -47,8 +47,11 @@ public class ModTagDataGen {
                     .add(
                             ModItems.FISH_SAUCE_BOTTLE,
                             ModItems.LIME_JUICE,
+                            ModItems.HONEY_LIME_JUICE,
                             ModItems.PAPAYA_JUICE,
-                            ModItems.COCONUT_WATER
+                            ModItems.COCONUT_WATER,
+                            ModItems.BUTTERFLY_PEA_TEA,
+                            ModItems.COCONUT_MILK_BOTTLE
                     );
 
             getOrCreateTagBuilder(ModTags.LIME)

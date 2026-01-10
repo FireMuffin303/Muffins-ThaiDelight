@@ -5,15 +5,18 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
 import net.firemuffin303.muffinsthaidelightfabric.common.recipe.mortar.MortarRecipeBookTab;
 import net.firemuffin303.muffinsthaidelightfabric.datagen.builder.CookingPotRecipeBuilder;
+import net.firemuffin303.muffinsthaidelightfabric.datagen.builder.CuttingBoardRecipeBuilder;
 import net.firemuffin303.muffinsthaidelightfabric.datagen.builder.MortarRecipeBuilder;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModItems;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModTags;
+import net.firemuffin303.muffinsthaidelightfabric.util.CommonEvents;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.data.recipes.*;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
@@ -37,6 +40,7 @@ public class ModRecipeDataGen extends FabricRecipeProvider {
 
         mortar(exporter);
         cookingPot(exporter);
+        cuttingBoard(exporter);
     }
 
     private void cook(ItemLike ingredient, Item result, float exp, int cookTicks, Consumer<FinishedRecipe> exporter) {
@@ -76,6 +80,7 @@ public class ModRecipeDataGen extends FabricRecipeProvider {
         bigPackingCraft(ModItems.PEPPER_CRATE,1,ModItems.PEPPER,exporter);
         bigPackingCraft(ModItems.RAW_PAPAYA_CRATE,1,ModItems.RAW_PAPAYA,exporter);
         bigPackingCraft(ModItems.PAPAYA_CRATE,1,ModItems.PAPAYA,exporter);
+        bigPackingCraft(ModItems.MANGO_CRATE,1,ModItems.MANGO,exporter);
         bigPackingCraft(ModItems.HOLY_BASIL_CRATE,1,ModItems.HOLY_BASIL,exporter);
         bigPackingCraft(ModItems.BASIL_CRATE,1,ModItems.BASIL,exporter);
         bigPackingCraft(ModItems.BAMBOO_SHOOT_CRATE,1,ModItems.BAMBOO_SHOOT,exporter);
@@ -107,7 +112,7 @@ public class ModRecipeDataGen extends FabricRecipeProvider {
 
         bigPackingCraft(ModItems.COCONUT_LEAF_BLOCK,1,ModItems.COCONUT_LEAF,exporter);
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS,ModItems.COCONUT_LEAF_MAT)
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS,ModItems.COCONUT_LEAF_MAT,3)
                 .define('L', ModItems.COCONUT_LEAF_BLOCK)
                 .pattern("LL")
                 .unlockedBy(getHasName(ModItems.COCONUT_LEAF_BLOCK),has(ModItems.COCONUT_LEAF_BLOCK))
@@ -222,7 +227,9 @@ public class ModRecipeDataGen extends FabricRecipeProvider {
         ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD,ModItems.COCONUT_MILK_ICE_CREAM)
                 .requires(ModItems.COCONUT_MILK_BOTTLE)
                 .requires(Items.ICE).requires(Items.ICE)
-                .requires(Items.BOWL);
+                .requires(Items.BOWL)
+                .unlockedBy("has_coconut_milk_bottle",RecipeProvider.has(ModItems.COCONUT_MILK_BOTTLE))
+                .save(exporter,ThaiDelight.modid("crafting/"+RecipeProvider.getItemName(ModItems.COCONUT_MILK_ICE_CREAM)));
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,Items.BLUE_DYE,2).requires(ModItems.BUTTERFLY_PEA)
                 .unlockedBy(getHasName(ModItems.BUTTERFLY_PEA),has(ModItems.BUTTERFLY_PEA))
@@ -232,26 +239,23 @@ public class ModRecipeDataGen extends FabricRecipeProvider {
                 .unlockedBy(getHasName(ModBlocks.DURIAN_FLOWER),has(ModBlocks.DURIAN_FLOWER))
                 .save(exporter,ThaiDelight.modid("crafting/yellow_dye_from_durian_flower"));
 
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD,ModItems.LIME,9).requires(ModBlocks.LIME_CRATE)
-                .unlockedBy(getHasName(ModBlocks.LIME_CRATE),has(ModBlocks.LIME_CRATE))
-                .save(exporter,ThaiDelight.modid("crafting/"+getItemName(ModItems.LIME)+"_from_crafting"));
+        unPacking(ModItems.LIME,ModItems.LIME_CRATE,exporter);
+        unPacking(ModItems.PEPPER,ModItems.PEPPER_CRATE,exporter);
+        unPacking(ModItems.RAW_PAPAYA,ModItems.RAW_PAPAYA_CRATE,exporter);
+        unPacking(ModItems.PAPAYA,ModItems.PAPAYA_CRATE,exporter);
+        unPacking(ModItems.MANGO,ModItems.MANGO_CRATE,exporter);
+        unPacking(ModItems.HOLY_BASIL,ModItems.HOLY_BASIL_CRATE,exporter);
+        unPacking(ModItems.BASIL,ModItems.BASIL_CRATE,exporter);
+        unPacking(ModItems.BAMBOO_SHOOT,ModItems.BAMBOO_SHOOT_CRATE,exporter);
+        unPacking(ModItems.BUTTERFLY_PEA,ModItems.BUTTERFLY_PEA_CRATE,exporter);
 
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD,ModItems.PEPPER,9).requires(ModBlocks.PEPPER_CRATE)
-                .unlockedBy(getHasName(ModBlocks.PEPPER_CRATE),has(ModBlocks.PEPPER_CRATE))
-                .save(exporter,ThaiDelight.modid("crafting/"+getItemName(ModItems.PEPPER)+"_from_crafting"));
-
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD,ModItems.RAW_PAPAYA,9).requires(ModBlocks.RAW_PAPAYA_CRATE)
-                .unlockedBy(getHasName(ModBlocks.RAW_PAPAYA_CRATE),has(ModBlocks.RAW_PAPAYA_CRATE))
-                .save(exporter,ThaiDelight.modid("crafting/"+getItemName(ModItems.RAW_PAPAYA)+"_from_crafting"));
-
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD,ModItems.PAPAYA,9)
-                .requires(ModBlocks.PAPAYA_CRATE).unlockedBy(getHasName(ModBlocks.PAPAYA_CRATE),has(ModBlocks.PAPAYA_CRATE))
-                .save(exporter,ThaiDelight.modid("crafting/"+getItemName(ModItems.PAPAYA)+"_from_crafting"));
-
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,ModItems.PEPPER_SEED,4).requires(ModItems.PEPPER)
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,ModItems.PEPPER_SEED,4)
+                .requires(ModItems.PEPPER)
                 .unlockedBy(getHasName(ModItems.PEPPER),has(ModItems.PEPPER))
                 .save(exporter,ThaiDelight.modid("crafting/"+getItemName(ModItems.PEPPER_SEED)+"_from_crafting"));
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,ModItems.PAPAYA_SEEDS,4).requires(ModItems.PAPAYA)
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,ModItems.PAPAYA_SEEDS,4)
+                .requires(ModItems.PAPAYA)
                 .unlockedBy(getHasName(ModItems.PAPAYA),has(ModItems.PAPAYA))
                 .save(exporter,ThaiDelight.modid("crafting/"+getItemName(ModBlocks.PAPAYA_SAPLING)+"_by_papaya_from_crafting"));
 
@@ -297,6 +301,12 @@ public class ModRecipeDataGen extends FabricRecipeProvider {
                 .pattern("AAA")
                 .pattern("AAA")
                 .unlockedBy(getHasName(ingredient),has(ingredient))
+                .save(exporter,ThaiDelight.modid("crafting/"+getItemName(result)+"_from_crafting"));
+    }
+
+    private void unPacking(Item result,Item unpackedItem,Consumer<FinishedRecipe> exporter){
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD,result,9)
+                .requires(unpackedItem).unlockedBy(getHasName(unpackedItem),has(unpackedItem))
                 .save(exporter,ThaiDelight.modid("crafting/"+getItemName(result)+"_from_crafting"));
     }
 
@@ -610,8 +620,44 @@ public class ModRecipeDataGen extends FabricRecipeProvider {
     }
 
     private void cookingPot(Consumer<FinishedRecipe> exporter){
+        CookingPotRecipeBuilder.cookingPot(ModItems.CRAB_FRIED_RICE_FEAST,1,200,0.35f)
+                .requires(ModTags.FLOWER_CRAB_MEAT)
+                .requires(vectorwing.farmersdelight.common.registry.ModItems.RICE.get())
+                .requires(ModTags.COMMON_EGGS)
+                .requires(Items.CARROT)
+                .requires(vectorwing.farmersdelight.common.registry.ModItems.ONION.get())
+                .recipeTab(CookingPotRecipeBookTab.MEALS)
+                .container(Items.BOWL)
+                .group("crab_fried_rice_feast")
+                .unlockedBy("has_rice",RecipeProvider.has(vectorwing.farmersdelight.common.registry.ModItems.RICE.get()))
+                .save(exporter,ThaiDelight.modid("cooking_pot/crab_fried_rice_feast"));
+
+        CookingPotRecipeBuilder.cookingPot(ModItems.CRAB_FRIED_RICE_FEAST,1,100,0.35f)
+                .requires(ModTags.FLOWER_CRAB_MEAT)
+                .requires(vectorwing.farmersdelight.common.registry.ModItems.FRIED_RICE.get())
+                .container(Items.BOWL)
+                .group("crab_fried_rice_feast")
+                .unlockedBy("has_rice",RecipeProvider.has(vectorwing.farmersdelight.common.registry.ModItems.RICE.get()))
+                .save(exporter,ThaiDelight.modid("cooking_pot/crab_fried_rice_feast_from_rice"));
+
+        CookingPotRecipeBuilder.cookingPot(ModItems.LARB_FEAST,1,200,0.35f)
+                .requires(ModTags.COMMON_COOKED_MEATS)
+                .requires(ModTags.COMMON_COOKED_MEATS)
+                .container(ModItems.PEPPER)
+                .container(Items.SUGAR)
+                .container(ModItems.FISH_SAUCE_BOTTLE)
+                .container(vectorwing.farmersdelight.common.registry.ModItems.ONION.get())
+                .unlockedBy("has_pepper",RecipeProvider.has(ModItems.PEPPER))
+                .save(exporter,ThaiDelight.modid("cooking_pot/larb_feast"));
+
+        CookingPotRecipeBuilder.cookingPot(ModItems.FISH_SAUCE_BOTTLE,1,100,0.35f)
+                .requires(ModTags.COMMON_FISHES)
+                .container(Items.GLASS_BOTTLE)
+                .unlockedBy("has_raw_fishes",RecipeProvider.has(ModTags.COMMON_FISHES))
+                .save(exporter,ThaiDelight.modid("cooking_pot/fish_sauce_bottle"));
+
         CookingPotRecipeBuilder.cookingPot(ModItems.PHAT_KAPHRAO_FEAST,1)
-                .requires(ModTags.COMMON_MEATS)
+                .requires(ModTags.COMMON_COOKED_MEATS)
                 .requires(ModItems.HOLY_BASIL)
                 .requires(ModItems.PEPPER)
                 .requires(ModItems.FISH_SAUCE_BOTTLE)
@@ -626,11 +672,29 @@ public class ModRecipeDataGen extends FabricRecipeProvider {
                 .requires(ModItems.COCONUT_MILK_BOTTLE)
                 .requires(ModItems.PEPPER)
                 .requires(ModItems.FISH_SAUCE_BOTTLE)
-                .requires(ModTags.COMMON_MEATS)
+                .requires(ModTags.COMMON_COOKED_MEATS)
                 .container(Items.BOWL)
                 .recipeTab(CookingPotRecipeBookTab.MEALS)
                 .unlockedBy("has_durian",RecipeProvider.has(ModTags.DURIAN))
                 .save(exporter,ThaiDelight.modid("cooking_pot/durian_curry_feast"));
+
+        CookingPotRecipeBuilder.cookingPot(ModItems.COCONUT_JELLY,4)
+                .requires(ModItems.COCONUT_SLICE)
+                .requires(Items.SLIME_BALL)
+                .requires(Items.SUGAR)
+                .requires(ModItems.COCONUT_WATER)
+                .recipeTab(CookingPotRecipeBookTab.MISC)
+                .unlockedBy("has_coconut_slice",RecipeProvider.has(ModItems.COCONUT_SLICE))
+                .save(exporter,ThaiDelight.modid("cooking_pot/coconut_jelly"));
+
+        CookingPotRecipeBuilder.cookingPot(ModItems.KHANOM_BABIN,4)
+                .requires(ModItems.COCONUT_SLICE)
+                .requires(vectorwing.farmersdelight.common.registry.ModItems.RICE.get())
+                .requires(Items.SUGAR)
+                .requires(ModItems.COCONUT_MILK_BOTTLE)
+                .recipeTab(CookingPotRecipeBookTab.MISC)
+                .unlockedBy("has_coconut_slice",RecipeProvider.has(ModItems.COCONUT_SLICE))
+                .save(exporter,ThaiDelight.modid("cooking_pot/khanom_babin"));
 
         CookingPotRecipeBuilder.cookingPot(ModItems.OMELETTE_FEAST,1)
                 .requires(Items.EGG)
@@ -651,6 +715,151 @@ public class ModRecipeDataGen extends FabricRecipeProvider {
                 .recipeTab(CookingPotRecipeBookTab.MEALS)
                 .unlockedBy("has_egg",RecipeProvider.has(Items.EGG))
                 .save(exporter,ThaiDelight.modid("cooking_pot/basil_omelette_feast"));
+
+        CookingPotRecipeBuilder.cookingPot(ModItems.PINEAPPLE_FRIED_RICE_FEAST,1)
+                .requires(ModTags.PINEAPPLE)
+                .requires(vectorwing.farmersdelight.common.registry.ModItems.RICE.get())
+                .requires(Items.EGG)
+                .requires(Items.CARROT)
+                .requires(vectorwing.farmersdelight.common.registry.ModItems.ONION.get())
+                .container(Items.BOWL)
+                .recipeTab(CookingPotRecipeBookTab.MEALS)
+                .conditions(CommonEvents.HAS_PINEAPPLE)
+                .unlockedBy("has_pineapple",RecipeProvider.has(ModTags.PINEAPPLE))
+                .save(exporter,ThaiDelight.modid("cooking_pot/pineapple_fried_rice_feast"));
+
+        CookingPotRecipeBuilder.cookingPot(ModItems.BAMBOO_SHOOT_SOUP,1)
+                .requires(ModItems.BAMBOO_SHOOT)
+                .requires(ModItems.PEPPER)
+                .requires(ModItems.FERMENTED_FISH)
+                .requires(vectorwing.farmersdelight.common.registry.ModItems.PUMPKIN_SLICE.get())
+                .requires(ModItems.BASIL)
+                .requires(Items.BROWN_MUSHROOM)
+                .container(Items.BOWL)
+                .recipeTab(CookingPotRecipeBookTab.MEALS)
+                .unlockedBy("has_bamboo_shoot",RecipeProvider.has(ModItems.BAMBOO_SHOOT))
+                .save(exporter,ThaiDelight.modid("cooking_pot/bamboo_shoot_soup"));
+
+        CookingPotRecipeBuilder.cookingPot(ModItems.BANANA_IN_COCONUT_MILK,1)
+                .requires(ModTags.BANANA)
+                .requires(ModItems.COCONUT_MILK_BOTTLE)
+                .requires(Items.SUGAR)
+                .container(Items.BOWL)
+                .recipeTab(CookingPotRecipeBookTab.MEALS)
+                .conditions(CommonEvents.HAS_BANANA)
+                .unlockedBy("has_banana",RecipeProvider.has(ModTags.BANANA))
+                .save(exporter,ThaiDelight.modid("cooking_pot/banana_in_coconut_milk"));
+
+        CookingPotRecipeBuilder.cookingPot(ModItems.KHANOM_CHAN,4)
+                .requires(ModTags.COMMON_MILKS)
+                .requires(Items.SUGAR)
+                .requires(Items.WHEAT)
+                .requires(ModItems.COCONUT_MILK_BOTTLE)
+                .unlockedBy("has_coconut_milk_bottle",RecipeProvider.has(ModItems.COCONUT_MILK_BOTTLE))
+                .save(exporter,ThaiDelight.modid("cooking_pot/khanom_chan"));
+
+
+        CookingPotRecipeBuilder.cookingPot(ModItems.LIME_JUICE,1,200,0.35f)
+                .requires(ModTags.LIME)
+                .requires(ModTags.LIME)
+                .requires(Items.SUGAR)
+                .container(Items.GLASS_BOTTLE)
+                .recipeTab(CookingPotRecipeBookTab.DRINKS)
+                .unlockedBy("has_lime",RecipeProvider.has(ModItems.LIME))
+                .save(exporter,ThaiDelight.modid("cooking_pot/lime_juice"));
+
+        CookingPotRecipeBuilder.cookingPot(ModItems.HONEY_LIME_JUICE,1,200,0.35f)
+                .requires(ModTags.LIME)
+                .requires(ModTags.LIME)
+                .requires(Items.SUGAR)
+                .requires(Items.HONEY_BOTTLE)
+                .container(Items.GLASS_BOTTLE)
+                .recipeTab(CookingPotRecipeBookTab.DRINKS)
+                .group("honey_lime_juice")
+                .unlockedBy("has_lime",RecipeProvider.has(ModItems.LIME))
+                .save(exporter,ThaiDelight.modid("cooking_pot/honey_lime_juice"));
+
+        CookingPotRecipeBuilder.cookingPot(ModItems.HONEY_LIME_JUICE,1,100,0.35f)
+                .requires(ModItems.LIME_JUICE)
+                .requires(Items.HONEY_BOTTLE)
+                .container(Items.GLASS_BOTTLE)
+                .recipeTab(CookingPotRecipeBookTab.DRINKS)
+                .group("honey_lime_juice")
+                .unlockedBy("has_lime",RecipeProvider.has(ModItems.LIME))
+                .save(exporter,ThaiDelight.modid("cooking_pot/honey_lime_juice_from_lime_juice"));
+
+        CookingPotRecipeBuilder.cookingPot(ModItems.PAPAYA_JUICE,1,200,0.35f)
+                .requires(ModTags.RIPE_PAPAYA)
+                .requires(ModTags.RIPE_PAPAYA)
+                .requires(Items.SUGAR)
+                .container(Items.GLASS_BOTTLE)
+                .recipeTab(CookingPotRecipeBookTab.DRINKS)
+                .unlockedBy("has_papaya",RecipeProvider.has(ModTags.PAPAYA))
+                .save(exporter,ThaiDelight.modid("cooking_pot/papaya_juice"));
+
+        CookingPotRecipeBuilder.cookingPot(ModItems.COCONUT_WATER,1,200,0.35f)
+                .requires(ModTags.COCONUT)
+                .requires(ModTags.COCONUT)
+                .requires(Items.SUGAR)
+                .container(Items.GLASS_BOTTLE)
+                .recipeTab(CookingPotRecipeBookTab.DRINKS)
+                .unlockedBy("has_coconut",RecipeProvider.has(ModTags.COCONUT))
+                .save(exporter,ThaiDelight.modid("cooking_pot/coconut_water"));
+
+        CookingPotRecipeBuilder.cookingPot(ModItems.BUTTERFLY_PEA_TEA,1,200,0.35f)
+                .requires(ModItems.BUTTERFLY_PEA)
+                .requires(ModItems.BUTTERFLY_PEA)
+                .requires(Items.SUGAR)
+                .container(Items.GLASS_BOTTLE)
+                .recipeTab(CookingPotRecipeBookTab.DRINKS)
+                .unlockedBy("has_butterfly_pea",RecipeProvider.has(ModItems.BUTTERFLY_PEA))
+                .save(exporter,ThaiDelight.modid("cooking_pot/butterfly_pea_tea"));
+    }
+
+    private void cuttingBoard(Consumer<FinishedRecipe> exporter){
+        Ingredient knivesTag = Ingredient.of(ModTags.KNIVES);
+
+        CuttingBoardRecipeBuilder.cutting(ModItems.SLICED_LIME,2,Ingredient.of(ModItems.LIME),knivesTag)
+                .save(exporter,ThaiDelight.modid("cutting/lime_slice"));
+
+        CuttingBoardRecipeBuilder.cutting(ModItems.RAW_PAPAYA_SLICE,4,Ingredient.of(ModItems.RAW_PAPAYA),knivesTag)
+                .save(exporter,ThaiDelight.modid("cutting/raw_papaya_slice"));
+
+        CuttingBoardRecipeBuilder.cutting(ModItems.SLICED_PAPAYA,2,Ingredient.of(ModItems.PAPAYA),knivesTag)
+                .save(exporter,ThaiDelight.modid("cutting/papaya_slice"));
+
+        CuttingBoardRecipeBuilder.cutting(ModItems.DURIAN_PULP,1,Ingredient.of(ModItems.SMALL_DURIAN),knivesTag)
+                .addResults(new ItemStack(ModItems.DURIAN_PEEL,1))
+                .save(exporter,ThaiDelight.modid("cutting/durian_pulp_from_small_durian"));
+
+        CuttingBoardRecipeBuilder.cutting(ModItems.DURIAN_PULP,2,Ingredient.of(ModItems.DURIAN),knivesTag)
+                .addResults(new ItemStack(ModItems.DURIAN_PEEL,2))
+                .save(exporter,ThaiDelight.modid("cutting/durian_pulp_from_durian"));
+
+        CuttingBoardRecipeBuilder.cutting(ModItems.MANGO_SLICE,2,Ingredient.of(ModItems.MANGO),knivesTag)
+                .save(exporter,ThaiDelight.modid("cutting/mango_slice"));
+
+        CuttingBoardRecipeBuilder.cutting(ModItems.STRIPPED_COCONUT,1,Ingredient.of(ModItems.COCONUT),Ingredient.of(ItemTags.AXES))
+                .addResults(new ItemStack(vectorwing.farmersdelight.common.registry.ModItems.TREE_BARK.get(),2))
+                .save(exporter,ThaiDelight.modid("cutting/stripped_coconut_from_coconut"));
+
+        CuttingBoardRecipeBuilder.cutting(ModItems.COCONUT_SLICE,2,Ingredient.of(ModItems.COCONUT), knivesTag)
+                .save(exporter,ThaiDelight.modid("cutting/coconut_slice_from_coconut"));
+
+        CuttingBoardRecipeBuilder.cutting(ModItems.COCONUT_SLICE,2,Ingredient.of(ModItems.STRIPPED_COCONUT), knivesTag)
+                .save(exporter,ThaiDelight.modid("cutting/coconut_slice_from_stripped_coconut"));
+
+        CuttingBoardRecipeBuilder.cutting(ModItems.DURIAN_CAKE_SLICE,7,Ingredient.of(ModItems.DURIAN_CAKE),knivesTag)
+                .save(exporter,ThaiDelight.modid("cutting/durian_cake_slice"));
+
+        CuttingBoardRecipeBuilder.cutting(ModItems.MANGO_PUDDING_SLICE,4,Ingredient.of(ModItems.MANGO_PUDDING),knivesTag)
+                .save(exporter,ThaiDelight.modid("cutting/mango_pudding_slice"));
+
+        CuttingBoardRecipeBuilder.cutting(ModItems.COCONUT_PIE_SLICE,4,Ingredient.of(ModItems.COCONUT_PIE),knivesTag)
+                .save(exporter,ThaiDelight.modid("cutting/coconut_pie_slice"));
+
+        CuttingBoardRecipeBuilder.cutting(ModItems.HONEY_COCONUT_PIE_SLICE,4,Ingredient.of(ModItems.HONEY_COCONUT_PIE),knivesTag)
+                .save(exporter,ThaiDelight.modid("cutting/honey_coconut_pie_slice"));
     }
 
 }
