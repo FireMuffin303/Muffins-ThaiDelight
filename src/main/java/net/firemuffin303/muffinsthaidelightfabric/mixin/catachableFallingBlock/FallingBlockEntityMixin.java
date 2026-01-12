@@ -1,11 +1,11 @@
-package net.firemuffin303.muffinsthaidelightfabric.mixin;
+package net.firemuffin303.muffinsthaidelightfabric.mixin.catachableFallingBlock;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.Share;
 import com.llamalad7.mixinextras.sugar.ref.LocalRef;
-import com.mojang.logging.LogUtils;
-import net.firemuffin303.muffinsthaidelightfabric.common.block.FallableExtension;
+import net.firemuffin303.muffinsthaidelightfabric.common.block.SackBlock;
+import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModItems;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModTags;
 import net.minecraft.core.BlockPos;
@@ -87,8 +87,12 @@ public abstract class FallingBlockEntityMixin extends Entity {
     @Inject(method = "tick",at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/item/FallingBlockEntity;discard()V",ordinal = 3))
     public void muffins$checkLandOnBlock(CallbackInfo ci,@Local Block block,@Local BlockPos blockPos){
         BlockState blockState1 = this.level().getBlockState(blockPos);
-        if(block instanceof FallableExtension fallableExtension && fallableExtension.checkFallenOnBlock(this.level(),this.blockState,blockState1,blockPos)){
-            this.dropItem = !fallableExtension.onLandOnBlock(this.level(),this.blockState,blockState1,blockPos);
+        if(this.blockState.is(ModTags.SACK_CATCHABLE) && (blockState1.is(ModBlocks.SACK) && !blockState1.getValue(SackBlock.FILLED))){
+            SackBlock sackBlock = (SackBlock) blockState1.getBlock();
+            if(sackBlock.insertFallingBlock(this.blockState.getBlock().asItem(),this.level(),blockPos)){
+                this.dropItem = false;
+                sackBlock.playCatchFallingBlockEffect(this.level(),blockPos);
+            }
         }
     }
 

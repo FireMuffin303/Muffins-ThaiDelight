@@ -1,7 +1,6 @@
 package net.firemuffin303.muffinsthaidelightfabric.common.item;
 
 import com.chocohead.mm.api.ClassTinkerers;
-import com.mojang.logging.LogUtils;
 import net.firemuffin303.muffinsthaidelightfabric.client.renderer.component.SackTooltipComponent;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModItems;
@@ -19,7 +18,6 @@ import net.minecraft.world.level.Level;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Stream;
 
 public class SackItem extends BlockItem {
     public SackItem(Properties properties) {
@@ -96,27 +94,20 @@ public class SackItem extends BlockItem {
         if (!itemStack.is(ModItems.SACK)){
             return false;
         }
-        CompoundTag compoundTag = itemStack.getTag();
-        if(compoundTag == null || !compoundTag.contains("BlockEntityTag")){
+
+        CompoundTag compoundTag = BlockItem.getBlockEntityData(itemStack);
+        if(compoundTag == null){
             return false;
         }
 
-        CompoundTag blockEntityTag = compoundTag.getCompound("BlockEntityTag");
-        if(!blockEntityTag.contains("Items")){
+        ListTag listTag = compoundTag.getList("Items",10);
+        if(listTag.isEmpty()){
             return false;
         }
 
-        List<ItemStack> itemStackStream = blockEntityTag.getList("Items",10).stream().map(CompoundTag.class::cast).map(ItemStack::of).toList();
-        if(itemStackStream.isEmpty()){
-            return false;
-        }
-        int amount = 0;
-        int maxAmount = 0;
-        for(ItemStack itemStack1 : itemStackStream){
-            amount += itemStack1.getCount();
-            maxAmount = itemStack1.getMaxStackSize();
-        }
-
-        return amount >= maxAmount*5;
+        return listTag.stream().map(CompoundTag.class::cast).map(ItemStack::of).allMatch(itemStack1 -> {
+            return itemStack1.getCount() >= itemStack1.getMaxStackSize() && !itemStack1.isEmpty();
+                }
+            );
     }
 }

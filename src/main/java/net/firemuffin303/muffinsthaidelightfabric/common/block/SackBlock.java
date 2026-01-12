@@ -7,11 +7,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.RandomSource;
-import net.minecraft.util.StringRepresentable;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -19,6 +17,7 @@ import net.minecraft.world.entity.monster.piglin.PiglinAi;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -31,7 +30,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.storage.loot.LootParams;
@@ -44,12 +43,11 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class SackBlock extends BaseEntityBlock implements SimpleWaterloggedBlock {
-    private static final VoxelShape BOX = Block.box(1.0,0.0,1.0,15.0,16.0,15.0);
+    private static final VoxelShape FILLED_BOX = Block.box(1.0,0.0,1.0,15.0,16.0,15.0);
+    private static final VoxelShape BOX = Block.box(1.0,0.0,1.0,15.0,12.0,15.0);
     public static final DirectionProperty HORIZONTAL_FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static final BooleanProperty FILLED = BooleanProperty.create("filled");
-
-    public static final BooleanProperty OPEN = BlockStateProperties.OPEN;
     public static final ResourceLocation CONTENTS = new ResourceLocation("contents");
     public SackBlock(Properties properties) {
         super(properties);
@@ -57,29 +55,44 @@ public class SackBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
                 .setValue(HORIZONTAL_FACING,Direction.NORTH)
                 .setValue(WATERLOGGED,false)
                 .setValue(FILLED,false)
-                .setValue(OPEN,false)
         );
     }
 
     @Override
     public InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
-        if(level.isClientSide){
-            return InteractionResult.SUCCESS;
-        }
         BlockEntity block = level.getBlockEntity(blockPos);
         if(block instanceof SackBlockEntity sackBlockEntity){
-            player.openMenu(sackBlockEntity);
-            PiglinAi.angerNearbyPiglins(player, true);
+            ItemStack itemStack = player.getItemInHand(interactionHand);
+            if(itemStack.isEmpty()){
+                this.removeItem(level,player,blockPos,sackBlockEntity);
+            }else if(sackBlockEntity.canInsertItem(itemStack)){
+                if(!level.isClientSide){
+                    ItemStack excessItem = sackBlockEntity.addItem(itemStack);
+                    player.setItemInHand(interactionHand,excessItem);
+                    this.playCatchFallingBlockEffect(level, blockPos);
+                }
+            }
+
+            //player.openMenu(sackBlockEntity);
+            //PiglinAi.angerNearbyPiglins(player, true);
         }
-        return InteractionResult.CONSUME;
+        return InteractionResult.sidedSuccess(level.isClientSide);
     }
 
-    @Override
-    public void tick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource) {
-        BlockEntity blockEntity = serverLevel.getBlockEntity(blockPos);
-        if (blockEntity instanceof SackBlockEntity sackBlockEntity) {
-            sackBlockEntity.recheckOpen();
+    public void removeItem(Level level,Player player,BlockPos blockPos,SackBlockEntity sackBlockEntity){
+        if(level.isClientSide){
+            return;
         }
+        ItemStack itemStack = sackBlockEntity.popItem();
+        if(itemStack.isEmpty()){
+            return;
+        }
+        if(!player.getInventory().add(itemStack)){
+            player.drop(itemStack,false);
+        }
+        this.playCatchFallingBlockEffect(level, blockPos);
+        level.gameEvent(player, GameEvent.BLOCK_CHANGE,blockPos);
+        PiglinAi.angerNearbyPiglins(player,true);
     }
 
     @Override
@@ -100,8 +113,6 @@ public class SackBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
                 ItemEntity itemEntity = new ItemEntity(level, (double)blockPos.getX() + 0.5, (double)blockPos.getY() + 0.5, (double)blockPos.getZ() + 0.5, itemStack);
                 itemEntity.setDefaultPickUpDelay();
                 level.addFreshEntity(itemEntity);
-            } else {
-                sackBlockEntity.unpackLootTable(player);
             }
         }
         super.playerWillDestroy(level, blockPos, blockState, player);
@@ -135,13 +146,6 @@ public class SackBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
         return blockState.rotate(mirror.getRotation(blockState.getValue(HORIZONTAL_FACING)));
     }
 
-    @Override
-    public void onPlace(BlockState blockState, Level level, BlockPos blockPos, BlockState blockState2, boolean bl) {
-        if(blockState2.is(blockState.getBlock())){
-            return;
-        }
-    }
-
     public BlockState getStateForPlacement(BlockPlaceContext blockPlaceContext) {
         LevelAccessor levelAccessor = blockPlaceContext.getLevel();
         BlockPos blockPos = blockPlaceContext.getClickedPos();
@@ -150,8 +154,8 @@ public class SackBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
         int amount = 0;
 
         if(compoundTag != null){
-            ListTag itemListTag = (ListTag) compoundTag.get("Items");
-            if(itemListTag != null && !itemListTag.isEmpty()){
+            ListTag itemListTag = compoundTag.getList("Items",10);
+            if(!itemListTag.isEmpty()){
                 for(int i = 0; i < itemListTag.size(); i++){
                     ItemStack itemStack = ItemStack.of(itemListTag.getCompound(i));
                     if(itemStack.getCount() >= itemStack.getMaxStackSize()){
@@ -169,12 +173,12 @@ public class SackBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(HORIZONTAL_FACING,WATERLOGGED,OPEN,FILLED);
+        builder.add(HORIZONTAL_FACING,WATERLOGGED,FILLED);
     }
 
     @Override
     public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
-        return BOX;
+        return blockState.getValue(FILLED) ? FILLED_BOX : BOX;
     }
 
     @Override
@@ -191,20 +195,16 @@ public class SackBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
         return new SackBlockEntity(blockPos,blockState);
     }
 
-    public static enum SackFullness implements StringRepresentable {
-        EMPTY("empty"),
-        HALF("half"),
-        FULL("full");
-
-        String name;
-
-        SackFullness(String id){
-            this.name = id;
+    public boolean insertFallingBlock(Item item, Level level, BlockPos blockPos){
+        BlockEntity blockEntity = level.getBlockEntity(blockPos);
+        if(blockEntity instanceof SackBlockEntity sackBlockEntity){
+            return sackBlockEntity.insertItem(new ItemStack(item)) != ItemStack.EMPTY;
         }
+        return false;
+    }
 
-        @Override
-        public String getSerializedName() {
-            return this.name;
-        }
+    public void playCatchFallingBlockEffect(Level level,BlockPos blockPos){
+        level.levelEvent(2009,blockPos,0);
+        level.playSound(null,blockPos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS);
     }
 }

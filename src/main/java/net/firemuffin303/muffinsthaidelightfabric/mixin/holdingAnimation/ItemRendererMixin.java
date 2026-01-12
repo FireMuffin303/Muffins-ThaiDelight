@@ -5,6 +5,8 @@ import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.ref.LocalRef;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.firemuffin303.muffinsthaidelightfabric.client.ThaiDelightClient;
+import net.firemuffin303.muffinsthaidelightfabric.common.block.SackBlock;
+import net.firemuffin303.muffinsthaidelightfabric.common.item.SackItem;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModItems;
 import net.minecraft.client.renderer.ItemModelShaper;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -39,7 +41,10 @@ public abstract class ItemRendererMixin {
                                           BakedModel bakedModel, CallbackInfo ci,@Local(argsOnly = true) LocalRef<BakedModel> bakedModel2
     ){
         if( itemStack.is(ModItems.SACK)){
-            bakedModel2.set(this.itemModelShaper.getModelManager().getModel(ThaiDelightClient.SACK_MODEL));
+            BakedModel sackModel = SackItem.isFull(itemStack) ?
+                    this.itemModelShaper.getModelManager().getModel(ThaiDelightClient.FILLED_SACK_MODEL) :
+                    this.itemModelShaper.getModelManager().getModel(ThaiDelightClient.SACK_MODEL);
+            bakedModel2.set(sackModel);
         }
     }
 }

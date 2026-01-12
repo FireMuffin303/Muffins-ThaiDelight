@@ -543,12 +543,9 @@ public class ModelDataGen extends FabricModelProvider {
         //ResourceLocation openModel =  FULL_SACK_BLOCK.create(ThaiDelight.modid("block/full_sack_open"),new TextureMapping().put(TextureSlot.TOP,ThaiDelight.modid("block/full_sack_top_open")),blockStateModelGenerator.modelOutput);
 
         blockStateModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.SACK)
-                        .with(PropertyDispatch.properties(BlockStateProperties.OPEN,SackBlock.FILLED)
-                                .generate((open,fullness) -> {
+                        .with(PropertyDispatch.property(SackBlock.FILLED)
+                                .generate((fullness) -> {
                                     if(fullness){
-                                        if(open){
-                                            return Variant.variant().with(VariantProperties.MODEL,ThaiDelight.modid("block/sack/sack_full_open"));
-                                        }
                                         return Variant.variant().with(VariantProperties.MODEL,ThaiDelight.modid("block/sack/sack_full_close"));
                                     }
                                     return Variant.variant().with(VariantProperties.MODEL,ThaiDelight.modid("block/sack/sack"));
@@ -607,6 +604,7 @@ public class ModelDataGen extends FabricModelProvider {
     }
 
     private static void skipItemBlock(BlockModelGenerators blockStateModelGenerator){
+        blockStateModelGenerator.skipAutoItemBlock(ModBlocks.SACK);
         blockStateModelGenerator.skipAutoItemBlock(ModBlocks.COCONUT_LEAF);
         blockStateModelGenerator.skipAutoItemBlock(ModBlocks.BUDDING_COCONUT_LEAF);
         blockStateModelGenerator.skipAutoItemBlock(ModBlocks.DURIAN_BLOCK);

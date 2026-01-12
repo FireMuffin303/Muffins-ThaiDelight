@@ -38,7 +38,10 @@ public class SackItemRenderer implements BuiltinItemRendererRegistry.DynamicItem
 
     @Override
     public void render(ItemStack stack, ItemDisplayContext mode, PoseStack matrices, MultiBufferSource vertexConsumers, int light, int overlay) {
-        boolean thirdPerson = mode == ItemDisplayContext.THIRD_PERSON_LEFT_HAND || mode == ItemDisplayContext.THIRD_PERSON_RIGHT_HAND || mode == ItemDisplayContext.HEAD;
+        boolean thirdPerson = mode == ItemDisplayContext.THIRD_PERSON_LEFT_HAND ||
+                mode == ItemDisplayContext.THIRD_PERSON_RIGHT_HAND ||
+                mode == ItemDisplayContext.HEAD;
+        boolean gui = mode == ItemDisplayContext.GUI || mode == ItemDisplayContext.FIXED || mode == ItemDisplayContext.GROUND;
         boolean isLeftHand = false;
         Item item = stack.getItem();
         SackBlock sackBlock = (SackBlock) ((BlockItem)item).getBlock();
@@ -59,9 +62,9 @@ public class SackItemRenderer implements BuiltinItemRendererRegistry.DynamicItem
             matrices.pushPose();
             matrices.scale(0.8f,0.8f,1f);
             if (isLeftHand) {
-                matrices.translate(-0.085f, -0.75f, -0.12f);
+                matrices.translate(-0.025f, -0.55f, -0.12f);
             } else {
-                matrices.translate(-0.975f, -0.75f, -0.12f);
+                matrices.translate(-0.975f, -0.55f, -0.12f);
             }
 
             Minecraft.getInstance().getBlockEntityRenderDispatcher().renderItem(this.sackBlockEntity,matrices,vertexConsumers,light,overlay);

@@ -1,8 +1,8 @@
-// 1.20.1	2026-01-10T21:27:14.0644507	Muffin's Thai's Delight Refabricated/minecraft:block Loot Table
+// 1.20.1	2026-01-12T15:42:00.5299188	Muffin's Thai's Delight Refabricated/minecraft:block Loot Table
 2b86ed0c1bda3adc9bf64f4c5df8da96e931ae66 data\muffins_thaidelight\loot_tables\harvest\lime_shears.json
 4675e4737ece4a14f4047db265ad3525d1104b6a data\muffins_thaidelight\loot_tables\harvest\lime_harvest.json
 25875eeb4028a381a5d8115e85626172ec67fe52 data\muffins_thaidelight\loot_tables\harvest\pepper_harvest.json
 12b4399d09b268851f9de2c7f3412d367748775d data\muffins_thaidelight\loot_tables\harvest\butterfly_pea_harvest.json
 c13b7d4435663948ef4a4f8e3ea119386e4b19f0 data\muffins_thaidelight\loot_tables\harvest\holy_basil_harvest.json
-1e57abb7f89ad29a47e09ca44f55506f4d581000 data\muffins_thaidelight\loot_tables\harvest\basil_harvest.json
 fd5ebcb34a6da86fdfdf1bdfe4c970bfeca1111c data\muffins_thaidelight\loot_tables\harvest\butterfly_pea_shears.json
+1e57abb7f89ad29a47e09ca44f55506f4d581000 data\muffins_thaidelight\loot_tables\harvest\basil_harvest.json

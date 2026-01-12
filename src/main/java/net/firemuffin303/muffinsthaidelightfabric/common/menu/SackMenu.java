@@ -24,7 +24,12 @@ public class SackMenu extends AbstractContainerMenu {
         this.container = container;
         container.startOpen(inventory.player);
         for(int m = 0; m < this.container.getContainerSize(); ++m) {
-            this.addSlot(new Slot(container, m, 44 + m * 18, 18));
+            this.addSlot(new Slot(container, m, 44 + m * 18, 18){
+                @Override
+                public boolean mayPlace(ItemStack itemStack) {
+                    return itemStack.getItem().canFitInsideContainerItems();
+                }
+            });
         }
 
 

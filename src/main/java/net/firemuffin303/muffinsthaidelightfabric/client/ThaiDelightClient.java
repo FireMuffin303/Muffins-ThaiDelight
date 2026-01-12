@@ -114,6 +114,7 @@ public class ThaiDelightClient implements ClientModInitializer {
     public static final ModelResourceLocation SACK_MODEL_IN_HAND = new ModelResourceLocation(ThaiDelight.MOD_ID,"sack_in_hand","inventory");
     public static final ModelResourceLocation FULL_SACK_MODEL_IN_HAND = new ModelResourceLocation(ThaiDelight.MOD_ID,"full_sack_in_hand","inventory");
     public static final ModelResourceLocation SACK_MODEL = new ModelResourceLocation(ThaiDelight.MOD_ID,"sack","inventory");
+    public static final ModelResourceLocation FILLED_SACK_MODEL = new ModelResourceLocation(ThaiDelight.MOD_ID,"filled_sack","inventory");
 
 
     public static final RecipeBookType MORTAR_RECIPE_BOOK_TYPE = RecipeBookType.valueOf("MORTAR_RECIPE_BOOK_TYPE");
@@ -136,9 +137,12 @@ public class ThaiDelightClient implements ClientModInitializer {
         ModelLoadingPlugin.register(new ModelLoadingPlugin() {
             @Override
             public void onInitializeModelLoader(Context context) {
-                context.addModels(ThaiDelightClient.SACK_MODEL);
-                context.addModels(ThaiDelightClient.SACK_MODEL_IN_HAND);
-                context.addModels(ThaiDelightClient.FULL_SACK_MODEL_IN_HAND);
+                context.addModels(ThaiDelightClient.SACK_MODEL,
+                        ThaiDelightClient.FILLED_SACK_MODEL,
+                        ThaiDelightClient.SACK_MODEL_IN_HAND,
+                        ThaiDelightClient.FULL_SACK_MODEL_IN_HAND
+                );
+
             }
         });
 

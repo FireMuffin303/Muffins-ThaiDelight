@@ -1,49 +1,27 @@
 package net.firemuffin303.muffinsthaidelightfabric;
 
-import com.mojang.datafixers.util.Pair;
 import com.mojang.logging.LogUtils;
 import com.terraformersmc.terraform.boat.api.TerraformBoatType;
 import com.terraformersmc.terraform.boat.api.TerraformBoatTypeRegistry;
 import eu.midnightdust.lib.config.MidnightConfig;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
-import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
-import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.fabricmc.fabric.api.loot.v2.LootTableSource;
-import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
-import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
-import net.fabricmc.fabric.api.registry.FuelRegistry;
-import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.fabricmc.fabric.api.registry.TillableBlockRegistry;
 import net.firemuffin303.muffinsthaidelightfabric.common.entity.DragonflyEntity;
-import net.firemuffin303.muffinsthaidelightfabric.common.entity.FlowerCrabEntity;
-import net.firemuffin303.muffinsthaidelightfabric.common.event.ModVillagerTrades;
 import net.firemuffin303.muffinsthaidelightfabric.common.item.DragonflyBottleItem;
-import net.firemuffin303.muffinsthaidelightfabric.common.item.DyeableItem;
 import net.firemuffin303.muffinsthaidelightfabric.config.ThaiDelightConfig;
 import net.firemuffin303.muffinsthaidelightfabric.mixin.*;
-import net.firemuffin303.muffinsthaidelightfabric.util.BlockEntityTypeAdder;
-import net.firemuffin303.muffinsthaidelightfabric.mixin.food.ChickenFoodAccessor;
-import net.firemuffin303.muffinsthaidelightfabric.mixin.food.FrogFoodAccessor;
-import net.firemuffin303.muffinsthaidelightfabric.mixin.food.ParrotTameFoodAccessor;
-import net.firemuffin303.muffinsthaidelightfabric.mixin.food.PigFoodAccessor;
 import net.firemuffin303.muffinsthaidelightfabric.mixin.loot.LootPoolBuilderAccessor;
 import net.firemuffin303.muffinsthaidelightfabric.mixin.loot.LootTableAccessor;
-import net.firemuffin303.muffinsthaidelightfabric.mixin.villager.VillagerAccessor;
 import net.firemuffin303.muffinsthaidelightfabric.registry.*;
 import net.firemuffin303.muffinsthaidelightfabric.util.CommonEvents;
-import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
@@ -51,17 +29,7 @@ import net.minecraft.world.entity.ai.goal.GoalSelector;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.alchemy.PotionBrewing;
 import net.minecraft.world.item.alchemy.Potions;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.ComposterBlock;
-import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.levelgen.GenerationStep;
-import net.minecraft.world.level.levelgen.Heightmap;
-import net.minecraft.world.level.levelgen.structure.pools.SinglePoolElement;
-import net.minecraft.world.level.levelgen.structure.pools.StructurePoolElement;
-import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
-import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorList;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootDataManager;
 import net.minecraft.world.level.storage.loot.LootPool;
@@ -70,7 +38,6 @@ import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
 import org.slf4j.Logger;
 
 import java.util.*;
-import java.util.stream.Stream;
 
 public class ThaiDelight implements ModInitializer {
     public static final Logger LOGGER = LogUtils.getLogger();
@@ -110,8 +77,6 @@ public class ThaiDelight implements ModInitializer {
         postInit();
 
         MidnightConfig.init(MOD_ID, ThaiDelightConfig.class);
-
-        //ResourceManagerHelper.get(PackType.SERVER_DATA).registerReloadListener(new FlavorManager());
 
 
         ServerEntityEvents.ENTITY_LOAD.register((entity, serverLevel) -> {
