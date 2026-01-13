@@ -1,6 +1,7 @@
 package net.firemuffin303.muffinsthaidelightfabric.common.item;
 
 import com.chocohead.mm.api.ClassTinkerers;
+import com.mojang.logging.LogUtils;
 import net.firemuffin303.muffinsthaidelightfabric.client.renderer.component.SackTooltipComponent;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModItems;
@@ -105,7 +106,7 @@ public class SackItem extends BlockItem {
             return false;
         }
 
-        return listTag.stream().map(CompoundTag.class::cast).map(ItemStack::of).allMatch(itemStack1 -> {
+        return listTag.size() >= 5 && listTag.stream().map(CompoundTag.class::cast).map(ItemStack::of).allMatch(itemStack1 -> {
             return itemStack1.getCount() >= itemStack1.getMaxStackSize() && !itemStack1.isEmpty();
                 }
             );

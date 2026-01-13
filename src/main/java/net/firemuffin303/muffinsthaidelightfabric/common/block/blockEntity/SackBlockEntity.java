@@ -24,6 +24,7 @@ import java.util.Objects;
 
 public class SackBlockEntity extends BlockEntity implements Container, Nameable {
     private NonNullList<ItemStack> items = NonNullList.withSize(5,ItemStack.EMPTY);
+    private ItemStack currentItem = ItemStack.EMPTY;
     @Nullable
     private Component name;
 
@@ -50,6 +51,12 @@ public class SackBlockEntity extends BlockEntity implements Container, Nameable 
         if (compoundTag.contains("CustomName", 8)) {
             this.name = Component.Serializer.fromJson(compoundTag.getString("CustomName"));
         }
+
+        for(ItemStack itemStack:this.items){
+            if(itemStack.isEmpty()) continue;
+            this.currentItem = itemStack;
+            break;
+        }
     }
 
     @Override
@@ -60,12 +67,10 @@ public class SackBlockEntity extends BlockEntity implements Container, Nameable 
     @Override
     public ItemStack removeItem(int i, int j) {
         ItemStack itemStack = Objects.requireNonNullElse(this.items.get(i), ItemStack.EMPTY);
-
         if(!itemStack.isEmpty()){
-            ContainerHelper.removeItem(this.items,i,j);
             this.markUpdated();
         }
-        return itemStack;
+        return ContainerHelper.removeItem(this.items,i,j);
     }
 
     @Override
@@ -76,6 +81,7 @@ public class SackBlockEntity extends BlockEntity implements Container, Nameable 
     @Override
     public void setItem(int i, ItemStack itemStack) {
         this.items.set(i,itemStack);
+        this.setChanged();
         this.markUpdated();
     }
 
@@ -105,6 +111,22 @@ public class SackBlockEntity extends BlockEntity implements Container, Nameable 
     }
 
     @Override
+    public boolean canPlaceItem(int i, ItemStack itemStack) {
+        ItemStack sackItemSlot = this.items.get(i);
+        return this.items.stream().anyMatch(sackItem -> sackItem.is(itemStack.getItem())) && sackItemSlot.getCount() < sackItemSlot.getMaxStackSize();
+    }
+
+    @Override
+    public boolean canTakeItem(Container container, int i, ItemStack itemStack) {
+        return container.hasAnyMatching(itemStack2 -> {
+            if (itemStack2.isEmpty()) {
+                return true;
+            }
+            return ItemStack.isSameItemSameTags(itemStack, itemStack2) && itemStack2.getCount() + itemStack.getCount() <= Math.min(itemStack2.getMaxStackSize(), container.getMaxStackSize());
+        });
+    }
+
+    @Override
     public @Nullable Packet<ClientGamePacketListener> getUpdatePacket() {
         return ClientboundBlockEntityDataPacket.create(this);
     }
@@ -114,12 +136,22 @@ public class SackBlockEntity extends BlockEntity implements Container, Nameable 
         return this.saveWithoutMetadata();
     }
 
-    public ItemStack getFirstStack(){
-        return this.items.get(0);
+    public ItemStack getCurrentItem(){
+        return this.currentItem;
+    }
+
+    public int getSackItemAmount(){
+        int amount = 0;
+
+        for(ItemStack itemStack:this.items){
+            amount += itemStack.getCount();
+        }
+
+        return amount;
     }
 
     public boolean canInsertItem(ItemStack itemStack){
-        if(this.isEmpty()){
+        if(this.isEmpty() && itemStack.getItem().canFitInsideContainerItems()){
             return true;
         }
 
@@ -127,7 +159,8 @@ public class SackBlockEntity extends BlockEntity implements Container, Nameable 
             return false;
         }
 
-        return this.items.stream().anyMatch(sackItem -> sackItem.is(itemStack.getItem()));
+
+        return this.items.stream().anyMatch(sackItem -> sackItem.is(itemStack.getItem()) && ItemStack.isSameItemSameTags(sackItem,itemStack)) && itemStack.getItem().canFitInsideContainerItems();
     }
 
     public ItemStack addItem(ItemStack itemStack){
@@ -141,7 +174,7 @@ public class SackBlockEntity extends BlockEntity implements Container, Nameable 
                 this.markUpdated();
                 return itemStack.copy();
             }else if(sackItem.isEmpty()){
-                this.items.set(i,itemStack);
+                this.items.set(i,itemStack.copy());
                 this.markUpdated();
                 return ItemStack.EMPTY;
             }

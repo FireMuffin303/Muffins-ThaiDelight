@@ -67,8 +67,10 @@ public class SackBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
                 this.removeItem(level,player,blockPos,sackBlockEntity);
             }else if(sackBlockEntity.canInsertItem(itemStack)){
                 if(!level.isClientSide){
-                    ItemStack excessItem = sackBlockEntity.addItem(itemStack);
-                    player.setItemInHand(interactionHand,excessItem);
+                    ItemStack excessItem = sackBlockEntity.addItem(itemStack.copy());
+                    if(!player.getAbilities().instabuild){
+                        player.setItemInHand(interactionHand,excessItem);
+                    }
                     this.playCatchFallingBlockEffect(level, blockPos);
                 }
             }
@@ -197,9 +199,17 @@ public class SackBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
 
     public boolean insertFallingBlock(Item item, Level level, BlockPos blockPos){
         BlockEntity blockEntity = level.getBlockEntity(blockPos);
+        ItemStack itemStack = new ItemStack(item);
         if(blockEntity instanceof SackBlockEntity sackBlockEntity){
-            return sackBlockEntity.insertItem(new ItemStack(item)) != ItemStack.EMPTY;
+            if(sackBlockEntity.canInsertItem(itemStack)){
+                if(!level.isClientSide){
+                    sackBlockEntity.addItem(itemStack);
+                    this.playCatchFallingBlockEffect(level, blockPos);
+                    return true;
+                }
+            }
         }
+
         return false;
     }
 
