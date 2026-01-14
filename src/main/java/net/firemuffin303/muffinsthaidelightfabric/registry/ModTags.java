@@ -39,6 +39,7 @@ public class ModTags {
     public static final TagKey<Block> COCONUT_LOGS_BLOCK = TagKey.create(Registries.BLOCK,ThaiDelight.modid("coconut_logs"));
 
     public static final TagKey<Block> SACK_CATCHABLE = TagKey.create(Registries.BLOCK,ThaiDelight.modid("sack_catchable"));
+    public static final TagKey<Block> SACK_HEAVY_CATCHABLE = TagKey.create(Registries.BLOCK,ThaiDelight.modid("sack_heavy_catchable"));
 
     public static final TagKey<Block> DURIAN_RICH_SOIL = TagKey.create(Registries.BLOCK,ThaiDelight.modid("durian_rich_soil"));
     public static final TagKey<Block> MANGO_RICH_SOIL = TagKey.create(Registries.BLOCK,ThaiDelight.modid("mango_rich_soil"));

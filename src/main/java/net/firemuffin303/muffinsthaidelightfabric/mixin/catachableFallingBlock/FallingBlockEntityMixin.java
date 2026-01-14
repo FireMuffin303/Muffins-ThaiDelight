@@ -4,13 +4,20 @@ import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.Share;
 import com.llamalad7.mixinextras.sugar.ref.LocalRef;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.firemuffin303.muffinsthaidelightfabric.client.packet.ModLevelEventPacket;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.SackBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.item.SackItem;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModItems;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModTags;
+import net.firemuffin303.muffinsthaidelightfabric.util.CommonEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.EntityType;
@@ -30,6 +37,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Predicate;
 
 @Mixin(FallingBlockEntity.class)
@@ -88,7 +96,12 @@ public abstract class FallingBlockEntityMixin extends Entity {
 
                 this.discard();
                 list.forEach(entity -> ((Player)entity).getCooldowns().addCooldown(ModItems.SACK,10));
-                this.level().levelEvent(1045,this.blockPosition(),0);
+                if(this.blockState.is(ModTags.SACK_HEAVY_CATCHABLE)){
+                    CommonEvents.playDurianCatchingSound((ServerLevel) this.level(),this.position(),this.blockPosition());
+                }else{
+                    this.level().levelEvent(2009,blockPos,0);
+                    this.level().playSound(null,blockPos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS);
+                }
             }
         }
     }

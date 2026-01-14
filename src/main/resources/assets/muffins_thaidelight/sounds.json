@@ -8,6 +8,13 @@
     ],
     "subtitle": "subtitles.ui.mortar.take_result"
   },
+  "item.sack.catching_durian": {
+    "sounds": [
+      {
+        "name" : "muffins_thaidelight:sack/catching"
+      }
+    ]
+  },
   "entity.dragonfly.loop": {
     "sounds": [
       {

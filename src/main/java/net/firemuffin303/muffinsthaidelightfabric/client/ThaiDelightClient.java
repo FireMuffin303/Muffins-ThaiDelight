@@ -9,9 +9,12 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
 import net.fabricmc.fabric.api.client.model.loading.v1.ModelLoadingPlugin;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.*;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.loader.api.FabricLoader;
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
+import net.firemuffin303.muffinsthaidelightfabric.client.packet.ModLevelEventPacket;
 import net.firemuffin303.muffinsthaidelightfabric.client.renderer.blocks.FenceLoggedButterflyPeaRenderer;
 import net.firemuffin303.muffinsthaidelightfabric.client.renderer.blocks.SackBlockEntityRenderer;
 import net.firemuffin303.muffinsthaidelightfabric.client.renderer.items.SackItemRenderer;
@@ -33,6 +36,7 @@ import net.minecraft.client.color.item.ItemColors;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
 import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.Sheets;
@@ -237,5 +241,7 @@ public class ThaiDelightClient implements ClientModInitializer {
             return ThaiDelightClient.MORTAR_MISC;
         });
 
+
+        ClientPlayNetworking.registerGlobalReceiver(ModLevelEventPacket.TYPE,ModLevelEventPacket::receive);
     }
 }

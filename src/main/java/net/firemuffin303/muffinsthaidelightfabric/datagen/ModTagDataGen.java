@@ -252,10 +252,12 @@ public class ModTagDataGen {
 
             getOrCreateTagBuilder(SACK_CATCHABLE).add(
                     ModBlocks.SMALL_DURIAN_BLOCK,
-                    ModBlocks.DURIAN_BLOCK,
                     ModBlocks.HANGING_DURIAN,
-                    ModBlocks.COCONUT,
-                    ModBlocks.HANGING_MANGO_BLOCK
+                    ModBlocks.HANGING_MANGO_BLOCK).addTag(SACK_HEAVY_CATCHABLE);
+
+            getOrCreateTagBuilder(SACK_HEAVY_CATCHABLE).add(
+                    ModBlocks.DURIAN_BLOCK,
+                    ModBlocks.COCONUT
             );
 
             getOrCreateTagBuilder(BlockTags.CANDLE_CAKES).add(

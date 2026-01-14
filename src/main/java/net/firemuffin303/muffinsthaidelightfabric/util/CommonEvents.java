@@ -4,12 +4,14 @@ import com.mojang.datafixers.util.Pair;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.fabricmc.fabric.api.resource.conditions.v1.ResourceConditions;
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
+import net.firemuffin303.muffinsthaidelightfabric.client.packet.ModLevelEventPacket;
 import net.firemuffin303.muffinsthaidelightfabric.common.entity.DragonflyEntity;
 import net.firemuffin303.muffinsthaidelightfabric.common.entity.FlowerCrabEntity;
 import net.firemuffin303.muffinsthaidelightfabric.common.event.ModVillagerTrades;
@@ -29,8 +31,11 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.item.ArmorItem;
@@ -52,6 +57,7 @@ import net.minecraft.world.level.levelgen.structure.pools.SinglePoolElement;
 import net.minecraft.world.level.levelgen.structure.pools.StructurePoolElement;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorList;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
@@ -342,5 +348,12 @@ public class CommonEvents {
         ResourceConditions.register(HAS_BANANA,jsonObject -> BuiltInRegistries.ITEM.stream().anyMatch(item -> item.builtInRegistryHolder().is(ModTags.BANANA)));
     }
 
+    public static void playDurianCatchingSound(ServerLevel serverLevel, Vec3 vec3,BlockPos blockPos){
+        for(ServerPlayer player : serverLevel.getServer().getPlayerList().getPlayers()){
+            if(player.level().dimension() != serverLevel.dimension() || player.position().distanceTo(vec3) > 64f) continue;
+            ServerPlayNetworking.send(player,new ModLevelEventPacket((byte) 1,blockPos));
+        }
 
+
+    }
 }

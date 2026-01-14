@@ -2,9 +2,8 @@
   "replace": false,
   "values": [
     "muffins_thaidelight:small_durian_block",
-    "muffins_thaidelight:durian_block",
     "muffins_thaidelight:hanging_durian",
-    "muffins_thaidelight:coconut",
-    "muffins_thaidelight:mango_block"
+    "muffins_thaidelight:mango_block",
+    "#muffins_thaidelight:sack_heavy_catchable"
   ]
 }

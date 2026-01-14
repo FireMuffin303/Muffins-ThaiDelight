@@ -9,6 +9,7 @@ import net.minecraft.sounds.SoundEvent;
 
 public class ModSoundEvents {
     public static SoundEvent MORTAR_CRAFT = register("ui.mortar.take_result");
+    public static SoundEvent SACK_CATCHING_DURIAN = register("item.sack.catching_durian");
 
     public static void init(){}
 
