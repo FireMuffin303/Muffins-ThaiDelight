@@ -32,7 +32,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.List;
 import java.util.function.Predicate;
 
-@Debug(export = true)
 @Mixin(FallingBlockEntity.class)
 public abstract class FallingBlockEntityMixin extends Entity {
     @Shadow private BlockState blockState;

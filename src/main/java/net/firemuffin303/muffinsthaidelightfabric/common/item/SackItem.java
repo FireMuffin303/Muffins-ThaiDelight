@@ -56,33 +56,15 @@ public class SackItem extends BlockItem {
 
     @Override
     public Optional<TooltipComponent> getTooltipImage(ItemStack itemStack) {
-        CompoundTag compoundTag = itemStack.getTag();
-        if(compoundTag == null){
-            return Optional.empty();
-        }
-
-        if(!compoundTag.contains("BlockEntityTag")){
-            return Optional.empty();
-        }
-
-        CompoundTag blockEntityTag = compoundTag.getCompound("BlockEntityTag");
-        if(!blockEntityTag.contains("Items")){
-            return Optional.empty();
-        }
-        List<ItemStack> itemStackStream = blockEntityTag.getList("Items",10).stream().map(CompoundTag.class::cast).map(ItemStack::of).toList();
-        if(itemStackStream.isEmpty()){
-            return Optional.empty();
-        }
-
-        int amount = 0;
-        NonNullList<ItemStack> nonNullList = NonNullList.create();
-        for(ItemStack itemStack1 : itemStackStream){
-            nonNullList.add(itemStack1);
-            amount += itemStack1.getCount();
-        }
+        NonNullList<ItemStack> nonNullList = NonNullList.withSize(5,ItemStack.EMPTY);
 
 
-        return Optional.of(new SackTooltipComponent.SackToolTip(nonNullList.get(0).getItem(),amount));
+        CompoundTag compoundTag = BlockItem.getBlockEntityData(itemStack);
+        if(compoundTag != null){
+            ContainerHelper.loadAllItems(compoundTag,nonNullList);
+        }
+
+        return Optional.of(new SackTooltipComponent.SackToolTip(nonNullList));
     }
 
     @Override

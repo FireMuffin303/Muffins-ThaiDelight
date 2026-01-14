@@ -2,8 +2,10 @@ package net.firemuffin303.muffinsthaidelightfabric.util;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.logging.LogUtils;
+import com.mojang.math.Axis;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
 
@@ -32,6 +34,22 @@ public class ModAnimationUtils {
     }
 
     public static void handleUsingCatchingBag(PoseStack poseStack, HumanoidArm humanoidArm,float i){
-        poseStack.translate(0.56,-0.22 + (i * -0.55f),-0.72F);
+        if(humanoidArm == HumanoidArm.RIGHT){
+            poseStack.translate(0.56,-0.22 + (i * -0.55f),-0.72F);
+        }else{
+            poseStack.translate(-0.56,-0.22 + (i * -0.55f),-0.72F);
+
+        }
+    }
+
+    public static void sackAttackAnimation(PoseStack poseStack, HumanoidArm humanoidArm, float f){
+        int i = humanoidArm == HumanoidArm.RIGHT ? 1 : -1;
+        float g = Mth.sin(f * f * (float)Math.PI);
+        poseStack.mulPose(Axis.YP.rotationDegrees((float)i * (45.0f + g * -20.0f)));
+        float h = Mth.sin(Mth.sqrt(f) * (float)Math.PI);
+        poseStack.mulPose(Axis.ZP.rotationDegrees((float)i * h * -10.0f));
+        poseStack.mulPose(Axis.XP.rotationDegrees(h * -10.0f));
+        poseStack.mulPose(Axis.YP.rotationDegrees((float)i * -15.0f));
+        poseStack.translate(0,0,-0.25f);
     }
 }

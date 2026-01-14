@@ -39,7 +39,7 @@ public abstract class PlayerRendererMixin {
                                                     CallbackInfoReturnable<HumanoidModel.ArmPose> cir,
                                                     @Share("shareItemStack") LocalRef<ItemStack> itemStackLocalRef
                                                 ){
-        if(!abstractClientPlayer.swinging && itemStackLocalRef.get().is(ModItems.SACK)){
+        if(itemStackLocalRef.get().is(ModItems.SACK)){
             if(SackItem.isFull(itemStackLocalRef.get())){
                 cir.setReturnValue(ModASMEarlyRiser.getSackShoulderArmPose());
             }else{

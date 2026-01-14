@@ -1,13 +1,17 @@
 package net.firemuffin303.muffinsthaidelightfabric.mixin.holdingAnimation;
 
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import com.llamalad7.mixinextras.sugar.Local;
+import net.firemuffin303.muffinsthaidelightfabric.common.item.SackItem;
+import net.firemuffin303.muffinsthaidelightfabric.registry.ModItems;
 import net.firemuffin303.muffinsthaidelightfabric.util.ModASMEarlyRiser;
 import net.firemuffin303.muffinsthaidelightfabric.util.ModAnimationUtils;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(HumanoidModel.class)
@@ -42,5 +46,35 @@ public abstract class HumanoidModelMixin {
         } else if (this.leftArmPose == ModASMEarlyRiser.getSackShoulderArmPose()) {
             ModAnimationUtils.handleSackShoulderHold(humanoidModel,false);
         }
+    }
+
+    @ModifyVariable(method = "setupAttackAnimation",at = @At(value = "STORE"), ordinal = 2)
+    public <T extends LivingEntity> float muffins$sackAttackAnimationSetupX(float original, @Local(argsOnly = true) T livingEntity){
+        ItemStack mainHandItem = livingEntity.getMainHandItem();
+        if(mainHandItem.is(ModItems.SACK) && SackItem.isFull(mainHandItem)){
+            return -original;
+        }
+
+        return original;
+    }
+
+    @ModifyConstant(method = "setupAttackAnimation",constant = @Constant(floatValue = 2.0f))
+    public <T extends LivingEntity> float muffins$sackAttackAnimationSetupY(float original, @Local(argsOnly = true) T livingEntity){
+        ItemStack mainHandItem = livingEntity.getMainHandItem();
+        if(mainHandItem.is(ModItems.SACK) && SackItem.isFull(mainHandItem)){
+            return -original;
+        }
+
+        return original;
+    }
+
+    @ModifyExpressionValue(method = "setupAttackAnimation",at = @At(value = "INVOKE", target = "Lnet/minecraft/util/Mth;sin(F)F",ordinal = 5))
+    public <T extends LivingEntity> float muffins$sackAttackAnimationSetupZ(float original, @Local(argsOnly = true) T livingEntity){
+        ItemStack mainHandItem = livingEntity.getMainHandItem();
+        if(mainHandItem.is(ModItems.SACK) && SackItem.isFull(mainHandItem)){
+            return -original;
+        }
+
+        return original;
     }
 }
