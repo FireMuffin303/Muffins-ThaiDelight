@@ -66,11 +66,12 @@ public class SackBlockEntity extends BlockEntity implements Container, Nameable 
 
     @Override
     public ItemStack removeItem(int i, int j) {
-        ItemStack itemStack = Objects.requireNonNullElse(this.items.get(i), ItemStack.EMPTY);
+        ItemStack itemStack = ContainerHelper.removeItem(this.items,i,j);
         if(!itemStack.isEmpty()){
             this.markUpdated();
+            this.setChanged();
         }
-        return ContainerHelper.removeItem(this.items,i,j);
+        return itemStack;
     }
 
     @Override
@@ -81,8 +82,8 @@ public class SackBlockEntity extends BlockEntity implements Container, Nameable 
     @Override
     public void setItem(int i, ItemStack itemStack) {
         this.items.set(i,itemStack);
-        this.setChanged();
         this.markUpdated();
+        this.setChanged();
     }
 
     @Override
@@ -172,10 +173,10 @@ public class SackBlockEntity extends BlockEntity implements Container, Nameable 
                 itemStack.shrink(k);
                 sackItem.grow(k);
                 this.markUpdated();
+                this.setChanged();
                 return itemStack.copy();
             }else if(sackItem.isEmpty()){
-                this.items.set(i,itemStack.copy());
-                this.markUpdated();
+                this.setItem(i,itemStack.copy());
                 return ItemStack.EMPTY;
             }
         }
@@ -212,7 +213,6 @@ public class SackBlockEntity extends BlockEntity implements Container, Nameable 
 
         }
 
-        LogUtils.getLogger().info("{}",itemStack);
 
         if(shouldUpdate){
             this.markUpdated();
@@ -226,6 +226,7 @@ public class SackBlockEntity extends BlockEntity implements Container, Nameable 
             ItemStack itemStack = this.items.get(i).copy();
             if(itemStack.isEmpty()) continue;
             this.removeItem(i,64);
+            this.markUpdated();
             return itemStack;
         }
 

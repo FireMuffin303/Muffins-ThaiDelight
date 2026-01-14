@@ -5,6 +5,7 @@ import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.Share;
 import com.llamalad7.mixinextras.sugar.ref.LocalRef;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.SackBlock;
+import net.firemuffin303.muffinsthaidelightfabric.common.item.SackItem;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModItems;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModTags;
@@ -15,9 +16,11 @@ import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -35,6 +38,7 @@ public abstract class FallingBlockEntityMixin extends Entity {
     @Shadow private BlockState blockState;
     @Shadow public boolean dropItem;
     @Shadow public int time;
+    @Shadow @Nullable public CompoundTag blockData;
     @Unique private boolean isBagCatch = false;
 
     public FallingBlockEntityMixin(EntityType<?> entityType, Level level) {
@@ -68,15 +72,21 @@ public abstract class FallingBlockEntityMixin extends Entity {
 
             Predicate<Entity> predicate = EntitySelector.NO_SPECTATORS.and(EntitySelector.LIVING_ENTITY_STILL_ALIVE).and(entity -> {
                 if(entity instanceof Player player){
-                    return player.isUsingItem() && player.getItemInHand(player.getUsedItemHand()).is(ModItems.SACK);
+                    ItemStack itemStack = player.getItemInHand(player.getUsedItemHand());
+                    return player.isUsingItem() && itemStack.is(ModItems.SACK) && !SackItem.isFull(itemStack);
                 }
                 return false;
             });
             List<Entity> list = this.level().getEntities(this,this.getBoundingBox().inflate(0.5,-0.3,0.5),predicate);
             if(!list.isEmpty()){
                 if(this.dropItem){
-                    this.spawnAtLocation(block.get());
+                    if(list.get(0) instanceof Player player){
+                        if(!SackItem.onCatchingFallingBlock( player.getUseItem(), this.blockState.getBlock().asItem() )){
+                            this.spawnAtLocation(block.get());
+                        }
+                    }
                 }
+
                 this.discard();
                 list.forEach(entity -> ((Player)entity).getCooldowns().addCooldown(ModItems.SACK,10));
                 this.level().levelEvent(1045,this.blockPosition(),0);

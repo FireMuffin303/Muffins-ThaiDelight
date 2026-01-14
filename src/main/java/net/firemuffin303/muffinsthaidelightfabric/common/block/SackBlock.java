@@ -74,9 +74,6 @@ public class SackBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
                     this.playCatchFallingBlockEffect(level, blockPos);
                 }
             }
-
-            //player.openMenu(sackBlockEntity);
-            //PiglinAi.angerNearbyPiglins(player, true);
         }
         return InteractionResult.sidedSuccess(level.isClientSide);
     }

@@ -342,4 +342,5 @@ public class CommonEvents {
         ResourceConditions.register(HAS_BANANA,jsonObject -> BuiltInRegistries.ITEM.stream().anyMatch(item -> item.builtInRegistryHolder().is(ModTags.BANANA)));
     }
 
+
 }
