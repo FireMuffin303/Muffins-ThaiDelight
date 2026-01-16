@@ -6,7 +6,7 @@
 	"textures": {
 		"tray_top": "muffins_thaidelight:block/somtam/somtam_tray_top",
 		"tray_side": "farmersdelight:block/tray_bottom",
-		"particle": "muffins_thaidelight:block/somtam/somtam"
+		"particle": "#tray_top"
 	},
 	"elements": [
 		{

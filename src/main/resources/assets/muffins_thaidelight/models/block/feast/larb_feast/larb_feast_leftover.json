@@ -5,7 +5,7 @@
 	"textures": {
 		"tray_top": "muffins_thaidelight:block/spicy_minced_meat_salad/spicy_minced_meat_salad_tray_top",
 		"tray_side": "farmersdelight:block/tray_bottom",
-		"particle": "muffins_thaidelight:block/spicy_minced_meat_salad/spicy_minced_meat_salad_stage3"
+		"particle": "#tray_top"
 	},
 	"elements": [
 		{

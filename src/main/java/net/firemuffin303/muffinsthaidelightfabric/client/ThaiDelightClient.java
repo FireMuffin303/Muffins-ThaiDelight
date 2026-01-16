@@ -114,7 +114,8 @@ public class ThaiDelightClient implements ClientModInitializer {
             ModBlocks.WILD_BASIL,
             ModBlocks.WILD_HOLY_BASIL,
             ModBlocks.POTTED_HOLY_BASIL,
-            ModBlocks.POTTED_BASIL
+            ModBlocks.POTTED_BASIL,
+            ModBlocks.LARB_FEAST
     };
 
     public static final ModelResourceLocation SACK_MODEL_IN_HAND = new ModelResourceLocation(ThaiDelight.MOD_ID,"sack_in_hand","inventory");
