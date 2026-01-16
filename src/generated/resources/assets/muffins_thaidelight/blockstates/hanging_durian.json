@@ -4,7 +4,7 @@
       "model": "muffins_thaidelight:block/durian_block_stage0_hanging"
     },
     "age=1": {
-      "model": "muffins_thaidelight:block/durian_block_stage2_hanging"
+      "model": "muffins_thaidelight:block/durian/durian"
     }
   }
 }

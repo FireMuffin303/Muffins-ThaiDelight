@@ -33,6 +33,7 @@ import net.firemuffin303.muffinsthaidelightfabric.registry.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.RecipeBookCategories;
 import net.minecraft.client.color.item.ItemColors;
+import net.minecraft.client.gui.components.SplashRenderer;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -78,6 +79,7 @@ public class ThaiDelightClient implements ClientModInitializer {
             ModBlocks.DURIAN_SAPLING,
             ModBlocks.HANGING_MANGO_BLOCK,
             ModBlocks.LIME_PLANT,
+            ModBlocks.MANGO_SAPLING,
             ModBlocks.POTTED_LIME_SAPLING,
             ModBlocks.POTTED_COCONUT_SAPLING,
             ModBlocks.POTTED_DURIAN_SAPLING,
@@ -120,6 +122,7 @@ public class ThaiDelightClient implements ClientModInitializer {
     public static final ModelResourceLocation SACK_MODEL = new ModelResourceLocation(ThaiDelight.MOD_ID,"sack","inventory");
     public static final ModelResourceLocation FILLED_SACK_MODEL = new ModelResourceLocation(ThaiDelight.MOD_ID,"filled_sack","inventory");
 
+    public static final SplashRenderer FISH_OF_THIEVES = new SplashRenderer("Also try Fish of Thieves mod!");
 
     public static final RecipeBookType MORTAR_RECIPE_BOOK_TYPE = RecipeBookType.valueOf("MORTAR_RECIPE_BOOK_TYPE");
     public static final RecipeBookCategories MORTAR_SEARCH = RecipeBookCategories.valueOf("MORTAR_SEARCH");
@@ -149,6 +152,7 @@ public class ThaiDelightClient implements ClientModInitializer {
 
             }
         });
+
 
 
         if(FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT){

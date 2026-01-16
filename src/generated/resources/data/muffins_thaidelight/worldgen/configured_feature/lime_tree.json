@@ -17,7 +17,7 @@
     "foliage_provider": {
       "type": "minecraft:simple_state_provider",
       "state": {
-        "Name": "muffins_thaidelight:durian_block"
+        "Name": "muffins_thaidelight:durian"
       }
     },
     "force_dirt": false,

@@ -12,7 +12,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class DurianBlock extends FallingBlock {
-    private static final VoxelShape BOX = Block.box(2.0,0.0,2.0,14.0,14.0,14.0);
+    private static final VoxelShape BOX = Block.box(1.0,0.0,1.0,15.0,16.0,15.0);
     public DurianBlock(Properties properties) {
         super(properties);
     }

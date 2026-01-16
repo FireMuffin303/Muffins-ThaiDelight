@@ -33,7 +33,7 @@
                   }
                 }
               ],
-              "name": "muffins_thaidelight:small_durian_block"
+              "name": "muffins_thaidelight:small_durian"
             },
             {
               "type": "minecraft:item",
@@ -100,7 +100,7 @@
                   }
                 }
               ],
-              "name": "muffins_thaidelight:durian_block"
+              "name": "muffins_thaidelight:durian"
             },
             {
               "type": "minecraft:item",

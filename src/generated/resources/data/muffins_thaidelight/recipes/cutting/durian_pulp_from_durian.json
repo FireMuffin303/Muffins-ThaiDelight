@@ -2,7 +2,7 @@
   "type": "farmersdelight:cutting",
   "ingredients": [
     {
-      "item": "muffins_thaidelight:durian_block"
+      "item": "muffins_thaidelight:durian"
     }
   ],
   "result": [

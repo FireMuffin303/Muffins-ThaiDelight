@@ -5,9 +5,10 @@
 		"0": "muffins_thaidelight:block/ripe_pineapple_side",
 		"1": "muffins_thaidelight:block/pineapple_crown",
 		"2": "muffins_thaidelight:block/pineapple_fried_rice_rice",
+		"5": "muffins_thaidelight:block/pineapple_fried_rice_top",
+		"particle": "muffins_thaidelight:block/ripe_pineapple_side",
 		"tray_side": "farmersdelight:block/tray_bottom",
-		"tray_top": "muffins_thaidelight:block/leaf_tray_top",
-		"particle": "muffins_thaidelight:block/ripe_pineapple_side"
+		"tray_top": "muffins_thaidelight:block/leaf_tray_top"
 	},
 	"elements": [
 		{
@@ -19,8 +20,7 @@
 				"east": {"uv": [4, 0, 0, 10], "rotation": 270, "texture": "#0"},
 				"south": {"uv": [8, 4, 16, 8], "texture": "#0"},
 				"west": {"uv": [4, 0, 0, 10], "rotation": 90, "texture": "#0"},
-				"up": {"uv": [0, 0, 8, 10], "rotation": 180, "texture": "#0"},
-				"down": {"uv": [0, 0, 8, 10], "texture": "#0"}
+				"up": {"uv": [0, 0, 8, 10], "rotation": 180, "texture": "#5"}
 			}
 		},
 		{
@@ -57,20 +57,18 @@
 			}
 		},
 		{
-			"from": [5, 5, 4],
-			"to": [11, 7, 12],
-			"rotation": {"angle": 0, "axis": "y", "origin": [5, 5, 4]},
+			"from": [8, 5, 4],
+			"to": [11, 7, 8],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 5, 4]},
 			"faces": {
-				"north": {"uv": [6, 2, 12, 4], "texture": "#2"},
-				"east": {"uv": [6, 0, 14, 2], "texture": "#2"},
-				"south": {"uv": [6, 2, 12, 4], "texture": "#2"},
-				"west": {"uv": [6, 0, 14, 2], "texture": "#2"},
-				"up": {"uv": [0, 0, 6, 8], "texture": "#2"},
-				"down": {"uv": [0, 0, 6, 8], "texture": "#2"}
+				"north": {"uv": [6, 2, 9, 4], "texture": "#2"},
+				"east": {"uv": [10, 0, 14, 2], "texture": "#2"},
+				"south": {"uv": [9, 2, 12, 4], "texture": "#2"},
+				"west": {"uv": [6, 0, 10, 2], "texture": "#2"},
+				"up": {"uv": [3, 0, 6, 4], "texture": "#2"}
 			}
 		}
 	],
-	"display": {},
 	"groups": [
 		0,
 		{

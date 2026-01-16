@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "muffins_thaidelight:durian_block",
-    "muffins_thaidelight:small_durian_block"
+    "muffins_thaidelight:durian",
+    "muffins_thaidelight:small_durian"
   ]
 }

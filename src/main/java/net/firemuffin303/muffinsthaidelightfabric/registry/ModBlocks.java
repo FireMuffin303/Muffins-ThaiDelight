@@ -14,6 +14,7 @@ import net.firemuffin303.muffinsthaidelightfabric.common.block.butterfly_pea.Fen
 import net.firemuffin303.muffinsthaidelightfabric.common.block.butterfly_pea.WallFlowerBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.coconut.*;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.*;
+import net.firemuffin303.muffinsthaidelightfabric.common.block.feast.MangoStickyRiceFeastBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.lime.*;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.mango.HangingMangoBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.mango.MangoLeavesBlock;
@@ -104,9 +105,9 @@ public class ModBlocks {
 
     public static final Block HANGING_DURIAN = register("hanging_durian",new HangingDurianBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).strength(1.0F).sound(SoundType.WOOD).pushReaction(PushReaction.DESTROY).randomTicks()));
 
-    public static final Block SMALL_DURIAN_BLOCK = register("small_durian_block",new SmallDurianBlock(
+    public static final Block SMALL_DURIAN_BLOCK = register("small_durian",new SmallDurianBlock(
             BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).strength(1.0F).sound(SoundType.WOOD).noOcclusion().pushReaction(PushReaction.DESTROY)));
-    public static final Block DURIAN_BLOCK = register("durian_block",new DurianBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).strength(1.0F).sound(SoundType.WOOD).pushReaction(PushReaction.DESTROY)));
+    public static final Block DURIAN_BLOCK = register("durian",new DurianBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).strength(1.0F).sound(SoundType.WOOD).pushReaction(PushReaction.DESTROY)));
     public static final Block DURIAN_LEAVES = register("durian_leaves",new DurianLeaveBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES)));
 
     //Durian Woodset
@@ -594,10 +595,10 @@ public class ModBlocks {
     });
     public static final Block HONEY_COCONUT_PIE = register("honey_coconut_pie",new PieBlock(BlockBehaviour.Properties.copy(CAKE), () -> ModItems.HONEY_COCONUT_PIE_SLICE));
 
-    public static final Block PHAT_KAPHRAO_FEAST = register("phat_kaphrao_feast",new FeastBlock(BlockBehaviour.Properties.copy(CAKE),() -> ModItems.PHAT_KAPHRAO,true));
-    public static final Block MANGO_STICKY_RICE_FEAST = register("mango_sticky_rice_feast",new FeastBlock(BlockBehaviour.Properties.copy(CAKE),() -> ModItems.MANGO_STICKY_RICE,true));
+    public static final Block PHAT_KAPHRAO_FEAST = register("phat_kaphrao_feast",new FeastBlock(BlockBehaviour.Properties.copy(CAKE),() -> ModItems.PHAT_KAPHRAO,false));
+    public static final Block MANGO_STICKY_RICE_FEAST = register("mango_sticky_rice_feast",new MangoStickyRiceFeastBlock(BlockBehaviour.Properties.copy(CAKE)));
     public static final Block OMELETTE_FEAST = register("omelette",new FeastBlock(BlockBehaviour.Properties.copy(CAKE),() -> ModItems.OMELETTE,false));
-    public static final Block BASIL_OMELETTE_FEAST = register("basil_omelette",new FeastBlock(BlockBehaviour.Properties.copy(CAKE),() -> ModItems.BASIL_OMELETTE,true));
+    public static final Block BASIL_OMELETTE_FEAST = register("basil_omelette",new FeastBlock(BlockBehaviour.Properties.copy(CAKE),() -> ModItems.BASIL_OMELETTE,false));
     public static final Block PINEAPPLE_FRIED_RICE_FEAST = register("pineapple_fried_rice_feast",new FeastBlock(BlockBehaviour.Properties.copy(CAKE),() -> ModItems.PINEAPPLE_FRIED_RICE,true));
 
 
