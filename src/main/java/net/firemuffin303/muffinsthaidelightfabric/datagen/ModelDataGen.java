@@ -158,10 +158,7 @@ public class ModelDataGen extends FabricModelProvider {
 
         blockStateModelGenerator.createTrivialCube(ModBlocks.DURIAN_PEEL_BLOCK);
 
-        blockStateModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.SMALL_DURIAN_BLOCK)
-                .with(PropertyDispatch.property(SmallDurianBlock.STACKS)
-                        .generate(integer -> Variant.variant().with(VariantProperties.MODEL,ThaiDelight.modid("block/durian/stackable_durian_%d".formatted(integer))))
-                ).with(createHorizontalFacingDispatch()));
+
 
         blockStateModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.LIME_BLOCK)
                 .with(PropertyDispatch.property(LimeBlock.STACKS)
@@ -576,7 +573,7 @@ public class ModelDataGen extends FabricModelProvider {
                 MultiVariantGenerator.multiVariant(ModBlocks.HANGING_DURIAN)
                         .with(PropertyDispatch.property(BlockStateProperties.AGE_1)
                                 .select(0,Variant.variant()
-                                        .with(VariantProperties.MODEL,ThaiDelight.modid("block/durian_block_stage0_hanging")))
+                                        .with(VariantProperties.MODEL,ThaiDelight.modid("block/durian/durian_block_stage0_hanging")))
                                 .select(1,Variant.variant()
                                         .with(VariantProperties.MODEL,ThaiDelight.modid("block/durian/durian")))
 
@@ -588,6 +585,17 @@ public class ModelDataGen extends FabricModelProvider {
                         ModBlocks.DURIAN_BLOCK,
                         ThaiDelight.modid("block/durian/durian")
                 ));
+
+
+        blockModelGenerators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.SMALL_DURIAN_BLOCK)
+                .with(PropertyDispatch.property(SmallDurianBlock.STACKS)
+                        .generate(integer -> {
+                            if(integer == 1){
+                                return Variant.variant().with(VariantProperties.MODEL,ThaiDelight.modid("block/durian/durian_block_stage0"));
+                            }
+                            return Variant.variant().with(VariantProperties.MODEL,ThaiDelight.modid("block/durian/stackable_durian_%d".formatted(integer)));
+                        })
+                ).with(createHorizontalFacingDispatch()));
     }
 
     private static void createFeastBlock(BlockModelGenerators blockModelGenerators){
