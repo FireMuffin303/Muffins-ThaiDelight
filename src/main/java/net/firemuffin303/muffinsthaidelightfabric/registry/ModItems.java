@@ -279,8 +279,8 @@ public class ModItems {
 
     public static final Item MANGO_STICKY_RICE_FEAST = registerFlatItem("mango_sticky_rice_feast",new BlockItem(ModBlocks.MANGO_STICKY_RICE_FEAST,new Item.Properties()));
     public static final Item MANGO_STICKY_RICE = registerFlatItem("mango_sticky_rice",new ConsumableItem(bowlFoodItem(ModFood.MANGO_STICKY_RICE)));
-    public static final Item MANGO_PUDDING = registerFlatItem("mango_pudding",new BlockItem(ModBlocks.MANGO_PUDDING,new Item.Properties()));
-    public static final Item MANGO_PUDDING_SLICE = registerFlatItem("mango_pudding_slice",new Item(new Item.Properties().food(ModFood.MANGO_PIE)));
+    public static final Item MANGO_CHEESECAKE = registerFlatItem("mango_cheesecake",new BlockItem(ModBlocks.MANGO_CHEESECAKE,new Item.Properties()));
+    public static final Item MANGO_CHEESECAKE_SLICE = registerFlatItem("mango_cheesecake_slice",new Item(new Item.Properties().food(ModFood.MANGO_PIE)));
 
     public static final Item COCONUT_JELLY = registerFlatItem("coconut_jelly",new Item(new Item.Properties().food(ModFood.MANGO_PIE)));
     public static final Item KHANOM_BABIN = registerFlatItem("khanom_babin",new Item(new Item.Properties().food(ModFood.MANGO_PIE)));

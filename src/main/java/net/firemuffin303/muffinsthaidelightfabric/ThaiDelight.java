@@ -9,7 +9,6 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.fabricmc.fabric.api.loot.v2.LootTableSource;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.fabric.api.registry.TillableBlockRegistry;
 import net.firemuffin303.muffinsthaidelightfabric.common.entity.DragonflyEntity;
 import net.firemuffin303.muffinsthaidelightfabric.common.item.DragonflyBottleItem;
@@ -335,8 +334,8 @@ public class ThaiDelight implements ModInitializer {
         output.accept(ModItems.DURIAN_CURRY);
         output.accept(ModItems.DURIAN_CAKE);
         output.accept(ModItems.DURIAN_CAKE_SLICE);
-        output.accept(ModItems.MANGO_PUDDING);
-        output.accept(ModItems.MANGO_PUDDING_SLICE);
+        output.accept(ModItems.MANGO_CHEESECAKE);
+        output.accept(ModItems.MANGO_CHEESECAKE_SLICE);
 
         output.accept(ModItems.COCONUT_JELLY);
         output.accept(ModItems.KHANOM_BABIN);

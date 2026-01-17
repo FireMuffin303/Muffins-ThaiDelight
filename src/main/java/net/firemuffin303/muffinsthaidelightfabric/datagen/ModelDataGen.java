@@ -560,7 +560,7 @@ public class ModelDataGen extends FabricModelProvider {
         blockStateModelGenerator.skipAutoItemBlock(ModBlocks.DURIAN_BLOCK);
         blockStateModelGenerator.skipAutoItemBlock(ModBlocks.SMALL_DURIAN_BLOCK);
         blockStateModelGenerator.skipAutoItemBlock(ModBlocks.DURIAN_CAKE);
-        blockStateModelGenerator.skipAutoItemBlock(ModBlocks.MANGO_PUDDING);
+        blockStateModelGenerator.skipAutoItemBlock(ModBlocks.MANGO_CHEESECAKE);
         blockStateModelGenerator.skipAutoItemBlock(ModBlocks.CRAB_EGG);
         blockStateModelGenerator.skipAutoItemBlock(ModBlocks.PAPAYA_LEAVES);
         blockStateModelGenerator.skipAutoItemBlock(ModBlocks.COCONUT);
@@ -610,6 +610,20 @@ public class ModelDataGen extends FabricModelProvider {
         createCommonFeastState(ModBlocks.PHAT_KAPHRAO_FEAST,blockModelGenerators);
         createMangoStickRice(blockModelGenerators);
         createCommonFeastState(ModBlocks.PINEAPPLE_FRIED_RICE_FEAST,blockModelGenerators);
+        createMangoCheesecake(blockModelGenerators);
+    }
+
+    private static void createMangoCheesecake(BlockModelGenerators blockModelGenerators){
+        blockModelGenerators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.MANGO_CHEESECAKE)
+                .with(PropertyDispatch.property(PieBlock.BITES)
+                        .generate(integer -> {
+                            if(integer == 0){
+                                return Variant.variant().with(VariantProperties.MODEL,ThaiDelight.modid("block/feast/mango_cheesecake/mango_cheesecake"));
+                            }
+                            return Variant.variant().with(VariantProperties.MODEL,ThaiDelight.modid("block/feast/mango_cheesecake/mango_cheesecake_slice%d".formatted(integer)));
+                        })
+                ).with(createHorizontalFacingDispatch())
+        );
     }
 
     private static void createCommonFeastState(Block block,BlockModelGenerators blockModelGenerators){

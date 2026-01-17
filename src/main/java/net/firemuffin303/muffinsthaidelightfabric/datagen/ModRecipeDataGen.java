@@ -852,7 +852,7 @@ public class ModRecipeDataGen extends FabricRecipeProvider {
         CuttingBoardRecipeBuilder.cutting(ModItems.DURIAN_CAKE_SLICE,7,Ingredient.of(ModItems.DURIAN_CAKE),knivesTag)
                 .save(exporter,ThaiDelight.modid("cutting/durian_cake_slice"));
 
-        CuttingBoardRecipeBuilder.cutting(ModItems.MANGO_PUDDING_SLICE,4,Ingredient.of(ModItems.MANGO_PUDDING),knivesTag)
+        CuttingBoardRecipeBuilder.cutting(ModItems.MANGO_CHEESECAKE_SLICE,4,Ingredient.of(ModItems.MANGO_CHEESECAKE),knivesTag)
                 .save(exporter,ThaiDelight.modid("cutting/mango_pudding_slice"));
 
         CuttingBoardRecipeBuilder.cutting(ModItems.COCONUT_PIE_SLICE,4,Ingredient.of(ModItems.COCONUT_PIE),knivesTag)

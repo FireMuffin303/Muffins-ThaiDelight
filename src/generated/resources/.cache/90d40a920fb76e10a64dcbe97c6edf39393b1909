@@ -1,4 +1,4 @@
-// 1.20.1	2026-01-17T11:46:13.5825187	Muffin's Thai's Delight Refabricated/Recipes
+// 1.20.1	2026-01-17T13:06:18.4214065	Muffin's Thai's Delight Refabricated/Recipes
 6bb67d275913c0a7a26f168a3eff355df6123b2d data\muffins_thaidelight\recipes\mortar\bone_meal_by_nautilus_shell.json
 833d9b11d227d28a58f6b952568eef4b812d6ce7 data\muffins_thaidelight\advancements\recipes\mortar\brown_dye_by_cocoa.json
 129f03f235429fcbd9d1ff8e349859d531414342 data\muffins_thaidelight\advancements\recipes\misc\crafting\papaya_sapling_by_sliced_papaya_from_crafting.json
@@ -136,7 +136,7 @@ fc5e5a816225a51dc8ff1885ccf5a4f5cf56a287 data\muffins_thaidelight\advancements\r
 3d5e3ee591cd0c3c2e4a9d5b9f88e5ed57d241a5 data\muffins_thaidelight\recipes\crafting\coconut_leaf_mat.json
 eab2a1fa9f824c2eeacdcb466e450379fda72f2d data\muffins_thaidelight\advancements\recipes\building_blocks\crafting\durian_slab.json
 2949a278512ea428e1a652539a00bcfd7a274581 data\muffins_thaidelight\recipes\cutting\stripped_coconut_from_coconut.json
-99702b32adb6666c3206a3e8c215014533024118 data\muffins_thaidelight\recipes\cutting\mango_pudding_slice.json
+d45c77332f861f3963efa220d92f82cea489d65b data\muffins_thaidelight\recipes\cutting\mango_pudding_slice.json
 9cd1d2672b05fb83db8bb32e0daef0c7481cfdae data\muffins_thaidelight\recipes\crafting\durian_stairs.json
 cf610b0571fe9d19c28b6345636bb297b4f8bf9a data\muffins_thaidelight\recipes\crafting\stripped_mango_wood.json
 16020a3f935d9fb266ddc36869e809276bec5e98 data\muffins_thaidelight\advancements\recipes\cooking_pot\lime_juice.json

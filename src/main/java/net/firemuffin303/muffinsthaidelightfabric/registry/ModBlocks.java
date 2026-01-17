@@ -570,7 +570,7 @@ public class ModBlocks {
     public static final Block BLACK_CANDLE_DURIAN_CAKE = register("black_candle_durian_cake",new CandleDurianCakeBlock(BLACK_CANDLE,BlockBehaviour.Properties.copy(CANDLE_CAKE)));
 
 
-    public static final Block MANGO_PUDDING = register("mango_pudding",new PieBlock(BlockBehaviour.Properties.copy(CAKE),() -> ModItems.MANGO_PUDDING_SLICE));
+    public static final Block MANGO_CHEESECAKE = register("mango_cheesecake",new PieBlock(BlockBehaviour.Properties.copy(CAKE),() -> ModItems.MANGO_CHEESECAKE_SLICE));
     public static final Block COCONUT_PIE = register("coconut_pie",new PieBlock(BlockBehaviour.Properties.copy(CAKE),() -> ModItems.COCONUT_PIE_SLICE){
         @Override
         public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
