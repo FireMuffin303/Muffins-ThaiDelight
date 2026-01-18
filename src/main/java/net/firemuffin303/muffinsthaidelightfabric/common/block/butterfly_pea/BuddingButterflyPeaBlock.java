@@ -11,13 +11,18 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import vectorwing.farmersdelight.common.block.BuddingBushBlock;
 import vectorwing.farmersdelight.common.block.TomatoVineBlock;
 public class BuddingButterflyPeaBlock extends BuddingBushBlock implements BonemealableBlock {
 
+    public static final IntegerProperty BUDDING_AGE = BlockStateProperties.AGE_2;
     public BuddingButterflyPeaBlock(Properties properties) {
         super(properties);
     }
@@ -28,16 +33,18 @@ public class BuddingButterflyPeaBlock extends BuddingBushBlock implements Boneme
     }
 
     @Override
-    public boolean mayPlaceOn(BlockState pState, BlockGetter pLevel, BlockPos pPos) {
-        return pState.is(vectorwing.farmersdelight.common.registry.ModBlocks.RICH_SOIL_FARMLAND.get()) || pState.is(Blocks.FARMLAND);
+    public IntegerProperty getAgeProperty() {
+        return BUDDING_AGE;
     }
 
     @Override
-    public BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
-        if (state.getValue(AGE) == 4) {
-            level.setBlock(currentPos, ModBlocks.BUTTERFLY_PEA_BLOCK.defaultBlockState(), 3);
-        }
-        return super.updateShape(state, facing, facingState, level, currentPos, facingPos);
+    public int getMaxAge() {
+        return 2;
+    }
+
+    @Override
+    public boolean mayPlaceOn(BlockState pState, BlockGetter pLevel, BlockPos pPos) {
+        return pState.is(vectorwing.farmersdelight.common.registry.ModBlocks.RICH_SOIL_FARMLAND.get()) || pState.is(Blocks.FARMLAND);
     }
 
     @Override
@@ -51,6 +58,11 @@ public class BuddingButterflyPeaBlock extends BuddingBushBlock implements Boneme
     }
 
     @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(BUDDING_AGE);
+    }
+
+    @Override
     public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state, boolean isClient) {
         return true;
     }
@@ -61,15 +73,15 @@ public class BuddingButterflyPeaBlock extends BuddingBushBlock implements Boneme
     }
 
     protected int getBonemealAgeIncrease(Level level) {
-        return Mth.nextInt(level.random, 1, 4);
+        return Mth.nextInt(level.random, 1, 3);
     }
 
     @Override
     public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {
         int maxAge = getMaxAge();
-        int ageGrowth = Math.min(getAge(state) + getBonemealAgeIncrease(level), 7);
+        int ageGrowth = Math.min(getAge(state) + getBonemealAgeIncrease(level), 4);
         if (ageGrowth <= maxAge) {
-            level.setBlockAndUpdate(pos, state.setValue(AGE, ageGrowth));
+            level.setBlockAndUpdate(pos, state.setValue(BUDDING_AGE, ageGrowth));
         } else {
             int remainingGrowth = Mth.clamp(ageGrowth - maxAge - 1,0,2);
             level.setBlockAndUpdate(pos, ModBlocks.BUTTERFLY_PEA_BLOCK.defaultBlockState().setValue(ButterflyPeaVineBlock.VINE_AGE, remainingGrowth));

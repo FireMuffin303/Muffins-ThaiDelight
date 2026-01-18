@@ -941,7 +941,7 @@ public class ModelDataGen extends FabricModelProvider {
         createCropRope(ModBlocks.BUTTERFLY_PEA_BLOCK,blockModelGenerators);
 
         blockModelGenerators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.BUDDING_BUTTERFLY_PEA_BLOCK)
-                .with(PropertyDispatch.property(BuddingButterflyPeaBlock.AGE)
+                .with(PropertyDispatch.property(BuddingButterflyPeaBlock.BUDDING_AGE)
                         .generate(integer ->
                                 Variant.variant().with(VariantProperties.MODEL,CROP_CROSS
                                         .create(
