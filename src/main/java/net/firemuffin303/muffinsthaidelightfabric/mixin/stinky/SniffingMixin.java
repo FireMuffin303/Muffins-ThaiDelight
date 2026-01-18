@@ -1,4 +1,4 @@
-package net.firemuffin303.muffinsthaidelightfabric.mixin.sticky;
+package net.firemuffin303.muffinsthaidelightfabric.mixin.stinky;
 
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModMobEffects;
 import net.minecraft.world.entity.LivingEntity;

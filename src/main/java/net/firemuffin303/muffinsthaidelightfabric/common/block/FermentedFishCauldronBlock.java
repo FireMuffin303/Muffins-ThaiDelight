@@ -78,6 +78,7 @@ public class FermentedFishCauldronBlock extends AbstractCauldronBlock {
                 }
 
                 livingEntity.addEffect(new MobEffectInstance(ModMobEffects.STINKY, duration));
+                livingEntity.addEffect(new MobEffectInstance(ModMobEffects.ANOREXIA, duration));
             }
 
             if(entity.isOnFire()){

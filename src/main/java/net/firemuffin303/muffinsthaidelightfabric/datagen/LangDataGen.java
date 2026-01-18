@@ -223,22 +223,22 @@ public class LangDataGen extends FabricLanguageProvider {
         translationBuilder.add("container.muffins_thaidelight.mortar","Mortar");
 
         translationBuilder.add(ModMobEffects.STINKY,"Stinky");
-        translationBuilder.add(ModMobEffects.GLUTTONY,"Gluttony");
-        translationBuilder.add("item.minecraft.potion.effect.stinkiness","Potion of Stinkiness");
-        translationBuilder.add("item.minecraft.potion.effect.long_stinkiness","Potion of Stinkiness");
-        translationBuilder.add("item.minecraft.potion.effect.strong_stinkiness","Potion of Stinkiness");
+        translationBuilder.add(ModMobEffects.ANOREXIA,"Anorexia");
+        translationBuilder.add("item.minecraft.potion.effect.stench","Potion of Stench");
+        translationBuilder.add("item.minecraft.potion.effect.long_stench","Potion of Stench");
+        translationBuilder.add("item.minecraft.potion.effect.strong_stench","Potion of Stench");
 
-        translationBuilder.add("item.minecraft.splash_potion.effect.stinkiness","Splash Potion of Stinkiness");
-        translationBuilder.add("item.minecraft.splash_potion.effect.long_stinkiness","Splash Potion of Stinkiness");
-        translationBuilder.add("item.minecraft.splash_potion.effect.strong_stinkiness","Splash Potion of Stinkiness");
+        translationBuilder.add("item.minecraft.splash_potion.effect.stench","Splash Potion of Stench");
+        translationBuilder.add("item.minecraft.splash_potion.effect.long_stench","Splash Potion of Stench");
+        translationBuilder.add("item.minecraft.splash_potion.effect.strong_stench","Splash Potion of Stench");
 
-        translationBuilder.add("item.minecraft.lingering_potion.effect.stinkiness","Lingering Potion of Stinkiness");
-        translationBuilder.add("item.minecraft.lingering_potion.effect.long_stinkiness","Lingering Potion of Stinkiness");
-        translationBuilder.add("item.minecraft.lingering_potion.effect.strong_stinkiness","Lingering Potion of Stinkiness");
+        translationBuilder.add("item.minecraft.lingering_potion.effect.stench","Lingering Potion of Stench");
+        translationBuilder.add("item.minecraft.lingering_potion.effect.long_stench","Lingering Potion of Stench");
+        translationBuilder.add("item.minecraft.lingering_potion.effect.strong_stench","Lingering Potion of Stench");
 
-        translationBuilder.add("item.minecraft.tipped_arrow.effect.stinkiness","Arrow of Stinkiness");
-        translationBuilder.add("item.minecraft.tipped_arrow.effect.long_stinkiness","Arrow of Stinkiness");
-        translationBuilder.add("item.minecraft.tipped_arrow.effect.strong_stinkiness","Arrow of Stinkiness");
+        translationBuilder.add("item.minecraft.tipped_arrow.effect.stench","Arrow of Stench");
+        translationBuilder.add("item.minecraft.tipped_arrow.effect.long_stench","Arrow of Stench");
+        translationBuilder.add("item.minecraft.tipped_arrow.effect.strong_stench","Arrow of Stench");
 
         translationBuilder.add("muffins_thaidelight.midnightconfig.developer","------ Developer ------");
         translationBuilder.add("muffins_thaidelight.midnightconfig.firemuffin","FireMuffin303");
@@ -482,22 +482,22 @@ public class LangDataGen extends FabricLanguageProvider {
             translationBuilder.add("container.muffins_thaidelight.mortar","ครก");
 
             translationBuilder.add(ModMobEffects.STINKY,"เหม็น");
-            translationBuilder.add(ModMobEffects.GLUTTONY,"ตะกละ");
-            translationBuilder.add("item.minecraft.potion.effect.stinkiness","น้ำยาเหม็น");
-            translationBuilder.add("item.minecraft.potion.effect.long_stinkiness","น้ำยาเหม็น");
-            translationBuilder.add("item.minecraft.potion.effect.strong_stinkiness","น้ำยาเหม็น");
+            translationBuilder.add(ModMobEffects.ANOREXIA,"เบื่ออาหาร");
+            translationBuilder.add("item.minecraft.potion.effect.stench","น้ำยาเหม็น");
+            translationBuilder.add("item.minecraft.potion.effect.long_stench","น้ำยาเหม็น");
+            translationBuilder.add("item.minecraft.potion.effect.strong_stench","น้ำยาเหม็น");
 
-            translationBuilder.add("item.minecraft.splash_potion.effect.stinkiness","น้ำยาเหม็นแบบปา");
-            translationBuilder.add("item.minecraft.splash_potion.effect.long_stinkiness","น้ำยาเหม็นแบบปา");
-            translationBuilder.add("item.minecraft.splash_potion.effect.strong_stinkiness","น้ำยาเหม็นแบบปา");
+            translationBuilder.add("item.minecraft.splash_potion.effect.stench","น้ำยาเหม็นแบบปา");
+            translationBuilder.add("item.minecraft.splash_potion.effect.long_stench","น้ำยาเหม็นแบบปา");
+            translationBuilder.add("item.minecraft.splash_potion.effect.strong_stench","น้ำยาเหม็นแบบปา");
 
-            translationBuilder.add("item.minecraft.lingering_potion.effect.stinkiness","น้ำยาเหม็นแบบระเหย");
-            translationBuilder.add("item.minecraft.lingering_potion.effect.long_stinkiness","น้ำยาเหม็นแบบระเหย");
-            translationBuilder.add("item.minecraft.lingering_potion.effect.strong_stinkiness","น้ำยาเหม็นแบบระเหย");
+            translationBuilder.add("item.minecraft.lingering_potion.effect.stench","น้ำยาเหม็นแบบระเหย");
+            translationBuilder.add("item.minecraft.lingering_potion.effect.long_stench","น้ำยาเหม็นแบบระเหย");
+            translationBuilder.add("item.minecraft.lingering_potion.effect.strong_stench","น้ำยาเหม็นแบบระเหย");
 
-            translationBuilder.add("item.minecraft.tipped_arrow.effect.stinkiness","ลูกธนูอาบยาเหม็น");
-            translationBuilder.add("item.minecraft.tipped_arrow.effect.long_stinkiness","ลูกธนูอาบยาเหม็น");
-            translationBuilder.add("item.minecraft.tipped_arrow.effect.strong_stinkiness","ลูกธนูอาบยาเหม็น");
+            translationBuilder.add("item.minecraft.tipped_arrow.effect.stench","ลูกธนูอาบยาเหม็น");
+            translationBuilder.add("item.minecraft.tipped_arrow.effect.long_stench","ลูกธนูอาบยาเหม็น");
+            translationBuilder.add("item.minecraft.tipped_arrow.effect.strong_stench","ลูกธนูอาบยาเหม็น");
 
             translationBuilder.add("muffins_thaidelight.midnightconfig.developer","------ ผู้พัฒนา ------");
             translationBuilder.add("muffins_thaidelight.midnightconfig.firemuffin","FireMuffin303");

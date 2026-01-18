@@ -448,7 +448,11 @@ public class ModItems {
                 .effect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 600, 0, false, false), 1.0F).build();
 
 
-        public static final FoodProperties FERMENTED_FISH = new FoodProperties.Builder().alwaysEat().effect(new MobEffectInstance(ModMobEffects.STINKY,10*20),0.5f).build();
+        public static final FoodProperties FERMENTED_FISH = new FoodProperties.Builder().alwaysEat()
+                .effect(new MobEffectInstance(ModMobEffects.STINKY,10*20),1f)
+                .effect(new MobEffectInstance(ModMobEffects.ANOREXIA,10*20),1f)
+
+                .build();
 
         public static final FoodProperties COCONUT_MILK_ICE_CREAM = new FoodProperties.Builder()
                 .nutrition(3)

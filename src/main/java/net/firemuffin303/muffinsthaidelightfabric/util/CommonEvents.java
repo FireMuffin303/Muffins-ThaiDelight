@@ -3,7 +3,10 @@ package net.firemuffin303.muffinsthaidelightfabric.util;
 import com.mojang.datafixers.util.Pair;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
+import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
+import net.fabricmc.fabric.api.loot.v2.LootTableSource;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
@@ -11,15 +14,19 @@ import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.fabricmc.fabric.api.resource.conditions.v1.ResourceConditions;
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
-import net.firemuffin303.muffinsthaidelightfabric.client.packet.ModLevelEventPacket;
+import net.firemuffin303.muffinsthaidelightfabric.network.packet.ModLevelEventPacket;
 import net.firemuffin303.muffinsthaidelightfabric.common.entity.DragonflyEntity;
 import net.firemuffin303.muffinsthaidelightfabric.common.entity.FlowerCrabEntity;
+import net.firemuffin303.muffinsthaidelightfabric.common.entity.ai.NearestMobStinkyTargetGoal;
 import net.firemuffin303.muffinsthaidelightfabric.common.event.ModVillagerTrades;
+import net.firemuffin303.muffinsthaidelightfabric.mixin.MobAccessor;
 import net.firemuffin303.muffinsthaidelightfabric.mixin.StructurePoolAccessor;
 import net.firemuffin303.muffinsthaidelightfabric.mixin.food.ChickenFoodAccessor;
 import net.firemuffin303.muffinsthaidelightfabric.mixin.food.FrogFoodAccessor;
 import net.firemuffin303.muffinsthaidelightfabric.mixin.food.ParrotTameFoodAccessor;
 import net.firemuffin303.muffinsthaidelightfabric.mixin.food.PigFoodAccessor;
+import net.firemuffin303.muffinsthaidelightfabric.mixin.loot.LootPoolBuilderAccessor;
+import net.firemuffin303.muffinsthaidelightfabric.mixin.loot.LootTableAccessor;
 import net.firemuffin303.muffinsthaidelightfabric.mixin.villager.VillagerAccessor;
 import net.firemuffin303.muffinsthaidelightfabric.registry.*;
 import net.minecraft.core.BlockPos;
@@ -33,11 +40,17 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.goal.GoalSelector;
+import net.minecraft.world.entity.animal.AbstractGolem;
+import net.minecraft.world.entity.animal.Dolphin;
+import net.minecraft.world.entity.animal.Panda;
+import net.minecraft.world.entity.animal.horse.Llama;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.Item;
@@ -57,6 +70,11 @@ import net.minecraft.world.level.levelgen.structure.pools.SinglePoolElement;
 import net.minecraft.world.level.levelgen.structure.pools.StructurePoolElement;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorList;
+import net.minecraft.world.level.storage.loot.BuiltInLootTables;
+import net.minecraft.world.level.storage.loot.LootDataManager;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 
@@ -259,6 +277,62 @@ public class CommonEvents {
         FuelRegistry.INSTANCE.add(ModItems.DURIAN_PEEL,200);
     }
 
+    public static void modifyLootTable(){
+        Set<ResourceLocation> chestsId = Set.of(
+                BuiltInLootTables.VILLAGE_PLAINS_HOUSE,
+                BuiltInLootTables.VILLAGE_SAVANNA_HOUSE,
+                BuiltInLootTables.VILLAGE_SNOWY_HOUSE,
+                BuiltInLootTables.VILLAGE_TAIGA_HOUSE,
+                BuiltInLootTables.VILLAGE_DESERT_HOUSE,
+                BuiltInLootTables.ABANDONED_MINESHAFT,
+                BuiltInLootTables.PILLAGER_OUTPOST);
+
+        LootTableEvents.MODIFY.register(new LootTableEvents.Modify() {
+            @Override
+            public void modifyLootTable(ResourceManager resourceManager, LootDataManager lootDataManager,
+                                        ResourceLocation resourceLocation, LootTable.Builder builder, LootTableSource lootTableSource) {
+
+                if (chestsId.contains(resourceLocation)) {
+                    ResourceLocation injectId = new ResourceLocation(ThaiDelight.MOD_ID, "inject/" + resourceLocation.getPath());
+                    LootTable injectingLootTable = lootDataManager.getLootTable(injectId);
+                    LootTableAccessor accessor = (LootTableAccessor) injectingLootTable;
+
+                    LootPool injectingPool = List.of(accessor.getPools()).get(0);
+
+                    builder.modifyPools(builder1 -> {
+                        for(LootPoolEntryContainer lootPoolEntryContainer : injectingPool.entries){
+                            ((LootPoolBuilderAccessor) builder1).getEntries().add(lootPoolEntryContainer);
+                        }
+                    });
+                }
+            }
+        });
+    }
+
+    public static void initializeStinkyEffect(){
+        Map<EntityType<?>,Integer> map = Map.of(
+                EntityType.BEE,2,
+                EntityType.ENDERMAN,3,
+                EntityType.POLAR_BEAR,3,
+                EntityType.WOLF,4,
+                EntityType.ZOMBIFIED_PIGLIN,2
+                );
+
+        ServerEntityEvents.ENTITY_LOAD.register((entity, serverLevel) -> {
+            if(entity instanceof Mob mob){
+                GoalSelector goalSelector = ((MobAccessor)mob).getGoalSelector();
+                if(!goalSelector.getAvailableGoals().isEmpty()){
+                    if(mob instanceof NeutralMob && !(mob instanceof AbstractGolem)){
+                        goalSelector.addGoal(map.getOrDefault(entity.getType(), 3), new NearestMobStinkyTargetGoal<>(mob, Player.class, true));
+                    } else if(mob instanceof Panda || mob instanceof Llama || mob instanceof Dolphin){
+                        goalSelector.addGoal(2, new NearestMobStinkyTargetGoal<>(mob, Player.class, true));
+                    }
+
+                }
+            }
+        });
+    }
+
     public static void durianHelmetThorns(LivingEntity victim, Entity attacker){
         ItemStack helmet = victim.getItemBySlot(EquipmentSlot.HEAD);
         if(helmet.is(ModItems.DURIAN_HELMET) && EnchantmentHelper.getEnchantmentLevel(Enchantments.THORNS,victim) <= 0){
@@ -355,5 +429,11 @@ public class CommonEvents {
         }
 
 
+    }
+
+    public static int calculateEatingWithAnorexiaEffect(LivingEntity livingEntity, int original){
+        float amp = ( Objects.requireNonNull(livingEntity.getEffect(ModMobEffects.ANOREXIA)).getAmplifier() + 1);
+        float rate = 1.2f;
+        return (int) ((float)original * (rate + (rate * (0.6 * amp))  ) );
     }
 }

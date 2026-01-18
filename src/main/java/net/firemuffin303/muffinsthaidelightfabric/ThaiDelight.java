@@ -5,36 +5,21 @@ import com.terraformersmc.terraform.boat.api.TerraformBoatType;
 import com.terraformersmc.terraform.boat.api.TerraformBoatTypeRegistry;
 import eu.midnightdust.lib.config.MidnightConfig;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
-import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
-import net.fabricmc.fabric.api.loot.v2.LootTableSource;
 import net.fabricmc.fabric.api.registry.TillableBlockRegistry;
 import net.firemuffin303.muffinsthaidelightfabric.common.entity.DragonflyEntity;
 import net.firemuffin303.muffinsthaidelightfabric.common.item.DragonflyBottleItem;
 import net.firemuffin303.muffinsthaidelightfabric.config.ThaiDelightConfig;
-import net.firemuffin303.muffinsthaidelightfabric.mixin.*;
-import net.firemuffin303.muffinsthaidelightfabric.mixin.loot.LootPoolBuilderAccessor;
-import net.firemuffin303.muffinsthaidelightfabric.mixin.loot.LootTableAccessor;
 import net.firemuffin303.muffinsthaidelightfabric.registry.*;
 import net.firemuffin303.muffinsthaidelightfabric.util.CommonEvents;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.resources.ResourceManager;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
-import net.minecraft.world.entity.ai.goal.GoalSelector;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.alchemy.PotionBrewing;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.storage.loot.BuiltInLootTables;
-import net.minecraft.world.level.storage.loot.LootDataManager;
-import net.minecraft.world.level.storage.loot.LootPool;
-import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
 import org.slf4j.Logger;
 
 import java.util.*;
@@ -42,9 +27,6 @@ import java.util.*;
 public class ThaiDelight implements ModInitializer {
     public static final Logger LOGGER = LogUtils.getLogger();
     public static final String MOD_ID = "muffins_thaidelight";
-    public static final String TASTY_NBT = "Tasty";
-
-    public static final ResourceLocation SPICY_PAYLOAD_ID = new ResourceLocation(MOD_ID,"spicypayload");
 
     public static final TerraformBoatType DURIAN = new TerraformBoatType.Builder()
             .item(ModItems.DURIAN_BOAT)
@@ -72,59 +54,10 @@ public class ThaiDelight implements ModInitializer {
     @Override
     public void onInitialize() {
         Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB,new ResourceLocation(MOD_ID,"main"),MOD_TAB);
+        MidnightConfig.init(MOD_ID, ThaiDelightConfig.class);
 
         init();
         postInit();
-
-
-        MidnightConfig.init(MOD_ID, ThaiDelightConfig.class);
-
-
-        ServerEntityEvents.ENTITY_LOAD.register((entity, serverLevel) -> {
-            if(entity instanceof PathfinderMob mob){
-                GoalSelector goalSelector = ((MobAccessor)mob).getGoalSelector();
-                if(!goalSelector.getAvailableGoals().isEmpty()){
-                    goalSelector.addGoal(3,new AvoidEntityGoal<>(mob, LivingEntity.class,6.0f,1.0,1.2,livingEntity -> livingEntity.hasEffect(ModMobEffects.STINKY)));
-                }
-            }
-        });
-
-        Set<ResourceLocation> chestsId = Set.of(
-                BuiltInLootTables.VILLAGE_PLAINS_HOUSE,
-                BuiltInLootTables.VILLAGE_SAVANNA_HOUSE,
-                BuiltInLootTables.VILLAGE_SNOWY_HOUSE,
-                BuiltInLootTables.VILLAGE_TAIGA_HOUSE,
-                BuiltInLootTables.VILLAGE_DESERT_HOUSE,
-                BuiltInLootTables.ABANDONED_MINESHAFT,
-                BuiltInLootTables.PILLAGER_OUTPOST);
-
-        TillableBlockRegistry.register(Blocks.BAMBOO_SAPLING,useOnContext -> true,Blocks.AIR.defaultBlockState(),ModItems.BAMBOO_SHOOT);
-
-
-
-        LootTableEvents.MODIFY.register(new LootTableEvents.Modify() {
-            @Override
-            public void modifyLootTable(ResourceManager resourceManager, LootDataManager lootDataManager,
-                                        ResourceLocation resourceLocation, LootTable.Builder builder, LootTableSource lootTableSource) {
-
-                if (chestsId.contains(resourceLocation)) {
-                    ResourceLocation injectId = new ResourceLocation(ThaiDelight.MOD_ID, "inject/" + resourceLocation.getPath());
-                    LootTable injectingLootTable = lootDataManager.getLootTable(injectId);
-                    LootTableAccessor accessor = (LootTableAccessor) injectingLootTable;
-
-                    LootPool injectingPool = List.of(accessor.getPools()).get(0);
-
-                    builder.modifyPools(builder1 -> {
-                        for(LootPoolEntryContainer lootPoolEntryContainer : injectingPool.entries){
-                            ((LootPoolBuilderAccessor) builder1).getEntries().add(lootPoolEntryContainer);
-                        }
-
-                    });
-
-
-                }
-            }
-        });
     }
 
     private void init(){
@@ -157,50 +90,31 @@ public class ThaiDelight implements ModInitializer {
         CommonEvents.entityInit();
         CommonEvents.setVillagerItem();
         CommonEvents.setResourceConditions();
+        CommonEvents.modifyLootTable();
+        CommonEvents.initializeStinkyEffect();
 
-        PotionBrewing.addMix(Potions.AWKWARD,ModItems.FERMENTED_FISH,ModMobEffects.STINKY_POTION);
-        PotionBrewing.addMix(ModMobEffects.STINKY_POTION, Items.REDSTONE,ModMobEffects.LONG_STINKY_POTION);
-        PotionBrewing.addMix(ModMobEffects.STINKY_POTION, Items.GLOWSTONE_DUST,ModMobEffects.STRONG_STINKY_POTION);
+        PotionBrewing.addMix(Potions.AWKWARD,ModItems.FERMENTED_FISH,ModMobEffects.STENCH_POTION);
+        PotionBrewing.addMix(ModMobEffects.STENCH_POTION, Items.REDSTONE,ModMobEffects.LONG_STENCH_POTION);
+        PotionBrewing.addMix(ModMobEffects.STENCH_POTION, Items.GLOWSTONE_DUST,ModMobEffects.STRONG_STENCH_POTION);
 
-
+        TillableBlockRegistry.register(Blocks.BAMBOO_SAPLING,useOnContext -> true,Blocks.AIR.defaultBlockState(),ModItems.BAMBOO_SHOOT);
     }
 
     private static void itemsGenerator(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output output){
+
+
         output.accept(ModItems.MORTAR);
         output.accept(ModItems.SACK);
+
         output.accept(ModItems.LIME_CRATE);
         output.accept(ModItems.PEPPER_CRATE);
         output.accept(ModItems.RAW_PAPAYA_CRATE);
         output.accept(ModItems.PAPAYA_CRATE);
         output.accept(ModItems.MANGO_CRATE);
-        //output.accept(ModItems.COCONUT_CRATE);
         output.accept(ModItems.HOLY_BASIL_CRATE);
         output.accept(ModItems.BASIL_CRATE);
         output.accept(ModItems.BAMBOO_SHOOT_CRATE);
         output.accept(ModItems.BUTTERFLY_PEA_CRATE);
-
-        output.accept(ModItems.CRAB_SPAWN_EGG);
-        output.accept(ModItems.CRAB_EGG);
-        output.accept(ModItems.CRAB_BUCKET);
-        output.accept(ModItems.CRAB_MEAT);
-        output.accept(ModItems.COOKED_CRAB_MEAT);
-
-        output.accept(ModItems.DRAGONFLY_SPAWN_EGG);
-        Arrays.stream(DragonflyEntity.DragonflyVariant.values()).forEach(dragonflyVariant -> {
-            ItemStack itemStack = new ItemStack(ModItems.DRAGONFLY_BOTTLE);
-            DragonflyBottleItem.setVariant(itemStack,dragonflyVariant);
-            output.accept(itemStack);
-        });
-        output.accept(ModItems.DRAGONFLY);
-        output.accept(ModItems.COOKED_DRAGONFLY);
-
-        output.accept(ModItems.FISH_SAUCE_BOTTLE);
-        output.accept(ModItems.FERMENTED_FISH);
-        output.accept(ModItems.PAPAYA_JUICE);
-        output.accept(ModItems.LIME_JUICE);
-        output.accept(ModItems.HONEY_LIME_JUICE);
-        output.accept(ModItems.COCONUT_WATER);
-        output.accept(ModItems.BUTTERFLY_PEA_TEA);
 
         output.accept(ModItems.LIME_SAPLING);
         output.accept(ModItems.LIME);
@@ -314,6 +228,30 @@ public class ThaiDelight implements ModInitializer {
         output.accept(ModItems.BUTTERFLY_PEA_SEEDS);
 
         output.accept(ModItems.BAMBOO_SHOOT);
+
+        output.accept(ModItems.CRAB_SPAWN_EGG);
+        output.accept(ModItems.DRAGONFLY_SPAWN_EGG);
+
+        output.accept(ModItems.CRAB_EGG);
+        output.accept(ModItems.CRAB_BUCKET);
+        output.accept(ModItems.CRAB_MEAT);
+        output.accept(ModItems.COOKED_CRAB_MEAT);
+
+        Arrays.stream(DragonflyEntity.DragonflyVariant.values()).forEach(dragonflyVariant -> {
+            ItemStack itemStack = new ItemStack(ModItems.DRAGONFLY_BOTTLE);
+            DragonflyBottleItem.setVariant(itemStack,dragonflyVariant);
+            output.accept(itemStack);
+        });
+        output.accept(ModItems.DRAGONFLY);
+        output.accept(ModItems.COOKED_DRAGONFLY);
+
+        output.accept(ModItems.FISH_SAUCE_BOTTLE);
+        output.accept(ModItems.FERMENTED_FISH);
+        output.accept(ModItems.PAPAYA_JUICE);
+        output.accept(ModItems.LIME_JUICE);
+        output.accept(ModItems.HONEY_LIME_JUICE);
+        output.accept(ModItems.COCONUT_WATER);
+        output.accept(ModItems.BUTTERFLY_PEA_TEA);
 
         output.accept(ModItems.PESTO_SAUCE);
         output.accept(ModItems.FRIED_DURIAN);
