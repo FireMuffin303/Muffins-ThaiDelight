@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "muffins_thaidelight:block/potted_holy_basil"
+      "model": "muffins_thaidelight:block/holy_basil/potted_holy_basil"
     }
   }
 }

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "muffins_thaidelight:block/butterfly_pea/budding_butterfly_pea_stage0"
+    },
+    "age=1": {
+      "model": "muffins_thaidelight:block/butterfly_pea/budding_butterfly_pea_stage1"
+    },
+    "age=2": {
+      "model": "muffins_thaidelight:block/butterfly_pea/budding_butterfly_pea_stage2"
+    },
+    "age=3": {
+      "model": "muffins_thaidelight:block/butterfly_pea/budding_butterfly_pea_stage3"
+    },
+    "age=4": {
+      "model": "muffins_thaidelight:block/butterfly_pea/budding_butterfly_pea_stage4"
+    }
+  }
+}

@@ -1,4 +1,4 @@
-// 1.20.1	2026-01-18T16:39:05.840596	Muffin's Thai's Delight Refabricated/Tags for minecraft:block
+// 1.20.1	2026-01-18T18:00:16.3265976	Muffin's Thai's Delight Refabricated/Tags for minecraft:block
 2997bee55adbe1ff89563f6a9cfdfa1ba552e022 data\muffins_thaidelight\tags\blocks\sack_heavy_catchable.json
 dbd743d02ce42fc855d1ba0eae6172852983951e data\minecraft\tags\blocks\wooden_pressure_plates.json
 e18ee9232ec6405eab98dfbbc48a018ca8af85f7 data\minecraft\tags\blocks\wooden_stairs.json
@@ -6,7 +6,7 @@ e18ee9232ec6405eab98dfbbc48a018ca8af85f7 data\minecraft\tags\blocks\wooden_stair
 a7a2b9824f7c94e1dbb4ca2fc909f84ee0a9a7b0 data\muffins_thaidelight\tags\blocks\flower_crab_spawnable_on.json
 b86b5ed44294037342281f19ad8b9335f128e089 data\muffins_thaidelight\tags\blocks\mango_logs.json
 e82ad5f369390ff94b6416c681b2c22fa7749096 data\muffins_thaidelight\tags\blocks\common_rich_soil.json
-dbd5eeed3f1ce9d5a2d9c88e230920cb44b4ac08 data\minecraft\tags\blocks\candle_cakes.json
+19d500096b5e2ec9a64e73826e61bd6b33acd603 data\minecraft\tags\blocks\candle_cakes.json
 ae7eb8a3671e3ffc481f0d370af2def02a40edfa data\minecraft\tags\blocks\fence_gates.json
 1e89c31cbe457cd5c2c3dcd4d235b458db7a47bb data\muffins_thaidelight\tags\blocks\mango_rich_soil.json
 41fac955da90b592a46b4e78a827e1eff4e7af24 data\minecraft\tags\blocks\mineable\axe.json
@@ -14,7 +14,7 @@ ae7eb8a3671e3ffc481f0d370af2def02a40edfa data\minecraft\tags\blocks\fence_gates.
 13738ca5325e1cee5e8dfe846f99054e5262abb3 data\minecraft\tags\blocks\leaves.json
 973b7856466364aa110084974dd7dbc3236f4da5 data\muffins_thaidelight\tags\blocks\papaya_logs.json
 a1a8cb8d5592d488e7812ebbfb14775b0cb3306f data\minecraft\tags\blocks\small_flowers.json
-a3489bbd4234a5f3c0042777058750aba119189c data\minecraft\tags\blocks\wooden_fences.json
+6fc8b402a7400156d30d904075c6e9fbba104be9 data\minecraft\tags\blocks\wooden_fences.json
 d026fec16e02d7258ea497364a9ac91670a3fd4f data\minecraft\tags\blocks\wooden_doors.json
 1e89c31cbe457cd5c2c3dcd4d235b458db7a47bb data\muffins_thaidelight\tags\blocks\coconut_rich_soil.json
 c48962fe61470e7c26bc8fa54e2152c20defb62a data\minecraft\tags\blocks\mineable\pickaxe.json

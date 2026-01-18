@@ -1,5 +1,6 @@
 package net.firemuffin303.muffinsthaidelightfabric.common.block.butterfly_pea;
 
+import com.mojang.logging.LogUtils;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -70,8 +71,8 @@ public class BuddingButterflyPeaBlock extends BuddingBushBlock implements Boneme
         if (ageGrowth <= maxAge) {
             level.setBlockAndUpdate(pos, state.setValue(AGE, ageGrowth));
         } else {
-            int remainingGrowth = ageGrowth - maxAge - 1;
-            level.setBlockAndUpdate(pos, ModBlocks.BUTTERFLY_PEA_BLOCK.defaultBlockState().setValue(TomatoVineBlock.VINE_AGE, remainingGrowth));
+            int remainingGrowth = Mth.clamp(ageGrowth - maxAge - 1,0,2);
+            level.setBlockAndUpdate(pos, ModBlocks.BUTTERFLY_PEA_BLOCK.defaultBlockState().setValue(ButterflyPeaVineBlock.VINE_AGE, remainingGrowth));
         }
     }
 }

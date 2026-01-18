@@ -6,35 +6,25 @@ import com.terraformersmc.terraform.boat.api.TerraformBoatTypeRegistry;
 import com.terraformersmc.terraform.boat.api.item.TerraformBoatItemHelper;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
-import net.firemuffin303.muffinsthaidelightfabric.common.block.blockEntity.FenceLoggedButterflyPeaBlockEntity;
-import net.firemuffin303.muffinsthaidelightfabric.common.block.butterfly_pea.FenceLoggedButterflyPeaBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.item.CoconutItem;
 import net.firemuffin303.muffinsthaidelightfabric.common.item.DragonflyBottleItem;
 import net.firemuffin303.muffinsthaidelightfabric.common.item.DyeableItem;
 import net.firemuffin303.muffinsthaidelightfabric.common.item.SackItem;
 import net.firemuffin303.muffinsthaidelightfabric.common.item.papaya.PapayaFlowerItem;
 import net.firemuffin303.muffinsthaidelightfabric.util.CommonEvents;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
-import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
 import vectorwing.farmersdelight.common.item.ConsumableItem;
 import vectorwing.farmersdelight.common.item.DrinkableItem;
@@ -271,7 +261,7 @@ public class ModItems {
     public static final Item PHAT_KAPHRAO = registerFlatItem("phat_kaphrao", new ConsumableItem(bowlFoodItem(ModFood.PHAT_KAPHRAO)));
 
     public static final Item PINEAPPLE_FRIED_RICE_FEAST = registerFlatItem("pineapple_fried_rice_feast",new BlockItem(ModBlocks.PINEAPPLE_FRIED_RICE_FEAST,new Item.Properties()));
-    public static final Item PINEAPPLE_FRIED_RICE = registerFlatItem("pineapple_fried_rice",new Item(new Item.Properties()));
+    public static final Item PINEAPPLE_FRIED_RICE = registerFlatItem("pineapple_fried_rice",new Item(bowlFoodItem(ModFood.CRAB_FRIED_RICE)));
 
     public static final Item DURIAN_CURRY = registerFlatItem("durian_curry",new ConsumableItem(bowlFoodItem(ModFood.DURIAN_CURRY)));
     public static final Item DURIAN_CAKE = registerFlatItem("durian_cake",new BlockItem(ModBlocks.DURIAN_CAKE,new Item.Properties()));
@@ -305,28 +295,7 @@ public class ModItems {
     public static final Item BAMBOO_SHOOT_SOUP = registerFlatItem("bamboo_shoot_soup",new Item(new Item.Properties()));
     public static final Item STEAMED_BAMBOO_SHOOT = registerFlatItem("steamed_bamboo_shoot",new Item(new Item.Properties()));
 
-    public static final Item BUTTERFLY_PEA = registerFlatItem("butterfly_pea",new ItemNameBlockItem(ModBlocks.BUTTERFLY_PEA_WALL,new Item.Properties()){
-        @Override
-        public InteractionResult useOn(UseOnContext useOnContext) {
-            Level level = useOnContext.getLevel();
-            BlockPos blockPos = useOnContext.getClickedPos();
-            BlockState blockState = level.getBlockState(useOnContext.getClickedPos());
-            if(blockState.is(BlockTags.FENCES) && !blockState.is(ModBlocks.FENCE_LOGGED_BUTTERFLY_PEA)) {
-                Player player = useOnContext.getPlayer();
-                if(!level.isClientSide && player != null){
-                    level.setBlock(blockPos,FenceLoggedButterflyPeaBlock.copyFence(blockState),3);
-                    BlockEntity blockEntity = level.getBlockEntity(blockPos);
-                    if(blockEntity instanceof FenceLoggedButterflyPeaBlockEntity fenceLoggedButterflyPeaBlock){
-                        fenceLoggedButterflyPeaBlock.fenceState = blockState;
-                    }
-                    level.playSound(null,blockPos,SoundEvents.MOSS_CARPET_PLACE, SoundSource.BLOCKS);
-                }
-                return InteractionResult.sidedSuccess(level.isClientSide);
-            }
-
-            return super.useOn(useOnContext);
-        }
-    });
+    public static final Item BUTTERFLY_PEA = registerFlatItem("butterfly_pea",new ItemNameBlockItem(ModBlocks.BUTTERFLY_PEA_WALL,new Item.Properties()));
     //I KNOW IT'S NOT THAI. BUT THERE IS MORTAR AND BASIL IN THE SAME MOD. HOW COULD I MISS THIS OPPORTUNITY.
     public static final Item PESTO_SAUCE = registerFlatItem("pesto_sauce",new ConsumableItem(new Item.Properties().food(ModFood.PESTO_SAUCE).craftRemainder(Items.BOWL)));
 

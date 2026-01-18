@@ -10,7 +10,6 @@ import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.*;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.butterfly_pea.BuddingButterflyPeaBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.butterfly_pea.ButterflyPeaVineBlock;
-import net.firemuffin303.muffinsthaidelightfabric.common.block.butterfly_pea.FenceLoggedButterflyPeaBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.butterfly_pea.WallFlowerBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.coconut.*;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.*;
@@ -547,7 +546,6 @@ public class ModBlocks {
 
     public static final Block BUDDING_BUTTERFLY_PEA_BLOCK = register("budding_butterfly_pea",new BuddingButterflyPeaBlock(BlockBehaviour.Properties.copy(WHEAT)));
     public static final Block BUTTERFLY_PEA_BLOCK = register("butterfly_pea_vine",new ButterflyPeaVineBlock(BlockBehaviour.Properties.copy(WHEAT)));
-    public static final Block FENCE_LOGGED_BUTTERFLY_PEA = register("fence_logged_butterfly_pea",new FenceLoggedButterflyPeaBlock(BlockBehaviour.Properties.copy(OAK_FENCE)));
     public static final Block BUTTERFLY_PEA_WALL = register("butterfly_pea_wall",new WallFlowerBlock(BlockBehaviour.Properties.copy(SPORE_BLOSSOM),MobEffects.HEAL,1));
 
     public static final Block DURIAN_CAKE = register("durian_cake",new DurianCakeBlock(BlockBehaviour.Properties.copy(CAKE)));
