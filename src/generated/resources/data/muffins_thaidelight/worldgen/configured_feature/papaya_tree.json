@@ -40,7 +40,6 @@
       "state": {
         "Name": "muffins_thaidelight:papaya_leaves",
         "Properties": {
-          "fullness": "false",
           "papaya_leaves_facing": "up",
           "waterlogged": "false"
         }

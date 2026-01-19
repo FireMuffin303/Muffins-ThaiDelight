@@ -1,0 +1,38 @@
+{
+	"format_version": "1.21.6",
+	"credit": "Made with Blockbench",
+	"textures": {
+		"1": "muffins_thaidelight:block/papaya/papaya_flower_stem",
+		"2": "muffins_thaidelight:block/papaya/papaya_flower2",
+		"particle": "muffins_thaidelight:block/papaya/papaya_flower2"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 14],
+			"to": [16, 16, 14.1],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 14.05]},
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#2"},
+				"south": {"uv": [16, 0, 0, 16], "texture": "#2"}
+			}
+		},
+		{
+			"from": [10, 9, 14],
+			"to": [10, 13, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [10, 9, 14]},
+			"faces": {
+				"east": {"uv": [0, 0, 2, 4], "texture": "#1"},
+				"west": {"uv": [0, 0, 2, 4], "texture": "#1"}
+			}
+		},
+		{
+			"from": [6, 2, 14],
+			"to": [6, 6, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [6, 2, 14]},
+			"faces": {
+				"east": {"uv": [0, 0, 2, 4], "texture": "#1"},
+				"west": {"uv": [0, 0, 2, 4], "texture": "#1"}
+			}
+		}
+	]
+}

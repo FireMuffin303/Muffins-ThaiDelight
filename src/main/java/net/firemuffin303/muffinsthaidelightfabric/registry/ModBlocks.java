@@ -119,15 +119,19 @@ public class ModBlocks {
     public static final Block DURIAN_STAIRS = register("durian_stairs",new StairBlock(DURIAN_PLANKS.defaultBlockState(),BlockBehaviour.Properties.copy(DURIAN_PLANKS)));
     public static final Block DURIAN_SLAB = register("durian_slab",new SlabBlock(BlockBehaviour.Properties.copy(DURIAN_PLANKS)));
     public static final Block DURIAN_FENCE = register("durian_fence", new FenceBlock(BlockBehaviour.Properties.copy(DURIAN_PLANKS)));
-    public static final Block DURIAN_FENCE_GATE = register("durian_fence_gate",new FenceGateBlock(BlockBehaviour.Properties.of().mapColor(DURIAN_PLANKS.defaultMapColor()).forceSolidOn().instrument(NoteBlockInstrument.BASS).strength(2.0f,3.0f).ignitedByLava(), WoodType.CHERRY));
+    public static final Block DURIAN_FENCE_GATE = register("durian_fence_gate",new FenceGateBlock(BlockBehaviour.Properties.of()
+            .mapColor(DURIAN_PLANKS.defaultMapColor())
+            .forceSolidOn()
+            .instrument(NoteBlockInstrument.BASS)
+            .strength(2.0f,3.0f)
+            .ignitedByLava(), ModWoodTypes.DURIAN));
     public static final Block DURIAN_DOOR = register("durian_door",new DoorBlock(BlockBehaviour.Properties.of()
             .mapColor(DURIAN_PLANKS.defaultMapColor())
             .instrument(NoteBlockInstrument.BASS)
             .strength(3.0f)
             .noOcclusion()
             .ignitedByLava()
-            .pushReaction(PushReaction.DESTROY),
-            BlockSetType.CHERRY
+            .pushReaction(PushReaction.DESTROY), ModBlockSetTypes.DURIAN
     ));
     public static final Block DURIAN_TRAPDOOR = register("durian_trapdoor",new TrapDoorBlock(BlockBehaviour.Properties.of()
             .mapColor(DURIAN_PLANKS.defaultMapColor())
@@ -135,8 +139,7 @@ public class ModBlocks {
             .strength(3.0f)
             .noOcclusion()
             .isValidSpawn(Blocks::never)
-            .ignitedByLava(),
-            BlockSetType.CHERRY
+            .ignitedByLava(),ModBlockSetTypes.DURIAN
     ));
 
     public static final Block DURIAN_PRESSURE_PLATE = register("durian_pressure_plate",new PressurePlateBlock(
@@ -148,11 +151,10 @@ public class ModBlocks {
                     .noCollission()
                     .strength(0.5f)
                     .ignitedByLava()
-                    .pushReaction(PushReaction.DESTROY),
-            BlockSetType.CHERRY
+                    .pushReaction(PushReaction.DESTROY),ModBlockSetTypes.DURIAN
     ));
 
-    public static final Block DURIAN_BUTTON = register("durian_button",Blocks.woodenButton(BlockSetType.CHERRY));
+    public static final Block DURIAN_BUTTON = register("durian_button",Blocks.woodenButton(ModBlockSetTypes.DURIAN));
     public static final Block DURIAN_SIGN = register("durian_sign",new TerraformSignBlock(
             ThaiDelight.modid("entity/signs/durian"),
             BlockBehaviour.Properties.of()
@@ -160,6 +162,7 @@ public class ModBlocks {
             .forceSolidOn()
             .instrument(NoteBlockInstrument.BASS)
             .noCollission()
+            .sound(SoundType.WOOD)
             .strength(1.0f)
             .ignitedByLava()
     ));
@@ -171,6 +174,7 @@ public class ModBlocks {
             .forceSolidOn()
             .instrument(NoteBlockInstrument.BASS)
             .noCollission()
+            .sound(SoundType.WOOD)
             .strength(1.0f)
             .dropsLike(ModBlocks.DURIAN_SIGN)
             .ignitedByLava()
@@ -184,6 +188,7 @@ public class ModBlocks {
             .forceSolidOn()
             .instrument(NoteBlockInstrument.BASS)
             .noCollission()
+            .sound(SoundType.WOOD)
             .strength(1.0f)
             .ignitedByLava()
     ));
@@ -196,6 +201,7 @@ public class ModBlocks {
             .forceSolidOn()
             .instrument(NoteBlockInstrument.BASS)
             .noCollission()
+            .sound(SoundType.WOOD)
             .strength(1.0f)
             .ignitedByLava()
             .dropsLike(DURIAN_HANGING_SIGN)
@@ -233,9 +239,11 @@ public class ModBlocks {
     public static final Block COCONUT_LEAF_BLOCK = register("coconut_leaf_block",new BundledCoconutLeafBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GREEN).strength(0.5F, 2.5F).sound(SoundType.GRASS)));
 
     public static final Block COCONUT_LOG = register("coconut_log",Blocks.log(MapColor.COLOR_BROWN,MapColor.COLOR_YELLOW));
-    public static final Block COCONUT_WOOD = register("coconut_wood",new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava()));
+    public static final Block COCONUT_WOOD = register("coconut_wood",new RotatedPillarBlock(BlockBehaviour.Properties.of()
+            .mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava()));
     public static final Block STRIPPED_COCONUT_LOG = register("stripped_coconut_log",Blocks.log(MapColor.COLOR_RED,MapColor.COLOR_RED));
-    public static final Block STRIPPED_COCONUT_WOOD = register("stripped_coconut_wood",new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava()));
+    public static final Block STRIPPED_COCONUT_WOOD = register("stripped_coconut_wood",new RotatedPillarBlock(BlockBehaviour.Properties.of()
+            .mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava()));
     public static final Block COCONUT_PLANKS = register("coconut_planks",new Block(BlockBehaviour.Properties.of()
             .mapColor(MapColor.COLOR_LIGHT_GREEN).instrument(NoteBlockInstrument.BASS).strength(2.0f,3.0f).sound(SoundType.WOOD).ignitedByLava()));
     public static final Block COCONUT_STAIRS = register("coconut_stairs",new StairBlock(COCONUT_PLANKS.defaultBlockState(),BlockBehaviour.Properties.copy(COCONUT_PLANKS)));
@@ -247,7 +255,7 @@ public class ModBlocks {
             .instrument(NoteBlockInstrument.BASS)
             .strength(2.0f,3.0f)
             .ignitedByLava(),
-            WoodType.CHERRY
+            ModWoodTypes.COCONUT
     ));
     public static final Block COCONUT_DOOR = register("coconut_door",new DoorBlock(BlockBehaviour.Properties.of()
             .mapColor(COCONUT_PLANKS.defaultMapColor())
@@ -256,7 +264,7 @@ public class ModBlocks {
             .noOcclusion()
             .ignitedByLava()
             .pushReaction(PushReaction.DESTROY),
-            BlockSetType.CHERRY
+            ModBlockSetTypes.COCONUT
     ));
     public static final Block COCONUT_TRAPDOOR = register("coconut_trapdoor",new TrapDoorBlock(BlockBehaviour.Properties.of()
             .mapColor(COCONUT_PLANKS.defaultMapColor())
@@ -265,7 +273,7 @@ public class ModBlocks {
             .noOcclusion()
             .isValidSpawn(Blocks::never)
             .ignitedByLava(),
-            BlockSetType.CHERRY
+            ModBlockSetTypes.COCONUT
     ));
     public static final Block COCONUT_PRESSURE_PLATE = register("coconut_pressure_plate",new PressurePlateBlock(
             PressurePlateBlock.Sensitivity.EVERYTHING,
@@ -277,16 +285,17 @@ public class ModBlocks {
                     .strength(0.5f)
                     .ignitedByLava()
                     .pushReaction(PushReaction.DESTROY),
-            BlockSetType.CHERRY
+            ModBlockSetTypes.COCONUT
     ));
-    public static final Block COCONUT_BUTTON = register("coconut_button",Blocks.woodenButton(BlockSetType.CHERRY));
+    public static final Block COCONUT_BUTTON = register("coconut_button",Blocks.woodenButton(ModBlockSetTypes.COCONUT));
     public static final Block COCONUT_SIGN = register("coconut_sign",new TerraformSignBlock(
             ThaiDelight.modid("entity/signs/coconut"),
             BlockBehaviour.Properties.of()
-            .mapColor(ModBlocks.DURIAN_PLANKS.defaultMapColor())
+            .mapColor(ModBlocks.COCONUT_PLANKS.defaultMapColor())
             .forceSolidOn()
             .instrument(NoteBlockInstrument.BASS)
             .noCollission()
+                    .sound(SoundType.WOOD)
             .strength(1.0f)
             .ignitedByLava()
     ));
@@ -298,7 +307,8 @@ public class ModBlocks {
             .instrument(NoteBlockInstrument.BASS)
             .noCollission()
             .strength(1.0f)
-            .dropsLike(ModBlocks.DURIAN_SIGN)
+            .sound(SoundType.WOOD)
+            .dropsLike(ModBlocks.COCONUT_SIGN)
             .ignitedByLava()
     ));
     public static final Block COCONUT_HANGING_SIGN = register("coconut_hanging_sign",new TerraformHangingSignBlock(
@@ -310,6 +320,7 @@ public class ModBlocks {
             .instrument(NoteBlockInstrument.BASS)
             .noCollission()
             .strength(1.0f)
+                    .sound(SoundType.WOOD)
             .ignitedByLava()
     ));
     public static final Block COCONUT_WALL_HANGING_SIGN = register("coconut_wall_hanging_sign",new TerraformWallHangingSignBlock(
@@ -321,8 +332,9 @@ public class ModBlocks {
             .instrument(NoteBlockInstrument.BASS)
             .noCollission()
             .strength(1.0f)
+                    .sound(SoundType.WOOD)
             .ignitedByLava()
-            .dropsLike(DURIAN_HANGING_SIGN)
+            .dropsLike(COCONUT_HANGING_SIGN)
     ));
     public static final Block COCONUT_CABINET = registerCabinet("coconut_cabinet");
     public static final Block COCONUT_LEAF_CARPET = register("coconut_leaf_carpet",new CarpetBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GREEN).strength(0.1f).sound(SoundType.MOSS_CARPET).pushReaction(PushReaction.DESTROY)));
@@ -357,7 +369,7 @@ public class ModBlocks {
             .instrument(NoteBlockInstrument.BASS)
             .strength(2.0f,3.0f)
             .ignitedByLava(),
-            WoodType.CHERRY
+            ModWoodTypes.MANGO
     ));
     public static final Block MANGO_DOOR = register("mango_door",new DoorBlock(BlockBehaviour.Properties.of()
             .mapColor(MANGO_PLANKS.defaultMapColor())
@@ -366,7 +378,7 @@ public class ModBlocks {
             .noOcclusion()
             .ignitedByLava()
             .pushReaction(PushReaction.DESTROY),
-            BlockSetType.CHERRY
+            ModBlockSetTypes.MANGO
     ));
     public static final Block MANGO_TRAPDOOR = register("mango_trapdoor",new TrapDoorBlock(BlockBehaviour.Properties.of()
             .mapColor(MANGO_PLANKS.defaultMapColor())
@@ -375,7 +387,7 @@ public class ModBlocks {
             .noOcclusion()
             .isValidSpawn(Blocks::never)
             .ignitedByLava(),
-            BlockSetType.CHERRY
+            ModBlockSetTypes.MANGO
     ));
     public static final Block MANGO_PRESSURE_PLATE = register("mango_pressure_plate",new PressurePlateBlock(
             PressurePlateBlock.Sensitivity.EVERYTHING,
@@ -387,7 +399,7 @@ public class ModBlocks {
                     .strength(0.5f)
                     .ignitedByLava()
                     .pushReaction(PushReaction.DESTROY),
-            BlockSetType.CHERRY
+            ModBlockSetTypes.MANGO
     ));
     public static final Block MANGO_BUTTON = register("mango_button",Blocks.woodenButton(BlockSetType.CHERRY));
     public static final Block MANGO_SIGN = register("mango_sign",new TerraformSignBlock(
@@ -398,6 +410,7 @@ public class ModBlocks {
             .instrument(NoteBlockInstrument.BASS)
             .noCollission()
             .strength(1.0f)
+                    .sound(SoundType.WOOD)
             .ignitedByLava()
     ));
     public static final Block MANGO_WALL_SIGN = register("mango_wall_sign",new TerraformWallSignBlock(
@@ -408,7 +421,8 @@ public class ModBlocks {
             .instrument(NoteBlockInstrument.BASS)
             .noCollission()
             .strength(1.0f)
-            .dropsLike(ModBlocks.DURIAN_SIGN)
+                    .sound(SoundType.WOOD)
+            .dropsLike(ModBlocks.MANGO_SIGN)
             .ignitedByLava()
     ));
     public static final Block MANGO_HANGING_SIGN = register("mango_hanging_sign",new TerraformHangingSignBlock(
@@ -420,6 +434,7 @@ public class ModBlocks {
             .instrument(NoteBlockInstrument.BASS)
             .noCollission()
             .strength(1.0f)
+                    .sound(SoundType.WOOD)
             .ignitedByLava()
     ));
     public static final Block MANGO_WALL_HANGING_SIGN = register("mango_wall_hanging_sign", new TerraformWallHangingSignBlock(
@@ -431,8 +446,9 @@ public class ModBlocks {
             .instrument(NoteBlockInstrument.BASS)
             .noCollission()
             .strength(1.0f)
+                    .sound(SoundType.WOOD)
             .ignitedByLava()
-            .dropsLike(DURIAN_HANGING_SIGN)
+            .dropsLike(MANGO_HANGING_SIGN)
     ));
     public static final Block MANGO_CABINET = registerCabinet("mango_cabinet");
 

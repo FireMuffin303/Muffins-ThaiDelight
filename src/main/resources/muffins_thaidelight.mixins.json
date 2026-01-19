@@ -11,6 +11,8 @@
     "anorexia.LivingEntityMixin",
     "axeItem.AxeItemMixin",
     "blockEntityType.BlockEntityTypeMixin",
+    "blockSetType.BlockSetTypeAccessor",
+    "blockSetType.WoodSetTypeAccessor",
     "bonemeal.BoneMealItemMixin",
     "catachableFallingBlock.FallingBlockEntityMixin",
     "durianHelmet.EnchantmentHelperMixin",

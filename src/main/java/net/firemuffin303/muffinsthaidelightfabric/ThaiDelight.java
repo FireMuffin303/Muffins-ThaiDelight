@@ -62,6 +62,8 @@ public class ThaiDelight implements ModInitializer {
 
     private void init(){
         ModEntityTypes.init();
+        ModBlockSetTypes.init();
+        ModWoodTypes.init();
         ModBlockEntityTypes.init();
         ModBlocks.init();
         ModItems.init();

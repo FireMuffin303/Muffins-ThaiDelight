@@ -1,18 +1,18 @@
 {
   "variants": {
     "facing=east": {
-      "model": "muffins_thaidelight:block/papaya/papaya_flower",
+      "model": "muffins_thaidelight:block/papaya/papaya_flower1",
       "y": 270
     },
     "facing=north": {
-      "model": "muffins_thaidelight:block/papaya/papaya_flower",
+      "model": "muffins_thaidelight:block/papaya/papaya_flower1",
       "y": 180
     },
     "facing=south": {
-      "model": "muffins_thaidelight:block/papaya/papaya_flower"
+      "model": "muffins_thaidelight:block/papaya/papaya_flower1"
     },
     "facing=west": {
-      "model": "muffins_thaidelight:block/papaya/papaya_flower",
+      "model": "muffins_thaidelight:block/papaya/papaya_flower1",
       "y": 90
     }
   }

@@ -27,8 +27,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
-import static net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.PapayaLeavesBlock.FULLNESS;
-
 public class PapayaLeavesStemBlock extends BushBlock implements SimpleWaterloggedBlock, BonemealableBlock {
     public static final DirectionProperty PAPAYA_LEAVES_FACING = ModBlockStateProperties.PAPAYA_LEAVES_FACING;
     private static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
@@ -130,7 +128,7 @@ public class PapayaLeavesStemBlock extends BushBlock implements SimpleWaterlogge
                 .setValue(PapayaLeavesStemBlock.PAPAYA_LEAVES_FACING,direction),2);
 
         serverLevel.setBlock(blockPos2.relative(direction,1),
-                ModBlocks.PAPAYA_LEAVES.defaultBlockState().setValue(PapayaLeavesBlock.PAPAYA_LEAVES_FACING,direction).setValue(FULLNESS,false),
+                ModBlocks.PAPAYA_LEAVES.defaultBlockState().setValue(PapayaLeavesBlock.PAPAYA_LEAVES_FACING,direction),
                 2
         );
     }

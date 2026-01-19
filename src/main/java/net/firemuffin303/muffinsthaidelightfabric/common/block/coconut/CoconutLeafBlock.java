@@ -1,25 +1,11 @@
 package net.firemuffin303.muffinsthaidelightfabric.common.block.coconut;
 
-import com.mojang.logging.LogUtils;
-import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.HangingDurianBlock;
-import net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.PapayaLeavesBlock;
-import net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.PapayaLeavesStemBlock;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
 import net.firemuffin303.muffinsthaidelightfabric.util.CommonEvents;
-import net.minecraft.BlockUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.item.FallingBlockEntity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -33,15 +19,12 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
-
-import static net.firemuffin303.muffinsthaidelightfabric.common.block.papaya.PapayaLeavesBlock.FULLNESS;
 
 public class CoconutLeafBlock extends Block implements SimpleWaterloggedBlock,BonemealableBlock {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;

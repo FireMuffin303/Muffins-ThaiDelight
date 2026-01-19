@@ -830,27 +830,20 @@ public class ModelDataGen extends FabricModelProvider {
                 blockStateModelGenerator.modelOutput);
 
         blockStateModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.BUDDING_PAPAYA_FLOWER,
-                Variant.variant().with(VariantProperties.MODEL,ThaiDelight.modid("block/papaya/papaya_flower"))
+                Variant.variant().with(VariantProperties.MODEL,ThaiDelight.modid("block/papaya/papaya_flower1"))
         ).with(createHorizontalFacingDispatchAlt()));
 
         blockStateModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.PAPAYA_FLOWER)
                 .with(PropertyDispatch.properties(PapayaFlowerBlock.FLOWERS,PapayaFlowerBlock.HANGING)
-                        .generate((integer, hangning) -> {
-
-                            if(hangning){
-                                return Variant.variant().with(VariantProperties.MODEL,TEMPLATE_HANGING_PAPAYA_FLOWER.create(
-                                        ThaiDelight.modid("block/papaya/hanging_papaya_flower%d".formatted(integer)),
-
-                                        integer == 1 ? new TextureMapping().put(FLOWER,ThaiDelight.modid("block/papaya/papaya_flower")) :
-                                                new TextureMapping().put(FLOWER,ThaiDelight.modid("block/papaya/papaya_flower%d".formatted(integer))),
-                                        blockStateModelGenerator.modelOutput));
+                        .generate((integer, hanging) -> {
+                            if(hanging){
+                                return Variant.variant()
+                                        .with(VariantProperties.MODEL,ThaiDelight.modid("block/papaya/papaya_flower%d".formatted(integer)))
+                                        .with(VariantProperties.X_ROT, VariantProperties.Rotation.R90);
                             }
-                            return Variant.variant().with(VariantProperties.MODEL,TEMPLATE_PAPAYA_FLOWER.create(
-                                    ThaiDelight.modid("block/papaya/papaya_flower%d".formatted(integer)),
-
-                                    integer == 1 ? new TextureMapping().put(FLOWER,ThaiDelight.modid("block/papaya/papaya_flower")) :
-                                            new TextureMapping().put(FLOWER,ThaiDelight.modid("block/papaya/papaya_flower%d".formatted(integer))),
-                                    blockStateModelGenerator.modelOutput));
+                            return Variant.variant()
+                                    .with(VariantProperties.MODEL,ThaiDelight.modid("block/papaya/papaya_flower%d".formatted(integer)))
+                                    .with(VariantProperties.X_ROT, VariantProperties.Rotation.R270);
                         })
                 )
                 .with(createHorizontalFacingDispatch()));
@@ -858,13 +851,8 @@ public class ModelDataGen extends FabricModelProvider {
         blockStateModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.WALL_PAPAYA_FLOWER)
                 .with(PropertyDispatch.property(WallPapayaFlowerBlock.FLOWERS)
                         .generate(integer -> {
-                            if(integer == 1){
-                                return Variant.variant().with(VariantProperties.MODEL,ThaiDelight.modid("block/papaya/papaya_flower"));
-                            }
-                            return Variant.variant().with(VariantProperties.MODEL,TEMPLATE_WALL_PAPAYA_FLOWER.create(
-                                    ThaiDelight.modid("block/papaya/wall_papaya_flower%d".formatted(integer)),
-                                    new TextureMapping().put(FLOWER,ThaiDelight.modid("block/papaya/papaya_flower%d".formatted(integer))),
-                                    blockStateModelGenerator.modelOutput));
+                            return Variant.variant().with(VariantProperties.MODEL,ThaiDelight.modid("block/papaya/papaya_flower%d".formatted(integer)));
+
                         })
                 )
                 .with(createHorizontalFacingDispatch()));

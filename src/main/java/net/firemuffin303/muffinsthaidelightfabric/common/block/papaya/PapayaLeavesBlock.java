@@ -25,29 +25,24 @@ import org.jetbrains.annotations.Nullable;
 
 public class PapayaLeavesBlock extends BushBlock implements SimpleWaterloggedBlock, BonemealableBlock {
     private static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
-    public static final BooleanProperty FULLNESS = BooleanProperty.create("fullness");
     public static final DirectionProperty PAPAYA_LEAVES_FACING = ModBlockStateProperties.PAPAYA_LEAVES_FACING;
 
     public PapayaLeavesBlock(Properties properties) {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(WATERLOGGED,false)
-                .setValue(FULLNESS,false)
                 .setValue(PAPAYA_LEAVES_FACING,Direction.UP)
         );
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(WATERLOGGED,FULLNESS,PAPAYA_LEAVES_FACING);
+        builder.add(WATERLOGGED,PAPAYA_LEAVES_FACING);
     }
 
     @Override
     public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
         boolean bl = blockState.getValue(PAPAYA_LEAVES_FACING) == Direction.UP;
-        if(blockState.getValue(FULLNESS)){
-            return Block.box(0.0,0.0,0.0,16.0,16.0,16.0);
-        }
 
         return bl ? Block.box(0.0, 0.0, 0.0, 16.0, 8.0, 16.0) : Block.box(0.0, 8.0, 0.0, 16.0, 16.0, 16.0);
     }
@@ -111,7 +106,7 @@ public class PapayaLeavesBlock extends BushBlock implements SimpleWaterloggedBlo
     @Override
     public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState, boolean isClient) {
         Direction direction = blockState.getValue(PapayaLeavesBlock.PAPAYA_LEAVES_FACING);
-        return !blockState.getValue(FULLNESS) || levelReader.getBlockState(blockPos.relative(direction)).is(Blocks.AIR);
+        return levelReader.getBlockState(blockPos.relative(direction)).is(Blocks.AIR);
     }
 
     @Override
@@ -121,19 +116,13 @@ public class PapayaLeavesBlock extends BushBlock implements SimpleWaterloggedBlo
 
     @Override
     public void performBonemeal(ServerLevel serverLevel, RandomSource randomSource, BlockPos blockPos, BlockState blockState) {
-        if(!blockState.getValue(FULLNESS)){
-            serverLevel.setBlock(blockPos,blockState.setValue(FULLNESS,true),2);
-            return;
-        }
-
-
         Direction direction = blockState.getValue(PAPAYA_LEAVES_FACING);
 
         serverLevel.setBlock(blockPos,ModBlocks.PAPAYA_LEAVES_STEM.defaultBlockState()
                 .setValue(PapayaLeavesStemBlock.PAPAYA_LEAVES_FACING,direction),2);
 
         serverLevel.setBlock(blockPos.relative(direction,1),
-                blockState.setValue(PapayaLeavesBlock.PAPAYA_LEAVES_FACING,direction).setValue(FULLNESS,false),
+                blockState.setValue(PapayaLeavesBlock.PAPAYA_LEAVES_FACING,direction),
                 2
         );
     }
