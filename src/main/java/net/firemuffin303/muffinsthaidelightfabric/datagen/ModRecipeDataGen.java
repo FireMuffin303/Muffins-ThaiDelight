@@ -33,6 +33,7 @@ public class ModRecipeDataGen extends FabricRecipeProvider {
     @Override
     public void buildRecipes(Consumer<FinishedRecipe> exporter) {
         craft(exporter);
+        furnace(exporter);
         smithing(exporter);
         cook(ModItems.CRAB_MEAT, ModItems.COOKED_CRAB_MEAT, 0.35f, 200, exporter);
         cook(ModItems.DRAGONFLY, ModItems.COOKED_DRAGONFLY, 0.35f, 200, exporter);
@@ -191,6 +192,24 @@ public class ModRecipeDataGen extends FabricRecipeProvider {
                 .save(exporter,ThaiDelight.modid("crafting/"+RecipeProvider.getItemName(ModItems.DURIAN_CAKE)));
 
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.FOOD,ModItems.MANGO_CHEESECAKE)
+                .define('M',ModTags.MANGO)
+                .define('C',ModTags.COMMON_MILKS)
+                .define('P', vectorwing.farmersdelight.common.registry.ModItems.PIE_CRUST.get())
+                .pattern("MMM")
+                .pattern("MMM")
+                .pattern("CPC")
+                .unlockedBy("has_milk",RecipeProvider.has(ModTags.COMMON_MILKS))
+                .save(exporter,ThaiDelight.modid("crafting/"+RecipeProvider.getItemName(ModItems.MANGO_CHEESECAKE)));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, ModItems.MANGO_CHEESECAKE)
+                .define('C', ModItems.MANGO_CHEESECAKE_SLICE)
+                .pattern("CC")
+                .pattern("CC")
+                .unlockedBy("has_mango_cheesecake_slice",RecipeProvider.has(ModItems.MANGO_CHEESECAKE_SLICE))
+                .save(exporter,ThaiDelight.modid("crafting/"+RecipeProvider.getItemName(ModItems.MANGO_CHEESECAKE)+"_from_slice"));
+
+
         //--------- Coconut Pie ------------
         ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, ModItems.COCONUT_PIE)
                 .define('C', ModItems.COCONUT_SLICE)
@@ -231,9 +250,9 @@ public class ModRecipeDataGen extends FabricRecipeProvider {
                 .unlockedBy("has_coconut_milk_bottle",RecipeProvider.has(ModItems.COCONUT_MILK_BOTTLE))
                 .save(exporter,ThaiDelight.modid("crafting/"+RecipeProvider.getItemName(ModItems.COCONUT_MILK_ICE_CREAM)));
 
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,Items.BLUE_DYE,2).requires(ModItems.BUTTERFLY_PEA)
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,ModItems.BUTTERFLY_PEA_SEEDS,3).requires(ModItems.BUTTERFLY_PEA)
                 .unlockedBy(getHasName(ModItems.BUTTERFLY_PEA),has(ModItems.BUTTERFLY_PEA))
-                .save(exporter,ThaiDelight.modid("crafting/blue_dye_from_butterfly_pea"));
+                .save(exporter,ThaiDelight.modid("crafting/butterfly_seeds_from_butterfly_pea"));
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,Items.YELLOW_DYE).requires(ModBlocks.DURIAN_FLOWER)
                 .unlockedBy(getHasName(ModBlocks.DURIAN_FLOWER),has(ModBlocks.DURIAN_FLOWER))
@@ -288,6 +307,12 @@ public class ModRecipeDataGen extends FabricRecipeProvider {
                 .unlockedBy(getHasName(Items.BOWL),has(Items.BOWL))
                 .save(exporter,ThaiDelight.modid("crafting/"+getItemName(vectorwing.farmersdelight.common.registry.ModItems.FRUIT_SALAD.get())+"_by_mango"));
 
+    }
+
+    private void furnace(Consumer<FinishedRecipe> exporter){
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModItems.DURIAN_PEEL),RecipeCategory.MISC,Items.CHARCOAL,0.15f,200)
+                .unlockedBy("has_durian_peel",RecipeProvider.has(ModItems.DURIAN_PEEL))
+                .save(exporter,ThaiDelight.modid("smelting/charcoal_from_durian_peel"));
     }
 
     private void smithing(Consumer<FinishedRecipe> exporter){

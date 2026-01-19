@@ -10,6 +10,7 @@
     "StructurePoolAccessor",
     "anorexia.LivingEntityMixin",
     "axeItem.AxeItemMixin",
+    "bambooShoot.PandaMixin",
     "blockEntityType.BlockEntityTypeMixin",
     "blockSetType.BlockSetTypeAccessor",
     "blockSetType.WoodSetTypeAccessor",

@@ -30,7 +30,7 @@ public class ModTags {
     public static final TagKey<Item> DURIAN_LOGS_ITEM = TagKey.create(Registries.ITEM,ThaiDelight.modid("durian_logs"));
     public static final TagKey<Item> MANGO_LOGS_ITEM = TagKey.create(Registries.ITEM,ThaiDelight.modid("mango_logs"));
     public static final TagKey<Item> COCONUT_LOGS_ITEM = TagKey.create(Registries.ITEM,ThaiDelight.modid("coconut_logs"));
-
+    public static final TagKey<Item> PAPAYA_LOGS_ITEM = TagKey.create(Registries.ITEM,ThaiDelight.modid("papaya_logs"));
 
     public static final TagKey<Block> FLOWER_CRAB_SPAWNABLE_ON = TagKey.create(Registries.BLOCK,ThaiDelight.modid("flower_crab_spawnable_on"));
 

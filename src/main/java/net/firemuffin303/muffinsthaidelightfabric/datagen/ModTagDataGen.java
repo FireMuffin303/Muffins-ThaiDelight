@@ -139,6 +139,13 @@ public class ModTagDataGen {
                     ModItems.PEPPER_SEED
             );
 
+            getOrCreateTagBuilder(PAPAYA_LOGS_ITEM).add(
+                    ModItems.PAPAYA_LOG,
+                    ModItems.PAPAYA_WOOD,
+                    ModItems.STRIPPED_PAPAYA_LOG,
+                    ModItems.STRIPPED_PAPAYA_WOOD
+            );
+
 
             getOrCreateTagBuilder(ItemTags.SAPLINGS).add(
                     ModItems.LIME_SAPLING,
@@ -148,6 +155,50 @@ public class ModTagDataGen {
                     ModItems.COCONUT_SAPLING
             );
 
+            getOrCreateTagBuilder(ItemTags.LOGS_THAT_BURN)
+                    .addTag(PAPAYA_LOGS_ITEM)
+                    .addTag(COCONUT_LOGS_ITEM)
+                    .addTag(MANGO_LOGS_ITEM)
+                    .addTag(DURIAN_LOGS_ITEM);
+
+            getOrCreateTagBuilder(ItemTags.WOODEN_DOORS)
+                    .add(ModItems.DURIAN_DOOR,ModItems.MANGO_DOOR,ModItems.COCONUT_DOOR);
+
+            getOrCreateTagBuilder(ItemTags.WOODEN_TRAPDOORS)
+                    .add(ModItems.DURIAN_TRAPDOOR,ModItems.MANGO_TRAPDOOR,ModItems.COCONUT_TRAPDOOR);
+
+            getOrCreateTagBuilder(ItemTags.WOODEN_BUTTONS)
+                    .add(ModItems.DURIAN_BUTTON,ModItems.MANGO_BUTTON,ModItems.COCONUT_BUTTON);
+
+            getOrCreateTagBuilder(ItemTags.WOODEN_FENCES)
+                    .add(ModItems.DURIAN_FENCE,ModItems.MANGO_FENCE,ModItems.COCONUT_FENCE);
+
+            getOrCreateTagBuilder(ItemTags.WOODEN_SLABS)
+                    .add(ModItems.DURIAN_SLAB,ModItems.MANGO_SLAB,ModItems.COCONUT_SLAB);
+
+            getOrCreateTagBuilder(ItemTags.WOODEN_PRESSURE_PLATES)
+                    .add(ModItems.DURIAN_PRESSURE_PLATE,ModItems.MANGO_PRESSURE_PLATE,ModItems.COCONUT_PRESSURE_PLATE);
+
+            getOrCreateTagBuilder(ItemTags.WOODEN_STAIRS)
+                    .add(ModItems.DURIAN_STAIRS, ModItems.MANGO_STAIRS,ModItems.COCONUT_STAIRS);
+
+            getOrCreateTagBuilder(ItemTags.BOATS)
+                    .add(ModItems.DURIAN_BOAT,ModItems.MANGO_BOAT,ModItems.COCONUT_BOAT);
+
+            getOrCreateTagBuilder(ItemTags.CHEST_BOATS)
+                    .add(ModItems.DURIAN_CHEST_BOAT,ModItems.MANGO_CHEST_BOAT,ModItems.COCONUT_CHEST_BOAT);
+
+            getOrCreateTagBuilder(ItemTags.SIGNS)
+                    .add(ModItems.DURIAN_SIGN,ModItems.MANGO_SIGN,ModItems.COCONUT_SIGN);
+
+            getOrCreateTagBuilder(ItemTags.HANGING_SIGNS)
+                    .add(ModItems.DURIAN_HANGING_SIGN,ModItems.MANGO_HANGING_SIGN,ModItems.COCONUT_HANGING_SIGN);
+
+            getOrCreateTagBuilder(vectorwing.farmersdelight.common.tag.ModTags.WOODEN_CABINETS)
+                    .add(ModItems.DURIAN_CABINET,ModItems.MANGO_CABINET,ModItems.COCONUT_CABINET);
+
+            getOrCreateTagBuilder(vectorwing.farmersdelight.common.tag.ModTags.WILD_CROPS_ITEM)
+                    .add(ModItems.WILD_PEPPER_CROP,ModItems.WILD_BASIL,ModItems.WILD_HOLY_BASIL);
         }
     }
 
@@ -161,17 +212,63 @@ public class ModTagDataGen {
 
         @Override
         protected void addTags(HolderLookup.Provider provider) {
-            getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_AXE)
-                    .add(ModBlocks.PEPPER_CRATE)
-                    .add(ModBlocks.PAPAYA_CRATE)
-                    .add(ModBlocks.LIME_CRATE)
-                    .add(ModBlocks.DURIAN_BLOCK);
+            getOrCreateTagBuilder(BlockTags.PLANKS).add(ModBlocks.DURIAN_PLANKS,ModBlocks.MANGO_PLANKS,ModBlocks.COCONUT_PLANKS);
+            getOrCreateTagBuilder(BlockTags.WOODEN_STAIRS).add(ModBlocks.DURIAN_STAIRS,ModBlocks.MANGO_STAIRS,ModBlocks.COCONUT_STAIRS);
+            getOrCreateTagBuilder(BlockTags.WOODEN_SLABS).add(ModBlocks.DURIAN_SLAB,ModBlocks.MANGO_SLAB,ModBlocks.COCONUT_SLAB);
+            getOrCreateTagBuilder(BlockTags.WOODEN_FENCES).add(ModBlocks.DURIAN_FENCE,ModBlocks.MANGO_FENCE,ModBlocks.COCONUT_FENCE);
+            getOrCreateTagBuilder(BlockTags.FENCE_GATES).add(ModBlocks.DURIAN_FENCE_GATE,ModBlocks.MANGO_FENCE_GATE,ModBlocks.COCONUT_FENCE_GATE);
+            getOrCreateTagBuilder(BlockTags.WOODEN_DOORS).add(ModBlocks.DURIAN_DOOR,ModBlocks.MANGO_DOOR,ModBlocks.COCONUT_DOOR);
+            getOrCreateTagBuilder(BlockTags.WOODEN_TRAPDOORS).add(ModBlocks.DURIAN_TRAPDOOR,ModBlocks.MANGO_TRAPDOOR,ModBlocks.COCONUT_TRAPDOOR);
+            getOrCreateTagBuilder(BlockTags.WOODEN_PRESSURE_PLATES).add(ModBlocks.DURIAN_PRESSURE_PLATE,ModBlocks.MANGO_PRESSURE_PLATE,ModBlocks.COCONUT_PRESSURE_PLATE);
+            getOrCreateTagBuilder(BlockTags.WOODEN_BUTTONS).add(ModBlocks.DURIAN_BUTTON,ModBlocks.MANGO_BUTTON,ModBlocks.COCONUT_BUTTON);
+
+            getOrCreateTagBuilder(BlockTags.STANDING_SIGNS).add(ModBlocks.DURIAN_SIGN,ModBlocks.MANGO_SIGN,ModBlocks.COCONUT_SIGN);
+            getOrCreateTagBuilder(BlockTags.WALL_SIGNS).add(ModBlocks.DURIAN_WALL_SIGN,ModBlocks.MANGO_WALL_SIGN,ModBlocks.COCONUT_WALL_SIGN);
+            getOrCreateTagBuilder(BlockTags.CEILING_HANGING_SIGNS).add(ModBlocks.DURIAN_HANGING_SIGN,ModBlocks.MANGO_HANGING_SIGN,ModBlocks.COCONUT_HANGING_SIGN);
+            getOrCreateTagBuilder(BlockTags.WALL_HANGING_SIGNS).add(ModBlocks.DURIAN_WALL_HANGING_SIGN,ModBlocks.MANGO_WALL_HANGING_SIGN,ModBlocks.COCONUT_WALL_HANGING_SIGN);
+
+            getOrCreateTagBuilder(BlockTags.CROPS).add(
+                    ModBlocks.BUDDING_PEPPER_CROP,
+                    ModBlocks.PEPPER_CROP,
+                    ModBlocks.LIME_PLANT,
+                    ModBlocks.BUDDING_PAPAYA_FLOWER,
+                    ModBlocks.PAPAYA,
+                    ModBlocks.HANGING_DURIAN,
+                    ModBlocks.HANGING_MANGO_BLOCK,
+                    ModBlocks.BUDDING_COCONUT_LEAF,
+                    ModBlocks.HOLY_BASIL,
+                    ModBlocks.BASIL,
+                    ModBlocks.BUDDING_BUTTERFLY_PEA_BLOCK,
+                    ModBlocks.BUTTERFLY_PEA_BLOCK
+            );
+
+            getOrCreateTagBuilder(BlockTags.CAULDRONS)
+                    .add(ModBlocks.FERMENTED_FISH_CAULDRON);
+
+            getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_AXE).add(
+                    ModBlocks.PEPPER_CRATE,
+                    ModBlocks.PAPAYA_CRATE,
+                    ModBlocks.LIME_CRATE,
+                    ModBlocks.RAW_PAPAYA_CRATE,
+                    ModBlocks.MANGO_CRATE,
+                    ModBlocks.HOLY_BASIL_CRATE,
+                    ModBlocks.BASIL_CRATE,
+                    ModBlocks.BAMBOO_SHOOT_CRATE,
+                    ModBlocks.BUTTERFLY_PEA_CRATE,
+                    ModBlocks.SMALL_DURIAN_BLOCK,
+                    ModBlocks.DURIAN_BLOCK,
+                    ModBlocks.DURIAN_PEEL_BLOCK,
+                    ModBlocks.COCONUT,
+                    ModBlocks.STRIPPED_COCONUT
+            );
 
             getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_PICKAXE)
                     .add(ModBlocks.MORTAR);
 
-            getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_HOE)
-                    .add(ModBlocks.DURIAN_BLOCK);
+            getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_HOE).add(
+                    ModBlocks.DURIAN_BLOCK,
+                    ModBlocks.COCONUT_LEAF_BLOCK
+            );
 
             getOrCreateTagBuilder(DURIAN_LOGS_BLOCK).add(
                     ModBlocks.DURIAN_LOG,
@@ -213,17 +310,6 @@ public class ModTagDataGen {
                     .add(ModBlocks.STRIPPED_PAPAYA_LOG)
                     .add(ModBlocks.STRIPPED_PAPAYA_WOOD);
 
-
-            getOrCreateTagBuilder(BlockTags.PLANKS).add(ModBlocks.DURIAN_PLANKS,ModBlocks.MANGO_PLANKS,ModBlocks.COCONUT_PLANKS);
-            getOrCreateTagBuilder(BlockTags.WOODEN_STAIRS).add(ModBlocks.DURIAN_STAIRS,ModBlocks.MANGO_STAIRS,ModBlocks.COCONUT_STAIRS);
-            getOrCreateTagBuilder(BlockTags.WOODEN_SLABS).add(ModBlocks.DURIAN_SLAB,ModBlocks.MANGO_SLAB,ModBlocks.COCONUT_SLAB);
-            getOrCreateTagBuilder(BlockTags.WOODEN_FENCES).add(ModBlocks.DURIAN_FENCE,ModBlocks.MANGO_FENCE,ModBlocks.COCONUT_FENCE);
-            getOrCreateTagBuilder(BlockTags.FENCE_GATES).add(ModBlocks.DURIAN_FENCE_GATE,ModBlocks.MANGO_FENCE_GATE,ModBlocks.COCONUT_FENCE_GATE);
-            getOrCreateTagBuilder(BlockTags.WOODEN_DOORS).add(ModBlocks.DURIAN_DOOR,ModBlocks.MANGO_DOOR,ModBlocks.COCONUT_DOOR);
-            getOrCreateTagBuilder(BlockTags.WOODEN_TRAPDOORS).add(ModBlocks.DURIAN_TRAPDOOR,ModBlocks.MANGO_TRAPDOOR,ModBlocks.COCONUT_FENCE_GATE);
-            getOrCreateTagBuilder(BlockTags.WOODEN_PRESSURE_PLATES).add(ModBlocks.DURIAN_PRESSURE_PLATE,ModBlocks.MANGO_PRESSURE_PLATE,ModBlocks.COCONUT_PRESSURE_PLATE);
-            getOrCreateTagBuilder(BlockTags.WOODEN_BUTTONS).add(ModBlocks.DURIAN_BUTTON,ModBlocks.MANGO_BUTTON,ModBlocks.COCONUT_BUTTON);
-
             getOrCreateTagBuilder(BlockTags.SMALL_FLOWERS).add(
                     ModBlocks.DURIAN_FLOWER,
                     ModBlocks.BUTTERFLY_PEA_WALL,
@@ -237,26 +323,18 @@ public class ModTagDataGen {
                     Blocks.MUD,
                     Blocks.MANGROVE_ROOTS,
                     Blocks.MUDDY_MANGROVE_ROOTS,
+                    Blocks.CLAY,
                     Blocks.SAND,
-                    Blocks.CLAY
+                    Blocks.SUSPICIOUS_SAND
             );
-
-            getOrCreateTagBuilder(COMMON_RICH_SOIL).add(
-                    vectorwing.farmersdelight.common.registry.ModBlocks.RICH_SOIL.get(),
-                    vectorwing.farmersdelight.common.registry.ModBlocks.RICH_SOIL_FARMLAND.get()
-            );
-
-            getOrCreateTagBuilder(DURIAN_RICH_SOIL).addTag(COMMON_RICH_SOIL);
-            getOrCreateTagBuilder(MANGO_RICH_SOIL).addTag(COMMON_RICH_SOIL);
-            getOrCreateTagBuilder(COCONUT_RICH_SOIL).addTag(COMMON_RICH_SOIL);
 
             getOrCreateTagBuilder(SACK_CATCHABLE).add(
                     ModBlocks.SMALL_DURIAN_BLOCK,
-                    ModBlocks.HANGING_DURIAN,
                     ModBlocks.HANGING_MANGO_BLOCK).addTag(SACK_HEAVY_CATCHABLE);
 
             getOrCreateTagBuilder(SACK_HEAVY_CATCHABLE).add(
                     ModBlocks.DURIAN_BLOCK,
+                    ModBlocks.HANGING_DURIAN,
                     ModBlocks.COCONUT
             );
 
@@ -278,6 +356,12 @@ public class ModTagDataGen {
                     ModBlocks.MAGENTA_CANDLE_DURIAN_CAKE,
                     ModBlocks.PURPLE_CANDLE_DURIAN_CAKE,
                     ModBlocks.PINK_CANDLE_DURIAN_CAKE
+            );
+
+            getOrCreateTagBuilder(vectorwing.farmersdelight.common.tag.ModTags.WILD_CROPS).add(
+                    ModBlocks.WILD_BASIL,
+                    ModBlocks.WILD_HOLY_BASIL,
+                    ModBlocks.WILD_PEPPER_CROP
             );
 
         }

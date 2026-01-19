@@ -275,6 +275,12 @@ public class CommonEvents {
 
     public static void registerFuel(){
         FuelRegistry.INSTANCE.add(ModItems.DURIAN_PEEL,200);
+        FuelRegistry.INSTANCE.add(ModItems.DURIAN_PEEL_BLOCK,1800);
+        FuelRegistry.INSTANCE.add(ModItems.COCONUT_LEAF_BLOCK,4001);
+        FuelRegistry.INSTANCE.add(ModItems.PAPAYA_LEAVES,100);
+        FuelRegistry.INSTANCE.add(ModItems.DURIAN_CABINET,300);
+        FuelRegistry.INSTANCE.add(ModItems.MANGO_CABINET,300);
+        FuelRegistry.INSTANCE.add(ModItems.COCONUT_CABINET,300);
     }
 
     public static void modifyLootTable(){

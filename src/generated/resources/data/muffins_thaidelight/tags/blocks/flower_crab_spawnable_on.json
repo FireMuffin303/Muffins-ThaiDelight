@@ -5,7 +5,8 @@
     "minecraft:mud",
     "minecraft:mangrove_roots",
     "minecraft:muddy_mangrove_roots",
+    "minecraft:clay",
     "minecraft:sand",
-    "minecraft:clay"
+    "minecraft:suspicious_sand"
   ]
 }

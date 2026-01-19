@@ -264,7 +264,7 @@ public class ModItems {
     public static final Item PINEAPPLE_FRIED_RICE = registerFlatItem("pineapple_fried_rice",new Item(bowlFoodItem(ModFood.CRAB_FRIED_RICE)));
 
     public static final Item DURIAN_CURRY = registerFlatItem("durian_curry",new ConsumableItem(bowlFoodItem(ModFood.DURIAN_CURRY)));
-    public static final Item DURIAN_CAKE = registerFlatItem("durian_cake",new BlockItem(ModBlocks.DURIAN_CAKE,new Item.Properties()));
+    public static final Item DURIAN_CAKE = registerFlatItem("durian_cake",new BlockItem(ModBlocks.DURIAN_CAKE,new Item.Properties().stacksTo(1)));
     public static final Item DURIAN_CAKE_SLICE = registerFlatItem("durian_cake_slice",new Item(new Item.Properties().food(ModFood.MANGO_PIE)));
 
     public static final Item MANGO_STICKY_RICE_FEAST = registerFlatItem("mango_sticky_rice_feast",new BlockItem(ModBlocks.MANGO_STICKY_RICE_FEAST,new Item.Properties()));
