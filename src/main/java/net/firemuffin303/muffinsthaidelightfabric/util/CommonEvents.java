@@ -438,7 +438,7 @@ public class CommonEvents {
     }
 
     public static int calculateEatingWithAnorexiaEffect(LivingEntity livingEntity, int original){
-        float amp = ( Objects.requireNonNull(livingEntity.getEffect(ModMobEffects.ANOREXIA)).getAmplifier() + 1);
+        float amp = ( Objects.requireNonNull(livingEntity.getEffect(ModMobEffects.APPETITE_LOSS)).getAmplifier() + 1);
         float rate = 1.2f;
         return (int) ((float)original * (rate + (rate * (0.6 * amp))  ) );
     }

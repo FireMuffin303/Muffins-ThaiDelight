@@ -80,7 +80,7 @@ dependencies {
     modImplementation("vectorwing:FarmersDelight:${project.fdrf_version}") {
         exclude(group: "net.fabricmc")
     }
-    modImplementation "com.terraformersmc.terraform-api:terraform-wood-api-v1:7.0.3"
+    modImplementation include("com.terraformersmc.terraform-api:terraform-wood-api-v1:7.0.3")
     modImplementation ("maven.modrinth:midnightlib:${project.midnightlib_version}")
 
     //Non Needed Dependency
@@ -93,6 +93,10 @@ dependencies {
 
     modRuntimeOnly("maven.modrinth:cloth-config:y0kQixP8")
     modRuntimeOnly("maven.modrinth:cloth-config:dKy60O1Y")
+
+    modCompileOnly "dev.emi:emi-fabric:${emi_version}:api"
+    modLocalRuntime "dev.emi:emi-fabric:${emi_version}"
+
 }
 
 processResources {

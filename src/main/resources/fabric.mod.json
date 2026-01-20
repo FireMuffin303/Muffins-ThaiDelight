@@ -27,7 +27,10 @@
       "net.firemuffin303.muffinsthaidelightfabric.datagen.ModDataGen"
     ],
     "jei_mod_plugin": [
-      "net.firemuffin303.muffinsthaidelightfabric.integration.ThaiDelightJEIIntegration"
+      "net.firemuffin303.muffinsthaidelightfabric.integration.jei.ThaiDelightJEIIntegration"
+    ],
+    "emi": [
+      "net.firemuffin303.muffinsthaidelightfabric.integration.emi.ThaiDelightEMI"
     ],
     "modmenu": [
       "net.firemuffin303.muffinsthaidelightfabric.integration.ThaiDelightModMenu"

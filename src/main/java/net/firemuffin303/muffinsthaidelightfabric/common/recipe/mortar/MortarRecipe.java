@@ -20,6 +20,7 @@ public interface MortarRecipe extends Recipe<Container> {
         return ModRecipes.MORTAR;
     }
 
+    ItemStack getResult();
 
     ItemStack getContainer();
 

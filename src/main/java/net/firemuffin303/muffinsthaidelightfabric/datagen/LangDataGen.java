@@ -223,7 +223,7 @@ public class LangDataGen extends FabricLanguageProvider {
         translationBuilder.add("container.muffins_thaidelight.mortar","Mortar");
 
         translationBuilder.add(ModMobEffects.STINKY,"Stinky");
-        translationBuilder.add(ModMobEffects.ANOREXIA,"Anorexia");
+        translationBuilder.add(ModMobEffects.APPETITE_LOSS,"Appetite Loss");
         translationBuilder.add("item.minecraft.potion.effect.stench","Potion of Stench");
         translationBuilder.add("item.minecraft.potion.effect.long_stench","Potion of Stench");
         translationBuilder.add("item.minecraft.potion.effect.strong_stench","Potion of Stench");
@@ -239,6 +239,13 @@ public class LangDataGen extends FabricLanguageProvider {
         translationBuilder.add("item.minecraft.tipped_arrow.effect.stench","Arrow of Stench");
         translationBuilder.add("item.minecraft.tipped_arrow.effect.long_stench","Arrow of Stench");
         translationBuilder.add("item.minecraft.tipped_arrow.effect.strong_stench","Arrow of Stench");
+
+        translationBuilder.add("muffins_thaidelight.jei.fermented_fish.cauldron1","Putting a fish into Water Cauldron");
+        translationBuilder.add("muffins_thaidelight.jei.fermented_fish.cauldron2","and wait for 6 - 15 minutes");
+        translationBuilder.add("muffins_thaidelight.jei.fermented_fish.cauldron3","until it fully fermented.");
+
+        translationBuilder.add("emi.category.muffins_thaidelight.mortar","Mortar");
+        translationBuilder.add("emi.category.muffins_thaidelight.fermented_fish","Fermenting");
 
         translationBuilder.add("muffins_thaidelight.midnightconfig.developer","------ Developer ------");
         translationBuilder.add("muffins_thaidelight.midnightconfig.firemuffin","FireMuffin303");
@@ -482,7 +489,7 @@ public class LangDataGen extends FabricLanguageProvider {
             translationBuilder.add("container.muffins_thaidelight.mortar","ครก");
 
             translationBuilder.add(ModMobEffects.STINKY,"เหม็น");
-            translationBuilder.add(ModMobEffects.ANOREXIA,"เบื่ออาหาร");
+            translationBuilder.add(ModMobEffects.APPETITE_LOSS,"เบื่ออาหาร");
             translationBuilder.add("item.minecraft.potion.effect.stench","น้ำยาเหม็น");
             translationBuilder.add("item.minecraft.potion.effect.long_stench","น้ำยาเหม็น");
             translationBuilder.add("item.minecraft.potion.effect.strong_stench","น้ำยาเหม็น");
@@ -498,6 +505,12 @@ public class LangDataGen extends FabricLanguageProvider {
             translationBuilder.add("item.minecraft.tipped_arrow.effect.stench","ลูกธนูอาบยาเหม็น");
             translationBuilder.add("item.minecraft.tipped_arrow.effect.long_stench","ลูกธนูอาบยาเหม็น");
             translationBuilder.add("item.minecraft.tipped_arrow.effect.strong_stench","ลูกธนูอาบยาเหม็น");
+
+            translationBuilder.add("muffins_thaidelight.jei.fermented_fish.cauldron1","นำปลาใส่ลงไปในหม้อน้ำ");
+            translationBuilder.add("muffins_thaidelight.jei.fermented_fish.cauldron2","และรอ 6 - 15 นาที");
+            translationBuilder.add("muffins_thaidelight.jei.fermented_fish.cauldron3","จนกว่าจะหมักเสร็จ.");
+            translationBuilder.add("emi.category.muffins_thaidelight.mortar","ครก");
+            translationBuilder.add("emi.category.muffins_thaidelight.fermented_fish","การหมัก");
 
             translationBuilder.add("muffins_thaidelight.midnightconfig.developer","------ ผู้พัฒนา ------");
             translationBuilder.add("muffins_thaidelight.midnightconfig.firemuffin","FireMuffin303");

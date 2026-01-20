@@ -27,7 +27,7 @@ public class StinkyMobEffect extends MobEffect {
             List<ServerPlayer> playerList = serverLevel.getEntitiesOfClass(ServerPlayer.class,aabb);
             for (ServerPlayer serverPlayer : playerList){
                 if(!livingEntity.is(serverPlayer)){
-                    serverPlayer.addEffect(new MobEffectInstance(ModMobEffects.ANOREXIA,5*20,i));
+                    serverPlayer.addEffect(new MobEffectInstance(ModMobEffects.APPETITE_LOSS,5*20,i));
                 }
 
             }

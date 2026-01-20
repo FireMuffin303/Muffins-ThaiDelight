@@ -17,7 +17,7 @@ public abstract class ItemInHandRendererMixin {
 
     @ModifyExpressionValue(method = "applyEatTransform",at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;getUseDuration()I"))
     public int muffins$hasStinkyEffect(int original){
-        if(this.minecraft.player.hasEffect(ModMobEffects.ANOREXIA)){
+        if(this.minecraft.player.hasEffect(ModMobEffects.APPETITE_LOSS)){
             return CommonEvents.calculateEatingWithAnorexiaEffect(this.minecraft.player,original);
         }
 

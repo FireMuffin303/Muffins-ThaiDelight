@@ -18,7 +18,7 @@ public abstract class LivingEntityMixin {
 
     @ModifyExpressionValue(method = "startUsingItem",at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;getUseDuration()I"))
     public int muffins$modifyEatDuration(int original, @Local ItemStack itemStack){
-        if(itemStack.isEdible() && this.hasEffect(ModMobEffects.ANOREXIA)){
+        if(itemStack.isEdible() && this.hasEffect(ModMobEffects.APPETITE_LOSS)){
             return CommonEvents.calculateEatingWithAnorexiaEffect((LivingEntity) (Object)this,original);
         }
         return original;
@@ -26,7 +26,7 @@ public abstract class LivingEntityMixin {
 
     @ModifyExpressionValue(method = "shouldTriggerItemUseEffects",at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;getUseDuration()I"))
     public int muffins$modifyTriggerEffect(int original){
-        if(this.hasEffect(ModMobEffects.ANOREXIA)){
+        if(this.hasEffect(ModMobEffects.APPETITE_LOSS)){
             return CommonEvents.calculateEatingWithAnorexiaEffect((LivingEntity) (Object)this,original);
         }
         return original;

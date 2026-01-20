@@ -2,7 +2,6 @@ package net.firemuffin303.muffinsthaidelightfabric.common.block;
 
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModMobEffects;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.core.cauldron.CauldronInteraction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
@@ -78,7 +77,7 @@ public class FermentedFishCauldronBlock extends AbstractCauldronBlock {
                 }
 
                 livingEntity.addEffect(new MobEffectInstance(ModMobEffects.STINKY, duration));
-                livingEntity.addEffect(new MobEffectInstance(ModMobEffects.ANOREXIA, duration));
+                livingEntity.addEffect(new MobEffectInstance(ModMobEffects.APPETITE_LOSS, duration));
             }
 
             if(entity.isOnFire()){

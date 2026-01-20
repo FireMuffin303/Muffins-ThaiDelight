@@ -419,7 +419,7 @@ public class ModItems {
 
         public static final FoodProperties FERMENTED_FISH = new FoodProperties.Builder().alwaysEat()
                 .effect(new MobEffectInstance(ModMobEffects.STINKY,10*20),1f)
-                .effect(new MobEffectInstance(ModMobEffects.ANOREXIA,10*20),1f)
+                .effect(new MobEffectInstance(ModMobEffects.APPETITE_LOSS,10*20),1f)
 
                 .build();
 
