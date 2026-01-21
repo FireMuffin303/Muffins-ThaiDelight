@@ -1,11 +1,13 @@
 package net.firemuffin303.muffinsthaidelightfabric.registry;
 
 import com.google.common.collect.ImmutableList;
+import com.terraformersmc.modmenu.util.mod.Mod;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.DurianFlowerBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.mango.HangingMangoBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.world.feature.*;
+import net.firemuffin303.muffinsthaidelightfabric.common.world.feature.stateproviders.RandomHorizontalFacingStateProvider;
 import net.minecraft.core.*;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -15,19 +17,27 @@ import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.ClampedInt;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.MultifaceBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.MultifaceGrowthFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.*;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProviderType;
 import net.minecraft.world.level.levelgen.feature.stateproviders.RandomizedIntStateProvider;
 import net.minecraft.world.level.levelgen.feature.treedecorators.AttachedToLeavesDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.BeehiveDecorator;
@@ -56,6 +66,9 @@ public class ModFeatures {
 
     public static final ResourceKey<ConfiguredFeature<?,?>> FEATURE_PATCH_LIME_BUSH;
     public static final ResourceKey<ConfiguredFeature<?,?>> FEATURE_PATCH_WILD_PEPPER;
+    public static final ResourceKey<ConfiguredFeature<?, ?>> FEATURE_PATCH_WILD_HOLY_BASIL = ResourceKey.create(Registries.CONFIGURED_FEATURE,new ResourceLocation(ThaiDelight.MOD_ID,"patch_wild_holy_basil"));
+    public static final ResourceKey<ConfiguredFeature<?, ?>> FEATURE_PATCH_WILD_BASIL = ResourceKey.create(Registries.CONFIGURED_FEATURE,new ResourceLocation(ThaiDelight.MOD_ID,"patch_wild_basil"));
+    public static final ResourceKey<ConfiguredFeature<?, ?>> FEATURE_PATCH_WILD_ALL_BASIL = ResourceKey.create(Registries.CONFIGURED_FEATURE,new ResourceLocation(ThaiDelight.MOD_ID,"patch_wild_all_basil"));
 
     //Papaya
     public static final ResourceKey<ConfiguredFeature<?, ?>> FEATURE_PAPAYA_TREE = ResourceKey.create(Registries.CONFIGURED_FEATURE,new ResourceLocation(ThaiDelight.MOD_ID,"papaya_tree"));
@@ -79,8 +92,15 @@ public class ModFeatures {
     //Lime
     public static final ResourceKey<ConfiguredFeature<?, ?>> FEATURE_LIME_TREE = ResourceKey.create(Registries.CONFIGURED_FEATURE,ThaiDelight.modid("lime_tree"));
 
+    //Butterfly Pea
+    public static final ResourceKey<ConfiguredFeature<?, ?>> FEATURE_BUTTERFLY_PEA = ResourceKey.create(Registries.CONFIGURED_FEATURE,ThaiDelight.modid("butterfly_pea_vine"));
+
     public static final ResourceKey<PlacedFeature> PATCH_LIME_BUSH;
     public static final ResourceKey<PlacedFeature> PATCH_WILD_PEPPER;
+    public static final ResourceKey<PlacedFeature> PATCH_WILD_HOLY_BASIL = ResourceKey.create(Registries.PLACED_FEATURE,new ResourceLocation(ThaiDelight.MOD_ID,"patch_wild_holy_basil"));
+    public static final ResourceKey<PlacedFeature> PATCH_WILD_BASIL = ResourceKey.create(Registries.PLACED_FEATURE,new ResourceLocation(ThaiDelight.MOD_ID,"patch_wild_basil"));
+    public static final ResourceKey<PlacedFeature> PATCH_WILD_ALL_BASIL = ResourceKey.create(Registries.PLACED_FEATURE,new ResourceLocation(ThaiDelight.MOD_ID,"patch_wild_all_basil"));
+    public static final ResourceKey<PlacedFeature> PATCH_BUTTERFLY_PEA = ResourceKey.create(Registries.PLACED_FEATURE,ThaiDelight.modid("patch_butterfly_pea"));
     public static final ResourceKey<PlacedFeature> TREES_PAPAYA = ResourceKey.create(Registries.PLACED_FEATURE,new ResourceLocation(ThaiDelight.MOD_ID,"trees_papaya"));
     public static final ResourceKey<PlacedFeature> TREES_DURIAN = ResourceKey.create(Registries.PLACED_FEATURE,ThaiDelight.modid("trees_durian"));
     public static final ResourceKey<PlacedFeature> TREES_DURIAN_SPARSE_JUNGLE = ResourceKey.create(Registries.PLACED_FEATURE,ThaiDelight.modid("trees_durian_sparse"));
@@ -114,6 +134,57 @@ public class ModFeatures {
 
                         )));
 
+        bootstapContext.register(ModFeatures.FEATURE_PATCH_WILD_HOLY_BASIL,new ConfiguredFeature<>(ModBiomeFeatures.WILD_CROP.get(),
+                new WildCropConfiguration(24,6,3,
+                        PlacementUtils.filtered(Feature.SIMPLE_BLOCK,
+                                new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.WILD_HOLY_BASIL.defaultBlockState())),
+                                BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE,BlockPredicate.matchesTag(Direction.DOWN.getNormal(), BlockTags.DIRT))),
+                        PlacementUtils.filtered(Feature.SIMPLE_BLOCK,
+                                new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.GRASS.defaultBlockState())),
+                                BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE,BlockPredicate.matchesTag(Direction.DOWN.getNormal(), BlockTags.DIRT))),
+                        PlacementUtils.filtered(Feature.SIMPLE_BLOCK,
+                                new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.COARSE_DIRT.defaultBlockState())),
+                                BlockPredicate.allOf(BlockPredicate.replaceable(Direction.UP.getNormal()),BlockPredicate.matchesTag(BlockTags.DIRT)))
+
+                )));
+
+        bootstapContext.register(ModFeatures.FEATURE_PATCH_WILD_BASIL,new ConfiguredFeature<>(ModBiomeFeatures.WILD_CROP.get(),
+                new WildCropConfiguration(24,6,3,
+                        PlacementUtils.filtered(Feature.SIMPLE_BLOCK,
+                                new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.WILD_BASIL.defaultBlockState())),
+                                BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE,BlockPredicate.matchesTag(Direction.DOWN.getNormal(), BlockTags.DIRT))),
+                        PlacementUtils.filtered(Feature.SIMPLE_BLOCK,
+                                new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.GRASS.defaultBlockState())),
+                                BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE,BlockPredicate.matchesTag(Direction.DOWN.getNormal(), BlockTags.DIRT))),
+                        PlacementUtils.filtered(Feature.SIMPLE_BLOCK,
+                                new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.COARSE_DIRT.defaultBlockState())),
+                                BlockPredicate.allOf(BlockPredicate.replaceable(Direction.UP.getNormal()),BlockPredicate.matchesTag(BlockTags.DIRT)))
+
+                )));
+
+        bootstapContext.register(ModFeatures.FEATURE_PATCH_WILD_ALL_BASIL,new ConfiguredFeature<>(ModBiomeFeatures.WILD_CROP.get(),
+                new WildCropConfiguration(48,8,3,
+                        PlacementUtils.filtered(Feature.SIMPLE_BLOCK,
+                                new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.WILD_BASIL.defaultBlockState())),
+                                BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE,BlockPredicate.matchesTag(Direction.DOWN.getNormal(), BlockTags.DIRT))),
+                        PlacementUtils.filtered(Feature.SIMPLE_BLOCK,
+                                new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.WILD_HOLY_BASIL.defaultBlockState())),
+                                BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE,BlockPredicate.matchesTag(Direction.DOWN.getNormal(), BlockTags.DIRT))),
+                        PlacementUtils.filtered(Feature.SIMPLE_BLOCK,
+                                new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.COARSE_DIRT.defaultBlockState())),
+                                BlockPredicate.allOf(BlockPredicate.replaceable(Direction.UP.getNormal()),BlockPredicate.matchesTag(BlockTags.DIRT)))
+
+                )));
+
+        bootstapContext.register(ModFeatures.FEATURE_BUTTERFLY_PEA,new ConfiguredFeature<>(Feature.MULTIFACE_GROWTH,new MultifaceGrowthConfiguration(
+                        (MultifaceBlock) ModBlocks.BUTTERFLY_PEA_WALL,20,true,true,true,0.5f,
+                        HolderSet.direct(Block::builtInRegistryHolder,
+                                Blocks.OAK_LOG,Blocks.BIRCH_LOG,Blocks.SPRUCE_LOG,
+                                Blocks.ACACIA_LOG,Blocks.DARK_OAK_LOG,Blocks.JUNGLE_LOG,
+                                Blocks.CHERRY_LOG, Blocks.MANGROVE_LOG,ModBlocks.DURIAN_LOG,
+                                ModBlocks.MANGO_LOG,ModBlocks.COCONUT_LOG
+                        )
+                )));
 
         //Durian
         bootstapContext.register(ModFeatures.FEATURE_DURIAN_TREE,new ConfiguredFeature<>(Feature.TREE,createShortDurianTree(List.of()).build()));
@@ -154,8 +225,12 @@ public class ModFeatures {
     }
 
     public static void bootstrapPlacedFeature(BootstapContext<PlacedFeature> bootstapContext){
-        var config_lime_bush = bootstapContext.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(ModFeatures.FEATURE_PATCH_LIME_BUSH);
-        var config_wild_pepper = bootstapContext.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(ModFeatures.FEATURE_PATCH_WILD_PEPPER);
+        Holder.Reference<ConfiguredFeature<?,?>> config_lime_bush = bootstapContext.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(ModFeatures.FEATURE_PATCH_LIME_BUSH);
+        Holder.Reference<ConfiguredFeature<?,?>> config_wild_pepper = bootstapContext.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(ModFeatures.FEATURE_PATCH_WILD_PEPPER);
+        Holder.Reference<ConfiguredFeature<?,?>> config_wild_holy_basil = bootstapContext.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(ModFeatures.FEATURE_PATCH_WILD_HOLY_BASIL);
+        Holder.Reference<ConfiguredFeature<?,?>> config_wild_basil = bootstapContext.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(ModFeatures.FEATURE_PATCH_WILD_BASIL);
+        Holder.Reference<ConfiguredFeature<?,?>> config_wild_all_basil = bootstapContext.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(ModFeatures.FEATURE_PATCH_WILD_ALL_BASIL);
+        Holder.Reference<ConfiguredFeature<?,?>> config_butterfly_pea = bootstapContext.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(ModFeatures.FEATURE_BUTTERFLY_PEA);
 
         Holder.Reference<ConfiguredFeature<?,?>> durian_tree_checked = bootstapContext.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(ModFeatures.FEATURE_DURIAN_TREE);
         Holder.Reference<ConfiguredFeature<?,?>> tall_durian_tree_checked = bootstapContext.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(ModFeatures.FEATURE_TALL_DURIAN_TREE);
@@ -182,6 +257,42 @@ public class ModFeatures {
                 )
         ));
 
+        bootstapContext.register(ModFeatures.PATCH_WILD_HOLY_BASIL,new PlacedFeature(config_wild_holy_basil,
+                List.of(
+                        HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
+                        RarityFilter.onAverageOnceEvery(32),
+                        InSquarePlacement.spread(),
+                        BiomeFilter.biome()
+                )
+        ));
+
+        bootstapContext.register(ModFeatures.PATCH_WILD_BASIL,new PlacedFeature(config_wild_basil,
+                List.of(
+                        HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
+                        RarityFilter.onAverageOnceEvery(32),
+                        InSquarePlacement.spread(),
+                        BiomeFilter.biome()
+                )
+        ));
+
+        bootstapContext.register(ModFeatures.PATCH_WILD_ALL_BASIL,new PlacedFeature(config_wild_all_basil,
+                List.of(
+                        HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
+                        RarityFilter.onAverageOnceEvery(64),
+                        InSquarePlacement.spread(),
+                        BiomeFilter.biome()
+                )
+        ));
+
+        bootstapContext.register(ModFeatures.PATCH_BUTTERFLY_PEA,new PlacedFeature(config_butterfly_pea,
+                List.of(
+                    BiomeFilter.biome(),
+                    InSquarePlacement.spread(),
+                    CountPlacement.of(127),
+                    HeightRangePlacement.uniform(VerticalAnchor.absolute(64),VerticalAnchor.absolute(100))
+                )
+        ));
+
         bootstapContext.register(ModFeatures.TREES_DURIAN, new PlacedFeature(tall_durian_tree_checked,
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(1,0.02f,1),ModBlocks.DURIAN_SAPLING)));
         bootstapContext.register(ModFeatures.TREES_DURIAN_SPARSE_JUNGLE, new PlacedFeature(durian_tree_checked,
@@ -189,7 +300,7 @@ public class ModFeatures {
 
         bootstapContext.register(ModFeatures.TREES_MANGO,new PlacedFeature(mango_tree_checked, ImmutableList.<PlacementModifier>builder()
                 .add(CountPlacement.of(ClampedInt.of(UniformInt.of(-3,1),0,1)))
-                .add(RarityFilter.onAverageOnceEvery(5))
+                .add(RarityFilter.onAverageOnceEvery(8))
                 .add(InSquarePlacement.spread())
                 .add(SurfaceWaterDepthFilter.forMaxDepth(0))
                 .add(PlacementUtils.HEIGHTMAP_OCEAN_FLOOR)
@@ -219,6 +330,10 @@ public class ModFeatures {
     public static void dataGen(HolderLookup.Provider provider, FabricDynamicRegistryProvider.Entries entries){
         entries.add(provider.lookupOrThrow(Registries.CONFIGURED_FEATURE),ModFeatures.FEATURE_PATCH_LIME_BUSH);
         entries.add(provider.lookupOrThrow(Registries.CONFIGURED_FEATURE),ModFeatures.FEATURE_PATCH_WILD_PEPPER);
+        entries.add(provider.lookupOrThrow(Registries.CONFIGURED_FEATURE),ModFeatures.FEATURE_PATCH_WILD_HOLY_BASIL);
+        entries.add(provider.lookupOrThrow(Registries.CONFIGURED_FEATURE),ModFeatures.FEATURE_PATCH_WILD_BASIL);
+        entries.add(provider.lookupOrThrow(Registries.CONFIGURED_FEATURE),ModFeatures.FEATURE_PATCH_WILD_ALL_BASIL);
+        entries.add(provider.lookupOrThrow(Registries.CONFIGURED_FEATURE),ModFeatures.FEATURE_BUTTERFLY_PEA);
 
         //Durian
         entries.add(provider.lookupOrThrow(Registries.CONFIGURED_FEATURE),ModFeatures.FEATURE_DURIAN_TREE);
@@ -241,11 +356,16 @@ public class ModFeatures {
         entries.add(provider.lookupOrThrow(Registries.CONFIGURED_FEATURE),ModFeatures.FEATURE_LIME_TREE);
         entries.add(provider.lookupOrThrow(Registries.PLACED_FEATURE),ModFeatures.PATCH_LIME_BUSH);
         entries.add(provider.lookupOrThrow(Registries.PLACED_FEATURE),ModFeatures.PATCH_WILD_PEPPER);
+        entries.add(provider.lookupOrThrow(Registries.PLACED_FEATURE), ModFeatures.PATCH_WILD_HOLY_BASIL);
+        entries.add(provider.lookupOrThrow(Registries.PLACED_FEATURE), ModFeatures.PATCH_WILD_BASIL);
+        entries.add(provider.lookupOrThrow(Registries.PLACED_FEATURE), ModFeatures.PATCH_WILD_ALL_BASIL);
+        entries.add(provider.lookupOrThrow(Registries.PLACED_FEATURE),ModFeatures.PATCH_BUTTERFLY_PEA);
         entries.add(provider.lookupOrThrow(Registries.PLACED_FEATURE),ModFeatures.TREES_DURIAN);
         entries.add(provider.lookupOrThrow(Registries.PLACED_FEATURE),ModFeatures.TREES_DURIAN_SPARSE_JUNGLE);
         entries.add(provider.lookupOrThrow(Registries.PLACED_FEATURE),ModFeatures.TREES_MANGO);
         entries.add(provider.lookupOrThrow(Registries.PLACED_FEATURE),ModFeatures.TREES_COCONUT);
         entries.add(provider.lookupOrThrow(Registries.PLACED_FEATURE),ModFeatures.TREES_PAPAYA);
+
 
     }
 
@@ -311,14 +431,14 @@ public class ModFeatures {
     public static TreeConfiguration.TreeConfigurationBuilder createFancyMangoTree(List<TreeDecorator> treeDecorators){
         List<TreeDecorator> decorators = new ArrayList<>();
         decorators.add(new AttachedToLeavesDecorator(0.24f,1,0,new RandomizedIntStateProvider(
-                BlockStateProvider.simple(ModBlocks.HANGING_MANGO_BLOCK.defaultBlockState()),
-                HangingMangoBlock.AGE,UniformInt.of(0,1)
+                new RandomHorizontalFacingStateProvider(ModBlocks.HANGING_MANGO_BLOCK.defaultBlockState()),
+                HangingMangoBlock.AGE, UniformInt.of(0, 1)
         ),2,List.of(Direction.DOWN)));
         decorators.addAll(treeDecorators);
 
         return new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBlocks.MANGO_LOG),
-                new FancyTrunkPlacer(11, 13, 0),
+                new FancyTrunkPlacer(9, 11, 0),
                 BlockStateProvider.simple(ModBlocks.MANGO_LEAVES),
                 new HangingBlobFoliagePlacer(ConstantInt.of(3),ConstantInt.of(2),3,0.15f,0.1f),
                 new TwoLayersFeatureSize(0, 0, 0, OptionalInt.of(4)))

@@ -9,10 +9,7 @@ import net.firemuffin303.muffinsthaidelightfabric.registry.ModTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.EntityTypeTags;
-import net.minecraft.tags.ItemTags;
-import net.minecraft.tags.TagKey;
+import net.minecraft.tags.*;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.biome.Biome;
@@ -392,8 +389,14 @@ public class ModTagDataGen {
             getOrCreateTagBuilder(PAPAYA_TREE_BIOMES).add(Biomes.SAVANNA,Biomes.SAVANNA_PLATEAU,Biomes.WINDSWEPT_SAVANNA);
             getOrCreateTagBuilder(PEPPER_TREE_BIOMES).add(Biomes.SAVANNA,Biomes.SAVANNA_PLATEAU,Biomes.WINDSWEPT_SAVANNA);
             getOrCreateTagBuilder(DURIAN_TREE_BIOMES).add(Biomes.JUNGLE);
-            getOrCreateTagBuilder(MANGO_TREE_BIOMES).add(Biomes.BIRCH_FOREST,Biomes.OLD_GROWTH_BIRCH_FOREST,Biomes.FLOWER_FOREST,Biomes.FOREST);
+            getOrCreateTagBuilder(MANGO_TREE_BIOMES).add(Biomes.FLOWER_FOREST,Biomes.FOREST);
             getOrCreateTagBuilder(COCONUT_TREE_BIOMES).add(Biomes.BEACH);
+
+            getOrCreateTagBuilder(WILD_HOLY_BASIL_BIOMES).forceAddTag(BiomeTags.IS_FOREST);
+            getOrCreateTagBuilder(WILD_BASIL_BIOMES).forceAddTag(BiomeTags.IS_FOREST);
+            getOrCreateTagBuilder(WILD_ALL_BASIL_BIOMES).forceAddTag(BiomeTags.IS_JUNGLE);
+            getOrCreateTagBuilder(BUTTERFLY_PEA_BIOMES).forceAddTag(BiomeTags.IS_FOREST);
+
         }
     }
 }

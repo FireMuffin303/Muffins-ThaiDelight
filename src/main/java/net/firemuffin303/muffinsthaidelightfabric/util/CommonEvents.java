@@ -151,6 +151,19 @@ public class CommonEvents {
         BiomeModifications.addFeature(context -> BiomeSelectors.tag(ModTags.COCONUT_TREE_BIOMES).test(context),
                 GenerationStep.Decoration.VEGETAL_DECORATION,ModFeatures.TREES_COCONUT);
 
+        BiomeModifications.addFeature(context -> BiomeSelectors.tag(ModTags.WILD_HOLY_BASIL_BIOMES).test(context),
+                GenerationStep.Decoration.VEGETAL_DECORATION,ModFeatures.PATCH_WILD_HOLY_BASIL);
+
+        BiomeModifications.addFeature(context -> BiomeSelectors.tag(ModTags.WILD_BASIL_BIOMES).test(context),
+                GenerationStep.Decoration.VEGETAL_DECORATION,ModFeatures.PATCH_WILD_BASIL);
+
+        BiomeModifications.addFeature(context -> BiomeSelectors.tag(ModTags.WILD_ALL_BASIL_BIOMES).test(context),
+                GenerationStep.Decoration.VEGETAL_DECORATION,ModFeatures.PATCH_WILD_ALL_BASIL);
+
+        BiomeModifications.addFeature(context -> BiomeSelectors.tag(ModTags.BUTTERFLY_PEA_BIOMES).test(context),
+                GenerationStep.Decoration.VEGETAL_DECORATION,ModFeatures.PATCH_BUTTERFLY_PEA
+        );
+
 
         ServerLifecycleEvents.SERVER_STARTING.register(minecraftServer -> {
             CommonEvents.addToStructurePool(minecraftServer,

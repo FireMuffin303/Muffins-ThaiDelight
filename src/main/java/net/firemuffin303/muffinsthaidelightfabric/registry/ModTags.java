@@ -53,6 +53,11 @@ public class ModTags {
     public static final TagKey<Biome> MANGO_TREE_BIOMES = TagKey.create(Registries.BIOME, ThaiDelight.modid("mango_tree_biomes"));
     public static final TagKey<Biome> COCONUT_TREE_BIOMES = TagKey.create(Registries.BIOME, ThaiDelight.modid("coconut_tree_biomes"));
 
+    public static final TagKey<Biome> WILD_HOLY_BASIL_BIOMES = TagKey.create(Registries.BIOME,ThaiDelight.modid("wild_holy_basil_biomes"));
+    public static final TagKey<Biome> WILD_BASIL_BIOMES = TagKey.create(Registries.BIOME,ThaiDelight.modid("wild_basil_biomes"));
+    public static final TagKey<Biome> WILD_ALL_BASIL_BIOMES = TagKey.create(Registries.BIOME,ThaiDelight.modid("wild_all_basil_biomes"));
+    public static final TagKey<Biome> BUTTERFLY_PEA_BIOMES = TagKey.create(Registries.BIOME,ThaiDelight.modid("butterfly_peas_biomes"));
+
     //----- Covenience Tag ----
     public static final TagKey<Item> COMMON_MILKS = TagKey.create(Registries.ITEM,new ResourceLocation("c","milks"));
     public static final TagKey<Item> COMMON_COOKED_MEATS =  TagKey.create(Registries.ITEM,new ResourceLocation("c","foods/cooked_meats"));

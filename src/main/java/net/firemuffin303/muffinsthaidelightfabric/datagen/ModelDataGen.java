@@ -942,12 +942,22 @@ public class ModelDataGen extends FabricModelProvider {
                 )
         );
 
+        ResourceLocation wall_block = WALL_FLOWER.create(ModBlocks.BUTTERFLY_PEA_WALL,new TextureMapping()
+                        .put(VINE,ThaiDelight.modid("block/butterfly_pea/butterfly_pea_wall_vine"))
+                        .put(FLOWER,ThaiDelight.modid("block/butterfly_pea/butterfly_pea_flower")),
+                blockModelGenerators.modelOutput);
+
+        ModModelUtils.createCustomModelMultiFace(ModBlocks.BUTTERFLY_PEA_WALL,wall_block,blockModelGenerators);
+
+        /*
         blockModelGenerators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.BUTTERFLY_PEA_WALL,
                 Variant.variant().with(VariantProperties.MODEL, WALL_FLOWER.create(ModBlocks.BUTTERFLY_PEA_WALL,new TextureMapping()
                         .put(VINE,ThaiDelight.modid("block/butterfly_pea/butterfly_pea_wall_vine"))
                         .put(FLOWER,ThaiDelight.modid("block/butterfly_pea/butterfly_pea_flower")),
                         blockModelGenerators.modelOutput))
         ).with(createHorizontalFacingDispatch()));
+
+         */
 
 
     }

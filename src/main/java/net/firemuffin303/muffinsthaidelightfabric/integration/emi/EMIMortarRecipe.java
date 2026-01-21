@@ -5,7 +5,6 @@ import dev.emi.emi.api.recipe.EmiRecipeCategory;
 import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
 import dev.emi.emi.api.widget.WidgetHolder;
-import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
 import net.firemuffin303.muffinsthaidelightfabric.client.sceens.MortarScreen;
 import net.firemuffin303.muffinsthaidelightfabric.common.recipe.mortar.MortarRecipe;
 import net.minecraft.resources.ResourceLocation;
@@ -15,6 +14,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class EMIMortarRecipe implements EmiRecipe {
     private final ResourceLocation id;
@@ -31,8 +32,6 @@ public class EMIMortarRecipe implements EmiRecipe {
         for(Ingredient ingredient:mortarRecipe.getIngredients()){
             list.add(EmiIngredient.of(ingredient));
         }
-        list.add(this.container);
-
         this.ingredients = list;
     }
 
@@ -48,7 +47,7 @@ public class EMIMortarRecipe implements EmiRecipe {
 
     @Override
     public List<EmiIngredient> getInputs() {
-        return this.ingredients;
+        return Stream.concat(this.ingredients.stream(),Stream.of(this.container)).collect(Collectors.toList());
     }
 
     @Override
