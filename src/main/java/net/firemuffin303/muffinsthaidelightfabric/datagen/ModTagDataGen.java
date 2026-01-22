@@ -71,10 +71,12 @@ public class ModTagDataGen {
                     .add(ModItems.DURIAN,ModItems.SMALL_DURIAN);
 
             getOrCreateTagBuilder(MANGO)
-                    .add(ModItems.MANGO,ModItems.MANGO_SLICE);
+                    .add(ModItems.MANGO,ModItems.MANGO_SLICE)
+                    .addOptional(new ResourceLocation("fishofthieves","mango"));
 
             getOrCreateTagBuilder(COCONUT)
-                    .add(ModItems.COCONUT,ModItems.STRIPPED_COCONUT,ModItems.COCONUT_SLICE);
+                    .add(ModItems.COCONUT,ModItems.STRIPPED_COCONUT,ModItems.COCONUT_SLICE)
+                    .addOptional(new ResourceLocation("fishofthieves","coconut"));
 
 
             getOrCreateTagBuilder(ModTags.FLOWER_CRAB_MEAT)
@@ -196,6 +198,17 @@ public class ModTagDataGen {
 
             getOrCreateTagBuilder(vectorwing.farmersdelight.common.tag.ModTags.WILD_CROPS_ITEM)
                     .add(ModItems.WILD_PEPPER_CROP,ModItems.WILD_BASIL,ModItems.WILD_HOLY_BASIL);
+
+
+            getOrCreateTagBuilder(PINEAPPLE).addOptional(
+                    new ResourceLocation("fishofthieves","crownless_pineapple")
+            ).addOptional(
+                    new ResourceLocation("fishofthieves","pineapple")
+            );
+
+            getOrCreateTagBuilder(BANANA).addOptional(
+                    new ResourceLocation("fishofthieves","banana")
+            );
         }
     }
 

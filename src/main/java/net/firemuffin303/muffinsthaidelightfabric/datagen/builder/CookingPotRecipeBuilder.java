@@ -3,6 +3,7 @@ package net.firemuffin303.muffinsthaidelightfabric.datagen.builder;
 import com.google.common.collect.Lists;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import net.fabricmc.fabric.api.resource.conditions.v1.ConditionJsonProvider;
 import net.fabricmc.fabric.api.resource.conditions.v1.ResourceConditions;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRewards;
@@ -39,7 +40,7 @@ public class CookingPotRecipeBuilder implements RecipeBuilder {
     private CookingPotRecipeBookTab cookingPotRecipeBookTab;
     private final Advancement.Builder advancement = Advancement.Builder.recipeAdvancement();
 
-    private final List<ResourceLocation> conditions = new ArrayList<>();
+    private final List<ConditionJsonProvider> conditions = new ArrayList<>();
 
     public CookingPotRecipeBuilder(ItemLike result,int count,float experience,int cookTime){
         this.result = result.asItem();
@@ -99,8 +100,8 @@ public class CookingPotRecipeBuilder implements RecipeBuilder {
         return this;
     }
 
-    public CookingPotRecipeBuilder conditions(ResourceLocation resourceLocation){
-        this.conditions.add(resourceLocation);
+    public CookingPotRecipeBuilder conditions(ConditionJsonProvider conditionJsonProvider){
+        this.conditions.add(conditionJsonProvider);
         return this;
     }
 
@@ -163,7 +164,7 @@ public class CookingPotRecipeBuilder implements RecipeBuilder {
         private final Advancement.Builder advancement;
         private final ResourceLocation advancementId;
 
-        private final List<ResourceLocation> conditions;
+        private final List<ConditionJsonProvider> conditions;
 
         public Result(ResourceLocation id,
                       String group,
@@ -176,7 +177,7 @@ public class CookingPotRecipeBuilder implements RecipeBuilder {
                       @Nullable CookingPotRecipeBookTab cookingPotRecipeBookTab,
                       Advancement.Builder advancement,
                       ResourceLocation advancementId,
-                      List<ResourceLocation> conditions
+                      List<ConditionJsonProvider> conditions
                       ){
             this.id = id;
             this.group = group;
@@ -225,13 +226,7 @@ public class CookingPotRecipeBuilder implements RecipeBuilder {
             }
 
             if(!this.conditions.isEmpty()){
-                JsonArray conditionsArray = new JsonArray();
-                for(ResourceLocation resourceLocation : this.conditions){
-                    JsonObject conditionContainer = new JsonObject();
-                    conditionContainer.addProperty("condition",resourceLocation.toString());
-                    conditionsArray.add(conditionContainer);
-                }
-                jsonObject.add("fabric:load_conditions",conditionsArray);
+                ConditionJsonProvider.write(jsonObject,this.conditions.toArray(new ConditionJsonProvider[0]));
             }
         }
 

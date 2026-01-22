@@ -24,14 +24,16 @@ import net.minecraft.world.level.block.LayeredCauldronBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 
 import static net.minecraft.core.cauldron.CauldronInteraction.*;
 
 public class ModCauldronInteraction {
     static Map<Item, CauldronInteraction> FERMENTED_FISH = CauldronInteraction.newInteractionMap();
 
-    static CauldronInteraction MAKE_FERMENTED_FISH = ((blockState, level, blockPos, player, interactionHand, itemStack) -> {
+    public static CauldronInteraction MAKE_FERMENTED_FISH = ((blockState, level, blockPos, player, interactionHand, itemStack) -> {
         if(!level.isClientSide) {
             if(!player.isCreative()){
                 itemStack.shrink(1);
@@ -58,10 +60,10 @@ public class ModCauldronInteraction {
     public static void init(){
         CauldronInteraction.addDefaultInteractions(FERMENTED_FISH);
 
-        WATER.put(Items.COD,MAKE_FERMENTED_FISH);
-        WATER.put(Items.SALMON,MAKE_FERMENTED_FISH);
-        WATER.put(Items.TROPICAL_FISH,MAKE_FERMENTED_FISH);
-        WATER.put(Items.PUFFERFISH,MAKE_FERMENTED_FISH);
+        //WATER.put(Items.COD,MAKE_FERMENTED_FISH);
+        //WATER.put(Items.SALMON,MAKE_FERMENTED_FISH);
+        //WATER.put(Items.TROPICAL_FISH,MAKE_FERMENTED_FISH);
+        //WATER.put(Items.PUFFERFISH,MAKE_FERMENTED_FISH);
         //WATER.put(vectorwing.farmersdelight.common.registry.ModItems.COD_SLICE.get(),MAKE_FERMENTED_FISH);
         //WATER.put(vectorwing.farmersdelight.common.registry.ModItems.SALMON_SLICE.get(),MAKE_FERMENTED_FISH);
 

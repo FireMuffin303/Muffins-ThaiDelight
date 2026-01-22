@@ -7,12 +7,10 @@ import net.firemuffin303.muffinsthaidelightfabric.client.renderer.integration.Mo
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModItems;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
-import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import vectorwing.farmersdelight.client.renderer.CuttingBoardRenderer;
 
-@Debug(export = true)
 @Mixin(CuttingBoardRenderer.class)
 public abstract class CuttingBoardRendererMixin {
 

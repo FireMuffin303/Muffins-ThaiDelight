@@ -32,11 +32,11 @@
     "emi": [
       "net.firemuffin303.muffinsthaidelightfabric.integration.emi.ThaiDelightEMI"
     ],
-    "modmenu": [
-      "net.firemuffin303.muffinsthaidelightfabric.integration.ThaiDelightModMenu"
-    ],
     "mm:early_risers": [
       "net.firemuffin303.muffinsthaidelightfabric.util.ModASMEarlyRiser"
+    ],
+    "modmenu": [
+      "net.firemuffin303.muffinsthaidelightfabric.integration.modmenu.ThaiDelightModMenu"
     ]
   },
   "mixins": [
@@ -46,7 +46,6 @@
     "fabricloader": ">=${loader_version}",
     "fabric": "*",
     "minecraft": "${minecraft_version}",
-    "farmersdelight": ">=1.20.1-2.0.13+refabricated",
-    "midnightlib": ">=1.4.1-fabric"
+    "farmersdelight": ">=1.20.1-2.0.13+refabricated"
   }
 }

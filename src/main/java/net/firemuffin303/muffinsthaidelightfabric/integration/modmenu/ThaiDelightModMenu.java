@@ -1,4 +1,4 @@
-package net.firemuffin303.muffinsthaidelightfabric.integration;
+package net.firemuffin303.muffinsthaidelightfabric.integration.modmenu;
 
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;

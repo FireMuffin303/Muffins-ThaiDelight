@@ -247,6 +247,22 @@ public class LangDataGen extends FabricLanguageProvider {
         translationBuilder.add("emi.category.muffins_thaidelight.mortar","Mortar");
         translationBuilder.add("emi.category.muffins_thaidelight.fermented_fish","Fermenting");
 
+        translationBuilder.add("muffins_thaidelight.midnightconfig.title","Muffin's Thai's Delight Config");
+        translationBuilder.add("muffins_thaidelight.midnightconfig.gameplay","Gameplay");
+        translationBuilder.add("muffins_thaidelight.midnightconfig.wanderingTraderShouldTradeTDItem","Wandering Traders Trades Thai's Delight Items");
+        translationBuilder.add("muffins_thaidelight.midnightconfig.wanderingTraderShouldTradeTDItem.tooltip","Require Game/Server Restart");
+        translationBuilder.add("muffins_thaidelight.midnightconfig.villagerShouldTradeTDItem","Villagers Trades Thai's Delight Items");
+        translationBuilder.add("muffins_thaidelight.midnightconfig.villagerShouldTradeTDItem.tooltip","Require Game/Server Restart");
+        translationBuilder.add("muffins_thaidelight.midnightconfig.worldGen","World Generation");
+        translationBuilder.add("muffins_thaidelight.midnightconfig.shouldThaiHouseSpawn","Thai House generates in Villages");
+        translationBuilder.add("muffins_thaidelight.midnightconfig.shouldThaiHouseSpawn.tooltip","Require Server Restart");
+        translationBuilder.add("muffins_thaidelight.midnightconfig.stinkyShouldTriggerNeutral","Stinky Effect should trigger Neutral Mobs");
+        translationBuilder.add("muffins_thaidelight.midnightconfig.fishofthieves","Fish Of Thieves Compatibility");
+        translationBuilder.add("muffins_thaidelight.midnightconfig.coconutTreeType","Coconut Tree Generation");
+        translationBuilder.add("muffins_thaidelight.midnightconfig.coconutTreeType.tooltip","Require Game/Server Restart");
+        translationBuilder.add("muffins_thaidelight.midnightconfig.mangoTreeType","Mango Tree Generation");
+        translationBuilder.add("muffins_thaidelight.midnightconfig.mangoTreeType.tooltip","Require Game/Server Restart");
+
         translationBuilder.add("muffins_thaidelight.midnightconfig.developer","------ Developer ------");
         translationBuilder.add("muffins_thaidelight.midnightconfig.firemuffin","FireMuffin303");
         translationBuilder.add("muffins_thaidelight.midnightconfig.concept_artist","------ Concept Artists ------");

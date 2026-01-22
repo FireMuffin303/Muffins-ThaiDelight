@@ -1,7 +1,10 @@
 {
   "fabric:load_conditions": [
     {
-      "condition": "muffins_thaidelight:has_banana"
+      "condition": "fabric:tags_populated",
+      "values": [
+        "muffins_thaidelight:banana"
+      ]
     }
   ],
   "type": "farmersdelight:cooking",

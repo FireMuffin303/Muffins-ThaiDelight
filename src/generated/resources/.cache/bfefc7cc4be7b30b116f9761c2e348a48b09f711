@@ -1,10 +1,11 @@
-// 1.20.1	2026-01-21T13:21:20.7229257	Muffin's Thai's Delight Refabricated/Tags for minecraft:item
+// 1.20.1	2026-01-22T16:20:52.682327	Muffin's Thai's Delight Refabricated/Tags for minecraft:item
 32b2e80c4f617f2c9d13775b6f03518a19e68ce6 data\crabbersdelight\tags\items\cooked_seafood.json
 de3c4dbc11c6afe12b3f3ad2ec4b0e47ddda1d4d data\muffins_thaidelight\tags\items\durian_logs.json
 e47099cc79d74a686639d32e7b8a96140ade72aa data\minecraft\tags\items\saplings.json
 ea245bcc88673ba87ae5700240886a1010cda139 data\muffins_thaidelight\tags\items\dragonfly_food.json
 87ef45be87411bf3880d6685b5d9f9942f5cfe8a data\alexsmobs\tags\items\insect_items.json
-fe736e8258c93d1406e1b16c2d8cbff84296c3be data\muffins_thaidelight\tags\items\mango.json
+9bab09d149225c8a2e6887a9a1bc333df850aaea data\muffins_thaidelight\tags\items\banana.json
+2df05a2602c5242638e4dafb94220ece2ed1e994 data\muffins_thaidelight\tags\items\mango.json
 973b7856466364aa110084974dd7dbc3236f4da5 data\muffins_thaidelight\tags\items\papaya_logs.json
 5dbe4ac6ac645c069c524832f9909774b22a80b0 data\muffins_thaidelight\tags\items\ripe_papaya.json
 dbd743d02ce42fc855d1ba0eae6172852983951e data\minecraft\tags\items\wooden_pressure_plates.json
@@ -19,7 +20,8 @@ d4ac26b152a836a75235e9807fa2c313f4452ca7 data\create\tags\items\upright_on_belt.
 da99dc8d812796943adb0b21e571878b1a541fd0 data\origins\tags\items\meat.json
 d45f8e77edd3c6d47aa78e691f604e8f91834423 data\muffins_thaidelight\tags\items\lime.json
 dae4834c95306bff8e56440a840b6eed065375c0 data\minecraft\tags\items\logs_that_burn.json
-69fd6e6ede277d4a493807b5863af22bc72bd008 data\muffins_thaidelight\tags\items\coconut.json
+39fc797588737a72ff7c10e895baa99cfbb9448b data\muffins_thaidelight\tags\items\coconut.json
+1ec4cb5ac3f5bd5aad5c89cdffc54ac2dd729b3c data\muffins_thaidelight\tags\items\pineapple.json
 d6f7a365d0c46f4e0e253d28e4fad8e61ba8f738 data\muffins_thaidelight\tags\items\durian.json
 b86b5ed44294037342281f19ad8b9335f128e089 data\muffins_thaidelight\tags\items\mango_logs.json
 8802cc3aafe6081a937869502b012eccb2a214ce data\muffins_thaidelight\tags\items\papaya.json

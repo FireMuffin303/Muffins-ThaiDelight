@@ -7,9 +7,10 @@ import eu.midnightdust.lib.config.MidnightConfig;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.registry.TillableBlockRegistry;
+import net.fabricmc.loader.api.FabricLoader;
 import net.firemuffin303.muffinsthaidelightfabric.common.entity.DragonflyEntity;
 import net.firemuffin303.muffinsthaidelightfabric.common.item.DragonflyBottleItem;
-import net.firemuffin303.muffinsthaidelightfabric.config.ThaiDelightConfig;
+import net.firemuffin303.muffinsthaidelightfabric.integration.midnightLib.ThaiDelightConfig;
 import net.firemuffin303.muffinsthaidelightfabric.registry.*;
 import net.firemuffin303.muffinsthaidelightfabric.util.CommonEvents;
 import net.minecraft.core.Registry;
@@ -27,6 +28,8 @@ import java.util.*;
 public class ThaiDelight implements ModInitializer {
     public static final Logger LOGGER = LogUtils.getLogger();
     public static final String MOD_ID = "muffins_thaidelight";
+    public static boolean IS_FOT_INSTALLED = false;
+
 
     public static final TerraformBoatType DURIAN = new TerraformBoatType.Builder()
             .item(ModItems.DURIAN_BOAT)
@@ -53,8 +56,10 @@ public class ThaiDelight implements ModInitializer {
             .build();
     @Override
     public void onInitialize() {
-        Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB,new ResourceLocation(MOD_ID,"main"),MOD_TAB);
         MidnightConfig.init(MOD_ID, ThaiDelightConfig.class);
+        IS_FOT_INSTALLED = FabricLoader.getInstance().isModLoaded("fishofthieves");
+        Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB,new ResourceLocation(MOD_ID,"main"),MOD_TAB);
+
 
         init();
         postInit();
@@ -101,6 +106,7 @@ public class ThaiDelight implements ModInitializer {
         PotionBrewing.addMix(ModMobEffects.STENCH_POTION, Items.GLOWSTONE_DUST,ModMobEffects.STRONG_STENCH_POTION);
 
         TillableBlockRegistry.register(Blocks.BAMBOO_SAPLING,useOnContext -> true,Blocks.AIR.defaultBlockState(),ModItems.BAMBOO_SHOOT);
+
     }
 
     private static void itemsGenerator(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output output){

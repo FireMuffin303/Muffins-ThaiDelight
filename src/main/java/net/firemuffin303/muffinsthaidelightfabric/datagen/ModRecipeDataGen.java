@@ -2,6 +2,7 @@ package net.firemuffin303.muffinsthaidelightfabric.datagen;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
+import net.fabricmc.fabric.api.resource.conditions.v1.DefaultResourceConditions;
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
 import net.firemuffin303.muffinsthaidelightfabric.common.recipe.mortar.MortarRecipeBookTab;
 import net.firemuffin303.muffinsthaidelightfabric.datagen.builder.CookingPotRecipeBuilder;
@@ -10,9 +11,10 @@ import net.firemuffin303.muffinsthaidelightfabric.datagen.builder.MortarRecipeBu
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModItems;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModTags;
-import net.firemuffin303.muffinsthaidelightfabric.util.CommonEvents;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.data.recipes.*;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -668,17 +670,18 @@ public class ModRecipeDataGen extends FabricRecipeProvider {
         CookingPotRecipeBuilder.cookingPot(ModItems.LARB_FEAST,1,200,0.35f)
                 .requires(ModTags.COMMON_COOKED_MEATS)
                 .requires(ModTags.COMMON_COOKED_MEATS)
-                .container(ModItems.PEPPER)
-                .container(Items.SUGAR)
-                .container(ModItems.FISH_SAUCE_BOTTLE)
-                .container(vectorwing.farmersdelight.common.registry.ModItems.ONION.get())
+                .requires(ModItems.PEPPER)
+                .requires(Items.SUGAR)
+                .requires(ModItems.FISH_SAUCE_BOTTLE)
+                .requires(vectorwing.farmersdelight.common.registry.ModItems.ONION.get())
+                .container(Items.BOWL)
                 .unlockedBy("has_pepper",RecipeProvider.has(ModItems.PEPPER))
                 .save(exporter,ThaiDelight.modid("cooking_pot/larb_feast"));
 
         CookingPotRecipeBuilder.cookingPot(ModItems.FISH_SAUCE_BOTTLE,1,100,0.35f)
-                .requires(ModTags.COMMON_FISHES)
+                .requires(ModTags.COMMON_RAW_FISHES)
                 .container(Items.GLASS_BOTTLE)
-                .unlockedBy("has_raw_fishes",RecipeProvider.has(ModTags.COMMON_FISHES))
+                .unlockedBy("has_raw_fishes",RecipeProvider.has(ModTags.COMMON_RAW_FISHES))
                 .save(exporter,ThaiDelight.modid("cooking_pot/fish_sauce_bottle"));
 
         CookingPotRecipeBuilder.cookingPot(ModItems.PHAT_KAPHRAO_FEAST,1)
@@ -741,6 +744,7 @@ public class ModRecipeDataGen extends FabricRecipeProvider {
                 .unlockedBy("has_egg",RecipeProvider.has(Items.EGG))
                 .save(exporter,ThaiDelight.modid("cooking_pot/basil_omelette_feast"));
 
+
         CookingPotRecipeBuilder.cookingPot(ModItems.PINEAPPLE_FRIED_RICE_FEAST,1)
                 .requires(ModTags.PINEAPPLE)
                 .requires(vectorwing.farmersdelight.common.registry.ModItems.RICE.get())
@@ -749,7 +753,7 @@ public class ModRecipeDataGen extends FabricRecipeProvider {
                 .requires(vectorwing.farmersdelight.common.registry.ModItems.ONION.get())
                 .container(Items.BOWL)
                 .recipeTab(CookingPotRecipeBookTab.MEALS)
-                .conditions(CommonEvents.HAS_PINEAPPLE)
+                .conditions(DefaultResourceConditions.tagsPopulated(ModTags.PINEAPPLE))
                 .unlockedBy("has_pineapple",RecipeProvider.has(ModTags.PINEAPPLE))
                 .save(exporter,ThaiDelight.modid("cooking_pot/pineapple_fried_rice_feast"));
 
@@ -771,7 +775,7 @@ public class ModRecipeDataGen extends FabricRecipeProvider {
                 .requires(Items.SUGAR)
                 .container(Items.BOWL)
                 .recipeTab(CookingPotRecipeBookTab.MEALS)
-                .conditions(CommonEvents.HAS_BANANA)
+                .conditions(DefaultResourceConditions.tagsPopulated(ModTags.BANANA))
                 .unlockedBy("has_banana",RecipeProvider.has(ModTags.BANANA))
                 .save(exporter,ThaiDelight.modid("cooking_pot/banana_in_coconut_milk"));
 

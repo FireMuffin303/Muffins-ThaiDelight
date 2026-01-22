@@ -7,7 +7,7 @@
   "experience": 0.35,
   "ingredients": [
     {
-      "tag": "c:raw_fishes"
+      "tag": "c:foods/raw_fishes"
     }
   ],
   "result": {

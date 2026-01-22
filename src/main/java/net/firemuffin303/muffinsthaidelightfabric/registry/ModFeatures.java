@@ -107,6 +107,9 @@ public class ModFeatures {
     public static final ResourceKey<PlacedFeature> TREES_MANGO = ResourceKey.create(Registries.PLACED_FEATURE,ThaiDelight.modid("trees_mango"));
     public static final ResourceKey<PlacedFeature> TREES_COCONUT = ResourceKey.create(Registries.PLACED_FEATURE,ThaiDelight.modid("trees_coconut"));
 
+    //---- FOT
+    public static final ResourceKey<PlacedFeature> PLACED_FOT_BANANA = ResourceKey.create(Registries.PLACED_FEATURE,ThaiDelight.modid("fot_banana"));
+
     public static void init(){}
 
     public static void bootstrapConfiguredFeature(BootstapContext<ConfiguredFeature<?, ?>> bootstapContext){
@@ -325,6 +328,7 @@ public class ModFeatures {
                 .add(BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(ModBlocks.PAPAYA_SAPLING.defaultBlockState(), BlockPos.ZERO)))
                 .add(BiomeFilter.biome())
                 .build()));
+
     }
 
     public static void dataGen(HolderLookup.Provider provider, FabricDynamicRegistryProvider.Entries entries){
@@ -365,6 +369,7 @@ public class ModFeatures {
         entries.add(provider.lookupOrThrow(Registries.PLACED_FEATURE),ModFeatures.TREES_MANGO);
         entries.add(provider.lookupOrThrow(Registries.PLACED_FEATURE),ModFeatures.TREES_COCONUT);
         entries.add(provider.lookupOrThrow(Registries.PLACED_FEATURE),ModFeatures.TREES_PAPAYA);
+
 
 
     }

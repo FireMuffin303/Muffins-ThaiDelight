@@ -63,5 +63,17 @@ public class ModTags {
     public static final TagKey<Item> COMMON_COOKED_MEATS =  TagKey.create(Registries.ITEM,new ResourceLocation("c","foods/cooked_meats"));
     public static final TagKey<Item> KNIVES = TagKey.create(Registries.ITEM,new ResourceLocation("c","tools/knives"));
     public static final TagKey<Item> COMMON_EGGS = TagKey.create(Registries.ITEM,new ResourceLocation("c","eggs"));
-    public static final TagKey<Item> COMMON_FISHES = TagKey.create(Registries.ITEM,new ResourceLocation("c","raw_fishes"));
+    public static final TagKey<Item> COMMON_RAW_FISHES = TagKey.create(Registries.ITEM,new ResourceLocation("c","foods/raw_fishes"));
+
+    //----- SereneSeason -----
+    public static final TagKey<Block> AUTUMN_CROPS = TagKey.create(Registries.BLOCK,new ResourceLocation("sereneseasons","autumn_crops"));
+    public static final TagKey<Block> SPRING_CROPS = TagKey.create(Registries.BLOCK,new ResourceLocation("sereneseasons","spring_crops"));
+    public static final TagKey<Block> SUMMER_CROPS = TagKey.create(Registries.BLOCK,new ResourceLocation("sereneseasons","summer_crops"));
+    public static final TagKey<Block> WINTER_CROPS = TagKey.create(Registries.BLOCK,new ResourceLocation("sereneseasons","winter_crops"));
+
+    public static final TagKey<Item> AUTUMN_CROPS_ITEM = TagKey.create(Registries.ITEM,new ResourceLocation("sereneseasons","autumn_crops"));
+    public static final TagKey<Item> SPRING_CROPS_ITEM = TagKey.create(Registries.ITEM,new ResourceLocation("sereneseasons","spring_crops"));
+    public static final TagKey<Item> SUMMER_CROPS_ITEM = TagKey.create(Registries.ITEM,new ResourceLocation("sereneseasons","summer_crops"));
+    public static final TagKey<Item> WINTER_CROPS_ITEM = TagKey.create(Registries.ITEM,new ResourceLocation("sereneseasons","winter_crops"));
+
 }

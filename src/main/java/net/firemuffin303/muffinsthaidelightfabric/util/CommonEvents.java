@@ -1,6 +1,7 @@
 package net.firemuffin303.muffinsthaidelightfabric.util;
 
 import com.mojang.datafixers.util.Pair;
+import com.mojang.logging.LogUtils;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
@@ -14,6 +15,7 @@ import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.fabricmc.fabric.api.resource.conditions.v1.ResourceConditions;
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
+import net.firemuffin303.muffinsthaidelightfabric.integration.midnightLib.ThaiDelightConfig;
 import net.firemuffin303.muffinsthaidelightfabric.network.packet.ModLevelEventPacket;
 import net.firemuffin303.muffinsthaidelightfabric.common.entity.DragonflyEntity;
 import net.firemuffin303.muffinsthaidelightfabric.common.entity.FlowerCrabEntity;
@@ -127,6 +129,13 @@ public class CommonEvents {
     }
 
     public static void worldGeneration(){
+        boolean shouldCoconutSpawn = true;
+        boolean shouldMangoSpawn = true;
+        if(ThaiDelight.IS_FOT_INSTALLED){
+            shouldCoconutSpawn = ThaiDelightConfig.coconutTreeType != ThaiDelightConfig.TreeType.FISH_OF_THIEVES;
+            shouldMangoSpawn = ThaiDelightConfig.mangoTreeType != ThaiDelightConfig.TreeType.FISH_OF_THIEVES;
+        }
+
         BiomeModifications.addFeature((context) ->{
             return BiomeSelectors.tag(ModTags.LIME_TREE_BIOMES).test(context);
         }, GenerationStep.Decoration.VEGETAL_DECORATION, ModFeatures.PATCH_LIME_BUSH);
@@ -145,11 +154,17 @@ public class CommonEvents {
         BiomeModifications.addFeature(context -> BiomeSelectors.includeByKey(Biomes.SPARSE_JUNGLE).test(context),
                 GenerationStep.Decoration.VEGETAL_DECORATION,ModFeatures.TREES_DURIAN_SPARSE_JUNGLE);
 
-        BiomeModifications.addFeature(context -> BiomeSelectors.tag(ModTags.MANGO_TREE_BIOMES).test(context),
-                GenerationStep.Decoration.VEGETAL_DECORATION,ModFeatures.TREES_MANGO);
+        
+        if(shouldMangoSpawn){
+            BiomeModifications.addFeature(context -> BiomeSelectors.tag(ModTags.MANGO_TREE_BIOMES).test(context),
+                    GenerationStep.Decoration.VEGETAL_DECORATION,ModFeatures.TREES_MANGO);
+        }
 
-        BiomeModifications.addFeature(context -> BiomeSelectors.tag(ModTags.COCONUT_TREE_BIOMES).test(context),
-                GenerationStep.Decoration.VEGETAL_DECORATION,ModFeatures.TREES_COCONUT);
+        if(shouldCoconutSpawn){
+            BiomeModifications.addFeature(context -> BiomeSelectors.tag(ModTags.COCONUT_TREE_BIOMES).test(context),
+                    GenerationStep.Decoration.VEGETAL_DECORATION,ModFeatures.TREES_COCONUT);
+        }
+
 
         BiomeModifications.addFeature(context -> BiomeSelectors.tag(ModTags.WILD_HOLY_BASIL_BIOMES).test(context),
                 GenerationStep.Decoration.VEGETAL_DECORATION,ModFeatures.PATCH_WILD_HOLY_BASIL);
@@ -160,19 +175,31 @@ public class CommonEvents {
         BiomeModifications.addFeature(context -> BiomeSelectors.tag(ModTags.WILD_ALL_BASIL_BIOMES).test(context),
                 GenerationStep.Decoration.VEGETAL_DECORATION,ModFeatures.PATCH_WILD_ALL_BASIL);
 
+
         BiomeModifications.addFeature(context -> BiomeSelectors.tag(ModTags.BUTTERFLY_PEA_BIOMES).test(context),
                 GenerationStep.Decoration.VEGETAL_DECORATION,ModFeatures.PATCH_BUTTERFLY_PEA
         );
 
+        if(ThaiDelight.IS_FOT_INSTALLED){
+            if(ThaiDelightConfig.mangoTreeType == ThaiDelightConfig.TreeType.THAI_DELIGHT){
+                BiomeModifications.addFeature(context -> BiomeSelectors.includeByKey(Biomes.SPARSE_JUNGLE).test(context),
+                        GenerationStep.Decoration.VEGETAL_DECORATION,ModFeatures.PLACED_FOT_BANANA);
+            }
+        }
+
 
         ServerLifecycleEvents.SERVER_STARTING.register(minecraftServer -> {
-            CommonEvents.addToStructurePool(minecraftServer,
-                    new ResourceLocation("minecraft","village/plains/houses"),
-                    ThaiDelight.modid("village/plains/houses/small_thai_house_1"),2);
+            if(ThaiDelightConfig.shouldThaiHouseSpawn){
+                CommonEvents.addToStructurePool(minecraftServer,
+                        new ResourceLocation("minecraft","village/plains/houses"),
+                        ThaiDelight.modid("village/plains/houses/small_thai_house_1"),2);
 
-            CommonEvents.addToStructurePool(minecraftServer,
-                    new ResourceLocation("minecraft","village/savanna/houses"),
-                    ThaiDelight.modid("village/savanna/houses/savanna_small_thai_house_1"),2);
+                CommonEvents.addToStructurePool(minecraftServer,
+                        new ResourceLocation("minecraft","village/savanna/houses"),
+                        ThaiDelight.modid("village/savanna/houses/savanna_small_thai_house_1"),2);
+            }
+
+
 
             if(minecraftServer.isDedicatedServer()){
                 Optional<BlockEntityType<?>> blockEntityTypeOptional = BuiltInRegistries.BLOCK_ENTITY_TYPE.getOptional(new ResourceLocation("farmersdelight","cabinet"));
@@ -249,18 +276,23 @@ public class CommonEvents {
     }
 
     public static void addVillagersTrades(){
-        ModVillagerTrades.trades().forEach(modVillagerTrade -> {
-            TradeOfferHelper.registerVillagerOffers(modVillagerTrade.villagerProfession(), modVillagerTrade.level(), (factories) ->{
-                factories.add((entity, randomSource) -> modVillagerTrade.merchantOffer());
+        if(ThaiDelightConfig.villagerShouldTradeTDItem){
+            ModVillagerTrades.trades().forEach(modVillagerTrade -> {
+                TradeOfferHelper.registerVillagerOffers(modVillagerTrade.villagerProfession(), modVillagerTrade.level(), (factories) ->{
+                    factories.add((entity, randomSource) -> modVillagerTrade.merchantOffer());
+                });
             });
-        });
+        }
 
 
-        TradeOfferHelper.registerWanderingTraderOffers(1, (factories) -> {
-            ModVillagerTrades.wanderTrade().forEach(integerMerchantOfferPair -> {
-                factories.add((entity, randomSource) -> integerMerchantOfferPair);
+        if(ThaiDelightConfig.wanderingTraderShouldTradeTDItem){
+            TradeOfferHelper.registerWanderingTraderOffers(1, (factories) -> {
+                ModVillagerTrades.wanderTrade().forEach(integerMerchantOfferPair -> {
+                    factories.add((entity, randomSource) -> integerMerchantOfferPair);
+                });
             });
-        });
+        }
+
     }
 
     public static void addToStructurePool(MinecraftServer server, ResourceLocation poolIdentifier, ResourceLocation nbtIdentifier, int weight) {
@@ -437,8 +469,9 @@ public class CommonEvents {
     }
 
     public static void setResourceConditions(){
-        ResourceConditions.register(HAS_PINEAPPLE, jsonObject -> BuiltInRegistries.ITEM.stream().anyMatch(item -> item.builtInRegistryHolder().is(ModTags.PINEAPPLE)));
-        ResourceConditions.register(HAS_BANANA,jsonObject -> BuiltInRegistries.ITEM.stream().anyMatch(item -> item.builtInRegistryHolder().is(ModTags.BANANA)));
+//        ResourceConditions.register(HAS_PINEAPPLE, jsonObject -> BuiltInRegistries.ITEM.stream().anyMatch(item -> item.builtInRegistryHolder().is(ModTags.PINEAPPLE)));
+//        ResourceConditions.register(HAS_BANANA,jsonObject -> BuiltInRegistries.ITEM.stream().anyMatch(item -> item.builtInRegistryHolder().is(ModTags.BANANA)));
+
     }
 
     public static void playDurianCatchingSound(ServerLevel serverLevel, Vec3 vec3,BlockPos blockPos){
