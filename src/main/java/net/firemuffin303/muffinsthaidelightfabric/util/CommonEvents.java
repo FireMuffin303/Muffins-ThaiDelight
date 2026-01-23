@@ -133,7 +133,7 @@ public class CommonEvents {
         boolean shouldMangoSpawn = true;
         if(ThaiDelight.IS_FOT_INSTALLED){
             shouldCoconutSpawn = ThaiDelightConfig.coconutTreeType != ThaiDelightConfig.TreeType.FISH_OF_THIEVES;
-            shouldMangoSpawn = ThaiDelightConfig.mangoTreeType != ThaiDelightConfig.TreeType.FISH_OF_THIEVES;
+            shouldMangoSpawn = ThaiDelightConfig.shouldMangoTreeSpawn;
         }
 
         BiomeModifications.addFeature((context) ->{
@@ -179,14 +179,6 @@ public class CommonEvents {
         BiomeModifications.addFeature(context -> BiomeSelectors.tag(ModTags.BUTTERFLY_PEA_BIOMES).test(context),
                 GenerationStep.Decoration.VEGETAL_DECORATION,ModFeatures.PATCH_BUTTERFLY_PEA
         );
-
-        if(ThaiDelight.IS_FOT_INSTALLED){
-            if(ThaiDelightConfig.mangoTreeType == ThaiDelightConfig.TreeType.THAI_DELIGHT){
-                BiomeModifications.addFeature(context -> BiomeSelectors.includeByKey(Biomes.SPARSE_JUNGLE).test(context),
-                        GenerationStep.Decoration.VEGETAL_DECORATION,ModFeatures.PLACED_FOT_BANANA);
-            }
-        }
-
 
         ServerLifecycleEvents.SERVER_STARTING.register(minecraftServer -> {
             if(ThaiDelightConfig.shouldThaiHouseSpawn){

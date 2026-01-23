@@ -1,5 +1,6 @@
 package net.firemuffin303.muffinsthaidelightfabric.common.block.coconut;
 
+import com.mojang.logging.LogUtils;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModItems;
 import net.minecraft.core.BlockPos;
@@ -99,7 +100,7 @@ public class BuddingCoconutLeafBlock extends Block implements SimpleWaterloggedB
         Direction direction = blockState.getValue(FACING).getOpposite();
         BlockPos blockPos2 = blockPos.relative(direction);
         BlockState blockState2 = levelReader.getBlockState(blockPos2);
-        return blockState2.isFaceSturdy(levelReader, blockPos2, direction) || ( blockState2.is(ModBlocks.COCONUT_LEAF) || blockState2.is(ModBlocks.BUDDING_COCONUT_LEAF) );
+        return blockState2.isFaceSturdy(levelReader, blockPos2, direction);
     }
 
     @Override
@@ -108,7 +109,18 @@ public class BuddingCoconutLeafBlock extends Block implements SimpleWaterloggedB
             levelAccessor.scheduleTick(blockPos, Fluids.WATER, Fluids.WATER.getTickDelay(levelAccessor));
         }
 
+        if ((direction == blockState.getValue(FACING) || direction == blockState.getValue(FACING).getOpposite() && !blockState.canSurvive(levelAccessor, blockPos))) {
+            levelAccessor.scheduleTick(blockPos, this, 1);
+        }
+
         return super.updateShape(blockState, direction, blockState2, levelAccessor, blockPos, blockPos2);
+    }
+
+    @Override
+    public void tick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource) {
+        if (!blockState.canSurvive(serverLevel, blockPos)) {
+            serverLevel.destroyBlock(blockPos, true);
+        }
     }
 
     @Override

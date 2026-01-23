@@ -1,7 +1,6 @@
 package net.firemuffin303.muffinsthaidelightfabric.registry;
 
 import com.google.common.collect.ImmutableList;
-import com.terraformersmc.modmenu.util.mod.Mod;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.DurianFlowerBlock;
@@ -17,27 +16,22 @@ import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.ClampedInt;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.MultifaceBlock;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.MultifaceGrowthFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.*;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
-import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProviderType;
 import net.minecraft.world.level.levelgen.feature.stateproviders.RandomizedIntStateProvider;
 import net.minecraft.world.level.levelgen.feature.treedecorators.AttachedToLeavesDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.BeehiveDecorator;
@@ -106,9 +100,6 @@ public class ModFeatures {
     public static final ResourceKey<PlacedFeature> TREES_DURIAN_SPARSE_JUNGLE = ResourceKey.create(Registries.PLACED_FEATURE,ThaiDelight.modid("trees_durian_sparse"));
     public static final ResourceKey<PlacedFeature> TREES_MANGO = ResourceKey.create(Registries.PLACED_FEATURE,ThaiDelight.modid("trees_mango"));
     public static final ResourceKey<PlacedFeature> TREES_COCONUT = ResourceKey.create(Registries.PLACED_FEATURE,ThaiDelight.modid("trees_coconut"));
-
-    //---- FOT
-    public static final ResourceKey<PlacedFeature> PLACED_FOT_BANANA = ResourceKey.create(Registries.PLACED_FEATURE,ThaiDelight.modid("fot_banana"));
 
     public static void init(){}
 
@@ -408,7 +399,7 @@ public class ModFeatures {
 
         return new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBlocks.DURIAN_LOG),
-                new DurianTreeTrunkPlacer(baseHeight,heightRandA,0, UniformInt.of(-4,-2), UniformInt.of(2,4),UniformInt.of(2,4)),
+                new DurianTreeTrunkPlacer(baseHeight,heightRandA,0, UniformInt.of(-4,-2), UniformInt.of(2,3),UniformInt.of(2,4)),
                 BlockStateProvider.simple(ModBlocks.DURIAN_LEAVES),
                 new DurianTreeFoliagePlacer(ConstantInt.of(2),ConstantInt.of(0),0.4f,0.12f),
                 new TwoLayersFeatureSize(1,0,1)
@@ -425,7 +416,7 @@ public class ModFeatures {
 
         return new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBlocks.MANGO_LOG),
-                new StraightTrunkPlacer(7,1,0),
+                new StraightTrunkPlacer(9,3,0),
                 BlockStateProvider.simple(ModBlocks.MANGO_LEAVES),
                 new HangingBlobFoliagePlacer(ConstantInt.of(2),ConstantInt.of(0),3,0.35f,0.1f),
                 new TwoLayersFeatureSize(1,0,1)
@@ -443,7 +434,7 @@ public class ModFeatures {
 
         return new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBlocks.MANGO_LOG),
-                new FancyTrunkPlacer(9, 11, 0),
+                new FancyTrunkPlacer(8, 10, 0),
                 BlockStateProvider.simple(ModBlocks.MANGO_LEAVES),
                 new HangingBlobFoliagePlacer(ConstantInt.of(3),ConstantInt.of(2),3,0.15f,0.1f),
                 new TwoLayersFeatureSize(0, 0, 0, OptionalInt.of(4)))

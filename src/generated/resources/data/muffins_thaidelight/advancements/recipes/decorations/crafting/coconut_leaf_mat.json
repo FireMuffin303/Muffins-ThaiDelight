@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_coconut_leaf_block": {
+    "has_coconut_leaf": {
       "conditions": {
         "items": [
           {
             "items": [
-              "muffins_thaidelight:coconut_leaf_block"
+              "muffins_thaidelight:coconut_leaf"
             ]
           }
         ]
@@ -22,7 +22,7 @@
   },
   "requirements": [
     [
-      "has_coconut_leaf_block",
+      "has_coconut_leaf",
       "has_the_recipe"
     ]
   ],

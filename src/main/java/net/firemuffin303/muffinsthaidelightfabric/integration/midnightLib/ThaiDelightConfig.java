@@ -32,7 +32,7 @@ public class ThaiDelightConfig extends MidnightConfig {
 
     @Condition(requiredModId = FISH_OF_THIEVES)
     @Entry(category = GAMEPLAY)
-    public static TreeType mangoTreeType = TreeType.BOTH;
+    public static boolean shouldMangoTreeSpawn = true;
 
 
     public static enum TreeType{

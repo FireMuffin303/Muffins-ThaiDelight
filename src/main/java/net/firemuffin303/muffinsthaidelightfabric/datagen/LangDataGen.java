@@ -249,19 +249,23 @@ public class LangDataGen extends FabricLanguageProvider {
 
         translationBuilder.add("muffins_thaidelight.midnightconfig.title","Muffin's Thai's Delight Config");
         translationBuilder.add("muffins_thaidelight.midnightconfig.gameplay","Gameplay");
-        translationBuilder.add("muffins_thaidelight.midnightconfig.wanderingTraderShouldTradeTDItem","Wandering Traders Trades Thai's Delight Items");
+        translationBuilder.add("muffins_thaidelight.midnightconfig.wanderingTraderShouldTradeTDItem","Enable Wandering Traders Trades Thai's Delight Items");
         translationBuilder.add("muffins_thaidelight.midnightconfig.wanderingTraderShouldTradeTDItem.tooltip","Require Game/Server Restart");
-        translationBuilder.add("muffins_thaidelight.midnightconfig.villagerShouldTradeTDItem","Villagers Trades Thai's Delight Items");
+        translationBuilder.add("muffins_thaidelight.midnightconfig.villagerShouldTradeTDItem","Enable Villagers Trades Thai's Delight Items");
         translationBuilder.add("muffins_thaidelight.midnightconfig.villagerShouldTradeTDItem.tooltip","Require Game/Server Restart");
         translationBuilder.add("muffins_thaidelight.midnightconfig.worldGen","World Generation");
-        translationBuilder.add("muffins_thaidelight.midnightconfig.shouldThaiHouseSpawn","Thai House generates in Villages");
+        translationBuilder.add("muffins_thaidelight.midnightconfig.shouldThaiHouseSpawn","Enable Thai House generates in Villages");
         translationBuilder.add("muffins_thaidelight.midnightconfig.shouldThaiHouseSpawn.tooltip","Require Server Restart");
         translationBuilder.add("muffins_thaidelight.midnightconfig.stinkyShouldTriggerNeutral","Stinky Effect should trigger Neutral Mobs");
         translationBuilder.add("muffins_thaidelight.midnightconfig.fishofthieves","Fish Of Thieves Compatibility");
         translationBuilder.add("muffins_thaidelight.midnightconfig.coconutTreeType","Coconut Tree Generation");
         translationBuilder.add("muffins_thaidelight.midnightconfig.coconutTreeType.tooltip","Require Game/Server Restart");
-        translationBuilder.add("muffins_thaidelight.midnightconfig.mangoTreeType","Mango Tree Generation");
-        translationBuilder.add("muffins_thaidelight.midnightconfig.mangoTreeType.tooltip","Require Game/Server Restart");
+        translationBuilder.add("muffins_thaidelight.midnightconfig.shouldMangoTreeSpawn","Enable Thai's Delight Mango Tree Generation");
+        translationBuilder.add("muffins_thaidelight.midnightconfig.shouldMangoTreeSpawn.tooltip","Require Game/Server Restart");
+
+        translationBuilder.add("muffins_thaidelight.midnightconfig.enum.TreeType.BOTH","Thai's Delight & Fish of Thieves");
+        translationBuilder.add("muffins_thaidelight.midnightconfig.enum.TreeType.THAI_DELIGHT","Thai's Delight");
+        translationBuilder.add("muffins_thaidelight.midnightconfig.enum.TreeType.FISH_OF_THIEVES","Fish of Thieves");
 
         translationBuilder.add("muffins_thaidelight.midnightconfig.developer","------ Developer ------");
         translationBuilder.add("muffins_thaidelight.midnightconfig.firemuffin","FireMuffin303");
@@ -527,6 +531,23 @@ public class LangDataGen extends FabricLanguageProvider {
             translationBuilder.add("muffins_thaidelight.jei.fermented_fish.cauldron3","จนกว่าจะหมักเสร็จ.");
             translationBuilder.add("emi.category.muffins_thaidelight.mortar","ครก");
             translationBuilder.add("emi.category.muffins_thaidelight.fermented_fish","การหมัก");
+
+            translationBuilder.add("muffins_thaidelight.midnightconfig.title","Muffin's Thai's Delight Config");
+            translationBuilder.add("muffins_thaidelight.midnightconfig.gameplay","เกมเพลย์");
+            translationBuilder.add("muffins_thaidelight.midnightconfig.wanderingTraderShouldTradeTDItem","อนุญาตให้พ่อค้าเร่ร่อนขายของ Thai's Delight");
+            translationBuilder.add("muffins_thaidelight.midnightconfig.wanderingTraderShouldTradeTDItem.tooltip","จำเป็นต้องเริ่มเกม/เซิฟเวอร์ใหม่เพื่อเห็นผล");
+            translationBuilder.add("muffins_thaidelight.midnightconfig.villagerShouldTradeTDItem","อนุญาตให้ชาวบ้านขายของ Thai's Delight");
+            translationBuilder.add("muffins_thaidelight.midnightconfig.villagerShouldTradeTDItem.tooltip","จำเป็นต้องเริ่มเกม/เซิฟเวอร์ใหม่เพื่อเห็นผล");
+            translationBuilder.add("muffins_thaidelight.midnightconfig.worldGen","การเกิดโลก");
+            translationBuilder.add("muffins_thaidelight.midnightconfig.shouldThaiHouseSpawn","อนุญาตให้บ้านไทยเกิดในหมู่บ้าน");
+            translationBuilder.add("muffins_thaidelight.midnightconfig.shouldThaiHouseSpawn.tooltip","จำเป็นต้องเริ่มเซิฟเวอร์ใหม่เพื่อเห็นผล");
+            translationBuilder.add("muffins_thaidelight.midnightconfig.stinkyShouldTriggerNeutral","เอฟเฟคเหม็นควรให้ม็อบเป็นกลางโกรธ");
+            translationBuilder.add("muffins_thaidelight.midnightconfig.fishofthieves","Fish Of Thieves Compatibility");
+            translationBuilder.add("muffins_thaidelight.midnightconfig.coconutTreeType","การเกิดต้นมะพร้าว");
+            translationBuilder.add("muffins_thaidelight.midnightconfig.coconutTreeType.tooltip","จำเป็นต้องเริ่มเกม/เซิฟเวอร์ใหม่เพื่อเห็นผล");
+            translationBuilder.add("muffins_thaidelight.midnightconfig.shouldMangoTreeSpawn","อนุญาตให้ต้นมะม่วงของ Thai's Delight เกิด");
+            translationBuilder.add("muffins_thaidelight.midnightconfig.shouldMangoTreeSpawn.tooltip","จำเป็นต้องเริ่มเกม/เซิฟเวอร์ใหม่เพื่อเห็นผล");
+
 
             translationBuilder.add("muffins_thaidelight.midnightconfig.developer","------ ผู้พัฒนา ------");
             translationBuilder.add("muffins_thaidelight.midnightconfig.firemuffin","FireMuffin303");

@@ -116,9 +116,9 @@ public class ModRecipeDataGen extends FabricRecipeProvider {
         bigPackingCraft(ModItems.COCONUT_LEAF_BLOCK,1,ModItems.COCONUT_LEAF,exporter);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS,ModItems.COCONUT_LEAF_MAT,3)
-                .define('L', ModItems.COCONUT_LEAF_BLOCK)
+                .define('L', ModItems.COCONUT_LEAF)
                 .pattern("LL")
-                .unlockedBy(getHasName(ModItems.COCONUT_LEAF_BLOCK),has(ModItems.COCONUT_LEAF_BLOCK))
+                .unlockedBy(getHasName(ModItems.COCONUT_LEAF),has(ModItems.COCONUT_LEAF))
                 .save(exporter,ThaiDelight.modid("crafting/"+getItemName(ModItems.COCONUT_LEAF_MAT)));
 
         craftWoodFamily(
@@ -499,12 +499,12 @@ public class ModRecipeDataGen extends FabricRecipeProvider {
                 .requires(Items.BONE_MEAL,1)
                 .unlockedBy(getHasName(Items.BONE_MEAL),has(Items.BONE_MEAL))
                 .group("white_dye")
-                .save(exporter,ThaiDelight.modid("mortar/"+getItemName(Items.WHITE_CARPET)+"_by_bone_meal"));
+                .save(exporter,ThaiDelight.modid("mortar/"+getItemName(Items.WHITE_DYE)+"_by_bone_meal"));
 
         MortarRecipeBuilder.mortar(Items.WHITE_DYE,2).requires(Items.LILY_OF_THE_VALLEY,1)
                 .unlockedBy(getHasName(Items.LILY_OF_THE_VALLEY),has(Items.LILY_OF_THE_VALLEY))
                 .group("white_dye")
-                .save(exporter,ThaiDelight.modid("mortar/"+getItemName(Items.WHITE_CARPET)+"_by_lily_of_the_valley"));
+                .save(exporter,ThaiDelight.modid("mortar/"+getItemName(Items.WHITE_DYE)+"_by_lily_of_the_valley"));
 
         MortarRecipeBuilder.mortar(Items.LIGHT_GRAY_DYE,2)
                 .requires(Items.OXEYE_DAISY,1)

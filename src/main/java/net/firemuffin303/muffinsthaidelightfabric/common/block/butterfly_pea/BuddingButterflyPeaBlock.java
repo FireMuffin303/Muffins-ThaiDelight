@@ -1,15 +1,12 @@
 package net.firemuffin303.muffinsthaidelightfabric.common.block.butterfly_pea;
 
-import com.mojang.logging.LogUtils;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -19,7 +16,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import vectorwing.farmersdelight.common.block.BuddingBushBlock;
-import vectorwing.farmersdelight.common.block.TomatoVineBlock;
+
 public class BuddingButterflyPeaBlock extends BuddingBushBlock implements BonemealableBlock {
 
     public static final IntegerProperty BUDDING_AGE = BlockStateProperties.AGE_2;

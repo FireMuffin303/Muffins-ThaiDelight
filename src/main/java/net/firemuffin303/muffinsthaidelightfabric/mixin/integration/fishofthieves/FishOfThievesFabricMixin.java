@@ -26,16 +26,4 @@ public abstract class FishOfThievesFabricMixin {
         }
         return true;
     }
-
-    @WrapWithCondition(method = "onInitialize",at = @At(value = "INVOKE",
-            target = "Lnet/fabricmc/fabric/api/biome/v1/BiomeModifications;addFeature(Ljava/util/function/Predicate;Lnet/minecraft/world/level/levelgen/GenerationStep$Decoration;Lnet/minecraft/resources/ResourceKey;)V",
-            ordinal = 3
-    ))
-    public boolean muffins$preventMangoSpawn(Predicate<BiomeSelectionContext> biomeSelector, GenerationStep.Decoration step, ResourceKey<PlacedFeature> placedFeatureRegistryKey){
-        if(ThaiDelightConfig.mangoTreeType == ThaiDelightConfig.TreeType.THAI_DELIGHT){
-            return false;
-        }
-
-        return true;
-    }
 }

@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "muffins_thaidelight:mortar/white_carpet_by_lily_of_the_valley"
+        "recipe": "muffins_thaidelight:mortar/white_dye_by_lily_of_the_valley"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "muffins_thaidelight:mortar/white_carpet_by_lily_of_the_valley"
+      "muffins_thaidelight:mortar/white_dye_by_lily_of_the_valley"
     ]
   },
   "sends_telemetry_event": false

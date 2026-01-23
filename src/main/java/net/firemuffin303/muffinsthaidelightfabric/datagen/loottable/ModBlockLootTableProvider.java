@@ -79,18 +79,20 @@ public class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
         this.createSimpleLoot(ModBlocks.BAMBOO_SHOOT_CRATE);
         this.createSimpleLoot(ModBlocks.BUTTERFLY_PEA_CRATE);
 
-        this.add(ModBlocks.LIME_PLANT,this.applyExplosionDecay(ModBlocks.LIME_SAPLING,
+        this.add(ModBlocks.LIME_PLANT,block ->  this.applyExplosionDecay(ModBlocks.LIME_SAPLING,
                         LootTable.lootTable()
                                 .withPool(LootPool.lootPool()
-                                        .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.LIME_PLANT)
+                                        .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
                                                 .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(LimePlantBlock.HALF,DoubleBlockHalf.LOWER))
                                         )
                                         .add(LootItem.lootTableItem(ModItems.LIME_SAPLING))
                                 )
                                 .withPool(LootPool.lootPool()
-                                        .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.LIME_PLANT)
-                                                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(LimePlantBlock.AGE,2))
-                                                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(LimePlantBlock.HALF, DoubleBlockHalf.LOWER))
+                                        .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
+                                                .setProperties(StatePropertiesPredicate.Builder.properties()
+                                                        .hasProperty(LimePlantBlock.AGE,2)
+                                                        .hasProperty(LimePlantBlock.HALF, DoubleBlockHalf.LOWER)
+                                                )
                                         )
                                         .add(LootItem.lootTableItem(ModItems.LIME)
                                                 .apply(ApplyBonusCount.addBonusBinomialDistributionCount(Enchantments.BLOCK_FORTUNE,0.5714286F, 3))
@@ -125,45 +127,43 @@ public class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
         this.createSimpleLoot(ModBlocks.DURIAN_SAPLING);
         this.add(ModBlocks.DURIAN_LEAVES,block -> this.createLeavesDrops(block,ModBlocks.DURIAN_SAPLING,NORMAL_LEAVES_SAPLING_CHANCES));
         this.dropSelf(ModBlocks.DURIAN_FLOWER);
-        this.add(ModBlocks.HANGING_DURIAN, block ->
-                LootTable.lootTable()
-                        .withPool(
-                                LootPool.lootPool().setRolls(ConstantValue.exactly(1.0f))
-                                        .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.HANGING_DURIAN)
-                                                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(HangingDurianBlock.AGE,0))
-                                        )
-                                        .add(LootItem.lootTableItem(ModBlocks.SMALL_DURIAN_BLOCK)
-                                                .when(VanillaBlockLoot.HAS_SILK_TOUCH)
-                                                .otherwise(this.applyExplosionDecay(block,
-                                                        LootItem.lootTableItem(ModItems.DURIAN_PULP)
-                                                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))
-                                                                .apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE))
-                                                                .apply(LimitCount.limitCount(IntRange.upperBound(2)))
-                                                ))
-                                        )
-                        ).withPool(
-                                LootPool.lootPool().setRolls(ConstantValue.exactly(1.0f))
-                                        .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.HANGING_DURIAN)
-                                                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(HangingDurianBlock.AGE,1))
-                                        )
-                                        .add(LootItem.lootTableItem(ModBlocks.DURIAN_BLOCK)
-                                                .when(VanillaBlockLoot.HAS_SILK_TOUCH)
-                                                .otherwise(this.applyExplosionDecay(block,
-                                                        LootItem.lootTableItem(ModItems.DURIAN_PULP)
-                                                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(2,3)))
-                                                                .apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE))
-                                                                .apply(LimitCount.limitCount(IntRange.upperBound(4)))
-                                                )))
+        this.add(ModBlocks.HANGING_DURIAN, block -> LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0f))
+                        .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
+                                .setProperties(StatePropertiesPredicate.Builder.properties()
+                                        .hasProperty(HangingDurianBlock.AGE,0)
+                                ))
+                        .add(LootItem.lootTableItem(ModItems.SMALL_DURIAN)
+                                .when(VanillaBlockLoot.HAS_SILK_TOUCH)
+                                .otherwise(this.applyExplosionDecay(block,LootItem.lootTableItem(ModItems.DURIAN_PULP)))
                         )
+                )
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0f))
+                        .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
+                                .setProperties(StatePropertiesPredicate.Builder.properties()
+                                        .hasProperty(HangingDurianBlock.AGE,1)
+                                )
+                        )
+                        .add(LootItem.lootTableItem(ModItems.DURIAN)
+                                .when(VanillaBlockLoot.HAS_SILK_TOUCH)
+                                .otherwise(this.applyExplosionDecay(block,
+                                        LootItem.lootTableItem(ModItems.DURIAN_PULP)
+                                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(2,3)))
+                                                .apply(ApplyBonusCount.addBonusBinomialDistributionCount(Enchantments.BLOCK_FORTUNE, 0.5714286F, 2))
+                                ))
+                        )
+                )
+
         );
 
         this.add(ModBlocks.SMALL_DURIAN_BLOCK,block ->
                 LootTable.lootTable().withPool(
                         LootPool.lootPool().setRolls(ConstantValue.exactly(1.0f))
-                                .when(VanillaBlockLoot.HAS_SILK_TOUCH)
                                 .add(LootItem.lootTableItem(block)
+                                        .when(VanillaBlockLoot.HAS_SILK_TOUCH)
                                         .apply(List.of(2,3),
                                                 integer -> SetItemCountFunction.setCount(ConstantValue.exactly(integer))
+
                                                         .when(
                                                                 LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
                                                                         .setProperties(StatePropertiesPredicate.Builder.properties()

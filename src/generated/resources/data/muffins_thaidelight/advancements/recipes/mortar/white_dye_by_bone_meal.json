@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "muffins_thaidelight:mortar/white_carpet_by_bone_meal"
+        "recipe": "muffins_thaidelight:mortar/white_dye_by_bone_meal"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "muffins_thaidelight:mortar/white_carpet_by_bone_meal"
+      "muffins_thaidelight:mortar/white_dye_by_bone_meal"
     ]
   },
   "sends_telemetry_event": false

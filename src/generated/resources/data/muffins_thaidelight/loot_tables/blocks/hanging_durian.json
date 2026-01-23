@@ -39,25 +39,6 @@
               "type": "minecraft:item",
               "functions": [
                 {
-                  "add": false,
-                  "count": 1.0,
-                  "function": "minecraft:set_count"
-                },
-                {
-                  "enchantment": "minecraft:fortune",
-                  "formula": "minecraft:uniform_bonus_count",
-                  "function": "minecraft:apply_bonus",
-                  "parameters": {
-                    "bonusMultiplier": 1
-                  }
-                },
-                {
-                  "function": "minecraft:limit_count",
-                  "limit": {
-                    "max": 2.0
-                  }
-                },
-                {
                   "function": "minecraft:explosion_decay"
                 }
               ],
@@ -116,16 +97,11 @@
                 },
                 {
                   "enchantment": "minecraft:fortune",
-                  "formula": "minecraft:uniform_bonus_count",
+                  "formula": "minecraft:binomial_with_bonus_count",
                   "function": "minecraft:apply_bonus",
                   "parameters": {
-                    "bonusMultiplier": 1
-                  }
-                },
-                {
-                  "function": "minecraft:limit_count",
-                  "limit": {
-                    "max": 4.0
+                    "extra": 2,
+                    "probability": 0.5714286
                   }
                 },
                 {
