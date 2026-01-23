@@ -3,6 +3,7 @@ package net.firemuffin303.muffinsthaidelightfabric.common.block.butterfly_pea;
 import io.github.fabricators_of_create.porting_lib.tags.Tags;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModItems;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModLootTables;
+import net.firemuffin303.muffinsthaidelightfabric.util.CommonEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -107,7 +108,7 @@ public class ButterflyPeaVineBlock extends CropBlock {
         if (level.getRawBrightness(pos, 0) >= 9) {
             int age = this.getAge(state);
             if (age < this.getMaxAge()) {
-                float speed = CropBlock.getGrowthSpeed(this, level, pos);
+                float speed = CommonEvents.getGrowthSpeed(this, level, pos);
                 if (random.nextInt((int) (25.0F / speed) + 1) == 0) {
                     level.setBlock(pos, state.setValue(getAgeProperty(), age + 1), 2);
                 }

@@ -1,6 +1,7 @@
 package net.firemuffin303.muffinsthaidelightfabric.common.block.coconut;
 
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
+import net.firemuffin303.muffinsthaidelightfabric.util.CommonEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -24,7 +25,7 @@ public class CoconutSaplingCropBlock extends Block implements BonemealableBlock 
 
     @Override
     public void randomTick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource) {
-        if(serverLevel.getRawBrightness(blockPos,0) >= 9 && randomSource.nextInt( (int)(25.0f/ CropBlock.getGrowthSpeed(this,serverLevel,blockPos)) + 1) == 0){
+        if(serverLevel.getRawBrightness(blockPos,0) >= 9 && randomSource.nextInt( (int)(25.0f/ CommonEvents.getGrowthSpeed(this,serverLevel,blockPos)) + 1) == 0){
             serverLevel.setBlock(blockPos, ModBlocks.COCONUT_SAPLING.defaultBlockState(),2);
         }
     }

@@ -100,6 +100,7 @@ public class ThaiDelight implements ModInitializer {
         CommonEvents.setResourceConditions();
         CommonEvents.modifyLootTable();
         CommonEvents.initializeStinkyEffect();
+        CommonEvents.initConfigSyncEvent();
 
         PotionBrewing.addMix(Potions.AWKWARD,ModItems.FERMENTED_FISH,ModMobEffects.STENCH_POTION);
         PotionBrewing.addMix(ModMobEffects.STENCH_POTION, Items.REDSTONE,ModMobEffects.LONG_STENCH_POTION);

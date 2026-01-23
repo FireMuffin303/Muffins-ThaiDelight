@@ -2,6 +2,7 @@ package net.firemuffin303.muffinsthaidelightfabric.common.block.papaya;
 
 import com.mojang.logging.LogUtils;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
+import net.firemuffin303.muffinsthaidelightfabric.util.CommonEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -41,7 +42,7 @@ public class BuddingPapayaFlowerBlock extends HorizontalDirectionalBlock impleme
     @Override
     public void randomTick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource) {
         if (serverLevel.getRawBrightness(blockPos, 0) >= 9) {
-            float f = CropBlock.getGrowthSpeed(this, serverLevel, blockPos);
+            float f = CommonEvents.getGrowthSpeed(this, serverLevel, blockPos);
             if(randomSource.nextInt((int)(25.0F / f) + 1) == 0){
                 serverLevel.setBlock(blockPos,
                         ModBlocks.PAPAYA.defaultBlockState()

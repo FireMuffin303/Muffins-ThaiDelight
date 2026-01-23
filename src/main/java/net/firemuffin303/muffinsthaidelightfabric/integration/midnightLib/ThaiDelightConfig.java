@@ -1,6 +1,7 @@
 package net.firemuffin303.muffinsthaidelightfabric.integration.midnightLib;
 
 import eu.midnightdust.lib.config.MidnightConfig;
+import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
 
 public class ThaiDelightConfig extends MidnightConfig {
 
@@ -10,8 +11,10 @@ public class ThaiDelightConfig extends MidnightConfig {
     @Comment(category = GAMEPLAY,centered = true) public static Comment gameplay;
     @Entry(category = GAMEPLAY)
     public static Boolean wanderingTraderShouldTradeTDItem = true;
+
     @Entry(category = GAMEPLAY)
     public static Boolean villagerShouldTradeTDItem = true;
+
     @Entry(category = GAMEPLAY)
     public static Boolean stinkyShouldTriggerNeutral = true;
 
@@ -33,6 +36,20 @@ public class ThaiDelightConfig extends MidnightConfig {
     @Condition(requiredModId = FISH_OF_THIEVES)
     @Entry(category = GAMEPLAY)
     public static boolean shouldMangoTreeSpawn = true;
+
+    public static int encode(){
+        //We doing Enchancement mod config sync way here, cause I have no brain to make it sync.
+        //Yeah this is literally a ducttape the problem for now.
+        String encoding =
+                wanderingTraderShouldTradeTDItem.toString() +
+                        villagerShouldTradeTDItem.toString() +
+                        stinkyShouldTriggerNeutral.toString() +
+                        shouldThaiHouseSpawn.toString() +
+                        coconutTreeType.toString() +
+                        shouldThaiHouseSpawn.toString();
+
+        return encoding.hashCode();
+    }
 
 
     public static enum TreeType{

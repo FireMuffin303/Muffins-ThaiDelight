@@ -2,12 +2,17 @@ package net.firemuffin303.muffinsthaidelightfabric.util;
 
 import com.mojang.datafixers.util.Pair;
 import com.mojang.logging.LogUtils;
+import io.github.fabricators_of_create.porting_lib.entity.events.PlayerEvents;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
+import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.fabricmc.fabric.api.loot.v2.LootTableSource;
+import net.fabricmc.fabric.api.networking.v1.PacketSender;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
@@ -30,6 +35,7 @@ import net.firemuffin303.muffinsthaidelightfabric.mixin.food.PigFoodAccessor;
 import net.firemuffin303.muffinsthaidelightfabric.mixin.loot.LootPoolBuilderAccessor;
 import net.firemuffin303.muffinsthaidelightfabric.mixin.loot.LootTableAccessor;
 import net.firemuffin303.muffinsthaidelightfabric.mixin.villager.VillagerAccessor;
+import net.firemuffin303.muffinsthaidelightfabric.network.packet.ThaiDelightConfigPacket;
 import net.firemuffin303.muffinsthaidelightfabric.registry.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -42,6 +48,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.network.ServerGamePacketListenerImpl;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -63,15 +70,20 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.item.enchantment.ThornsEnchantment;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.biome.Biomes;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ComposterBlock;
+import net.minecraft.world.level.block.FarmBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.dimension.LevelStem;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.structure.pools.SinglePoolElement;
 import net.minecraft.world.level.levelgen.structure.pools.StructurePoolElement;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorList;
+import net.minecraft.world.level.storage.LevelResource;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootDataManager;
 import net.minecraft.world.level.storage.loot.LootPool;
@@ -124,8 +136,26 @@ public class CommonEvents {
 
         BiomeModifications.addSpawn(BiomeSelectors.includeByKey(Biomes.BEACH), MobCategory.CREATURE,ModEntityTypes.FLOWER_CRAB,10,3,5);
         BiomeModifications.addSpawn(BiomeSelectors.includeByKey(Biomes.MANGROVE_SWAMP,Biomes.SWAMP), MobCategory.CREATURE,ModEntityTypes.DRAGONFLY,2,1,3);
+    }
 
+    public static void initConfigSyncEvent(){
+        ServerPlayConnectionEvents.JOIN.register(new ServerPlayConnectionEvents.Join() {
+            @Override
+            public void onPlayReady(ServerGamePacketListenerImpl serverGamePacketListener, PacketSender packetSender, MinecraftServer minecraftServer) {
+                ServerPlayNetworking.send(serverGamePacketListener.player,new ThaiDelightConfigPacket(ThaiDelightConfig.encode()));
+            }
+        });
 
+        ServerTickEvents.END_SERVER_TICK.register(new ServerTickEvents.EndTick() {
+            @Override
+            public void onEndTick(MinecraftServer minecraftServer) {
+                if(minecraftServer.overworld().getGameTime() % 100 == 0){
+                    for(ServerPlayer player : minecraftServer.getPlayerList().getPlayers()){
+                        ServerPlayNetworking.send(player,new ThaiDelightConfigPacket(ThaiDelightConfig.encode()));
+                    }
+                }
+            }
+        });
     }
 
     public static void worldGeneration(){
@@ -479,5 +509,47 @@ public class CommonEvents {
         float amp = ( Objects.requireNonNull(livingEntity.getEffect(ModMobEffects.APPETITE_LOSS)).getAmplifier() + 1);
         float rate = 1.2f;
         return (int) ((float)original * (rate + (rate * (0.6 * amp))  ) );
+    }
+
+    //Duplicate Method because of Lithium for some reason?????
+    public static float getGrowthSpeed(Block block, BlockGetter blockGetter, BlockPos blockPos) {
+        float f = 1.0F;
+        BlockPos blockPos2 = blockPos.below();
+
+        for(int i = -1; i <= 1; ++i) {
+            for(int j = -1; j <= 1; ++j) {
+                float g = 0.0F;
+                BlockState blockState = blockGetter.getBlockState(blockPos2.offset(i, 0, j));
+                if (blockState.is(Blocks.FARMLAND)) {
+                    g = 1.0F;
+                    if ((Integer)blockState.getValue(FarmBlock.MOISTURE) > 0) {
+                        g = 3.0F;
+                    }
+                }
+
+                if (i != 0 || j != 0) {
+                    g /= 4.0F;
+                }
+
+                f += g;
+            }
+        }
+
+        BlockPos blockPos3 = blockPos.north();
+        BlockPos blockPos4 = blockPos.south();
+        BlockPos blockPos5 = blockPos.west();
+        BlockPos blockPos6 = blockPos.east();
+        boolean bl = blockGetter.getBlockState(blockPos5).is(block) || blockGetter.getBlockState(blockPos6).is(block);
+        boolean bl2 = blockGetter.getBlockState(blockPos3).is(block) || blockGetter.getBlockState(blockPos4).is(block);
+        if (bl && bl2) {
+            f /= 2.0F;
+        } else {
+            boolean bl3 = blockGetter.getBlockState(blockPos5.north()).is(block) || blockGetter.getBlockState(blockPos6.north()).is(block) || blockGetter.getBlockState(blockPos6.south()).is(block) || blockGetter.getBlockState(blockPos5.south()).is(block);
+            if (bl3) {
+                f /= 2.0F;
+            }
+        }
+
+        return f;
     }
 }

@@ -25,6 +25,7 @@ import net.firemuffin303.muffinsthaidelightfabric.common.item.SackItem;
 import net.firemuffin303.muffinsthaidelightfabric.common.item.tooltipComponent.FlavorTooltipClient;
 import net.firemuffin303.muffinsthaidelightfabric.common.recipe.mortar.MortarRecipe;
 import net.firemuffin303.muffinsthaidelightfabric.common.recipe.mortar.MortarRecipeBookTab;
+import net.firemuffin303.muffinsthaidelightfabric.network.packet.ThaiDelightConfigPacket;
 import net.firemuffin303.muffinsthaidelightfabric.util.BlockEntityTypeAdder;
 import net.firemuffin303.muffinsthaidelightfabric.registry.*;
 import net.minecraft.client.Minecraft;
@@ -187,6 +188,7 @@ public class ThaiDelightClient implements ClientModInitializer {
 
 
         ClientPlayNetworking.registerGlobalReceiver(ModLevelEventPacket.TYPE,ModLevelEventPacket::receive);
+        ClientPlayNetworking.registerGlobalReceiver(ThaiDelightConfigPacket.TYPE,ThaiDelightConfigPacket::receive);
     }
 
     static {
