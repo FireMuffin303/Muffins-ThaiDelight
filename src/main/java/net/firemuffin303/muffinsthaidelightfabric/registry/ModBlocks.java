@@ -11,6 +11,8 @@ import net.firemuffin303.muffinsthaidelightfabric.common.block.*;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.butterfly_pea.BuddingButterflyPeaBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.butterfly_pea.ButterflyPeaVineBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.butterfly_pea.WallFlowerBlock;
+import net.firemuffin303.muffinsthaidelightfabric.common.block.cauldron.CoconutCauldron;
+import net.firemuffin303.muffinsthaidelightfabric.common.block.cauldron.CoconutMilkCauldron;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.coconut.*;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.durian.*;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.feast.MangoStickyRiceFeastBlock;
@@ -539,6 +541,9 @@ public class ModBlocks {
 
     //Cauldron
     public static final Block FERMENTED_FISH_CAULDRON = register("fermented_fish_cauldron",new FermentedFishCauldronBlock(BlockBehaviour.Properties.copy(Blocks.CAULDRON),ModCauldronInteraction.FERMENTED_FISH));
+    public static final Block COCONUT_CAULDRON = register("coconut_cauldron",new CoconutCauldron(BlockBehaviour.Properties.copy(CAULDRON)));
+    public static final Block COCONUT_MILK_CAULDRON = register("coconut_milk_cauldron",new CoconutMilkCauldron(BlockBehaviour.Properties.copy(CAULDRON)));
+
 
     // 🌿 BASIL 🌿
     public static final Block BASIL = register("basil",new BasilCropBlock(BlockBehaviour.Properties.copy(Blocks.POTATOES),ModLootTables.BASIL_HARVEST,ModLootTables.BASIL_SHEARS){

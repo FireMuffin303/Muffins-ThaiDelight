@@ -36,6 +36,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LayeredCauldronBlock;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import vectorwing.farmersdelight.common.block.FeastBlock;
@@ -269,6 +270,8 @@ public class ModelDataGen extends FabricModelProvider {
         createSackBlock(blockStateModelGenerator);
 
         createFermentedFishCauldron(blockStateModelGenerator);
+        createCauldron(ModBlocks.COCONUT_CAULDRON,blockStateModelGenerator);
+        createCauldron(ModBlocks.COCONUT_MILK_CAULDRON,blockStateModelGenerator);
 
         blockStateModelGenerator.createPlant(ModBlocks.LIME_SAPLING,ModBlocks.POTTED_LIME_SAPLING, BlockModelGenerators.TintState.NOT_TINTED);
         blockStateModelGenerator.createPlant(ModBlocks.MANGO_SAPLING,ModBlocks.POTTED_MANGO_SAPLING, BlockModelGenerators.TintState.NOT_TINTED);
@@ -281,6 +284,8 @@ public class ModelDataGen extends FabricModelProvider {
                         TextureMapping.plant(ThaiDelight.modid("block/coconut/coconut_sapling")),
                         blockStateModelGenerator.modelOutput)));
     }
+
+
 
     @Override
     public void generateItemModels(ItemModelGenerators itemModelGenerator) {
@@ -960,6 +965,37 @@ public class ModelDataGen extends FabricModelProvider {
          */
 
 
+    }
+
+    private static void createCauldron(Block block,BlockModelGenerators blockModelGenerators) {
+
+        blockModelGenerators.blockStateOutput.accept(
+            MultiVariantGenerator.multiVariant(block)
+                .with(PropertyDispatch.property(LayeredCauldronBlock.LEVEL)
+                    .select(1, Variant.variant()
+                        .with(VariantProperties.MODEL, ModelTemplates.CAULDRON_LEVEL1
+                            .createWithSuffix(block, "_level1",
+                                TextureMapping.cauldron(getBlockTexture(block).withSuffix("_content")),
+                                    blockModelGenerators.modelOutput
+                            )
+                        )
+                    ).select(2, Variant.variant()
+                        .with(VariantProperties.MODEL, ModelTemplates.CAULDRON_LEVEL2
+                            .createWithSuffix(
+                                    block, "_level2",
+                                    TextureMapping.cauldron(getBlockTexture(block).withSuffix("_content")),
+                                    blockModelGenerators.modelOutput
+                            )
+                        )
+                    ).select(3, Variant.variant()
+                        .with(VariantProperties.MODEL, ModelTemplates.CAULDRON_FULL
+                            .createWithSuffix(
+                                    block, "_full",
+                                    TextureMapping.cauldron(getBlockTexture(block).withSuffix("_content")),
+                                    blockModelGenerators.modelOutput))
+                                )
+                )
+        );
     }
 
     private static TextureMapping upperLimeMapping(int age){

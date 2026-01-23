@@ -37,7 +37,11 @@ public abstract class AbstractCauldronMixin {
                                          @Local(argsOnly = true)Player player,
                                          @Local(argsOnly = true) InteractionHand interactionHand
                                          ){
-        if((AbstractCauldronBlock)(Object)this instanceof LayeredCauldronBlock && this.interactions == CauldronInteraction.WATER){
+        if(this.interactions == CauldronInteraction.EMPTY){
+            if(itemStack.is(ModTags.COCONUT) && !CauldronInteraction.EMPTY.containsKey(itemStack.getItem())){
+                return ModCauldronInteraction.SET_COCONUT_CAULDRON.interact(blockState, level, blockPos, player, interactionHand, itemStack);
+            }
+        } else if((AbstractCauldronBlock)(Object)this instanceof LayeredCauldronBlock && this.interactions == CauldronInteraction.WATER){
             if(itemStack.is(ModTags.COMMON_RAW_FISHES) && !CauldronInteraction.WATER.containsKey(itemStack.getItem())){
                 return ModCauldronInteraction.MAKE_FERMENTED_FISH.interact(blockState, level, blockPos, player, interactionHand, itemStack);
             }

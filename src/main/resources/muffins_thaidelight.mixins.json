@@ -17,6 +17,7 @@
     "bonemeal.BoneMealItemMixin",
     "catachableFallingBlock.FallingBlockEntityMixin",
     "cauldron.AbstractCauldronMixin",
+    "cauldron.LayeredCauldronAccessor",
     "durianHelmet.EnchantmentHelperMixin",
     "durianHelmet.LivingEntityMixin",
     "durianHelmet.ThornsEnchantmentMixin",
