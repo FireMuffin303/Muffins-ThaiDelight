@@ -4,7 +4,6 @@ package net.firemuffin303.muffinsthaidelightfabric.registry;
 import com.terraformersmc.terraform.boat.api.TerraformBoatType;
 import com.terraformersmc.terraform.boat.api.TerraformBoatTypeRegistry;
 import com.terraformersmc.terraform.boat.api.item.TerraformBoatItemHelper;
-import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
 import net.firemuffin303.muffinsthaidelightfabric.common.item.CoconutItem;
 import net.firemuffin303.muffinsthaidelightfabric.common.item.DragonflyBottleItem;
@@ -209,8 +208,8 @@ public class ModItems {
     public static final Item MANGO_BOAT = TerraformBoatItemHelper.registerBoatItem(ThaiDelight.modid("mango_boat"),MANGO_BOAT_KEY,false);
     public static final Item MANGO_CHEST_BOAT = TerraformBoatItemHelper.registerBoatItem(ThaiDelight.modid("mango_chest_boat"),MANGO_BOAT_KEY,true);
 
-    public static final Item MANGO = registerFlatItem("mango",new ItemNameBlockItem(ModBlocks.STACKABLE_MANGO_BLOCK,new Item.Properties()));
-    public static final Item MANGO_SLICE = registerFlatItem("mango_slice",new Item(new Item.Properties()));
+    public static final Item MANGO = registerFlatItem("mango",new ItemNameBlockItem(ModBlocks.STACKABLE_MANGO_BLOCK,new Item.Properties().food(ModFood.MANGO)));
+    public static final Item MANGO_SLICE = registerFlatItem("mango_slice",new Item(new Item.Properties().food(ModFood.MANGO_SLICE)));
 
     //----- 🍐 Papaya 🍐 -----------------------------------
     public static final Item PAPAYA = registerFlatItem("papaya",new ItemNameBlockItem(ModBlocks.STACKABLE_PAPAYA,new Item.Properties().food(ModFood.PAPAYA)));
@@ -254,26 +253,27 @@ public class ModItems {
     public static final Item STIR_FRIED_NOODLE = registerFlatItem("stir_fried_noodle",new ConsumableItem(bowlFoodItem(ModFood.STIR_FRIED_NOODLE)));
 
     public static final Item FRIED_DURIAN = registerFlatItem("fried_durian",new Item(new Item.Properties().food(ModFood.FRIED_DURIAN)));
-    public static final Item COCONUT_MILK_BOTTLE = registerFlatItem("coconut_milk_bottle",new Item(new Item.Properties()));
+
+    public static final Item COCONUT_MILK_BOTTLE = registerFlatItem("coconut_milk_bottle",new Item(drinkItem()));
     public static final Item COCONUT_SLICE = registerFlatItem("coconut_slice",new ConsumableItem(new Item.Properties().food(ModFood.COCONUT_MEAT).craftRemainder(Items.BOWL)));
 
     public static final Item PHAT_KAPHRAO_FEAST = registerFlatItem("phat_kaphrao_feast",new BlockItem(ModBlocks.PHAT_KAPHRAO_FEAST,new Item.Properties()));
     public static final Item PHAT_KAPHRAO = registerFlatItem("phat_kaphrao", new ConsumableItem(bowlFoodItem(ModFood.PHAT_KAPHRAO)));
 
     public static final Item PINEAPPLE_FRIED_RICE_FEAST = registerFlatItem("pineapple_fried_rice_feast",new BlockItem(ModBlocks.PINEAPPLE_FRIED_RICE_FEAST,new Item.Properties()));
-    public static final Item PINEAPPLE_FRIED_RICE = registerFlatItem("pineapple_fried_rice",new Item(bowlFoodItem(ModFood.CRAB_FRIED_RICE)));
+    public static final Item PINEAPPLE_FRIED_RICE = registerFlatItem("pineapple_fried_rice",new Item(bowlFoodItem(ModFood.PINEAPPLE_FRIED_RICE)));
 
     public static final Item DURIAN_CURRY = registerFlatItem("durian_curry",new ConsumableItem(bowlFoodItem(ModFood.DURIAN_CURRY)));
     public static final Item DURIAN_CAKE = registerFlatItem("durian_cake",new BlockItem(ModBlocks.DURIAN_CAKE,new Item.Properties().stacksTo(1)));
-    public static final Item DURIAN_CAKE_SLICE = registerFlatItem("durian_cake_slice",new Item(new Item.Properties().food(ModFood.MANGO_PIE)));
+    public static final Item DURIAN_CAKE_SLICE = registerFlatItem("durian_cake_slice",new Item(new Item.Properties().food(ModFood.DURIAN_CAKE)));
 
     public static final Item MANGO_STICKY_RICE_FEAST = registerFlatItem("mango_sticky_rice_feast",new BlockItem(ModBlocks.MANGO_STICKY_RICE_FEAST,new Item.Properties()));
     public static final Item MANGO_STICKY_RICE = registerFlatItem("mango_sticky_rice",new ConsumableItem(bowlFoodItem(ModFood.MANGO_STICKY_RICE)));
     public static final Item MANGO_CHEESECAKE = registerFlatItem("mango_cheesecake",new BlockItem(ModBlocks.MANGO_CHEESECAKE,new Item.Properties()));
     public static final Item MANGO_CHEESECAKE_SLICE = registerFlatItem("mango_cheesecake_slice",new Item(new Item.Properties().food(ModFood.MANGO_PIE)));
 
-    public static final Item COCONUT_JELLY = registerFlatItem("coconut_jelly",new Item(new Item.Properties().food(ModFood.MANGO_PIE)));
-    public static final Item KHANOM_BABIN = registerFlatItem("khanom_babin",new Item(new Item.Properties().food(ModFood.MANGO_PIE)));
+    public static final Item COCONUT_JELLY = registerFlatItem("coconut_jelly",new Item(new Item.Properties().food(ModFood.COCONUT_JELLO)));
+    public static final Item KHANOM_BABIN = registerFlatItem("khanom_babin",new Item(new Item.Properties().food(ModFood.KHANOM_BABIN)));
     public static final Item COCONUT_PIE = registerFlatItem("coconut_pie",new BlockItem(ModBlocks.COCONUT_PIE,new Item.Properties()));
     public static final Item COCONUT_PIE_SLICE = registerFlatItem("coconut_pie_slice",new Item(new Item.Properties().food(ModFood.COCONUT_PIE_SLICE)));
     public static final Item HONEY_COCONUT_PIE = registerFlatItem("honey_coconut_pie",new BlockItem(ModBlocks.HONEY_COCONUT_PIE,new Item.Properties()));
@@ -288,12 +288,12 @@ public class ModItems {
     });
 
     public static final Item OMELETTE_FEAST = registerFlatItem("omelette_feast",new BlockItem(ModBlocks.OMELETTE_FEAST,new Item.Properties()));
-    public static final Item OMELETTE = registerFlatItem("omelette",new Item(new Item.Properties()));
+    public static final Item OMELETTE = registerFlatItem("omelette",new Item(bowlFoodItem(ModFood.OMELETTE)));
     public static final Item BASIL_OMELETTE_FEAST = registerFlatItem("basil_omelette_feast",new BlockItem(ModBlocks.BASIL_OMELETTE_FEAST,new Item.Properties()));
-    public static final Item BASIL_OMELETTE = registerFlatItem("basil_omelette",new Item(new Item.Properties()));
+    public static final Item BASIL_OMELETTE = registerFlatItem("basil_omelette",new Item(bowlFoodItem(ModFood.BASIL_OMELETTE)));
 
-    public static final Item BAMBOO_SHOOT_SOUP = registerFlatItem("bamboo_shoot_soup",new Item(new Item.Properties()));
-    public static final Item STEAMED_BAMBOO_SHOOT = registerFlatItem("steamed_bamboo_shoot",new Item(new Item.Properties()));
+    public static final Item BAMBOO_SHOOT_SOUP = registerFlatItem("bamboo_shoot_soup",new Item(bowlFoodItem(ModFood.BAMBOO_SOUP)));
+    public static final Item STEAMED_BAMBOO_SHOOT = registerFlatItem("steamed_bamboo_shoot",new Item(bowlFoodItem(ModFood.STEAMED_BAMBOO_SHOOT)));
 
     public static final Item BUTTERFLY_PEA = registerFlatItem("butterfly_pea",new ItemNameBlockItem(ModBlocks.BUTTERFLY_PEA_WALL,new Item.Properties()));
     //I KNOW IT'S NOT THAI. BUT THERE IS MORTAR AND BASIL IN THE SAME MOD. HOW COULD I MISS THIS OPPORTUNITY.
@@ -301,21 +301,19 @@ public class ModItems {
 
 
     public static final Item BUTTERFLY_PEA_SEEDS = registerFlatItem("butterfly_pea_seeds",new ItemNameBlockItem(ModBlocks.BUDDING_BUTTERFLY_PEA_BLOCK,new Item.Properties()));
-    public static final Item BUTTERFLY_PEA_TEA = registerFlatItem("butterfly_pea_tea",new Item(drinkItem()));
+    public static final Item BUTTERFLY_PEA_TEA = registerFlatItem("butterfly_pea_tea",new DrinkableItem(drinkItem().food(ModFood.COCONUT_WATER),false,true){
+        @Override
+        public void affectConsumer(ItemStack stack, Level level, LivingEntity consumer) {
+            super.affectConsumer(stack, level, consumer);
+            consumer.removeEffect(MobEffects.MOVEMENT_SLOWDOWN);
+        }
+    });
 
-    public static final Item KHANOM_CHAN = registerFlatItem("khanom_chan",new DyeableItem(new Item.Properties().food(ModFood.MANGO_PIE)));
+    public static final Item KHANOM_CHAN = registerFlatItem("khanom_chan",new DyeableItem(new Item.Properties().food(ModFood.KHANOM_CHAN)));
     public static final Item COCONUT_MILK_ICE_CREAM = register("coconut_milk_ice_cream",new DyeableItem(bowlFoodItem(ModFood.COCONUT_MILK_ICE_CREAM)));
 
-    public static final Item BANANA_IN_COCONUT_MILK = registerFlatItem("banana_in_coconut_milk",new Item(new Item.Properties()));
+    public static final Item BANANA_IN_COCONUT_MILK = registerFlatItem("banana_in_coconut_milk",new Item(bowlFoodItem(ModFood.BANANA_IN_COCONUT_MILK)));
 
-
-    public static Item registerKhanomChan(String id){
-        return registerFlatItem(id,new Item(new Item.Properties().food(ModFood.MANGO_PIE)));
-    }
-
-    public static Item registerCoconutMilkIceCream(String id){
-        return registerFlatItem(id,new Item(bowlFoodItem(ModFood.COCONUT_MILK_ICE_CREAM)));
-    }
 
     public static Item registerFlatItem(String id,Item item){
         Item registeredItem = register(id,item);
@@ -334,81 +332,103 @@ public class ModItems {
         Item.BY_BLOCK.put(ModBlocks.PAPAYA,ModItems.PAPAYA);
     }
 
-    public static void addFuel(){
-        FuelRegistry.INSTANCE.add(ModItems.LIME,200);
-        FuelRegistry.INSTANCE.add(ModItems.SLICED_LIME,200);
-        FuelRegistry.INSTANCE.add(ModItems.DURIAN_PEEL,200);
-    }
-
 
     //----------------------------------------------------------------------------------------------
     public static class ModFood{
-        public static final FoodProperties CRAB = new FoodProperties.Builder().nutrition(2).saturationMod(0.1F).meat().build();
-        public static final FoodProperties COOKED_CRAB = new FoodProperties.Builder().nutrition(8).saturationMod(0.5F).meat().build();
-
-        public static final FoodProperties COOKED_DRAGONFLY = new FoodProperties.Builder().nutrition(3).saturationMod(0.2f).alwaysEat().build();
-        public static final FoodProperties DRAGONFLY = new FoodProperties.Builder().nutrition(2).saturationMod(0.1f).alwaysEat().effect(new MobEffectInstance(MobEffects.HUNGER,10*20,0),0.8f).effect(new MobEffectInstance(MobEffects.CONFUSION,10*20,0),0.8f).build();
-
         public static final FoodProperties LIME = new FoodProperties.Builder().nutrition(4).saturationMod(0.2F).build();
-        public static final FoodProperties LIME_SLICE = new FoodProperties.Builder().nutrition(2).saturationMod(0.1F)
-                .build();
+        public static final FoodProperties LIME_SLICE = new FoodProperties.Builder().nutrition(2).saturationMod(0.1F).fast().build();
 
         public static final FoodProperties PEPPER = new FoodProperties.Builder().nutrition(2).saturationMod(0.1F).alwaysEat().fast().build();
 
-        public static final FoodProperties SLICED_UNRIPE_PAPAYA = new FoodProperties.Builder().nutrition(1).saturationMod(0.1F).alwaysEat().fast().build();
-        public static final FoodProperties SLICED_PAPAYA = new FoodProperties.Builder().nutrition(3).saturationMod(0.2F).build();
-        public static final FoodProperties PAPAYA = new FoodProperties.Builder().nutrition(5).saturationMod(0.4F).build();
-        public static final FoodProperties RAW_PAPAYA = new FoodProperties.Builder().nutrition(4).saturationMod(0.2F).build();
-
-        public static final FoodProperties DURIAN_PULP = new FoodProperties.Builder().nutrition(4).saturationMod(0.2f).build();
-        public static final FoodProperties FRIED_DURIAN = new FoodProperties.Builder().alwaysEat().fast().nutrition(3).saturationMod(0.4f).build();
+        public static final FoodProperties DURIAN_PULP = new FoodProperties.Builder().nutrition(8).saturationMod(0.4f).build();
 
         public static final FoodProperties COCONUT_MEAT = new FoodProperties.Builder().nutrition(2).saturationMod(0.2f).build();
 
-        public static final FoodProperties COCONUT_PIE_SLICE = new FoodProperties.Builder()
-                .nutrition(3).saturationMod(0.3f).fast()
-                .effect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED,600,0,false,false),1.0f).build();
+        public static final FoodProperties MANGO = new FoodProperties.Builder().nutrition(6).saturationMod(0.4f).build();
+        public static final FoodProperties MANGO_SLICE = new FoodProperties.Builder().nutrition(3).saturationMod(0.2f).build();
+
+        public static final FoodProperties PAPAYA = new FoodProperties.Builder().nutrition(5).saturationMod(0.4F).build();
+        public static final FoodProperties SLICED_PAPAYA = new FoodProperties.Builder().nutrition(3).saturationMod(0.2F).build();
+
+        public static final FoodProperties RAW_PAPAYA = new FoodProperties.Builder().nutrition(4).saturationMod(0.2F).build();
+        public static final FoodProperties SLICED_UNRIPE_PAPAYA = new FoodProperties.Builder().nutrition(1).saturationMod(0.1F).alwaysEat().fast().build();
+
+        public static final FoodProperties CRAB = new FoodProperties.Builder().nutrition(2).saturationMod(0.1F).meat().build();
+        public static final FoodProperties COOKED_CRAB = new FoodProperties.Builder().nutrition(8).saturationMod(0.5F).meat().build();
+
+        public static final FoodProperties DRAGONFLY = new FoodProperties.Builder().nutrition(2).saturationMod(0.1f).alwaysEat()
+                .effect(new MobEffectInstance(MobEffects.HUNGER,10*20,0),0.8f).effect(new MobEffectInstance(MobEffects.CONFUSION,10*20,0),0.8f).build();
+        public static final FoodProperties COOKED_DRAGONFLY = new FoodProperties.Builder().nutrition(3).saturationMod(0.2f).alwaysEat().build();
 
         public static final FoodProperties FISH_SAUCE = new FoodProperties.Builder().alwaysEat().effect(new MobEffectInstance(MobEffects.HUNGER,200,0),1.0f).build();
-        public static final FoodProperties SEAFOOD_SAUCE = new FoodProperties.Builder().alwaysEat().effect(new MobEffectInstance(MobEffects.WATER_BREATHING,200,0),1.0f).build();
+        public static final FoodProperties FERMENTED_FISH = new FoodProperties.Builder().alwaysEat()
+                .effect(new MobEffectInstance(ModMobEffects.STINKY,10*20),1f)
+                .effect(new MobEffectInstance(ModMobEffects.APPETITE_LOSS,10*20),1f)
+
+                .build();
+
         public static final FoodProperties PAPAYA_JUICE = new FoodProperties.Builder().alwaysEat().build();
         public static final FoodProperties LIME_JUICE = new FoodProperties.Builder().alwaysEat().build();
         public static final FoodProperties HONEY_LIME_JUICE = new FoodProperties.Builder().alwaysEat().build();
         public static final FoodProperties COCONUT_WATER = new FoodProperties.Builder().alwaysEat().build();
 
+        public static final FoodProperties PESTO_SAUCE = (new FoodProperties.Builder())
+                .nutrition(4).saturationMod(0.4f).build();
+
+        public static final FoodProperties FRIED_DURIAN = new FoodProperties.Builder().alwaysEat().fast().nutrition(3).saturationMod(0.4f).build();
+
         public static final FoodProperties SOMTAM = new FoodProperties.Builder()
                 .nutrition(14)
                 .saturationMod(0.75F)
                 .effect(new MobEffectInstance(ModEffects.NOURISHMENT.get(),6000,0),1.0f).build();
-        public static final FoodProperties CRAB_FRIED_RICE = new FoodProperties.Builder()
-                .nutrition(14)
-                .saturationMod(0.6F)
-                .effect(new MobEffectInstance(ModEffects.COMFORT.get(),6000,0),1.0f).build();
 
         public static final FoodProperties LARB = new FoodProperties.Builder()
                 .nutrition(14)
                 .saturationMod(0.75F)
                 .effect(new MobEffectInstance(ModEffects.NOURISHMENT.get(),6000,0),1.0f).build();
 
+        public static final FoodProperties CRAB_FRIED_RICE = new FoodProperties.Builder()
+                .nutrition(16)
+                .saturationMod(0.80F)
+                .effect(new MobEffectInstance(ModEffects.NOURISHMENT.get(),2400,0),1.0f)
+                .effect(new MobEffectInstance(MobEffects.WATER_BREATHING,1200,0),1.0f)
+                .effect(new MobEffectInstance(ModEffects.COMFORT.get(),9600,0),1.0f).build();
+
+        public static final FoodProperties PHAT_KAPHRAO = new FoodProperties.Builder()
+                .nutrition(12)
+                .saturationMod(0.75f)
+                .effect(new MobEffectInstance(ModEffects.COMFORT.get(),6000,0),1.0f)
+                .build();
+
+        public static final FoodProperties MANGO_STICKY_RICE = new FoodProperties.Builder()
+                .nutrition(12)
+                .saturationMod(0.55F)
+                .effect(new MobEffectInstance(ModEffects.COMFORT.get(),9600,0),1.0f)
+                .effect(new MobEffectInstance(MobEffects.DIG_SPEED,600),1.0f)
+                .build();
+
+        public static final FoodProperties PINEAPPLE_FRIED_RICE = new FoodProperties.Builder()
+                .nutrition(16)
+                .saturationMod(0.80F)
+                .effect(new MobEffectInstance(ModEffects.NOURISHMENT.get(),2400,0),1.0f)
+                .effect(new MobEffectInstance(MobEffects.REGENERATION,600,0),1.0f)
+                .effect(new MobEffectInstance(ModEffects.COMFORT.get(),9600,0),1.0f).build();
+
         public static final FoodProperties STIR_FRIED_NOODLE = new FoodProperties.Builder()
                 .nutrition(12)
                 .saturationMod(0.55F)
                 .effect(new MobEffectInstance(ModEffects.COMFORT.get(),5000,0),1.0f).build();
-
-        public static final FoodProperties PHAT_KAPHRAO = new FoodProperties.Builder()
-                .nutrition(12)
-                .saturationMod(0.8F)
-                .effect(new MobEffectInstance(ModEffects.NOURISHMENT.get(),3600,0),1.0f).build();
 
         public static final FoodProperties DURIAN_CURRY = new FoodProperties.Builder()
                 .nutrition(12)
                 .saturationMod(0.8F)
                 .effect(new MobEffectInstance(ModEffects.NOURISHMENT.get(),3600,0),1.0f).build();
 
-        public static final FoodProperties MANGO_STICKY_RICE = new FoodProperties.Builder()
-                .nutrition(12)
-                .saturationMod(0.55F)
-                .effect(new MobEffectInstance(ModEffects.COMFORT.get(),9600,0),1.0f).build();
+        public static final FoodProperties DURIAN_CAKE = new FoodProperties.Builder()
+                .nutrition(2)
+                .saturationMod(0.1F)
+                .fast()
+                .effect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 400, 0, false, false), 1.0F).build();
 
         public static final FoodProperties MANGO_PIE = new FoodProperties.Builder()
                 .nutrition(3)
@@ -416,21 +436,60 @@ public class ModItems {
                 .fast()
                 .effect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 600, 0, false, false), 1.0F).build();
 
+        public static final FoodProperties COCONUT_PIE_SLICE = new FoodProperties.Builder()
+                .nutrition(3).saturationMod(0.3f).fast()
+                .effect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED,600,0,false,false),1.0f).build();
 
-        public static final FoodProperties FERMENTED_FISH = new FoodProperties.Builder().alwaysEat()
-                .effect(new MobEffectInstance(ModMobEffects.STINKY,10*20),1f)
-                .effect(new MobEffectInstance(ModMobEffects.APPETITE_LOSS,10*20),1f)
+        public static final FoodProperties COCONUT_JELLO = new FoodProperties.Builder()
+                .nutrition(3)
+                .saturationMod(1F)
+                .effect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED,200,0),1.0f)
+                .fast().build();
 
-                .build();
+        public static final FoodProperties KHANOM_BABIN = new FoodProperties.Builder()
+                .nutrition(3)
+                .saturationMod(1F)
+                .effect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED,200,0),1.0f)
+                .fast().build();
+
+        public static final FoodProperties OMELETTE = new FoodProperties.Builder()
+                .nutrition(12).saturationMod(0.75f)
+                .effect(new MobEffectInstance(ModEffects.COMFORT.get(),6000,0),1.0f).build();
+
+        public static final FoodProperties BASIL_OMELETTE = new FoodProperties.Builder()
+                .nutrition(12).saturationMod(0.75f)
+                .effect(new MobEffectInstance(ModEffects.COMFORT.get(),9600,0),1.0f).build();
+
+        public static final FoodProperties BAMBOO_SOUP = new FoodProperties.Builder()
+                .nutrition(10).saturationMod(0.80f)
+                .effect(new MobEffectInstance(ModEffects.COMFORT.get(),4800,0),1.0f).build();
+
+        public static final FoodProperties STEAMED_BAMBOO_SHOOT = new FoodProperties.Builder()
+                .nutrition(10).saturationMod(0.80f)
+                .effect(new MobEffectInstance(ModEffects.COMFORT.get(),6000,0),1.0f).build();
+
+        public static final FoodProperties BANANA_IN_COCONUT_MILK = new FoodProperties.Builder()
+                .nutrition(10).saturationMod(0.90f)
+                .effect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED,600,0),1.0f)
+                .effect(new MobEffectInstance(ModEffects.COMFORT.get(),6000,0),1.0f).build();
+
+        public static final FoodProperties KHANOM_CHAN = new FoodProperties.Builder()
+                .nutrition(3)
+                .saturationMod(1F)
+                .effect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED,200,0),1.0f)
+                .fast().build();
 
         public static final FoodProperties COCONUT_MILK_ICE_CREAM = new FoodProperties.Builder()
                 .nutrition(3)
-                .saturationMod(0.3F)
+                .saturationMod(0.5F)
+                .effect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED,200,0),1.0f)
+                .effect(new MobEffectInstance(ModEffects.COMFORT.get(),3000,0),1.0f)
                 .fast()
                 .build();
 
-        public static final FoodProperties PESTO_SAUCE = (new FoodProperties.Builder())
-                .nutrition(4).saturationMod(0.4f).build();
+
+
+        public static final FoodProperties SEAFOOD_SAUCE = new FoodProperties.Builder().alwaysEat().effect(new MobEffectInstance(MobEffects.WATER_BREATHING,200,0),1.0f).build();
     }
 
 }

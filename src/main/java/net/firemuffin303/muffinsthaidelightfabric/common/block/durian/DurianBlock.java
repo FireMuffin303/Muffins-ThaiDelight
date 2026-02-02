@@ -1,7 +1,10 @@
 package net.firemuffin303.muffinsthaidelightfabric.common.block.durian;
 
+import net.firemuffin303.muffinsthaidelightfabric.registry.ModDamageTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -30,6 +33,10 @@ public class DurianBlock extends FallingBlock {
     @Override
     protected void falling(FallingBlockEntity fallingBlockEntity) {
         fallingBlockEntity.setHurtsEntities(1.5f,8);
+    }
 
+    @Override
+    public DamageSource getFallDamageSource(Entity entity) {
+        return entity.damageSources().source(ModDamageTypes.FALLING_DURIAN);
     }
 }

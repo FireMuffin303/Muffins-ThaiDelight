@@ -13,6 +13,7 @@ import net.firemuffin303.muffinsthaidelightfabric.util.CommonEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
@@ -83,7 +84,7 @@ public abstract class FallingBlockEntityMixin extends Entity {
             if(!list.isEmpty()){
                 if(this.dropItem){
                     if(list.get(0) instanceof Player player){
-                        if(!SackItem.onCatchingFallingBlock( player.getUseItem(), this.blockState.getBlock().asItem() )){
+                        if(!SackItem.onCatchingFallingBlock( player.getUseItem(), this.blockState.getBlock().asItem(), (ServerPlayer) player )){
                             this.spawnAtLocation(block.get());
                         }
                     }

@@ -80,6 +80,8 @@ public class ThaiDelight implements ModInitializer {
         ModMenuType.init();
         ModTreeDecoratorTypes.init();
         ModMobEffects.init();
+        ModCriteriaTriggers.init();
+        ModDamageTypes.init();
 
         Registry.register(TerraformBoatTypeRegistry.INSTANCE,ModItems.DURIAN_BOAT_KEY,DURIAN);
         Registry.register(TerraformBoatTypeRegistry.INSTANCE,ModItems.COCONUT_BOAT_KEY,COCONUT);

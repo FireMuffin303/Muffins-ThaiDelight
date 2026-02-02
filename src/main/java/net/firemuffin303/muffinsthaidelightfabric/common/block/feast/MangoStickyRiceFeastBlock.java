@@ -17,8 +17,7 @@ public class MangoStickyRiceFeastBlock extends FeastBlock {
             Block.box(2.0D, 0.0D, 2.0D, 14.0D, 1.0D, 14.0D),
             Block.box(2.0D, 0.0D, 2.0D, 14.0D, 3.0D, 14.0D),
             Block.box(2.0D, 0.0D, 2.0D, 14.0D, 6.0D, 14.0D),
-            Block.box(2.0D, 0.0D, 2.0D, 14.0D, 8.0D, 14.0D),
-            Block.box(2.0D, 0.0D, 2.0D, 14.0D, 10.0D, 14.0D),
+            Block.box(2.0D, 0.0D, 2.0D, 14.0D, 8.0D, 14.0D)
     };
 
     public MangoStickyRiceFeastBlock(Properties properties) {

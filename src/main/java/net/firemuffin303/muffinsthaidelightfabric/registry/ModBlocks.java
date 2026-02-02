@@ -68,7 +68,12 @@ public class ModBlocks {
     public static final ArrayList<Block> CABINET = new ArrayList<>();
     //Functional Block
     public static final Block MORTAR = register("mortar",new MortarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_RED).strength(0.5f,6.0f).noOcclusion().sound(SoundType.DECORATED_POT)));
-    public static final Block SACK = register("sack",new SackBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW).instrument(NoteBlockInstrument.BANJO).strength(0.5F).sound(SoundType.GRASS)));
+    public static final Block SACK = register("sack",new SackBlock(
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_YELLOW)
+                    .instrument(NoteBlockInstrument.BANJO)
+                    .strength(0.5F).sound(SoundType.GRASS)
+    ));
 
     //Crate
     public static final Block LIME_CRATE = registerCrate("lime_crate");
@@ -459,7 +464,7 @@ public class ModBlocks {
         @Override
         public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
             final VoxelShape PLATE_SHAPE = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 2.0D, 15.0D);
-            final VoxelShape PIE_SHAPE = Shapes.joinUnoptimized(PLATE_SHAPE, Block.box(2.0D, 2.0D, 2.0D, 14.0D, 7.0D, 14.0D), BooleanOp.OR);
+            final VoxelShape PIE_SHAPE = Shapes.joinUnoptimized(PLATE_SHAPE, Block.box(3.0D, 2.0D, 3.0D, 13.0D, 5.0D, 13.0D), BooleanOp.OR);
 
             return (Integer)state.getValue(SERVINGS) == 0 ? PLATE_SHAPE : PIE_SHAPE;
         }
@@ -468,7 +473,8 @@ public class ModBlocks {
         @Override
         public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
             final VoxelShape PLATE_SHAPE = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 2.0D, 15.0D);
-            final VoxelShape PIE_SHAPE = Shapes.joinUnoptimized(PLATE_SHAPE, Block.box(2.0D, 2.0D, 2.0D, 14.0D, 7.0D, 14.0D), BooleanOp.OR);
+            VoxelShape PIE_SHAPE = Shapes.joinUnoptimized(PLATE_SHAPE, Block.box(3.0D, 2.0D, 3.0D, 13.0D, 5.0D, 13.0D), BooleanOp.OR);
+            PIE_SHAPE = Shapes.joinUnoptimized(PIE_SHAPE,Block.box(4.0D, 5.0D, 4.0D, 12.0D, 8.0D, 12.0D),BooleanOp.OR);
 
             return (Integer)state.getValue(SERVINGS) == 0 ? PLATE_SHAPE : PIE_SHAPE;
         }
@@ -477,7 +483,7 @@ public class ModBlocks {
         @Override
         public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
             final VoxelShape PLATE_SHAPE = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 2.0D, 15.0D);
-            final VoxelShape PIE_SHAPE = Shapes.joinUnoptimized(PLATE_SHAPE, Block.box(2.0D, 2.0D, 2.0D, 14.0D, 8.0D, 14.0D), BooleanOp.OR);
+            final VoxelShape PIE_SHAPE = Shapes.joinUnoptimized(PLATE_SHAPE, Block.box(3.0D, 2.0D, 3.0D, 13.0D, 5.0D, 13.0D), BooleanOp.OR);
 
             return (Integer)state.getValue(SERVINGS) == 0 ? PLATE_SHAPE : PIE_SHAPE;
         }
@@ -614,11 +620,43 @@ public class ModBlocks {
     });
     public static final Block HONEY_COCONUT_PIE = register("honey_coconut_pie",new PieBlock(BlockBehaviour.Properties.copy(CAKE), () -> ModItems.HONEY_COCONUT_PIE_SLICE));
 
-    public static final Block PHAT_KAPHRAO_FEAST = register("phat_kaphrao_feast",new FeastBlock(BlockBehaviour.Properties.copy(CAKE),() -> ModItems.PHAT_KAPHRAO,false));
+    public static final Block PHAT_KAPHRAO_FEAST = register("phat_kaphrao_feast",new FeastBlock(BlockBehaviour.Properties.copy(CAKE),() -> ModItems.PHAT_KAPHRAO,false){
+        @Override
+        public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+            final VoxelShape PLATE_SHAPE = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 2.0D, 15.0D);
+            final VoxelShape PIE_SHAPE = Shapes.joinUnoptimized(PLATE_SHAPE, Block.box(2.0D, 2.0D, 2.0D, 14.0D, 4.0D, 14.0D), BooleanOp.OR);
+
+            return (Integer)state.getValue(SERVINGS) == 0 ? PLATE_SHAPE : PIE_SHAPE;
+        }
+    });
     public static final Block MANGO_STICKY_RICE_FEAST = register("mango_sticky_rice_feast",new MangoStickyRiceFeastBlock(BlockBehaviour.Properties.copy(CAKE)));
-    public static final Block OMELETTE_FEAST = register("omelette",new FeastBlock(BlockBehaviour.Properties.copy(CAKE),() -> ModItems.OMELETTE,false));
-    public static final Block BASIL_OMELETTE_FEAST = register("basil_omelette",new FeastBlock(BlockBehaviour.Properties.copy(CAKE),() -> ModItems.BASIL_OMELETTE,false));
-    public static final Block PINEAPPLE_FRIED_RICE_FEAST = register("pineapple_fried_rice_feast",new FeastBlock(BlockBehaviour.Properties.copy(CAKE),() -> ModItems.PINEAPPLE_FRIED_RICE,true));
+    public static final Block OMELETTE_FEAST = register("omelette",new FeastBlock(BlockBehaviour.Properties.copy(CAKE),() -> ModItems.OMELETTE,false){
+        @Override
+        public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+            final VoxelShape PLATE_SHAPE = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 2.0D, 15.0D);
+            final VoxelShape PIE_SHAPE = Shapes.joinUnoptimized(PLATE_SHAPE, Block.box(2.0D, 2.0D, 2.0D, 14.0D, 4.0D, 14.0D), BooleanOp.OR);
+
+            return (Integer)state.getValue(SERVINGS) == 0 ? PLATE_SHAPE : PIE_SHAPE;
+        }
+    });
+    public static final Block BASIL_OMELETTE_FEAST = register("basil_omelette",new FeastBlock(BlockBehaviour.Properties.copy(CAKE),() -> ModItems.BASIL_OMELETTE,false){
+        @Override
+        public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+            final VoxelShape PLATE_SHAPE = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 2.0D, 15.0D);
+            final VoxelShape PIE_SHAPE = Shapes.joinUnoptimized(PLATE_SHAPE, Block.box(2.0D, 2.0D, 2.0D, 14.0D, 4.0D, 14.0D), BooleanOp.OR);
+
+            return (Integer)state.getValue(SERVINGS) == 0 ? PLATE_SHAPE : PIE_SHAPE;
+        }
+    });
+    public static final Block PINEAPPLE_FRIED_RICE_FEAST = register("pineapple_fried_rice_feast",new FeastBlock(BlockBehaviour.Properties.copy(CAKE),() -> ModItems.PINEAPPLE_FRIED_RICE,true){
+        @Override
+        public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+            final VoxelShape PLATE_SHAPE = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 2.0D, 15.0D);
+            final VoxelShape PIE_SHAPE = Shapes.joinUnoptimized(PLATE_SHAPE, Block.box(2.0D, 2.0D, 2.0D, 14.0D, 7.0D, 14.0D), BooleanOp.OR);
+
+            return (Integer)state.getValue(SERVINGS) == 0 ? PLATE_SHAPE : PIE_SHAPE;
+        }
+    });
 
 
     //public static final Block SAUCE_BOWL = register("sauce_bowl",new SauceBowlBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BROWN)));

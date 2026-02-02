@@ -3,9 +3,11 @@ package net.firemuffin303.muffinsthaidelightfabric.datagen;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementProvider;
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
+import net.firemuffin303.muffinsthaidelightfabric.common.advancement.SackCatchTrigger;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModItems;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModMobEffects;
+import net.firemuffin303.muffinsthaidelightfabric.registry.ModTags;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.FrameType;
 import net.minecraft.advancements.critereon.*;
@@ -141,6 +143,31 @@ public class AdvancementDataGen extends FabricAdvancementProvider {
             ).parent(ROOT)
             .build(ThaiDelight.modid("susie_prize"));
 
+    Advancement BIG_BIG_NUT = Advancement.Builder.advancement()
+            .display(ModItems.COCONUT,
+                    Component.translatable("advancement.muffins_thaidelight.big_big_nut"),
+                    Component.translatable("advancement.muffins_thaidelight.big_big_nut.description"),
+                    BACKGROUND,
+                    FrameType.TASK,
+                    true,true,false
+                    )
+            .addCriterion("big_big_nut", SackCatchTrigger.TriggerInstance.sackCatch(ModItems.COCONUT)
+            ).parent(ROOT).build(ThaiDelight.modid("big_big_nut"));
+
+    Advancement GRAVITY_NOT_INVENTED = Advancement.Builder.advancement()
+            .display(ModItems.DURIAN,
+                    Component.translatable("advancement.muffins_thaidelight.gravity_not_invent"),
+                    Component.translatable("advancement.muffins_thaidelight.gravity_not_invent.description"),
+                    BACKGROUND,
+                    FrameType.TASK,
+                    true,true,false
+                    )
+            .addCriterion("gravity_not_invent",EntityHurtPlayerTrigger.TriggerInstance.entityHurtPlayer(
+                    DamagePredicate.Builder.damageInstance().type(DamageSourcePredicate.Builder.damageType().tag(TagPredicate.is(ModTags.FALLING_DURIAN))).blocked(false)
+            )).parent(ROOT).build(ThaiDelight.modid("gravity_not_invent"));
+
+
+
     @Override
     public void generateAdvancement(Consumer<Advancement> consumer) {
         consumer.accept(ROOT);
@@ -151,5 +178,7 @@ public class AdvancementDataGen extends FabricAdvancementProvider {
         consumer.accept(GOT_SOMTAM);
         consumer.accept(BEING_STINKY);
         consumer.accept(SUSIE_PRIZE);
+        consumer.accept(BIG_BIG_NUT);
+        consumer.accept(GRAVITY_NOT_INVENTED);
     }
 }

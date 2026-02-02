@@ -41,12 +41,19 @@ public class LangDataGen extends FabricLanguageProvider {
         translationBuilder.add("advancement.muffins_thaidelight.susie_prize","The Susie Prize");
         translationBuilder.add("advancement.muffins_thaidelight.susie_prize.description","Light a papaya flower with glow ink sac. C'mon you deserve one.");
 
+        translationBuilder.add("advancement.muffins_thaidelight.big_big_nut","Big Big Nut");
+        translationBuilder.add("advancement.muffins_thaidelight.big_big_nut.description","Catch a coconut with a sack. Coconut is a giant nut.");
+
+        translationBuilder.add("advancement.muffins_thaidelight.gravity_not_invent","Gravity not invent");
+        translationBuilder.add("advancement.muffins_thaidelight.gravity_not_invent.description","Got a durian fall on the head. I don't think that is an apple tree.");
+
         translationBuilder.add("item.muffins_thaidelight.tasty","Tasty");
 
         translationBuilder.add("farmersdelight.tooltip.papaya_juice","Clear Hunger Effect");
         translationBuilder.add("farmersdelight.tooltip.lime_juice","Clear Blindness Effect");
         translationBuilder.add("farmersdelight.tooltip.honey_lime_juice","Clear Blindness and Poison Effect");
         translationBuilder.add("farmersdelight.tooltip.coconut_water","Clear Weakness Effect");
+        translationBuilder.add("farmersdelight.tooltip.butterfly_pea_tea","Clear Slowness");
         translationBuilder.add("jei.info.papaya_log","Right click with bone meal to grow papayas.");
 
 
@@ -207,6 +214,10 @@ public class LangDataGen extends FabricLanguageProvider {
         translationBuilder.add(ModItems.KHANOM_BABIN,"Khanom Babin");
         translationBuilder.add(ModItems.COCONUT_PIE,"Coconut Pie");
         translationBuilder.add(ModItems.COCONUT_PIE_SLICE,"Coconut Pie Slice");
+        translationBuilder.add(ModItems.HONEY_COCONUT_PIE,"Honey Coconut Pie");
+        translationBuilder.add(ModItems.HONEY_COCONUT_PIE_SLICE,"Honey Coconut Pie Slice");
+        translationBuilder.add(ModItems.OMELETTE_FEAST,"Omelette");
+        translationBuilder.add(ModItems.OMELETTE,"Plate of Omelette");
         translationBuilder.add(ModItems.BASIL_OMELETTE_FEAST,"Basil Omelette");
         translationBuilder.add(ModItems.BASIL_OMELETTE,"Plate of Basil Omelette");
         translationBuilder.add(ModItems.BAMBOO_SHOOT_SOUP,"Bamboo Shoot Soup");
@@ -320,10 +331,17 @@ public class LangDataGen extends FabricLanguageProvider {
             translationBuilder.add("advancement.muffins_thaidelight.susie_prize","ของรางวัลซูซี่");
             translationBuilder.add("advancement.muffins_thaidelight.susie_prize.description","ทำให้ดอกมะละกอสว่างขึ้นด้วยหมึกเรืองแสง เอาน่าคุณควรได้รางวัลบ้างนะ");
 
+            translationBuilder.add("advancement.muffins_thaidelight.big_big_nut","มะพร้าวอันเบิ้มๆ");
+            translationBuilder.add("advancement.muffins_thaidelight.big_big_nut.description","รับลูกมะพร้าวร่วงด้วยกระสอบ ลูกเบิ้มๆเลย");
+
+            translationBuilder.add("advancement.muffins_thaidelight.gravity_not_invent","แรงโน้มถ่วงไม่ถูกคิดค้น");
+            translationBuilder.add("advancement.muffins_thaidelight.gravity_not_invent.description","โดนลูกทุเรียนหล่นใส่หัว อันนี้ไม่น่าใช่ต้นแอปเปิ้ลนะ");
+
             translationBuilder.add("farmersdelight.tooltip.papaya_juice","ล้างหิวเร็ว");
             translationBuilder.add("farmersdelight.tooltip.lime_juice","ล้างตาบอด");
             translationBuilder.add("farmersdelight.tooltip.honey_lime_juice","ล้างตาบอดและพิษ");
             translationBuilder.add("farmersdelight.tooltip.coconut_water","ล้างโจมตีเบา");
+            translationBuilder.add("farmersdelight.tooltip.butterfly_pea_tea","ล้างวิ่งช้า");
             translationBuilder.add("jei.info.papaya_log","คลิ๊กขวาด้วยผงกระดูกเพื่อโตผลมะละกอ");
 
             translationBuilder.add("item.muffins_thaidelight.tasty","อยากอาหาร");
@@ -491,6 +509,10 @@ public class LangDataGen extends FabricLanguageProvider {
             translationBuilder.add(ModItems.KHANOM_BABIN,"ขนมบ้าบิ่น");
             translationBuilder.add(ModItems.COCONUT_PIE,"พายมะพร้าว");
             translationBuilder.add(ModItems.COCONUT_PIE_SLICE,"สไลด์พายมะพร้าว");
+            translationBuilder.add(ModItems.HONEY_COCONUT_PIE,"พายมะพร้าวราดน้ำผึ้ง");
+            translationBuilder.add(ModItems.HONEY_COCONUT_PIE_SLICE,"สไลด์พายมะพร้าวราดน้ำผึ้ง");
+            translationBuilder.add(ModItems.OMELETTE_FEAST,"ไข่เจียว");
+            translationBuilder.add(ModItems.OMELETTE,"จานไข่เจียว");
             translationBuilder.add(ModItems.BASIL_OMELETTE_FEAST,"ไข่เจียวโหระพา");
             translationBuilder.add(ModItems.BASIL_OMELETTE,"จานไข่เจียวโหระพา");
             translationBuilder.add(ModItems.BAMBOO_SHOOT_SOUP,"แกงหน่อไม้");

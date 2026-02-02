@@ -4,6 +4,7 @@ import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
@@ -76,4 +77,7 @@ public class ModTags {
     public static final TagKey<Item> SUMMER_CROPS_ITEM = TagKey.create(Registries.ITEM,new ResourceLocation("sereneseasons","summer_crops"));
     public static final TagKey<Item> WINTER_CROPS_ITEM = TagKey.create(Registries.ITEM,new ResourceLocation("sereneseasons","winter_crops"));
 
+
+    //Damage Types
+    public static final TagKey<DamageType> FALLING_DURIAN = TagKey.create(Registries.DAMAGE_TYPE,ThaiDelight.modid("falling_durian"));
 }
