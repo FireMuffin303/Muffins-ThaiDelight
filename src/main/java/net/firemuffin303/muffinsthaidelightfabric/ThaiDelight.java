@@ -8,12 +8,16 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.registry.TillableBlockRegistry;
 import net.fabricmc.loader.api.FabricLoader;
+import net.firemuffin303.muffinsthaidelightfabric.common.block.FermentedFishCauldronBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.entity.DragonflyEntity;
 import net.firemuffin303.muffinsthaidelightfabric.common.item.DragonflyBottleItem;
 import net.firemuffin303.muffinsthaidelightfabric.integration.midnightLib.ThaiDelightConfig;
 import net.firemuffin303.muffinsthaidelightfabric.registry.*;
 import net.firemuffin303.muffinsthaidelightfabric.util.CommonEvents;
+import net.minecraft.core.BlockSource;
+import net.minecraft.core.Direction;
 import net.minecraft.core.Registry;
+import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -21,6 +25,9 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.item.alchemy.PotionBrewing;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.DispenserBlock;
+import net.minecraft.world.level.block.LayeredCauldronBlock;
+import net.minecraft.world.level.block.state.BlockState;
 import org.slf4j.Logger;
 
 import java.util.*;
@@ -109,6 +116,26 @@ public class ThaiDelight implements ModInitializer {
         PotionBrewing.addMix(ModMobEffects.STENCH_POTION, Items.GLOWSTONE_DUST,ModMobEffects.STRONG_STENCH_POTION);
 
         TillableBlockRegistry.register(Blocks.BAMBOO_SAPLING,useOnContext -> true,Blocks.AIR.defaultBlockState(),ModItems.BAMBOO_SHOOT);
+
+        DefaultDispenseItemBehavior defaultDispenseItemBehavior = new DefaultDispenseItemBehavior(){
+            @Override
+            protected ItemStack execute(BlockSource blockSource, ItemStack itemStack) {
+                Direction direction = blockSource.getBlockState().getValue(DispenserBlock.FACING);
+                BlockState blockState = blockSource.getLevel().getBlockState(blockSource.getPos().relative(direction));
+                if(blockState.is(Blocks.WATER_CAULDRON) && blockState.getValue(LayeredCauldronBlock.LEVEL) == 3){
+                    blockSource.getLevel().setBlock(blockSource.getPos().relative(direction),ModBlocks.FERMENTED_FISH_CAULDRON.defaultBlockState().setValue(FermentedFishCauldronBlock.LEVEL,3), 3);
+                    itemStack.shrink(1);
+                    return itemStack;
+                }
+
+
+                return super.execute(blockSource,itemStack);
+            }
+        };
+
+        DispenserBlock.registerBehavior(Items.COD,defaultDispenseItemBehavior);
+        DispenserBlock.registerBehavior(Items.SALMON,defaultDispenseItemBehavior);
+        DispenserBlock.registerBehavior(Items.TROPICAL_FISH,defaultDispenseItemBehavior);
 
     }
 

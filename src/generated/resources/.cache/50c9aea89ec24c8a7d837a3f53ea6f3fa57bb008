@@ -1,4 +1,4 @@
-// 1.20.1	2026-02-03T20:35:07.8490878	Muffin's Thai's Delight Refabricated/Tags for minecraft:block
+// 1.20.1	2026-02-03T23:49:15.8434536	Muffin's Thai's Delight Refabricated/Tags for minecraft:block
 ea3aea25fe2e387145415905365d873d5c905843 data\muffins_thaidelight\tags\blocks\sack_heavy_catchable.json
 e17f31464de156aacc01673039b972c6bc43c4ca data\farmersdelight\tags\blocks\wild_crops.json
 dbd743d02ce42fc855d1ba0eae6172852983951e data\minecraft\tags\blocks\wooden_pressure_plates.json
@@ -14,8 +14,8 @@ b86b5ed44294037342281f19ad8b9335f128e089 data\muffins_thaidelight\tags\blocks\ma
 e8cd343c1eae9bbc4e7b6cfaa37c084399044234 data\minecraft\tags\blocks\ceiling_hanging_signs.json
 19d500096b5e2ec9a64e73826e61bd6b33acd603 data\minecraft\tags\blocks\candle_cakes.json
 ae7eb8a3671e3ffc481f0d370af2def02a40edfa data\minecraft\tags\blocks\fence_gates.json
-2ab2393739d09f57af554b5f4a5f8bebcd10838c data\minecraft\tags\blocks\mineable\hoe.json
 71d8acbdaf4034bbfb7d33f1259cf775c6e43ef9 data\minecraft\tags\blocks\mineable\axe.json
+2ab2393739d09f57af554b5f4a5f8bebcd10838c data\minecraft\tags\blocks\mineable\hoe.json
 13738ca5325e1cee5e8dfe846f99054e5262abb3 data\minecraft\tags\blocks\leaves.json
 973b7856466364aa110084974dd7dbc3236f4da5 data\muffins_thaidelight\tags\blocks\papaya_logs.json
 a1a8cb8d5592d488e7812ebbfb14775b0cb3306f data\minecraft\tags\blocks\small_flowers.json

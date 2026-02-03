@@ -251,9 +251,11 @@ public class LangDataGen extends FabricLanguageProvider {
         translationBuilder.add("item.minecraft.tipped_arrow.effect.long_stench","Arrow of Stench");
         translationBuilder.add("item.minecraft.tipped_arrow.effect.strong_stench","Arrow of Stench");
 
-        translationBuilder.add("muffins_thaidelight.jei.fermented_fish.cauldron1","Putting a fish into Water Cauldron");
-        translationBuilder.add("muffins_thaidelight.jei.fermented_fish.cauldron2","and wait for 6 - 15 minutes");
-        translationBuilder.add("muffins_thaidelight.jei.fermented_fish.cauldron3","until it fully fermented.");
+        translationBuilder.add("muffins_thaidelight.jei.cauldron.fermented_fish1","Putting a fish into Water Cauldron");
+        translationBuilder.add("muffins_thaidelight.jei.cauldron.fermented_fish2","and wait for 6 - 15 minutes");
+        translationBuilder.add("muffins_thaidelight.jei.cauldron.fermented_fish3","until it fully fermented.");
+
+        translationBuilder.add("muffins_thaidelight.jei.cauldron.coconut_milk_bottle","Put water into filled Coconut Cauldron");
 
         translationBuilder.add("emi.category.muffins_thaidelight.mortar","Mortar");
         translationBuilder.add("emi.category.muffins_thaidelight.fermented_fish","Fermenting");

@@ -11,7 +11,6 @@ import dev.emi.emi.api.widget.WidgetHolder;
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.FermentedFishCauldronBlock;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
-import net.firemuffin303.muffinsthaidelightfabric.registry.ModItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
@@ -20,13 +19,14 @@ import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.LayeredCauldronBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Quaternionf;
-import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.utility.ClientRenderUtils;
 
 import java.util.List;
@@ -36,11 +36,23 @@ public class EMIFermentedFishRecipe implements EmiRecipe {
     private final EmiStack container;
     private final EmiStack result;
     private final ResourceLocation BACKGROUND = ThaiDelight.modid("textures/gui/jei/fermented_fish_jei.png");
+    private final TransformMode transformMode;
 
-    public EMIFermentedFishRecipe(){
-        this.ingredient = EmiIngredient.of(ItemTags.FISHES);
-        this.container = EmiStack.of(Items.BOWL);
-        this.result = EmiStack.of(ModItems.FERMENTED_FISH);
+    private final BlockState blockState;
+
+    public EMIFermentedFishRecipe(TagKey<Item> tagKey,int requiredAmount,Item container,Item result,TransformMode transformMode){
+        this.ingredient = EmiIngredient.of(tagKey,requiredAmount);
+        this.container = EmiStack.of(container);
+        this.result = EmiStack.of(result);
+        this.transformMode = transformMode;
+
+        //I know this is stupid. but it works.
+        if(this.transformMode == TransformMode.WAIT){
+            this.blockState = ModBlocks.FERMENTED_FISH_CAULDRON.defaultBlockState().setValue(FermentedFishCauldronBlock.LEVEL,3);
+        } else {
+            this.blockState = ModBlocks.COCONUT_CAULDRON.defaultBlockState();
+        }
+
     }
 
     @Override
@@ -50,7 +62,7 @@ public class EMIFermentedFishRecipe implements EmiRecipe {
 
     @Override
     public @Nullable ResourceLocation getId() {
-        return ThaiDelight.modid("/fermented_fish");
+        return ThaiDelight.modid("/%s_cauldron".formatted(this.result.getId().getPath()));
     }
 
     @Override
@@ -76,6 +88,14 @@ public class EMIFermentedFishRecipe implements EmiRecipe {
     @Override
     public void addWidgets(WidgetHolder widgetHolder) {
         widgetHolder.addTexture(BACKGROUND,1,1,154,65,256,256);
+        widgetHolder.addTexture(BACKGROUND,98,14,18,18,154,22);
+
+        if(transformMode == TransformMode.WAIT){
+            widgetHolder.addTexture(BACKGROUND,70,2,17,22,154,0);
+        }else if(transformMode == TransformMode.WATER){
+            widgetHolder.addTexture(BACKGROUND,69,4,18,18,154,22);
+            widgetHolder.addSlot(EmiStack.of(Items.WATER_BUCKET),69,4).drawBack(false);
+        }
 
         widgetHolder.addSlot(this.ingredient,22,33).drawBack(false);
         widgetHolder.addSlot(this.container,98,14).drawBack(false);
@@ -112,15 +132,22 @@ public class EMIFermentedFishRecipe implements EmiRecipe {
                 poseStack.scale(20f,20f,-20f);
                 poseStack.translate(3.1f,0.9,-3);
                 poseStack.rotateAround(new Quaternionf().rotateXYZ(0.33633232F, -2.7F, 3.1415927F),1,1,1);
-                BlockState blockState = ModBlocks.FERMENTED_FISH_CAULDRON.defaultBlockState().setValue(FermentedFishCauldronBlock.FERMENT,state).setValue(FermentedFishCauldronBlock.LEVEL,3);
+                BlockState blockState;
+
+                if(transformMode == TransformMode.WAIT){
+                    blockState = EMIFermentedFishRecipe.this.blockState.setValue(FermentedFishCauldronBlock.FERMENT,state);
+                }else {
+                    blockState = EMIFermentedFishRecipe.this.blockState.setValue(LayeredCauldronBlock.LEVEL,3);
+                }
+
                 Minecraft.getInstance().getBlockRenderer().getModelRenderer().renderModel(
                         poseStack.last(),
                         guiGraphics.bufferSource().getBuffer(Sheets.solidBlockSheet()),
                         blockState,
                         Minecraft.getInstance().getBlockRenderer().getBlockModel(blockState),
-                        state == 0 ? f : 1,
-                        state == 0 ? g : 1,
-                        state == 0 ? h : 1, LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY
+                        state == 0 && transformMode == TransformMode.WAIT ? f : 1,
+                        state == 0 && transformMode == TransformMode.WAIT ? g : 1,
+                        state == 0 && transformMode == TransformMode.WAIT ? h : 1, LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY
                 );
 
                 poseStack.popPose();
@@ -128,16 +155,21 @@ public class EMIFermentedFishRecipe implements EmiRecipe {
         });
 
         widgetHolder.addTooltip((mouseX, mouseY) -> {
-            if(ClientRenderUtils.isCursorInsideBounds(60,27,34,29,mouseX,mouseY) ||
-                    ClientRenderUtils.isCursorInsideBounds(69,2,17,22,mouseX,mouseY)
-            ){
-                return ImmutableList.of(createTooltip("cauldron1"),createTooltip("cauldron2"),createTooltip("cauldron3"));
+            if(ClientRenderUtils.isCursorInsideBounds(60,27,34,29,mouseX,mouseY)){
+                return EMIFermentedFishRecipe.this.transformMode == TransformMode.WAIT ?
+                        ImmutableList.of(createTooltip("fermented_fish1"),createTooltip("fermented_fish2"),createTooltip("fermented_fish3")) :
+                        ImmutableList.of(createTooltip(this.result.getId().getPath()));
             }
             return List.of();
         }, 0, 0, widgetHolder.getWidth(), widgetHolder.getHeight());
     }
 
     private static ClientTooltipComponent createTooltip(@NotNull String suffix) {
-        return ClientTooltipComponent.create(Component.translatable(ThaiDelight.MOD_ID + ".jei.fermented_fish." + suffix).getVisualOrderText());
+        return ClientTooltipComponent.create(Component.translatable(ThaiDelight.MOD_ID + ".jei.cauldron." + suffix).getVisualOrderText());
+    }
+
+    public static enum TransformMode{
+        WAIT,
+        WATER
     }
 }

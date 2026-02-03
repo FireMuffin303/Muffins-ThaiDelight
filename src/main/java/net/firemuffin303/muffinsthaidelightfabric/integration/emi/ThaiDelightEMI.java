@@ -9,11 +9,12 @@ import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
 import net.firemuffin303.muffinsthaidelightfabric.common.recipe.mortar.MortarRecipe;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModItems;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModRecipes;
+import net.firemuffin303.muffinsthaidelightfabric.registry.ModTags;
 import net.minecraft.world.item.Items;
 
 public class ThaiDelightEMI implements EmiPlugin {
     public static final EmiRecipeCategory FERMENTED_FISH = new EmiRecipeCategory(
-            ThaiDelight.modid("fermented_fish"),
+            ThaiDelight.modid("cauldron_crafting"),
             EmiStack.of(Items.CAULDRON),
             new EmiTexture(ThaiDelight.modid("textures/gui/emi/cauldron.png"),0,0,16,16,16,16,16,16)
     );
@@ -34,6 +35,7 @@ public class ThaiDelightEMI implements EmiPlugin {
             emiRegistry.addRecipe(new EMIMortarRecipe(recipe));
         }
 
-        emiRegistry.addRecipe(new EMIFermentedFishRecipe());
+        emiRegistry.addRecipe(new EMIFermentedFishRecipe(ModTags.COMMON_RAW_FISHES,1,Items.BOWL,ModItems.FERMENTED_FISH, EMIFermentedFishRecipe.TransformMode.WAIT));
+        emiRegistry.addRecipe(new EMIFermentedFishRecipe(ModTags.COCONUT,3,Items.GLASS_BOTTLE,ModItems.COCONUT_MILK_BOTTLE, EMIFermentedFishRecipe.TransformMode.WATER));
     }
 }
