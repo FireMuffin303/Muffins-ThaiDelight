@@ -97,6 +97,15 @@ dependencies {
         modRuntimeOnly("maven.modrinth:fish-of-thieves:hI4gvof3")
     }
 
+    if(seasons.toBoolean()){
+        modRuntimeOnly("maven.modrinth:serene-seasons:c1BdjabH")
+        modRuntimeOnly("maven.modrinth:glitchcore:25HLOiOl")
+    }
+
+    if(expanded_delight.toBoolean()){
+        modLocalRuntime("maven.modrinth:expanded-delight:4KEfJPHI")
+    }
+
     modCompileOnly("maven.modrinth:fish-of-thieves:hI4gvof3")
     modCompileOnlyApi("mezz.jei:jei-${minecraft_version}-fabric-api:${project.jei_version}")
     modRuntimeOnly("mezz.jei:jei-${minecraft_version}-fabric:${project.jei_version}")

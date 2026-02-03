@@ -445,7 +445,7 @@ public class ModRecipeDataGen extends FabricRecipeProvider {
 
     private void mortar(Consumer<FinishedRecipe> exporter){
         MortarRecipeBuilder.mortar(ModBlocks.SOMTAM_FEAST)
-                .requires(ModItems.PEPPER)
+                .requires(ModTags.PEPPER)
                 .requires(vectorwing.farmersdelight.common.registry.ModItems.TOMATO.get())
                 .requires(ModTags.RAW_PAPAYA)
                 .requires(ModItems.FERMENTED_FISH)
@@ -647,7 +647,7 @@ public class ModRecipeDataGen extends FabricRecipeProvider {
 
         MortarRecipeBuilder.mortar(ModItems.STEAMED_BAMBOO_SHOOT,1)
                 .requires(ModItems.BAMBOO_SHOOT)
-                .requires(ModItems.PEPPER)
+                .requires(ModTags.PEPPER)
                 .requires(ModItems.FERMENTED_FISH)
                 .requires(ModTags.COMMON_COOKED_MEATS)
                 .container(Items.BOWL)
@@ -679,12 +679,12 @@ public class ModRecipeDataGen extends FabricRecipeProvider {
         CookingPotRecipeBuilder.cookingPot(ModItems.LARB_FEAST,1,200,0.35f)
                 .requires(ModTags.COMMON_COOKED_MEATS)
                 .requires(ModTags.COMMON_COOKED_MEATS)
-                .requires(ModItems.PEPPER)
+                .requires(ModTags.PEPPER)
                 .requires(Items.SUGAR)
                 .requires(ModItems.FISH_SAUCE_BOTTLE)
                 .requires(vectorwing.farmersdelight.common.registry.ModItems.ONION.get())
                 .container(Items.BOWL)
-                .unlockedBy("has_pepper",RecipeProvider.has(ModItems.PEPPER))
+                .unlockedBy("has_pepper",RecipeProvider.has(ModTags.PEPPER))
                 .save(exporter,ThaiDelight.modid("cooking_pot/larb_feast"));
 
         CookingPotRecipeBuilder.cookingPot(ModItems.FISH_SAUCE_BOTTLE,1,100,0.35f)
@@ -696,7 +696,7 @@ public class ModRecipeDataGen extends FabricRecipeProvider {
         CookingPotRecipeBuilder.cookingPot(ModItems.PHAT_KAPHRAO_FEAST,1)
                 .requires(ModTags.COMMON_COOKED_MEATS)
                 .requires(ModItems.HOLY_BASIL)
-                .requires(ModItems.PEPPER)
+                .requires(ModTags.PEPPER)
                 .requires(ModItems.FISH_SAUCE_BOTTLE)
                 .requires(Items.EGG)
                 .container(Items.BOWL)
@@ -707,7 +707,7 @@ public class ModRecipeDataGen extends FabricRecipeProvider {
         CookingPotRecipeBuilder.cookingPot(ModItems.DURIAN_CURRY,1)
                 .requires(ModTags.DURIAN)
                 .requires(ModItems.COCONUT_MILK_BOTTLE)
-                .requires(ModItems.PEPPER)
+                .requires(ModTags.PEPPER)
                 .requires(ModItems.FISH_SAUCE_BOTTLE)
                 .requires(ModTags.COMMON_COOKED_MEATS)
                 .container(Items.BOWL)
@@ -747,7 +747,7 @@ public class ModRecipeDataGen extends FabricRecipeProvider {
                 .requires(Items.EGG)
                 .requires(ModItems.FISH_SAUCE_BOTTLE)
                 .requires(ModItems.BASIL)
-                .requires(ModItems.PEPPER)
+                .requires(ModTags.PEPPER)
                 .container(Items.BOWL)
                 .recipeTab(CookingPotRecipeBookTab.MEALS)
                 .unlockedBy("has_egg",RecipeProvider.has(Items.EGG))
@@ -768,7 +768,7 @@ public class ModRecipeDataGen extends FabricRecipeProvider {
 
         CookingPotRecipeBuilder.cookingPot(ModItems.BAMBOO_SHOOT_SOUP,1)
                 .requires(ModItems.BAMBOO_SHOOT)
-                .requires(ModItems.PEPPER)
+                .requires(ModTags.PEPPER)
                 .requires(ModItems.FERMENTED_FISH)
                 .requires(vectorwing.farmersdelight.common.registry.ModItems.PUMPKIN_SLICE.get())
                 .requires(ModItems.BASIL)

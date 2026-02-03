@@ -66,6 +66,10 @@ public class ModTags {
     public static final TagKey<Item> COMMON_EGGS = TagKey.create(Registries.ITEM,new ResourceLocation("c","eggs"));
     public static final TagKey<Item> COMMON_RAW_FISHES = TagKey.create(Registries.ITEM,new ResourceLocation("c","foods/raw_fishes"));
 
+    public static final TagKey<Item> CROPS = TagKey.create(Registries.ITEM,new ResourceLocation("c","crops"));
+    public static final TagKey<Item> VEGETABLES = TagKey.create(Registries.ITEM,new ResourceLocation("c","foods/vegetables"));
+    public static final TagKey<Item> PEPPER = TagKey.create(Registries.ITEM,new ResourceLocation("c","foods/vegetables/chili_pepper"));
+
     //----- SereneSeason -----
     public static final TagKey<Block> AUTUMN_CROPS = TagKey.create(Registries.BLOCK,new ResourceLocation("sereneseasons","autumn_crops"));
     public static final TagKey<Block> SPRING_CROPS = TagKey.create(Registries.BLOCK,new ResourceLocation("sereneseasons","spring_crops"));

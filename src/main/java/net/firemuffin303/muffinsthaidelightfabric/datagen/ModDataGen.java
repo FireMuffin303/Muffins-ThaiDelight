@@ -6,6 +6,7 @@ import net.firemuffin303.muffinsthaidelightfabric.datagen.loottable.ModBlockLoot
 import net.firemuffin303.muffinsthaidelightfabric.datagen.loottable.ModChestLootTableProvider;
 import net.firemuffin303.muffinsthaidelightfabric.datagen.loottable.ModCustomLootTableProvider;
 import net.firemuffin303.muffinsthaidelightfabric.datagen.loottable.ModEntityLootTableProvider;
+import net.firemuffin303.muffinsthaidelightfabric.datagen.tag.ModBlockTagDataGen;
 import net.firemuffin303.muffinsthaidelightfabric.datagen.tag.ModDamageTypeTagDataGen;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModDamageTypes;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModFeatures;
@@ -27,7 +28,7 @@ public class ModDataGen implements DataGeneratorEntrypoint {
         pack.addProvider(LangDataGen::new);
         pack.addProvider(LangDataGen.ThaiLangData::new);
 
-        pack.addProvider(ModTagDataGen.ModBlockTagDataGen::new);
+        pack.addProvider(ModBlockTagDataGen::new);
         pack.addProvider(ModTagDataGen.ModItemTagDataGen::new);
         pack.addProvider(ModTagDataGen.ModEntityTypesTagDataGen::new);
         pack.addProvider(ModTagDataGen.ModBiomeTagDataGen::new);
