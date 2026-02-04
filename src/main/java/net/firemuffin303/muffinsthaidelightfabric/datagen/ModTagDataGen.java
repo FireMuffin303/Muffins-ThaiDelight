@@ -72,7 +72,7 @@ public class ModTagDataGen {
                     .addTag(ModTags.RAW_PAPAYA);
 
             getOrCreateTagBuilder(DURIAN)
-                    .add(ModItems.DURIAN,ModItems.SMALL_DURIAN);
+                    .add(ModItems.DURIAN,ModItems.SMALL_DURIAN,ModItems.DURIAN_PULP);
 
             getOrCreateTagBuilder(MANGO)
                     .add(ModItems.MANGO,ModItems.MANGO_SLICE)

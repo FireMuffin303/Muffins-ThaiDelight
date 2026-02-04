@@ -8,10 +8,10 @@
   "group": "honey_lime_juice",
   "ingredients": [
     {
-      "tag": "muffins_thaidelight:lime"
+      "tag": "c:foods/lime"
     },
     {
-      "tag": "muffins_thaidelight:lime"
+      "tag": "c:foods/lime"
     },
     {
       "item": "minecraft:sugar"

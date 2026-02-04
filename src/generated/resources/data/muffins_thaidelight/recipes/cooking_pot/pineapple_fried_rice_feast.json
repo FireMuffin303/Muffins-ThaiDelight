@@ -3,7 +3,7 @@
     {
       "condition": "fabric:tags_populated",
       "values": [
-        "muffins_thaidelight:pineapple"
+        "c:foods/pineapple"
       ]
     }
   ],
@@ -15,7 +15,7 @@
   "experience": 1.0,
   "ingredients": [
     {
-      "tag": "muffins_thaidelight:pineapple"
+      "tag": "c:foods/pineapple"
     },
     {
       "item": "farmersdelight:rice"

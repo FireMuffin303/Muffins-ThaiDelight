@@ -3,7 +3,7 @@
   "category": "misc",
   "ingredients": [
     {
-      "tag": "muffins_thaidelight:raw_papaya"
+      "tag": "c:foods/raw_papaya"
     },
     {
       "item": "farmersdelight:tomato"

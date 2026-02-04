@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "tag": "muffins_thaidelight:coconut"
+            "tag": "c:foods/coconut"
           }
         ]
       },

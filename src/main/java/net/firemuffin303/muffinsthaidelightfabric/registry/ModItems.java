@@ -330,6 +330,9 @@ public class ModItems {
         Item.BY_BLOCK.put(ModBlocks.HANGING_DURIAN,ModItems.DURIAN);
         Item.BY_BLOCK.put(ModBlocks.HANGING_MANGO_BLOCK,ModItems.MANGO);
         Item.BY_BLOCK.put(ModBlocks.PAPAYA,ModItems.PAPAYA);
+        Item.BY_BLOCK.put(ModBlocks.FERMENTED_FISH_CAULDRON,Items.CAULDRON);
+        Item.BY_BLOCK.put(ModBlocks.COCONUT_CAULDRON,Items.CAULDRON);
+        Item.BY_BLOCK.put(ModBlocks.COCONUT_MILK_CAULDRON,Items.CAULDRON);
     }
 
 

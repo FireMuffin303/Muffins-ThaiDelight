@@ -7,7 +7,7 @@
   "experience": 1.0,
   "ingredients": [
     {
-      "tag": "muffins_thaidelight:durian"
+      "tag": "c:foods/durian"
     },
     {
       "item": "muffins_thaidelight:coconut_milk_bottle"

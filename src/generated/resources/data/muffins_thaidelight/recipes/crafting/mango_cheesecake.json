@@ -6,7 +6,7 @@
       "tag": "c:milks"
     },
     "M": {
-      "tag": "muffins_thaidelight:mango"
+      "tag": "c:foods/mango"
     },
     "P": {
       "item": "farmersdelight:pie_crust"

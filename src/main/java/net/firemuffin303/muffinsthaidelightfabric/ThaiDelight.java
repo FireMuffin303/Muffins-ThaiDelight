@@ -9,6 +9,7 @@ import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.registry.TillableBlockRegistry;
 import net.fabricmc.loader.api.FabricLoader;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.FermentedFishCauldronBlock;
+import net.firemuffin303.muffinsthaidelightfabric.common.block.cauldron.CoconutCauldron;
 import net.firemuffin303.muffinsthaidelightfabric.common.entity.DragonflyEntity;
 import net.firemuffin303.muffinsthaidelightfabric.common.item.DragonflyBottleItem;
 import net.firemuffin303.muffinsthaidelightfabric.integration.midnightLib.ThaiDelightConfig;
@@ -21,9 +22,11 @@ import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.alchemy.PotionBrewing;
 import net.minecraft.world.item.alchemy.Potions;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.block.LayeredCauldronBlock;
@@ -137,6 +140,31 @@ public class ThaiDelight implements ModInitializer {
         DispenserBlock.registerBehavior(Items.SALMON,defaultDispenseItemBehavior);
         DispenserBlock.registerBehavior(Items.TROPICAL_FISH,defaultDispenseItemBehavior);
 
+        DispenserBlock.registerBehavior(ModItems.COCONUT_SLICE,new DefaultDispenseItemBehavior(){
+            private final DefaultDispenseItemBehavior defaultDispenseItemBehavior = new DefaultDispenseItemBehavior();
+            @Override
+            protected ItemStack execute(BlockSource blockSource, ItemStack itemStack) {
+                Direction direction = blockSource.getBlockState().getValue(DispenserBlock.FACING);
+                BlockState blockState = blockSource.getLevel().getBlockState(blockSource.getPos().relative(direction));
+                if(blockState.is(Blocks.CAULDRON) || blockState.is(ModBlocks.COCONUT_CAULDRON) || blockState.is(ModBlocks.COCONUT_MILK_CAULDRON)){
+                    if( (blockState.is(ModBlocks.COCONUT_CAULDRON) && blockState.getValue(CoconutCauldron.LEVEL) >=3) || blockState.is(ModBlocks.COCONUT_MILK_CAULDRON)){
+                        return itemStack;
+                    }
+
+                    int level = blockState.is(ModBlocks.COCONUT_CAULDRON) ? blockState.getValue(CoconutCauldron.LEVEL) + 1 : 1;
+                    level = Mth.clamp(level,1,3);
+                    blockSource.getLevel().setBlockAndUpdate(blockSource.getPos().relative(direction), ModBlocks.COCONUT_CAULDRON.defaultBlockState().setValue(FermentedFishCauldronBlock.LEVEL,level));
+                    itemStack.shrink(1);
+                    if(itemStack.isEmpty()){
+                        return itemStack.getRecipeRemainder();
+                    }
+                    this.defaultDispenseItemBehavior.dispense(blockSource, itemStack.copy().getRecipeRemainder());
+                    return itemStack;
+                }
+
+                return super.execute(blockSource, itemStack);
+            }
+        });
     }
 
     private static void itemsGenerator(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output output){

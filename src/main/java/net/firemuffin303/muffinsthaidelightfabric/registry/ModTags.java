@@ -12,15 +12,15 @@ import net.minecraft.world.level.block.Block;
 public class ModTags {
     public static final TagKey<Block> PAPAYA_LOGS = TagKey.create(Registries.BLOCK, new ResourceLocation(ThaiDelight.MOD_ID,"papaya_logs"));
 
-    public static final TagKey<Item> LIME = TagKey.create(Registries.ITEM, new ResourceLocation(ThaiDelight.MOD_ID,"lime"));
-    public static final TagKey<Item> PAPAYA = TagKey.create(Registries.ITEM, new ResourceLocation(ThaiDelight.MOD_ID,"papaya"));
-    public static final TagKey<Item> RIPE_PAPAYA = TagKey.create(Registries.ITEM, new ResourceLocation(ThaiDelight.MOD_ID,"ripe_papaya"));
-    public static final TagKey<Item> RAW_PAPAYA = TagKey.create(Registries.ITEM, new ResourceLocation(ThaiDelight.MOD_ID,"raw_papaya"));
-    public static final TagKey<Item> DURIAN = TagKey.create(Registries.ITEM,ThaiDelight.modid("durian"));
-    public static final TagKey<Item> MANGO = TagKey.create(Registries.ITEM,ThaiDelight.modid("mango"));
-    public static final TagKey<Item> COCONUT = TagKey.create(Registries.ITEM,ThaiDelight.modid("coconut"));
-    public static final TagKey<Item> PINEAPPLE = TagKey.create(Registries.ITEM,ThaiDelight.modid("pineapple"));
-    public static final TagKey<Item> BANANA = TagKey.create(Registries.ITEM,ThaiDelight.modid("banana"));
+    public static final TagKey<Item> LIME = TagKey.create(Registries.ITEM, new ResourceLocation("c","foods/lime"));
+    public static final TagKey<Item> PAPAYA = TagKey.create(Registries.ITEM, new ResourceLocation("c","foods/papaya"));
+    public static final TagKey<Item> RIPE_PAPAYA = TagKey.create(Registries.ITEM, new ResourceLocation("c","foods/ripe_papaya"));
+    public static final TagKey<Item> RAW_PAPAYA = TagKey.create(Registries.ITEM, new ResourceLocation("c","foods/raw_papaya"));
+    public static final TagKey<Item> DURIAN = TagKey.create(Registries.ITEM,new ResourceLocation("c","foods/durian"));
+    public static final TagKey<Item> MANGO = TagKey.create(Registries.ITEM,new ResourceLocation("c","foods/mango"));
+    public static final TagKey<Item> COCONUT = TagKey.create(Registries.ITEM,new ResourceLocation("c","foods/coconut"));
+    public static final TagKey<Item> PINEAPPLE = TagKey.create(Registries.ITEM,new ResourceLocation("c","foods/pineapple"));
+    public static final TagKey<Item> BANANA = TagKey.create(Registries.ITEM,new ResourceLocation("c","foods/banana"));
 
     public static final TagKey<Item> FLOWER_CRAB_MEAT = TagKey.create(Registries.ITEM, new ResourceLocation(ThaiDelight.MOD_ID,"flower_crab_meat"));
 

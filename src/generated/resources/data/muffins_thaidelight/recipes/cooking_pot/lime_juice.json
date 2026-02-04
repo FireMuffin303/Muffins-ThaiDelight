@@ -7,10 +7,10 @@
   "experience": 0.35,
   "ingredients": [
     {
-      "tag": "muffins_thaidelight:lime"
+      "tag": "c:foods/lime"
     },
     {
-      "tag": "muffins_thaidelight:lime"
+      "tag": "c:foods/lime"
     },
     {
       "item": "minecraft:sugar"

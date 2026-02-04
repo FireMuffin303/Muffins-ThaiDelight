@@ -7,10 +7,10 @@
   "experience": 0.35,
   "ingredients": [
     {
-      "tag": "muffins_thaidelight:coconut"
+      "tag": "c:foods/coconut"
     },
     {
-      "tag": "muffins_thaidelight:coconut"
+      "tag": "c:foods/coconut"
     },
     {
       "item": "minecraft:sugar"

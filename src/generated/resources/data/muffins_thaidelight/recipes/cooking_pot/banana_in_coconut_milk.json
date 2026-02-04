@@ -3,7 +3,7 @@
     {
       "condition": "fabric:tags_populated",
       "values": [
-        "muffins_thaidelight:banana"
+        "c:foods/banana"
       ]
     }
   ],
@@ -15,7 +15,7 @@
   "experience": 1.0,
   "ingredients": [
     {
-      "tag": "muffins_thaidelight:banana"
+      "tag": "c:foods/banana"
     },
     {
       "item": "muffins_thaidelight:coconut_milk_bottle"

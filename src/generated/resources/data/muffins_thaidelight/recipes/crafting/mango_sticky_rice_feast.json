@@ -3,7 +3,7 @@
   "category": "misc",
   "ingredients": [
     {
-      "tag": "muffins_thaidelight:mango"
+      "tag": "c:foods/mango"
     },
     {
       "item": "farmersdelight:cooked_rice"

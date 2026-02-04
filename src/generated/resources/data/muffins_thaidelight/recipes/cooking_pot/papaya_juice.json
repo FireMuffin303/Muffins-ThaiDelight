@@ -7,10 +7,10 @@
   "experience": 0.35,
   "ingredients": [
     {
-      "tag": "muffins_thaidelight:ripe_papaya"
+      "tag": "c:foods/ripe_papaya"
     },
     {
-      "tag": "muffins_thaidelight:ripe_papaya"
+      "tag": "c:foods/ripe_papaya"
     },
     {
       "item": "minecraft:sugar"
