@@ -32,6 +32,9 @@
     "emi": [
       "net.firemuffin303.muffinsthaidelightfabric.integration.emi.ThaiDelightEMI"
     ],
+    "rei_client": [
+      "net.firemuffin303.muffinsthaidelightfabric.integration.rei.ThaiDelightClientREI"
+    ],
     "mm:early_risers": [
       "net.firemuffin303.muffinsthaidelightfabric.util.ModASMEarlyRiser"
     ],
