@@ -110,7 +110,7 @@ dependencies {
     modCompileOnlyApi("mezz.jei:jei-${minecraft_version}-fabric-api:${project.jei_version}")
     modRuntimeOnly("mezz.jei:jei-${minecraft_version}-fabric:${project.jei_version}")
     modCompileOnly "dev.emi:emi-fabric:${emi_version}:api"
-    modLocalRuntime "dev.emi:emi-fabric:${emi_version}"
+    //modLocalRuntime "dev.emi:emi-fabric:${emi_version}"
 
 
 }
