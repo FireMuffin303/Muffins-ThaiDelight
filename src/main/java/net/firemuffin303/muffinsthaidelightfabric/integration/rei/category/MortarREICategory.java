@@ -1,4 +1,4 @@
-package net.firemuffin303.muffinsthaidelightfabric.integration.rei;
+package net.firemuffin303.muffinsthaidelightfabric.integration.rei.category;
 
 import me.shedaniel.math.Point;
 import me.shedaniel.math.Rectangle;
@@ -11,6 +11,8 @@ import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.entry.EntryIngredient;
 import me.shedaniel.rei.api.common.util.EntryStacks;
 import net.firemuffin303.muffinsthaidelightfabric.client.sceens.MortarScreen;
+import net.firemuffin303.muffinsthaidelightfabric.integration.rei.ThaiDelightClientREI;
+import net.firemuffin303.muffinsthaidelightfabric.integration.rei.display.MortarREIDisplay;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
 import net.minecraft.network.chat.Component;
 

@@ -1,12 +1,11 @@
-package net.firemuffin303.muffinsthaidelightfabric.integration.rei;
+package net.firemuffin303.muffinsthaidelightfabric.integration.rei.display;
 
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.display.basic.BasicDisplay;
 import me.shedaniel.rei.api.common.entry.EntryIngredient;
-import me.shedaniel.rei.api.common.entry.EntryStack;
 import me.shedaniel.rei.api.common.util.EntryIngredients;
-import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
 import net.firemuffin303.muffinsthaidelightfabric.common.recipe.mortar.MortarRecipe;
+import net.firemuffin303.muffinsthaidelightfabric.integration.rei.ThaiDelightClientREI;
 
 import java.util.List;
 
