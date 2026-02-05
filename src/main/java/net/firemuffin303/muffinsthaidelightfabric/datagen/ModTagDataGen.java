@@ -2,6 +2,7 @@ package net.firemuffin303.muffinsthaidelightfabric.datagen;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModBlocks;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModEntityTypes;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModItems;
@@ -33,6 +34,17 @@ public class ModTagDataGen {
         @Override
         protected void addTags(HolderLookup.Provider arg) {
             // getOrCreateTagBuilder(ItemTags.PIGLIN_LOVED).add(ModItems.GOLDEN_PASTLE);
+            getOrCreateTagBuilder(SPICY_FOODS).add(
+                    ModItems.PEPPER,
+                    ModItems.SOMTAM,
+                    ModItems.LARB,
+                    ModItems.PHAT_KAPHRAO,
+                    ModItems.BASIL_OMELETTE,
+                    ModItems.DURIAN_CURRY,
+                    ModItems.BAMBOO_SHOOT_SOUP,
+                    ModItems.STEAMED_BAMBOO_SHOOT
+            );
+
             getOrCreateTagBuilder(TagKey.create(Registries.ITEM, new ResourceLocation("origins", "meat")))
                     .add(ModItems.CRAB_MEAT)
                     .add(ModItems.COOKED_CRAB_MEAT)

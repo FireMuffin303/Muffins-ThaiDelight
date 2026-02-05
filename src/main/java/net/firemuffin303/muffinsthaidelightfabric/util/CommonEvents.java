@@ -1,11 +1,8 @@
 package net.firemuffin303.muffinsthaidelightfabric.util;
 
 import com.mojang.datafixers.util.Pair;
-import com.mojang.logging.LogUtils;
-import io.github.fabricators_of_create.porting_lib.entity.events.PlayerEvents;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
-import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
@@ -18,7 +15,6 @@ import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRe
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
-import net.fabricmc.fabric.api.resource.conditions.v1.ResourceConditions;
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
 import net.firemuffin303.muffinsthaidelightfabric.integration.midnightLib.ThaiDelightConfig;
 import net.firemuffin303.muffinsthaidelightfabric.network.packet.ModLevelEventPacket;
@@ -76,14 +72,12 @@ import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraft.world.level.block.FarmBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.dimension.LevelStem;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.structure.pools.SinglePoolElement;
 import net.minecraft.world.level.levelgen.structure.pools.StructurePoolElement;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorList;
-import net.minecraft.world.level.storage.LevelResource;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootDataManager;
 import net.minecraft.world.level.storage.loot.LootPool;
@@ -551,5 +545,9 @@ public class CommonEvents {
         }
 
         return f;
+    }
+
+    public static void onEatSpicyFood(ItemStack itemStack,LivingEntity livingEntity){
+        livingEntity.setTicksFrozen(0);
     }
 }

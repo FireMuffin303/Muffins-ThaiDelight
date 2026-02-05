@@ -36,6 +36,7 @@
     "loot.LootTableAccessor",
     "recipeBookType.RecipeBlockSettingMixin",
     "recipeBookType.RecipeBookTypeMixin",
+    "spicyFoodItem.LivingEntityMixin",
     "stinky.LivingEntityMixin",
     "stinky.SniffingMixin",
     "stinky.VillagerMixin",

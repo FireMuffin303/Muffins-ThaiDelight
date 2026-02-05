@@ -12,6 +12,8 @@ import net.minecraft.world.level.block.Block;
 public class ModTags {
     public static final TagKey<Block> PAPAYA_LOGS = TagKey.create(Registries.BLOCK, new ResourceLocation(ThaiDelight.MOD_ID,"papaya_logs"));
 
+    public static final TagKey<Item> SPICY_FOODS = TagKey.create(Registries.ITEM,ThaiDelight.modid("spicy_foods"));
+
     public static final TagKey<Item> LIME = TagKey.create(Registries.ITEM, new ResourceLocation("c","foods/lime"));
     public static final TagKey<Item> PAPAYA = TagKey.create(Registries.ITEM, new ResourceLocation("c","foods/papaya"));
     public static final TagKey<Item> RIPE_PAPAYA = TagKey.create(Registries.ITEM, new ResourceLocation("c","foods/ripe_papaya"));

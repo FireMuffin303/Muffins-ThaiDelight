@@ -1,4 +1,4 @@
-// 1.20.1	2026-02-04T13:37:44.4973496	Muffin's Thai's Delight Refabricated/Tags for minecraft:item
+// 1.20.1	2026-02-05T15:34:13.0311548	Muffin's Thai's Delight Refabricated/Tags for minecraft:item
 e47099cc79d74a686639d32e7b8a96140ade72aa data\minecraft\tags\items\saplings.json
 ea245bcc88673ba87ae5700240886a1010cda139 data\muffins_thaidelight\tags\items\dragonfly_food.json
 87ef45be87411bf3880d6685b5d9f9942f5cfe8a data\alexsmobs\tags\items\insect_items.json
@@ -38,6 +38,7 @@ d4ac26b152a836a75235e9807fa2c313f4452ca7 data\create\tags\items\upright_on_belt.
 dae4834c95306bff8e56440a840b6eed065375c0 data\minecraft\tags\items\logs_that_burn.json
 b86b5ed44294037342281f19ad8b9335f128e089 data\muffins_thaidelight\tags\items\mango_logs.json
 b8b0b516baead8b0dfbd700382f2d702f5bd2d85 data\minecraft\tags\items\villager_plantable_seeds.json
+2d729d9dc81610b4f61a0018fcd8196fb3f4403d data\muffins_thaidelight\tags\items\spicy_foods.json
 d22951dd62f6f7b8873b40679152ee8ec7ce66f4 data\minecraft\tags\items\wooden_trapdoors.json
 e8cd343c1eae9bbc4e7b6cfaa37c084399044234 data\minecraft\tags\items\hanging_signs.json
 81dd85d651f0a0e9b4b4762e7d264117f16a05c8 data\c\tags\items\foods\cooked_meats.json

@@ -54,13 +54,13 @@ public class MortarJEI implements IRecipeCategory<MortarRecipe> {
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, MortarRecipe recipe, IFocusGroup focuses) {
         builder.addInvisibleIngredients(RecipeIngredientRole.CATALYST).addIngredients(Ingredient.of(ModBlocks.MORTAR));
-        builder.addSlot(RecipeIngredientRole.OUTPUT,124,35).addIngredients(Ingredient.of(recipe.getResult()));
+        builder.addSlot(RecipeIngredientRole.OUTPUT,120,31).addIngredients(Ingredient.of(recipe.getResult()));
         for(int i = 0;i < recipe.getIngredients().size();i++){
 
-            builder.addSlot(RecipeIngredientRole.INPUT,i > 1 ? 39 + Mth.clamp(i-2,0,1) *18 : 39+ i *18,i > 1 ? 26+18: 26).addIngredients(recipe.getIngredients().get(i));
+            builder.addSlot(RecipeIngredientRole.INPUT,i > 1 ? 35 + Mth.clamp(i-2,0,1) *18 : 35+ i *18,i > 1 ? 22+18: 22).addIngredients(recipe.getIngredients().get(i));
         }
 
-        builder.addSlot(RecipeIngredientRole.INPUT,84,54).addIngredients(Ingredient.of(recipe.getContainer()));
+        builder.addSlot(RecipeIngredientRole.INPUT,80,50).addIngredients(Ingredient.of(recipe.getContainer()));
     }
 
     @Override
