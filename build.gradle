@@ -106,6 +106,7 @@ dependencies {
     if(expanded_delight.toBoolean()){
         modLocalRuntime("maven.modrinth:expanded-delight:4KEfJPHI")
     }
+    modLocalRuntime("maven.modrinth:brewin-and-chewin-fabric:KPe7wpZQ")
 
     modCompileOnly("maven.modrinth:fish-of-thieves:hI4gvof3")
     modCompileOnlyApi("mezz.jei:jei-${minecraft_version}-fabric-api:${project.jei_version}")

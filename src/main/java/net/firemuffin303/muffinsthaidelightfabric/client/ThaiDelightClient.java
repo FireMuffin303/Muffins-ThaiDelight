@@ -1,5 +1,7 @@
 package net.firemuffin303.muffinsthaidelightfabric.client;
 
+import com.mojang.authlib.minecraft.client.MinecraftClient;
+import com.mojang.logging.LogUtils;
 import com.terraformersmc.terraform.boat.api.client.TerraformBoatClientHelper;
 import com.terraformersmc.terraform.sign.SpriteIdentifierRegistry;
 import io.github.fabricators_of_create.porting_lib.recipe_book_categories.RecipeBookRegistry;
@@ -8,11 +10,13 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.model.loading.v1.ModelLoadingPlugin;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.*;
 import net.fabricmc.loader.api.FabricLoader;
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
+import net.firemuffin303.muffinsthaidelightfabric.client.renderer.DurianHeatRendererLayer;
 import net.firemuffin303.muffinsthaidelightfabric.network.packet.ModLevelEventPacket;
 import net.firemuffin303.muffinsthaidelightfabric.client.renderer.blocks.SackBlockEntityRenderer;
 import net.firemuffin303.muffinsthaidelightfabric.client.renderer.items.SackItemRenderer;
@@ -38,12 +42,16 @@ import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.LivingEntityRenderer;
+import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.client.resources.model.Material;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.inventory.RecipeBookType;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
@@ -145,6 +153,14 @@ public class ThaiDelightClient implements ClientModInitializer {
         ColorProviderRegistry.ITEM.register((itemStack, i) -> i > 0 ? -1 : ((DyeableLeatherItem) itemStack.getItem()).getColor(itemStack), ModItems.COCONUT_MILK_ICE_CREAM);
         ColorProviderRegistry.ITEM.register((itemStack, i) -> ((DyeableLeatherItem) itemStack.getItem()).getColor(itemStack), ModItems.KHANOM_CHAN);
 
+        LivingEntityFeatureRendererRegistrationCallback.EVENT.register(new LivingEntityFeatureRendererRegistrationCallback() {
+            @Override
+            public void registerRenderers(EntityType<? extends LivingEntity> entityType, LivingEntityRenderer<?, ?> livingEntityRenderer, RegistrationHelper registrationHelper, EntityRendererProvider.Context context) {
+                if(livingEntityRenderer instanceof PlayerRenderer playerRenderer){
+                    registrationHelper.register(new DurianHeatRendererLayer<>(playerRenderer));
+                }
+            }
+        });
 
         ItemProperties.register(ModItems.DRAGONFLY_BOTTLE, ThaiDelight.modid("variant"), new ClampedItemPropertyFunction() {
             @Override

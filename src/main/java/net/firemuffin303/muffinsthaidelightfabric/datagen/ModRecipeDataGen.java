@@ -71,9 +71,8 @@ public class ModRecipeDataGen extends FabricRecipeProvider {
 
 
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS,ModItems.SACK)
-                .define('S', Items.STRING)
                 .define('C', vectorwing.farmersdelight.common.registry.ModItems.CANVAS.get())
-                .pattern(" S ")
+                .pattern("CCC")
                 .pattern("C C")
                 .pattern("CCC")
                 .unlockedBy(getHasName(vectorwing.farmersdelight.common.registry.ModItems.CANVAS.get()),has(vectorwing.farmersdelight.common.registry.ModItems.CANVAS.get()))

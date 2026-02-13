@@ -1,6 +1,7 @@
 package net.firemuffin303.muffinsthaidelightfabric.common.block.durian;
 
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModItems;
+import net.firemuffin303.muffinsthaidelightfabric.util.CommonEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
@@ -104,6 +105,7 @@ public class DurianCakeBlock extends Block {
         }
         player.awardStat(Stats.EAT_CAKE_SLICE);
         player.getFoodData().eat(2, 0.1f);
+        CommonEvents.onEatDurian(new ItemStack(ModItems.DURIAN_CAKE_SLICE),player);
         int i = blockState.getValue(BITES);
         levelAccessor.gameEvent((Entity)player, GameEvent.EAT, blockPos);
         if (i < 6) {

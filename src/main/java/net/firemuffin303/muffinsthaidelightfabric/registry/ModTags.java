@@ -19,10 +19,13 @@ public class ModTags {
     public static final TagKey<Item> RIPE_PAPAYA = TagKey.create(Registries.ITEM, new ResourceLocation("c","foods/ripe_papaya"));
     public static final TagKey<Item> RAW_PAPAYA = TagKey.create(Registries.ITEM, new ResourceLocation("c","foods/raw_papaya"));
     public static final TagKey<Item> DURIAN = TagKey.create(Registries.ITEM,new ResourceLocation("c","foods/durian"));
+    public static final TagKey<Item> DURIAN_FOOD = TagKey.create(Registries.ITEM,ThaiDelight.modid("durian_foods"));
     public static final TagKey<Item> MANGO = TagKey.create(Registries.ITEM,new ResourceLocation("c","foods/mango"));
     public static final TagKey<Item> COCONUT = TagKey.create(Registries.ITEM,new ResourceLocation("c","foods/coconut"));
     public static final TagKey<Item> PINEAPPLE = TagKey.create(Registries.ITEM,new ResourceLocation("c","foods/pineapple"));
     public static final TagKey<Item> BANANA = TagKey.create(Registries.ITEM,new ResourceLocation("c","foods/banana"));
+
+    public static final TagKey<Item> FERMENTED_DRINKS = TagKey.create(Registries.ITEM,new ResourceLocation("c","foods/fermented_drinks"));
 
     public static final TagKey<Item> FLOWER_CRAB_MEAT = TagKey.create(Registries.ITEM, new ResourceLocation(ThaiDelight.MOD_ID,"flower_crab_meat"));
 

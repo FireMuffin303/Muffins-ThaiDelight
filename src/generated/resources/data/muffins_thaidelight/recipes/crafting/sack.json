@@ -4,13 +4,10 @@
   "key": {
     "C": {
       "item": "farmersdelight:canvas"
-    },
-    "S": {
-      "item": "minecraft:string"
     }
   },
   "pattern": [
-    " S ",
+    "CCC",
     "C C",
     "CCC"
   ],

@@ -86,6 +86,30 @@ public class ModTagDataGen {
             getOrCreateTagBuilder(DURIAN)
                     .add(ModItems.DURIAN,ModItems.SMALL_DURIAN,ModItems.DURIAN_PULP);
 
+            getOrCreateTagBuilder(DURIAN_FOOD)
+                    .add(ModItems.DURIAN_PULP,ModItems.FRIED_DURIAN,ModItems.DURIAN_CURRY,ModItems.DURIAN_CAKE_SLICE);
+
+
+            getOrCreateTagBuilder(FERMENTED_DRINKS)
+                    .addOptional(new ResourceLocation("brewinandchewin","beer"))
+                    .addOptional(new ResourceLocation("brewinandchewin","vodka"))
+                    .addOptional(new ResourceLocation("brewinandchewin","mead"))
+                    .addOptional(new ResourceLocation("brewinandchewin","rice_wine"))
+                    .addOptional(new ResourceLocation("brewinandchewin","egg_grog"))
+                    .addOptional(new ResourceLocation("brewinandchewin","strongroot_ale"))
+                    .addOptional(new ResourceLocation("brewinandchewin","saccharine_rum"))
+                    .addOptional(new ResourceLocation("brewinandchewin","pale_jane"))
+                    .addOptional(new ResourceLocation("brewinandchewin","dread_nog"))
+                    .addOptional(new ResourceLocation("brewinandchewin","salty_folly"))
+                    .addOptional(new ResourceLocation("brewinandchewin","steel_toe_stout"))
+                    .addOptional(new ResourceLocation("brewinandchewin","glittering_grenadine"))
+                    .addOptional(new ResourceLocation("brewinandchewin","bloody_mary"))
+                    .addOptional(new ResourceLocation("brewinandchewin","red_rum"))
+                    .addOptional(new ResourceLocation("brewinandchewin","withering_dross"))
+                    .addOptional(new ResourceLocation("brewinandchewin","kombucha"));
+
+
+
             getOrCreateTagBuilder(MANGO)
                     .add(ModItems.MANGO,ModItems.MANGO_SLICE)
                     .addOptional(new ResourceLocation("fishofthieves","mango"));

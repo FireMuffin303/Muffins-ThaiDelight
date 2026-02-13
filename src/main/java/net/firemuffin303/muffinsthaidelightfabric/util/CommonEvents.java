@@ -1,6 +1,7 @@
 package net.firemuffin303.muffinsthaidelightfabric.util;
 
 import com.mojang.datafixers.util.Pair;
+import com.mojang.logging.LogUtils;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
@@ -16,6 +17,7 @@ import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
+import net.firemuffin303.muffinsthaidelightfabric.common.attachments.DurianHeatAttachment;
 import net.firemuffin303.muffinsthaidelightfabric.integration.midnightLib.ThaiDelightConfig;
 import net.firemuffin303.muffinsthaidelightfabric.network.packet.ModLevelEventPacket;
 import net.firemuffin303.muffinsthaidelightfabric.common.entity.DragonflyEntity;
@@ -39,6 +41,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
@@ -49,6 +52,8 @@ import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.goal.GoalSelector;
 import net.minecraft.world.entity.animal.AbstractGolem;
@@ -56,6 +61,7 @@ import net.minecraft.world.entity.animal.Dolphin;
 import net.minecraft.world.entity.animal.Panda;
 import net.minecraft.world.entity.animal.horse.Llama;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.Item;
@@ -65,6 +71,7 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.item.enchantment.ThornsEnchantment;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -549,5 +556,32 @@ public class CommonEvents {
 
     public static void onEatSpicyFood(ItemStack itemStack,LivingEntity livingEntity){
         livingEntity.setTicksFrozen(0);
+    }
+
+    public static void onEatDurian(ItemStack itemStack,LivingEntity livingEntity){
+        int i = 2400;
+        if(itemStack.getItem().isEdible()){
+            FoodProperties foodProperties = itemStack.getItem().getFoodProperties();
+            if(foodProperties != null){
+                float nutrition = foodProperties.getNutrition();
+                float modifier = foodProperties.getSaturationModifier();
+                i = Math.max( (int)Math.ceil((nutrition + (nutrition * modifier)) / 4f) * (60 * 20), 2400) ;
+            }
+        }
+
+        DurianHeatAttachment durianHeatAttachment = livingEntity.getAttached(ModAttachments.DURIAN_HEAT);
+        if(durianHeatAttachment != null){
+            durianHeatAttachment.addTime(i);
+        }
+    }
+
+    public static void onDrinkFermentedDrinks(Level level, ItemStack itemStack, LivingEntity livingEntity){
+        DurianHeatAttachment durianHeatAttachment = livingEntity.getAttached(ModAttachments.DURIAN_HEAT);
+        if(durianHeatAttachment != null){
+            if(livingEntity instanceof Player player){
+                player.displayClientMessage(Component.translatable("muffins_thaidelight.consume.durian_fermented_drinks"),true);
+            }
+            durianHeatAttachment.setDrankFermentedDrink(true);
+        }
     }
 }

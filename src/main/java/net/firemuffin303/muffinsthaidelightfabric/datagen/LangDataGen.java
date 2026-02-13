@@ -295,6 +295,8 @@ public class LangDataGen extends FabricLanguageProvider {
         translationBuilder.add("muffins_thaidelight.midnightconfig.peaenka","P34enKa");
         translationBuilder.add("muffins_thaidelight.midnightconfig.zh_cn","--- Simplified Chinese ---");
         translationBuilder.add("muffins_thaidelight.midnightconfig.huantanhua","Huantanhua");
+
+        translationBuilder.add("muffins_thaidelight.consume.durian_fermented_drinks","Your body heated up.");
     }
 
     public static class ThaiLangData extends FabricLanguageProvider{
@@ -347,8 +349,6 @@ public class LangDataGen extends FabricLanguageProvider {
             translationBuilder.add("jei.info.papaya_log","คลิ๊กขวาด้วยผงกระดูกเพื่อโตผลมะละกอ");
 
             translationBuilder.add("item.muffins_thaidelight.tasty","อยากอาหาร");
-
-
 
             translationBuilder.add("itemGroup.muffins_thaidelight.main","Muffin's Thai Delight");
 
@@ -588,6 +588,8 @@ public class LangDataGen extends FabricLanguageProvider {
             translationBuilder.add("muffins_thaidelight.midnightconfig.peaenka","P34enKa");
             translationBuilder.add("muffins_thaidelight.midnightconfig.zh_cn","--- ภาษาจีนตัวย่อ ---");
             translationBuilder.add("muffins_thaidelight.midnightconfig.huantanhua","Huantanhua");
+
+            translationBuilder.add("muffins_thaidelight.consume.durian_fermented_drinks","ร่างกายของคุณร้อนขึ้น");
         }
     }
 }
