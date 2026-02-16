@@ -1,6 +1,7 @@
 {
   "required": true,
   "minVersion": "0.8",
+  "plugin": "net.firemuffin303.muffinsthaidelightfabric.integration.ModMixinPlugin",
   "package": "net.firemuffin303.muffinsthaidelightfabric.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
@@ -48,15 +49,10 @@
   ],
   "client": [
     "anorexia.ItemInHandRendererMixin",
-    "durianHelmet.HumanoidArmorLayerMixin",
-    "durianHelmet.LivingEntityRendererMixin",
-    "foodEffect.gui.AbstractContainerScreenAccessor",
-    "foodEffect.gui.EffectRenderingInventoryScreenMixin",
     "holdingAnimation.HumanoidModelMixin",
     "holdingAnimation.ItemInHandRendererMixin",
     "holdingAnimation.ItemRendererMixin",
     "holdingAnimation.PlayerRendererMixin",
-    "integration.emi.EmiEffectRenderingMixin",
     "recipeBookType.RecipeBookCategoriesMixin"
   ],
   "injectors": {

@@ -608,7 +608,7 @@ public class CommonEvents {
             if(foodProperties != null){
                 float nutrition = foodProperties.getNutrition();
                 float modifier = foodProperties.getSaturationModifier();
-                i = Math.max( (int)Math.ceil((nutrition + (nutrition * modifier)) / 4f) * (60 * 20), 2400) ;
+                i = (int)Math.max( ((nutrition + (nutrition * modifier) ) / 4f) * (60f * 20f), 2400f) ;
             }
         }
 
@@ -620,7 +620,7 @@ public class CommonEvents {
 
     public static void onDrinkFermentedDrinks(Level level, ItemStack itemStack, LivingEntity livingEntity){
         DurianHeatAttachment durianHeatAttachment = livingEntity.getAttached(ModAttachments.DURIAN_HEAT);
-        if(durianHeatAttachment != null){
+        if(durianHeatAttachment != null && durianHeatAttachment.timer > 0){
             if(livingEntity instanceof Player player){
                 player.displayClientMessage(Component.translatable("muffins_thaidelight.consume.durian_fermented_drinks"),true);
             }

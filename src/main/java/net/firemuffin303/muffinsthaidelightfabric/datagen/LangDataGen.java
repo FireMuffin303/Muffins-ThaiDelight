@@ -297,6 +297,9 @@ public class LangDataGen extends FabricLanguageProvider {
         translationBuilder.add("muffins_thaidelight.midnightconfig.huantanhua","Huantanhua");
 
         translationBuilder.add("muffins_thaidelight.consume.durian_fermented_drinks","Your body heated up.");
+        translationBuilder.add("muffins_thaidelight.custom_effect_render.durian_consumed","Durian Consumed");
+        translationBuilder.add("muffins_thaidelight.custom_effect_render.heated_up","Heated Up");
+        translationBuilder.add("muffins_thaidelight.custom_effect_render.spicy","Spicy");
     }
 
     public static class ThaiLangData extends FabricLanguageProvider{
@@ -590,6 +593,10 @@ public class LangDataGen extends FabricLanguageProvider {
             translationBuilder.add("muffins_thaidelight.midnightconfig.huantanhua","Huantanhua");
 
             translationBuilder.add("muffins_thaidelight.consume.durian_fermented_drinks","ร่างกายของคุณร้อนขึ้น");
+
+            translationBuilder.add("muffins_thaidelight.custom_effect_render.durian_consumed","ทานทุเรียนแล้ว");
+            translationBuilder.add("muffins_thaidelight.custom_effect_render.heated_up","ตัวร้อน");
+            translationBuilder.add("muffins_thaidelight.custom_effect_render.spicy","เผ็ด");
         }
     }
 }

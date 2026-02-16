@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version '1.13-SNAPSHOT'
+    id 'fabric-loom' version '1.15-SNAPSHOT'
     id 'maven-publish'
 }
 
@@ -69,6 +69,8 @@ repositories {
     maven { url = "https://maven.shedaniel.me" }
 
     maven { url = "https://maven.bawnorton.com/releases" }
+
+    maven { url = 'https://www.jitpack.io' }
 }
 
 dependencies {
@@ -121,7 +123,7 @@ dependencies {
     modCompileOnly "dev.emi:emi-fabric:${emi_version}:api"
     //modLocalRuntime "dev.emi:emi-fabric:${emi_version}"
 
-    include(implementation(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-fabric:0.3.7-beta.1")))
+    modImplementation include('com.github.FireMuffin303:MuffinsEffectRenderAPI:0.1.0-alpha')
 }
 
 processResources {

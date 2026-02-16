@@ -18,6 +18,7 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
 import net.firemuffin303.muffinsthaidelightfabric.client.renderer.DurianHeatRendererLayer;
 import net.firemuffin303.muffinsthaidelightfabric.client.renderer.StatusEffectRenderer;
+import net.firemuffin303.muffinsthaidelightfabric.client.renderer.armor.DurianHelmetRenderer;
 import net.firemuffin303.muffinsthaidelightfabric.common.attachments.DurianHeatAttachment;
 import net.firemuffin303.muffinsthaidelightfabric.network.packet.DurianHeatPacket;
 import net.firemuffin303.muffinsthaidelightfabric.network.packet.ModLevelEventPacket;
@@ -119,6 +120,8 @@ public class ThaiDelightClient implements ClientModInitializer {
 
         StatusEffectRenderer.init();
 
+
+        ArmorRenderer.register(new DurianHelmetRenderer(),ModItems.DURIAN_HELMET);
 
         if(FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT){
             ClientLifecycleEvents.CLIENT_STARTED.register(new ClientLifecycleEvents.ClientStarted() {
