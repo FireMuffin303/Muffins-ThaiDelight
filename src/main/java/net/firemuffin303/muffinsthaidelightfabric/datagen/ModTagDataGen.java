@@ -106,7 +106,9 @@ public class ModTagDataGen {
                     .addOptional(new ResourceLocation("brewinandchewin","bloody_mary"))
                     .addOptional(new ResourceLocation("brewinandchewin","red_rum"))
                     .addOptional(new ResourceLocation("brewinandchewin","withering_dross"))
-                    .addOptional(new ResourceLocation("brewinandchewin","kombucha"));
+                    .addOptional(new ResourceLocation("brewinandchewin","kombucha"))
+                    .addOptionalTag(new ResourceLocation("vinery","red_wine"))
+                    .addOptionalTag(new ResourceLocation("vinery","white_wine"));
 
 
 

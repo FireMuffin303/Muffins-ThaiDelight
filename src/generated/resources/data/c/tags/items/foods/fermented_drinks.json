@@ -64,6 +64,14 @@
     {
       "id": "brewinandchewin:kombucha",
       "required": false
+    },
+    {
+      "id": "#vinery:red_wine",
+      "required": false
+    },
+    {
+      "id": "#vinery:white_wine",
+      "required": false
     }
   ]
 }
