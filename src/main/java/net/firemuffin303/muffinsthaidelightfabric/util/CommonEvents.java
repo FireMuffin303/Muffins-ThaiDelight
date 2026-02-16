@@ -1,7 +1,9 @@
 package net.firemuffin303.muffinsthaidelightfabric.util;
 
+import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.arguments.BoolArgumentType;
+import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.datafixers.util.Pair;
-import com.mojang.logging.LogUtils;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
@@ -18,7 +20,9 @@ import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
 import net.firemuffin303.muffinsthaidelightfabric.common.attachments.DurianHeatAttachment;
+import net.firemuffin303.muffinsthaidelightfabric.common.attachments.SpicyAttachment;
 import net.firemuffin303.muffinsthaidelightfabric.integration.midnightLib.ThaiDelightConfig;
+import net.firemuffin303.muffinsthaidelightfabric.network.packet.DurianHeatPacket;
 import net.firemuffin303.muffinsthaidelightfabric.network.packet.ModLevelEventPacket;
 import net.firemuffin303.muffinsthaidelightfabric.common.entity.DragonflyEntity;
 import net.firemuffin303.muffinsthaidelightfabric.common.entity.FlowerCrabEntity;
@@ -33,8 +37,13 @@ import net.firemuffin303.muffinsthaidelightfabric.mixin.food.PigFoodAccessor;
 import net.firemuffin303.muffinsthaidelightfabric.mixin.loot.LootPoolBuilderAccessor;
 import net.firemuffin303.muffinsthaidelightfabric.mixin.loot.LootTableAccessor;
 import net.firemuffin303.muffinsthaidelightfabric.mixin.villager.VillagerAccessor;
+import net.firemuffin303.muffinsthaidelightfabric.network.packet.SpicyPacket;
 import net.firemuffin303.muffinsthaidelightfabric.network.packet.ThaiDelightConfigPacket;
 import net.firemuffin303.muffinsthaidelightfabric.registry.*;
+import net.minecraft.commands.CommandBuildContext;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.commands.Commands;
+import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
@@ -52,8 +61,6 @@ import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.goal.GoalSelector;
 import net.minecraft.world.entity.animal.AbstractGolem;
@@ -155,6 +162,26 @@ public class CommonEvents {
                         ServerPlayNetworking.send(player,new ThaiDelightConfigPacket(ThaiDelightConfig.encode()));
                     }
                 }
+            }
+        });
+    }
+
+    public static void initDataAttachmentSync(){
+        ServerPlayConnectionEvents.JOIN.register(new ServerPlayConnectionEvents.Join() {
+            @Override
+            public void onPlayReady(ServerGamePacketListenerImpl serverGamePacketListener, PacketSender packetSender, MinecraftServer minecraftServer) {
+                ServerPlayer serverPlayer = serverGamePacketListener.player;
+                DurianHeatAttachment durianHeatAttachment = serverPlayer.getAttached(ModAttachments.DURIAN_HEAT);
+                SpicyAttachment spicyAttachment = serverPlayer.getAttached(ModAttachments.SPICY);
+
+                if(durianHeatAttachment != null){
+                    ServerPlayNetworking.send(serverGamePacketListener.player,new DurianHeatPacket(durianHeatAttachment));
+                }
+
+                if(spicyAttachment != null){
+                    ServerPlayNetworking.send(serverGamePacketListener.player, new SpicyPacket(spicyAttachment.getTimer()));
+                }
+
             }
         });
     }
@@ -556,6 +583,22 @@ public class CommonEvents {
 
     public static void onEatSpicyFood(ItemStack itemStack,LivingEntity livingEntity){
         livingEntity.setTicksFrozen(0);
+
+
+        int i = 1200;
+        if(itemStack.getItem().isEdible()){
+            FoodProperties foodProperties = itemStack.getItem().getFoodProperties();
+            if(foodProperties != null){
+                float nutrition = foodProperties.getNutrition();
+                float modifier = foodProperties.getSaturationModifier();
+                i = Math.max( (int)Math.ceil((nutrition + (nutrition * modifier)) / 6f) * (60 * 20), 1200) ;
+            }
+        }
+
+        SpicyAttachment spicyAttachment = livingEntity.getAttached(ModAttachments.SPICY);
+        if(spicyAttachment != null){
+            spicyAttachment.addTime(i,livingEntity);
+        }
     }
 
     public static void onEatDurian(ItemStack itemStack,LivingEntity livingEntity){
@@ -571,7 +614,7 @@ public class CommonEvents {
 
         DurianHeatAttachment durianHeatAttachment = livingEntity.getAttached(ModAttachments.DURIAN_HEAT);
         if(durianHeatAttachment != null){
-            durianHeatAttachment.addTime(i);
+            durianHeatAttachment.addTime(i,livingEntity);
         }
     }
 
@@ -581,7 +624,124 @@ public class CommonEvents {
             if(livingEntity instanceof Player player){
                 player.displayClientMessage(Component.translatable("muffins_thaidelight.consume.durian_fermented_drinks"),true);
             }
-            durianHeatAttachment.setDrankFermentedDrink(true);
+            durianHeatAttachment.setHeatedUp(true,livingEntity);
         }
+    }
+
+    public static void modCommand(CommandDispatcher<CommandSourceStack> commandDispatcher, CommandBuildContext commandBuildContext, Commands.CommandSelection commandSelection){
+        commandDispatcher.register(
+                Commands.literal("durianHeat")
+                        .requires(source -> source.hasPermission(4))
+                        .then(Commands.argument("player", EntityArgument.player())
+                                .then(Commands.literal("set")
+                                        .then(Commands.argument("amount", IntegerArgumentType.integer(1))
+                                                .executes(commandContext -> {
+                                                    ServerPlayer serverPlayer = EntityArgument.getPlayer(commandContext,"player");
+                                                    DurianHeatAttachment durianHeatAttachment = serverPlayer.getAttached(ModAttachments.DURIAN_HEAT);
+                                                    if(durianHeatAttachment != null){
+                                                        durianHeatAttachment.setTime(IntegerArgumentType.getInteger(commandContext,"amount"),serverPlayer);
+                                                        commandContext.getSource().sendSuccess(() -> Component.literal("Apply Durian Heat to Player for amount."),false);
+                                                        return 1;
+                                                    }
+
+                                                    commandContext.getSource().sendFailure(Component.literal("lmao you failed"));
+                                                    return 0;
+                                                })
+                                        )
+                                )
+
+                                .then(Commands.literal("clear")
+                                        .executes(commandContext -> {
+                                            ServerPlayer serverPlayer = EntityArgument.getPlayer(commandContext,"player");
+                                            DurianHeatAttachment durianHeatAttachment = serverPlayer.getAttached(ModAttachments.DURIAN_HEAT);
+                                            if(durianHeatAttachment != null){
+                                                durianHeatAttachment.setTime(0,serverPlayer);
+                                                commandContext.getSource().sendSuccess(() -> Component.literal("Apply Durian Heat to Player for amount."),false);
+                                                return 1;
+                                            }
+
+                                            commandContext.getSource().sendFailure(Component.literal("lmao you failed"));
+                                            return 0;
+                                        })
+                                )
+
+                                .then(Commands.literal("heat")
+                                        .then(Commands.argument("isHeatedUp", BoolArgumentType.bool())
+                                                .executes(commandContext -> {
+                                                    ServerPlayer serverPlayer = EntityArgument.getPlayer(commandContext,"player");
+                                                    DurianHeatAttachment durianHeatAttachment = serverPlayer.getAttached(ModAttachments.DURIAN_HEAT);
+                                                    if(durianHeatAttachment != null){
+                                                        durianHeatAttachment.setHeatedUp(BoolArgumentType.getBool(commandContext,"isHeatedUp"),serverPlayer);
+                                                        commandContext.getSource().sendSuccess(() -> Component.literal("Apply Durian Heat to Player for amount."),false);
+                                                        return 1;
+                                                    }
+
+                                                    commandContext.getSource().sendFailure(Component.literal("lmao you failed"));
+                                                    return 0;
+                                                })
+                                        )
+                                )
+
+
+                        )
+        );
+
+        commandDispatcher.register(
+                Commands.literal("spicy")
+                        .requires(source -> source.hasPermission(4))
+                        .then(Commands.argument("player",EntityArgument.player())
+                                .then(Commands.literal("add")
+                                        .then(Commands.argument("amount",IntegerArgumentType.integer(0))
+                                                .executes(commandContext -> {
+                                                    ServerPlayer serverPlayer = EntityArgument.getPlayer(commandContext,"player");
+                                                    SpicyAttachment spicyAttachment = serverPlayer.getAttached(ModAttachments.SPICY);
+                                                    if(spicyAttachment != null){
+                                                        spicyAttachment.addTime(IntegerArgumentType.getInteger(commandContext,"amount"),serverPlayer);
+                                                        commandContext.getSource().sendSuccess(() -> Component.literal("Apply Spicy to Player for amount."),false);
+                                                        return 1;
+                                                    }
+
+                                                    commandContext.getSource().sendFailure(Component.literal("lmao you failed"));
+                                                    return 0;
+                                                })
+                                        )
+                                )
+
+                                .then(Commands.literal("set")
+                                        .then(Commands.argument("amount",IntegerArgumentType.integer(0))
+                                                .executes(commandContext -> {
+                                                    ServerPlayer serverPlayer = EntityArgument.getPlayer(commandContext,"player");
+                                                    SpicyAttachment spicyAttachment = serverPlayer.getAttached(ModAttachments.SPICY);
+                                                    if(spicyAttachment != null){
+                                                        spicyAttachment.setTime(IntegerArgumentType.getInteger(commandContext,"amount"),serverPlayer);
+                                                        commandContext.getSource().sendSuccess(() -> Component.literal("Apply Spicy to Player for amount."),false);
+                                                        return 1;
+                                                    }
+
+                                                    commandContext.getSource().sendFailure(Component.literal("lmao you failed"));
+                                                    return 0;
+                                                })
+                                        )
+                                )
+
+
+
+                                .then(Commands.literal("clear")
+                                        .executes(commandContext -> {
+                                            ServerPlayer serverPlayer = EntityArgument.getPlayer(commandContext,"player");
+                                            SpicyAttachment spicyAttachment = serverPlayer.getAttached(ModAttachments.SPICY);
+                                            if(spicyAttachment != null){
+                                                spicyAttachment.setTime(0,serverPlayer);
+                                                commandContext.getSource().sendSuccess(() -> Component.literal("Cleared Spicy from Player."),false);
+                                                return 1;
+                                            }
+
+                                            commandContext.getSource().sendFailure(Component.literal("lmao you failed"));
+                                            return 0;
+                                        })
+                                )
+                        )
+
+        );
     }
 }

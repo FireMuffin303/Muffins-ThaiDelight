@@ -1,22 +1,32 @@
 package net.firemuffin303.muffinsthaidelightfabric;
 
+import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.arguments.BoolArgumentType;
+import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.logging.LogUtils;
 import com.terraformersmc.terraform.boat.api.TerraformBoatType;
 import com.terraformersmc.terraform.boat.api.TerraformBoatTypeRegistry;
 import eu.midnightdust.lib.config.MidnightConfig;
 import io.github.fabricators_of_create.porting_lib.entity.events.PlayerEvents;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.registry.TillableBlockRegistry;
 import net.fabricmc.loader.api.FabricLoader;
+import net.firemuffin303.muffinsthaidelightfabric.common.attachments.DurianHeatAttachment;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.FermentedFishCauldronBlock;
 import net.firemuffin303.muffinsthaidelightfabric.common.block.cauldron.CoconutCauldron;
 import net.firemuffin303.muffinsthaidelightfabric.common.entity.DragonflyEntity;
 import net.firemuffin303.muffinsthaidelightfabric.common.item.DragonflyBottleItem;
 import net.firemuffin303.muffinsthaidelightfabric.integration.midnightLib.ThaiDelightConfig;
+import net.firemuffin303.muffinsthaidelightfabric.integration.toughasnail.ToughAsNailIntegration;
 import net.firemuffin303.muffinsthaidelightfabric.registry.*;
 import net.firemuffin303.muffinsthaidelightfabric.util.CommonEvents;
+import net.minecraft.commands.CommandBuildContext;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.commands.Commands;
+import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.core.BlockSource;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Registry;
@@ -36,12 +46,14 @@ import net.minecraft.world.level.block.LayeredCauldronBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import org.slf4j.Logger;
 
+import java.security.Permissions;
 import java.util.*;
 
 public class ThaiDelight implements ModInitializer {
     public static final Logger LOGGER = LogUtils.getLogger();
     public static final String MOD_ID = "muffins_thaidelight";
     public static boolean IS_FOT_INSTALLED = false;
+    public static boolean IS_TOUGH_AS_NAIL_INSTALLED = false;
 
 
     public static final TerraformBoatType DURIAN = new TerraformBoatType.Builder()
@@ -71,6 +83,7 @@ public class ThaiDelight implements ModInitializer {
     public void onInitialize() {
         MidnightConfig.init(MOD_ID, ThaiDelightConfig.class);
         IS_FOT_INSTALLED = FabricLoader.getInstance().isModLoaded("fishofthieves");
+        IS_TOUGH_AS_NAIL_INSTALLED = FabricLoader.getInstance().isModLoaded("toughasnails");
         Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB,new ResourceLocation(MOD_ID,"main"),MOD_TAB);
 
 
@@ -117,6 +130,11 @@ public class ThaiDelight implements ModInitializer {
         CommonEvents.modifyLootTable();
         CommonEvents.initializeStinkyEffect();
         CommonEvents.initConfigSyncEvent();
+        CommonEvents.initDataAttachmentSync();
+
+        if(IS_TOUGH_AS_NAIL_INSTALLED){
+            ToughAsNailIntegration.toughAsNailIntegration();
+        }
 
         PotionBrewing.addMix(Potions.AWKWARD,ModItems.FERMENTED_FISH,ModMobEffects.STENCH_POTION);
         PotionBrewing.addMix(ModMobEffects.STENCH_POTION, Items.REDSTONE,ModMobEffects.LONG_STENCH_POTION);
@@ -170,7 +188,7 @@ public class ThaiDelight implements ModInitializer {
             }
         });
 
-
+        CommandRegistrationCallback.EVENT.register(CommonEvents::modCommand);
     }
 
     private static void itemsGenerator(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output output){

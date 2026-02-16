@@ -68,6 +68,7 @@ repositories {
 
     maven { url = "https://maven.shedaniel.me" }
 
+    maven { url = "https://maven.bawnorton.com/releases" }
 }
 
 dependencies {
@@ -107,6 +108,8 @@ dependencies {
         modLocalRuntime("maven.modrinth:expanded-delight:4KEfJPHI")
     }
     modLocalRuntime("maven.modrinth:brewin-and-chewin-fabric:KPe7wpZQ")
+    modCompileOnly("maven.modrinth:tough-as-nails:VaFrDMPi")
+    modCompileOnly("maven.modrinth:glitchcore:25HLOiOl")
 
     modCompileOnly("maven.modrinth:fish-of-thieves:hI4gvof3")
     modCompileOnlyApi("mezz.jei:jei-${minecraft_version}-fabric-api:${project.jei_version}")
@@ -118,7 +121,7 @@ dependencies {
     modCompileOnly "dev.emi:emi-fabric:${emi_version}:api"
     //modLocalRuntime "dev.emi:emi-fabric:${emi_version}"
 
-
+    include(implementation(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-fabric:0.3.7-beta.1")))
 }
 
 processResources {

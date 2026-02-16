@@ -17,6 +17,9 @@ import net.fabricmc.fabric.api.client.rendering.v1.*;
 import net.fabricmc.loader.api.FabricLoader;
 import net.firemuffin303.muffinsthaidelightfabric.ThaiDelight;
 import net.firemuffin303.muffinsthaidelightfabric.client.renderer.DurianHeatRendererLayer;
+import net.firemuffin303.muffinsthaidelightfabric.client.renderer.StatusEffectRenderer;
+import net.firemuffin303.muffinsthaidelightfabric.common.attachments.DurianHeatAttachment;
+import net.firemuffin303.muffinsthaidelightfabric.network.packet.DurianHeatPacket;
 import net.firemuffin303.muffinsthaidelightfabric.network.packet.ModLevelEventPacket;
 import net.firemuffin303.muffinsthaidelightfabric.client.renderer.blocks.SackBlockEntityRenderer;
 import net.firemuffin303.muffinsthaidelightfabric.client.renderer.items.SackItemRenderer;
@@ -29,15 +32,18 @@ import net.firemuffin303.muffinsthaidelightfabric.common.item.SackItem;
 import net.firemuffin303.muffinsthaidelightfabric.common.item.tooltipComponent.FlavorTooltipClient;
 import net.firemuffin303.muffinsthaidelightfabric.common.recipe.mortar.MortarRecipe;
 import net.firemuffin303.muffinsthaidelightfabric.common.recipe.mortar.MortarRecipeBookTab;
+import net.firemuffin303.muffinsthaidelightfabric.network.packet.SpicyPacket;
 import net.firemuffin303.muffinsthaidelightfabric.network.packet.ThaiDelightConfigPacket;
 import net.firemuffin303.muffinsthaidelightfabric.util.BlockEntityTypeAdder;
 import net.firemuffin303.muffinsthaidelightfabric.registry.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.RecipeBookCategories;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.SplashRenderer;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
 import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.Sheets;
@@ -53,6 +59,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.RecipeBookType;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.DyeableLeatherItem;
@@ -80,8 +87,15 @@ public class ThaiDelightClient implements ClientModInitializer {
     public static final RecipeBookCategories MORTAR_MEALS = RecipeBookCategories.valueOf("MORTAR_MEALS");
     public static final RecipeBookCategories MORTAR_MISC = RecipeBookCategories.valueOf("MORTAR_MISC");
 
+    public static boolean isJEIInstalled = false;
+    public static boolean isEMIInstalled = false;
+
+
     @Override
     public void onInitializeClient() {
+        isJEIInstalled = FabricLoader.getInstance().isModLoaded("jei");
+        isEMIInstalled = FabricLoader.getInstance().isModLoaded("emi");
+
         ClientModelRegistry.entityInit();
 
         TerraformBoatClientHelper.registerModelLayers(ThaiDelight.modid("durian_boat"),false);
@@ -103,6 +117,7 @@ public class ThaiDelightClient implements ClientModInitializer {
             }
         });
 
+        StatusEffectRenderer.init();
 
 
         if(FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT){
@@ -202,9 +217,10 @@ public class ThaiDelightClient implements ClientModInitializer {
             return ThaiDelightClient.MORTAR_MISC;
         });
 
-
         ClientPlayNetworking.registerGlobalReceiver(ModLevelEventPacket.TYPE,ModLevelEventPacket::receive);
         ClientPlayNetworking.registerGlobalReceiver(ThaiDelightConfigPacket.TYPE,ThaiDelightConfigPacket::receive);
+        ClientPlayNetworking.registerGlobalReceiver(DurianHeatPacket.TYPE,DurianHeatPacket::recieve);
+        ClientPlayNetworking.registerGlobalReceiver(SpicyPacket.TYPE,SpicyPacket::recieve);
     }
 
     static {
