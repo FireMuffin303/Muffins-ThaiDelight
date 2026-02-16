@@ -2,6 +2,8 @@ package net.firemuffin303.muffinsthaidelightfabric.mixin.foodEffect;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.sugar.Local;
+import com.llamalad7.mixinextras.sugar.Share;
+import com.llamalad7.mixinextras.sugar.ref.LocalRef;
 import net.firemuffin303.muffinsthaidelightfabric.common.attachments.DurianHeatAttachment;
 import net.firemuffin303.muffinsthaidelightfabric.common.attachments.SpicyAttachment;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModAttachments;
@@ -9,6 +11,8 @@ import net.firemuffin303.muffinsthaidelightfabric.registry.ModTags;
 import net.firemuffin303.muffinsthaidelightfabric.util.CommonEvents;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -18,6 +22,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin{
@@ -72,7 +77,7 @@ public abstract class LivingEntityMixin{
     }
 
     @ModifyVariable(method = "hurt", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/WalkAnimationState;setSpeed(F)V"), argsOnly = true)
-    public float muffins$additionalFireDamage(float value, @Local(argsOnly = true) DamageSource damageSource){
+    public float muffins$calculateDamage(float value, @Local(argsOnly = true) DamageSource damageSource){
         LivingEntity livingEntity = (LivingEntity) (Object) this;
 
         if(livingEntity instanceof Player){
@@ -82,9 +87,37 @@ public abstract class LivingEntityMixin{
                     value *= 2f;
                 }
             }
+
+            SpicyAttachment spicyAttachment = livingEntity.getAttached(ModAttachments.SPICY);
+            if(spicyAttachment != null){
+                if(spicyAttachment.timer > 0 && damageSource.is(ModTags.SPICY_RESISTANT_TO)){
+                    value *= 0.80f;
+                }
+            }
         }
 
         return value;
     }
 
+    @Inject(method = "addEffect(Lnet/minecraft/world/effect/MobEffectInstance;Lnet/minecraft/world/entity/Entity;)Z",at = @At("HEAD"))
+    public void muffins$setPlayer(MobEffectInstance mobEffectInstance, Entity entity, CallbackInfoReturnable<Boolean> cir, @Share("player") LocalRef<Player> localRef){
+        LivingEntity livingEntity = (LivingEntity)(Object)this;
+        if(livingEntity instanceof Player player1){
+            localRef.set(player1);
+        }
+    }
+
+    @Inject(method = "addEffect(Lnet/minecraft/world/effect/MobEffectInstance;Lnet/minecraft/world/entity/Entity;)Z",
+            at = @At(value = "INVOKE", target = "Ljava/util/Map;get(Ljava/lang/Object;)Ljava/lang/Object;"))
+    public void muffins$reduceIfSpicy(MobEffectInstance mobEffectInstance, Entity entity, CallbackInfoReturnable<Boolean> cir,
+                                      @Local(argsOnly = true)LocalRef<MobEffectInstance> mobEffectInstanceLocalRef, @Share("player") LocalRef<Player> localRef){
+        if(!mobEffectInstanceLocalRef.get().isAmbient()){
+            SpicyAttachment spicyAttachment = localRef.get().getAttached(ModAttachments.SPICY);
+            if(spicyAttachment != null){
+                if(spicyAttachment.timer > 0){
+                    mobEffectInstanceLocalRef.set(new MobEffectInstance(mobEffectInstance.getEffect(),mobEffectInstance.getDuration() - mobEffectInstance.getDuration()/3));
+                }
+            }
+        }
+    }
 }

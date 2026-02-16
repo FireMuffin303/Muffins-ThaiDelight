@@ -591,7 +591,7 @@ public class CommonEvents {
             if(foodProperties != null){
                 float nutrition = foodProperties.getNutrition();
                 float modifier = foodProperties.getSaturationModifier();
-                i = Math.max( (int)Math.ceil((nutrition + (nutrition * modifier)) / 6f) * (60 * 20), 1200) ;
+                i = (int)Math.max( ((nutrition + (nutrition * modifier) ) / 6f) * (60f * 20f), 1200) ;
             }
         }
 

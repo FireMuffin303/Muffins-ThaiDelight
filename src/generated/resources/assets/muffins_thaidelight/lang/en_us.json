@@ -122,6 +122,8 @@
   "block.muffins_thaidelight.wild_holy_basil": "Wild Holy Basil",
   "block.muffins_thaidelight.wild_pepper": "Wild Pepper",
   "container.muffins_thaidelight.mortar": "Mortar",
+  "death.attack.durian": "%1$s was bonked by a falling durian.",
+  "death.attack.durian.player": "%1$s was bonked by a falling durian whilst fighting %2$s.",
   "dragonfly.variant.muffins_thaidelight.blue": "Blue",
   "dragonfly.variant.muffins_thaidelight.green": "Green",
   "dragonfly.variant.muffins_thaidelight.red": "Red",

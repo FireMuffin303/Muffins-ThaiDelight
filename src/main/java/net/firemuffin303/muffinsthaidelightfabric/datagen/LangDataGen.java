@@ -300,6 +300,9 @@ public class LangDataGen extends FabricLanguageProvider {
         translationBuilder.add("muffins_thaidelight.custom_effect_render.durian_consumed","Durian Consumed");
         translationBuilder.add("muffins_thaidelight.custom_effect_render.heated_up","Heated Up");
         translationBuilder.add("muffins_thaidelight.custom_effect_render.spicy","Spicy");
+
+        translationBuilder.add("death.attack.durian","%1$s was bonked by a falling durian.");
+        translationBuilder.add("death.attack.durian.player","%1$s was bonked by a falling durian whilst fighting %2$s.");
     }
 
     public static class ThaiLangData extends FabricLanguageProvider{
@@ -597,6 +600,9 @@ public class LangDataGen extends FabricLanguageProvider {
             translationBuilder.add("muffins_thaidelight.custom_effect_render.durian_consumed","ทานทุเรียนแล้ว");
             translationBuilder.add("muffins_thaidelight.custom_effect_render.heated_up","ตัวร้อน");
             translationBuilder.add("muffins_thaidelight.custom_effect_render.spicy","เผ็ด");
+
+            translationBuilder.add("death.attack.durian","%1$s ถูกลูกทุเรียนหล่นใส่หัว.");
+            translationBuilder.add("death.attack.durian.player","%1$s ถูกลูกทุเรียนหล่นใส่หัวขณะสู้กับ %2$s.");
         }
     }
 }

@@ -1,9 +1,8 @@
-package net.firemuffin303.muffinsthaidelightfabric.mixin.foodEffect.spicy;
+package net.firemuffin303.muffinsthaidelightfabric.mixin.foodEffect.heatedup;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.sugar.Local;
 import net.firemuffin303.muffinsthaidelightfabric.common.attachments.DurianHeatAttachment;
-import net.firemuffin303.muffinsthaidelightfabric.common.attachments.SpicyAttachment;
 import net.firemuffin303.muffinsthaidelightfabric.registry.ModAttachments;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;

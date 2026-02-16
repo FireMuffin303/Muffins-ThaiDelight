@@ -28,7 +28,7 @@ public class SpicyAttachment implements SpecialEffectAttachment {
     }
 
     public void setTime(int value,LivingEntity livingEntity){
-        this.timer = Mth.clamp(value,0,1200);
+        this.timer = value;
         if(livingEntity instanceof ServerPlayer player){
             ServerPlayNetworking.send(player,new SpicyPacket(this.timer));
         }

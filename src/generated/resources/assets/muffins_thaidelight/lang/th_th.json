@@ -122,6 +122,8 @@
   "block.muffins_thaidelight.wild_holy_basil": "ต้นกะเพราป่า",
   "block.muffins_thaidelight.wild_pepper": "พริกป่า",
   "container.muffins_thaidelight.mortar": "ครก",
+  "death.attack.durian": "%1$s ถูกลูกทุเรียนหล่นใส่หัว.",
+  "death.attack.durian.player": "%1$s ถูกลูกทุเรียนหล่นใส่หัวขณะสู้กับ %2$s.",
   "dragonfly.variant.muffins_thaidelight.blue": "สีฟ้า",
   "dragonfly.variant.muffins_thaidelight.green": "สีเขียว",
   "dragonfly.variant.muffins_thaidelight.red": "สีแดง",

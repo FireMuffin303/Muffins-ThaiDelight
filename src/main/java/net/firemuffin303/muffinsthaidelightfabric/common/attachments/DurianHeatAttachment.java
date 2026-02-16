@@ -50,7 +50,7 @@ public class DurianHeatAttachment implements SpecialEffectAttachment {
         if(this.timer > 0){
             if(this.isHeatedUp){
                 if( livingEntity.tickCount % 20 == 0 && !livingEntity.level().isClientSide){
-                    livingEntity.addEffect(new MobEffectInstance(MobEffects.HUNGER,200,14));
+                    livingEntity.addEffect(new MobEffectInstance(MobEffects.HUNGER,200,14,true,true));
 
                     SpicyAttachment spicyAttachment = livingEntity.getAttached(ModAttachments.SPICY);
                     if(spicyAttachment != null && spicyAttachment.timer > 0 && !(livingEntity.fireImmune() || livingEntity.hasEffect(MobEffects.FIRE_RESISTANCE))){

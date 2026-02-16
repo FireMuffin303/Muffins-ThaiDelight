@@ -89,4 +89,5 @@ public class ModTags {
 
     //Damage Types
     public static final TagKey<DamageType> FALLING_DURIAN = TagKey.create(Registries.DAMAGE_TYPE,ThaiDelight.modid("falling_durian"));
+    public static final TagKey<DamageType> SPICY_RESISTANT_TO = TagKey.create(Registries.DAMAGE_TYPE,ThaiDelight.modid("spicy_resistant_to"));
 }
