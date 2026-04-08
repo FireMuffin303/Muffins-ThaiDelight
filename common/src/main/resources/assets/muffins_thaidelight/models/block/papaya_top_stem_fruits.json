@@ -1,0 +1,85 @@
+{
+	"credit": "Made with Blockbench",
+	"texture_size": [32, 32],
+	"textures": {
+		"texture": "muffins_thaidelight:block/papaya_stem_side",
+		"fruits": "papaya_fruit",
+		"particle": "muffins_thaidelight:block/papaya_stem_side"
+	},
+	"elements": [
+		{
+			"from": [4, 0, 4],
+			"to": [12, 16, 12],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 8]},
+			"faces": {
+				"north": {"uv": [0, 0, 4, 8], "texture": "#texture"},
+				"east": {"uv": [4, 0, 8, 8], "texture": "#texture"},
+				"south": {"uv": [0, 8, 4, 16], "texture": "#texture"},
+				"west": {"uv": [8, 0, 12, 8], "texture": "#texture"},
+				"up": {"uv": [8, 12, 4, 8], "texture": "#texture"},
+				"down": {"uv": [12, 8, 8, 12], "texture": "#texture"}
+			}
+		},
+		{
+			"from": [5, 3, -1],
+			"to": [11, 13, 5],
+			"rotation": {"angle": 22.5, "axis": "x", "origin": [8, 13, 4]},
+			"faces": {
+				"north": {"uv": [0, 0, 3, 5], "texture": "#fruits"},
+				"east": {"uv": [3, 0, 6, 5], "texture": "#fruits"},
+				"south": {"uv": [0, 5, 3, 10], "texture": "#fruits"},
+				"west": {"uv": [3, 5, 6, 10], "texture": "#fruits"},
+				"up": {"uv": [9, 3, 6, 0], "texture": "#fruits"},
+				"down": {"uv": [9, 3, 6, 6], "texture": "#fruits"}
+			}
+		},
+		{
+			"from": [5, 3, 11],
+			"to": [11, 13, 17],
+			"rotation": {"angle": -22.5, "axis": "x", "origin": [8, 13, 12]},
+			"faces": {
+				"north": {"uv": [0, 0, 3, 5], "texture": "#fruits"},
+				"east": {"uv": [3, 0, 6, 5], "texture": "#fruits"},
+				"south": {"uv": [0, 5, 3, 10], "texture": "#fruits"},
+				"west": {"uv": [3, 5, 6, 10], "texture": "#fruits"},
+				"up": {"uv": [6, 0, 9, 3], "texture": "#fruits"},
+				"down": {"uv": [6, 3, 9, 6], "texture": "#fruits"}
+			}
+		},
+		{
+			"from": [11, 3, 5],
+			"to": [17, 13, 11],
+			"rotation": {"angle": 22.5, "axis": "z", "origin": [12, 13, 8]},
+			"faces": {
+				"north": {"uv": [0, 0, 3, 5], "texture": "#fruits"},
+				"east": {"uv": [3, 0, 6, 5], "texture": "#fruits"},
+				"south": {"uv": [0, 5, 3, 10], "texture": "#fruits"},
+				"west": {"uv": [3, 5, 6, 10], "texture": "#fruits"},
+				"up": {"uv": [6, 0, 9, 3], "texture": "#fruits"},
+				"down": {"uv": [6, 3, 9, 6], "texture": "#fruits"}
+			}
+		},
+		{
+			"from": [-1, 3, 5],
+			"to": [5, 13, 11],
+			"rotation": {"angle": -22.5, "axis": "z", "origin": [4, 13, 8]},
+			"faces": {
+				"north": {"uv": [0, 0, 3, 5], "texture": "#fruits"},
+				"east": {"uv": [3, 0, 6, 5], "texture": "#fruits"},
+				"south": {"uv": [0, 5, 3, 10], "texture": "#fruits"},
+				"west": {"uv": [3, 5, 6, 10], "texture": "#fruits"},
+				"up": {"uv": [6, 0, 9, 3], "texture": "#fruits"},
+				"down": {"uv": [6, 3, 9, 6], "texture": "#fruits"}
+			}
+		}
+	],
+	"groups": [
+		0,
+		{
+			"name": "fruit",
+			"origin": [4, 16, 8],
+			"color": 0,
+			"children": [1, 2, 3, 4]
+		}
+	]
+}

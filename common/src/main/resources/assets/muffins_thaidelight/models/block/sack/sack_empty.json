@@ -1,0 +1,25 @@
+{
+	"format_version": "1.9.0",
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "muffins_thaidelight:block/sack/sack_top",
+		"1": "muffins_thaidelight:block/sack/sack_empty_side",
+		"2": "muffins_thaidelight:block/sack/sack_bottom",
+		"particle": "muffins_thaidelight:block/sack/sack_empty_side"
+	},
+	"elements": [
+		{
+			"from": [1, 0, 1],
+			"to": [15, 6, 15],
+			"rotation": {"angle": 0, "axis": "y", "origin": [1, 0, 1]},
+			"faces": {
+				"north": {"uv": [1, 10, 15, 16], "texture": "#1"},
+				"east": {"uv": [1, 10, 15, 16], "texture": "#1"},
+				"south": {"uv": [1, 10, 15, 16], "texture": "#1"},
+				"west": {"uv": [1, 10, 15, 16], "texture": "#1"},
+				"up": {"uv": [1, 1, 15, 15], "texture": "#0"},
+				"down": {"uv": [1, 1, 15, 15], "texture": "#2"}
+			}
+		}
+	]
+}

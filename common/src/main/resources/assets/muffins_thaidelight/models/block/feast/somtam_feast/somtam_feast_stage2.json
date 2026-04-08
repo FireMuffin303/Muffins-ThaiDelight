@@ -1,0 +1,71 @@
+{
+	"format_version": "1.9.0",
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"render_type": "minecraft:cutout",
+	"textures": {
+		"3": "muffins_thaidelight:block/somtam/somtam_new",
+		"particle": "muffins_thaidelight:block/somtam/somtam_new",
+		"tray_top": "muffins_thaidelight:block/somtam/somtam_tray_top",
+		"tray_side": "farmersdelight:block/tray_bottom"
+	},
+	"elements": [
+		{
+			"name": "plate",
+			"from": [1, 0, 1],
+			"to": [15, 2, 15],
+			"faces": {
+				"north": {"uv": [1, 11, 15, 13], "texture": "#tray_side"},
+				"east": {"uv": [1, 11, 15, 13], "texture": "#tray_side"},
+				"south": {"uv": [1, 11, 15, 13], "texture": "#tray_side"},
+				"west": {"uv": [1, 11, 15, 13], "texture": "#tray_side"},
+				"up": {"uv": [1, 1, 15, 15], "texture": "#tray_top"},
+				"down": {"uv": [1, 1, 15, 15], "texture": "#tray_side", "cullface": "down"}
+			}
+		},
+		{
+			"from": [8, 2, 3],
+			"to": [13, 5, 13],
+			"rotation": {"angle": 0, "axis": "y", "origin": [14, 4.5, 9]},
+			"faces": {
+				"north": {"uv": [0, 10, 5, 13], "texture": "#3"},
+				"east": {"uv": [0, 10, 10, 13], "texture": "#3"},
+				"south": {"uv": [5, 10, 10, 13], "texture": "#3"},
+				"west": {"uv": [0, 10, 10, 13], "texture": "#3"},
+				"up": {"uv": [5, 10, 0, 0], "texture": "#3"}
+			}
+		},
+		{
+			"from": [3, 2, 8],
+			"to": [8, 5, 13],
+			"rotation": {"angle": 0, "axis": "y", "origin": [9, 4.5, 14]},
+			"faces": {
+				"north": {"uv": [5, 10, 10, 13], "texture": "#3"},
+				"south": {"uv": [0, 10, 5, 13], "texture": "#3"},
+				"west": {"uv": [5, 10, 10, 13], "texture": "#3"},
+				"up": {"uv": [10, 5, 5, 0], "texture": "#3"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "somtam",
+			"origin": [8, 8, 8],
+			"color": 0,
+			"children": [
+				{
+					"name": "plate",
+					"origin": [8, 8, 8],
+					"color": 0,
+					"children": [0]
+				},
+				{
+					"name": "body",
+					"origin": [8, 8, 8],
+					"color": 0,
+					"children": [1, 2]
+				}
+			]
+		}
+	]
+}

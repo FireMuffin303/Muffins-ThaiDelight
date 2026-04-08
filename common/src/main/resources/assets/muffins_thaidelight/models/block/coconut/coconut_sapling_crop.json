@@ -1,0 +1,24 @@
+{
+	"format_version": "1.9.0",
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "muffins_thaidelight:block/coconut/green_coconut_side",
+		"1": "muffins_thaidelight:block/coconut/green_coconut_top",
+		"particle": "muffins_thaidelight:block/coconut/green_coconut_side"
+	},
+	"elements": [
+		{
+			"from": [3, -1, 3],
+			"to": [13, 4, 13],
+			"rotation": {"angle": 0, "axis": "y", "origin": [3, -1, 3]},
+			"faces": {
+				"north": {"uv": [0, 0, 10, 5], "texture": "#0"},
+				"east": {"uv": [0, 0, 10, 5], "texture": "#0"},
+				"south": {"uv": [0, 0, 10, 5], "texture": "#0"},
+				"west": {"uv": [0, 0, 10, 5], "texture": "#0"},
+				"up": {"uv": [0, 0, 10, 10], "texture": "#1"}
+			}
+		}
+	],
+	"display": {}
+}

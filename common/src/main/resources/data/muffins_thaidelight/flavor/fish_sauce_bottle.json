@@ -1,0 +1,9 @@
+{
+  "item": "muffins_thaidelight:fish_sauce_bottle",
+  "flavor": {
+    "sour": 0,
+    "spicy": 0,
+    "salty": 1,
+    "sweet": 0
+  }
+}

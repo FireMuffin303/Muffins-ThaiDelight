@@ -1,0 +1,48 @@
+{
+	"parent": "minecraft:block/block",
+	"format_version": "1.9.0",
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "muffins_thaidelight:block/coconut/coconut_leaf_end_top",
+		"1": "muffins_thaidelight:block/coconut/coconut_leaf_end_side",
+		"particle": "muffins_thaidelight:block/coconut/coconut_leaf_top"
+	},
+	"elements": [
+		{
+			"from": [15.8, -4.5, 5],
+			"to": [15.9, 11.5, 21],
+			"rotation": {"angle": -45, "axis": "x", "origin": [7.95, 7.475, 13]},
+			"faces": {
+				"east": {"uv": [16, 0, 0, 16], "texture": "#1"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#1"}
+			}
+		},
+		{
+			"from": [0, 11.4, 5],
+			"to": [16, 11.5, 21],
+			"rotation": {"angle": -45, "axis": "x", "origin": [8.05, 7.475, 13]},
+			"shade": false,
+			"faces": {
+				"up": {"uv": [0, 0, 16, 16], "texture": "#0"},
+				"down": {"uv": [0, 16, 16, 0], "texture": "#0"}
+			}
+		},
+		{
+			"from": [0.1, -4.5, 5],
+			"to": [0.2, 11.5, 21],
+			"rotation": {"angle": -45, "axis": "x", "origin": [8.15, 7.475, 13]},
+			"faces": {
+				"east": {"uv": [16, 0, 0, 16], "texture": "#1"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#1"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "group",
+			"origin": [0.05, 8, 8],
+			"color": 0,
+			"children": [0, 1, 2]
+		}
+	]
+}

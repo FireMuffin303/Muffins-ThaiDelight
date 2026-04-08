@@ -1,0 +1,56 @@
+{
+	"parent": "minecraft:block/block",
+	"format_version": "1.21.11",
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "muffins_thaidelight:block/durian/durian_side",
+		"1": "muffins_thaidelight:block/durian/durian_top",
+		"2": "muffins_thaidelight:block/durian/durian_stem",
+		"3": "muffins_thaidelight:block/durian/durian_bottom",
+		"particle": "#0"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 0],
+			"to": [16, 16, 16],
+			"faces": {
+				"up": {"uv": [0, 0, 16, 16], "texture": "#1", "cullface": "up"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#3", "cullface": "down"}
+			}
+		},
+		{
+			"from": [0, 0, 1],
+			"to": [16, 16, 15],
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#0"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#0"}
+			}
+		},
+		{
+			"from": [1, 0, 0],
+			"to": [15, 16, 16],
+			"faces": {
+				"east": {"uv": [0, 0, 16, 16], "texture": "#0"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#0"}
+			}
+		},
+		{
+			"from": [0, 16, 8],
+			"to": [16, 20, 8],
+			"rotation": {"angle": 45, "axis": "y", "origin": [8, 16, 8], "rescale": true},
+			"faces": {
+				"north": {"uv": [0, 12, 16, 16], "texture": "#2"},
+				"south": {"uv": [0, 12, 16, 16], "texture": "#2"}
+			}
+		},
+		{
+			"from": [0, 16, 8],
+			"to": [16, 20, 8],
+			"rotation": {"angle": -45, "axis": "y", "origin": [8, 16, 8], "rescale": true},
+			"faces": {
+				"north": {"uv": [0, 12, 16, 16], "texture": "#2"},
+				"south": {"uv": [0, 12, 16, 16], "texture": "#2"}
+			}
+		}
+	]
+}

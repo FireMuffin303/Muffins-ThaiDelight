@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "id": "${mod_id}",
+  "version": "${version}",
+  "name": "Muffin's Thai's Delight Refabricated",
+  "description": "Cooking expansion focus on Thai's Food!",
+  "authors": [
+    "FireMuffin303 - Developer & Texture Artist",
+    "lllLucaslll - Concept Artist",
+    "Dino_care - Concept Artist",
+    "No92 - Concept Artist"
+  ],
+  "contact": {
+    "homepage": "https://modrinth.com/mod/muffins-thais-delight",
+    "sources": "https://github.com/FireMuffin303/Muffins-ThaiDelight",
+    "issues": "https://github.com/FireMuffin303/Muffins-ThaiDelight/issues"
+  },
+  "license": "MIT License",
+  "icon": "assets/muffins_thaidelight/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "net.firemuffin303.thaidelight.client.ThaiDelightClientFabric"
+    ],
+    "main": [
+      "net.firemuffin303.thaidelight.ThaiDelightFabric"
+    ],
+    "fabric-datagen": [
+      "net.firemuffin303.muffinsthaidelightfabric.datagen.ModDataGen"
+    ],
+    "jei_mod_plugin": [
+      "net.firemuffin303.muffinsthaidelightfabric.integration.jei.ThaiDelightJEIIntegration"
+    ],
+    "emi": [
+      "net.firemuffin303.muffinsthaidelightfabric.integration.emi.ThaiDelightEMI"
+    ],
+    "rei_client": [
+      "net.firemuffin303.muffinsthaidelightfabric.integration.rei.ThaiDelightClientREI"
+    ],
+    "mm:early_risers": [
+      "net.firemuffin303.muffinsthaidelightfabric.util.ModASMEarlyRiser"
+    ],
+    "modmenu": [
+      "net.firemuffin303.muffinsthaidelightfabric.integration.modmenu.ThaiDelightModMenu"
+    ]
+  },
+  "mixins": [
+    "muffins_thaidelight.mixins.json",
+    "muffins_thaidelight_fabric.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}",
+    "farmersdelight": ">=${farmersdelight_refabricated_version}",
+    "midnightlib": ">=1.9.2+1.20.1-fabric"
+  }
+}

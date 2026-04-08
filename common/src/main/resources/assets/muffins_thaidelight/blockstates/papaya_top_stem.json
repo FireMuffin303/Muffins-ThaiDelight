@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "muffins_thaidelight:block/papaya_stem_test"
+    },
+    "age=1": {
+      "model": "muffins_thaidelight:block/papaya_stem_test"
+    },
+    "age=2": {
+      "model": "muffins_thaidelight:block/papaya_top_stem_stage1"
+    },
+    "age=3": {
+      "model": "muffins_thaidelight:block/papaya_top_stem_stage2"
+    }
+  }
+}
