@@ -1,6 +1,6 @@
 package net.firemuffin303.thaidelight.common.world.trees;
 
-import net.firemuffin303.muffinsthaidelightfabric.registry.ModFeatures;
+import net.firemuffin303.thaidelight.common.registry.ModFeatures;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.grower.AbstractTreeGrower;

@@ -67,9 +67,9 @@ public class LimeCropBlock extends BushBlock implements BonemealableBlock {
         } else if (flag) {
             int j = 2 + level.random.nextInt(3);
             int k = level.random.nextInt(4);
-            popResource(level, blockPos, new ItemStack(ModItems.LIME, j));
+            popResource(level, blockPos, new ItemStack(ModItems.LIME.get(), j));
             if(k <= 1){
-                popResource(level,blockPos,new ItemStack(ModItems.LIME_SAPLING,1));
+                popResource(level,blockPos,new ItemStack(ModItems.LIME_SAPLING.get(),1));
             }
             level.playSound((Player)null, player, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
 
@@ -89,7 +89,7 @@ public class LimeCropBlock extends BushBlock implements BonemealableBlock {
 
     @Override
     public ItemStack getCloneItemStack(BlockGetter blockGetter, BlockPos blockPos, BlockState blockState) {
-        return new ItemStack(ModItems.LIME_SAPLING);
+        return new ItemStack(ModItems.LIME_SAPLING.get());
     }
 
     //--- Bonemeal ---

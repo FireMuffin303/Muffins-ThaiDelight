@@ -112,6 +112,6 @@ public class SmallDurianBlock extends HorizontalDirectionalBlock implements Simp
 
     @Override
     public ItemLike getPickUpItem() {
-        return ModItems.SMALL_DURIAN;
+        return ModItems.SMALL_DURIAN.get();
     }
 }

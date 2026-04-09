@@ -7,10 +7,9 @@ import net.firemuffin303.thaidelight.common.block.vegetations.durian.DurianFlowe
 import net.firemuffin303.thaidelight.common.block.vegetations.mango.HangingMangoBlock;
 import net.firemuffin303.thaidelight.common.world.feature.*;
 import net.firemuffin303.thaidelight.common.world.feature.stateproviders.RandomHorizontalFacingStateProvider;
-import net.firemuffin303.thaidelight.mixin.accessor.FoliagePlacerTypeAccessor;
-import net.firemuffin303.thaidelight.mixin.accessor.TrunkPlacerTypeAccessor;
+import net.firemuffin303.thaidelight.mixin.accessor.feature.FoliagePlacerTypeAccessor;
+import net.firemuffin303.thaidelight.mixin.accessor.feature.TrunkPlacerTypeAccessor;
 import net.minecraft.core.*;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.data.worldgen.placement.PlacementUtils;

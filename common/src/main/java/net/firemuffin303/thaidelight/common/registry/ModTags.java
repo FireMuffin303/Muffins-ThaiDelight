@@ -64,6 +64,9 @@ public class ModTags {
     public static final TagKey<Biome> WILD_ALL_BASIL_BIOMES = TagKey.create(Registries.BIOME,ThaiDelightCommon.modid("wild_all_basil_biomes"));
     public static final TagKey<Biome> BUTTERFLY_PEA_BIOMES = TagKey.create(Registries.BIOME,ThaiDelightCommon.modid("butterfly_peas_biomes"));
 
+    //----- Farmers Delight --------
+    public static final TagKey<Block> FARMER_DELIGHT_ROPE = TagKey.create(Registries.BLOCK,new ResourceLocation("farmersdelight","ropes"));
+
     //----- Covenience Tag ----
     public static final TagKey<Item> COMMON_MILKS = TagKey.create(Registries.ITEM,new ResourceLocation("c","milks"));
     public static final TagKey<Item> COMMON_COOKED_MEATS =  TagKey.create(Registries.ITEM,new ResourceLocation("c","foods/cooked_meats"));

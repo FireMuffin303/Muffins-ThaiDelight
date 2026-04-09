@@ -1,7 +1,7 @@
 package net.firemuffin303.thaidelight.common.registry;
 
-import net.firemuffin303.thaidelight.mixin.accessor.BlockSetTypeAccessor;
-import net.firemuffin303.thaidelight.mixin.accessor.WoodSetTypeAccessor;
+import net.firemuffin303.thaidelight.mixin.accessor.block.BlockSetTypeAccessor;
+import net.firemuffin303.thaidelight.mixin.accessor.block.WoodSetTypeAccessor;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.WoodType;
 

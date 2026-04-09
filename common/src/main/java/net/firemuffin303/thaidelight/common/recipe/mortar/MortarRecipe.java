@@ -1,0 +1,21 @@
+package net.firemuffin303.thaidelight.common.recipe.mortar;
+
+import net.firemuffin303.thaidelight.common.registry.ModRecipes;
+import net.minecraft.world.Container;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.*;
+
+public interface MortarRecipe extends Recipe<Container> {
+
+
+    @Override
+    default RecipeType<?> getType() {
+        return ModRecipes.MORTAR.get();
+    }
+
+    ItemStack getResult();
+
+    ItemStack getContainer();
+
+    MortarRecipeBookTab getRecipeBookTab();
+}

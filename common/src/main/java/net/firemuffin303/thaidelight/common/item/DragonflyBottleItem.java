@@ -15,7 +15,7 @@ import java.util.List;
 
 public class DragonflyBottleItem extends MobBottleItem {
     public DragonflyBottleItem(Properties properties) {
-        super(ModEntityTypes.DRAGONFLY, SoundEvents.BOTTLE_EMPTY, properties);
+        super(ModEntityTypes.DRAGONFLY.get(), SoundEvents.BOTTLE_EMPTY, properties);
     }
 
     @Override

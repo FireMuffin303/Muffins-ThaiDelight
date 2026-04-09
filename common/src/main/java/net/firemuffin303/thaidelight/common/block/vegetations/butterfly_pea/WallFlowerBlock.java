@@ -61,7 +61,7 @@ public class WallFlowerBlock extends MultifaceBlock implements SimpleWaterlogged
 
     @Override
     public boolean canBeReplaced(BlockState blockState, BlockPlaceContext blockPlaceContext) {
-        return !blockPlaceContext.getItemInHand().is(ModItems.BUTTERFLY_PEA) || super.canBeReplaced(blockState, blockPlaceContext);
+        return !blockPlaceContext.getItemInHand().is(ModItems.BUTTERFLY_PEA.get()) || super.canBeReplaced(blockState, blockPlaceContext);
     }
 
     @Override

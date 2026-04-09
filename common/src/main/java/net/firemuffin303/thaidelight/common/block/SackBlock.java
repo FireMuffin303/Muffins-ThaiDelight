@@ -103,7 +103,7 @@ public class SackBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
         BlockEntity blockEntity = level.getBlockEntity(blockPos);
         if (blockEntity instanceof SackBlockEntity sackBlockEntity) {
             if (!level.isClientSide && player.isCreative() && !sackBlockEntity.isEmpty()) {
-                ItemStack itemStack = new ItemStack(ModItems.SACK);
+                ItemStack itemStack = new ItemStack(ModItems.SACK.get());
                 blockEntity.saveToItem(itemStack);
                 if (sackBlockEntity.hasCustomName()) {
                     itemStack.setHoverName(sackBlockEntity.getCustomName());

@@ -77,6 +77,6 @@ public class StackableMangoBlock extends AbstractStackableBlock {
 
     @Override
     public ItemLike getPickUpItem() {
-        return ModItems.MANGO;
+        return ModItems.MANGO.get();
     }
 }

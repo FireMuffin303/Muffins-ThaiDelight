@@ -4,15 +4,30 @@
   "package": "net.firemuffin303.thaidelight.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "accessor.BlocksAccessor",
-    "accessor.BlockSetTypeAccessor",
-    "accessor.BlockStateProviderTypeAccessor",
     "accessor.CriteriaTriggersAccessor",
-    "accessor.FoliagePlacerTypeAccessor",
-    "accessor.TrunkPlacerTypeAccessor",
-    "accessor.WoodSetTypeAccessor"
+    "accessor.DamageSourcesAccessor",
+    "accessor.block.BlockEntityTypeAccessor",
+    "accessor.block.BlocksAccessor",
+    "accessor.block.BlockSetTypeAccessor",
+    "accessor.block.BlockStateProviderTypeAccessor",
+    "accessor.block.WoodSetTypeAccessor",
+    "accessor.feature.FoliagePlacerTypeAccessor",
+    "accessor.feature.TrunkPlacerTypeAccessor",
+    "bambooShoot.PandaMixin",
+    "dispenser.DispenseItemBehaviorMixin",
+    "durianHelmet.EnchantmentHelperMixin",
+    "durianHelmet.LivingEntityMixin",
+    "durianHelmet.ThornsEnchantmentMixin",
+    "dyeableItem.DyeableLeatherItemMixin",
+    "dyeableItem.RecipeMixin",
+    "foodEffect.LivingEntityMixin",
+    "foodEffect.heatedup.PowderSnowBlockMixin",
+    "recipeBookType.RecipeBlockSettingMixin",
+    "stinky.SniffingMixin"
   ],
   "client": [
+    "durianHelmet.LivingEntityRendererMixin",
+    "recipeBookType.RecipeBookCategoriesMixin"
   ],
   "injectors": {
     "defaultRequire": 1

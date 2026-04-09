@@ -35,8 +35,4 @@ public class ModEntityTypes {
         void register(EntityType<? extends LivingEntity> entity, AttributeSupplier.Builder builder);
     }
 
-    @FunctionalInterface
-    public interface EntityAttributeSupplier{
-        void register(EntityType<? extends LivingEntity> entity, AttributeSupplier.Builder builder);
-    }
 }

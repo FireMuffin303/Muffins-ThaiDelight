@@ -145,7 +145,7 @@ public class PapayaFlowerBlock extends HorizontalDirectionalBlock implements Sim
             serverLevel.setBlock(blockPos,blockState.setValue(FLOWERS,flowers+1),2);
             return;
         }
-        popResource(serverLevel,blockPos,new ItemStack(ModItems.PAPAYA_FLOWER));
+        popResource(serverLevel,blockPos,new ItemStack(ModItems.PAPAYA_FLOWER.get()));
     }
 
     @Override

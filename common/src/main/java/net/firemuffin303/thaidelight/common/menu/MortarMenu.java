@@ -1,11 +1,12 @@
 package net.firemuffin303.thaidelight.common.menu;
 
 
-import net.firemuffin303.thaidelight.common.recipe.MortarRecipe;
+import net.firemuffin303.thaidelight.common.recipe.mortar.MortarRecipe;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.firemuffin303.thaidelight.common.registry.ModMenuType;
 import net.firemuffin303.thaidelight.common.registry.ModRecipes;
 import net.firemuffin303.thaidelight.common.registry.ModSoundEvents;
+import net.firemuffin303.thaidelight.util.PlatformUtil;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.protocol.game.ClientboundContainerSetSlotPacket;
 import net.minecraft.server.level.ServerPlayer;
@@ -83,7 +84,7 @@ public class MortarMenu extends RecipeBookMenu<Container> {
         if (!arg2.isClientSide) {
             ServerPlayer serverPlayer = (ServerPlayer)arg3;
             ItemStack itemStack = ItemStack.EMPTY;
-            Optional<MortarRecipe> optional = arg2.getServer().getRecipeManager().getRecipeFor(ModRecipes.MORTAR, arg4, arg2);
+            Optional<MortarRecipe> optional = arg2.getServer().getRecipeManager().getRecipeFor(ModRecipes.MORTAR.get(), arg4, arg2);
             if (optional.isPresent()) {
                 MortarRecipe mortarRecipe = optional.get();
                 if (arg5.setRecipeUsed(arg2, serverPlayer, mortarRecipe)) {
@@ -140,7 +141,7 @@ public class MortarMenu extends RecipeBookMenu<Container> {
 
     @Override
     public RecipeBookType getRecipeBookType() {
-        return ThaiDelightClient.MORTAR_RECIPE_BOOK_TYPE;
+        return PlatformUtil.getMortarBookType();
     }
 
     @Override
@@ -220,7 +221,7 @@ public class MortarMenu extends RecipeBookMenu<Container> {
         public void onTake(Player player, ItemStack itemStack) {
 
             this.checkTakeAchievements(itemStack);
-            NonNullList<ItemStack> nonNullList = player.level().getRecipeManager().getRemainingItemsFor(ModRecipes.MORTAR, this.craftSlots, player.level());
+            NonNullList<ItemStack> nonNullList = player.level().getRecipeManager().getRemainingItemsFor(ModRecipes.MORTAR.get(), this.craftSlots, player.level());
 
             for(int i = 0; i < nonNullList.size(); ++i) {
                 ItemStack itemStack2 = this.craftSlots.getItem(i);

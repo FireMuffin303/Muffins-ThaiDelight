@@ -2,16 +2,15 @@ package net.firemuffin303.thaidelight.common.registry;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.firemuffin303.thaidelight.ThaiDelightCommon;
-import net.firemuffin303.thaidelight.common.item.CoconutItem;
+import net.firemuffin303.thaidelight.common.item.equipments.DurianHelmetItem;
+import net.firemuffin303.thaidelight.common.item.vegetations.CoconutItem;
 import net.firemuffin303.thaidelight.common.item.DragonflyBottleItem;
 import net.firemuffin303.thaidelight.common.item.DyeableItem;
 import net.firemuffin303.thaidelight.common.item.SackItem;
-import net.firemuffin303.thaidelight.common.item.papaya.PapayaFlowerItem;
-import net.firemuffin303.thaidelight.util.PlatformUtil;
-import net.minecraft.core.registries.BuiltInRegistries;
+import net.firemuffin303.thaidelight.common.item.vegetations.papaya.PapayaFlowerItem;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.food.FoodProperties;
@@ -23,7 +22,6 @@ import net.minecraft.world.level.material.Fluids;
 
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.Properties;
 import java.util.function.Supplier;
 
 import static net.firemuffin303.thaidelight.util.PlatformUtil.bowlFoodItem;
@@ -36,10 +34,6 @@ public class ModItems {
             .displayItems(RegistryUtils::itemsGenerator)
             .build());
 
-
-    public static final ResourceKey<TerraformBoatType> DURIAN_BOAT_KEY = TerraformBoatTypeRegistry.createKey(ThaiDelight.modid("durian_boat"));
-    public static final ResourceKey<TerraformBoatType> COCONUT_BOAT_KEY = TerraformBoatTypeRegistry.createKey(ThaiDelight.modid("coconut_boat"));
-    public static final ResourceKey<TerraformBoatType> MANGO_BOAT_KEY = TerraformBoatTypeRegistry.createKey(ThaiDelight.modid("mango_boat"));
 
     public static final ArrayList<Supplier<Item>> FLAT_ITEMS = new ArrayList<>();
 
@@ -59,14 +53,14 @@ public class ModItems {
     public static final Supplier<Item> BUTTERFLY_PEA_CRATE = register("butterfly_pea_crate",() -> new BlockItem(ModBlocks.BUTTERFLY_PEA_CRATE.get(),new Item.Properties()));
 
     //Crab
-    public static final Supplier<Item> CRAB_SPAWN_EGG = register("flower_crab_spawn_egg",() -> new SpawnEggItem(ModEntityTypes.FLOWER_CRAB,0x93a064,0xac3247,new Item.Properties()));
+    public static final Supplier<Item> CRAB_SPAWN_EGG = register("flower_crab_spawn_egg",() -> new SpawnEggItem(ModEntityTypes.FLOWER_CRAB.get(),0x93a064,0xac3247,new Item.Properties()));
     public static final Supplier<Item> CRAB_EGG = register("flower_crab_egg",() -> new BlockItem(ModBlocks.CRAB_EGG.get(),new Item.Properties()));
-    public static final Supplier<Item> CRAB_BUCKET = registerFlatItem("flower_crab_bucket",() -> new MobBucketItem(ModEntityTypes.FLOWER_CRAB, Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH,new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> CRAB_BUCKET = registerFlatItem("flower_crab_bucket",() -> new MobBucketItem(ModEntityTypes.FLOWER_CRAB.get(), Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH,new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> CRAB_MEAT = registerFlatItem("flower_crab",() -> new Item(new Item.Properties().food(ModFoods.CRAB)));
     public static final Supplier<Item> COOKED_CRAB_MEAT = registerFlatItem("cooked_flower_crab",() -> new Item(new Item.Properties().food(ModFoods.COOKED_CRAB)));
 
     //Dragonfly
-    public static final Supplier<Item> DRAGONFLY_SPAWN_EGG = register("dragonfly_spawn_egg",() -> new SpawnEggItem(ModEntityTypes.DRAGONFLY,0x181d13,0x246011,new Item.Properties()));
+    public static final Supplier<Item> DRAGONFLY_SPAWN_EGG = register("dragonfly_spawn_egg",() -> new SpawnEggItem(ModEntityTypes.DRAGONFLY.get(),0x181d13,0x246011,new Item.Properties()));
     public static final Supplier<Item> DRAGONFLY = registerFlatItem("dragonfly",() -> new Item(new Item.Properties().food(ModFoods.DRAGONFLY)));
     public static final Supplier<Item> DRAGONFLY_BOTTLE = register("dragonfly_bottle",() -> new DragonflyBottleItem(new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> COOKED_DRAGONFLY = registerFlatItem("cooked_dragonfly",() -> new Item(new Item.Properties().food(ModFoods.COOKED_DRAGONFLY)));
@@ -119,12 +113,12 @@ public class ModItems {
     public static final Supplier<Item> DURIAN_SIGN = register("durian_sign",() ->new SignItem(new Item.Properties().stacksTo(16),ModBlocks.DURIAN_SIGN.get(),ModBlocks.DURIAN_WALL_SIGN.get()));
     public static final Supplier<Item> DURIAN_HANGING_SIGN = register("durian_hanging_sign",() ->new HangingSignItem(ModBlocks.DURIAN_HANGING_SIGN.get(),ModBlocks.DURIAN_WALL_HANGING_SIGN.get(),new Item.Properties().stacksTo(16)));
     public static final Supplier<Item> DURIAN_CABINET = register("durian_cabinet",() ->new BlockItem(ModBlocks.DURIAN_CABINET.get(),new Item.Properties()));
-    public static final Supplier<Item> DURIAN_BOAT = TerraformBoatItemHelper.registerBoatItem(ThaiDelightCommon.modid("durian_boat"),DURIAN_BOAT_KEY,false);
-    public static final Supplier<Item> DURIAN_CHEST_BOAT = TerraformBoatItemHelper.registerBoatItem(ThaiDelightCommon.modid("durian_chest_boat"),DURIAN_BOAT_KEY,true);
+    public static final Supplier<Item> DURIAN_BOAT = createBoat(ThaiDelightCommon.modid("durian_boat"),false,"durian");
+    public static final Supplier<Item> DURIAN_CHEST_BOAT = createBoat(ThaiDelightCommon.modid("durian_chest_boat"),true,"durian");
 
     public static final Supplier<Item> DURIAN_PEEL = registerFlatItem("durian_peel",() ->new Item(new Item.Properties()));
     public static final Supplier<Item> DURIAN_PEEL_BLOCK = register("durian_peel_block",() ->new BlockItem(ModBlocks.DURIAN_PEEL_BLOCK.get(),new Item.Properties()));
-    public static final Supplier<Item> DURIAN_HELMET = registerFlatItem("durian_helmet",() ->new ArmorItem(CommonEvents.getDurianMaterial(), ArmorItem.Type.HELMET,new Item.Properties()));
+    public static final Supplier<Item> DURIAN_HELMET = registerFlatItem("durian_helmet", DurianHelmetItem::new);
     //------------------ 🥥 COCONUT 🥥 ------------------
     public static final Supplier<Item> COCONUT_SAPLING = register("coconut_sapling",() ->new BlockItem(ModBlocks.COCONUT_SAPLING.get(),new Item.Properties()));
     public static final Supplier<Item> COCONUT_LEAF = register("coconut_leaf",() ->new BlockItem(ModBlocks.COCONUT_LEAF.get(),new Item.Properties()));
@@ -147,8 +141,8 @@ public class ModItems {
     public static final Supplier<Item> COCONUT_SIGN = register("coconut_sign",() ->new SignItem(new Item.Properties().stacksTo(16),ModBlocks.COCONUT_SIGN.get(),ModBlocks.COCONUT_WALL_SIGN.get()));
     public static final Supplier<Item> COCONUT_HANGING_SIGN = register("coconut_hanging_sign",() ->new HangingSignItem(ModBlocks.COCONUT_HANGING_SIGN.get(),ModBlocks.COCONUT_WALL_HANGING_SIGN.get(),new Item.Properties().stacksTo(16)));
     public static final Supplier<Item> COCONUT_CABINET = register("coconut_cabinet",() ->new BlockItem(ModBlocks.COCONUT_CABINET.get(),new Item.Properties()));
-    public static final Supplier<Item> COCONUT_BOAT = TerraformBoatItemHelper.registerBoatItem(ThaiDelightCommon.modid("coconut_boat"),COCONUT_BOAT_KEY,false);
-    public static final Supplier<Item> COCONUT_CHEST_BOAT = TerraformBoatItemHelper.registerBoatItem(ThaiDelightCommon.modid("coconut_chest_boat"),COCONUT_BOAT_KEY,true);
+    public static final Supplier<Item> COCONUT_BOAT = createBoat(ThaiDelightCommon.modid("coconut_boat"),false,"coconut");
+    public static final Supplier<Item> COCONUT_CHEST_BOAT = createBoat(ThaiDelightCommon.modid("coconut_chest_boat"),true,"coconut");
 
     public static final Supplier<Item> COCONUT = register("coconut",() ->new CoconutItem(new Item.Properties()));
     public static final Supplier<Item> STRIPPED_COCONUT = register("stripped_coconut",() ->new BlockItem(ModBlocks.STRIPPED_COCONUT.get(),new Item.Properties()));
@@ -175,8 +169,8 @@ public class ModItems {
     public static final Supplier<Item> MANGO_SIGN = register("mango_sign",() ->new SignItem(new Item.Properties().stacksTo(16),ModBlocks.MANGO_SIGN.get(),ModBlocks.MANGO_WALL_SIGN.get()));
     public static final Supplier<Item> MANGO_HANGING_SIGN = register("mango_hanging_sign",() ->new HangingSignItem(ModBlocks.MANGO_HANGING_SIGN.get(),ModBlocks.MANGO_WALL_HANGING_SIGN.get(),new Item.Properties().stacksTo(16)));
     public static final Supplier<Item> MANGO_CABINET = register("mango_cabinet",() ->new BlockItem(ModBlocks.MANGO_CABINET.get(),new Item.Properties()));
-    public static final Supplier<Item> MANGO_BOAT = TerraformBoatItemHelper.registerBoatItem(ThaiDelightCommon.modid("mango_boat"),MANGO_BOAT_KEY,false);
-    public static final Supplier<Item> MANGO_CHEST_BOAT = TerraformBoatItemHelper.registerBoatItem(ThaiDelightCommon.modid("mango_chest_boat"),MANGO_BOAT_KEY,true);
+    public static final Supplier<Item> MANGO_BOAT = createBoat(ThaiDelightCommon.modid("mango_boat"),false,"mango");
+    public static final Supplier<Item> MANGO_CHEST_BOAT = createBoat(ThaiDelightCommon.modid("mango_chest_boat"),true,"mango");
 
     public static final Supplier<Item> MANGO = registerFlatItem("mango",() ->new ItemNameBlockItem(ModBlocks.STACKABLE_MANGO_BLOCK.get(),new Item.Properties().food(ModFoods.MANGO)));
     public static final Supplier<Item> MANGO_SLICE = registerFlatItem("mango_slice",() ->new Item(new Item.Properties().food(ModFoods.MANGO_SLICE)));
@@ -356,12 +350,7 @@ public class ModItems {
     }
 
     @ExpectPlatform
-    public static Item createBoat(){
-        throw new AssertionError();
-    }
-
-    @ExpectPlatform
-    public static Item createChestBoat(){
+    public static Supplier<Item> createBoat(ResourceLocation id, boolean chest, String boatType){
         throw new AssertionError();
     }
 }

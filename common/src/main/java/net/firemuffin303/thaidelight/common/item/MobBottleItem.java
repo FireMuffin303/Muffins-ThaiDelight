@@ -1,6 +1,6 @@
 package net.firemuffin303.thaidelight.common.item;
 
-import net.firemuffin303.muffinsthaidelightfabric.util.Bottleable;
+import net.firemuffin303.muffinsmcapi.api.extension.Bottleable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;

@@ -1,8 +1,11 @@
 package net.firemuffin303.thaidelight.common.block.vegetations.butterfly_pea;
 
+import net.firemuffin303.muffinsmcapi.api.CommonEvents;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.firemuffin303.thaidelight.common.registry.ModLootTables;
+import net.firemuffin303.thaidelight.common.registry.ModTags;
+import net.firemuffin303.thaidelight.util.ModUtil;
 import net.firemuffin303.thaidelight.util.PlatformUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -64,7 +67,7 @@ public class ButterflyPeaVineBlock extends CropBlock {
             }
 
 
-            level.playSound(null, pos, ModSounds.ITEM_TOMATO_PICK_FROM_BUSH.get(), SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
+            level.playSound(null, pos, PlatformUtil.tomatoPickSound(), SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
             level.setBlock(pos, state.setValue(getAgeProperty(), 0), 2);
             return InteractionResult.SUCCESS;
         } else {
@@ -95,7 +98,7 @@ public class ButterflyPeaVineBlock extends CropBlock {
 
     @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        if (!level.isAreaLoaded(pos, 1)) return;
+        if (!ModUtil.isAreaLoaded(level,pos, 1)) return;
         if (level.getRawBrightness(pos, 0) >= 9) {
             int age = this.getAge(state);
             if (age < this.getMaxAge()) {
@@ -112,7 +115,7 @@ public class ButterflyPeaVineBlock extends CropBlock {
         if (random.nextFloat() < 0.3F) {
             BlockPos posAbove = pos.above();
             BlockState stateAbove = level.getBlockState(posAbove);
-            boolean canClimb = Configuration.ENABLE_TOMATO_VINE_CLIMBING_TAGGED_ROPES.get() ? stateAbove.is(ModTags.ROPES) : stateAbove.is(ModBlocks.ROPE.get());
+            boolean canClimb = PlatformUtil.tomatoVineConfig() ? stateAbove.is(ModTags.FARMER_DELIGHT_ROPE) : stateAbove.is(PlatformUtil.farmerDelightRope());
             if (canClimb) {
                 int vineHeight;
                 for (vineHeight = 1; level.getBlockState(pos.below(vineHeight)).is(this); ++vineHeight) {
@@ -178,7 +181,7 @@ public class ButterflyPeaVineBlock extends CropBlock {
         BlockPos belowPos = pos.below();
         BlockState belowState = level.getBlockState(belowPos);
 
-        if (state.getValue(TomatoVineBlock.ROPELOGGED)) {
+        if (state.getValue(ROPELOGGED)) {
             return belowState.is(ModBlocks.BUTTERFLY_PEA_BLOCK.get()) && hasGoodCropConditions(level, pos);
         }
 
@@ -191,7 +194,7 @@ public class ButterflyPeaVineBlock extends CropBlock {
 
     @Override
     public void playerDestroy(Level level, Player player, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity, ItemStack stack) {
-        boolean isRopelogged = state.getValue(TomatoVineBlock.ROPELOGGED);
+        boolean isRopelogged = state.getValue(ROPELOGGED);
         super.playerDestroy(level, player, pos, state, blockEntity, stack);
 
         if (isRopelogged) {
@@ -209,8 +212,8 @@ public class ButterflyPeaVineBlock extends CropBlock {
     }
 
     public static void destroyAndPlaceRope(Level level, BlockPos pos) {
-        var configuredRopeBlock = BuiltInRegistries.BLOCK.getOptional(new ResourceLocation(Configuration.DEFAULT_TOMATO_VINE_ROPE.get()));
-        Block finalRopeBlock = configuredRopeBlock.orElseGet(ModBlocks.ROPE);
+        var configuredRopeBlock = BuiltInRegistries.BLOCK.getOptional(new ResourceLocation(PlatformUtil.defaultTomatoVineConfig()));
+        Block finalRopeBlock = configuredRopeBlock.orElseGet(PlatformUtil::farmerDelightRope);
 
         level.setBlockAndUpdate(pos, finalRopeBlock.defaultBlockState());
     }
@@ -219,7 +222,7 @@ public class ButterflyPeaVineBlock extends CropBlock {
     public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         if (!state.canSurvive(level, pos)) {
             level.destroyBlock(pos, true);
-            if (state.getValue(TomatoVineBlock.ROPELOGGED)) {
+            if (state.getValue(ROPELOGGED)) {
                 destroyAndPlaceRope(level, pos);
             }
         }

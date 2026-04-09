@@ -1,5 +1,6 @@
 package net.firemuffin303.thaidelight.common.block.vegetations.papaya;
 
+import net.firemuffin303.thaidelight.common.block.ModBlockStateProperties;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

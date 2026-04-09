@@ -1,5 +1,6 @@
 package net.firemuffin303.thaidelight.common.item;
 
+import net.firemuffin303.thaidelight.client.renderer.component.SackTooltipComponent;
 import net.firemuffin303.thaidelight.common.registry.ModBlockEntityTypes;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.firemuffin303.thaidelight.common.registry.ModCriteriaTriggers;

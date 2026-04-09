@@ -2,6 +2,7 @@ package net.firemuffin303.thaidelight.common.world.feature;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.firemuffin303.thaidelight.common.block.ModBlockStateProperties;
 import net.firemuffin303.thaidelight.common.registry.ModFeatures;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

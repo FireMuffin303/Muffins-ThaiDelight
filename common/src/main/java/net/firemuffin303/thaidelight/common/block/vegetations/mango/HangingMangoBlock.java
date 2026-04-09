@@ -1,5 +1,6 @@
 package net.firemuffin303.thaidelight.common.block.vegetations.mango;
 
+import net.firemuffin303.thaidelight.common.block.FallableExtension;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.minecraft.core.BlockPos;

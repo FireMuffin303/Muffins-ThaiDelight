@@ -29,10 +29,8 @@ import net.firemuffin303.thaidelight.common.block.vegetations.durian.*;
 import net.firemuffin303.thaidelight.common.world.trees.DurianTreeGrower;
 import net.firemuffin303.thaidelight.common.world.trees.MangoTreeGrower;
 import net.firemuffin303.thaidelight.common.world.trees.PapayaTreeGrower;
-import net.firemuffin303.thaidelight.mixin.accessor.BlocksAccessor;
-import net.firemuffin303.thaidelight.util.PlatformUtil;
+import net.firemuffin303.thaidelight.mixin.accessor.block.BlocksAccessor;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.effect.MobEffect;
@@ -50,7 +48,7 @@ import net.minecraft.world.level.material.PushReaction;
 import java.util.ArrayList;
 import java.util.function.Supplier;
 
-import static net.firemuffin303.thaidelight.mixin.accessor.BlocksAccessor.log;
+import static net.firemuffin303.thaidelight.mixin.accessor.block.BlocksAccessor.log;
 import static net.minecraft.world.level.block.Blocks.*;
 
 public class ModBlocks {

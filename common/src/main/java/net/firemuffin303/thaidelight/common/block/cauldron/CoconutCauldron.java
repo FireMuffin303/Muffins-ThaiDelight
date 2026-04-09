@@ -3,6 +3,7 @@ package net.firemuffin303.thaidelight.common.block.cauldron;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.firemuffin303.thaidelight.common.registry.ModCauldronInteraction;
 import net.firemuffin303.thaidelight.common.registry.ModTags;
+import net.firemuffin303.thaidelight.mixin.cauldron.LayeredCauldronAccessor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;

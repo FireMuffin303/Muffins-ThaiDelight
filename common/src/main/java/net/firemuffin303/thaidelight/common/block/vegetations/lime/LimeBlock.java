@@ -71,6 +71,6 @@ public class LimeBlock extends AbstractStackableBlock {
 
     @Override
     public ItemLike getPickUpItem() {
-        return ModItems.LIME;
+        return ModItems.LIME.get();
     }
 }

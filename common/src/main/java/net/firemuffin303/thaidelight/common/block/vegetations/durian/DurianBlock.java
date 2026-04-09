@@ -1,6 +1,7 @@
 package net.firemuffin303.thaidelight.common.block.vegetations.durian;
 
 import net.firemuffin303.thaidelight.common.registry.ModDamageTypes;
+import net.firemuffin303.thaidelight.mixin.accessor.DamageSourcesAccessor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
@@ -37,6 +38,6 @@ public class DurianBlock extends FallingBlock {
 
     @Override
     public DamageSource getFallDamageSource(Entity entity) {
-        return entity.damageSources().source(ModDamageTypes.FALLING_DURIAN);
+        return ((DamageSourcesAccessor) entity.damageSources()).source(ModDamageTypes.FALLING_DURIAN);
     }
 }
