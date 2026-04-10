@@ -66,12 +66,12 @@ public class ModItems {
     public static final Supplier<Item> COOKED_DRAGONFLY = registerFlatItem("cooked_dragonfly",() -> new Item(new Item.Properties().food(ModFoods.COOKED_DRAGONFLY)));
 
     //Bucket
-    public static final Supplier<Item> FISH_SAUCE_BOTTLE = registerFlatItem("fish_sauce_bottle",() -> createDrinkableItem(getDrinkItem().food(ModFoods.FISH_SAUCE),true,false)) ;
-    public static final Supplier<Item> FERMENTED_FISH = registerFlatItem("fermented_fish",() -> createConsumeableItem(bowlFoodItem(ModFoods.FERMENTED_FISH),true,false));
-    public static final Supplier<Item> PAPAYA_JUICE = registerFlatItem("papaya_juice",() -> createPapayaJuiceItem());
-    public static final Supplier<Item> LIME_JUICE = registerFlatItem("lime_juice",() -> createLimeJuiceItem());
-    public static final Supplier<Item> HONEY_LIME_JUICE = registerFlatItem("honey_lime_juice",() -> createHoneyLimeJuiceItem());
-    public static final Supplier<Item> COCONUT_WATER = registerFlatItem("coconut_water",() -> createCoconutWaterJuiceItem());
+    public static final Supplier<Item> FISH_SAUCE_BOTTLE = registerFlatItem("fish_sauce_bottle",createDrinkableItem(getDrinkItem().food(ModFoods.FISH_SAUCE),true,false)) ;
+    public static final Supplier<Item> FERMENTED_FISH = registerFlatItem("fermented_fish",createConsumeableItem(bowlFoodItem(ModFoods.FERMENTED_FISH),true,false));
+    public static final Supplier<Item> PAPAYA_JUICE = registerFlatItem("papaya_juice", ModItems::createPapayaJuiceItem);
+    public static final Supplier<Item> LIME_JUICE = registerFlatItem("lime_juice", ModItems::createLimeJuiceItem);
+    public static final Supplier<Item> HONEY_LIME_JUICE = registerFlatItem("honey_lime_juice", ModItems::createHoneyLimeJuiceItem);
+    public static final Supplier<Item> COCONUT_WATER = registerFlatItem("coconut_water", ModItems::createCoconutWaterJuiceItem);
 
     //Crops
     //------------- Lime ---------------
@@ -113,8 +113,8 @@ public class ModItems {
     public static final Supplier<Item> DURIAN_SIGN = register("durian_sign",() ->new SignItem(new Item.Properties().stacksTo(16),ModBlocks.DURIAN_SIGN.get(),ModBlocks.DURIAN_WALL_SIGN.get()));
     public static final Supplier<Item> DURIAN_HANGING_SIGN = register("durian_hanging_sign",() ->new HangingSignItem(ModBlocks.DURIAN_HANGING_SIGN.get(),ModBlocks.DURIAN_WALL_HANGING_SIGN.get(),new Item.Properties().stacksTo(16)));
     public static final Supplier<Item> DURIAN_CABINET = register("durian_cabinet",() ->new BlockItem(ModBlocks.DURIAN_CABINET.get(),new Item.Properties()));
-    public static final Supplier<Item> DURIAN_BOAT = createBoat(ThaiDelightCommon.modid("durian_boat"),false,"durian");
-    public static final Supplier<Item> DURIAN_CHEST_BOAT = createBoat(ThaiDelightCommon.modid("durian_chest_boat"),true,"durian");
+    public static final Supplier<Item> DURIAN_BOAT = register("durian_boat",createBoat(ThaiDelightCommon.modid("durian_boat"),false,"durian"));
+    public static final Supplier<Item> DURIAN_CHEST_BOAT = register("durian_chest_boat",createBoat(ThaiDelightCommon.modid("durian_chest_boat"),true,"durian"));
 
     public static final Supplier<Item> DURIAN_PEEL = registerFlatItem("durian_peel",() ->new Item(new Item.Properties()));
     public static final Supplier<Item> DURIAN_PEEL_BLOCK = register("durian_peel_block",() ->new BlockItem(ModBlocks.DURIAN_PEEL_BLOCK.get(),new Item.Properties()));
@@ -141,8 +141,8 @@ public class ModItems {
     public static final Supplier<Item> COCONUT_SIGN = register("coconut_sign",() ->new SignItem(new Item.Properties().stacksTo(16),ModBlocks.COCONUT_SIGN.get(),ModBlocks.COCONUT_WALL_SIGN.get()));
     public static final Supplier<Item> COCONUT_HANGING_SIGN = register("coconut_hanging_sign",() ->new HangingSignItem(ModBlocks.COCONUT_HANGING_SIGN.get(),ModBlocks.COCONUT_WALL_HANGING_SIGN.get(),new Item.Properties().stacksTo(16)));
     public static final Supplier<Item> COCONUT_CABINET = register("coconut_cabinet",() ->new BlockItem(ModBlocks.COCONUT_CABINET.get(),new Item.Properties()));
-    public static final Supplier<Item> COCONUT_BOAT = createBoat(ThaiDelightCommon.modid("coconut_boat"),false,"coconut");
-    public static final Supplier<Item> COCONUT_CHEST_BOAT = createBoat(ThaiDelightCommon.modid("coconut_chest_boat"),true,"coconut");
+    public static final Supplier<Item> COCONUT_BOAT = register("coconut_boat",createBoat(ThaiDelightCommon.modid("coconut_boat"),false,"coconut"));
+    public static final Supplier<Item> COCONUT_CHEST_BOAT = register("coconut_chest_boat",createBoat(ThaiDelightCommon.modid("coconut_chest_boat"),true,"coconut"));
 
     public static final Supplier<Item> COCONUT = register("coconut",() ->new CoconutItem(new Item.Properties()));
     public static final Supplier<Item> STRIPPED_COCONUT = register("stripped_coconut",() ->new BlockItem(ModBlocks.STRIPPED_COCONUT.get(),new Item.Properties()));
@@ -169,8 +169,8 @@ public class ModItems {
     public static final Supplier<Item> MANGO_SIGN = register("mango_sign",() ->new SignItem(new Item.Properties().stacksTo(16),ModBlocks.MANGO_SIGN.get(),ModBlocks.MANGO_WALL_SIGN.get()));
     public static final Supplier<Item> MANGO_HANGING_SIGN = register("mango_hanging_sign",() ->new HangingSignItem(ModBlocks.MANGO_HANGING_SIGN.get(),ModBlocks.MANGO_WALL_HANGING_SIGN.get(),new Item.Properties().stacksTo(16)));
     public static final Supplier<Item> MANGO_CABINET = register("mango_cabinet",() ->new BlockItem(ModBlocks.MANGO_CABINET.get(),new Item.Properties()));
-    public static final Supplier<Item> MANGO_BOAT = createBoat(ThaiDelightCommon.modid("mango_boat"),false,"mango");
-    public static final Supplier<Item> MANGO_CHEST_BOAT = createBoat(ThaiDelightCommon.modid("mango_chest_boat"),true,"mango");
+    public static final Supplier<Item> MANGO_BOAT = register("mango_boat",createBoat(ThaiDelightCommon.modid("mango_boat"),false,"mango"));
+    public static final Supplier<Item> MANGO_CHEST_BOAT = register("mango_chest_boat",createBoat(ThaiDelightCommon.modid("mango_chest_boat"),true,"mango"));
 
     public static final Supplier<Item> MANGO = registerFlatItem("mango",() ->new ItemNameBlockItem(ModBlocks.STACKABLE_MANGO_BLOCK.get(),new Item.Properties().food(ModFoods.MANGO)));
     public static final Supplier<Item> MANGO_SLICE = registerFlatItem("mango_slice",() ->new Item(new Item.Properties().food(ModFoods.MANGO_SLICE)));
@@ -206,33 +206,33 @@ public class ModItems {
 
     //--- 🍔 Food 🍔---
     public static final Supplier<Item> SOMTAM_FEAST = registerFlatItem("somtam_feast",() ->new BlockItem(ModBlocks.SOMTAM_FEAST.get(),new Item.Properties()));
-    public static final Supplier<Item> SOMTAM = registerFlatItem("somtam",() ->createConsumeableItem(bowlFoodItem(ModFoods.SOMTAM)));
+    public static final Supplier<Item> SOMTAM = registerFlatItem("somtam",createConsumeableItem(bowlFoodItem(ModFoods.SOMTAM)));
 
     public static final Supplier<Item> LARB_FEAST = registerFlatItem("larb_feast",() ->new BlockItem(ModBlocks.LARB_FEAST.get(),new Item.Properties()));
-    public static final Supplier<Item> LARB = registerFlatItem("larb",() ->createConsumeableItem(bowlFoodItem(ModFoods.LARB)));
+    public static final Supplier<Item> LARB = registerFlatItem("larb",createConsumeableItem(bowlFoodItem(ModFoods.LARB)));
 
     public static final Supplier<Item> CRAB_FRIED_RICE_FEAST = registerFlatItem("crab_fried_rice_feast",() ->new BlockItem(ModBlocks.CRAB_FRIED_RICE_FEAST.get(),new Item.Properties()));
-    public static final Supplier<Item> CRAB_FRIED_RICE = registerFlatItem("crab_fried_rice",() ->createConsumeableItem(bowlFoodItem(ModFoods.CRAB_FRIED_RICE)));
+    public static final Supplier<Item> CRAB_FRIED_RICE = registerFlatItem("crab_fried_rice",createConsumeableItem(bowlFoodItem(ModFoods.CRAB_FRIED_RICE)));
 
-    public static final Supplier<Item> STIR_FRIED_NOODLE = registerFlatItem("stir_fried_noodle",() ->createConsumeableItem(bowlFoodItem(ModFoods.STIR_FRIED_NOODLE)));
+    public static final Supplier<Item> STIR_FRIED_NOODLE = registerFlatItem("stir_fried_noodle",createConsumeableItem(bowlFoodItem(ModFoods.STIR_FRIED_NOODLE)));
 
     public static final Supplier<Item> FRIED_DURIAN = registerFlatItem("fried_durian",() ->new Item(new Item.Properties().food(ModFoods.FRIED_DURIAN)));
 
     public static final Supplier<Item> COCONUT_MILK_BOTTLE = registerFlatItem("coconut_milk_bottle",() ->new Item(getDrinkItem()));
-    public static final Supplier<Item> COCONUT_SLICE = registerFlatItem("coconut_slice",() ->createConsumeableItem(new Item.Properties().food(ModFoods.COCONUT_MEAT).craftRemainder(Items.BOWL)));
+    public static final Supplier<Item> COCONUT_SLICE = registerFlatItem("coconut_slice",createConsumeableItem(new Item.Properties().food(ModFoods.COCONUT_MEAT).craftRemainder(Items.BOWL)));
 
     public static final Supplier<Item> PHAT_KAPHRAO_FEAST = registerFlatItem("phat_kaphrao_feast",() ->new BlockItem(ModBlocks.PHAT_KAPHRAO_FEAST.get(),new Item.Properties()));
-    public static final Supplier<Item> PHAT_KAPHRAO = registerFlatItem("phat_kaphrao", () -> createConsumeableItem(bowlFoodItem(ModFoods.PHAT_KAPHRAO)));
+    public static final Supplier<Item> PHAT_KAPHRAO = registerFlatItem("phat_kaphrao",createConsumeableItem(bowlFoodItem(ModFoods.PHAT_KAPHRAO)));
 
     public static final Supplier<Item> PINEAPPLE_FRIED_RICE_FEAST = registerFlatItem("pineapple_fried_rice_feast",() -> new BlockItem(ModBlocks.PINEAPPLE_FRIED_RICE_FEAST.get(),new Item.Properties()));
     public static final Supplier<Item> PINEAPPLE_FRIED_RICE = registerFlatItem("pineapple_fried_rice",() -> new Item(bowlFoodItem(ModFoods.PINEAPPLE_FRIED_RICE)));
 
-    public static final Supplier<Item> DURIAN_CURRY = registerFlatItem("durian_curry",() -> createConsumeableItem(bowlFoodItem(ModFoods.DURIAN_CURRY)));
+    public static final Supplier<Item> DURIAN_CURRY = registerFlatItem("durian_curry",createConsumeableItem(bowlFoodItem(ModFoods.DURIAN_CURRY)));
     public static final Supplier<Item> DURIAN_CAKE = registerFlatItem("durian_cake",() -> new BlockItem(ModBlocks.DURIAN_CAKE.get(),new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> DURIAN_CAKE_SLICE = registerFlatItem("durian_cake_slice",() -> new Item(new Item.Properties().food(ModFoods.DURIAN_CAKE)));
 
     public static final Supplier<Item> MANGO_STICKY_RICE_FEAST = registerFlatItem("mango_sticky_rice_feast",() -> new BlockItem(ModBlocks.MANGO_STICKY_RICE_FEAST.get(),new Item.Properties()));
-    public static final Supplier<Item> MANGO_STICKY_RICE = registerFlatItem("mango_sticky_rice",() -> createConsumeableItem(bowlFoodItem(ModFoods.MANGO_STICKY_RICE)));
+    public static final Supplier<Item> MANGO_STICKY_RICE = registerFlatItem("mango_sticky_rice",createConsumeableItem(bowlFoodItem(ModFoods.MANGO_STICKY_RICE)));
     public static final Supplier<Item> MANGO_CHEESECAKE = registerFlatItem("mango_cheesecake",() -> new BlockItem(ModBlocks.MANGO_CHEESECAKE.get(),new Item.Properties()));
     public static final Supplier<Item> MANGO_CHEESECAKE_SLICE = registerFlatItem("mango_cheesecake_slice",() -> new Item(new Item.Properties().food(ModFoods.MANGO_PIE)));
 
@@ -261,11 +261,11 @@ public class ModItems {
 
     public static final Supplier<Item> BUTTERFLY_PEA = registerFlatItem("butterfly_pea",() -> new ItemNameBlockItem(ModBlocks.BUTTERFLY_PEA_WALL.get(),new Item.Properties()));
     //I KNOW IT'S NOT THAI. BUT THERE IS MORTAR AND BASIL IN THE SAME MOD. HOW COULD I MISS THIS OPPORTUNITY.
-    public static final Supplier<Item> PESTO_SAUCE = registerFlatItem("pesto_sauce",() -> createConsumeableItem(new Item.Properties().food(ModFoods.PESTO_SAUCE).craftRemainder(Items.BOWL)));
+    public static final Supplier<Item> PESTO_SAUCE = registerFlatItem("pesto_sauce",createConsumeableItem(new Item.Properties().food(ModFoods.PESTO_SAUCE).craftRemainder(Items.BOWL)));
 
 
     public static final Supplier<Item> BUTTERFLY_PEA_SEEDS = registerFlatItem("butterfly_pea_seeds", () ->new ItemNameBlockItem(ModBlocks.BUDDING_BUTTERFLY_PEA_BLOCK.get(),new Item.Properties()));
-    public static final Supplier<Item> BUTTERFLY_PEA_TEA = registerFlatItem("butterfly_pea_tea",() -> createButterflyPeaTeaItem());
+    public static final Supplier<Item> BUTTERFLY_PEA_TEA = registerFlatItem("butterfly_pea_tea", ModItems::createButterflyPeaTeaItem);
 
     public static final Supplier<Item> KHANOM_CHAN = registerFlatItem("khanom_chan",() -> new DyeableItem(new Item.Properties().food(ModFoods.KHANOM_CHAN)));
     public static final Supplier<Item> COCONUT_MILK_ICE_CREAM = register("coconut_milk_ice_cream",() -> new DyeableItem(bowlFoodItem(ModFoods.COCONUT_MILK_ICE_CREAM)));
@@ -300,12 +300,12 @@ public class ModItems {
         Item.BY_BLOCK.put(ModBlocks.COCONUT_MILK_CAULDRON.get(),Items.CAULDRON);
     }
 
-    public static Item createConsumeableItem(Item.Properties properties){
+    public static Supplier<Item> createConsumeableItem(Item.Properties properties){
         return createConsumeableItem(properties,false,false);
     }
 
     @ExpectPlatform
-    public static Item createConsumeableItem(Item.Properties properties, boolean hasFoodEffectTooltip, boolean hasCustomTooltip){
+    public static Supplier<Item> createConsumeableItem(Item.Properties properties, boolean hasFoodEffectTooltip, boolean hasCustomTooltip){
         throw new AssertionError();
     }
 
@@ -315,7 +315,7 @@ public class ModItems {
     }
 
     @ExpectPlatform
-    public static Item createDrinkableItem(Item.Properties properties,boolean hasPotionEffectTooltip,boolean hasCustomTooltip){
+    public static Supplier<Item> createDrinkableItem(Item.Properties properties,boolean hasPotionEffectTooltip,boolean hasCustomTooltip){
         throw new AssertionError();
     }
 

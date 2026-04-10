@@ -1,0 +1,6 @@
+{
+  "parent": "muffins_thaidelight:block/papaya/template_stackable_papaya_2",
+  "textures": {
+    "all": "muffins_thaidelight:block/papaya/unripe_papaya_fruit"
+  }
+}

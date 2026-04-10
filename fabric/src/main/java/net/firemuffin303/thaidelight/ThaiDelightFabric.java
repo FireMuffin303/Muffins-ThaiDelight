@@ -2,23 +2,22 @@ package net.firemuffin303.thaidelight;
 
 import com.mojang.logging.LogUtils;
 import com.terraformersmc.terraform.boat.api.TerraformBoatType;
-import io.github.fabricators_of_create.porting_lib.recipe_book_categories.RecipeBookRegistry;
+import com.terraformersmc.terraform.boat.api.TerraformBoatTypeRegistry;
+import com.terraformersmc.terraform.boat.api.item.TerraformBoatItemHelper;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
-import net.firemuffin303.thaidelight.client.ThaiDelightClientFabric;
-import net.firemuffin303.thaidelight.common.entity.DragonflyEntity;
-import net.firemuffin303.thaidelight.common.recipe.mortar.MortarRecipe;
-import net.firemuffin303.thaidelight.common.recipe.mortar.MortarRecipeBookTab;
+import net.fabricmc.fabric.api.registry.TillableBlockRegistry;
+import net.firemuffin303.thaidelight.common.TDFabricEvents;
 import net.firemuffin303.thaidelight.common.registry.ModEntityTypes;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
-import net.firemuffin303.thaidelight.common.registry.ModRecipes;
-import net.minecraft.client.RecipeBookCategories;
-import net.minecraft.world.inventory.RecipeBookType;
-import net.minecraft.world.item.alchemy.Potion;
+import net.firemuffin303.thaidelight.common.registry.ModMobEffects;
+import net.firemuffin303.thaidelight.common.registry.fabric.ModItemsImpl;
+import net.minecraft.core.Registry;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.PotionBrewing;
+import net.minecraft.world.item.alchemy.Potions;
+import net.minecraft.world.level.block.Blocks;
 import org.slf4j.Logger;
-
-import java.util.List;
 
 public class ThaiDelightFabric implements ModInitializer {
     public static final Logger LOGGER = LogUtils.getLogger();
@@ -51,7 +50,33 @@ public class ThaiDelightFabric implements ModInitializer {
 
         ModEntityTypes.registerAttribute(FabricDefaultAttributeRegistry::register);
 
+        Registry.register(TerraformBoatTypeRegistry.INSTANCE, ModItemsImpl.DURIAN_BOAT_KEY,DURIAN);
+        Registry.register(TerraformBoatTypeRegistry.INSTANCE,ModItemsImpl.COCONUT_BOAT_KEY,COCONUT);
+        Registry.register(TerraformBoatTypeRegistry.INSTANCE,ModItemsImpl.MANGO_BOAT_KEY,MANGO);
 
+
+        TerraformBoatItemHelper.registerBoatDispenserBehavior(ModItems.DURIAN_BOAT.get(),ModItemsImpl.DURIAN_BOAT_KEY,false);
+        TerraformBoatItemHelper.registerBoatDispenserBehavior(ModItems.DURIAN_CHEST_BOAT.get(),ModItemsImpl.DURIAN_BOAT_KEY,true);
+        TerraformBoatItemHelper.registerBoatDispenserBehavior(ModItems.MANGO_BOAT.get(),ModItemsImpl.MANGO_BOAT_KEY,false);
+        TerraformBoatItemHelper.registerBoatDispenserBehavior(ModItems.MANGO_CHEST_BOAT.get(),ModItemsImpl.MANGO_BOAT_KEY,true);
+        TerraformBoatItemHelper.registerBoatDispenserBehavior(ModItems.COCONUT_BOAT.get(),ModItemsImpl.COCONUT_BOAT_KEY,false);
+        TerraformBoatItemHelper.registerBoatDispenserBehavior(ModItems.COCONUT_CHEST_BOAT.get(),ModItemsImpl.COCONUT_BOAT_KEY,true);
+
+        PotionBrewing.addMix(Potions.AWKWARD,ModItems.FERMENTED_FISH.get(), ModMobEffects.STENCH_POTION.get());
+        PotionBrewing.addMix(ModMobEffects.STENCH_POTION.get(), Items.REDSTONE,ModMobEffects.LONG_STENCH_POTION.get());
+        PotionBrewing.addMix(ModMobEffects.STENCH_POTION.get(), Items.GLOWSTONE,ModMobEffects.STRONG_STENCH_POTION.get());
+
+        TillableBlockRegistry.register(Blocks.BAMBOO_SAPLING,useOnContext -> true,Blocks.AIR.defaultBlockState(),ModItems.BAMBOO_SHOOT.get());
+
+        TDFabricEvents.worldGeneration();
+        TDFabricEvents.registerFuel();
+        TDFabricEvents.modifyLootTable();
+        TDFabricEvents.initializeStinkyEffect();
+        TDFabricEvents.setVillagerItem();
+        TDFabricEvents.addVillagersTrades();
+        TDFabricEvents.registerStrippable();
+        TDFabricEvents.registerComposter();
+        TDFabricEvents.registerAnimalFood();
     }
 
 

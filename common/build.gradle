@@ -7,3 +7,13 @@ dependencies {
 
     modCompileOnly("net.firemuffin303:muffinsmcapi-common:0.1.0-alpha")
 }
+
+loom {
+    accessWidenerPath = file("src/main/resources/muffinsthaidelight.accesswidener")
+
+    sourceSets.main {
+        resources {
+            srcDirs += "src/generated/resources/"
+        }
+    }
+}

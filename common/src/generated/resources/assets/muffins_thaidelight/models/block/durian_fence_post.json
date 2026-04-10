@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/fence_post",
+  "textures": {
+    "texture": "muffins_thaidelight:block/durian_planks"
+  }
+}

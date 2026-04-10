@@ -1,0 +1,39 @@
+{
+  "parent": "muffins_thaidelight:root",
+  "criteria": {
+    "got_cooked_dragonfly": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "muffins_thaidelight:cooked_dragonfly"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "background": "minecraft:textures/block/oak_log.png",
+    "description": {
+      "translate": "advancement.muffins_thaidelight.cooked_dragonfly.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "muffins_thaidelight:cooked_dragonfly"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.muffins_thaidelight.cooked_dragonfly"
+    }
+  },
+  "requirements": [
+    [
+      "got_cooked_dragonfly"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

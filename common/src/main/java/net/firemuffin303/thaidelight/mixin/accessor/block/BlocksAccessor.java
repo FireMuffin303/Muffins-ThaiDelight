@@ -34,11 +34,6 @@ public interface BlocksAccessor {
         throw new AssertionError();
     }
 
-    @Invoker("never")
-    static boolean never(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos){
-        throw new AssertionError();
-    }
-
     @Invoker("ocelotOrParrot")
     static Boolean ocelotOrParrot(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, EntityType<?> entityType){
         throw new AssertionError();

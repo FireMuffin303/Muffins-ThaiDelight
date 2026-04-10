@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "tag": "c:milks"
+    },
+    "M": {
+      "tag": "c:foods/mango"
+    },
+    "P": {
+      "item": "farmersdelight:pie_crust"
+    }
+  },
+  "pattern": [
+    "MMM",
+    "MMM",
+    "CPC"
+  ],
+  "result": {
+    "item": "muffins_thaidelight:mango_cheesecake"
+  },
+  "show_notification": true
+}

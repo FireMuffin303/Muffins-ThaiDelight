@@ -1,0 +1,9 @@
+{
+  "parent": "muffins_thaidelight:block/lime/template_lime_bottom",
+  "textures": {
+    "bottom": "muffins_thaidelight:block/lime/lime_leaves_bottom",
+    "plant": "muffins_thaidelight:block/lime/lime_leaves_layer",
+    "side": "muffins_thaidelight:block/lime/lime_leaves_side_age1",
+    "stem": "muffins_thaidelight:block/lime/lime_stem"
+  }
+}

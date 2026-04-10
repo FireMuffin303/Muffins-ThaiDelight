@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "muffins_thaidelight:coconut_pie_slice"
+    }
+  },
+  "pattern": [
+    "CC",
+    "CC"
+  ],
+  "result": {
+    "item": "muffins_thaidelight:coconut_pie"
+  },
+  "show_notification": true
+}

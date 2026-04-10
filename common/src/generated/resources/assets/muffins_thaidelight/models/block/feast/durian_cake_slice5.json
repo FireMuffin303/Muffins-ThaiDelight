@@ -1,0 +1,9 @@
+{
+  "parent": "muffins_thaidelight:block/feast/template_cake_slice5",
+  "textures": {
+    "bottom": "minecraft:block/cake_bottom",
+    "inside": "muffins_thaidelight:block/durian_cake_inside",
+    "side": "muffins_thaidelight:block/durian_cake_side",
+    "top": "muffins_thaidelight:block/durian_cake_top"
+  }
+}

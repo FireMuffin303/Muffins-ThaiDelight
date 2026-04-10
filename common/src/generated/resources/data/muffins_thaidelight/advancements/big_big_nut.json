@@ -1,0 +1,37 @@
+{
+  "parent": "muffins_thaidelight:root",
+  "criteria": {
+    "big_big_nut": {
+      "conditions": {
+        "item": {
+          "items": [
+            "muffins_thaidelight:coconut"
+          ]
+        }
+      },
+      "trigger": "muffins_thaidelight:sack_catch"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "background": "minecraft:textures/block/oak_log.png",
+    "description": {
+      "translate": "advancement.muffins_thaidelight.big_big_nut.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "muffins_thaidelight:coconut"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.muffins_thaidelight.big_big_nut"
+    }
+  },
+  "requirements": [
+    [
+      "big_big_nut"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

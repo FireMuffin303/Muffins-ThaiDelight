@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "muffins_thaidelight:raw_papaya_crate"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "muffins_thaidelight:raw_papaya"
+  }
+}

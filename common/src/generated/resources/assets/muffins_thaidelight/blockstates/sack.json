@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=east,filled=false": {
+      "model": "muffins_thaidelight:block/sack/sack",
+      "y": 90
+    },
+    "facing=east,filled=true": {
+      "model": "muffins_thaidelight:block/sack/sack_full_close",
+      "y": 90
+    },
+    "facing=north,filled=false": {
+      "model": "muffins_thaidelight:block/sack/sack"
+    },
+    "facing=north,filled=true": {
+      "model": "muffins_thaidelight:block/sack/sack_full_close"
+    },
+    "facing=south,filled=false": {
+      "model": "muffins_thaidelight:block/sack/sack",
+      "y": 180
+    },
+    "facing=south,filled=true": {
+      "model": "muffins_thaidelight:block/sack/sack_full_close",
+      "y": 180
+    },
+    "facing=west,filled=false": {
+      "model": "muffins_thaidelight:block/sack/sack",
+      "y": 270
+    },
+    "facing=west,filled=true": {
+      "model": "muffins_thaidelight:block/sack/sack_full_close",
+      "y": 270
+    }
+  }
+}

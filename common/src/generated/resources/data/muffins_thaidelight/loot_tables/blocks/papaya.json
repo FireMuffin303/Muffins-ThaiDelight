@@ -1,0 +1,48 @@
+{
+  "type": "minecraft:block",
+  "functions": [
+    {
+      "function": "minecraft:explosion_decay"
+    }
+  ],
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "muffins_thaidelight:papaya",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "age": "1"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "muffins_thaidelight:raw_papaya"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "muffins_thaidelight:papaya",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "age": "2"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "muffins_thaidelight:papaya"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ]
+}

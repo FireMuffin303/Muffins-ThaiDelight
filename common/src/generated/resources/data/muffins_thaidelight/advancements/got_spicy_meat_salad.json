@@ -1,0 +1,39 @@
+{
+  "parent": "muffins_thaidelight:got_pepper",
+  "criteria": {
+    "got_spicy_meat_salad": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "muffins_thaidelight:larb"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "background": "minecraft:textures/block/oak_log.png",
+    "description": {
+      "translate": "advancement.muffins_thaidelight.got_spicy_meat_salad.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "muffins_thaidelight:larb"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.muffins_thaidelight.got_spicy_meat_salad"
+    }
+  },
+  "requirements": [
+    [
+      "got_spicy_meat_salad"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

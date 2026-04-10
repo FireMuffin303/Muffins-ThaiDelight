@@ -1,12 +1,15 @@
 package net.firemuffin303.thaidelight.util;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
+import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.inventory.RecipeBookType;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.block.Block;
 
 import java.util.function.Supplier;
@@ -67,4 +70,60 @@ public class PlatformUtil {
     public static Supplier<MobEffect> getNourishmentEffect(){
         throw new AssertionError();
     }
+
+    @ExpectPlatform
+    public static Supplier<Item> getTreeBarkItem(){
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static void setSpicyTime(int value, LivingEntity livingEntity){
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static void addSpicyTime(int value, LivingEntity livingEntity){
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static int getSpicyTime(LivingEntity livingEntity){
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static ModUtils.DurianComponentSupplier getDurianHeatComponent(LivingEntity livingEntity){
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static void setDurianHeat(boolean value,LivingEntity livingEntity){
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static void addDurianHeatTime(int i,LivingEntity livingEntity){
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static UseAnim getDurianCatcherUseAnim(){
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static HumanoidModel.ArmPose getSackShoulderPose(){
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static HumanoidModel.ArmPose getDurianCatcherHoldArmPose(){
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static HumanoidModel.ArmPose getDurianCatcherSwingArmPose(){
+        throw new AssertionError();
+    }
+
 }

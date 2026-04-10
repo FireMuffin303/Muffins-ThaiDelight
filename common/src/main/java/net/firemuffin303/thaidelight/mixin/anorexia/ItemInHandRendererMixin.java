@@ -2,6 +2,7 @@ package net.firemuffin303.thaidelight.mixin.anorexia;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import net.firemuffin303.thaidelight.common.registry.ModMobEffects;
+import net.firemuffin303.thaidelight.util.ModUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemInHandRenderer;
 import org.spongepowered.asm.mixin.Final;
@@ -17,7 +18,7 @@ public abstract class ItemInHandRendererMixin {
     @ModifyExpressionValue(method = "applyEatTransform",at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;getUseDuration()I"))
     public int muffins$hasStinkyEffect(int original){
         if(this.minecraft.player.hasEffect(ModMobEffects.APPETITE_LOSS.get())){
-            return CommonEvents.calculateEatingWithAnorexiaEffect(this.minecraft.player,original);
+            return ModUtils.calculateEatingWithAnorexiaEffect(this.minecraft.player,original);
         }
 
         return original;

@@ -1,7 +1,7 @@
 package net.firemuffin303.thaidelight.common.block.vegetations.coconut;
 
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
-import net.firemuffin303.thaidelight.util.ModUtil;
+import net.firemuffin303.thaidelight.util.ModUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -121,7 +121,7 @@ public class CoconutLeafBlock extends Block implements SimpleWaterloggedBlock,Bo
     public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState, boolean bl) {
         Direction direction = blockState.getValue(FACING);
         if(!blockState.getValue(END)){
-            Optional<BlockPos> optional = ModUtil.getTopConnectedBlock(
+            Optional<BlockPos> optional = ModUtils.getTopConnectedBlock(
                     levelReader,
                     blockPos,
                     blockState.setValue(CoconutLeafBlock.FACING,direction).setValue(END,false),
@@ -152,7 +152,7 @@ public class CoconutLeafBlock extends Block implements SimpleWaterloggedBlock,Bo
     public void performBonemeal(ServerLevel serverLevel, RandomSource randomSource, BlockPos blockPos, BlockState blockState) {
         Direction direction = blockState.getValue(FACING);
         if(!blockState.getValue(END)){
-            Optional<BlockPos> optional = ModUtil.getTopConnectedBlock(
+            Optional<BlockPos> optional = ModUtils.getTopConnectedBlock(
                     serverLevel,
                     blockPos,
                     blockState.setValue(CoconutLeafBlock.FACING,direction).setValue(END,false),

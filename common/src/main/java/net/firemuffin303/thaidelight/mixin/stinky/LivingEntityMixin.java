@@ -1,6 +1,6 @@
 package net.firemuffin303.thaidelight.mixin.stinky;
 
-import com.llamalad7.mixinextras.injector.ModifyReturnValue;=
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.firemuffin303.thaidelight.common.registry.ModMobEffects;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;

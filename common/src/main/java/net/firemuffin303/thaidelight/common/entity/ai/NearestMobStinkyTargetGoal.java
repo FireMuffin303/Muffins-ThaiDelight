@@ -9,7 +9,7 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 public class NearestMobStinkyTargetGoal<T extends LivingEntity> extends NearestAttackableTargetGoal<T> {
 
     public NearestMobStinkyTargetGoal(Mob mob, Class<T> class_, boolean bl) {
-        super(mob, class_, bl,livingEntity -> livingEntity.hasEffect(ModMobEffects.STINKY.get()) && ThaiDelightConfig.stinkyShouldTriggerNeutral);
+        super(mob, class_, bl,livingEntity -> livingEntity.hasEffect(ModMobEffects.STINKY.get()) /* && ThaiDelightConfig.stinkyShouldTriggerNeutral*/);
     }
 
     @Override

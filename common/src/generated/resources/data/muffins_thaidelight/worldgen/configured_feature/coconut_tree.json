@@ -1,0 +1,67 @@
+{
+  "type": "minecraft:tree",
+  "config": {
+    "decorators": [],
+    "dirt_provider": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "minecraft:dirt"
+      }
+    },
+    "foliage_placer": {
+      "type": "muffins_thaidelight:coconut_foliage_placer",
+      "height": 2,
+      "offset": 0,
+      "radius": {
+        "type": "minecraft:uniform",
+        "value": {
+          "max_inclusive": 3,
+          "min_inclusive": 2
+        }
+      },
+      "rand_radius_a": 1,
+      "rand_radius_b": 2
+    },
+    "foliage_provider": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "muffins_thaidelight:coconut_leaf_end",
+        "Properties": {
+          "facing": "north",
+          "waterlogged": "false"
+        }
+      }
+    },
+    "force_dirt": false,
+    "ignore_vines": true,
+    "minimum_size": {
+      "type": "minecraft:two_layers_feature_size",
+      "limit": 1,
+      "lower_size": 0,
+      "upper_size": 1
+    },
+    "trunk_placer": {
+      "type": "muffins_thaidelight:coconut_trunk_placer",
+      "base_height": 7,
+      "height_rand_a": 1,
+      "height_rand_b": 2,
+      "trunk_bend_chance": 0.6,
+      "trunk_section_height": {
+        "type": "minecraft:uniform",
+        "value": {
+          "max_inclusive": 5,
+          "min_inclusive": 3
+        }
+      }
+    },
+    "trunk_provider": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "muffins_thaidelight:coconut_log",
+        "Properties": {
+          "axis": "y"
+        }
+      }
+    }
+  }
+}

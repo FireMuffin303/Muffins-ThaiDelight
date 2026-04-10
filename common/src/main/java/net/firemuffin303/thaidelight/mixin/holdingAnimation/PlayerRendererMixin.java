@@ -5,6 +5,7 @@ import com.llamalad7.mixinextras.sugar.Share;
 import com.llamalad7.mixinextras.sugar.ref.LocalRef;
 import net.firemuffin303.thaidelight.common.item.SackItem;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
+import net.firemuffin303.thaidelight.util.PlatformUtil;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
@@ -39,9 +40,9 @@ public abstract class PlayerRendererMixin {
                                                 ){
         if(itemStackLocalRef.get().is(ModItems.SACK.get())){
             if(SackItem.isFull(itemStackLocalRef.get())){
-                cir.setReturnValue(ModASMEarlyRiser.getSackShoulderArmPose());
+                cir.setReturnValue(PlatformUtil.getSackShoulderPose());
             }else{
-                cir.setReturnValue(ModASMEarlyRiser.getDurianCatcherHoldArmPose());
+                cir.setReturnValue(PlatformUtil.getDurianCatcherHoldArmPose());
             }
         }
     }
@@ -52,8 +53,8 @@ public abstract class PlayerRendererMixin {
                                                      CallbackInfoReturnable<HumanoidModel.ArmPose> cir,
                                                      @Local UseAnim useAnim
                                                      ){
-        if(useAnim == ModASMEarlyRiser.getDurianCatcherUseAnim()){
-            cir.setReturnValue(ModASMEarlyRiser.getDurianCatcherSwingArmPose());
+        if(useAnim == PlatformUtil.getDurianCatcherUseAnim()){
+            cir.setReturnValue(PlatformUtil.getDurianCatcherSwingArmPose());
         }
     }
 }

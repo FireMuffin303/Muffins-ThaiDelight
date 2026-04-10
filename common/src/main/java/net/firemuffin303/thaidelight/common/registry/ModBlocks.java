@@ -139,7 +139,7 @@ public class ModBlocks {
             .instrument(NoteBlockInstrument.BASS)
             .strength(3.0f)
             .noOcclusion()
-            .isValidSpawn(BlocksAccessor::never)
+            .isValidSpawn((a,b,c,d) -> false)
             .ignitedByLava(),ModBlockSetTypes.DURIAN_BLOCK_SET
     ));
 
@@ -229,11 +229,11 @@ public class ModBlocks {
             .sound(SoundType.GRASS)
             .noOcclusion()
             .isValidSpawn(BlocksAccessor::ocelotOrParrot)
-            .isSuffocating(BlocksAccessor::never)
-            .isViewBlocking(BlocksAccessor::never)
+            .isSuffocating((b,a,c) -> false)
+            .isViewBlocking((b,a,c) -> false)
             .ignitedByLava()
             .pushReaction(PushReaction.DESTROY)
-            .isRedstoneConductor(BlocksAccessor::never)));
+            .isRedstoneConductor((b,a,c) -> false)));
     public static final Supplier<Block> COCONUT_LEAF_END = register("coconut_leaf_end",() ->new CoconutLeafEndBlock(BlockBehaviour.Properties.copy(COCONUT_LEAF.get()).dropsLike(ModBlocks.COCONUT_LEAF.get())));
     public static final Supplier<Block> BUDDING_COCONUT_LEAF = register("budding_coconut_leaf",() ->new BuddingCoconutLeafBlock(BlockBehaviour.Properties.copy(COCONUT_LEAF.get()).randomTicks()));
 
@@ -466,11 +466,11 @@ public class ModBlocks {
             .sound(SoundType.AZALEA_LEAVES)
             .noOcclusion()
             .isValidSpawn(BlocksAccessor::ocelotOrParrot)
-            .isSuffocating(BlocksAccessor::never)
-            .isViewBlocking(BlocksAccessor::never)
+            .isSuffocating((b,a,c) -> false)
+            .isViewBlocking((b,a,c) -> false)
             .ignitedByLava()
             .pushReaction(PushReaction.DESTROY)
-            .isRedstoneConductor(BlocksAccessor::never)));
+            .isRedstoneConductor((b,a,c) -> false)));
 
     public static final Supplier<Block> PAPAYA_LEAVES_STEM = register("papaya_leaves_stem",() -> new PapayaLeavesStemBlock(BlockBehaviour.Properties.copy(PAPAYA_LEAVES.get())));
 
@@ -480,11 +480,11 @@ public class ModBlocks {
             .sound(SoundType.AZALEA_LEAVES)
             .noOcclusion()
             .isValidSpawn(BlocksAccessor::ocelotOrParrot)
-            .isSuffocating(BlocksAccessor::never)
-            .isViewBlocking(BlocksAccessor::never)
+            .isSuffocating((b,a,c) -> false)
+            .isViewBlocking((b,a,c) -> false)
             .ignitedByLava()
             .pushReaction(PushReaction.DESTROY)
-            .isRedstoneConductor(BlocksAccessor::never)));
+            .isRedstoneConductor((b,a,c) -> false)));
 
     public static final Supplier<Block> BUDDING_PAPAYA_FLOWER = register("budding_papaya_flower",() ->new BuddingPapayaFlowerBlock(BlockBehaviour.Properties.of()
             .mapColor(MapColor.PLANT)
@@ -508,8 +508,8 @@ public class ModBlocks {
     public static final Supplier<Block> PAPAYA_SAPLING = register("papaya_sapling",() ->new ModSaplingBlock(new PapayaTreeGrower(), BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY)));
     public static final Supplier<Block> PAPAYA_CROP = register("papaya_crop",() ->new PapayaCropBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY)));
 
-    public static final Supplier<Block> STACKABLE_PAPAYA = register("stackable_papaya",() -> new StackablePapayaBlock(BlockBehaviour.Properties.copy(ModBlocks.LIME_BLOCK.get()), ModItems.PAPAYA::get));
-    public static final Supplier<Block> STACKABLE_RAW_PAPAYA = register("stackable_raw_papaya",() -> new StackablePapayaBlock(BlockBehaviour.Properties.copy(ModBlocks.LIME_BLOCK.get()), ModItems.RAW_PAPAYA::get));
+    public static final Supplier<Block> STACKABLE_PAPAYA = register("stackable_papaya",() -> new StackablePapayaBlock(BlockBehaviour.Properties.copy(ModBlocks.LIME_BLOCK.get()), () -> ModItems.PAPAYA.get()));
+    public static final Supplier<Block> STACKABLE_RAW_PAPAYA = register("stackable_raw_papaya",() -> new StackablePapayaBlock(BlockBehaviour.Properties.copy(ModBlocks.LIME_BLOCK.get()),() -> ModItems.RAW_PAPAYA.get()));
 
     //Cauldron
     public static final Supplier<Block> FERMENTED_FISH_CAULDRON = register("fermented_fish_cauldron",() ->new FermentedFishCauldronBlock(BlockBehaviour.Properties.copy(CAULDRON),ModCauldronInteraction.FERMENTED_FISH));

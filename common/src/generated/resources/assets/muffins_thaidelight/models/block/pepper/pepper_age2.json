@@ -1,0 +1,6 @@
+{
+  "parent": "farmersdelight:block/crop_cross",
+  "textures": {
+    "cross": "muffins_thaidelight:block/pepper/pepper_age2"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "variants": {
+    "hanging=false": {
+      "model": "muffins_thaidelight:block/durian_flower"
+    },
+    "hanging=true": {
+      "model": "muffins_thaidelight:block/durian_flower",
+      "x": 180
+    }
+  }
+}

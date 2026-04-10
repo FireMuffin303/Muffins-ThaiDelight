@@ -1,0 +1,35 @@
+{
+  "parent": "muffins_thaidelight:root",
+  "criteria": {
+    "being_stinky": {
+      "conditions": {
+        "effects": {
+          "muffins_thaidelight:stinky": {}
+        }
+      },
+      "trigger": "minecraft:effects_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "background": "minecraft:textures/block/oak_log.png",
+    "description": {
+      "translate": "advancement.muffins_thaidelight.being_stinky.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "muffins_thaidelight:fermented_fish"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.muffins_thaidelight.being_stinky"
+    }
+  },
+  "requirements": [
+    [
+      "being_stinky"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

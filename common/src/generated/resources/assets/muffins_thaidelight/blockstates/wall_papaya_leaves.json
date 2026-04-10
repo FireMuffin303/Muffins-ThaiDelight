@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "muffins_thaidelight:block/papaya/wall_papaya_leaves",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "muffins_thaidelight:block/papaya/wall_papaya_leaves"
+    },
+    "facing=south": {
+      "model": "muffins_thaidelight:block/papaya/wall_papaya_leaves",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "muffins_thaidelight:block/papaya/wall_papaya_leaves",
+      "y": 270
+    }
+  }
+}

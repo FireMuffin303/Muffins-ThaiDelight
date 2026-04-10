@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_top_left_open",
+  "textures": {
+    "bottom": "muffins_thaidelight:block/durian_door_bottom",
+    "top": "muffins_thaidelight:block/durian_door_top"
+  }
+}

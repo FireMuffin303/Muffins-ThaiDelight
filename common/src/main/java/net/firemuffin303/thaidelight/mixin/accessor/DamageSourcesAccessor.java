@@ -9,6 +9,4 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 
 @Mixin(DamageSources.class)
 public interface DamageSourcesAccessor {
-    @Invoker("source")
-    public DamageSource source(ResourceKey<DamageType> resourceKey);
 }

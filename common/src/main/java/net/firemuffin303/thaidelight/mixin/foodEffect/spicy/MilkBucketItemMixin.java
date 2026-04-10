@@ -1,5 +1,6 @@
 package net.firemuffin303.thaidelight.mixin.foodEffect.spicy;
 
+import net.firemuffin303.thaidelight.util.PlatformUtil;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -16,10 +17,7 @@ public abstract class MilkBucketItemMixin {
     @Inject(method = "finishUsingItem",at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;removeAllEffects()Z"))
     public void muffins$removeSpicy(ItemStack itemStack, Level level, LivingEntity livingEntity, CallbackInfoReturnable<ItemStack> cir){
         if(livingEntity instanceof Player player){
-            SpicyAttachment spicyAttachment = player.getAttached(ModAttachments.SPICY);
-            if(spicyAttachment != null){
-                spicyAttachment.setTime(0,player);
-            }
+            PlatformUtil.setSpicyTime(0,player);
         }
     }
 }

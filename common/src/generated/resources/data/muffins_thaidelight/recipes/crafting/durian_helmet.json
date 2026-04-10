@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "D": {
+      "item": "muffins_thaidelight:durian_peel"
+    },
+    "L": {
+      "item": "minecraft:leather_helmet"
+    }
+  },
+  "pattern": [
+    " D ",
+    "DLD"
+  ],
+  "result": {
+    "item": "muffins_thaidelight:durian_helmet"
+  },
+  "show_notification": true
+}

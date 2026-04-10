@@ -1,0 +1,14 @@
+{
+  "type": "muffins_thaidelight:mortar",
+  "group": "light_gray_dye",
+  "ingredients": [
+    {
+      "item": "minecraft:azure_bluet"
+    }
+  ],
+  "recipe_book_tab": "misc",
+  "result": {
+    "count": 2,
+    "item": "minecraft:light_gray_dye"
+  }
+}

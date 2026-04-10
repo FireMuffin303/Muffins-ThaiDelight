@@ -3,6 +3,7 @@ package net.firemuffin303.thaidelight.common.registry.fabric;
 import com.terraformersmc.terraform.boat.api.TerraformBoatType;
 import com.terraformersmc.terraform.boat.api.TerraformBoatTypeRegistry;
 import com.terraformersmc.terraform.boat.api.item.TerraformBoatItemHelper;
+import com.terraformersmc.terraform.boat.impl.item.TerraformBoatItem;
 import net.firemuffin303.thaidelight.ThaiDelightCommon;
 import net.firemuffin303.thaidelight.common.item.*;
 import net.minecraft.core.Registry;
@@ -44,16 +45,16 @@ public class ModItemsImpl {
         return new ButterflyPeaJuiceItem();
     }
 
-    public static Item createDrinkableItem(Item.Properties properties, boolean hasPotionEffectTooltip, boolean hasCustomTooltip) {
-        return new DrinkableItem(properties, hasPotionEffectTooltip, hasCustomTooltip);
+    public static Supplier<Item> createDrinkableItem(Item.Properties properties, boolean hasPotionEffectTooltip, boolean hasCustomTooltip) {
+        return () -> new DrinkableItem(properties, hasPotionEffectTooltip, hasCustomTooltip);
     }
 
     public static Item.Properties getDrinkItem() {
         return ModItems.drinkItem();
     }
 
-    public static Item createConsumeableItem(Item.Properties properties, boolean hasFoodEffectTooltip, boolean hasCustomTooltip) {
-        return new ConsumableItem(properties,hasFoodEffectTooltip,hasCustomTooltip);
+    public static Supplier<Item> createConsumeableItem(Item.Properties properties, boolean hasFoodEffectTooltip, boolean hasCustomTooltip) {
+        return () -> new ConsumableItem(properties,hasFoodEffectTooltip,hasCustomTooltip);
     }
 
     public static Item.Properties bowlItem(FoodProperties foodProperties) {
@@ -73,9 +74,9 @@ public class ModItemsImpl {
 
     public static Supplier<Item> createBoat(ResourceLocation id,boolean chest,String boatType) {
         return switch (boatType){
-            case "durian" ->  () -> TerraformBoatItemHelper.registerBoatItem(id,DURIAN_BOAT_KEY,chest);
-            case "mango" -> () -> TerraformBoatItemHelper.registerBoatItem(id,MANGO_BOAT_KEY,chest);
-            case "coconut" -> () -> TerraformBoatItemHelper.registerBoatItem(id,COCONUT_BOAT_KEY,chest);
+            case "durian" ->  () -> new TerraformBoatItem(DURIAN_BOAT_KEY, chest, new Item.Properties().stacksTo(1));
+            case "mango" -> () -> new TerraformBoatItem(MANGO_BOAT_KEY, chest, new Item.Properties().stacksTo(1));
+            case "coconut" -> () -> new TerraformBoatItem(COCONUT_BOAT_KEY, chest, new Item.Properties().stacksTo(1));
             default -> throw new IllegalStateException("Unexpected value: " + boatType);
         };
     }

@@ -14,6 +14,7 @@ import net.minecraft.world.level.block.FallingBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.NotNull;
 
 public class DurianBlock extends FallingBlock {
     private static final VoxelShape BOX = Block.box(1.0,0.0,1.0,15.0,16.0,15.0);
@@ -37,7 +38,7 @@ public class DurianBlock extends FallingBlock {
     }
 
     @Override
-    public DamageSource getFallDamageSource(Entity entity) {
-        return ((DamageSourcesAccessor) entity.damageSources()).source(ModDamageTypes.FALLING_DURIAN);
+    public @NotNull DamageSource getFallDamageSource(Entity entity) {
+        return entity.damageSources().cactus();
     }
 }

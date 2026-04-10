@@ -5,6 +5,7 @@ import net.firemuffin303.thaidelight.common.registry.ModBlockEntityTypes;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.firemuffin303.thaidelight.common.registry.ModCriteriaTriggers;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
+import net.firemuffin303.thaidelight.util.PlatformUtil;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -33,7 +34,7 @@ public class SackItem extends BlockItem {
 
     @Override
     public UseAnim getUseAnimation(ItemStack itemStack) {
-        return ClassTinkerers.getEnum(UseAnim.class,"CATCHING_BAG");
+        return PlatformUtil.getDurianCatcherUseAnim();
     }
 
     @Override

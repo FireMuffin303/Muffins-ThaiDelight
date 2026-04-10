@@ -21,7 +21,7 @@ public class PineappleFriedRiceFeastBlock extends FeastBlock {
 
 
     public PineappleFriedRiceFeastBlock() {
-        super(Properties.copy(Blocks.CAKE), () -> ModItems.PINEAPPLE_FRIED_RICE, true);
+        super(Properties.copy(Blocks.CAKE),ModItems.PINEAPPLE_FRIED_RICE, true);
     }
 
     @Override

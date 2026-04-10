@@ -1,0 +1,21 @@
+{
+  "type": "farmersdelight:cooking",
+  "container": {
+    "item": "minecraft:bowl"
+  },
+  "cookingtime": 100,
+  "experience": 0.35,
+  "group": "crab_fried_rice_feast",
+  "ingredients": [
+    {
+      "tag": "muffins_thaidelight:flower_crab_meat"
+    },
+    {
+      "item": "farmersdelight:fried_rice"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "item": "muffins_thaidelight:crab_fried_rice_feast"
+  }
+}

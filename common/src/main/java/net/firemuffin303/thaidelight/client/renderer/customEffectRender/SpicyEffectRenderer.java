@@ -2,6 +2,7 @@ package net.firemuffin303.thaidelight.client.renderer.customEffectRender;
 
 import net.firemuffin303.muffinsmcapi.impl.customEffect.CustomEffectRenderer;
 import net.firemuffin303.thaidelight.ThaiDelightCommon;
+import net.firemuffin303.thaidelight.util.PlatformUtil;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -12,11 +13,7 @@ public class SpicyEffectRenderer implements CustomEffectRenderer {
 
     @Override
     public boolean shouldRender(LocalPlayer localPlayer) {
-        SpicyAttachment spicyAttachment = localPlayer.getAttached(ModAttachments.SPICY);
-        if(spicyAttachment != null){
-            return spicyAttachment.timer > 0;
-        }
-        return false;
+        return PlatformUtil.getSpicyTime(localPlayer) > 0;
     }
 
     @Override
@@ -26,12 +23,7 @@ public class SpicyEffectRenderer implements CustomEffectRenderer {
 
     @Override
     public Component getDetail(LocalPlayer localPlayer) {
-        SpicyAttachment spicyAttachment = localPlayer.getAttached(ModAttachments.SPICY);
-        if(spicyAttachment != null){
-            return Component.literal(StringUtil.formatTickDuration(spicyAttachment.timer));
-        }
-
-        return null;
+        return Component.literal(StringUtil.formatTickDuration(PlatformUtil.getSpicyTime(localPlayer)));
     }
 
     @Override

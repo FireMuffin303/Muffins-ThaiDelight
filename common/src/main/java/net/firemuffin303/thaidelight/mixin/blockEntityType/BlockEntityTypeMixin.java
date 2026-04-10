@@ -1,6 +1,7 @@
 package net.firemuffin303.thaidelight.mixin.blockEntityType;
 
 import com.mojang.datafixers.types.Type;
+import net.firemuffin303.thaidelight.util.BlockEntityTypeAdder;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import org.spongepowered.asm.mixin.Final;

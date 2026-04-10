@@ -1,0 +1,53 @@
+{
+  "parent": "muffins_thaidelight:root",
+  "criteria": {
+    "susie_prize": {
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": [
+                  "muffins_thaidelight:wall_papaya_flower",
+                  "muffins_thaidelight:papaya_flower"
+                ]
+              }
+            }
+          },
+          {
+            "condition": "minecraft:match_tool",
+            "predicate": {
+              "items": [
+                "minecraft:glow_ink_sac"
+              ]
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:item_used_on_block"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "background": "minecraft:textures/block/oak_log.png",
+    "description": {
+      "translate": "advancement.muffins_thaidelight.susie_prize.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "muffins_thaidelight:papaya_flower"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.muffins_thaidelight.susie_prize"
+    }
+  },
+  "requirements": [
+    [
+      "susie_prize"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

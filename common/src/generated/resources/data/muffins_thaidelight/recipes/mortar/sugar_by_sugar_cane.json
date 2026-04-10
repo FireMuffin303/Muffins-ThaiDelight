@@ -1,0 +1,13 @@
+{
+  "type": "muffins_thaidelight:mortar",
+  "ingredients": [
+    {
+      "item": "minecraft:sugar_cane"
+    }
+  ],
+  "recipe_book_tab": "misc",
+  "result": {
+    "count": 2,
+    "item": "minecraft:sugar"
+  }
+}

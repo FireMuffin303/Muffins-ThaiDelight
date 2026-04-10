@@ -1,5 +1,6 @@
 package net.firemuffin303.thaidelight.mixin.durianHelmet;
 
+import net.firemuffin303.thaidelight.util.ModUtils;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
@@ -13,7 +14,7 @@ public abstract class EnchantmentHelperMixin {
 
     @Inject(method = "doPostHurtEffects",at = @At("HEAD"))
     private static void muffins$durianThorns(LivingEntity livingEntity, Entity entity, CallbackInfo ci){
-        CommonEvents.durianHelmetThorns(livingEntity,entity);
+        ModUtils.durianHelmetThorns(livingEntity,entity);
     }
 
 }

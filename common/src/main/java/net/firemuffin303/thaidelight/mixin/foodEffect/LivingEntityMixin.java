@@ -4,6 +4,9 @@ import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.Share;
 import com.llamalad7.mixinextras.sugar.ref.LocalRef;
+import net.firemuffin303.thaidelight.common.registry.ModTags;
+import net.firemuffin303.thaidelight.util.ModUtils;
+import net.firemuffin303.thaidelight.util.PlatformUtil;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -22,36 +25,15 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin{
 
-    @Inject(method = "baseTick",at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;fireImmune()Z"))
-    public void muffins$durianHeatTick(CallbackInfo ci){
-        LivingEntity livingEntity = (LivingEntity) (Object) this;
-
-        if(livingEntity instanceof Player){
-            DurianHeatAttachment durianHeat = livingEntity.getAttachedOrSet(ModAttachments.DURIAN_HEAT,new DurianHeatAttachment(0,false));
-            durianHeat.tick(livingEntity);
-        }
-    }
-
-    @Inject(method = "baseTick",at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;fireImmune()Z"))
-    public void muffins$spicyTick(CallbackInfo ci){
-
-        LivingEntity livingEntity = (LivingEntity) (Object) this;
-
-        if(livingEntity instanceof Player){
-            SpicyAttachment spicyAttachment = livingEntity.getAttachedOrSet(ModAttachments.SPICY,new SpicyAttachment(0));
-            spicyAttachment.tick(livingEntity);
-        }
-    }
-
     @Inject(method = "addEatEffect",at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/Item;getFoodProperties()Lnet/minecraft/world/food/FoodProperties;"))
     public void muffins$addEatEffect(ItemStack itemStack, Level level, LivingEntity livingEntity, CallbackInfo ci){
 
         if(itemStack.is(ModTags.SPICY_FOODS)){
-            CommonEvents.onEatSpicyFood(itemStack,livingEntity);
+            ModUtils.onEatSpicyFood(itemStack,livingEntity);
         }
 
         if (itemStack.is(ModTags.DURIAN_FOOD)) {
-            CommonEvents.onEatDurian(itemStack,livingEntity);
+            ModUtils.onEatDurian(itemStack,livingEntity);
         }
     }
 
@@ -62,10 +44,7 @@ public abstract class LivingEntityMixin{
 
         boolean bl = true;
         if(livingEntity instanceof Player){
-            DurianHeatAttachment durianHeat = livingEntity.getAttached(ModAttachments.DURIAN_HEAT);
-            if(durianHeat != null){
-                bl = !durianHeat.isHeatedUp;
-            }
+            bl = !PlatformUtil.getDurianHeatComponent(livingEntity).isHeatUp();
         }
 
         return original && bl;
@@ -76,18 +55,12 @@ public abstract class LivingEntityMixin{
         LivingEntity livingEntity = (LivingEntity) (Object) this;
 
         if(livingEntity instanceof Player){
-            DurianHeatAttachment durianHeat = livingEntity.getAttached(ModAttachments.DURIAN_HEAT);
-            if(durianHeat != null){
-                if(durianHeat.isHeatedUp && damageSource.is(DamageTypeTags.IS_FIRE)){
-                    value *= 2f;
-                }
+            if(PlatformUtil.getDurianHeatComponent(livingEntity).isHeatUp() && damageSource.is(DamageTypeTags.IS_FIRE)){
+                value *= 2f;
             }
 
-            SpicyAttachment spicyAttachment = livingEntity.getAttached(ModAttachments.SPICY);
-            if(spicyAttachment != null){
-                if(spicyAttachment.timer > 0 && damageSource.is(ModTags.SPICY_RESISTANT_TO)){
-                    value *= 0.80f;
-                }
+            if(PlatformUtil.getSpicyTime(livingEntity) > 0 && damageSource.is(ModTags.SPICY_RESISTANT_TO)){
+                value *= 0.80f;
             }
         }
 
@@ -107,11 +80,8 @@ public abstract class LivingEntityMixin{
     public void muffins$reduceIfSpicy(MobEffectInstance mobEffectInstance, Entity entity, CallbackInfoReturnable<Boolean> cir,
                                       @Local(argsOnly = true)LocalRef<MobEffectInstance> mobEffectInstanceLocalRef, @Share("player") LocalRef<Player> localRef){
         if(!mobEffectInstanceLocalRef.get().isAmbient()){
-            SpicyAttachment spicyAttachment = localRef.get().getAttached(ModAttachments.SPICY);
-            if(spicyAttachment != null){
-                if(spicyAttachment.timer > 0){
-                    mobEffectInstanceLocalRef.set(new MobEffectInstance(mobEffectInstance.getEffect(),mobEffectInstance.getDuration() - mobEffectInstance.getDuration()/3));
-                }
+            if(PlatformUtil.getSpicyTime(localRef.get()) > 0){
+                mobEffectInstanceLocalRef.set(new MobEffectInstance(mobEffectInstance.getEffect(),mobEffectInstance.getDuration() - mobEffectInstance.getDuration()/3));
             }
         }
     }

@@ -4,6 +4,7 @@ import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.ref.LocalRef;
 import com.mojang.blaze3d.vertex.PoseStack;
+import net.firemuffin303.thaidelight.client.ThaiDelightCommonClient;
 import net.firemuffin303.thaidelight.common.item.SackItem;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.minecraft.client.renderer.ItemModelShaper;
@@ -26,8 +27,8 @@ public abstract class ItemRendererMixin {
 
     @ModifyExpressionValue(method = "getModel",at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/ItemModelShaper;getItemModel(Lnet/minecraft/world/item/ItemStack;)Lnet/minecraft/client/resources/model/BakedModel;"))
     public BakedModel muffins$getModel(BakedModel original,@Local(argsOnly = true) ItemStack itemStack){
-        if(itemStack.is(ModItems.bowlItem().SACK)){
-            original = this.itemModelShaper.getModelManager().getModel(ThaiDelightClient.SACK_MODEL_IN_HAND);
+        if(itemStack.is(ModItems.SACK.get())){
+            original = this.itemModelShaper.getModelManager().getModel(ThaiDelightCommonClient.SACK_MODEL_IN_HAND);
         }
         return original;
     }
@@ -40,8 +41,8 @@ public abstract class ItemRendererMixin {
     ){
         if( itemStack.is(ModItems.SACK.get())){
             BakedModel sackModel = SackItem.isFull(itemStack) ?
-                    this.itemModelShaper.getModelManager().getModel(ThaiDelightClient.FILLED_SACK_MODEL) :
-                    this.itemModelShaper.getModelManager().getModel(ThaiDelightClient.SACK_MODEL);
+                    this.itemModelShaper.getModelManager().getModel(ThaiDelightCommonClient.FILLED_SACK_MODEL) :
+                    this.itemModelShaper.getModelManager().getModel(ThaiDelightCommonClient.SACK_MODEL);
             bakedModel2.set(sackModel);
         }
     }

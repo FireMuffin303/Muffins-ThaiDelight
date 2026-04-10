@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "muffins_thaidelight:lime_sapling",
+    "muffins_thaidelight:lime_plant",
+    "muffins_thaidelight:pepper_crop",
+    "muffins_thaidelight:budding_pepper_crop",
+    "muffins_thaidelight:durian_sapling",
+    "muffins_thaidelight:papaya_crop",
+    "muffins_thaidelight:papaya_sapling",
+    "muffins_thaidelight:holy_basil",
+    "muffins_thaidelight:basil",
+    "muffins_thaidelight:budding_butterfly_pea",
+    "muffins_thaidelight:butterfly_pea_vine"
+  ]
+}

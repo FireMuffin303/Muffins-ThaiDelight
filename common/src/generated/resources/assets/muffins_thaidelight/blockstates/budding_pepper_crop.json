@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "muffins_thaidelight:block/pepper/budding_pepper_age0"
+    },
+    "age=1": {
+      "model": "muffins_thaidelight:block/pepper/budding_pepper_age1"
+    }
+  }
+}

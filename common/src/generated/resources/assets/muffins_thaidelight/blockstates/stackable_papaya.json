@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=east,papayas=1": {
+      "model": "muffins_thaidelight:block/papaya/stackable_papaya_1",
+      "y": 90
+    },
+    "facing=east,papayas=2": {
+      "model": "muffins_thaidelight:block/papaya/stackable_papaya_2",
+      "y": 90
+    },
+    "facing=north,papayas=1": {
+      "model": "muffins_thaidelight:block/papaya/stackable_papaya_1"
+    },
+    "facing=north,papayas=2": {
+      "model": "muffins_thaidelight:block/papaya/stackable_papaya_2"
+    },
+    "facing=south,papayas=1": {
+      "model": "muffins_thaidelight:block/papaya/stackable_papaya_1",
+      "y": 180
+    },
+    "facing=south,papayas=2": {
+      "model": "muffins_thaidelight:block/papaya/stackable_papaya_2",
+      "y": 180
+    },
+    "facing=west,papayas=1": {
+      "model": "muffins_thaidelight:block/papaya/stackable_papaya_1",
+      "y": 270
+    },
+    "facing=west,papayas=2": {
+      "model": "muffins_thaidelight:block/papaya/stackable_papaya_2",
+      "y": 270
+    }
+  }
+}

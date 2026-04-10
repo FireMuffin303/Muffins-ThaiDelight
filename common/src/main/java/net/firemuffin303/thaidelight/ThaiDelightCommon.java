@@ -2,6 +2,7 @@ package net.firemuffin303.thaidelight;
 
 import net.firemuffin303.thaidelight.common.registry.*;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.alchemy.PotionBrewing;
 
 public class ThaiDelightCommon {
     public static final String MOD_ID = "muffins_thaidelight";
@@ -28,6 +29,9 @@ public class ThaiDelightCommon {
         ModRecipes.init();
         ModCauldronInteraction.init();
         ModDispenserBehavior.init();
+
+
+
     }
 
     public static ResourceLocation modid(String id){

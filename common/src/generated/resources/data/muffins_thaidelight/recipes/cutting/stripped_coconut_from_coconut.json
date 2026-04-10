@@ -1,0 +1,20 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "muffins_thaidelight:coconut"
+    }
+  ],
+  "result": [
+    {
+      "item": "muffins_thaidelight:stripped_coconut"
+    },
+    {
+      "count": 2,
+      "item": "farmersdelight:tree_bark"
+    }
+  ],
+  "tool": {
+    "tag": "minecraft:axes"
+  }
+}

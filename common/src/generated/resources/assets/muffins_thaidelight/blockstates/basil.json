@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "muffins_thaidelight:block/basil/basil_age0"
+    },
+    "age=1": {
+      "model": "muffins_thaidelight:block/basil/basil_age1"
+    },
+    "age=2": {
+      "model": "muffins_thaidelight:block/basil/basil_age2"
+    },
+    "age=3": {
+      "model": "muffins_thaidelight:block/basil/basil_age3"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "category": "food",
+  "cookingtime": 600,
+  "experience": 0.35,
+  "ingredient": {
+    "item": "muffins_thaidelight:flower_crab"
+  },
+  "result": "muffins_thaidelight:cooked_flower_crab"
+}

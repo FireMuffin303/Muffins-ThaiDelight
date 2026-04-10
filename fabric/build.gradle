@@ -8,6 +8,10 @@ architectury {
     fabric()
 }
 
+loom{
+    accessWidenerPath = project(":common").loom.accessWidenerPath
+}
+
 configurations {
     common {
         canBeResolved = true
@@ -26,7 +30,7 @@ configurations {
 }
 
 dependencies {
-    modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
+    modImplementation "net.fabricmc:fabric-loader:${project.fabric_loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
     common(project(path: ':common', configuration: 'namedElements')) { transitive false }
@@ -40,14 +44,28 @@ dependencies {
     }
     modImplementation include("com.terraformersmc.terraform-api:terraform-wood-api-v1:7.0.3")
 
+    modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-base:${project.cca_version}"
+    modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-entity:${project.cca_version}"
+
+    include "dev.onyxstudios.cardinal-components-api:cardinal-components-base:${project.cca_version}"
+    include "dev.onyxstudios.cardinal-components-api:cardinal-components-entity:${project.cca_version}"
+
+    modImplementation "net.firemuffin303:muffinsmcapi-fabric:0.1.0-alpha"
+
+    Collection<String> porting_lib_modules = rootProject.poritinglib_modules.split(',');
+    for(x in porting_lib_modules){
+        modImplementation(include("io.github.fabricators_of_create.Porting-Lib:${x}:${rootProject.portinglib_version}"))
+    }
+
+    /*
     modImplementation ("eu.midnightdust:midnightlib:${project.midnightlib_version}")
 
     //Non Needed Dependency
-    modImplementation("com.terraformersmc:modmenu:${project.modmenu_version}")
+    //modImplementation("com.terraformersmc:modmenu:${project.modmenu_version}")
 
-    modRuntimeOnly("maven.modrinth:appleskin:${project.apple_skin_version}")
+    //modRuntimeOnly("maven.modrinth:appleskin:${project.apple_skin_version}")
 
-    modRuntimeOnly("maven.modrinth:cloth-config:2xQdCMyG")
+    //modRuntimeOnly("maven.modrinth:cloth-config:2xQdCMyG")
 
     if (fot.toBoolean()){
         modRuntimeOnly("maven.modrinth:fish-of-thieves:hI4gvof3")
@@ -75,7 +93,9 @@ dependencies {
     modCompileOnly "dev.emi:emi-fabric:${emi_version}:api"
     //modLocalRuntime "dev.emi:emi-fabric:${emi_version}"
 
-    modImplementation "net.firemuffin303:muffinsmcapi-fabric:0.1.0-alpha"
+     */
+
+
 }
 
 processResources {

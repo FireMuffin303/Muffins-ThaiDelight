@@ -1,0 +1,43 @@
+{
+  "parent": "muffins_thaidelight:root",
+  "criteria": {
+    "gravity_not_invent": {
+      "conditions": {
+        "damage": {
+          "type": {
+            "tags": [
+              {
+                "expected": true,
+                "id": "muffins_thaidelight:falling_durian"
+              }
+            ]
+          },
+          "blocked": false
+        }
+      },
+      "trigger": "minecraft:entity_hurt_player"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "background": "minecraft:textures/block/oak_log.png",
+    "description": {
+      "translate": "advancement.muffins_thaidelight.gravity_not_invent.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "muffins_thaidelight:durian"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.muffins_thaidelight.gravity_not_invent"
+    }
+  },
+  "requirements": [
+    [
+      "gravity_not_invent"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

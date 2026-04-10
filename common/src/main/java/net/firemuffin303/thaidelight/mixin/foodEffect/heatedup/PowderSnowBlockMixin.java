@@ -2,6 +2,7 @@ package net.firemuffin303.thaidelight.mixin.foodEffect.heatedup;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.sugar.Local;
+import net.firemuffin303.thaidelight.util.PlatformUtil;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.PowderSnowBlock;
@@ -15,10 +16,7 @@ public abstract class PowderSnowBlockMixin {
     private static boolean muffins$shouldBeWalkOn(boolean original, @Local(argsOnly = true)Entity entity){
         boolean bl = false;
         if(entity instanceof Player player){
-            DurianHeatAttachment durianHeatAttachment = player.getAttached(ModAttachments.DURIAN_HEAT);
-            if(durianHeatAttachment != null){
-                bl = durianHeatAttachment.isHeatedUp;
-            }
+            bl = PlatformUtil.getDurianHeatComponent(player).isHeatUp();
         }
 
         return original || bl;

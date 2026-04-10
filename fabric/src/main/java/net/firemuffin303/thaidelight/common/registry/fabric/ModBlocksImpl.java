@@ -1,6 +1,8 @@
 package net.firemuffin303.thaidelight.common.registry.fabric;
 
+import com.terraformersmc.terraform.sign.block.TerraformHangingSignBlock;
 import com.terraformersmc.terraform.sign.block.TerraformSignBlock;
+import com.terraformersmc.terraform.sign.block.TerraformWallHangingSignBlock;
 import com.terraformersmc.terraform.sign.block.TerraformWallSignBlock;
 import net.firemuffin303.thaidelight.ThaiDelightCommon;
 import net.firemuffin303.thaidelight.common.block.vegetation.FabricBuddingButterflyPeaBlock;
@@ -83,6 +85,14 @@ public class ModBlocksImpl {
 
     public static Supplier<Block> createPieBlock(BlockBehaviour.Properties properties, Supplier<Item> supplier) {
         return () -> new PieBlock(properties,supplier);
+    }
+
+    public static Supplier<Block> createHangingSignBlock(ResourceLocation id, ResourceLocation id2, BlockBehaviour.Properties properties) {
+        return () -> new TerraformHangingSignBlock(id,id2,properties);
+    }
+
+    public static Supplier<Block> createHangingWallSignBlock(ResourceLocation id, ResourceLocation id2, BlockBehaviour.Properties properties) {
+        return () -> new TerraformWallHangingSignBlock(id,id2,properties);
     }
 
 

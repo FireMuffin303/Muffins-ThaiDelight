@@ -2,7 +2,6 @@ package net.firemuffin303.thaidelight.common.block.feast;
 
 import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -13,14 +12,12 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import vectorwing.farmersdelight.common.block.FeastBlock;
 
-import java.util.function.Supplier;
-
 public class CrabFriedRiceFeastBlock extends FeastBlock {
     final VoxelShape PLATE_SHAPE = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 2.0D, 15.0D);
     final VoxelShape PIE_SHAPE = Shapes.joinUnoptimized(PLATE_SHAPE, Block.box(3.0D, 2.0D, 3.0D, 13.0D, 5.0D, 13.0D), BooleanOp.OR);
 
     public CrabFriedRiceFeastBlock() {
-        super(Properties.copy(Blocks.CAKE), () -> ModItems.CRAB_FRIED_RICE, true);
+        super(Properties.copy(Blocks.CAKE), ModItems.CRAB_FRIED_RICE, true);
     }
 
     @Override

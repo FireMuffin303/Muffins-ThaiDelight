@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "muffins_thaidelight:butterfly_pea"
+    }
+  ],
+  "result": {
+    "count": 3,
+    "item": "muffins_thaidelight:butterfly_pea_seeds"
+  }
+}

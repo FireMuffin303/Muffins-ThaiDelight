@@ -114,6 +114,7 @@ public class ModFeatures {
         throw new AssertionError();
     }
 
+    /*
     public static void bootstrapConfiguredFeature(BootstapContext<ConfiguredFeature<?, ?>> bootstapContext){
 
         bootstapContext.register(ModFeatures.FEATURE_PATCH_LIME_BUSH,
@@ -228,6 +229,8 @@ public class ModFeatures {
 
         bootstapContext.register(ModFeatures.FEATURE_PAPAYA_TREE,new ConfiguredFeature<>(Feature.TREE, createPapayaTree(List.of()).build() ));
     }
+
+     */
 
     public static void bootstrapPlacedFeature(BootstapContext<PlacedFeature> bootstapContext){
         Holder.Reference<ConfiguredFeature<?,?>> config_lime_bush = bootstapContext.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(ModFeatures.FEATURE_PATCH_LIME_BUSH);

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "muffins_thaidelight:block/durian_slab"
+    },
+    "type=double": {
+      "model": "muffins_thaidelight:block/durian_planks"
+    },
+    "type=top": {
+      "model": "muffins_thaidelight:block/durian_slab_top"
+    }
+  }
+}

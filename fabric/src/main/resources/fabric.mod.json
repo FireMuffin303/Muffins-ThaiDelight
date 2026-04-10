@@ -25,23 +25,11 @@
     "main": [
       "net.firemuffin303.thaidelight.ThaiDelightFabric"
     ],
-    "fabric-datagen": [
-      "net.firemuffin303.muffinsthaidelightfabric.datagen.ModDataGen"
-    ],
-    "jei_mod_plugin": [
-      "net.firemuffin303.muffinsthaidelightfabric.integration.jei.ThaiDelightJEIIntegration"
-    ],
-    "emi": [
-      "net.firemuffin303.muffinsthaidelightfabric.integration.emi.ThaiDelightEMI"
-    ],
-    "rei_client": [
-      "net.firemuffin303.muffinsthaidelightfabric.integration.rei.ThaiDelightClientREI"
-    ],
     "mm:early_risers": [
-      "net.firemuffin303.muffinsthaidelightfabric.util.ModASMEarlyRiser"
+      "net.firemuffin303.thaidelight.asm.ModASMEarlyRiser"
     ],
-    "modmenu": [
-      "net.firemuffin303.muffinsthaidelightfabric.integration.modmenu.ThaiDelightModMenu"
+    "cardinal-components-entity": [
+      "net.firemuffin303.thaidelight.common.registry.ModCardinalComponents"
     ]
   },
   "mixins": [
@@ -52,7 +40,12 @@
     "fabricloader": ">=${loader_version}",
     "fabric": "*",
     "minecraft": "${minecraft_version}",
-    "farmersdelight": ">=${farmersdelight_refabricated_version}",
-    "midnightlib": ">=1.9.2+1.20.1-fabric"
+    "farmersdelight": ">=${farmersdelight_refabricated_version}"
+  },
+  "custom": {
+    "cardinal-components": [
+      "muffins_thaidelight:durian_heat",
+      "muffins_thaidelight:spicy"
+    ]
   }
 }

@@ -1,0 +1,17 @@
+{
+  "type": "farmersdelight:cooking",
+  "container": {
+    "item": "minecraft:glass_bottle"
+  },
+  "cookingtime": 100,
+  "experience": 0.35,
+  "ingredients": [
+    {
+      "tag": "c:foods/raw_fishes"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "item": "muffins_thaidelight:fish_sauce_bottle"
+  }
+}

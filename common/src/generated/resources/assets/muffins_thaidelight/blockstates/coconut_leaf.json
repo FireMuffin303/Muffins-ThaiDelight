@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "end=false,facing=east": {
+      "model": "muffins_thaidelight:block/coconut/coconut_leaf",
+      "y": 90
+    },
+    "end=false,facing=north": {
+      "model": "muffins_thaidelight:block/coconut/coconut_leaf"
+    },
+    "end=false,facing=south": {
+      "model": "muffins_thaidelight:block/coconut/coconut_leaf",
+      "y": 180
+    },
+    "end=false,facing=west": {
+      "model": "muffins_thaidelight:block/coconut/coconut_leaf",
+      "y": 270
+    },
+    "end=true,facing=east": {
+      "model": "muffins_thaidelight:block/coconut/coconut_leaf_end",
+      "y": 90
+    },
+    "end=true,facing=north": {
+      "model": "muffins_thaidelight:block/coconut/coconut_leaf_end"
+    },
+    "end=true,facing=south": {
+      "model": "muffins_thaidelight:block/coconut/coconut_leaf_end",
+      "y": 180
+    },
+    "end=true,facing=west": {
+      "model": "muffins_thaidelight:block/coconut/coconut_leaf_end",
+      "y": 270
+    }
+  }
+}

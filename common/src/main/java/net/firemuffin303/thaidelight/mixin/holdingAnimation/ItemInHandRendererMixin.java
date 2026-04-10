@@ -6,6 +6,8 @@ import com.llamalad7.mixinextras.sugar.Local;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.firemuffin303.thaidelight.common.item.SackItem;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
+import net.firemuffin303.thaidelight.util.ModAnimationUtils;
+import net.firemuffin303.thaidelight.util.PlatformUtil;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.ItemInHandRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -26,16 +28,16 @@ public abstract class ItemInHandRendererMixin {
                                  InteractionHand interactionHand, float h,
                                  ItemStack itemStack, float i, PoseStack poseStack, MultiBufferSource multiBufferSource,
                                  int j, CallbackInfo ci, @Local HumanoidArm humanoidArm){
-        if(itemStack.getUseAnimation() == ModASMEarlyRiser.getDurianCatcherUseAnim()){
+        if(itemStack.getUseAnimation() == PlatformUtil.getDurianCatcherUseAnim()){
             ModAnimationUtils.handleUsingCatchingBag(poseStack,humanoidArm,i);
         }
     }
 
     @ModifyReturnValue(method = "evaluateWhichHandsToRender",at = @At(value = "RETURN",ordinal = 0))
     private static ItemInHandRenderer.HandRenderSelection muffins$renderHands(ItemInHandRenderer.HandRenderSelection original, @Local(ordinal = 0) ItemStack itemStack, @Local(ordinal = 1) ItemStack itemStack2){
-        if(itemStack.isEmpty() && itemStack2.is(ModItems.SACK)){
+        if(itemStack.isEmpty() && itemStack2.is(ModItems.SACK.get())){
             return ItemInHandRenderer.HandRenderSelection.RENDER_OFF_HAND_ONLY;
-        }else if((itemStack.is(ModItems.SACK) && !SackItem.isFull(itemStack)) && (itemStack2.is(ModItems.SACK) && !SackItem.isFull(itemStack2)) ){
+        }else if((itemStack.is(ModItems.SACK.get()) && !SackItem.isFull(itemStack)) && (itemStack2.is(ModItems.SACK.get()) && !SackItem.isFull(itemStack2)) ){
             return ItemInHandRenderer.HandRenderSelection.RENDER_MAIN_HAND_ONLY;
         }
         return original;

@@ -3,6 +3,7 @@ package net.firemuffin303.thaidelight.mixin.axeItem;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.sugar.Local;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
+import net.firemuffin303.thaidelight.util.PlatformUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.AxeItem;
@@ -28,7 +29,7 @@ public abstract class AxeItemMixin {
                               @Local Level level,
                               @Local BlockPos blockPos){
         if(blockState.get().is(ModBlocks.STRIPPED_COCONUT.get())){
-            Block.popResource(level,blockPos,new ItemStack(ModItems.TREE_BARK.get()));
+            Block.popResource(level,blockPos,new ItemStack(PlatformUtil.getTreeBarkItem().get()));
         }
     }
 

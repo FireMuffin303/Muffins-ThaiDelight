@@ -2,6 +2,7 @@ package net.firemuffin303.thaidelight.common.block.vegetations.durian;
 
 import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.firemuffin303.thaidelight.common.registry.ModTags;
+import net.firemuffin303.thaidelight.util.ModUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
@@ -14,7 +15,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -90,7 +90,7 @@ public class DurianCakeBlock extends Block {
         }
 
         Direction direction = player.getDirection().getOpposite();
-        ItemUtils.spawnItemEntity(level, new ItemStack(ModItems.DURIAN_CAKE_SLICE.get()), pos.getX() + 0.5, pos.getY() + 0.3, pos.getZ() + 0.5,
+        ModUtils.spawnItemEntity(level, new ItemStack(ModItems.DURIAN_CAKE_SLICE.get()), pos.getX() + 0.5, pos.getY() + 0.3, pos.getZ() + 0.5,
                 direction.getStepX() * 0.15, 0.05, direction.getStepZ() * 0.15);
         level.playSound(null, pos, SoundEvents.WOOL_BREAK, SoundSource.PLAYERS, 0.8F, 0.8F);
         return InteractionResult.SUCCESS;
@@ -102,7 +102,7 @@ public class DurianCakeBlock extends Block {
         }
         player.awardStat(Stats.EAT_CAKE_SLICE);
         player.getFoodData().eat(2, 0.1f);
-        CommonEvents.onEatDurian(new ItemStack(ModItems.DURIAN_CAKE_SLICE.get()),player);
+        ModUtils.onEatDurian(new ItemStack(ModItems.DURIAN_CAKE_SLICE.get()),player);
         int i = blockState.getValue(BITES);
         levelAccessor.gameEvent((Entity)player, GameEvent.EAT, blockPos);
         if (i < 6) {

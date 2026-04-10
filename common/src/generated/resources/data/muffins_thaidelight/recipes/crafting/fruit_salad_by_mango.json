@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "c:foods/mango"
+    },
+    {
+      "item": "minecraft:melon"
+    },
+    {
+      "item": "minecraft:melon"
+    },
+    {
+      "tag": "minecraft:fox_food"
+    },
+    {
+      "tag": "minecraft:fox_food"
+    },
+    {
+      "item": "farmersdelight:pumpkin_slice"
+    },
+    {
+      "item": "minecraft:bowl"
+    }
+  ],
+  "result": {
+    "item": "farmersdelight:fruit_salad"
+  }
+}

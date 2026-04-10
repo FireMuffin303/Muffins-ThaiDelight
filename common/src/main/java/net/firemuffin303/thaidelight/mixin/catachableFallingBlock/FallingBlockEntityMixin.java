@@ -9,6 +9,7 @@ import net.firemuffin303.thaidelight.common.item.SackItem;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.firemuffin303.thaidelight.common.registry.ModTags;
+import net.firemuffin303.thaidelight.util.ModUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
@@ -92,7 +93,7 @@ public abstract class FallingBlockEntityMixin extends Entity {
                 this.discard();
                 list.forEach(entity -> ((Player)entity).getCooldowns().addCooldown(ModItems.SACK.get(),10));
                 if(this.blockState.is(ModTags.SACK_HEAVY_CATCHABLE)){
-                    CommonEvents.playDurianCatchingSound((ServerLevel) this.level(),this.position(),this.blockPosition());
+                    ModUtils.playDurianCatchingSound((ServerLevel) this.level(),this.position(),this.blockPosition());
                 }else{
                     this.level().levelEvent(2009,blockPos,0);
                     this.level().playSound(null,blockPos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS);

@@ -1,0 +1,18 @@
+{
+  "type": "muffins_thaidelight:mortar",
+  "container": {
+    "item": "minecraft:bowl"
+  },
+  "ingredients": [
+    {
+      "item": "muffins_thaidelight:basil"
+    },
+    {
+      "item": "muffins_thaidelight:basil"
+    }
+  ],
+  "recipe_book_tab": "meals",
+  "result": {
+    "item": "muffins_thaidelight:pesto_sauce"
+  }
+}

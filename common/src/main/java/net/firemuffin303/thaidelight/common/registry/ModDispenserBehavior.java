@@ -2,7 +2,7 @@ package net.firemuffin303.thaidelight.common.registry;
 
 import net.firemuffin303.thaidelight.common.block.cauldron.CoconutCauldron;
 import net.firemuffin303.thaidelight.common.block.cauldron.FermentedFishCauldronBlock;
-import net.firemuffin303.thaidelight.util.ModUtil;
+import net.firemuffin303.thaidelight.util.ModUtils;
 import net.minecraft.core.BlockSource;
 import net.minecraft.core.Direction;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
@@ -53,9 +53,9 @@ public class ModDispenserBehavior {
                     blockSource.getLevel().setBlockAndUpdate(blockSource.getPos().relative(direction), ModBlocks.COCONUT_CAULDRON.get().defaultBlockState().setValue(FermentedFishCauldronBlock.LEVEL,level));
                     itemStack.shrink(1);
                     if(itemStack.isEmpty()){
-                        return ModUtil.getCraftRemainder(itemStack.copy());
+                        return ModUtils.getCraftRemainder(itemStack.copy());
                     }
-                    this.defaultDispenseItemBehavior.dispense(blockSource, ModUtil.getCraftRemainder(itemStack.copy()));
+                    this.defaultDispenseItemBehavior.dispense(blockSource, ModUtils.getCraftRemainder(itemStack.copy()));
                     return itemStack;
                 }
 

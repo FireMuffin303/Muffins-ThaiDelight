@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "fishofthieves:crownless_pineapple",
+      "required": false
+    },
+    {
+      "id": "fishofthieves:pineapple",
+      "required": false
+    }
+  ]
+}

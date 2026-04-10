@@ -1,0 +1,28 @@
+{
+  "type": "farmersdelight:cooking",
+  "container": {
+    "item": "minecraft:glass_bottle"
+  },
+  "cookingtime": 200,
+  "experience": 0.35,
+  "group": "honey_lime_juice",
+  "ingredients": [
+    {
+      "tag": "c:foods/lime"
+    },
+    {
+      "tag": "c:foods/lime"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "item": "minecraft:honey_bottle"
+    }
+  ],
+  "recipe_book_tab": "drinks",
+  "result": {
+    "count": 1,
+    "item": "muffins_thaidelight:honey_lime_juice"
+  }
+}

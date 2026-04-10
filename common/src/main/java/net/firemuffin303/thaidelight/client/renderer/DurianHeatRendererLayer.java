@@ -3,6 +3,7 @@ package net.firemuffin303.thaidelight.client.renderer;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.firemuffin303.thaidelight.ThaiDelightCommon;
+import net.firemuffin303.thaidelight.util.PlatformUtil;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.HeadedModel;
 import net.minecraft.client.model.geom.ModelPart;
@@ -25,8 +26,7 @@ public class DurianHeatRendererLayer<T extends LivingEntity,M extends EntityMode
     @Override
     public void render(PoseStack poseStack, MultiBufferSource multiBufferSource, int i, T entity, float f, float g, float h, float j, float k, float l) {
         if(entity instanceof Player player) {
-            DurianHeatAttachment durianHeatAttachment = player.getAttached(ModAttachments.DURIAN_HEAT);
-            if (durianHeatAttachment.isHeatedUp) {
+            if(PlatformUtil.getDurianHeatComponent(player).isHeatUp()){
                 poseStack.pushPose();
 
                 VertexConsumer vertexConsumer = multiBufferSource.getBuffer(RenderType.entityCutout(RED_CHEEK));

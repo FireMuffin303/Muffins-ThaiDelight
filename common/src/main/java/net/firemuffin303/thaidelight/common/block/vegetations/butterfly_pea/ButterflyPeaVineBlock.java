@@ -5,7 +5,7 @@ import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.firemuffin303.thaidelight.common.registry.ModLootTables;
 import net.firemuffin303.thaidelight.common.registry.ModTags;
-import net.firemuffin303.thaidelight.util.ModUtil;
+import net.firemuffin303.thaidelight.util.ModUtils;
 import net.firemuffin303.thaidelight.util.PlatformUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -98,7 +98,7 @@ public class ButterflyPeaVineBlock extends CropBlock {
 
     @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        if (!ModUtil.isAreaLoaded(level,pos, 1)) return;
+        if (!ModUtils.isAreaLoaded(level,pos, 1)) return;
         if (level.getRawBrightness(pos, 0) >= 9) {
             int age = this.getAge(state);
             if (age < this.getMaxAge()) {

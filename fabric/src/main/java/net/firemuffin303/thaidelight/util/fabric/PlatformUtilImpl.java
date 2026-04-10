@@ -1,26 +1,22 @@
 package net.firemuffin303.thaidelight.util.fabric;
 
 import io.github.fabricators_of_create.porting_lib.tags.Tags;
-import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
+import net.firemuffin303.thaidelight.asm.ModASMEarlyRiser;
 import net.firemuffin303.thaidelight.client.ThaiDelightClientFabric;
-import net.firemuffin303.thaidelight.common.block.vegetation.pepper.FabricBuddingPepperBlock;
-import net.firemuffin303.thaidelight.util.PlatformUtil;
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.firemuffin303.thaidelight.common.cardinalcomponents.DurianHeatComponent;
+import net.firemuffin303.thaidelight.common.registry.ModCardinalComponents;
+import net.firemuffin303.thaidelight.util.ModUtils;
+import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.inventory.RecipeBookType;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import vectorwing.farmersdelight.common.Configuration;
-import vectorwing.farmersdelight.common.block.CabinetBlock;
-import vectorwing.farmersdelight.common.block.PieBlock;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModEffects;
 import vectorwing.farmersdelight.common.registry.ModItems;
@@ -73,6 +69,53 @@ public class PlatformUtilImpl {
     public static Supplier<MobEffect> getNourishmentEffect() {
         return ModEffects.NOURISHMENT;
     }
+
+    public static Supplier<Item> getTreeBarkItem() {
+        return ModItems.TREE_BARK;
+    }
+
+    public static void setSpicyTime(int value, LivingEntity livingEntity) {
+        ModCardinalComponents.SPICY_HEAT.get(livingEntity).setTime(value);
+    }
+
+    public static int getSpicyTime(LivingEntity livingEntity) {
+        return ModCardinalComponents.SPICY_HEAT.get(livingEntity).timer;
+    }
+
+    public static ModUtils.DurianComponentSupplier getDurianHeatComponent(LivingEntity livingEntity) {
+        DurianHeatComponent durianHeatComponent = ModCardinalComponents.DURIAN_HEAT.get(livingEntity);
+        return new ModUtils.DurianComponentSupplier(durianHeatComponent.timer,durianHeatComponent.isHeatedUp);
+    }
+
+    public static void setDurianHeat(boolean value,LivingEntity livingEntity) {
+        ModCardinalComponents.DURIAN_HEAT.get(livingEntity).setHeatedUp(value);
+    }
+
+
+    public static void addSpicyTime(int value, LivingEntity livingEntity) {
+        ModCardinalComponents.SPICY_HEAT.get(livingEntity).addTime(value);
+    }
+
+    public static void addDurianHeatTime(int i, LivingEntity livingEntity) {
+        ModCardinalComponents.DURIAN_HEAT.get(livingEntity).addTimer(i);
+    }
+
+    public static UseAnim getDurianCatcherUseAnim() {
+        return ModASMEarlyRiser.getDurianCatcherUseAnim();
+    }
+
+    public static HumanoidModel.ArmPose getSackShoulderPose() {
+        return ModASMEarlyRiser.getSackShoulderArmPose();
+    }
+
+    public static HumanoidModel.ArmPose getDurianCatcherHoldArmPose() {
+        return ModASMEarlyRiser.getDurianCatcherHoldArmPose();
+    }
+
+    public static HumanoidModel.ArmPose getDurianCatcherSwingArmPose() {
+        return ModASMEarlyRiser.getDurianCatcherSwingArmPose();
+    }
+
 
 }
 

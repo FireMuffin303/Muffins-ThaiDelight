@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "muffins_thaidelight:pepper"
+    }
+  ],
+  "result": {
+    "count": 4,
+    "item": "muffins_thaidelight:pepper_seeds"
+  }
+}
