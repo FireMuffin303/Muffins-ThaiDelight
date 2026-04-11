@@ -25,19 +25,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin{
 
-    @Inject(method = "addEatEffect",at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/Item;getFoodProperties()Lnet/minecraft/world/food/FoodProperties;"))
-    public void muffins$addEatEffect(ItemStack itemStack, Level level, LivingEntity livingEntity, CallbackInfo ci){
-
-        if(itemStack.is(ModTags.SPICY_FOODS)){
-            ModUtils.onEatSpicyFood(itemStack,livingEntity);
-        }
-
-        if (itemStack.is(ModTags.DURIAN_FOOD)) {
-            ModUtils.onEatDurian(itemStack,livingEntity);
-        }
-    }
-
-
     @ModifyReturnValue(method = "canFreeze",at = @At(value = "RETURN",ordinal = 1))
     public boolean muffins$canFreezeCheck(boolean original){
         LivingEntity livingEntity = (LivingEntity) (Object) this;

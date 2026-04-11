@@ -23,6 +23,7 @@ import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.firemuffin303.thaidelight.common.registry.ModMenuType;
 import net.firemuffin303.thaidelight.common.registry.ModRecipes;
+import net.firemuffin303.thaidelight.util.ModUtils;
 import net.minecraft.client.RecipeBookCategories;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
@@ -138,8 +139,8 @@ public class ThaiDelightClientFabric implements ClientModInitializer {
         },ModBlocks.DURIAN_LEAVES.get(),ModBlocks.MANGO_LEAVES.get());
 
         ColorProviderRegistry.ITEM.register((itemStack, i) -> FoliageColor.getDefaultColor(), ModItems.DURIAN_LEAVES.get(),ModItems.MANGO_LEAVES.get());
-        ColorProviderRegistry.ITEM.register((itemStack, i) -> i > 0 ? -1 : ((DyeableLeatherItem) itemStack.getItem()).getColor(itemStack), ModItems.COCONUT_MILK_ICE_CREAM.get());
-        ColorProviderRegistry.ITEM.register((itemStack, i) -> ((DyeableLeatherItem) itemStack.getItem()).getColor(itemStack), ModItems.KHANOM_CHAN.get());
+        ColorProviderRegistry.ITEM.register((itemStack, i) -> i > 0 ? -1 : ModUtils.getColor(itemStack), ModItems.COCONUT_MILK_ICE_CREAM.get());
+        ColorProviderRegistry.ITEM.register((itemStack, i) -> ModUtils.getColor(itemStack), ModItems.KHANOM_CHAN.get());
 
         LivingEntityFeatureRendererRegistrationCallback.EVENT.register(new LivingEntityFeatureRendererRegistrationCallback() {
             @Override

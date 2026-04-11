@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#muffins_thaidelight:papaya_tree_biomes",
+  "features": "muffins_thaidelight:trees_papaya",
+  "step": "vegetal_decoration"
+}

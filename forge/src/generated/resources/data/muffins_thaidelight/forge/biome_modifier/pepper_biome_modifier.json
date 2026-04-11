@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#muffins_thaidelight:pepper_tree_biomes",
+  "features": "muffins_thaidelight:patch_wild_pepper",
+  "step": "vegetal_decoration"
+}

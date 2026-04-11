@@ -96,7 +96,7 @@ public class ModBlocks {
     public static final Supplier<Block> LIME_BLOCK = register("lime_block",() -> new LimeBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).strength(1.0F).sound(SoundType.WOOD).noOcclusion().pushReaction(PushReaction.DESTROY)));
 
     public static final Supplier<Block> PEPPER_CROP = register("pepper_crop",() -> new PepperCropBlock(BlockBehaviour.Properties.copy(Blocks.POTATOES)));
-    public static final Supplier<Block> BUDDING_PEPPER_CROP = register("budding_pepper_crop",createBuddingPepperBlock(BlockBehaviour.Properties.copy(PEPPER_CROP.get())));
+    public static final Supplier<Block> BUDDING_PEPPER_CROP = register("budding_pepper_crop",createBuddingPepperBlock(BlockBehaviour.Properties.copy(POTATOES)));
 
     //Durian
     public static final Supplier<Block> DURIAN_SAPLING = register("durian_sapling",() ->  new ModSaplingBlock(new DurianTreeGrower(), BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY)));
@@ -159,7 +159,7 @@ public class ModBlocks {
     public static final Supplier<Block> DURIAN_SIGN = register("durian_sign",createStandingSignBlock(
             ThaiDelightCommon.modid("entity/signs/durian"),
             BlockBehaviour.Properties.of()
-                    .mapColor(ModBlocks.DURIAN_PLANKS.get().defaultMapColor())
+                    .mapColor(MapColor.COLOR_LIGHT_GREEN)
                     .forceSolidOn()
                     .instrument(NoteBlockInstrument.BASS)
                     .noCollission()
@@ -170,14 +170,13 @@ public class ModBlocks {
 
     public static final Supplier<Block> DURIAN_WALL_SIGN = register("durian_wall_sign",createWallSignBlock(
             ThaiDelightCommon.modid("entity/signs/durian"),
-            BlockBehaviour.Properties.of()
-                    .mapColor(ModBlocks.DURIAN_PLANKS.get().defaultMapColor())
+            dropLike(ModBlocks.DURIAN_SIGN)
+                    .mapColor(MapColor.COLOR_LIGHT_GREEN)
                     .forceSolidOn()
                     .instrument(NoteBlockInstrument.BASS)
                     .noCollission()
                     .sound(SoundType.WOOD)
                     .strength(1.0f)
-                    .dropsLike(ModBlocks.DURIAN_SIGN.get())
                     .ignitedByLava()
     ));
 
@@ -185,7 +184,7 @@ public class ModBlocks {
             ThaiDelightCommon.modid("entity/signs/hanging/durian"),
             ThaiDelightCommon.modid("textures/gui/hanging_signs/durian"),
             BlockBehaviour.Properties.of()
-                    .mapColor(ModBlocks.DURIAN_PLANKS.get().defaultMapColor())
+                    .mapColor(MapColor.COLOR_LIGHT_GREEN)
                     .forceSolidOn()
                     .instrument(NoteBlockInstrument.BASS)
                     .noCollission()
@@ -197,19 +196,18 @@ public class ModBlocks {
     public static final Supplier<Block> DURIAN_WALL_HANGING_SIGN = register("durian_wall_hanging_sign",createHangingWallSignBlock(
             ThaiDelightCommon.modid("entity/signs/hanging/durian"),
             ThaiDelightCommon.modid("textures/gui/hanging_signs/durian"),
-            BlockBehaviour.Properties.of()
-                    .mapColor(ModBlocks.DURIAN_PLANKS.get().defaultMapColor())
+            dropLike(ModBlocks.DURIAN_HANGING_SIGN).mapColor(MapColor.COLOR_LIGHT_GREEN)
                     .forceSolidOn()
                     .instrument(NoteBlockInstrument.BASS)
                     .noCollission()
                     .sound(SoundType.WOOD)
                     .strength(1.0f)
                     .ignitedByLava()
-                    .dropsLike(DURIAN_HANGING_SIGN.get())
     ));
 
     public static final Supplier<Block> DURIAN_CABINET = registerCabinet("durian_cabinet");
-    public static final Supplier<Block> DURIAN_PEEL_BLOCK = register("durian_peel_block",() ->new Block(BlockBehaviour.Properties.copy(ModBlocks.DURIAN_PLANKS.get())));
+    public static final Supplier<Block> DURIAN_PEEL_BLOCK = register("durian_peel_block",() ->new Block(BlockBehaviour.Properties.of()
+            .mapColor(MapColor.COLOR_LIGHT_GREEN).instrument(NoteBlockInstrument.BASS).strength(2.0f,3.0f).sound(SoundType.WOOD).ignitedByLava()));
 
 
     //----------------------Coconut
@@ -234,8 +232,29 @@ public class ModBlocks {
             .ignitedByLava()
             .pushReaction(PushReaction.DESTROY)
             .isRedstoneConductor((b,a,c) -> false)));
-    public static final Supplier<Block> COCONUT_LEAF_END = register("coconut_leaf_end",() ->new CoconutLeafEndBlock(BlockBehaviour.Properties.copy(COCONUT_LEAF.get()).dropsLike(ModBlocks.COCONUT_LEAF.get())));
-    public static final Supplier<Block> BUDDING_COCONUT_LEAF = register("budding_coconut_leaf",() ->new BuddingCoconutLeafBlock(BlockBehaviour.Properties.copy(COCONUT_LEAF.get()).randomTicks()));
+    public static final Supplier<Block> COCONUT_LEAF_END = register("coconut_leaf_end",() ->new CoconutLeafEndBlock(dropLike(ModBlocks.COCONUT_LEAF)
+            .mapColor(MapColor.PLANT)
+            .strength(0.2F)
+            .sound(SoundType.GRASS)
+            .noOcclusion()
+            .isValidSpawn(BlocksAccessor::ocelotOrParrot)
+            .isSuffocating((b,a,c) -> false)
+            .isViewBlocking((b,a,c) -> false)
+            .ignitedByLava()
+            .pushReaction(PushReaction.DESTROY)
+            .isRedstoneConductor((b,a,c) -> false)));
+    public static final Supplier<Block> BUDDING_COCONUT_LEAF = register("budding_coconut_leaf",() ->new BuddingCoconutLeafBlock(BlockBehaviour.Properties.of()
+            .mapColor(MapColor.PLANT)
+            .strength(0.2F)
+            .sound(SoundType.GRASS)
+            .noOcclusion()
+            .isValidSpawn(BlocksAccessor::ocelotOrParrot)
+            .isSuffocating((b,a,c) -> false)
+            .isViewBlocking((b,a,c) -> false)
+            .ignitedByLava()
+            .pushReaction(PushReaction.DESTROY)
+            .isRedstoneConductor((b,a,c) -> false)
+            .randomTicks()));
 
     public static final Supplier<Block> COCONUT_LEAF_BLOCK = register("coconut_leaf_block",() ->new BundledCoconutLeafBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GREEN).strength(0.5F, 2.5F).sound(SoundType.GRASS)));
 
@@ -292,7 +311,7 @@ public class ModBlocks {
     public static final Supplier<Block> COCONUT_SIGN = register("coconut_sign",createStandingSignBlock(
             ThaiDelightCommon.modid("entity/signs/coconut"),
             BlockBehaviour.Properties.of()
-                    .mapColor(ModBlocks.COCONUT_PLANKS.get().defaultMapColor())
+                    .mapColor(MapColor.COLOR_LIGHT_GREEN)
                     .forceSolidOn()
                     .instrument(NoteBlockInstrument.BASS)
                     .noCollission()
@@ -302,21 +321,19 @@ public class ModBlocks {
     ));
     public static final Supplier<Block> COCONUT_WALL_SIGN = register("coconut_wall_sign",createWallSignBlock(
             ThaiDelightCommon.modid("entity/signs/coconut"),
-            BlockBehaviour.Properties.of()
-                    .mapColor(ModBlocks.COCONUT_PLANKS.get().defaultMapColor())
+            dropLike(ModBlocks.COCONUT_SIGN).mapColor(MapColor.COLOR_LIGHT_GREEN)
                     .forceSolidOn()
                     .instrument(NoteBlockInstrument.BASS)
                     .noCollission()
                     .strength(1.0f)
                     .sound(SoundType.WOOD)
-                    .dropsLike(ModBlocks.COCONUT_SIGN.get())
                     .ignitedByLava()
     ));
     public static final Supplier<Block> COCONUT_HANGING_SIGN = register("coconut_hanging_sign",createHangingSignBlock(
             ThaiDelightCommon.modid("entity/signs/hanging/coconut"),
             ThaiDelightCommon.modid("textures/gui/hanging_signs/coconut"),
             BlockBehaviour.Properties.of()
-                    .mapColor(ModBlocks.COCONUT_PLANKS.get().defaultMapColor())
+                    .mapColor(MapColor.COLOR_LIGHT_GREEN)
                     .forceSolidOn()
                     .instrument(NoteBlockInstrument.BASS)
                     .noCollission()
@@ -327,15 +344,14 @@ public class ModBlocks {
     public static final Supplier<Block> COCONUT_WALL_HANGING_SIGN = register("coconut_wall_hanging_sign",createHangingWallSignBlock(
             ThaiDelightCommon.modid("entity/signs/hanging/coconut"),
             ThaiDelightCommon.modid("textures/gui/hanging_signs/coconut"),
-            BlockBehaviour.Properties.of()
-                    .mapColor(ModBlocks.COCONUT_PLANKS.get().defaultMapColor())
+            dropLike(ModBlocks.COCONUT_HANGING_SIGN)
+                    .mapColor(MapColor.COLOR_LIGHT_GREEN)
                     .forceSolidOn()
                     .instrument(NoteBlockInstrument.BASS)
                     .noCollission()
                     .strength(1.0f)
                     .sound(SoundType.WOOD)
                     .ignitedByLava()
-                    .dropsLike(COCONUT_HANGING_SIGN.get())
     ));
     public static final Supplier<Block> COCONUT_CABINET = registerCabinet("coconut_cabinet");
     public static final Supplier<Block> COCONUT_LEAF_CARPET = register("coconut_leaf_carpet",() ->new CarpetBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GREEN).strength(0.1f).sound(SoundType.MOSS_CARPET).pushReaction(PushReaction.DESTROY)));
@@ -406,7 +422,7 @@ public class ModBlocks {
     public static final Supplier<Block> MANGO_SIGN = register("mango_sign",createStandingSignBlock(
             ThaiDelightCommon.modid("entity/signs/mango"),
             BlockBehaviour.Properties.of()
-                    .mapColor(ModBlocks.MANGO_PLANKS.get().defaultMapColor())
+                    .mapColor(MapColor.COLOR_LIGHT_GREEN)
                     .forceSolidOn()
                     .instrument(NoteBlockInstrument.BASS)
                     .noCollission()
@@ -416,21 +432,20 @@ public class ModBlocks {
     ));
     public static final Supplier<Block> MANGO_WALL_SIGN = register("mango_wall_sign",createWallSignBlock(
             ThaiDelightCommon.modid("entity/signs/mango"),
-            BlockBehaviour.Properties.of()
-                    .mapColor(ModBlocks.MANGO_PLANKS.get().defaultMapColor())
+            dropLike(ModBlocks.MANGO_SIGN)
+                    .mapColor(MapColor.COLOR_LIGHT_GREEN)
                     .forceSolidOn()
                     .instrument(NoteBlockInstrument.BASS)
                     .noCollission()
                     .strength(1.0f)
                     .sound(SoundType.WOOD)
-                    .dropsLike(ModBlocks.MANGO_SIGN.get())
                     .ignitedByLava()
     ));
     public static final Supplier<Block> MANGO_HANGING_SIGN = register("mango_hanging_sign",createHangingSignBlock(
             ThaiDelightCommon.modid("entity/signs/hanging/mango"),
             ThaiDelightCommon.modid("textures/gui/hanging_signs/mango"),
             BlockBehaviour.Properties.of()
-                    .mapColor(ModBlocks.MANGO_PLANKS.get().defaultMapColor())
+                    .mapColor(MapColor.COLOR_LIGHT_GREEN)
                     .forceSolidOn()
                     .instrument(NoteBlockInstrument.BASS)
                     .noCollission()
@@ -441,15 +456,14 @@ public class ModBlocks {
     public static final Supplier<Block> MANGO_WALL_HANGING_SIGN = register("mango_wall_hanging_sign", createHangingWallSignBlock(
             ThaiDelightCommon.modid("entity/signs/hanging/mango"),
             ThaiDelightCommon.modid("textures/gui/hanging_signs/mango"),
-            BlockBehaviour.Properties.of()
-                    .mapColor(ModBlocks.MANGO_PLANKS.get().defaultMapColor())
+            dropLike(ModBlocks.MANGO_HANGING_SIGN)
+                    .mapColor(MapColor.COLOR_LIGHT_GREEN)
                     .forceSolidOn()
                     .instrument(NoteBlockInstrument.BASS)
                     .noCollission()
                     .strength(1.0f)
                     .sound(SoundType.WOOD)
                     .ignitedByLava()
-                    .dropsLike(MANGO_HANGING_SIGN.get())
     ));
     public static final Supplier<Block> MANGO_CABINET = registerCabinet("mango_cabinet");
 
@@ -674,6 +688,16 @@ public class ModBlocks {
 
     @ExpectPlatform
     public static Supplier<Block> createPieBlock(BlockBehaviour.Properties properties, Supplier<Item> supplier){
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static Supplier<Block> getThaiDelightBlock(String id, Supplier<Block> blockSupplier){
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static BlockBehaviour.Properties dropLike(Supplier<Block> blockSupplier){
         throw new AssertionError();
     }
 }

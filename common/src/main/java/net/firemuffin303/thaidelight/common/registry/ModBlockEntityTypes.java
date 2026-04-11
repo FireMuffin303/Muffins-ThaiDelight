@@ -8,15 +8,16 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
+import java.util.List;
 import java.util.function.Supplier;
 
 public class ModBlockEntityTypes {
-    public static Supplier<BlockEntityType<SackBlockEntity>> SACK_BLOCK_ENTITY = register("sack",SackBlockEntity::new,ModBlocks.SACK.get());
+    public static Supplier<BlockEntityType<SackBlockEntity>> SACK_BLOCK_ENTITY = register("sack",SackBlockEntity::new,List.of(ModBlocks.SACK));
 
     public static void init(){}
 
     @ExpectPlatform
-    public static <T extends BlockEntity> Supplier<BlockEntityType<T>> register(String id, BlockEntitySupplier<T> blockEntitySupplier, Block... blocks){
+    public static <T extends BlockEntity> Supplier<BlockEntityType<T>> register(String id, BlockEntitySupplier<T> blockEntitySupplier, List<Supplier<Block>> blocks){
         throw new AssertionError();
     }
 

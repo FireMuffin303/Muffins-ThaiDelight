@@ -4,7 +4,6 @@
   "package": "net.firemuffin303.thaidelight.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "LootItemAccessor",
     "accessor.CriteriaTriggersAccessor",
     "accessor.DamageSourcesAccessor",
     "accessor.MobAccessor",
@@ -24,24 +23,16 @@
     "catachableFallingBlock.FallingBlockEntityMixin",
     "cauldron.AbstractCauldronMixin",
     "cauldron.LayeredCauldronAccessor",
-    "dispenser.BucketItemMixin",
     "dispenser.DispenseItemBehaviorMixin",
     "durianHelmet.EnchantmentHelperMixin",
     "durianHelmet.LivingEntityMixin",
     "durianHelmet.ThornsEnchantmentMixin",
-    "dyeableItem.DyeableLeatherItemMixin",
-    "dyeableItem.RecipeMixin",
     "food.ChickenFoodAccessor",
     "food.FrogFoodAccessor",
     "food.ParrotTameFoodAccessor",
     "food.PigFoodAccessor",
     "foodEffect.LivingEntityMixin",
     "foodEffect.heatedup.PowderSnowBlockMixin",
-    "foodEffect.spicy.MilkBucketItemMixin",
-    "loot.LootPoolBuilderAccessor",
-    "loot.LootTableAccessor",
-    "recipeBookType.RecipeBlockSettingMixin",
-    "recipeBookType.RecipeBookTypeMixin",
     "stinky.LivingEntityMixin",
     "stinky.SniffingMixin",
     "stinky.VillagerMixin"
@@ -52,8 +43,7 @@
     "holdingAnimation.HumanoidModelMixin",
     "holdingAnimation.ItemInHandRendererMixin",
     "holdingAnimation.ItemRendererMixin",
-    "holdingAnimation.PlayerRendererMixin",
-    "recipeBookType.RecipeBookCategoriesMixin"
+    "holdingAnimation.PlayerRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

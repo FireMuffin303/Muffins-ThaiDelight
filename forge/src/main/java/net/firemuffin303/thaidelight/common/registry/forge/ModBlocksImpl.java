@@ -1,14 +1,20 @@
 package net.firemuffin303.thaidelight.common.registry.forge;
 
 import net.firemuffin303.thaidelight.ThaiDelightCommon;
-import net.firemuffin303.thaidelight.common.block.feast.*;
-import net.firemuffin303.thaidelight.common.block.vegetation.pepper.ForgeBuddingPepperBlock;
+import net.firemuffin303.thaidelight.forge.common.block.feast.*;
+import net.firemuffin303.thaidelight.forge.common.block.vegetation.ForgeBuddingButterflyPeaBlock;
+import net.firemuffin303.thaidelight.forge.common.block.vegetation.pepper.ForgeBuddingPepperBlock;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 import vectorwing.farmersdelight.common.block.CabinetBlock;
 import vectorwing.farmersdelight.common.block.PieBlock;
 import vectorwing.farmersdelight.common.block.WildCropBlock;
@@ -69,5 +75,35 @@ public class ModBlocksImpl {
     public static Supplier<Block> createPieBlock(BlockBehaviour.Properties properties, Supplier<Item> supplier) {
         return () -> new PieBlock(properties,supplier);
     }
+
+    public static Supplier<Block> createButterflyPeaBlock() {
+        return ForgeBuddingButterflyPeaBlock::new;
+    }
+
+    public static Supplier<Block> createStandingSignBlock(ResourceLocation resourceLocation, BlockBehaviour.Properties properties) {
+        return () -> new StandingSignBlock(properties, WoodType.OAK);
+    }
+
+    public static Supplier<Block> createWallSignBlock(ResourceLocation resourceLocation, BlockBehaviour.Properties properties) {
+        return () -> new WallSignBlock(properties,WoodType.OAK);
+    }
+
+    public static Supplier<Block> createHangingSignBlock(ResourceLocation id, ResourceLocation id2, BlockBehaviour.Properties properties) {
+        return () -> new CeilingHangingSignBlock(properties,WoodType.OAK);
+    }
+
+    public static Supplier<Block> createHangingWallSignBlock(ResourceLocation id, ResourceLocation id2, BlockBehaviour.Properties properties) {
+        return () -> new WallHangingSignBlock(properties,WoodType.OAK);
+    }
+
+    public static Supplier<Block> getThaiDelightBlock(String id, Supplier<Block> blockSupplier) {
+        return RegistryObject.create(ThaiDelightCommon.modid(id), ForgeRegistries.BLOCKS);
+    }
+
+    public static BlockBehaviour.Properties dropLike(Supplier<Block> blockSupplier) {
+
+        return BlockBehaviour.Properties.of().lootFrom(blockSupplier);
+    }
+
 
 }

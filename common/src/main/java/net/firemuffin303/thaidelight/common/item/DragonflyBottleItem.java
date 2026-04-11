@@ -13,9 +13,9 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class DragonflyBottleItem extends MobBottleItem {
+public class DragonflyBottleItem extends MobBottleItem<DragonflyEntity> {
     public DragonflyBottleItem(Properties properties) {
-        super(ModEntityTypes.DRAGONFLY.get(), SoundEvents.BOTTLE_EMPTY, properties);
+        super(ModEntityTypes.DRAGONFLY, SoundEvents.BOTTLE_EMPTY, properties);
     }
 
     @Override

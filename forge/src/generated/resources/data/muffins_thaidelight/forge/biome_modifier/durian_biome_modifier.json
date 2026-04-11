@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#muffins_thaidelight:durian_tree_biomes",
+  "features": "muffins_thaidelight:trees_durian",
+  "step": "vegetal_decoration"
+}

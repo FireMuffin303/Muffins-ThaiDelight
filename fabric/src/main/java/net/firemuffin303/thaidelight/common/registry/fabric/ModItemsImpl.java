@@ -10,9 +10,15 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.MobBucketItem;
+import net.minecraft.world.item.SpawnEggItem;
+import net.minecraft.world.level.material.Fluid;
 import vectorwing.farmersdelight.common.item.ConsumableItem;
 import vectorwing.farmersdelight.common.item.DrinkableItem;
 import vectorwing.farmersdelight.common.registry.ModItems;
@@ -25,24 +31,24 @@ public class ModItemsImpl {
     public static final ResourceKey<TerraformBoatType> COCONUT_BOAT_KEY = TerraformBoatTypeRegistry.createKey(ThaiDelightCommon.modid("coconut_boat"));
     public static final ResourceKey<TerraformBoatType> MANGO_BOAT_KEY = TerraformBoatTypeRegistry.createKey(ThaiDelightCommon.modid("mango_boat"));
 
-    public static Item createPapayaJuiceItem() {
-        return new PapayaJuiceItem();
+    public static Supplier<Item> createPapayaJuiceItem() {
+        return PapayaJuiceItem::new;
     }
 
-    public static Item createLimeJuiceItem() {
-        return new LimeJuiceItem();
+    public static Supplier<Item> createLimeJuiceItem() {
+        return LimeJuiceItem::new;
     }
 
-    public static Item createHoneyLimeJuiceItem() {
-        return new HoneyLimeJuiceItem();
+    public static Supplier<Item> createHoneyLimeJuiceItem() {
+        return HoneyLimeJuiceItem::new;
     }
 
-    public static Item createCoconutWaterJuiceItem() {
-        return new CoconutWaterJuiceItem();
+    public static Supplier<Item> createCoconutWaterJuiceItem() {
+        return CoconutWaterJuiceItem::new;
     }
 
-    public static Item createButterflyPeaTeaItem() {
-        return new ButterflyPeaJuiceItem();
+    public static Supplier<Item> createButterflyPeaTeaItem() {
+        return ButterflyPeaJuiceItem::new;
     }
 
     public static Supplier<Item> createDrinkableItem(Item.Properties properties, boolean hasPotionEffectTooltip, boolean hasCustomTooltip) {
@@ -79,6 +85,14 @@ public class ModItemsImpl {
             case "coconut" -> () -> new TerraformBoatItem(COCONUT_BOAT_KEY, chest, new Item.Properties().stacksTo(1));
             default -> throw new IllegalStateException("Unexpected value: " + boatType);
         };
+    }
+
+    public static <T extends Mob> Supplier<Item> createSpawnEgg(Supplier<EntityType<T>> entityTypeSupplier, int primaryColor, int secondaryColor, Item.Properties properties) {
+        return () -> new SpawnEggItem(entityTypeSupplier.get(),primaryColor,secondaryColor,properties);
+    }
+
+    public static <T extends Mob>  Supplier<Item> createMobBucket(Supplier<EntityType<T>> entitySupplier, Supplier<? extends Fluid> fluidSupplier, Supplier<? extends SoundEvent> soundSupplier, Item.Properties properties) {
+        return () -> new MobBucketItem(entitySupplier.get(),fluidSupplier.get(),soundSupplier.get(),properties);
     }
 
 

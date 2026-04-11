@@ -9,6 +9,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -20,12 +21,14 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.gameevent.GameEvent;
 import org.jetbrains.annotations.Nullable;
 
-public class MobBottleItem extends Item {
-    private final EntityType<?> entityType;
+import java.util.function.Supplier;
+
+public class MobBottleItem<T extends Mob> extends Item {
+    private final Supplier<EntityType<T>> entityType;
     private final SoundEvent emptySound;
-    public MobBottleItem(EntityType<?> entityType,SoundEvent emptySound,Properties properties) {
+    public MobBottleItem(Supplier<EntityType<T>> entityTypeSupplier, SoundEvent emptySound, Properties properties) {
         super(properties);
-        this.entityType = entityType;
+        this.entityType = entityTypeSupplier;
         this.emptySound = emptySound;
     }
 
@@ -59,7 +62,7 @@ public class MobBottleItem extends Item {
     }
 
     private void spawn(ServerLevel serverLevel, ItemStack itemStack, BlockPos blockPos) {
-        Entity entity = this.entityType.spawn(serverLevel, itemStack, (Player)null, blockPos, MobSpawnType.BUCKET, true, false);
+        Entity entity = this.entityType.get().spawn(serverLevel, itemStack, (Player)null, blockPos, MobSpawnType.BUCKET, true, false);
         if (entity instanceof Bottleable bottleable) {
             bottleable.copyDataFromNbt(itemStack.getOrCreateTag());
             bottleable.setFromBottle(true);

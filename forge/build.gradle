@@ -1,35 +1,92 @@
 plugins {
-    id 'com.github.johnrengelman.shadow'
+    id "com.github.johnrengelman.shadow"
 }
-
 
 architectury {
     platformSetupLoomIde()
     forge()
 }
 
-configurations {
-    common {
-        canBeResolved = true
-        canBeConsumed = false
+loom {
+    accessWidenerPath = project(":common").loom.accessWidenerPath
+
+    forge {
+        convertAccessWideners = true
+        extraAccessWideners.add loom.accessWidenerPath.get().asFile.name
+
+        mixinConfig "muffins_thaidelight.mixins.json"
+        mixinConfig "muffins_thaidelight.forge.mixins.json"
+
+        dataGen {
+            mod("muffins_thaidelight")
+        }
     }
+
+    sourceSets.main {
+        resources {
+            srcDirs += "src/generated/resources/"
+        }
+    }
+
+}
+
+configurations {
+    common
+    shadowCommon // Don't use shadow from the shadow plugin since it *excludes* files.
     compileClasspath.extendsFrom common
     runtimeClasspath.extendsFrom common
-    developmentFabric.extendsFrom common
-
-    // Files in this configuration will be bundled into your mod using the Shadow plugin.
-    // Don't use the `shadow` configuration from the plugin itself as it's meant for excluding files.
-    shadowBundle {
-        canBeResolved = true
-        canBeConsumed = false
-    }
+    developmentForge.extendsFrom common
 }
 
 dependencies {
     forge "net.minecraftforge:forge:${rootProject.minecraft_version}-${rootProject.forge_version}"
 
-    modImplementation("maven.modrinth:farmers-delight:1.20.1-1.2.8")
+    modImplementation("maven.modrinth:farmers-delight:${rootProject.farmersdelight_forge_version}")
+    modImplementation("maven.modrinth:mixinbooster:rOaAYvPZ")
+
+    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.5.3"))
+    implementation(include("io.github.llamalad7:mixinextras-forge:0.5.3"))
+
+    modImplementation "net.firemuffin303:muffinsmcapi-forge:0.1.0-alpha"
 
     common(project(path: ':common', configuration: 'namedElements')) { transitive false }
-    shadowBundle project(path: ':common', configuration: 'transformProductionForge')
+    shadowCommon project(path: ':common', configuration: 'transformProductionForge')
 }
+
+processResources {
+    inputs.property "version", project.version
+    inputs.property "mod_id" , rootProject.mod_id
+    inputs.property "farmersdelight_version", rootProject.farmersdelight_forge_version
+
+    filesMatching("META-INF/mods.toml") {
+        expand "version": project.version,
+        "mod_id":rootProject.mod_id,
+        "farmersdelight_version": rootProject.farmersdelight_forge_version
+    }
+}
+
+shadowJar {
+    exclude "fabric.mod.json"
+    exclude "architectury.common.json"
+
+    configurations = [project.configurations.shadowCommon]
+}
+
+remapJar {
+    input.set shadowJar.archiveFile
+    dependsOn shadowJar
+}
+
+
+sourcesJar {
+    def commonSources = project(":common").sourcesJar
+    dependsOn commonSources
+    from commonSources.archiveFile.map { zipTree(it) }
+}
+
+components.java {
+    withVariantsFromConfiguration(project.configurations.shadowRuntimeElements) {
+        skip()
+    }
+}
+

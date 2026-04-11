@@ -13,11 +13,12 @@ import net.minecraft.world.inventory.MenuType;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
+import java.util.function.Supplier;
+
 public class ModMenuTypeImpl {
     public static final DeferredRegister<MenuType<?>> MENU = DeferredRegister.create(Registries.MENU,ThaiDelightCommon.MOD_ID);
 
-    public static <T extends AbstractContainerMenu> MenuType<T> register(String id, ModMenuType.MenuTypeSupplier<T> menuType) {
-        RegistryObject<MenuType<T>> object = MENU.register(id,() -> new MenuType<>(menuType::create,FeatureFlags.VANILLA_SET));
-        return object.get();
+    public static <T extends AbstractContainerMenu> Supplier<MenuType<T>> register(String id, ModMenuType.MenuTypeSupplier<T> menuType) {
+        return MENU.register(id,() -> new MenuType<>(menuType::create,FeatureFlags.VANILLA_SET));
     }
 }

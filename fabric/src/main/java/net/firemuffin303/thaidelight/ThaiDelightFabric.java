@@ -8,11 +8,13 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.registry.TillableBlockRegistry;
 import net.firemuffin303.thaidelight.common.TDFabricEvents;
+import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.firemuffin303.thaidelight.common.registry.ModEntityTypes;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.firemuffin303.thaidelight.common.registry.ModMobEffects;
 import net.firemuffin303.thaidelight.common.registry.fabric.ModItemsImpl;
 import net.minecraft.core.Registry;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.PotionBrewing;
 import net.minecraft.world.item.alchemy.Potions;
@@ -47,6 +49,7 @@ public class ThaiDelightFabric implements ModInitializer {
     @Override
     public void onInitialize() {
         ThaiDelightCommon.init();
+        ThaiDelightCommon.postInit();
 
         ModEntityTypes.registerAttribute(FabricDefaultAttributeRegistry::register);
 
@@ -77,6 +80,8 @@ public class ThaiDelightFabric implements ModInitializer {
         TDFabricEvents.registerStrippable();
         TDFabricEvents.registerComposter();
         TDFabricEvents.registerAnimalFood();
+
+
     }
 
 

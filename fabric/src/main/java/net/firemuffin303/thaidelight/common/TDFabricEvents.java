@@ -11,7 +11,6 @@ import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.firemuffin303.thaidelight.ThaiDelightCommon;
-import net.firemuffin303.thaidelight.client.ThaiDelightCommonClient;
 import net.firemuffin303.thaidelight.common.entity.ai.NearestMobStinkyTargetGoal;
 import net.firemuffin303.thaidelight.common.registry.*;
 import net.firemuffin303.thaidelight.mixin.accessor.MobAccessor;

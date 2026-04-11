@@ -10,18 +10,24 @@ import net.firemuffin303.thaidelight.common.item.SackItem;
 import net.firemuffin303.thaidelight.common.item.vegetations.papaya.PapayaFlowerItem;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Properties;
 import java.util.function.Supplier;
 
 import static net.firemuffin303.thaidelight.util.PlatformUtil.bowlFoodItem;
@@ -53,14 +59,14 @@ public class ModItems {
     public static final Supplier<Item> BUTTERFLY_PEA_CRATE = register("butterfly_pea_crate",() -> new BlockItem(ModBlocks.BUTTERFLY_PEA_CRATE.get(),new Item.Properties()));
 
     //Crab
-    public static final Supplier<Item> CRAB_SPAWN_EGG = register("flower_crab_spawn_egg",() -> new SpawnEggItem(ModEntityTypes.FLOWER_CRAB.get(),0x93a064,0xac3247,new Item.Properties()));
+    public static final Supplier<Item> CRAB_SPAWN_EGG = register("flower_crab_spawn_egg",createSpawnEgg(ModEntityTypes.FLOWER_CRAB,0x93a064,0xac3247,new Item.Properties()));
     public static final Supplier<Item> CRAB_EGG = register("flower_crab_egg",() -> new BlockItem(ModBlocks.CRAB_EGG.get(),new Item.Properties()));
-    public static final Supplier<Item> CRAB_BUCKET = registerFlatItem("flower_crab_bucket",() -> new MobBucketItem(ModEntityTypes.FLOWER_CRAB.get(), Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH,new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> CRAB_BUCKET = registerFlatItem("flower_crab_bucket",createMobBucket(ModEntityTypes.FLOWER_CRAB, () -> Fluids.WATER,() -> SoundEvents.BUCKET_EMPTY_FISH,new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> CRAB_MEAT = registerFlatItem("flower_crab",() -> new Item(new Item.Properties().food(ModFoods.CRAB)));
     public static final Supplier<Item> COOKED_CRAB_MEAT = registerFlatItem("cooked_flower_crab",() -> new Item(new Item.Properties().food(ModFoods.COOKED_CRAB)));
 
     //Dragonfly
-    public static final Supplier<Item> DRAGONFLY_SPAWN_EGG = register("dragonfly_spawn_egg",() -> new SpawnEggItem(ModEntityTypes.DRAGONFLY.get(),0x181d13,0x246011,new Item.Properties()));
+    public static final Supplier<Item> DRAGONFLY_SPAWN_EGG = register("dragonfly_spawn_egg",createSpawnEgg(ModEntityTypes.DRAGONFLY,0x181d13,0x246011,new Item.Properties()));
     public static final Supplier<Item> DRAGONFLY = registerFlatItem("dragonfly",() -> new Item(new Item.Properties().food(ModFoods.DRAGONFLY)));
     public static final Supplier<Item> DRAGONFLY_BOTTLE = register("dragonfly_bottle",() -> new DragonflyBottleItem(new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> COOKED_DRAGONFLY = registerFlatItem("cooked_dragonfly",() -> new Item(new Item.Properties().food(ModFoods.COOKED_DRAGONFLY)));
@@ -68,10 +74,10 @@ public class ModItems {
     //Bucket
     public static final Supplier<Item> FISH_SAUCE_BOTTLE = registerFlatItem("fish_sauce_bottle",createDrinkableItem(getDrinkItem().food(ModFoods.FISH_SAUCE),true,false)) ;
     public static final Supplier<Item> FERMENTED_FISH = registerFlatItem("fermented_fish",createConsumeableItem(bowlFoodItem(ModFoods.FERMENTED_FISH),true,false));
-    public static final Supplier<Item> PAPAYA_JUICE = registerFlatItem("papaya_juice", ModItems::createPapayaJuiceItem);
-    public static final Supplier<Item> LIME_JUICE = registerFlatItem("lime_juice", ModItems::createLimeJuiceItem);
-    public static final Supplier<Item> HONEY_LIME_JUICE = registerFlatItem("honey_lime_juice", ModItems::createHoneyLimeJuiceItem);
-    public static final Supplier<Item> COCONUT_WATER = registerFlatItem("coconut_water", ModItems::createCoconutWaterJuiceItem);
+    public static final Supplier<Item> PAPAYA_JUICE = registerFlatItem("papaya_juice", createPapayaJuiceItem());
+    public static final Supplier<Item> LIME_JUICE = registerFlatItem("lime_juice", createLimeJuiceItem());
+    public static final Supplier<Item> HONEY_LIME_JUICE = registerFlatItem("honey_lime_juice", createHoneyLimeJuiceItem());
+    public static final Supplier<Item> COCONUT_WATER = registerFlatItem("coconut_water", createCoconutWaterJuiceItem());
 
     //Crops
     //------------- Lime ---------------
@@ -265,7 +271,7 @@ public class ModItems {
 
 
     public static final Supplier<Item> BUTTERFLY_PEA_SEEDS = registerFlatItem("butterfly_pea_seeds", () ->new ItemNameBlockItem(ModBlocks.BUDDING_BUTTERFLY_PEA_BLOCK.get(),new Item.Properties()));
-    public static final Supplier<Item> BUTTERFLY_PEA_TEA = registerFlatItem("butterfly_pea_tea", ModItems::createButterflyPeaTeaItem);
+    public static final Supplier<Item> BUTTERFLY_PEA_TEA = registerFlatItem("butterfly_pea_tea", createButterflyPeaTeaItem());
 
     public static final Supplier<Item> KHANOM_CHAN = registerFlatItem("khanom_chan",() -> new DyeableItem(new Item.Properties().food(ModFoods.KHANOM_CHAN)));
     public static final Supplier<Item> COCONUT_MILK_ICE_CREAM = register("coconut_milk_ice_cream",() -> new DyeableItem(bowlFoodItem(ModFoods.COCONUT_MILK_ICE_CREAM)));
@@ -291,13 +297,7 @@ public class ModItems {
     }
 
     public static void init() {
-        Item.BY_BLOCK.put(ModBlocks.COCONUT_LEAF.get(),ModItems.COCONUT_LEAF.get());
-        Item.BY_BLOCK.put(ModBlocks.HANGING_DURIAN.get(),ModItems.DURIAN.get());
-        Item.BY_BLOCK.put(ModBlocks.HANGING_MANGO_BLOCK.get(),ModItems.MANGO.get());
-        Item.BY_BLOCK.put(ModBlocks.PAPAYA.get(),ModItems.PAPAYA.get());
-        Item.BY_BLOCK.put(ModBlocks.FERMENTED_FISH_CAULDRON.get(), Items.CAULDRON);
-        Item.BY_BLOCK.put(ModBlocks.COCONUT_CAULDRON.get(),Items.CAULDRON);
-        Item.BY_BLOCK.put(ModBlocks.COCONUT_MILK_CAULDRON.get(),Items.CAULDRON);
+
     }
 
     public static Supplier<Item> createConsumeableItem(Item.Properties properties){
@@ -325,32 +325,42 @@ public class ModItems {
     }
 
     @ExpectPlatform
-    public static Item createPapayaJuiceItem(){
+    public static Supplier<Item> createPapayaJuiceItem(){
         throw new AssertionError();
     }
 
     @ExpectPlatform
-    public static Item createLimeJuiceItem(){
+    public static Supplier<Item> createLimeJuiceItem(){
         throw new AssertionError();
     }
 
     @ExpectPlatform
-    public static Item createHoneyLimeJuiceItem(){
+    public static Supplier<Item> createHoneyLimeJuiceItem(){
         throw new AssertionError();
     }
 
     @ExpectPlatform
-    public static Item createButterflyPeaTeaItem(){
+    public static Supplier<Item> createButterflyPeaTeaItem(){
         throw new AssertionError();
     }
 
     @ExpectPlatform
-    public static Item createCoconutWaterJuiceItem(){
+    public static Supplier<Item> createCoconutWaterJuiceItem(){
         throw new AssertionError();
     }
 
     @ExpectPlatform
     public static Supplier<Item> createBoat(ResourceLocation id, boolean chest, String boatType){
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static <T extends Mob> Supplier<Item> createSpawnEgg(Supplier<EntityType<T>> entityTypeSupplier, int primaryColor, int secondaryColor, Item.Properties properties){
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static <T extends Mob> Supplier<Item> createMobBucket(Supplier<EntityType<T>> entitySupplier, Supplier<? extends Fluid> fluidSupplier, Supplier<? extends SoundEvent> soundSupplier, Item.Properties properties){
         throw new AssertionError();
     }
 }

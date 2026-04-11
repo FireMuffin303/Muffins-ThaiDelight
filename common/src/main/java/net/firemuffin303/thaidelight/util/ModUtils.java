@@ -4,6 +4,7 @@ import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.firemuffin303.thaidelight.common.registry.ModMobEffects;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -126,5 +127,10 @@ public class ModUtils {
 
     public record DurianComponentSupplier(int timer,boolean isHeatUp){
 
+    }
+
+    public static int getColor(ItemStack itemStack) {
+        CompoundTag compoundTag = itemStack.getTagElement("display");
+        return compoundTag != null && compoundTag.contains("color", 99) ? compoundTag.getInt("color") : 0xFFFFFF;
     }
 }

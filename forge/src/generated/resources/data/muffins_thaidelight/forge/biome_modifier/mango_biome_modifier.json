@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#muffins_thaidelight:mango_tree_biomes",
+  "features": "muffins_thaidelight:trees_mango",
+  "step": "vegetal_decoration"
+}

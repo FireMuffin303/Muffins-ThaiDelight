@@ -95,5 +95,13 @@ public class ModBlocksImpl {
         return () -> new TerraformWallHangingSignBlock(id,id2,properties);
     }
 
+    public static Supplier<Block> getThaiDelightBlock(String id, Supplier<Block> blockSupplier) {
+        return blockSupplier;
+    }
+
+    public static BlockBehaviour.Properties dropLike(Supplier<Block> blockSupplier) {
+        return BlockBehaviour.Properties.of().dropsLike(blockSupplier.get());
+    }
+
 
 }
