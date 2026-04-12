@@ -1,6 +1,7 @@
 {
 	"format_version": "1.9.0",
 	"credit": "Made with Blockbench",
+	"render_type": "minecraft:cutout",
 	"textures": {
 		"0": "muffins_thaidelight:block/coconut/green_coconut_side",
 		"1": "muffins_thaidelight:block/coconut/green_coconut_top",

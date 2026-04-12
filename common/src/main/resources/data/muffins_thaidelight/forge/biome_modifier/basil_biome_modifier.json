@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#muffins_thaidelight:wild_basil_biomes",
+  "features": "muffins_thaidelight:patch_wild_basil",
+  "step": "vegetal_decoration"
+}

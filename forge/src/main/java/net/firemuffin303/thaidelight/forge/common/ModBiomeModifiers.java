@@ -1,6 +1,7 @@
 package net.firemuffin303.thaidelight.forge.common;
 
 import net.firemuffin303.thaidelight.ThaiDelightCommon;
+import net.firemuffin303.thaidelight.common.registry.ModEntityTypes;
 import net.firemuffin303.thaidelight.common.registry.ModFeatures;
 import net.firemuffin303.thaidelight.common.registry.ModTags;
 import net.minecraft.core.Holder;
@@ -9,11 +10,15 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.Biomes;
+import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraftforge.common.world.BiomeModifier;
 import net.minecraftforge.common.world.ForgeBiomeModifiers;
 import net.minecraftforge.registries.ForgeRegistries;
+
+import java.util.List;
 
 public class ModBiomeModifiers {
 
@@ -23,6 +28,13 @@ public class ModBiomeModifiers {
     public static final ResourceKey<BiomeModifier> DURIAN_TREE_MODIFIER = ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS,ThaiDelightCommon.modid("durian_biome_modifier"));
     public static final ResourceKey<BiomeModifier> MANGO_TREE_MODIFIER = ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS,ThaiDelightCommon.modid("mango_biome_modifier"));
     public static final ResourceKey<BiomeModifier> COCONUT_TREE_MODIFIER = ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS,ThaiDelightCommon.modid("coconut_biome_modifier"));
+    public static final ResourceKey<BiomeModifier> BUTTERFLY_PEA_MODIFIER = ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS,ThaiDelightCommon.modid("butterfly_pea_biome_modifier"));
+    public static final ResourceKey<BiomeModifier> BASIL_MODIFIER = ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS,ThaiDelightCommon.modid("basil_biome_modifier"));
+    public static final ResourceKey<BiomeModifier> HOLY_BASIL_MODIFIER = ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS,ThaiDelightCommon.modid("holy_basil_biome_modifier"));
+    public static final ResourceKey<BiomeModifier> ALL_BASIL_MODIFIER = ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS,ThaiDelightCommon.modid("all_basil_biome_modifier"));
+
+    public static final ResourceKey<BiomeModifier> FLOWER_CRAB_BIOME_MODIFIER = ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS,ThaiDelightCommon.modid("flower_crab_biome_modifier"));
+    public static final ResourceKey<BiomeModifier> DRAGONFLY_BIOME_MODIFIER = ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS,ThaiDelightCommon.modid("dragonfly_biome_modifier"));
 
     public static void bootstrap(BootstapContext<BiomeModifier> context) {
         Holder.Reference<PlacedFeature> limeBush = context.lookup(Registries.PLACED_FEATURE).getOrThrow(ModFeatures.PATCH_LIME_BUSH);
@@ -43,6 +55,21 @@ public class ModBiomeModifiers {
         Holder.Reference<PlacedFeature> coconutPlaceFeature = context.lookup(Registries.PLACED_FEATURE).getOrThrow(ModFeatures.TREES_COCONUT);
         HolderSet<Biome> coconutBiomeTag = context.lookup(Registries.BIOME).getOrThrow(ModTags.COCONUT_TREE_BIOMES);
 
+        Holder.Reference<PlacedFeature> butterflyPeaPlaceFeature = context.lookup(Registries.PLACED_FEATURE).getOrThrow(ModFeatures.PATCH_BUTTERFLY_PEA);
+        HolderSet<Biome> butterflyPeaBiomeTag = context.lookup(Registries.BIOME).getOrThrow(ModTags.BUTTERFLY_PEA_BIOMES);
+
+        Holder.Reference<PlacedFeature> basilPlaceFeature = context.lookup(Registries.PLACED_FEATURE).getOrThrow(ModFeatures.PATCH_WILD_BASIL);
+        HolderSet<Biome> basilPeaBiomeTag = context.lookup(Registries.BIOME).getOrThrow(ModTags.WILD_BASIL_BIOMES);
+
+        Holder.Reference<PlacedFeature> holyBasilPlaceFeature = context.lookup(Registries.PLACED_FEATURE).getOrThrow(ModFeatures.PATCH_WILD_HOLY_BASIL);
+        HolderSet<Biome> holyBasilPeaBiomeTag = context.lookup(Registries.BIOME).getOrThrow(ModTags.WILD_HOLY_BASIL_BIOMES);
+
+        Holder.Reference<PlacedFeature> allBasilPlaceFeature = context.lookup(Registries.PLACED_FEATURE).getOrThrow(ModFeatures.PATCH_WILD_ALL_BASIL);
+        HolderSet<Biome> allBasilPeaBiomeTag = context.lookup(Registries.BIOME).getOrThrow(ModTags.WILD_ALL_BASIL_BIOMES);
+
+        Holder.Reference<Biome> flowerCrabBiomeTag = context.lookup(Registries.BIOME).getOrThrow(Biomes.BEACH);
+        HolderSet<Biome> dragonflyBiomeTag = HolderSet.direct(context.lookup(Registries.BIOME).getOrThrow(Biomes.MANGROVE_SWAMP),context.lookup(Registries.BIOME).getOrThrow(Biomes.SWAMP));
+
 
         context.register(LIME_BUSH_BIOMES,new ForgeBiomeModifiers.AddFeaturesBiomeModifier(limeBiomeTag,HolderSet.direct(limeBush), GenerationStep.Decoration.VEGETAL_DECORATION));
         context.register(PEPPER_BIOME_MODIFIER,new ForgeBiomeModifiers.AddFeaturesBiomeModifier(pepperBiomeTag,HolderSet.direct(pepperPlaceFeature), GenerationStep.Decoration.VEGETAL_DECORATION));
@@ -50,6 +77,18 @@ public class ModBiomeModifiers {
         context.register(DURIAN_TREE_MODIFIER,new ForgeBiomeModifiers.AddFeaturesBiomeModifier(durianBiomeTag,HolderSet.direct(durianPlaceFeature), GenerationStep.Decoration.VEGETAL_DECORATION));
         context.register(MANGO_TREE_MODIFIER,new ForgeBiomeModifiers.AddFeaturesBiomeModifier(mangoBiomeTag,HolderSet.direct(mangoPlaceFeature), GenerationStep.Decoration.VEGETAL_DECORATION));
         context.register(COCONUT_TREE_MODIFIER,new ForgeBiomeModifiers.AddFeaturesBiomeModifier(coconutBiomeTag,HolderSet.direct(coconutPlaceFeature), GenerationStep.Decoration.VEGETAL_DECORATION));
+        context.register(BUTTERFLY_PEA_MODIFIER,new ForgeBiomeModifiers.AddFeaturesBiomeModifier(butterflyPeaBiomeTag,HolderSet.direct(butterflyPeaPlaceFeature), GenerationStep.Decoration.VEGETAL_DECORATION));
+        context.register(BASIL_MODIFIER,new ForgeBiomeModifiers.AddFeaturesBiomeModifier(basilPeaBiomeTag,HolderSet.direct(basilPlaceFeature), GenerationStep.Decoration.VEGETAL_DECORATION));
+        context.register(HOLY_BASIL_MODIFIER,new ForgeBiomeModifiers.AddFeaturesBiomeModifier(holyBasilPeaBiomeTag,HolderSet.direct(holyBasilPlaceFeature), GenerationStep.Decoration.VEGETAL_DECORATION));
+        context.register(ALL_BASIL_MODIFIER,new ForgeBiomeModifiers.AddFeaturesBiomeModifier(allBasilPeaBiomeTag,HolderSet.direct(allBasilPlaceFeature), GenerationStep.Decoration.VEGETAL_DECORATION));
+
+        context.register(FLOWER_CRAB_BIOME_MODIFIER,new ForgeBiomeModifiers.AddSpawnsBiomeModifier(HolderSet.direct(flowerCrabBiomeTag), List.of(
+                new MobSpawnSettings.SpawnerData(ModEntityTypes.FLOWER_CRAB.get(),10,3,5)
+        )));
+
+        context.register(DRAGONFLY_BIOME_MODIFIER,new ForgeBiomeModifiers.AddSpawnsBiomeModifier(dragonflyBiomeTag, List.of(
+                new MobSpawnSettings.SpawnerData(ModEntityTypes.DRAGONFLY.get(),2,1,3)
+        )));
 
     }
 }

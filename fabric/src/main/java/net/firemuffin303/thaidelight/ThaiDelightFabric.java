@@ -5,20 +5,28 @@ import com.terraformersmc.terraform.boat.api.TerraformBoatType;
 import com.terraformersmc.terraform.boat.api.TerraformBoatTypeRegistry;
 import com.terraformersmc.terraform.boat.api.item.TerraformBoatItemHelper;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
+import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.registry.TillableBlockRegistry;
 import net.firemuffin303.thaidelight.common.TDFabricEvents;
+import net.firemuffin303.thaidelight.common.entity.DragonflyEntity;
+import net.firemuffin303.thaidelight.common.entity.FlowerCrabEntity;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.firemuffin303.thaidelight.common.registry.ModEntityTypes;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.firemuffin303.thaidelight.common.registry.ModMobEffects;
 import net.firemuffin303.thaidelight.common.registry.fabric.ModItemsImpl;
 import net.minecraft.core.Registry;
+import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.PotionBrewing;
 import net.minecraft.world.item.alchemy.Potions;
+import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.levelgen.Heightmap;
 import org.slf4j.Logger;
 
 public class ThaiDelightFabric implements ModInitializer {
@@ -56,6 +64,13 @@ public class ThaiDelightFabric implements ModInitializer {
         Registry.register(TerraformBoatTypeRegistry.INSTANCE, ModItemsImpl.DURIAN_BOAT_KEY,DURIAN);
         Registry.register(TerraformBoatTypeRegistry.INSTANCE,ModItemsImpl.COCONUT_BOAT_KEY,COCONUT);
         Registry.register(TerraformBoatTypeRegistry.INSTANCE,ModItemsImpl.MANGO_BOAT_KEY,MANGO);
+
+        SpawnPlacements.register(ModEntityTypes.FLOWER_CRAB.get(),SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, FlowerCrabEntity::checkSpawnRules);
+        SpawnPlacements.register(ModEntityTypes.DRAGONFLY.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, DragonflyEntity::checkSpawnRules);
+
+        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(Biomes.BEACH), MobCategory.CREATURE,ModEntityTypes.FLOWER_CRAB.get(),10,3,5);
+        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(Biomes.MANGROVE_SWAMP, Biomes.SWAMP), MobCategory.CREATURE,ModEntityTypes.DRAGONFLY.get(),2,1,3);
+
 
 
         TerraformBoatItemHelper.registerBoatDispenserBehavior(ModItems.DURIAN_BOAT.get(),ModItemsImpl.DURIAN_BOAT_KEY,false);

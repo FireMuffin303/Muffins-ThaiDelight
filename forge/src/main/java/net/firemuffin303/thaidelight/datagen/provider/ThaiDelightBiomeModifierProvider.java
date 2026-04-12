@@ -1,6 +1,7 @@
 package net.firemuffin303.thaidelight.datagen.provider;
 
 import net.firemuffin303.thaidelight.ThaiDelightCommon;
+import net.firemuffin303.thaidelight.common.registry.ModDamageTypes;
 import net.firemuffin303.thaidelight.common.registry.ModFeatures;
 import net.firemuffin303.thaidelight.common.registry.forge.ModFeaturesImpl;
 import net.firemuffin303.thaidelight.forge.common.ModBiomeModifiers;
@@ -19,6 +20,7 @@ public class ThaiDelightBiomeModifierProvider extends DatapackBuiltinEntriesProv
             .add(Registries.CONFIGURED_FEATURE, ModFeaturesImpl::bootstrapConfiguredFeature)
             .add(Registries.PLACED_FEATURE, ModFeatures::bootstrapPlacedFeature)
             .add(ForgeRegistries.Keys.BIOME_MODIFIERS, ModBiomeModifiers::bootstrap)
+            //.add(Registries.DAMAGE_TYPE, ModDamageTypes::bootstrap)
             ;
 
     public ThaiDelightBiomeModifierProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {

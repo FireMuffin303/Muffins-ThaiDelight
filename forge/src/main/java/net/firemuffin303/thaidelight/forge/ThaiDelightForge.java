@@ -1,6 +1,8 @@
 package net.firemuffin303.thaidelight.forge;
 
+import com.mojang.logging.LogUtils;
 import net.firemuffin303.thaidelight.ThaiDelightCommon;
+import net.firemuffin303.thaidelight.client.ThaiDelightCommonClient;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.firemuffin303.thaidelight.common.registry.ModEntityTypes;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
@@ -10,6 +12,7 @@ import net.firemuffin303.thaidelight.forge.common.capabilities.ISpicy;
 import net.firemuffin303.thaidelight.forge.common.capabilities.SpicyProvider;
 import net.firemuffin303.thaidelight.forge.network.SpicyPacket;
 import net.firemuffin303.thaidelight.forge.network.ThaiDelightPacketHandler;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -19,6 +22,7 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.common.ForgeSpawnEggItem;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
@@ -34,6 +38,7 @@ import net.minecraftforge.registries.DeferredRegister;
 
 import java.util.Arrays;
 
+@Mod.EventBusSubscriber(modid = ThaiDelightCommon.MOD_ID,bus = Mod.EventBusSubscriber.Bus.MOD)
 @Mod(ThaiDelightCommon.MOD_ID)
 public class ThaiDelightForge {
     private static final DeferredRegister<?>[] REGISTERS = {
@@ -61,19 +66,23 @@ public class ThaiDelightForge {
         ThaiDelightCommon.init();
         Arrays.stream(REGISTERS).forEach(deferredRegister -> deferredRegister.register(eventBus));
 
+        MinecraftForge.EVENT_BUS.register(this);
+        MinecraftForge.EVENT_BUS.addGenericListener(Entity.class,this::attachCapability);
         eventBus.register(this);
+
+
     }
 
     @SubscribeEvent
     public static void commonSetup(FMLCommonSetupEvent event){
         event.enqueueWork(ThaiDelightCommon::postInit);
-
     }
-
 
     @SubscribeEvent
     public static void registerEntityAttribute(EntityAttributeCreationEvent event){
-        ModEntityTypes.registerAttribute((entity,attribute) -> event.put(entity,attribute.build()));
+        ModEntityTypes.registerAttribute((entity,attribute) -> {
+            event.put(entity,attribute.build());
+        });
     }
 
     @SubscribeEvent
@@ -81,11 +90,12 @@ public class ThaiDelightForge {
         event.register(ISpicy.class);
     }
 
-    @SubscribeEvent
-    public static void attachCapability(AttachCapabilitiesEvent<Entity> event){
+    public void attachCapability(AttachCapabilitiesEvent<Entity> event){
         if(event.getObject() instanceof LivingEntity){
             event.addCapability(ThaiDelightCommon.modid("spicy"),new SpicyProvider());
         }
     }
+
+
 
 }

@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#muffins_thaidelight:butterfly_peas_biomes",
+  "features": "muffins_thaidelight:patch_butterfly_pea",
+  "step": "vegetal_decoration"
+}

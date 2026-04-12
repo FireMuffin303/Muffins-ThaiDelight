@@ -1,6 +1,7 @@
 {
 	"format_version": "1.9.0",
 	"credit": "Made with Blockbench",
+	"render_type": "minecraft:cutout",
 	"textures": {
 		"4": "muffins_thaidelight:block/papaya/papaya_leaves_stem",
 		"6": "muffins_thaidelight:block/papaya/papaya_leaves_side",

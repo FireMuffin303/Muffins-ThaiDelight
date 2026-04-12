@@ -13,6 +13,8 @@ import net.firemuffin303.thaidelight.util.ModUtils;
 import net.minecraft.client.RecipeBookCategories;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.inventory.RecipeBookType;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -28,9 +30,7 @@ import java.util.List;
 @Mod.EventBusSubscriber(modid = ThaiDelightCommon.MOD_ID,value = Dist.CLIENT,bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ThaiDelightForgeClient {
 
-
     public ThaiDelightForgeClient(){
-
     }
 
     @SubscribeEvent
