@@ -1,4 +1,4 @@
-package net.firemuffin303.thaidelight.mixin.integration.fishofthieves;
+package net.firemuffin303.thaidelight.mixin.fabric.integration.fishofthieves;
 
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectionContext;

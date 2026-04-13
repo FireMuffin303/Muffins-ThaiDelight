@@ -1,4 +1,4 @@
-package net.firemuffin303.thaidelight.mixin;
+package net.firemuffin303.thaidelight.mixin.fabric;
 
 import net.firemuffin303.thaidelight.common.registry.ModTags;
 import net.firemuffin303.thaidelight.util.ModUtils;

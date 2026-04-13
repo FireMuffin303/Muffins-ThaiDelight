@@ -1,4 +1,4 @@
-package net.firemuffin303.thaidelight.mixin.loot;
+package net.firemuffin303.thaidelight.mixin.fabric.loot;
 
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;

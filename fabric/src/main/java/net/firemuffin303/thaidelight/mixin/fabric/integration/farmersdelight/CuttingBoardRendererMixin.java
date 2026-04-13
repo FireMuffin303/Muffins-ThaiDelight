@@ -1,4 +1,4 @@
-package net.firemuffin303.thaidelight.mixin.integration.farmersdelight;
+package net.firemuffin303.thaidelight.mixin.fabric.integration.farmersdelight;
 
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import com.llamalad7.mixinextras.sugar.Local;

@@ -1,4 +1,4 @@
-package net.firemuffin303.thaidelight.mixin.recipeBookType;
+package net.firemuffin303.thaidelight.mixin.fabric.recipeBookType;
 
 import com.mojang.datafixers.util.Pair;
 import net.firemuffin303.thaidelight.util.PlatformUtil;

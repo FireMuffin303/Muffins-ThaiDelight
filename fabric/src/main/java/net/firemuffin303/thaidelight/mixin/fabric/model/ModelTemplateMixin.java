@@ -1,4 +1,4 @@
-package net.firemuffin303.thaidelight.mixin.model;
+package net.firemuffin303.thaidelight.mixin.fabric.model;
 
 
 import com.google.gson.JsonObject;

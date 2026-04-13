@@ -1,4 +1,4 @@
-package net.firemuffin303.thaidelight.mixin.dispenser;
+package net.firemuffin303.thaidelight.mixin.fabric.dispenser;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;

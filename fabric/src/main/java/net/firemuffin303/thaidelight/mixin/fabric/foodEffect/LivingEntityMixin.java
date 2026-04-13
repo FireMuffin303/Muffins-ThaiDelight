@@ -1,4 +1,4 @@
-package net.firemuffin303.thaidelight.mixin.foodEffect;
+package net.firemuffin303.thaidelight.mixin.fabric.foodEffect;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.sugar.Local;

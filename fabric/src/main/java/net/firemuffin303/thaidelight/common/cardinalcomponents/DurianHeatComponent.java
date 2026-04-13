@@ -72,4 +72,9 @@ public class DurianHeatComponent implements AutoSyncedComponent, CommonTickingCo
         this.timer += value;
         ModCardinalComponents.DURIAN_HEAT.sync(this.livingEntity);
     }
+
+    public void setTimer(int value){
+        this.timer = value;
+        ModCardinalComponents.DURIAN_HEAT.sync(this.livingEntity);
+    }
 }

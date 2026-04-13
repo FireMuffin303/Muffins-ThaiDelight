@@ -1,5 +1,8 @@
 package net.firemuffin303.thaidelight;
 
+import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.arguments.BoolArgumentType;
+import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.logging.LogUtils;
 import com.terraformersmc.terraform.boat.api.TerraformBoatType;
 import com.terraformersmc.terraform.boat.api.TerraformBoatTypeRegistry;
@@ -7,17 +10,23 @@ import com.terraformersmc.terraform.boat.api.item.TerraformBoatItemHelper;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
+import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.registry.TillableBlockRegistry;
 import net.firemuffin303.thaidelight.common.TDFabricEvents;
+import net.firemuffin303.thaidelight.common.cardinalcomponents.DurianHeatComponent;
+import net.firemuffin303.thaidelight.common.cardinalcomponents.SpicyComponent;
 import net.firemuffin303.thaidelight.common.entity.DragonflyEntity;
 import net.firemuffin303.thaidelight.common.entity.FlowerCrabEntity;
-import net.firemuffin303.thaidelight.common.registry.ModBlocks;
-import net.firemuffin303.thaidelight.common.registry.ModEntityTypes;
-import net.firemuffin303.thaidelight.common.registry.ModItems;
-import net.firemuffin303.thaidelight.common.registry.ModMobEffects;
+import net.firemuffin303.thaidelight.common.registry.*;
 import net.firemuffin303.thaidelight.common.registry.fabric.ModItemsImpl;
+import net.minecraft.commands.CommandBuildContext;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.commands.Commands;
+import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.core.Registry;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.item.Item;
@@ -97,7 +106,97 @@ public class ThaiDelightFabric implements ModInitializer {
         TDFabricEvents.registerAnimalFood();
 
 
+        CommandRegistrationCallback.EVENT.register(ThaiDelightFabric::modCommand);
+
     }
+
+    public static void modCommand(CommandDispatcher<CommandSourceStack> commandDispatcher, CommandBuildContext commandBuildContext, Commands.CommandSelection commandSelection){
+        commandDispatcher.register(
+                Commands.literal("durianHeat")
+                        .requires(source -> source.hasPermission(4))
+                        .then(Commands.argument("player", EntityArgument.player())
+                                .then(Commands.literal("set")
+                                        .then(Commands.argument("amount", IntegerArgumentType.integer(1))
+                                                .executes(commandContext -> {
+                                                    ServerPlayer serverPlayer = EntityArgument.getPlayer(commandContext,"player");
+                                                    DurianHeatComponent durianHeatComponent = ModCardinalComponents.DURIAN_HEAT.get(serverPlayer);
+                                                    durianHeatComponent.setTimer(IntegerArgumentType.getInteger(commandContext,"amount"));
+                                                    commandContext.getSource().sendSuccess(() -> Component.literal("Apply Durian Heat to Player for amount."),false);
+                                                    return 1;
+                                                })
+                                        )
+                                )
+
+                                .then(Commands.literal("clear")
+                                        .executes(commandContext -> {
+                                            ServerPlayer serverPlayer = EntityArgument.getPlayer(commandContext,"player");
+                                            DurianHeatComponent durianHeatComponent = ModCardinalComponents.DURIAN_HEAT.get(serverPlayer);
+                                            durianHeatComponent.setTimer(0);
+                                            commandContext.getSource().sendSuccess(() -> Component.literal("Apply Durian Heat to Player for amount."),false);
+                                            return 1;
+                                        })
+                                )
+
+                                .then(Commands.literal("heat")
+                                        .then(Commands.argument("isHeatedUp", BoolArgumentType.bool())
+                                                .executes(commandContext -> {
+                                                    ServerPlayer serverPlayer = EntityArgument.getPlayer(commandContext,"player");
+                                                    DurianHeatComponent durianHeatComponent = ModCardinalComponents.DURIAN_HEAT.get(serverPlayer);
+                                                    durianHeatComponent.setHeatedUp(BoolArgumentType.getBool(commandContext,"isHeatedUp"));
+                                                    commandContext.getSource().sendSuccess(() -> Component.literal("Apply Durian Heat to Player for amount."),false);
+                                                    return 1;
+                                                })
+                                        )
+                                )
+
+
+                        )
+        );
+
+        commandDispatcher.register(
+                Commands.literal("spicy")
+                        .requires(source -> source.hasPermission(4))
+                        .then(Commands.argument("player",EntityArgument.player())
+                                .then(Commands.literal("add")
+                                        .then(Commands.argument("amount",IntegerArgumentType.integer(0))
+                                                .executes(commandContext -> {
+                                                    ServerPlayer serverPlayer = EntityArgument.getPlayer(commandContext,"player");
+                                                    SpicyComponent spicyComponent = ModCardinalComponents.SPICY_HEAT.get(serverPlayer);
+                                                    spicyComponent.addTime(IntegerArgumentType.getInteger(commandContext,"amount"));
+                                                    commandContext.getSource().sendSuccess(() -> Component.literal("Apply Spicy to Player for amount."),false);
+                                                    return 1;
+                                                })
+                                        )
+                                )
+
+                                .then(Commands.literal("set")
+                                        .then(Commands.argument("amount",IntegerArgumentType.integer(0))
+                                                .executes(commandContext -> {
+                                                    ServerPlayer serverPlayer = EntityArgument.getPlayer(commandContext,"player");
+                                                    SpicyComponent spicyComponent = ModCardinalComponents.SPICY_HEAT.get(serverPlayer);
+                                                    spicyComponent.setTime(IntegerArgumentType.getInteger(commandContext,"amount"));
+                                                    commandContext.getSource().sendSuccess(() -> Component.literal("Apply Spicy to Player for amount."),false);
+                                                    return 1;
+                                                })
+                                        )
+                                )
+
+
+
+                                .then(Commands.literal("clear")
+                                        .executes(commandContext -> {
+                                            ServerPlayer serverPlayer = EntityArgument.getPlayer(commandContext,"player");
+                                            SpicyComponent spicyComponent = ModCardinalComponents.SPICY_HEAT.get(serverPlayer);
+                                            spicyComponent.setTime(0);
+                                            commandContext.getSource().sendSuccess(() -> Component.literal("Cleared Spicy from Player."),false);
+                                            return 1;
+                                        })
+                                )
+                        )
+
+        );
+    }
+
 
 
 

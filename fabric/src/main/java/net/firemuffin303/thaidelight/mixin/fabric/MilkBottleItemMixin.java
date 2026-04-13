@@ -1,7 +1,6 @@
-package net.firemuffin303.thaidelight.mixin;
+package net.firemuffin303.thaidelight.mixin.fabric;
 
 import net.firemuffin303.thaidelight.common.registry.ModCardinalComponents;
-import net.firemuffin303.thaidelight.util.PlatformUtil;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;

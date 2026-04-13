@@ -1,4 +1,4 @@
-package net.firemuffin303.thaidelight.mixin.recipeBookType;
+package net.firemuffin303.thaidelight.mixin.fabric.recipeBookType;
 
 import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.minecraft.client.RecipeBookCategories;

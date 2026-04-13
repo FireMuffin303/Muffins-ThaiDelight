@@ -1,4 +1,4 @@
-package net.firemuffin303.thaidelight.mixin.foodEffect.spicy;
+package net.firemuffin303.thaidelight.mixin.fabric.foodEffect.spicy;
 
 import net.firemuffin303.thaidelight.util.PlatformUtil;
 import net.minecraft.world.entity.LivingEntity;

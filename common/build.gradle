@@ -5,7 +5,7 @@ architectury {
 dependencies {
     modImplementation "net.fabricmc:fabric-loader:$rootProject.fabric_loader_version"
 
-    modCompileOnly("net.firemuffin303:muffinsmcapi-common:0.1.0-alpha")
+    modCompileOnly("net.firemuffin303:muffinsmcapi-common:${rootProject.muffins_api_version}")
 }
 
 loom {

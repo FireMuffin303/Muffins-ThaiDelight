@@ -1,4 +1,4 @@
-package net.firemuffin303.thaidelight.mixin.recipeBookType;
+package net.firemuffin303.thaidelight.mixin.fabric.recipeBookType;
 
 import net.minecraft.world.inventory.RecipeBookType;
 import org.spongepowered.asm.mixin.Final;

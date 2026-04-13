@@ -4,22 +4,22 @@
   "package": "net.firemuffin303.thaidelight.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "ConsumableItemMixin",
-    "LootItemAccessor",
-    "MilkBottleItemMixin",
-    "dispenser.BucketItemMixin",
-    "dyeableItem.RecipeMixin",
-    "foodEffect.LivingEntityMixin",
-    "foodEffect.spicy.MilkBucketItemMixin",
-    "integration.farmersdelight.CuttingBoardRendererMixin",
-    "loot.LootPoolBuilderAccessor",
-    "loot.LootTableAccessor",
-    "model.ModelTemplateMixin",
-    "recipeBookType.RecipeBlockSettingMixin",
-    "recipeBookType.RecipeBookTypeMixin"
+    "fabric.ConsumableItemMixin",
+    "fabric.LootItemAccessor",
+    "fabric.MilkBottleItemMixin",
+    "fabric.dispenser.BucketItemMixin",
+    "fabric.dyeableItem.RecipeMixin",
+    "fabric.foodEffect.LivingEntityMixin",
+    "fabric.foodEffect.spicy.MilkBucketItemMixin",
+    "fabric.integration.farmersdelight.CuttingBoardRendererMixin",
+    "fabric.loot.LootPoolBuilderAccessor",
+    "fabric.loot.LootTableAccessor",
+    "fabric.model.ModelTemplateMixin",
+    "fabric.recipeBookType.RecipeBlockSettingMixin",
+    "fabric.recipeBookType.RecipeBookTypeMixin"
   ],
   "client": [
-    "recipeBookType.RecipeBookCategoriesMixin"
+    "fabric.recipeBookType.RecipeBookCategoriesMixin"
   ],
   "injectors": {
     "defaultRequire": 1
