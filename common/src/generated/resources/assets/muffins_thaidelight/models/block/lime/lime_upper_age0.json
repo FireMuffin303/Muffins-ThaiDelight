@@ -1,5 +1,6 @@
 {
   "parent": "muffins_thaidelight:block/lime/template_lime_upper",
+  "render_type": "minecraft:cutout",
   "textures": {
     "plant": "muffins_thaidelight:block/lime/lime_leaves_layer",
     "side": "muffins_thaidelight:block/lime/lime_leaves_side_age0",

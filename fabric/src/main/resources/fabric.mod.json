@@ -30,6 +30,9 @@
     ],
     "cardinal-components-entity": [
       "net.firemuffin303.thaidelight.common.registry.ModCardinalComponents"
+    ],
+    "fabric-datagen": [
+      "net.firemuffin303.thaidelight.datagen.ModDataGen"
     ]
   },
   "mixins": [

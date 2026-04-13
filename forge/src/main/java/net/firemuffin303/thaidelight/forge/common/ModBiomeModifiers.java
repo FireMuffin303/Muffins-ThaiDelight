@@ -26,6 +26,7 @@ public class ModBiomeModifiers {
     public static final ResourceKey<BiomeModifier> PEPPER_BIOME_MODIFIER = ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS,ThaiDelightCommon.modid("pepper_biome_modifier"));
     public static final ResourceKey<BiomeModifier> PAPAYA_TREE_MODIFIER = ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS,ThaiDelightCommon.modid("papaya_biome_modifier"));
     public static final ResourceKey<BiomeModifier> DURIAN_TREE_MODIFIER = ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS,ThaiDelightCommon.modid("durian_biome_modifier"));
+    public static final ResourceKey<BiomeModifier> SPARSE_DURIAN_TREE_MODIFIER = ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS,ThaiDelightCommon.modid("sparse_durian_biome_modifier"));
     public static final ResourceKey<BiomeModifier> MANGO_TREE_MODIFIER = ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS,ThaiDelightCommon.modid("mango_biome_modifier"));
     public static final ResourceKey<BiomeModifier> COCONUT_TREE_MODIFIER = ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS,ThaiDelightCommon.modid("coconut_biome_modifier"));
     public static final ResourceKey<BiomeModifier> BUTTERFLY_PEA_MODIFIER = ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS,ThaiDelightCommon.modid("butterfly_pea_biome_modifier"));
@@ -47,7 +48,9 @@ public class ModBiomeModifiers {
         HolderSet<Biome> papayaBiomeTag = context.lookup(Registries.BIOME).getOrThrow(ModTags.PAPAYA_TREE_BIOMES);
 
         Holder.Reference<PlacedFeature> durianPlaceFeature = context.lookup(Registries.PLACED_FEATURE).getOrThrow(ModFeatures.TREES_DURIAN);
+        Holder.Reference<PlacedFeature> sparseDurianPlaceFeature = context.lookup(Registries.PLACED_FEATURE).getOrThrow(ModFeatures.TREES_DURIAN_SPARSE_JUNGLE);
         HolderSet<Biome> durianBiomeTag = context.lookup(Registries.BIOME).getOrThrow(ModTags.DURIAN_TREE_BIOMES);
+        HolderSet<Biome> sparseDurianBiome = HolderSet.direct(context.lookup(Registries.BIOME).getOrThrow(Biomes.SPARSE_JUNGLE));
 
         Holder.Reference<PlacedFeature> mangoPlaceFeature = context.lookup(Registries.PLACED_FEATURE).getOrThrow(ModFeatures.TREES_MANGO);
         HolderSet<Biome> mangoBiomeTag = context.lookup(Registries.BIOME).getOrThrow(ModTags.MANGO_TREE_BIOMES);
@@ -75,6 +78,7 @@ public class ModBiomeModifiers {
         context.register(PEPPER_BIOME_MODIFIER,new ForgeBiomeModifiers.AddFeaturesBiomeModifier(pepperBiomeTag,HolderSet.direct(pepperPlaceFeature), GenerationStep.Decoration.VEGETAL_DECORATION));
         context.register(PAPAYA_TREE_MODIFIER,new ForgeBiomeModifiers.AddFeaturesBiomeModifier(papayaBiomeTag,HolderSet.direct(papayaPlaceFeature), GenerationStep.Decoration.VEGETAL_DECORATION));
         context.register(DURIAN_TREE_MODIFIER,new ForgeBiomeModifiers.AddFeaturesBiomeModifier(durianBiomeTag,HolderSet.direct(durianPlaceFeature), GenerationStep.Decoration.VEGETAL_DECORATION));
+        context.register(SPARSE_DURIAN_TREE_MODIFIER,new ForgeBiomeModifiers.AddFeaturesBiomeModifier(sparseDurianBiome,HolderSet.direct(sparseDurianPlaceFeature), GenerationStep.Decoration.VEGETAL_DECORATION));
         context.register(MANGO_TREE_MODIFIER,new ForgeBiomeModifiers.AddFeaturesBiomeModifier(mangoBiomeTag,HolderSet.direct(mangoPlaceFeature), GenerationStep.Decoration.VEGETAL_DECORATION));
         context.register(COCONUT_TREE_MODIFIER,new ForgeBiomeModifiers.AddFeaturesBiomeModifier(coconutBiomeTag,HolderSet.direct(coconutPlaceFeature), GenerationStep.Decoration.VEGETAL_DECORATION));
         context.register(BUTTERFLY_PEA_MODIFIER,new ForgeBiomeModifiers.AddFeaturesBiomeModifier(butterflyPeaBiomeTag,HolderSet.direct(butterflyPeaPlaceFeature), GenerationStep.Decoration.VEGETAL_DECORATION));

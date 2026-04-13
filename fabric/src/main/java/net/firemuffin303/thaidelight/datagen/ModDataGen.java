@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.firemuffin303.thaidelight.common.registry.ModDamageTypes;
 import net.firemuffin303.thaidelight.common.registry.ModFeatures;
+import net.firemuffin303.thaidelight.common.registry.fabric.ModFeaturesImpl;
 import net.firemuffin303.thaidelight.datagen.loottable.*;
 import net.firemuffin303.thaidelight.datagen.tag.ModBlockTagDataGen;
 import net.firemuffin303.thaidelight.datagen.tag.ModDamageTypeTagDataGen;
@@ -38,7 +39,7 @@ public class ModDataGen implements DataGeneratorEntrypoint {
 
     @Override
     public void buildRegistry(RegistrySetBuilder registryBuilder) {
-        //registryBuilder.add(Registries.CONFIGURED_FEATURE, ModFeatures::bootstrapConfiguredFeature);
+        registryBuilder.add(Registries.CONFIGURED_FEATURE, ModFeaturesImpl::bootstrapConfiguredFeature);
         registryBuilder.add(Registries.PLACED_FEATURE, ModFeatures::bootstrapPlacedFeature);
         registryBuilder.add(Registries.DAMAGE_TYPE, ModDamageTypes::bootstrap);
     }

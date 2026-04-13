@@ -1,5 +1,6 @@
 {
   "parent": "minecraft:block/door_top_left_open",
+  "render_type": "minecraft:cutout",
   "textures": {
     "bottom": "muffins_thaidelight:block/coconut_door_bottom",
     "top": "muffins_thaidelight:block/coconut_door_top"

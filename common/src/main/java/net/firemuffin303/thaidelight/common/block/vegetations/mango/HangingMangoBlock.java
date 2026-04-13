@@ -17,6 +17,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -200,5 +201,10 @@ public class HangingMangoBlock extends FallingBlock implements SimpleWaterlogged
 
         level.setBlock(blockPos,fallenOnBlock.cycle(StackableMangoBlock.STACKS),2);
         return true;
+    }
+
+    @Override
+    public Item asItem() {
+        return ModItems.MANGO.get();
     }
 }

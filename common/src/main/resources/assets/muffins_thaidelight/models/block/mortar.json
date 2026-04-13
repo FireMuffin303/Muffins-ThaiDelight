@@ -1,6 +1,7 @@
 {
 	"credit": "Made with Blockbench",
 	"texture_size": [64, 64],
+	"parent": "minecraft:block/block",
 	"textures": {
 		"1": "muffins_thaidelight:block/mortar",
 		"particle": "minecraft:block/terracotta"
@@ -103,14 +104,6 @@
 		"firstperson_lefthand": {
 			"translation": [0.25, 1.75, 0],
 			"scale": [0.5, 0.5, 0.5]
-		},
-		"ground": {
-			"scale": [0.5, 0.5, 0.5]
-		},
-		"gui": {
-			"rotation": [20, 35, 0],
-			"translation": [0, 1, 0],
-			"scale": [0.75, 0.75, 0.75]
 		},
 		"head": {
 			"translation": [0, 14.5, 0]

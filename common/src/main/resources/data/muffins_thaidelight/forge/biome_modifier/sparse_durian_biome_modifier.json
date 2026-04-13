@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "minecraft:sparse_jungle",
+  "features": "muffins_thaidelight:trees_durian_sparse",
+  "step": "vegetal_decoration"
+}

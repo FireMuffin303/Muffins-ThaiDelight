@@ -75,13 +75,14 @@ public class ThaiDelightCommonClient {
     }
 
     static {
-        CUTOUT = List.of(ModBlocks.SOMTAM_FEAST,
+        CUTOUT = List.of(
+                ModBlocks.SOMTAM_FEAST,
                 ModBlocks.WILD_PEPPER_CROP,
                 ModBlocks.PEPPER_CROP,
                 ModBlocks.PAPAYA,
                 ModBlocks.PAPAYA_SAPLING,
-                ModBlocks.CRAB_EGG,
                 ModBlocks.PAPAYA_CROP,
+                ModBlocks.CRAB_EGG,
                 ModBlocks.LIME_SAPLING,
                 ModBlocks.HANGING_DURIAN,
                 ModBlocks.SMALL_DURIAN_BLOCK,
@@ -126,6 +127,7 @@ public class ThaiDelightCommonClient {
                 ModBlocks.WILD_HOLY_BASIL,
                 ModBlocks.POTTED_HOLY_BASIL,
                 ModBlocks.POTTED_BASIL,
-                ModBlocks.LARB_FEAST);
+                ModBlocks.LARB_FEAST
+        );
     }
 }

@@ -2,6 +2,7 @@ package net.firemuffin303.thaidelight.common.block.cauldron;
 
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.firemuffin303.thaidelight.common.registry.ModCauldronInteraction;
+import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.firemuffin303.thaidelight.common.registry.ModTags;
 import net.firemuffin303.thaidelight.mixin.cauldron.LayeredCauldronAccessor;
 import net.minecraft.core.BlockPos;
@@ -9,7 +10,9 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.LayeredCauldronBlock;
@@ -61,5 +64,10 @@ public class CoconutCauldron extends LayeredCauldronBlock {
         } else {
             return precipitation == Biome.Precipitation.SNOW ? level.getRandom().nextFloat() < 0.1F : false;
         }
+    }
+
+    @Override
+    public Item asItem() {
+        return Items.CAULDRON;
     }
 }

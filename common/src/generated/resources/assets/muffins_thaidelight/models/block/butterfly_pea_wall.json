@@ -1,5 +1,6 @@
 {
   "parent": "muffins_thaidelight:block/template_wall_flower",
+  "render_type": "minecraft:cutout",
   "textures": {
     "flower": "muffins_thaidelight:block/butterfly_pea/butterfly_pea_flower",
     "vine": "muffins_thaidelight:block/butterfly_pea/butterfly_pea_wall_vine"

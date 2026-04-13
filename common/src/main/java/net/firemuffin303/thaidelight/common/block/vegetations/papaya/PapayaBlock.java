@@ -152,6 +152,11 @@ public class PapayaBlock extends HorizontalDirectionalBlock implements Bonemeala
         };
     }
 
+    @Override
+    public Item asItem() {
+        return ModItems.PAPAYA.get();
+    }
+
     static {
         EAST_AABB = new VoxelShape[]{Block.box(9.0D, 5.0D, 6.0D, 13.0D, 10.D, 10.0D), Block.box(8.0D, 0.0D, 5.0D, 14.0D, 10.0D, 11.0D), Block.box(8.0D, 0.0D, 5.0D, 14.0D, 10.0D, 11.0D)};
         WEST_AABB = new VoxelShape[]{Block.box(3.0D, 5.0D, 6.0D, 7.0D, 10.0D, 10.0D), Block.box(2.0D, 0.0D, 5.0D, 8.0D, 10.0D, 11.0D), Block.box(2.0D, 0.0D, 5.0D, 8.0D, 10.0D, 11.0D)};

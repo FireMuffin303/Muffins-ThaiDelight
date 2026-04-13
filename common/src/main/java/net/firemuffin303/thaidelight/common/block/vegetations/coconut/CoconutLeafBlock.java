@@ -1,11 +1,13 @@
 package net.firemuffin303.thaidelight.common.block.vegetations.coconut;
 
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
+import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.firemuffin303.thaidelight.util.ModUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -174,5 +176,10 @@ public class CoconutLeafBlock extends Block implements SimpleWaterloggedBlock,Bo
 
         serverLevel.setBlock(blockPos.relative(direction,1), blockState.setValue(CoconutLeafBlock.FACING,direction).setValue(END,true), 2
         );
+    }
+
+    @Override
+    public Item asItem() {
+        return ModItems.COCONUT_LEAF.get();
     }
 }

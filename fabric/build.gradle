@@ -127,5 +127,6 @@ remapJar {
 fabricApi {
     configureDataGeneration(){
         client = true
+        modId = "muffins_thaidelight"
     }
 }

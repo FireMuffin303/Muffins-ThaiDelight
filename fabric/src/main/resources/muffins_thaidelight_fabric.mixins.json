@@ -14,6 +14,7 @@
     "integration.farmersdelight.CuttingBoardRendererMixin",
     "loot.LootPoolBuilderAccessor",
     "loot.LootTableAccessor",
+    "model.ModelTemplateMixin",
     "recipeBookType.RecipeBlockSettingMixin",
     "recipeBookType.RecipeBookTypeMixin"
   ],

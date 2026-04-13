@@ -3,6 +3,9 @@ package net.firemuffin303.thaidelight.datagen;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
 import net.firemuffin303.thaidelight.ThaiDelightCommon;
+import net.firemuffin303.thaidelight.common.registry.ModDamageTypes;
+import net.firemuffin303.thaidelight.common.registry.fabric.ModDamageTypeImpl;
+import net.firemuffin303.thaidelight.common.registry.fabric.ModFeaturesImpl;
 import net.minecraft.core.HolderLookup;
 
 import java.util.concurrent.CompletableFuture;
@@ -14,8 +17,8 @@ public class ModDynamicDataGen extends FabricDynamicRegistryProvider {
 
     @Override
     protected void configure(HolderLookup.Provider provider, Entries entries) {
-        //ModFeatures.dataGen(provider,entries);
-        //ModDamageTypes.dataGen(provider,entries);
+        ModFeaturesImpl.dataGen(provider,entries);
+        ModDamageTypeImpl.dataGen(provider,entries);
     }
 
     @Override

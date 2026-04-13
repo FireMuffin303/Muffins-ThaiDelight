@@ -49,6 +49,8 @@ import static net.minecraft.data.models.BlockModelGenerators.*;
 import static net.minecraft.data.models.model.TextureMapping.getBlockTexture;
 
 public class ModelDataGen extends FabricModelProvider {
+    public static final ResourceLocation CUT_OUT = new ResourceLocation("minecraft","cutout");
+
     private static final TextureSlot FLOWER = TextureSlot.create("flower");
     private static final TextureSlot VINE = TextureSlot.create("vine");
     private static final TextureSlot ROPE_SIDE = TextureSlot.create("rope_side");
@@ -59,18 +61,18 @@ public class ModelDataGen extends FabricModelProvider {
     private static final ModelTemplate PASTLE_3D = createModItem("pastle_3d_template", TextureSlot.LAYER0);
     private static final ModelTemplate SPAWN_EGG = createMincraftItem("template_spawn_egg");
     private static final ModelTemplate LIME_BUSH_STAGE2 = new ModelTemplate(Optional.of(new ResourceLocation(ThaiDelightCommon.MOD_ID,"block/template_lime_bush_stage2")),Optional.empty(),TextureSlot.SIDE,TextureSlot.TOP);
-    private static final ModelTemplate LIME_UPPER_TEMPLATE = new ModModelTemplate(Optional.of(ThaiDelightCommon.modid("block/lime/template_lime_upper")),Optional.empty(),new ResourceLocation("minecraft","cutout"),TextureSlot.SIDE,TextureSlot.TOP,TextureSlot.PLANT);
-    private static final ModelTemplate LIME_BOTTOM_TEMPLATE = new ModModelTemplate(Optional.of(ThaiDelightCommon.modid("block/lime/template_lime_bottom")),Optional.empty(),new ResourceLocation("minecraft","cutout"),TextureSlot.SIDE,TextureSlot.BOTTOM,TextureSlot.STEM,TextureSlot.PLANT);
+    private static final ModModelTemplate LIME_UPPER_TEMPLATE = new ModModelTemplate(Optional.of(ThaiDelightCommon.modid("block/lime/template_lime_upper")),Optional.empty(),CUT_OUT,TextureSlot.SIDE,TextureSlot.TOP,TextureSlot.PLANT);
+    private static final ModModelTemplate LIME_BOTTOM_TEMPLATE = new ModModelTemplate(Optional.of(ThaiDelightCommon.modid("block/lime/template_lime_bottom")),Optional.empty(),CUT_OUT,TextureSlot.SIDE,TextureSlot.BOTTOM,TextureSlot.STEM,TextureSlot.PLANT);
 
     private static final ModelTemplate BASIL_TEMPLATE = new ModelTemplate(Optional.of(ThaiDelightCommon.modid("block/basil/template_basil")),Optional.empty(),TextureSlot.SIDE,TextureSlot.BOTTOM,TextureSlot.TOP,TextureSlot.STEM,FLOWER);
 
-    public static  final  ModelTemplate HANGING_MANGO = new ModelTemplate(Optional.of(ThaiDelightCommon.modid("block/template_hanging_mango")),Optional.empty(),TextureSlot.ALL);
+    public static  final  ModModelTemplate HANGING_MANGO = new ModModelTemplate(Optional.of(ThaiDelightCommon.modid("block/template_hanging_mango")),Optional.empty(), CUT_OUT,TextureSlot.ALL);
     public static  final  ModelTemplate MANGO = new ModelTemplate(Optional.of(ThaiDelightCommon.modid("block/template_mango")),Optional.empty(),TextureSlot.ALL);
 
-    private static final ModelTemplate WALL_FLOWER = new ModelTemplate(Optional.of(ThaiDelightCommon.modid("block/template_wall_flower")),Optional.empty(),VINE,FLOWER);
+    private static final ModModelTemplate WALL_FLOWER = new ModModelTemplate(Optional.of(ThaiDelightCommon.modid("block/template_wall_flower")),Optional.empty(), CUT_OUT,VINE,FLOWER);
 
-    private static final ModelTemplate CROP_WITH_ROPE = new ModelTemplate(Optional.of(new ResourceLocation("farmersdelight","block/crop_with_rope")),Optional.empty(),TextureSlot.CROP,ROPE_SIDE,ROPE_TOP);
-    private static final ModelTemplate CROP_CROSS = new ModelTemplate(Optional.of(new ResourceLocation("farmersdelight","block/crop_cross")),Optional.empty(),TextureSlot.CROSS);
+    private static final ModModelTemplate CROP_WITH_ROPE = new ModModelTemplate(Optional.of(new ResourceLocation("farmersdelight","block/crop_with_rope")),Optional.empty(), CUT_OUT,TextureSlot.CROP,ROPE_SIDE,ROPE_TOP);
+    private static final ModModelTemplate CROP_CROSS = new ModModelTemplate(Optional.of(new ResourceLocation("farmersdelight","block/crop_cross")),Optional.empty(), CUT_OUT,TextureSlot.CROSS);
 
     private static final ModelTemplate STACKABLE_PAPAYA_1 = new ModelTemplate(Optional.of(ThaiDelightCommon.modid("block/papaya/template_stackable_papaya_1")),Optional.empty(),TextureSlot.ALL);
     private static final ModelTemplate STACKABLE_PAPAYA_2 = new ModelTemplate(Optional.of(ThaiDelightCommon.modid("block/papaya/template_stackable_papaya_2")),Optional.empty(),TextureSlot.ALL);
@@ -882,7 +884,10 @@ public class ModelDataGen extends FabricModelProvider {
                             blockStateModelGenerator.modelOutput));
         })));
 
-        blockStateModelGenerator.createCrossBlockWithDefaultItem(ModBlocks.PAPAYA_SAPLING.get(), TintState.NOT_TINTED);
+        Block block = ModBlocks.PAPAYA_SAPLING.get();
+        ResourceLocation resourceLocation = ((IModelRenderType)TintState.NOT_TINTED.getCross()).muffins_thaidelight$setRenderType(CUT_OUT).create(block, TextureMapping.cross(block), blockStateModelGenerator.modelOutput);
+        blockStateModelGenerator.blockStateOutput.accept(createSimpleBlock(block, resourceLocation));
+        blockStateModelGenerator.createSimpleFlatItemModel(block);
     }
 
     private static void createBlock(Block block, ModelTemplate modelTemplate, TextureMapping textureMapping, BlockModelGenerators blockModelGenerator){
@@ -923,11 +928,11 @@ public class ModelDataGen extends FabricModelProvider {
                 );
 
         blockModelGenerators.blockStateOutput.accept(createSimpleBlock(ModBlocks.WILD_PEPPER_CROP.get(),
-                ModelTemplates.CROSS.create(
+                ((IModelRenderType)ModelTemplates.CROSS).muffins_thaidelight$setRenderType(CUT_OUT).create(
                         ThaiDelightCommon.modid("block/pepper/wild_pepper_crop"),
                         TextureMapping.cross(ThaiDelightCommon.modid("block/pepper/pepper_age2")),
-                        blockModelGenerators.modelOutput
-                )
+                        blockModelGenerators.modelOutput)
+
         ));
     }
 
@@ -1025,14 +1030,14 @@ public class ModelDataGen extends FabricModelProvider {
                 );
 
         blockModelGenerators.blockStateOutput.accept(createSimpleBlock(wildBlock,
-                ModelTemplates.CROSS.create(
+                ((IModelRenderType)ModelTemplates.CROSS).muffins_thaidelight$setRenderType(CUT_OUT).create(
                         wildBlockID.withPath(s -> "block/%s/%s".formatted(cropBlockID.getPath(),s) ),
                         TextureMapping.cross(ThaiDelightCommon.modid("block/%s/%s_age3".formatted(cropBlockID.getPath(),cropBlockID.getPath()) )),
                         blockModelGenerators.modelOutput
                 )));
 
         blockModelGenerators.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(potBlock,
-                TintState.NOT_TINTED.getCrossPot().create(
+                ((IModelRenderType)TintState.NOT_TINTED.getCrossPot()).muffins_thaidelight$setRenderType(CUT_OUT).create(
                         potBlockID.withPath(s -> "block/%s/%s".formatted(cropBlockID.getPath(),s)),
                         TextureMapping.plant(ThaiDelightCommon.modid("block/%s/%s_age3".formatted(cropBlockID.getPath(),cropBlockID.getPath()) )),
                         blockModelGenerators.modelOutput)));

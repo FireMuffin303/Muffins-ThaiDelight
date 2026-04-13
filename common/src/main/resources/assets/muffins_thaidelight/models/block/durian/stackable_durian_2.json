@@ -1,6 +1,7 @@
 {
 	"format_version": "1.21.6",
 	"credit": "Made with Blockbench",
+	"render_type": "minecraft:cutout",
 	"textures": {
 		"0": "muffins_thaidelight:block/durian/durian_stage0_bottom",
 		"1": "muffins_thaidelight:block/durian/durian_stage0_side",

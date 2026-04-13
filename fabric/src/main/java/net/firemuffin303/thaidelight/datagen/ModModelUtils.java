@@ -7,6 +7,7 @@ import net.minecraft.data.models.blockstates.Condition;
 import net.minecraft.data.models.blockstates.MultiPartGenerator;
 import net.minecraft.data.models.blockstates.Variant;
 import net.minecraft.data.models.blockstates.VariantProperties;
+import net.minecraft.data.models.model.TextureMapping;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -15,6 +16,8 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import java.util.Iterator;
 import java.util.List;
 import java.util.function.Function;
+
+import static net.minecraft.data.models.BlockModelGenerators.createSimpleBlock;
 
 
 public class ModModelUtils {
@@ -60,5 +63,12 @@ public class ModModelUtils {
         }), Pair.of(BlockStateProperties.DOWN, (resourceLocation) -> {
             return Variant.variant().with(VariantProperties.MODEL, resourceLocation).with(VariantProperties.X_ROT, VariantProperties.Rotation.R270);
         }));
+    }
+
+    public final void createPlant(Block block, Block block2, BlockModelGenerators.TintState tintState,BlockModelGenerators blockModelGenerators) {
+        blockModelGenerators.createCrossBlockWithDefaultItem(block, tintState);
+        TextureMapping textureMapping = TextureMapping.plant(block);
+        ResourceLocation resourceLocation = ((IModelRenderType)tintState.getCrossPot()).muffins_thaidelight$setRenderType(ModelDataGen.CUT_OUT).create(block2, textureMapping, blockModelGenerators.modelOutput);
+        blockModelGenerators.blockStateOutput.accept(createSimpleBlock(block2, resourceLocation));
     }
 }

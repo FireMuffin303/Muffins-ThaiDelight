@@ -1,5 +1,6 @@
 {
   "parent": "farmersdelight:block/crop_cross",
+  "render_type": "minecraft:cutout",
   "textures": {
     "cross": "muffins_thaidelight:block/butterfly_pea/butterfly_pea_vine_stage1"
   }

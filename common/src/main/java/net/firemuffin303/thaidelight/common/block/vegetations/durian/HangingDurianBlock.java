@@ -1,6 +1,7 @@
 package net.firemuffin303.thaidelight.common.block.vegetations.durian;
 
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
+import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -15,6 +16,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -174,5 +176,10 @@ public class HangingDurianBlock extends FallingBlock implements SimpleWaterlogge
         if(serverLevel.getBlockState(blockPos.above(1)).is(ModBlocks.DURIAN_LEAVES.get())){
             this.setFlower(serverLevel,blockPos,entity);
         }
+    }
+
+    @Override
+    public Item asItem() {
+        return ModItems.DURIAN.get();
     }
 }

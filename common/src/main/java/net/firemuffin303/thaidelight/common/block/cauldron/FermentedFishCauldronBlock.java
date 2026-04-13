@@ -13,6 +13,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.AbstractCauldronBlock;
 import net.minecraft.world.level.block.Block;
@@ -124,6 +125,11 @@ public class FermentedFishCauldronBlock extends AbstractCauldronBlock {
             double[] color = {0.596078431372549f,0.3607843137254902f,0.2705882352941176f};
             level.addParticle(ParticleTypes.AMBIENT_ENTITY_EFFECT,d, e,f,color[0],color[1],color[2]);
         }
+    }
+
+    @Override
+    public Item asItem() {
+        return Items.CAULDRON;
     }
 
     static {

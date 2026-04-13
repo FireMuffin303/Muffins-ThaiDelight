@@ -1,5 +1,6 @@
 {
   "parent": "muffins_thaidelight:block/template_hanging_mango",
+  "render_type": "minecraft:cutout",
   "textures": {
     "all": "muffins_thaidelight:block/mango"
   }

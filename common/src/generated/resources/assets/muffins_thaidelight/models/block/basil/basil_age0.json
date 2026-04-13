@@ -1,5 +1,6 @@
 {
   "parent": "farmersdelight:block/crop_cross",
+  "render_type": "minecraft:cutout",
   "textures": {
     "cross": "muffins_thaidelight:block/basil/basil_age0"
   }

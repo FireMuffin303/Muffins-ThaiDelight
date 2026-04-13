@@ -1,6 +1,7 @@
 {
 	"format_version": "1.21.6",
 	"credit": "Made with Blockbench",
+	"render_type": "minecraft:cutout",
 	"textures": {
 		"stem": "muffins_thaidelight:block/lime/lime_stem",
 		"lime": "muffins_thaidelight:block/lime/lime",

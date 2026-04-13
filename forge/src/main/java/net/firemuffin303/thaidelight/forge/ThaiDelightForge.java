@@ -1,27 +1,12 @@
 package net.firemuffin303.thaidelight.forge;
 
-import com.mojang.logging.LogUtils;
 import net.firemuffin303.thaidelight.ThaiDelightCommon;
-import net.firemuffin303.thaidelight.client.ThaiDelightCommonClient;
-import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.firemuffin303.thaidelight.common.registry.ModEntityTypes;
-import net.firemuffin303.thaidelight.common.registry.ModItems;
-import net.firemuffin303.thaidelight.common.registry.ModTreeDecoratorTypes;
 import net.firemuffin303.thaidelight.common.registry.forge.*;
 import net.firemuffin303.thaidelight.forge.common.capabilities.ISpicy;
 import net.firemuffin303.thaidelight.forge.common.capabilities.SpicyProvider;
-import net.firemuffin303.thaidelight.forge.network.SpicyPacket;
-import net.firemuffin303.thaidelight.forge.network.ThaiDelightPacketHandler;
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
-import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
@@ -31,9 +16,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.network.NetworkDirection;
-import net.minecraftforge.network.NetworkRegistry;
-import net.minecraftforge.network.simple.SimpleChannel;
 import net.minecraftforge.registries.DeferredRegister;
 
 import java.util.Arrays;
