@@ -33,6 +33,18 @@
     ],
     "fabric-datagen": [
       "net.firemuffin303.thaidelight.datagen.ModDataGen"
+    ],
+    "jei_mod_plugin": [
+      "net.firemuffin303.thaidelight.integration.jei.ThaiDelightJEIIntegration"
+    ],
+    "emi": [
+      "net.firemuffin303.thaidelight.integration.emi.ThaiDelightEMI"
+    ],
+    "rei_client": [
+      "net.firemuffin303.thaidelight.integration.rei.ThaiDelightClientREI"
+    ],
+    "modmenu": [
+      "net.firemuffin303.thaidelight.integration.modmenu.ThaiDelightModMenu"
     ]
   },
   "mixins": [

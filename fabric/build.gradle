@@ -57,15 +57,15 @@ dependencies {
         modImplementation(include("io.github.fabricators_of_create.Porting-Lib:${x}:${rootProject.portinglib_version}"))
     }
 
-    /*
+
     modImplementation ("eu.midnightdust:midnightlib:${project.midnightlib_version}")
 
     //Non Needed Dependency
-    //modImplementation("com.terraformersmc:modmenu:${project.modmenu_version}")
+    modImplementation("com.terraformersmc:modmenu:${project.modmenu_version}")
 
-    //modRuntimeOnly("maven.modrinth:appleskin:${project.apple_skin_version}")
+    modRuntimeOnly("maven.modrinth:appleskin:${project.apple_skin_version}")
 
-    //modRuntimeOnly("maven.modrinth:cloth-config:2xQdCMyG")
+    modRuntimeOnly("maven.modrinth:cloth-config:2xQdCMyG")
 
     if (fot.toBoolean()){
         modRuntimeOnly("maven.modrinth:fish-of-thieves:hI4gvof3")
@@ -92,9 +92,6 @@ dependencies {
 
     modCompileOnly "dev.emi:emi-fabric:${emi_version}:api"
     //modLocalRuntime "dev.emi:emi-fabric:${emi_version}"
-
-     */
-
 
 }
 
