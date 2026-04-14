@@ -100,7 +100,7 @@ public class ThaiDelightFabric implements ModInitializer {
 
         PotionBrewing.addMix(Potions.AWKWARD,ModItems.FERMENTED_FISH.get(), ModMobEffects.STENCH_POTION.get());
         PotionBrewing.addMix(ModMobEffects.STENCH_POTION.get(), Items.REDSTONE,ModMobEffects.LONG_STENCH_POTION.get());
-        PotionBrewing.addMix(ModMobEffects.STENCH_POTION.get(), Items.GLOWSTONE,ModMobEffects.STRONG_STENCH_POTION.get());
+        PotionBrewing.addMix(ModMobEffects.STENCH_POTION.get(), Items.GLOWSTONE_DUST,ModMobEffects.STRONG_STENCH_POTION.get());
 
         TillableBlockRegistry.register(Blocks.BAMBOO_SAPLING,useOnContext -> true,Blocks.AIR.defaultBlockState(),ModItems.BAMBOO_SHOOT.get());
 

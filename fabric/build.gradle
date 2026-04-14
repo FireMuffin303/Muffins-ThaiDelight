@@ -2,7 +2,6 @@ plugins {
     id 'com.github.johnrengelman.shadow'
 }
 
-
 architectury {
     platformSetupLoomIde()
     fabric()
@@ -33,8 +32,8 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${project.fabric_loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-    common(project(path: ':common', configuration: 'namedElements')) { transitive false }
-    shadowBundle project(path: ':common', configuration: 'transformProductionFabric')
+    common(project(path: ":common", configuration: "namedElements")) { transitive false }
+    shadowBundle (project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
 
     modImplementation include ("com.github.Chocohead:Fabric-ASM:v2.3")
 
@@ -113,12 +112,34 @@ processResources {
 }
 
 shadowJar {
+    exclude "architectury.common.json"
+    exclude "META-INF"
+
     configurations = [project.configurations.shadowBundle]
-    archiveClassifier = 'dev-shadow'
+    archiveClassifier = "dev-shadow"
 }
 
 remapJar {
+    injectAccessWidener = true
     input.set shadowJar.archiveFile
+    dependsOn shadowJar
+    archiveClassifier = null
+}
+
+jar {
+    archiveClassifier = "dev"
+}
+
+sourcesJar {
+    def commonSources = project(":common").sourcesJar
+    dependsOn commonSources
+    from commonSources.archiveFile.map { zipTree(it) }
+}
+
+components.java {
+    withVariantsFromConfiguration(project.configurations.shadowRuntimeElements) {
+        skip()
+    }
 }
 
 fabricApi {
