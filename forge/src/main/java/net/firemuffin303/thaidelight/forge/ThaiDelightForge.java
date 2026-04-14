@@ -17,6 +17,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
+import vectorwing.farmersdelight.common.tag.ForgeTags;
 
 import java.util.Arrays;
 
@@ -51,7 +52,6 @@ public class ThaiDelightForge {
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.addGenericListener(Entity.class,this::attachCapability);
         eventBus.register(this);
-
 
     }
 

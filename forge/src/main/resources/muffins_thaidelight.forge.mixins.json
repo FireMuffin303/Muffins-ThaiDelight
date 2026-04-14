@@ -5,8 +5,11 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "BlockFamiliesAccessor",
+    "DurianHelmetItemMixin",
+    "SackItemMixin",
     "dispenser.BucketItemMixin",
     "dyeableItem.RecipeMixin",
+    "fallingBlock.FallingBlockEntityMixin",
     "foodEffect.LivingEntityMixin",
     "foodEffect.spicy.MilkBucketItemMixin"
   ],

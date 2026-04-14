@@ -4,38 +4,78 @@ import net.firemuffin303.thaidelight.ThaiDelightCommon;
 import net.firemuffin303.thaidelight.client.ThaiDelightCommonClient;
 import net.firemuffin303.thaidelight.client.renderer.component.SackTooltipComponent;
 import net.firemuffin303.thaidelight.client.sceens.MortarScreen;
+import net.firemuffin303.thaidelight.common.block.cauldron.FermentedFishCauldronBlock;
+import net.firemuffin303.thaidelight.common.entity.DragonflyEntity;
+import net.firemuffin303.thaidelight.common.item.DragonflyBottleItem;
+import net.firemuffin303.thaidelight.common.item.SackItem;
 import net.firemuffin303.thaidelight.common.recipe.mortar.MortarRecipe;
 import net.firemuffin303.thaidelight.common.recipe.mortar.MortarRecipeBookTab;
+import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.firemuffin303.thaidelight.common.registry.ModMenuType;
 import net.firemuffin303.thaidelight.common.registry.ModRecipes;
 import net.firemuffin303.thaidelight.util.ModUtils;
 import net.minecraft.client.RecipeBookCategories;
+import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
+import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.world.entity.HumanoidArm;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.inventory.RecipeBookType;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.FoliageColor;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.IArmPoseTransformer;
 import net.minecraftforge.client.event.*;
+import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
 @Mod.EventBusSubscriber(modid = ThaiDelightCommon.MOD_ID,value = Dist.CLIENT,bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ThaiDelightForgeClient {
+    public static final HumanoidModel.ArmPose SACK_HOLD = HumanoidModel.ArmPose.create("CATCHING_BAG_HOLD", true, (arg, arg2, arg3) -> {});
+    public static final HumanoidModel.ArmPose SACK_SHOULDER_HOLD = HumanoidModel.ArmPose.create("SACK_SHOULDER_HOLD", false, (arg, arg2, arg3) -> {});
+    public static final HumanoidModel.ArmPose SACK_SWING = HumanoidModel.ArmPose.create("CATCHING_BAG_SWING", true, (arg, arg2, arg3) -> {});
 
     public ThaiDelightForgeClient(){
     }
 
     @SubscribeEvent
     public static void clientSetup(FMLClientSetupEvent event){
-        event.enqueueWork(() -> MenuScreens.register(ModMenuType.MORTAR.get(), MortarScreen::new));
+        event.enqueueWork(() -> {
+            MenuScreens.register(ModMenuType.MORTAR.get(), MortarScreen::new);
+            ItemProperties.register(ModItems.SACK.get(), ThaiDelightCommon.modid("fullness"), new ClampedItemPropertyFunction() {
+                @Override
+                public float unclampedCall(ItemStack arg, @Nullable ClientLevel arg2, @Nullable LivingEntity arg3, int i) {
+                    return SackItem.isFull(arg) ? 1f : 0f;
+                }
+            });
+
+            ItemProperties.register(ModItems.DRAGONFLY_BOTTLE.get(), ThaiDelightCommon.modid("variant"), new ClampedItemPropertyFunction() {
+                @Override
+                public float unclampedCall(ItemStack itemStack, @Nullable ClientLevel clientLevel, @Nullable LivingEntity livingEntity, int i) {
+                    return ((float) DragonflyBottleItem.getVariant(itemStack)) / ((float) DragonflyEntity.DragonflyVariant.values().length);
+                }
+            });
+        });
+
     }
 
     @SubscribeEvent
@@ -50,16 +90,32 @@ public class ThaiDelightForgeClient {
     }
 
     @SubscribeEvent
+    public static void registerColorBlock(RegisterColorHandlersEvent.Block event){
+        event.register((blockState, blockAndTintGetter, blockPos, i) -> {
+            if(blockAndTintGetter != null && blockPos != null && blockState.getValue(FermentedFishCauldronBlock.FERMENT) == 0){
+                return BiomeColors.getAverageWaterColor(blockAndTintGetter,blockPos);
+            }
+            return 0xFFFFFF;
+        }, ModBlocks.FERMENTED_FISH_CAULDRON.get());
+
+        event.register((blockState, blockAndTintGetter, blockPos, i) -> {
+            if(blockAndTintGetter != null && blockPos != null){
+                return BiomeColors.getAverageFoliageColor(blockAndTintGetter,blockPos);
+            }
+            return FoliageColor.getDefaultColor();
+        },ModBlocks.DURIAN_LEAVES.get(),ModBlocks.MANGO_LEAVES.get());
+    }
+
+    @SubscribeEvent
     public static void registerColorItem(RegisterColorHandlersEvent.Item event){
         event.register((itemStack, i) -> i > 0 ? -1 : ModUtils.getColor(itemStack), ModItems.COCONUT_MILK_ICE_CREAM.get());
         event.register((itemStack, i) -> ModUtils.getColor(itemStack), ModItems.KHANOM_CHAN.get());
         event.register((itemStack, i) -> FoliageColor.getDefaultColor(), ModItems.DURIAN_LEAVES.get(),ModItems.MANGO_LEAVES.get());
     }
 
-
-
     @SubscribeEvent
     public static void registerRecipeBook(RegisterRecipeBookCategoriesEvent event){
+
         final RecipeBookType MORTAR_BOOK_TYPE = RecipeBookType.create("MORTAR_RECIPE_BOOK_TYPE");
         final RecipeBookCategories MORTAR_SEARCH = RecipeBookCategories.create("MORTAR_SEARCH",new ItemStack(Items.COMPASS));
         final RecipeBookCategories MORTAR_MEALS = RecipeBookCategories.create("MORTAR_MEALS",new ItemStack(ModItems.SOMTAM_FEAST.get()));
@@ -86,5 +142,13 @@ public class ThaiDelightForgeClient {
     @SubscribeEvent
     public static void registerTooltipComponent(RegisterClientTooltipComponentFactoriesEvent event){
         event.register(SackTooltipComponent.SackToolTip.class, SackTooltipComponent::new);
+    }
+
+    @SubscribeEvent
+    public static void registerModel(ModelEvent.RegisterAdditional event){
+        event.register(ThaiDelightCommonClient.SACK_MODEL);
+        event.register(ThaiDelightCommonClient.FILLED_SACK_MODEL);
+        event.register(ThaiDelightCommonClient.SACK_MODEL_IN_HAND);
+        event.register(ThaiDelightCommonClient.FULL_SACK_MODEL_IN_HAND);
     }
 }

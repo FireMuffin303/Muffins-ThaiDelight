@@ -286,6 +286,10 @@ public class ModTagDataGen {
                     ModItems.BASIL.get(),
                     ModItems.BUTTERFLY_PEA_SEEDS.get()
             );
+
+            getOrCreateTagBuilder(COMMON_RAW_FISHES).addOptionalTag(
+                    TagKey.create(Registries.ITEM,new ResourceLocation("forge","raw_fishes"))
+            );
         }
     }
 

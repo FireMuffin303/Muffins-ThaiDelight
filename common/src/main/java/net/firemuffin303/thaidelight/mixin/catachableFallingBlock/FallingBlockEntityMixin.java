@@ -26,6 +26,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
+import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -98,18 +99,6 @@ public abstract class FallingBlockEntityMixin extends Entity {
                     this.level().levelEvent(2009,blockPos,0);
                     this.level().playSound(null,blockPos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS);
                 }
-            }
-        }
-    }
-
-    @Inject(method = "tick",at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/item/FallingBlockEntity;discard()V",ordinal = 3))
-    public void muffins$checkLandOnBlock(CallbackInfo ci,@Local Block block,@Local BlockPos blockPos){
-        BlockState blockState1 = this.level().getBlockState(blockPos);
-        if(this.blockState.is(ModTags.SACK_CATCHABLE) && (blockState1.is(ModBlocks.SACK.get()) && !blockState1.getValue(SackBlock.FILLED))){
-            SackBlock sackBlock = (SackBlock) blockState1.getBlock();
-            if(sackBlock.insertFallingBlock(this.blockState.getBlock().asItem(),this.level(),blockPos)){
-                this.dropItem = false;
-                sackBlock.playCatchFallingBlockEffect(this.level(),blockPos);
             }
         }
     }

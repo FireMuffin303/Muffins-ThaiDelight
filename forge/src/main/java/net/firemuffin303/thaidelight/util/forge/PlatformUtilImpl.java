@@ -14,6 +14,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.inventory.RecipeBookType;
 import net.minecraft.world.item.Item;
@@ -91,15 +92,15 @@ public class PlatformUtilImpl {
     }
 
     public static HumanoidModel.ArmPose getSackShoulderPose() {
-        return HumanoidModel.ArmPose.ITEM;
+        return ThaiDelightForgeClient.SACK_SHOULDER_HOLD;
     }
 
     public static HumanoidModel.ArmPose getDurianCatcherHoldArmPose() {
-        return HumanoidModel.ArmPose.ITEM;
+        return ThaiDelightForgeClient.SACK_HOLD;
     }
 
     public static HumanoidModel.ArmPose getDurianCatcherSwingArmPose() {
-        return HumanoidModel.ArmPose.ITEM;
+        return ThaiDelightForgeClient.SACK_SWING;
     }
 
     public static void setSpicyTime(int value, LivingEntity livingEntity) {
@@ -111,8 +112,11 @@ public class PlatformUtilImpl {
     }
 
     public static int getSpicyTime(LivingEntity livingEntity) {
-        LazyOptional<ISpicy> optionalSpicyProvider = livingEntity.getCapability(SpicyProvider.SPICY_CAPABILITY);
-        return optionalSpicyProvider.map(ISpicy::getTimer).orElse(0);
+        if(livingEntity instanceof Player){
+            LazyOptional<ISpicy> optionalSpicyProvider = livingEntity.getCapability(SpicyProvider.SPICY_CAPABILITY);
+            return optionalSpicyProvider.map(ISpicy::getTimer).orElse(0);
+        }
+        return 0;
     }
 
     public static ModUtils.DurianComponentSupplier getDurianHeatComponent(LivingEntity livingEntity) {
