@@ -48,8 +48,6 @@ public class ThaiDelightFabric implements ModInitializer {
     public static boolean IS_FOT_INSTALLED = false;
     public static boolean IS_TOUGH_AS_NAIL_INSTALLED = false;
 
-
-
     public static final TerraformBoatType DURIAN = new TerraformBoatType.Builder()
             .item(ModItems.DURIAN_BOAT.get())
             .chestItem(ModItems.DURIAN_CHEST_BOAT.get())

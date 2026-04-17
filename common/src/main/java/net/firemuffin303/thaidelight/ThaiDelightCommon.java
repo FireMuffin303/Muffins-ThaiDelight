@@ -17,7 +17,7 @@ public class ThaiDelightCommon {
         ModBlockStateProviderTypes.init();
         ModFeatures.init();
         ModTreeDecoratorTypes.init();
-
+        
         ModEntityTypes.init();
         ModMobEffects.init();
 
@@ -29,6 +29,9 @@ public class ThaiDelightCommon {
         ModItems.init();
 
         ModRecipes.init();
+        ModBoatVariants.init();
+
+
 
 
     }

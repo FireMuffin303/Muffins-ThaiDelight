@@ -1,6 +1,10 @@
 package net.firemuffin303.thaidelight.common.registry;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
+import net.firemuffin303.muffinsmcapi.api.block.sign.OvenCeilingHangingSignBlock;
+import net.firemuffin303.muffinsmcapi.api.block.sign.OvenStandSignBlock;
+import net.firemuffin303.muffinsmcapi.api.block.sign.OvenWallHangingSignBlock;
+import net.firemuffin303.muffinsmcapi.api.block.sign.OvenWallSignBlock;
 import net.firemuffin303.thaidelight.ThaiDelightCommon;
 import net.firemuffin303.thaidelight.common.block.animals.CrabEggBlock;
 import net.firemuffin303.thaidelight.common.block.cauldron.FermentedFishCauldronBlock;
@@ -156,8 +160,7 @@ public class ModBlocks {
     ));
 
     public static final Supplier<Block> DURIAN_BUTTON = register("durian_button",() -> BlocksAccessor.woodenButton(ModBlockSetTypes.DURIAN_BLOCK_SET));
-    public static final Supplier<Block> DURIAN_SIGN = register("durian_sign",createStandingSignBlock(
-            ThaiDelightCommon.modid("entity/signs/durian"),
+    public static final Supplier<Block> DURIAN_SIGN = register("durian_sign", () -> new OvenStandSignBlock(
             BlockBehaviour.Properties.of()
                     .mapColor(MapColor.COLOR_LIGHT_GREEN)
                     .forceSolidOn()
@@ -165,11 +168,11 @@ public class ModBlocks {
                     .noCollission()
                     .sound(SoundType.WOOD)
                     .strength(1.0f)
-                    .ignitedByLava()
+                    .ignitedByLava(),
+            "durian"
     ));
 
-    public static final Supplier<Block> DURIAN_WALL_SIGN = register("durian_wall_sign",createWallSignBlock(
-            ThaiDelightCommon.modid("entity/signs/durian"),
+    public static final Supplier<Block> DURIAN_WALL_SIGN = register("durian_wall_sign",() -> new OvenWallSignBlock(
             dropLike(ModBlocks.DURIAN_SIGN)
                     .mapColor(MapColor.COLOR_LIGHT_GREEN)
                     .forceSolidOn()
@@ -177,12 +180,11 @@ public class ModBlocks {
                     .noCollission()
                     .sound(SoundType.WOOD)
                     .strength(1.0f)
-                    .ignitedByLava()
+                    .ignitedByLava(),
+            "durian"
     ));
 
-    public static final Supplier<Block> DURIAN_HANGING_SIGN = register("durian_hanging_sign",createHangingSignBlock(
-            ThaiDelightCommon.modid("entity/signs/hanging/durian"),
-            ThaiDelightCommon.modid("textures/gui/hanging_signs/durian"),
+    public static final Supplier<Block> DURIAN_HANGING_SIGN = register("durian_hanging_sign",() -> new OvenCeilingHangingSignBlock(
             BlockBehaviour.Properties.of()
                     .mapColor(MapColor.COLOR_LIGHT_GREEN)
                     .forceSolidOn()
@@ -190,19 +192,19 @@ public class ModBlocks {
                     .noCollission()
                     .sound(SoundType.WOOD)
                     .strength(1.0f)
-                    .ignitedByLava()
+                    .ignitedByLava(),
+            "durian"
     ));
 
-    public static final Supplier<Block> DURIAN_WALL_HANGING_SIGN = register("durian_wall_hanging_sign",createHangingWallSignBlock(
-            ThaiDelightCommon.modid("entity/signs/hanging/durian"),
-            ThaiDelightCommon.modid("textures/gui/hanging_signs/durian"),
+    public static final Supplier<Block> DURIAN_WALL_HANGING_SIGN = register("durian_wall_hanging_sign",() -> new OvenWallHangingSignBlock(
             dropLike(ModBlocks.DURIAN_HANGING_SIGN).mapColor(MapColor.COLOR_LIGHT_GREEN)
                     .forceSolidOn()
                     .instrument(NoteBlockInstrument.BASS)
                     .noCollission()
                     .sound(SoundType.WOOD)
                     .strength(1.0f)
-                    .ignitedByLava()
+                    .ignitedByLava(),
+            "durian"
     ));
 
     public static final Supplier<Block> DURIAN_CABINET = registerCabinet("durian_cabinet");
@@ -308,8 +310,7 @@ public class ModBlocks {
             ModBlockSetTypes.COCONUT_BLOCK_SET
     ));
     public static final Supplier<Block> COCONUT_BUTTON = register("coconut_button",() ->BlocksAccessor.woodenButton(ModBlockSetTypes.COCONUT_BLOCK_SET));
-    public static final Supplier<Block> COCONUT_SIGN = register("coconut_sign",createStandingSignBlock(
-            ThaiDelightCommon.modid("entity/signs/coconut"),
+    public static final Supplier<Block> COCONUT_SIGN = register("coconut_sign", () -> new OvenStandSignBlock(
             BlockBehaviour.Properties.of()
                     .mapColor(MapColor.COLOR_LIGHT_GREEN)
                     .forceSolidOn()
@@ -317,21 +318,20 @@ public class ModBlocks {
                     .noCollission()
                     .sound(SoundType.WOOD)
                     .strength(1.0f)
-                    .ignitedByLava()
+                    .ignitedByLava(),
+            "coconut"
     ));
-    public static final Supplier<Block> COCONUT_WALL_SIGN = register("coconut_wall_sign",createWallSignBlock(
-            ThaiDelightCommon.modid("entity/signs/coconut"),
+    public static final Supplier<Block> COCONUT_WALL_SIGN = register("coconut_wall_sign",() -> new OvenWallSignBlock(
             dropLike(ModBlocks.COCONUT_SIGN).mapColor(MapColor.COLOR_LIGHT_GREEN)
                     .forceSolidOn()
                     .instrument(NoteBlockInstrument.BASS)
                     .noCollission()
                     .strength(1.0f)
                     .sound(SoundType.WOOD)
-                    .ignitedByLava()
+                    .ignitedByLava(),
+            "coconut"
     ));
-    public static final Supplier<Block> COCONUT_HANGING_SIGN = register("coconut_hanging_sign",createHangingSignBlock(
-            ThaiDelightCommon.modid("entity/signs/hanging/coconut"),
-            ThaiDelightCommon.modid("textures/gui/hanging_signs/coconut"),
+    public static final Supplier<Block> COCONUT_HANGING_SIGN = register("coconut_hanging_sign", () -> new OvenCeilingHangingSignBlock(
             BlockBehaviour.Properties.of()
                     .mapColor(MapColor.COLOR_LIGHT_GREEN)
                     .forceSolidOn()
@@ -339,11 +339,10 @@ public class ModBlocks {
                     .noCollission()
                     .strength(1.0f)
                     .sound(SoundType.WOOD)
-                    .ignitedByLava()
+                    .ignitedByLava(),
+            "coconut"
     ));
-    public static final Supplier<Block> COCONUT_WALL_HANGING_SIGN = register("coconut_wall_hanging_sign",createHangingWallSignBlock(
-            ThaiDelightCommon.modid("entity/signs/hanging/coconut"),
-            ThaiDelightCommon.modid("textures/gui/hanging_signs/coconut"),
+    public static final Supplier<Block> COCONUT_WALL_HANGING_SIGN = register("coconut_wall_hanging_sign",() -> new OvenWallHangingSignBlock(
             dropLike(ModBlocks.COCONUT_HANGING_SIGN)
                     .mapColor(MapColor.COLOR_LIGHT_GREEN)
                     .forceSolidOn()
@@ -351,7 +350,8 @@ public class ModBlocks {
                     .noCollission()
                     .strength(1.0f)
                     .sound(SoundType.WOOD)
-                    .ignitedByLava()
+                    .ignitedByLava(),
+            "coconut"
     ));
     public static final Supplier<Block> COCONUT_CABINET = registerCabinet("coconut_cabinet");
     public static final Supplier<Block> COCONUT_LEAF_CARPET = register("coconut_leaf_carpet",() ->new CarpetBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GREEN).strength(0.1f).sound(SoundType.MOSS_CARPET).pushReaction(PushReaction.DESTROY)));
@@ -419,8 +419,7 @@ public class ModBlocks {
             ModBlockSetTypes.MANGO_BLOCK_SET
     ));
     public static final Supplier<Block> MANGO_BUTTON = register("mango_button",() ->BlocksAccessor.woodenButton(ModBlockSetTypes.MANGO_BLOCK_SET));
-    public static final Supplier<Block> MANGO_SIGN = register("mango_sign",createStandingSignBlock(
-            ThaiDelightCommon.modid("entity/signs/mango"),
+    public static final Supplier<Block> MANGO_SIGN = register("mango_sign",() -> new OvenStandSignBlock(
             BlockBehaviour.Properties.of()
                     .mapColor(MapColor.COLOR_LIGHT_GREEN)
                     .forceSolidOn()
@@ -428,10 +427,10 @@ public class ModBlocks {
                     .noCollission()
                     .strength(1.0f)
                     .sound(SoundType.WOOD)
-                    .ignitedByLava()
+                    .ignitedByLava(),
+            "mango"
     ));
-    public static final Supplier<Block> MANGO_WALL_SIGN = register("mango_wall_sign",createWallSignBlock(
-            ThaiDelightCommon.modid("entity/signs/mango"),
+    public static final Supplier<Block> MANGO_WALL_SIGN = register("mango_wall_sign",() -> new OvenWallSignBlock(
             dropLike(ModBlocks.MANGO_SIGN)
                     .mapColor(MapColor.COLOR_LIGHT_GREEN)
                     .forceSolidOn()
@@ -439,11 +438,10 @@ public class ModBlocks {
                     .noCollission()
                     .strength(1.0f)
                     .sound(SoundType.WOOD)
-                    .ignitedByLava()
+                    .ignitedByLava(),
+            "mango"
     ));
-    public static final Supplier<Block> MANGO_HANGING_SIGN = register("mango_hanging_sign",createHangingSignBlock(
-            ThaiDelightCommon.modid("entity/signs/hanging/mango"),
-            ThaiDelightCommon.modid("textures/gui/hanging_signs/mango"),
+    public static final Supplier<Block> MANGO_HANGING_SIGN = register("mango_hanging_sign",() -> new OvenCeilingHangingSignBlock(
             BlockBehaviour.Properties.of()
                     .mapColor(MapColor.COLOR_LIGHT_GREEN)
                     .forceSolidOn()
@@ -451,11 +449,10 @@ public class ModBlocks {
                     .noCollission()
                     .strength(1.0f)
                     .sound(SoundType.WOOD)
-                    .ignitedByLava()
+                    .ignitedByLava(),
+            "mango"
     ));
-    public static final Supplier<Block> MANGO_WALL_HANGING_SIGN = register("mango_wall_hanging_sign", createHangingWallSignBlock(
-            ThaiDelightCommon.modid("entity/signs/hanging/mango"),
-            ThaiDelightCommon.modid("textures/gui/hanging_signs/mango"),
+    public static final Supplier<Block> MANGO_WALL_HANGING_SIGN = register("mango_wall_hanging_sign", () -> new OvenWallHangingSignBlock(
             dropLike(ModBlocks.MANGO_HANGING_SIGN)
                     .mapColor(MapColor.COLOR_LIGHT_GREEN)
                     .forceSolidOn()
@@ -463,7 +460,8 @@ public class ModBlocks {
                     .noCollission()
                     .strength(1.0f)
                     .sound(SoundType.WOOD)
-                    .ignitedByLava()
+                    .ignitedByLava(),
+            "mango"
     ));
     public static final Supplier<Block> MANGO_CABINET = registerCabinet("mango_cabinet");
 

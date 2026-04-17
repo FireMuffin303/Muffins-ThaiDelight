@@ -3,6 +3,8 @@ package net.firemuffin303.thaidelight.forge;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.BoolArgumentType;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
+import net.firemuffin303.muffinsmcapi.api.BoatRegistry;
+import net.firemuffin303.muffinsmcapi.forge.common.ModBoatVariants;
 import net.firemuffin303.thaidelight.ThaiDelightCommon;
 import net.firemuffin303.thaidelight.common.registry.ModEntityTypes;
 import net.firemuffin303.thaidelight.common.registry.forge.*;
@@ -37,6 +39,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.RegistryManager;
 import vectorwing.farmersdelight.common.tag.ForgeTags;
 
 import java.util.Arrays;
@@ -50,6 +53,7 @@ public class ThaiDelightForge {
             ModTreeDecoratorTypesImpl.TREE_DECORATOR_TYPE,
             ModFeaturesImpl.FOLIAGE_PLACER,
             ModFeaturesImpl.TRUNK_PLACER,
+            ModBoatVariantsImpl.BOAT_VARIANT,
             ModEntityTypesImpl.ENTITY_TYPES,
             ModMobEffectsImpl.MOB_EFFECT,
             ModMobEffectsImpl.POTION,

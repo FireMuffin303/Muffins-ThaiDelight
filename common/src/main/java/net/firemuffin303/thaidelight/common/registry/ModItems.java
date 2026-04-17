@@ -1,6 +1,7 @@
 package net.firemuffin303.thaidelight.common.registry;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
+import net.firemuffin303.muffinsmcapi.api.item.OvenBoatItem;
 import net.firemuffin303.thaidelight.ThaiDelightCommon;
 import net.firemuffin303.thaidelight.common.item.equipments.DurianHelmetItem;
 import net.firemuffin303.thaidelight.common.item.vegetations.CoconutItem;
@@ -119,8 +120,8 @@ public class ModItems {
     public static final Supplier<Item> DURIAN_SIGN = register("durian_sign",() ->new SignItem(new Item.Properties().stacksTo(16),ModBlocks.DURIAN_SIGN.get(),ModBlocks.DURIAN_WALL_SIGN.get()));
     public static final Supplier<Item> DURIAN_HANGING_SIGN = register("durian_hanging_sign",() ->new HangingSignItem(ModBlocks.DURIAN_HANGING_SIGN.get(),ModBlocks.DURIAN_WALL_HANGING_SIGN.get(),new Item.Properties().stacksTo(16)));
     public static final Supplier<Item> DURIAN_CABINET = register("durian_cabinet",() ->new BlockItem(ModBlocks.DURIAN_CABINET.get(),new Item.Properties()));
-    public static final Supplier<Item> DURIAN_BOAT = register("durian_boat",createBoat(ThaiDelightCommon.modid("durian_boat"),false,"durian"));
-    public static final Supplier<Item> DURIAN_CHEST_BOAT = register("durian_chest_boat",createBoat(ThaiDelightCommon.modid("durian_chest_boat"),true,"durian"));
+    public static final Supplier<Item> DURIAN_BOAT = register("durian_boat",() -> new OvenBoatItem(false,ModBoatVariants.DURIAN));
+    public static final Supplier<Item> DURIAN_CHEST_BOAT = register("durian_chest_boat",() -> new OvenBoatItem(true,ModBoatVariants.DURIAN));
 
     public static final Supplier<Item> DURIAN_PEEL = registerFlatItem("durian_peel",() ->new Item(new Item.Properties()));
     public static final Supplier<Item> DURIAN_PEEL_BLOCK = register("durian_peel_block",() ->new BlockItem(ModBlocks.DURIAN_PEEL_BLOCK.get(),new Item.Properties()));
@@ -147,8 +148,8 @@ public class ModItems {
     public static final Supplier<Item> COCONUT_SIGN = register("coconut_sign",() ->new SignItem(new Item.Properties().stacksTo(16),ModBlocks.COCONUT_SIGN.get(),ModBlocks.COCONUT_WALL_SIGN.get()));
     public static final Supplier<Item> COCONUT_HANGING_SIGN = register("coconut_hanging_sign",() ->new HangingSignItem(ModBlocks.COCONUT_HANGING_SIGN.get(),ModBlocks.COCONUT_WALL_HANGING_SIGN.get(),new Item.Properties().stacksTo(16)));
     public static final Supplier<Item> COCONUT_CABINET = register("coconut_cabinet",() ->new BlockItem(ModBlocks.COCONUT_CABINET.get(),new Item.Properties()));
-    public static final Supplier<Item> COCONUT_BOAT = register("coconut_boat",createBoat(ThaiDelightCommon.modid("coconut_boat"),false,"coconut"));
-    public static final Supplier<Item> COCONUT_CHEST_BOAT = register("coconut_chest_boat",createBoat(ThaiDelightCommon.modid("coconut_chest_boat"),true,"coconut"));
+    public static final Supplier<Item> COCONUT_BOAT = register("coconut_boat",() -> new OvenBoatItem(false,ModBoatVariants.COCONUT));
+    public static final Supplier<Item> COCONUT_CHEST_BOAT = register("coconut_chest_boat",() -> new OvenBoatItem(true,ModBoatVariants.COCONUT));
 
     public static final Supplier<Item> COCONUT = register("coconut",() ->new CoconutItem(new Item.Properties()));
     public static final Supplier<Item> STRIPPED_COCONUT = register("stripped_coconut",() ->new BlockItem(ModBlocks.STRIPPED_COCONUT.get(),new Item.Properties()));
@@ -175,8 +176,8 @@ public class ModItems {
     public static final Supplier<Item> MANGO_SIGN = register("mango_sign",() ->new SignItem(new Item.Properties().stacksTo(16),ModBlocks.MANGO_SIGN.get(),ModBlocks.MANGO_WALL_SIGN.get()));
     public static final Supplier<Item> MANGO_HANGING_SIGN = register("mango_hanging_sign",() ->new HangingSignItem(ModBlocks.MANGO_HANGING_SIGN.get(),ModBlocks.MANGO_WALL_HANGING_SIGN.get(),new Item.Properties().stacksTo(16)));
     public static final Supplier<Item> MANGO_CABINET = register("mango_cabinet",() ->new BlockItem(ModBlocks.MANGO_CABINET.get(),new Item.Properties()));
-    public static final Supplier<Item> MANGO_BOAT = register("mango_boat",createBoat(ThaiDelightCommon.modid("mango_boat"),false,"mango"));
-    public static final Supplier<Item> MANGO_CHEST_BOAT = register("mango_chest_boat",createBoat(ThaiDelightCommon.modid("mango_chest_boat"),true,"mango"));
+    public static final Supplier<Item> MANGO_BOAT = register("mango_boat",() -> new OvenBoatItem(false,ModBoatVariants.MANGO));
+    public static final Supplier<Item> MANGO_CHEST_BOAT = register("mango_chest_boat",() -> new OvenBoatItem(true,ModBoatVariants.MANGO));
 
     public static final Supplier<Item> MANGO = registerFlatItem("mango",() ->new ItemNameBlockItem(ModBlocks.STACKABLE_MANGO_BLOCK.get(),new Item.Properties().food(ModFoods.MANGO)));
     public static final Supplier<Item> MANGO_SLICE = registerFlatItem("mango_slice",() ->new Item(new Item.Properties().food(ModFoods.MANGO_SLICE)));
