@@ -1,30 +1,33 @@
 package net.firemuffin303.thaidelight.forge.network;
 
-import com.mojang.logging.LogUtils;
+import net.firemuffin303.thaidelight.forge.common.capabilities.DurianHeatProvider;
 import net.firemuffin303.thaidelight.forge.common.capabilities.SpicyProvider;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
-public class SpicyPacket  {
+public class DurianHeatPacket {
     int timer;
+    boolean isHeatUp;
 
-    public SpicyPacket(int timer){
+    public DurianHeatPacket(int timer,boolean isHeatUp){
         this.timer = timer;
+        this.isHeatUp = isHeatUp;
     }
 
-    public SpicyPacket(FriendlyByteBuf friendlyByteBuf){
+    public DurianHeatPacket(FriendlyByteBuf friendlyByteBuf){
         this.timer = friendlyByteBuf.readInt();
+        this.isHeatUp = friendlyByteBuf.readBoolean();
     }
 
     public void encode(FriendlyByteBuf friendlyByteBuf){
         friendlyByteBuf.writeInt(this.timer);
+        friendlyByteBuf.writeBoolean(this.isHeatUp);
     }
 
     public void handle(Supplier<NetworkEvent.Context> supplier){
@@ -32,8 +35,9 @@ public class SpicyPacket  {
         context.enqueueWork(() -> {
             DistExecutor.unsafeCallWhenOn(Dist.CLIENT,() -> () -> {
                 LocalPlayer localPlayer = Minecraft.getInstance().player;
-                localPlayer.getCapability(SpicyProvider.SPICY_CAPABILITY).ifPresent(spicy -> {
-                    spicy.setTimer(this.timer,localPlayer);
+                localPlayer.getCapability(DurianHeatProvider.DURIAN_CAPABILITY).ifPresent(spicy -> {
+                    spicy.setTimer(this.timer);
+                    spicy.setHeat(this.isHeatUp);
                 });
                 return null;
             });

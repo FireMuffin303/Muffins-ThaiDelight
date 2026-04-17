@@ -19,6 +19,18 @@ public class ThaiDelightPacketHandler {
 
 
     public static void registerSpicyPacket(){
-        INSTANCE.registerMessage(1, SpicyPacket.class,SpicyPacket::encode,SpicyPacket::new,SpicyPacket::handle, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
+        INSTANCE.registerMessage(1,
+                SpicyPacket.class,
+                SpicyPacket::encode,
+                SpicyPacket::new,
+                SpicyPacket::handle,
+                Optional.of(NetworkDirection.PLAY_TO_CLIENT));
+
+        INSTANCE.registerMessage(2,
+                DurianHeatPacket.class,
+                DurianHeatPacket::encode,
+                DurianHeatPacket::new,
+                DurianHeatPacket::handle,
+                Optional.of(NetworkDirection.PLAY_TO_CLIENT));
     }
 }

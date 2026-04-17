@@ -60,6 +60,7 @@ public class ThaiDelightForgeClient {
     @SubscribeEvent
     public static void clientSetup(FMLClientSetupEvent event){
         event.enqueueWork(() -> {
+            ThaiDelightCommonClient.registerCustomEffectRenderer();
             MenuScreens.register(ModMenuType.MORTAR.get(), MortarScreen::new);
             ItemProperties.register(ModItems.SACK.get(), ThaiDelightCommon.modid("fullness"), new ClampedItemPropertyFunction() {
                 @Override

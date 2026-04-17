@@ -6,10 +6,14 @@ import net.firemuffin303.thaidelight.forge.client.ThaiDelightForgeClient;
 import net.firemuffin303.thaidelight.forge.common.capabilities.DurianHeatProvider;
 import net.firemuffin303.thaidelight.forge.common.capabilities.ISpicy;
 import net.firemuffin303.thaidelight.forge.common.capabilities.SpicyProvider;
+import net.firemuffin303.thaidelight.forge.network.DurianHeatPacket;
+import net.firemuffin303.thaidelight.forge.network.SpicyPacket;
+import net.firemuffin303.thaidelight.forge.network.ThaiDelightPacketHandler;
 import net.firemuffin303.thaidelight.util.ModUtils;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.effect.MobEffect;
@@ -23,6 +27,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import vectorwing.farmersdelight.common.Configuration;
@@ -104,11 +109,11 @@ public class PlatformUtilImpl {
     }
 
     public static void setSpicyTime(int value, LivingEntity livingEntity) {
-        livingEntity.getCapability(SpicyProvider.SPICY_CAPABILITY).ifPresent(spicy -> spicy.setTimer(value));
+        livingEntity.getCapability(SpicyProvider.SPICY_CAPABILITY).ifPresent(spicy -> spicy.setTimer(value,livingEntity));
     }
 
     public static void addSpicyTime(int value, LivingEntity livingEntity) {
-        livingEntity.getCapability(SpicyProvider.SPICY_CAPABILITY).ifPresent(spicy -> spicy.addTimer(value));
+        livingEntity.getCapability(SpicyProvider.SPICY_CAPABILITY).ifPresent(spicy -> spicy.addTimer(value,livingEntity));
     }
 
     public static int getSpicyTime(LivingEntity livingEntity) {
@@ -126,11 +131,21 @@ public class PlatformUtilImpl {
     }
 
     public static void setDurianHeat(boolean value, LivingEntity livingEntity) {
-        livingEntity.getCapability(DurianHeatProvider.DURIAN_CAPABILITY).ifPresent(durianHeat -> durianHeat.setHeat(value));
+        livingEntity.getCapability(DurianHeatProvider.DURIAN_CAPABILITY).ifPresent(durianHeat -> {
+            durianHeat.setHeat(value);
+            if(livingEntity instanceof ServerPlayer serverPlayer){
+                ThaiDelightPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> serverPlayer),new DurianHeatPacket(durianHeat.getTimer(),durianHeat.isHeatUp()));
+            }
+        });
     }
 
     public static void addDurianHeatTime(int i, LivingEntity livingEntity) {
-        livingEntity.getCapability(DurianHeatProvider.DURIAN_CAPABILITY).ifPresent(durianHeat -> durianHeat.addTimer(i));
+        livingEntity.getCapability(DurianHeatProvider.DURIAN_CAPABILITY).ifPresent(durianHeat -> {
+            durianHeat.addTimer(i);
+            if(livingEntity instanceof ServerPlayer serverPlayer){
+                ThaiDelightPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> serverPlayer),new DurianHeatPacket(durianHeat.getTimer(),durianHeat.isHeatUp()));
+            }
+        });
     }
 
 

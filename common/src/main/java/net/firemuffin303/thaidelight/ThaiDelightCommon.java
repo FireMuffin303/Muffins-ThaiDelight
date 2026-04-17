@@ -31,8 +31,6 @@ public class ThaiDelightCommon {
         ModRecipes.init();
 
 
-
-
     }
 
     public static void postInit(){
@@ -43,4 +41,6 @@ public class ThaiDelightCommon {
     public static ResourceLocation modid(String id){
         return new ResourceLocation(MOD_ID,id);
     }
+
+
 }

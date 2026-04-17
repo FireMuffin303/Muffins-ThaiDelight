@@ -11,6 +11,7 @@
     "dyeableItem.RecipeMixin",
     "fallingBlock.FallingBlockEntityMixin",
     "foodEffect.LivingEntityMixin",
+    "foodEffect.spicy.MilkBottleItemMixin",
     "foodEffect.spicy.MilkBucketItemMixin"
   ],
   "client": [
