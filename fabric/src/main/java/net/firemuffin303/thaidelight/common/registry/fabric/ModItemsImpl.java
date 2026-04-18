@@ -2,7 +2,6 @@ package net.firemuffin303.thaidelight.common.registry.fabric;
 
 import com.terraformersmc.terraform.boat.api.TerraformBoatType;
 import com.terraformersmc.terraform.boat.api.TerraformBoatTypeRegistry;
-import com.terraformersmc.terraform.boat.api.item.TerraformBoatItemHelper;
 import com.terraformersmc.terraform.boat.impl.item.TerraformBoatItem;
 import net.firemuffin303.thaidelight.ThaiDelightCommon;
 import net.firemuffin303.thaidelight.common.item.*;
@@ -26,11 +25,6 @@ import vectorwing.farmersdelight.common.registry.ModItems;
 import java.util.function.Supplier;
 
 public class ModItemsImpl {
-
-    public static final ResourceKey<TerraformBoatType> DURIAN_BOAT_KEY = TerraformBoatTypeRegistry.createKey(ThaiDelightCommon.modid("durian_boat"));
-    public static final ResourceKey<TerraformBoatType> COCONUT_BOAT_KEY = TerraformBoatTypeRegistry.createKey(ThaiDelightCommon.modid("coconut_boat"));
-    public static final ResourceKey<TerraformBoatType> MANGO_BOAT_KEY = TerraformBoatTypeRegistry.createKey(ThaiDelightCommon.modid("mango_boat"));
-
     public static Supplier<Item> createPapayaJuiceItem() {
         return PapayaJuiceItem::new;
     }
@@ -68,8 +62,8 @@ public class ModItemsImpl {
     }
 
 
-    public static Supplier<Item> register(String id, Supplier<Item> item) {
-        Item registeredItem = Registry.register(BuiltInRegistries.ITEM, ThaiDelightCommon.modid(id),item.get());
+    public static <T extends Item> Supplier<T> register(String id, Supplier<T> item) {
+        T registeredItem = Registry.register(BuiltInRegistries.ITEM, ThaiDelightCommon.modid(id),item.get());
         return () -> registeredItem;
     }
 
@@ -78,14 +72,6 @@ public class ModItemsImpl {
         return () -> creativeModeTab;
     }
 
-    public static Supplier<Item> createBoat(ResourceLocation id,boolean chest,String boatType) {
-        return switch (boatType){
-            case "durian" ->  () -> new TerraformBoatItem(DURIAN_BOAT_KEY, chest, new Item.Properties().stacksTo(1));
-            case "mango" -> () -> new TerraformBoatItem(MANGO_BOAT_KEY, chest, new Item.Properties().stacksTo(1));
-            case "coconut" -> () -> new TerraformBoatItem(COCONUT_BOAT_KEY, chest, new Item.Properties().stacksTo(1));
-            default -> throw new IllegalStateException("Unexpected value: " + boatType);
-        };
-    }
 
     public static <T extends Mob> Supplier<Item> createSpawnEgg(Supplier<EntityType<T>> entityTypeSupplier, int primaryColor, int secondaryColor, Item.Properties properties) {
         return () -> new SpawnEggItem(entityTypeSupplier.get(),primaryColor,secondaryColor,properties);

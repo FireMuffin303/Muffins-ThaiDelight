@@ -1,11 +1,13 @@
 package net.firemuffin303.thaidelight.util.forge;
 
+import com.mojang.logging.LogUtils;
 import net.firemuffin303.thaidelight.ThaiDelightCommon;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.firemuffin303.thaidelight.forge.client.ThaiDelightForgeClient;
 import net.firemuffin303.thaidelight.forge.common.capabilities.DurianHeatProvider;
 import net.firemuffin303.thaidelight.forge.common.capabilities.ISpicy;
 import net.firemuffin303.thaidelight.forge.common.capabilities.SpicyProvider;
+import net.firemuffin303.thaidelight.forge.mixin.accessor.AxeItemAccessor;
 import net.firemuffin303.thaidelight.forge.network.DurianHeatPacket;
 import net.firemuffin303.thaidelight.forge.network.SpicyPacket;
 import net.firemuffin303.thaidelight.forge.network.ThaiDelightPacketHandler;
@@ -35,6 +37,8 @@ import vectorwing.farmersdelight.common.block.CabinetBlock;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModSounds;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 import java.util.function.Supplier;
 
@@ -145,6 +149,18 @@ public class PlatformUtilImpl {
             if(livingEntity instanceof ServerPlayer serverPlayer){
                 ThaiDelightPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> serverPlayer),new DurianHeatPacket(durianHeat.getTimer(),durianHeat.isHeatUp()));
             }
+        });
+    }
+
+    public static void registerStrippable(Map<Block, Block> map) {
+        Map<Block,Block> map1 = new HashMap<>();
+        map1.putAll(AxeItemAccessor.getStrippables());
+        map1.putAll(map);
+        AxeItemAccessor.setStrippables(map1);
+
+        AxeItemAccessor.getStrippables().entrySet().forEach(blockBlockEntry -> {
+            LogUtils.getLogger().info("{}",blockBlockEntry);
+
         });
     }
 

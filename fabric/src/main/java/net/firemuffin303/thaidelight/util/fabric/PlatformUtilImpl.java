@@ -1,6 +1,7 @@
 package net.firemuffin303.thaidelight.util.fabric;
 
 import io.github.fabricators_of_create.porting_lib.tags.Tags;
+import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.firemuffin303.thaidelight.asm.ModASMEarlyRiser;
 import net.firemuffin303.thaidelight.client.ThaiDelightClientFabric;
 import net.firemuffin303.thaidelight.common.cardinalcomponents.DurianHeatComponent;
@@ -22,6 +23,7 @@ import vectorwing.farmersdelight.common.registry.ModEffects;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.registry.ModSounds;
 
+import java.util.Map;
 import java.util.function.Supplier;
 
 public class PlatformUtilImpl {
@@ -114,6 +116,10 @@ public class PlatformUtilImpl {
 
     public static HumanoidModel.ArmPose getDurianCatcherSwingArmPose() {
         return ModASMEarlyRiser.getDurianCatcherSwingArmPose();
+    }
+
+    public static void registerStrippable(Map<Block, Block> map) {
+        map.forEach(StrippableBlockRegistry::register);
     }
 
 

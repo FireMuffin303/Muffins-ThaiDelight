@@ -1,13 +1,25 @@
 package net.firemuffin303.thaidelight;
 
+import com.mojang.logging.LogUtils;
 import net.firemuffin303.thaidelight.common.registry.*;
+import net.firemuffin303.thaidelight.mixin.accessor.VillagerAccessor;
+import net.firemuffin303.thaidelight.mixin.food.ChickenFoodAccessor;
+import net.firemuffin303.thaidelight.mixin.food.FrogFoodAccessor;
+import net.firemuffin303.thaidelight.mixin.food.ParrotTameFoodAccessor;
+import net.firemuffin303.thaidelight.mixin.food.PigFoodAccessor;
+import net.firemuffin303.thaidelight.util.PlatformUtil;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.alchemy.PotionBrewing;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.block.Block;
+
+import java.util.*;
+import java.util.stream.Stream;
 
 public class ThaiDelightCommon {
     public static final String MOD_ID = "muffins_thaidelight";
+
+    public static final Map<Item,Integer> FUEL_MAP = new HashMap<>();
 
     public static void init(){
         ModSoundEvents.init();
@@ -25,8 +37,8 @@ public class ThaiDelightCommon {
 
         ModBlockSetTypes.init();
         ModBlockEntityTypes.init();
-        ModBlocks.init();
         ModItems.init();
+        ModBlocks.init();
 
         ModRecipes.init();
         ModBoatVariants.init();
@@ -39,11 +51,101 @@ public class ThaiDelightCommon {
     public static void postInit(){
         ModCauldronInteraction.init();
         ModDispenserBehavior.init();
+        ModComposterEvent.init();
+        registerFuel();
+        registerStrippable();
+        registerAnimalFood();
+        setVillagerItem();
     }
 
     public static ResourceLocation modid(String id){
         return new ResourceLocation(MOD_ID,id);
     }
 
+
+    public static void registerStrippable(){
+        Map<Block,Block> block = new HashMap<>();
+        block.put(ModBlocks.PAPAYA_LOG.get(),ModBlocks.STRIPPED_PAPAYA_LOG.get());
+        block.put(ModBlocks.PAPAYA_WOOD.get(),ModBlocks.STRIPPED_PAPAYA_WOOD.get());
+        block.put(ModBlocks.DURIAN_LOG.get(),ModBlocks.STRIPPED_DURIAN_LOG.get());
+        block.put(ModBlocks.DURIAN_WOOD.get(),ModBlocks.STRIPPED_DURIAN_WOOD.get());
+        block.put(ModBlocks.MANGO_LOG.get(),ModBlocks.STRIPPED_MANGO_LOG.get());
+        block.put(ModBlocks.MANGO_WOOD.get(),ModBlocks.STRIPPED_MANGO_WOOD.get());
+        block.put(ModBlocks.COCONUT_LOG.get(),ModBlocks.STRIPPED_COCONUT_LOG.get());
+        block.put(ModBlocks.COCONUT_WOOD.get(),ModBlocks.STRIPPED_COCONUT_WOOD.get());
+
+        PlatformUtil.registerStrippable(block);
+    }
+
+    public static void registerFuel(){
+        FUEL_MAP.put(ModItems.DURIAN_PEEL.get(),200);
+        FUEL_MAP.put(ModItems.DURIAN_PEEL_BLOCK.get(),1800);
+        FUEL_MAP.put(ModItems.COCONUT_LEAF_BLOCK.get(),4001);
+        FUEL_MAP.put(ModItems.PAPAYA_LEAVES.get(),100);
+        FUEL_MAP.put(ModItems.DURIAN_CABINET.get(),300);
+        FUEL_MAP.put(ModItems.MANGO_CABINET.get(),300);
+        FUEL_MAP.put(ModItems.COCONUT_CABINET.get(),300);
+
+
+    }
+
+    public static void registerAnimalFood(){
+        ParrotTameFoodAccessor.getTameFood().add(Item.byBlock(ModBlocks.PAPAYA_SAPLING.get()));
+        ParrotTameFoodAccessor.getTameFood().add(ModItems.PEPPER_SEED.get());
+        ParrotTameFoodAccessor.getTameFood().add(ModItems.BUTTERFLY_PEA_SEEDS.get());
+
+        Ingredient newPigFoods = Ingredient.of(
+                ModItems.RAW_PAPAYA.get(),
+                ModItems.PAPAYA.get(),
+                ModItems.SLICED_PAPAYA.get(),
+                ModItems.RAW_PAPAYA_SLICE.get(),
+                ModItems.LIME.get(),
+                ModItems.SLICED_LIME.get(),
+                ModItems.BAMBOO_SHOOT.get()
+        );
+        Ingredient newChickenFoods = Ingredient.of(ModItems.PAPAYA_SEEDS.get(),ModItems.PEPPER_SEED.get(),ModItems.BUTTERFLY_PEA_SEEDS.get());
+
+        Ingredient newFrogFoods = Ingredient.of(ModItems.DRAGONFLY.get(),ModItems.COOKED_DRAGONFLY.get());
+
+        PigFoodAccessor.setFoodItems(Ingredient.of(
+                Stream.concat(Arrays.stream(PigFoodAccessor.getFoodItems().getItems()),Arrays.stream(newPigFoods.getItems()))
+        ));
+
+        ChickenFoodAccessor.setFoodItems(Ingredient.of(
+                Stream.concat(Arrays.stream(ChickenFoodAccessor.getFoodItems().getItems()),Arrays.stream(newChickenFoods.getItems()))
+        ));
+
+        FrogFoodAccessor.setFoodItems(Ingredient.of(
+                Stream.concat(Arrays.stream(FrogFoodAccessor.getFoodItems().getItems()),Arrays.stream(newFrogFoods.getItems()))
+        ));
+
+    }
+
+    public static void setVillagerItem(){
+        Map<Item,Integer> villagerFoodPoint = new HashMap<>(VillagerAccessor.getFoodPoints());
+        villagerFoodPoint.put(ModItems.LIME.get(),1);
+        villagerFoodPoint.put(ModItems.PEPPER.get(),1);
+        villagerFoodPoint.put(ModItems.PAPAYA.get(),1);
+        villagerFoodPoint.put(ModItems.RAW_PAPAYA.get(),1);
+        villagerFoodPoint.put(ModItems.DURIAN_PULP.get(),1);
+        villagerFoodPoint.put(ModItems.BASIL.get(),1);
+        villagerFoodPoint.put(ModItems.HOLY_BASIL.get(),1);
+        villagerFoodPoint.put(ModItems.MANGO.get(),1);
+        villagerFoodPoint.put(ModItems.COCONUT_SLICE.get(),1);
+
+        VillagerAccessor.setFoodPoints(villagerFoodPoint);
+
+        Set<Item> villagerWantedItems = new HashSet<>(VillagerAccessor.getWantedItems());
+        villagerWantedItems.add(ModItems.LIME.get());
+        villagerWantedItems.add(ModItems.PEPPER.get());
+        villagerWantedItems.add(ModItems.PAPAYA.get());
+        villagerWantedItems.add(ModItems.RAW_PAPAYA.get());
+        villagerWantedItems.add(ModItems.DURIAN_PULP.get());
+        villagerWantedItems.add(ModItems.BASIL.get());
+        villagerWantedItems.add(ModItems.HOLY_BASIL.get());
+        villagerWantedItems.add(ModItems.MANGO.get());
+        villagerWantedItems.add(ModItems.COCONUT_SLICE.get());
+        VillagerAccessor.setWantedItems(villagerWantedItems);
+    }
 
 }

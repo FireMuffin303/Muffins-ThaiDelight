@@ -649,25 +649,8 @@ public class ModBlocks {
         throw new AssertionError();
     }
 
-    @ExpectPlatform
-    public static Supplier<Block> createStandingSignBlock(ResourceLocation resourceLocation, BlockBehaviour.Properties properties){
-        throw new AssertionError();
-    }
 
-    @ExpectPlatform
-    public static Supplier<Block> createWallSignBlock(ResourceLocation resourceLocation,BlockBehaviour.Properties properties){
-        throw new AssertionError();
-    }
 
-    @ExpectPlatform
-    public static Supplier<Block> createHangingSignBlock(ResourceLocation id, ResourceLocation id2, BlockBehaviour.Properties properties){
-        throw new AssertionError();
-    }
-
-    @ExpectPlatform
-    public static Supplier<Block> createHangingWallSignBlock(ResourceLocation id, ResourceLocation id2, BlockBehaviour.Properties properties){
-        throw new AssertionError();
-    }
 
     @ExpectPlatform
     public static Supplier<Block> createButterflyPeaBlock(){

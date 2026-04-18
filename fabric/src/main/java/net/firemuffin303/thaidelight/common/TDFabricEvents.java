@@ -137,13 +137,7 @@ public class TDFabricEvents {
     }
 
     public static void registerFuel(){
-        FuelRegistry.INSTANCE.add(ModItems.DURIAN_PEEL.get(),200);
-        FuelRegistry.INSTANCE.add(ModItems.DURIAN_PEEL_BLOCK.get(),1800);
-        FuelRegistry.INSTANCE.add(ModItems.COCONUT_LEAF_BLOCK.get(),4001);
-        FuelRegistry.INSTANCE.add(ModItems.PAPAYA_LEAVES.get(),100);
-        FuelRegistry.INSTANCE.add(ModItems.DURIAN_CABINET.get(),300);
-        FuelRegistry.INSTANCE.add(ModItems.MANGO_CABINET.get(),300);
-        FuelRegistry.INSTANCE.add(ModItems.COCONUT_CABINET.get(),300);
+        ThaiDelightCommon.FUEL_MAP.forEach(FuelRegistry.INSTANCE::add);
     }
 
     public static void modifyLootTable(){

@@ -60,7 +60,7 @@ public class ModBlocksImpl {
         return () -> new WildCropBlock(stewEffect,effectDuration,properties);
     }
 
-    public static Supplier<Block> register(String id, Supplier<Block> block) {
+    public static <T extends Block> Supplier<T> register(String id, Supplier<T> block) {
         return BLOCK.register(id,block);
     }
 
@@ -80,21 +80,6 @@ public class ModBlocksImpl {
         return ForgeBuddingButterflyPeaBlock::new;
     }
 
-    public static Supplier<Block> createStandingSignBlock(ResourceLocation resourceLocation, BlockBehaviour.Properties properties) {
-        return () -> new StandingSignBlock(properties, WoodType.OAK);
-    }
-
-    public static Supplier<Block> createWallSignBlock(ResourceLocation resourceLocation, BlockBehaviour.Properties properties) {
-        return () -> new WallSignBlock(properties,WoodType.OAK);
-    }
-
-    public static Supplier<Block> createHangingSignBlock(ResourceLocation id, ResourceLocation id2, BlockBehaviour.Properties properties) {
-        return () -> new CeilingHangingSignBlock(properties,WoodType.OAK);
-    }
-
-    public static Supplier<Block> createHangingWallSignBlock(ResourceLocation id, ResourceLocation id2, BlockBehaviour.Properties properties) {
-        return () -> new WallHangingSignBlock(properties,WoodType.OAK);
-    }
 
     public static Supplier<Block> getThaiDelightBlock(String id, Supplier<Block> blockSupplier) {
         return RegistryObject.create(ThaiDelightCommon.modid(id), ForgeRegistries.BLOCKS);

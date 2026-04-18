@@ -288,7 +288,7 @@ public class ModItems {
 
 
     @ExpectPlatform
-    public static Supplier<Item> register(String id, Supplier<Item> item){
+    public static <T extends Item> Supplier<T> register(String id, Supplier<T> item){
         throw new AssertionError();
     }
 
@@ -350,10 +350,6 @@ public class ModItems {
         throw new AssertionError();
     }
 
-    @ExpectPlatform
-    public static Supplier<Item> createBoat(ResourceLocation id, boolean chest, String boatType){
-        throw new AssertionError();
-    }
 
     @ExpectPlatform
     public static <T extends Mob> Supplier<Item> createSpawnEgg(Supplier<EntityType<T>> entityTypeSupplier, int primaryColor, int secondaryColor, Item.Properties properties){

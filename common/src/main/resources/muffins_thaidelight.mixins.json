@@ -17,7 +17,6 @@
     "accessor.feature.FoliagePlacerTypeAccessor",
     "accessor.feature.TrunkPlacerTypeAccessor",
     "anorexia.LivingEntityMixin",
-    "axeItem.AxeItemMixin",
     "bambooShoot.PandaMixin",
     "blockEntityType.BlockEntityTypeMixin",
     "catachableFallingBlock.FallingBlockEntityMixin",

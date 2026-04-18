@@ -6,7 +6,9 @@ import com.mojang.brigadier.arguments.IntegerArgumentType;
 import net.firemuffin303.muffinsmcapi.api.BoatRegistry;
 import net.firemuffin303.muffinsmcapi.forge.common.ModBoatVariants;
 import net.firemuffin303.thaidelight.ThaiDelightCommon;
+import net.firemuffin303.thaidelight.common.entity.ai.NearestMobStinkyTargetGoal;
 import net.firemuffin303.thaidelight.common.registry.ModEntityTypes;
+import net.firemuffin303.thaidelight.common.registry.ModVillagerTrades;
 import net.firemuffin303.thaidelight.common.registry.forge.*;
 import net.firemuffin303.thaidelight.forge.common.capabilities.DurianHeatProvider;
 import net.firemuffin303.thaidelight.forge.common.capabilities.IDurianHeat;
@@ -15,6 +17,7 @@ import net.firemuffin303.thaidelight.forge.common.capabilities.SpicyProvider;
 import net.firemuffin303.thaidelight.forge.network.DurianHeatPacket;
 import net.firemuffin303.thaidelight.forge.network.SpicyPacket;
 import net.firemuffin303.thaidelight.forge.network.ThaiDelightPacketHandler;
+import net.firemuffin303.thaidelight.mixin.accessor.MobAccessor;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -22,16 +25,26 @@ import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.goal.GoalSelector;
+import net.minecraft.world.entity.animal.AbstractGolem;
+import net.minecraft.world.entity.animal.Dolphin;
+import net.minecraft.world.entity.animal.Panda;
+import net.minecraft.world.entity.animal.horse.Llama;
+import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.trading.MerchantOffer;
+import net.minecraftforge.common.BasicItemListing;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
+import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.village.VillagerTradesEvent;
+import net.minecraftforge.event.village.WandererTradesEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -42,7 +55,8 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryManager;
 import vectorwing.farmersdelight.common.tag.ForgeTags;
 
-import java.util.Arrays;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Mod.EventBusSubscriber(modid = ThaiDelightCommon.MOD_ID,bus = Mod.EventBusSubscriber.Bus.MOD)
 @Mod(ThaiDelightCommon.MOD_ID)
@@ -78,6 +92,9 @@ public class ThaiDelightForge {
         MinecraftForge.EVENT_BUS.addListener(this::onPlayerTick);
         MinecraftForge.EVENT_BUS.addListener(this::onPlayerJoin);
         MinecraftForge.EVENT_BUS.addListener(this::registerCommand);
+        MinecraftForge.EVENT_BUS.addListener(this::registerWanderingTraderOffers);
+        MinecraftForge.EVENT_BUS.addListener(this::registerVillagerTrade);
+        MinecraftForge.EVENT_BUS.addListener(this::registerGoalSelector);
         eventBus.register(this);
 
     }
@@ -101,6 +118,51 @@ public class ThaiDelightForge {
     public static void registerCapabilities(RegisterCapabilitiesEvent event){
         event.register(ISpicy.class);
         event.register(IDurianHeat.class);
+    }
+
+    public void registerGoalSelector(EntityJoinLevelEvent event){
+        Map<EntityType<?>,Integer> map = Map.of(
+                EntityType.BEE,2,
+                EntityType.ENDERMAN,3,
+                EntityType.POLAR_BEAR,3,
+                EntityType.WOLF,4,
+                EntityType.ZOMBIFIED_PIGLIN,2
+        );
+
+        Entity entity = event.getEntity();
+        if(entity instanceof Mob mob){
+            GoalSelector goalSelector = ((MobAccessor)mob).getGoalSelector();
+            if(!goalSelector.getAvailableGoals().isEmpty()){
+                if(mob instanceof NeutralMob && !(mob instanceof AbstractGolem)){
+                    goalSelector.addGoal(map.getOrDefault(entity.getType(), 3), new NearestMobStinkyTargetGoal<>(mob, Player.class, true));
+                } else if(mob instanceof Panda || mob instanceof Llama || mob instanceof Dolphin){
+                    goalSelector.addGoal(2, new NearestMobStinkyTargetGoal<>(mob, Player.class, true));
+                }
+
+            }
+        }
+
+    }
+
+    public void registerVillagerTrade(VillagerTradesEvent event){
+        ModVillagerTrades.trades().stream().forEach(modVillagerTrade -> {
+            if(event.getType() == modVillagerTrade.villagerProfession()){
+                List<VillagerTrades.ItemListing> list = event.getTrades().get(modVillagerTrade.level());
+                MerchantOffer merchantOffer = modVillagerTrade.merchantOffer();
+                list.add(new BasicItemListing(merchantOffer.getCostA(),merchantOffer.getCostB(),merchantOffer.getResult(),merchantOffer.getMaxUses(),merchantOffer.getXp(),merchantOffer.getPriceMultiplier()));
+            }
+        });
+    }
+
+    public void registerWanderingTraderOffers(WandererTradesEvent event){
+        Set<VillagerTrades.ItemListing> set = ModVillagerTrades.wanderTrade().stream().map(merchantOffer -> new BasicItemListing(merchantOffer.getCostA(), merchantOffer.getCostB(),
+                merchantOffer.getResult(),
+                merchantOffer.getMaxUses(),
+                merchantOffer.getXp(),
+                merchantOffer.getPriceMultiplier()
+                )).collect(Collectors.toSet());
+
+        event.getGenericTrades().addAll(set);
     }
 
     public void attachCapability(AttachCapabilitiesEvent<Entity> event){

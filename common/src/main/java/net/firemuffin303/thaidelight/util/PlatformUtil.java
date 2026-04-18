@@ -12,6 +12,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.block.Block;
 
+import java.util.Map;
 import java.util.function.Supplier;
 
 public class PlatformUtil {
@@ -123,6 +124,11 @@ public class PlatformUtil {
 
     @ExpectPlatform
     public static HumanoidModel.ArmPose getDurianCatcherSwingArmPose(){
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static void registerStrippable(Map<Block, Block> map){
         throw new AssertionError();
     }
 

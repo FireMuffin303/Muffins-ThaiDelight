@@ -71,17 +71,9 @@ public class ThaiDelightClientFabric implements ClientModInitializer {
         ThaiDelightCommonClient.blockEntityRenderRegister(BlockEntityRenderers::register);
         BuiltinItemRendererRegistry.INSTANCE.register(ModItems.SACK.get(),new SackItemRenderer());
 
-        TerraformBoatClientHelper.registerModelLayers(ThaiDelightCommon.modid("durian_boat"),false);
-        TerraformBoatClientHelper.registerModelLayers(ThaiDelightCommon.modid("coconut_boat"),false);
-        TerraformBoatClientHelper.registerModelLayers(ThaiDelightCommon.modid("mango_boat"),false);
-
         ArmorRenderer.register(new DurianHelmetRenderer(), ModItems.DURIAN_HELMET.get());
 
         ThaiDelightCommonClient.registerCustomEffectRenderer();
-
-        SpriteIdentifierRegistry.INSTANCE.addIdentifier(new Material(Sheets.SIGN_SHEET, ThaiDelightCommon.modid("entity/signs/durian")));
-        SpriteIdentifierRegistry.INSTANCE.addIdentifier(new Material(Sheets.SIGN_SHEET, ThaiDelightCommon.modid("entity/signs/coconut")));
-        SpriteIdentifierRegistry.INSTANCE.addIdentifier(new Material(Sheets.SIGN_SHEET, ThaiDelightCommon.modid("entity/signs/mango")));
 
         MenuScreens.register(ModMenuType.MORTAR.get(), MortarScreen::new);
 

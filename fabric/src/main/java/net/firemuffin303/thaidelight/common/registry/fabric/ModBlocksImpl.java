@@ -22,49 +22,50 @@ import vectorwing.farmersdelight.common.block.WildCropBlock;
 import java.util.function.Supplier;
 
 public class ModBlocksImpl {
-    public static Supplier<Block> createSomtamFeast() {
-        return SomtamFeastBlock::new;
+    public static  Supplier<Block> createSomtamFeast() {
+        Block somtamBlock = new SomtamFeastBlock();
+        return () -> somtamBlock;
     }
 
     public static Supplier<Block> createLarbFeast() {
-        return LarbFeastBlock::new;
+        Block block = new LarbFeastBlock();
+        return () -> block;
     }
 
     public static Supplier<Block> createCrabFriedRice() {
-        return CrabFriedRiceFeastBlock::new;
+        Block block = new CrabFriedRiceFeastBlock();
+        return () -> block;
     }
 
     public static Supplier<Block> createCoconutPieBlock() {
-        return CoconutPieBlock::new;
+        Block block = new CoconutPieBlock();
+        return () -> block;
     }
 
     public static Supplier<Block> createPhatKaphraoBlock() {
-        return PhatKaphraoFeastBlock::new;
+        Block block = new PhatKaphraoFeastBlock();
+        return () -> block;
     }
 
     public static Supplier<Block> createMangoStickyRiceBlock() {
-        return MangoStickyRiceFeastBlock::new;
+        Block block = new MangoStickyRiceFeastBlock();
+        return () -> block;
     }
 
     public static Supplier<Block> createOmeletteBlock(Supplier<Item> itemSupplier) {
-        return () -> new OmeletteFeastBlock(itemSupplier);
+        Block block = new OmeletteFeastBlock(itemSupplier);
+        return () -> block;
     }
 
     public static Supplier<Block> createPineappleFeastBlock() {
-        return PineappleFriedRiceFeastBlock::new;
+        Block block = new PineappleFriedRiceFeastBlock();
+        return () -> block;
     }
 
     public static Supplier<Block> createWildCropBlock(MobEffect stewEffect, int effectDuration, BlockBehaviour.Properties properties) {
         return () -> new WildCropBlock(stewEffect,effectDuration,properties);
     }
 
-    public static Supplier<Block> createStandingSignBlock(ResourceLocation resourceLocation,BlockBehaviour.Properties properties) {
-        return () -> new TerraformSignBlock(resourceLocation,properties);
-    }
-
-    public static Supplier<Block> createWallSignBlock(ResourceLocation resourceLocation, BlockBehaviour.Properties properties) {
-        return () -> new TerraformWallSignBlock(resourceLocation,properties);
-    }
 
     public static Supplier<Block> createButterflyPeaBlock() {
         return FabricBuddingButterflyPeaBlock::new;
@@ -78,8 +79,8 @@ public class ModBlocksImpl {
         return () -> new FabricBuddingPepperBlock(properties);
     }
 
-    public static Supplier<Block> register(String id, Supplier<Block> block) {
-        Block registeredBlock = Registry.register(BuiltInRegistries.BLOCK, ThaiDelightCommon.modid(id),block.get());
+    public static <T extends Block> Supplier<T> register(String id, Supplier<T> block) {
+        T registeredBlock = Registry.register(BuiltInRegistries.BLOCK, ThaiDelightCommon.modid(id),block.get());
         return () -> registeredBlock;
     }
 
@@ -87,13 +88,6 @@ public class ModBlocksImpl {
         return () -> new PieBlock(properties,supplier);
     }
 
-    public static Supplier<Block> createHangingSignBlock(ResourceLocation id, ResourceLocation id2, BlockBehaviour.Properties properties) {
-        return () -> new TerraformHangingSignBlock(id,id2,properties);
-    }
-
-    public static Supplier<Block> createHangingWallSignBlock(ResourceLocation id, ResourceLocation id2, BlockBehaviour.Properties properties) {
-        return () -> new TerraformWallHangingSignBlock(id,id2,properties);
-    }
 
     public static Supplier<Block> getThaiDelightBlock(String id, Supplier<Block> blockSupplier) {
         return blockSupplier;

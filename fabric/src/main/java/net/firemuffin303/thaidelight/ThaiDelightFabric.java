@@ -48,23 +48,9 @@ public class ThaiDelightFabric implements ModInitializer {
     public static boolean IS_FOT_INSTALLED = false;
     public static boolean IS_TOUGH_AS_NAIL_INSTALLED = false;
 
-    public static final TerraformBoatType DURIAN = new TerraformBoatType.Builder()
-            .item(ModItems.DURIAN_BOAT.get())
-            .chestItem(ModItems.DURIAN_CHEST_BOAT.get())
-            .planks(ModItems.DURIAN_PLANKS.get())
-            .build();
+    // vv The evil code that if I remove, the game won't start for some reason. vbvvv
+    private static final Item LOADER = ModItems.DURIAN.get();
 
-    private static final TerraformBoatType COCONUT = new TerraformBoatType.Builder()
-            .item(ModItems.COCONUT_BOAT.get())
-            .chestItem(ModItems.COCONUT_CHEST_BOAT.get())
-            .planks(ModItems.COCONUT_PLANKS.get())
-            .build();
-
-    private static final TerraformBoatType MANGO = new TerraformBoatType.Builder()
-            .item(ModItems.MANGO_BOAT.get())
-            .chestItem(ModItems.MANGO_CHEST_BOAT.get())
-            .planks(ModItems.MANGO_PLANKS.get())
-            .build();
 
     @Override
     public void onInitialize() {
@@ -75,9 +61,6 @@ public class ThaiDelightFabric implements ModInitializer {
 
         ModEntityTypes.registerAttribute(FabricDefaultAttributeRegistry::register);
 
-        Registry.register(TerraformBoatTypeRegistry.INSTANCE, ModItemsImpl.DURIAN_BOAT_KEY,DURIAN);
-        Registry.register(TerraformBoatTypeRegistry.INSTANCE,ModItemsImpl.COCONUT_BOAT_KEY,COCONUT);
-        Registry.register(TerraformBoatTypeRegistry.INSTANCE,ModItemsImpl.MANGO_BOAT_KEY,MANGO);
 
         SpawnPlacements.register(ModEntityTypes.FLOWER_CRAB.get(),SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, FlowerCrabEntity::checkSpawnRules);
         SpawnPlacements.register(ModEntityTypes.DRAGONFLY.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, DragonflyEntity::checkSpawnRules);
@@ -89,13 +72,6 @@ public class ThaiDelightFabric implements ModInitializer {
             ToughAsNailIntegration.toughAsNailIntegration();
         }
 
-        TerraformBoatItemHelper.registerBoatDispenserBehavior(ModItems.DURIAN_BOAT.get(),ModItemsImpl.DURIAN_BOAT_KEY,false);
-        TerraformBoatItemHelper.registerBoatDispenserBehavior(ModItems.DURIAN_CHEST_BOAT.get(),ModItemsImpl.DURIAN_BOAT_KEY,true);
-        TerraformBoatItemHelper.registerBoatDispenserBehavior(ModItems.MANGO_BOAT.get(),ModItemsImpl.MANGO_BOAT_KEY,false);
-        TerraformBoatItemHelper.registerBoatDispenserBehavior(ModItems.MANGO_CHEST_BOAT.get(),ModItemsImpl.MANGO_BOAT_KEY,true);
-        TerraformBoatItemHelper.registerBoatDispenserBehavior(ModItems.COCONUT_BOAT.get(),ModItemsImpl.COCONUT_BOAT_KEY,false);
-        TerraformBoatItemHelper.registerBoatDispenserBehavior(ModItems.COCONUT_CHEST_BOAT.get(),ModItemsImpl.COCONUT_BOAT_KEY,true);
-
         PotionBrewing.addMix(Potions.AWKWARD,ModItems.FERMENTED_FISH.get(), ModMobEffects.STENCH_POTION.get());
         PotionBrewing.addMix(ModMobEffects.STENCH_POTION.get(), Items.REDSTONE,ModMobEffects.LONG_STENCH_POTION.get());
         PotionBrewing.addMix(ModMobEffects.STENCH_POTION.get(), Items.GLOWSTONE_DUST,ModMobEffects.STRONG_STENCH_POTION.get());
@@ -106,12 +82,7 @@ public class ThaiDelightFabric implements ModInitializer {
         TDFabricEvents.registerFuel();
         TDFabricEvents.modifyLootTable();
         TDFabricEvents.initializeStinkyEffect();
-        TDFabricEvents.setVillagerItem();
         TDFabricEvents.addVillagersTrades();
-        TDFabricEvents.registerStrippable();
-        TDFabricEvents.registerComposter();
-        TDFabricEvents.registerAnimalFood();
-
 
         CommandRegistrationCallback.EVENT.register(ThaiDelightFabric::modCommand);
 

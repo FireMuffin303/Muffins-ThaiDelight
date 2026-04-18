@@ -7,12 +7,14 @@
     "BlockFamiliesAccessor",
     "DurianHelmetItemMixin",
     "SackItemMixin",
+    "accessor.AxeItemAccessor",
     "dispenser.BucketItemMixin",
     "dyeableItem.RecipeMixin",
     "fallingBlock.FallingBlockEntityMixin",
     "foodEffect.LivingEntityMixin",
     "foodEffect.spicy.MilkBottleItemMixin",
-    "foodEffect.spicy.MilkBucketItemMixin"
+    "foodEffect.spicy.MilkBucketItemMixin",
+    "fuel.ItemMixin"
   ],
   "client": [
   ],
