@@ -8,12 +8,15 @@ import net.firemuffin303.muffinsmcapi.forge.common.ModBoatVariants;
 import net.firemuffin303.thaidelight.ThaiDelightCommon;
 import net.firemuffin303.thaidelight.common.entity.ai.NearestMobStinkyTargetGoal;
 import net.firemuffin303.thaidelight.common.registry.ModEntityTypes;
+import net.firemuffin303.thaidelight.common.registry.ModItems;
+import net.firemuffin303.thaidelight.common.registry.ModMobEffects;
 import net.firemuffin303.thaidelight.common.registry.ModVillagerTrades;
 import net.firemuffin303.thaidelight.common.registry.forge.*;
 import net.firemuffin303.thaidelight.forge.common.capabilities.DurianHeatProvider;
 import net.firemuffin303.thaidelight.forge.common.capabilities.IDurianHeat;
 import net.firemuffin303.thaidelight.forge.common.capabilities.ISpicy;
 import net.firemuffin303.thaidelight.forge.common.capabilities.SpicyProvider;
+import net.firemuffin303.thaidelight.forge.mixin.accessor.PotionBrewingAccessor;
 import net.firemuffin303.thaidelight.forge.network.DurianHeatPacket;
 import net.firemuffin303.thaidelight.forge.network.SpicyPacket;
 import net.firemuffin303.thaidelight.forge.network.ThaiDelightPacketHandler;
@@ -33,6 +36,9 @@ import net.minecraft.world.entity.animal.Panda;
 import net.minecraft.world.entity.animal.horse.Llama;
 import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.PotionBrewing;
+import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraftforge.common.BasicItemListing;
 import net.minecraftforge.common.MinecraftForge;
@@ -40,6 +46,7 @@ import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.brewing.PotionBrewEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -62,15 +69,8 @@ import java.util.stream.Collectors;
 @Mod(ThaiDelightCommon.MOD_ID)
 public class ThaiDelightForge {
     private static final DeferredRegister<?>[] REGISTERS = {
-            ModSoundEventsImpl.SOUND_EVENT,
-            ModBlockStateProviderTypesImpl.BLOCK_STATE_PROVIDER_TYPE,
-            ModTreeDecoratorTypesImpl.TREE_DECORATOR_TYPE,
-            ModFeaturesImpl.FOLIAGE_PLACER,
-            ModFeaturesImpl.TRUNK_PLACER,
             ModBoatVariantsImpl.BOAT_VARIANT,
             ModEntityTypesImpl.ENTITY_TYPES,
-            ModMobEffectsImpl.MOB_EFFECT,
-            ModMobEffectsImpl.POTION,
             ModMenuTypeImpl.MENU,
             ModBlockEntityTypesImpl.BLOCK_ENTITY,
             ModBlocksImpl.BLOCK,
@@ -104,8 +104,14 @@ public class ThaiDelightForge {
         event.enqueueWork(() -> {
             ThaiDelightCommon.postInit();
             ThaiDelightPacketHandler.registerSpicyPacket();
+
+            PotionBrewingAccessor.addMix(Potions.AWKWARD, ModItems.FERMENTED_FISH.get(), ModMobEffects.STENCH_POTION.get());
+            PotionBrewingAccessor.addMix(ModMobEffects.STENCH_POTION.get(), Items.REDSTONE,ModMobEffects.LONG_STENCH_POTION.get());
+            PotionBrewingAccessor.addMix(ModMobEffects.STENCH_POTION.get(), Items.GLOWSTONE_DUST,ModMobEffects.STRONG_STENCH_POTION.get());
         });
     }
+
+
 
     @SubscribeEvent
     public static void registerEntityAttribute(EntityAttributeCreationEvent event){

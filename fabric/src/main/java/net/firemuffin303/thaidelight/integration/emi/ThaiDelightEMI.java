@@ -11,6 +11,9 @@ import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.firemuffin303.thaidelight.common.registry.ModRecipes;
 import net.firemuffin303.thaidelight.common.registry.ModTags;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.RecipeType;
+
+import java.util.function.Supplier;
 
 public class ThaiDelightEMI implements EmiPlugin {
     public static final EmiRecipeCategory FERMENTED_FISH = new EmiRecipeCategory(
@@ -31,7 +34,8 @@ public class ThaiDelightEMI implements EmiPlugin {
         emiRegistry.addCategory(MORTAR);
         emiRegistry.addCategory(FERMENTED_FISH);
 
-        for(MortarRecipe recipe : emiRegistry.getRecipeManager().getAllRecipesFor(ModRecipes.MORTAR.get())){
+        Supplier<RecipeType<MortarRecipe>> f = (Supplier<RecipeType<MortarRecipe>>) (Supplier<?>)ModRecipes.MORTAR;
+        for(MortarRecipe recipe : emiRegistry.getRecipeManager().getAllRecipesFor(f.get())){
             emiRegistry.addRecipe(new EMIMortarRecipe(recipe));
         }
 

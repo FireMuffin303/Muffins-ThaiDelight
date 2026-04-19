@@ -10,8 +10,4 @@ import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorTy
 import java.util.function.Supplier;
 
 public class ModTreeDecoratorTypesImpl {
-    public static <T extends TreeDecorator> Supplier<TreeDecoratorType<T>> registerTreeDecorator(String id, Codec<T> codec) {
-        TreeDecoratorType<T> registeredTreeDecorator = Registry.register(BuiltInRegistries.TREE_DECORATOR_TYPE, ThaiDelightCommon.modid(id),new TreeDecoratorType<>(codec));
-        return () -> registeredTreeDecorator;
-    }
 }

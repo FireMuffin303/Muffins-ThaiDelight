@@ -23,10 +23,10 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Supplier;
 
-public class MobBottleItem<T extends Mob> extends Item {
-    private final Supplier<EntityType<T>> entityType;
+public class MobBottleItem extends Item {
+    private final Supplier<EntityType<?>> entityType;
     private final SoundEvent emptySound;
-    public MobBottleItem(Supplier<EntityType<T>> entityTypeSupplier, SoundEvent emptySound, Properties properties) {
+    public MobBottleItem(Supplier<EntityType<?>> entityTypeSupplier, SoundEvent emptySound, Properties properties) {
         super(properties);
         this.entityType = entityTypeSupplier;
         this.emptySound = emptySound;

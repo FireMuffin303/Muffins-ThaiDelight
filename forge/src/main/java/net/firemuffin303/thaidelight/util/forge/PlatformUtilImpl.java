@@ -9,12 +9,15 @@ import net.firemuffin303.thaidelight.forge.common.capabilities.ISpicy;
 import net.firemuffin303.thaidelight.forge.common.capabilities.SpicyProvider;
 import net.firemuffin303.thaidelight.forge.mixin.accessor.AxeItemAccessor;
 import net.firemuffin303.thaidelight.forge.network.DurianHeatPacket;
+import net.firemuffin303.thaidelight.forge.network.ModLevelPacket;
 import net.firemuffin303.thaidelight.forge.network.SpicyPacket;
 import net.firemuffin303.thaidelight.forge.network.ThaiDelightPacketHandler;
 import net.firemuffin303.thaidelight.util.ModUtils;
 import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.TagKey;
@@ -27,6 +30,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.network.PacketDistributor;
@@ -157,11 +161,16 @@ public class PlatformUtilImpl {
         map1.putAll(AxeItemAccessor.getStrippables());
         map1.putAll(map);
         AxeItemAccessor.setStrippables(map1);
+    }
 
-        AxeItemAccessor.getStrippables().entrySet().forEach(blockBlockEntry -> {
-            LogUtils.getLogger().info("{}",blockBlockEntry);
+    public static void playDurianCatchSound(ServerLevel serverLevel, Vec3 vec3, BlockPos blockPos) {
+        ThaiDelightPacketHandler.INSTANCE.send(PacketDistributor.NEAR.with(new Supplier<PacketDistributor.TargetPoint>() {
+            @Override
+            public PacketDistributor.TargetPoint get() {
+                return new PacketDistributor.TargetPoint(vec3.x, vec3.y,vec3.z,32,serverLevel.dimension());
+            }
+        }),new ModLevelPacket((byte) 1,blockPos));
 
-        });
     }
 
 

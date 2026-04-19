@@ -2,6 +2,7 @@ package net.firemuffin303.thaidelight.common.registry;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.firemuffin303.muffinsmcapi.api.item.OvenBoatItem;
+import net.firemuffin303.muffinsmcapi.impl.registration.ResourceRegistry;
 import net.firemuffin303.thaidelight.ThaiDelightCommon;
 import net.firemuffin303.thaidelight.common.item.equipments.DurianHelmetItem;
 import net.firemuffin303.thaidelight.common.item.vegetations.CoconutItem;
@@ -9,10 +10,12 @@ import net.firemuffin303.thaidelight.common.item.DragonflyBottleItem;
 import net.firemuffin303.thaidelight.common.item.DyeableItem;
 import net.firemuffin303.thaidelight.common.item.SackItem;
 import net.firemuffin303.thaidelight.common.item.vegetations.papaya.PapayaFlowerItem;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -34,8 +37,11 @@ import java.util.function.Supplier;
 import static net.firemuffin303.thaidelight.util.PlatformUtil.bowlFoodItem;
 
 public class ModItems {
+    public static final ResourceRegistry<CreativeModeTab> CREATIVE_TAB = ResourceRegistry.create(Registries.CREATIVE_MODE_TAB,ThaiDelightCommon.MOD_ID);
+    public static final ResourceRegistry<Item> ITEM = ResourceRegistry.create(Registries.ITEM,ThaiDelightCommon.MOD_ID);
 
-    public static final Supplier<CreativeModeTab> MOD_TAB = registerCreativeTab("main",() -> CreativeModeTab.builder(null,-1)
+
+    public static final Supplier<CreativeModeTab> MOD_TAB = CREATIVE_TAB.register("main",() -> CreativeModeTab.builder(null,-1)
             .title(Component.translatable("itemGroup."+ThaiDelightCommon.MOD_ID+".main"))
             .icon(() -> new ItemStack(ModBlocks.MORTAR.get()))
             .displayItems(RegistryUtils::itemsGenerator)
@@ -74,7 +80,7 @@ public class ModItems {
 
     //Bucket
     public static final Supplier<Item> FISH_SAUCE_BOTTLE = registerFlatItem("fish_sauce_bottle",createDrinkableItem(getDrinkItem().food(ModFoods.FISH_SAUCE),true,false)) ;
-    public static final Supplier<Item> FERMENTED_FISH = registerFlatItem("fermented_fish",createConsumeableItem(bowlFoodItem(ModFoods.FERMENTED_FISH),true,false));
+    public static final Supplier<Item> FERMENTED_FISH = registerFlatItem("fermented_fish",createFermentedFish());
     public static final Supplier<Item> PAPAYA_JUICE = registerFlatItem("papaya_juice", createPapayaJuiceItem());
     public static final Supplier<Item> LIME_JUICE = registerFlatItem("lime_juice", createLimeJuiceItem());
     public static final Supplier<Item> HONEY_LIME_JUICE = registerFlatItem("honey_lime_juice", createHoneyLimeJuiceItem());
@@ -287,9 +293,8 @@ public class ModItems {
     }
 
 
-    @ExpectPlatform
-    public static <T extends Item> Supplier<T> register(String id, Supplier<T> item){
-        throw new AssertionError();
+    public static Supplier<Item> register(String id, Supplier<Item> item){
+        return ITEM.register(id,item);
     }
 
     @ExpectPlatform
@@ -298,7 +303,8 @@ public class ModItems {
     }
 
     public static void init() {
-
+        CREATIVE_TAB.init();
+        ITEM.init();
     }
 
     public static Supplier<Item> createConsumeableItem(Item.Properties properties){
@@ -307,6 +313,11 @@ public class ModItems {
 
     @ExpectPlatform
     public static Supplier<Item> createConsumeableItem(Item.Properties properties, boolean hasFoodEffectTooltip, boolean hasCustomTooltip){
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static Supplier<Item> createFermentedFish(){
         throw new AssertionError();
     }
 
@@ -352,12 +363,12 @@ public class ModItems {
 
 
     @ExpectPlatform
-    public static <T extends Mob> Supplier<Item> createSpawnEgg(Supplier<EntityType<T>> entityTypeSupplier, int primaryColor, int secondaryColor, Item.Properties properties){
+    public static Supplier<Item> createSpawnEgg(Supplier<EntityType<?>> entityTypeSupplier, int primaryColor, int secondaryColor, Item.Properties properties){
         throw new AssertionError();
     }
 
     @ExpectPlatform
-    public static <T extends Mob> Supplier<Item> createMobBucket(Supplier<EntityType<T>> entitySupplier, Supplier<? extends Fluid> fluidSupplier, Supplier<? extends SoundEvent> soundSupplier, Item.Properties properties){
+    public static Supplier<Item> createMobBucket(Supplier<EntityType<?>> entitySupplier, Supplier<? extends Fluid> fluidSupplier, Supplier<? extends SoundEvent> soundSupplier, Item.Properties properties){
         throw new AssertionError();
     }
 }

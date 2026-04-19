@@ -5,6 +5,7 @@ import net.firemuffin303.muffinsmcapi.api.block.sign.OvenCeilingHangingSignBlock
 import net.firemuffin303.muffinsmcapi.api.block.sign.OvenStandSignBlock;
 import net.firemuffin303.muffinsmcapi.api.block.sign.OvenWallHangingSignBlock;
 import net.firemuffin303.muffinsmcapi.api.block.sign.OvenWallSignBlock;
+import net.firemuffin303.muffinsmcapi.impl.registration.ResourceRegistry;
 import net.firemuffin303.thaidelight.ThaiDelightCommon;
 import net.firemuffin303.thaidelight.common.block.animals.CrabEggBlock;
 import net.firemuffin303.thaidelight.common.block.cauldron.FermentedFishCauldronBlock;
@@ -35,6 +36,7 @@ import net.firemuffin303.thaidelight.common.world.trees.MangoTreeGrower;
 import net.firemuffin303.thaidelight.common.world.trees.PapayaTreeGrower;
 import net.firemuffin303.thaidelight.mixin.accessor.block.BlocksAccessor;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.effect.MobEffect;
@@ -56,6 +58,7 @@ import static net.firemuffin303.thaidelight.mixin.accessor.block.BlocksAccessor.
 import static net.minecraft.world.level.block.Blocks.*;
 
 public class ModBlocks {
+    public static final ResourceRegistry<Block> BLOCK = ResourceRegistry.create(Registries.BLOCK,ThaiDelightCommon.MOD_ID);
 
     public static final ArrayList<Supplier<Block>> CRATES = new ArrayList<>();
     public static final ArrayList<Supplier<Block>> CABINET = new ArrayList<>();
@@ -584,7 +587,9 @@ public class ModBlocks {
     public static final Supplier<Block> BASIL_OMELETTE_FEAST = register("basil_omelette",createOmeletteBlock(ModItems.BASIL_OMELETTE));
     public static final Supplier<Block> PINEAPPLE_FRIED_RICE_FEAST = register("pineapple_fried_rice_feast",createPineappleFeastBlock());
 
-    public static void init(){}
+    public static void init(){
+        BLOCK.init();
+    }
 
     public static Supplier<Block> registerCabinet(String id){
         Supplier<Block> block = register(id, cabinetBlock(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(2.5f).sound(SoundType.WOOD).ignitedByLava()));
@@ -598,9 +603,8 @@ public class ModBlocks {
         return block;
     }
 
-    @ExpectPlatform
     public static Supplier<Block> register(String id,Supplier<Block> block){
-        throw new AssertionError();
+        return BLOCK.register(id, block);
     }
 
 

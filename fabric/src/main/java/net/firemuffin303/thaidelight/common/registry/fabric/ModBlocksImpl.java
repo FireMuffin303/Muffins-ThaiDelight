@@ -1,16 +1,11 @@
 package net.firemuffin303.thaidelight.common.registry.fabric;
 
-import com.terraformersmc.terraform.sign.block.TerraformHangingSignBlock;
-import com.terraformersmc.terraform.sign.block.TerraformSignBlock;
-import com.terraformersmc.terraform.sign.block.TerraformWallHangingSignBlock;
-import com.terraformersmc.terraform.sign.block.TerraformWallSignBlock;
 import net.firemuffin303.thaidelight.ThaiDelightCommon;
 import net.firemuffin303.thaidelight.common.block.vegetation.FabricBuddingButterflyPeaBlock;
 import net.firemuffin303.thaidelight.common.block.feast.*;
 import net.firemuffin303.thaidelight.common.block.vegetation.pepper.FabricBuddingPepperBlock;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -23,43 +18,35 @@ import java.util.function.Supplier;
 
 public class ModBlocksImpl {
     public static  Supplier<Block> createSomtamFeast() {
-        Block somtamBlock = new SomtamFeastBlock();
-        return () -> somtamBlock;
+        return SomtamFeastBlock::new;
     }
 
     public static Supplier<Block> createLarbFeast() {
-        Block block = new LarbFeastBlock();
-        return () -> block;
+        return LarbFeastBlock::new;
     }
 
     public static Supplier<Block> createCrabFriedRice() {
-        Block block = new CrabFriedRiceFeastBlock();
-        return () -> block;
+        return CrabFriedRiceFeastBlock::new;
     }
 
     public static Supplier<Block> createCoconutPieBlock() {
-        Block block = new CoconutPieBlock();
-        return () -> block;
+        return CoconutPieBlock::new;
     }
 
     public static Supplier<Block> createPhatKaphraoBlock() {
-        Block block = new PhatKaphraoFeastBlock();
-        return () -> block;
+        return PhatKaphraoFeastBlock::new;
     }
 
     public static Supplier<Block> createMangoStickyRiceBlock() {
-        Block block = new MangoStickyRiceFeastBlock();
-        return () -> block;
+        return MangoStickyRiceFeastBlock::new;
     }
 
     public static Supplier<Block> createOmeletteBlock(Supplier<Item> itemSupplier) {
-        Block block = new OmeletteFeastBlock(itemSupplier);
-        return () -> block;
+        return () -> new OmeletteFeastBlock(itemSupplier);
     }
 
     public static Supplier<Block> createPineappleFeastBlock() {
-        Block block = new PineappleFriedRiceFeastBlock();
-        return () -> block;
+        return PineappleFriedRiceFeastBlock::new;
     }
 
     public static Supplier<Block> createWildCropBlock(MobEffect stewEffect, int effectDuration, BlockBehaviour.Properties properties) {

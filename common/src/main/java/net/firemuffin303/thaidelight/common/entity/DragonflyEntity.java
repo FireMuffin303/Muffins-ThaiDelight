@@ -85,7 +85,7 @@ public class DragonflyEntity extends Animal implements VariantHolder<DragonflyEn
     @Nullable
     @Override
     public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
-        DragonflyEntity dragonfly = ModEntityTypes.DRAGONFLY.get().create(serverLevel);
+        DragonflyEntity dragonfly = (DragonflyEntity) ModEntityTypes.DRAGONFLY.get().create(serverLevel);
         if(dragonfly != null){
             dragonfly.setVariant(this.random.nextBoolean() ? this.getVariant() : ((DragonflyEntity)ageableMob ).getVariant());
             dragonfly.setPersistenceRequired();

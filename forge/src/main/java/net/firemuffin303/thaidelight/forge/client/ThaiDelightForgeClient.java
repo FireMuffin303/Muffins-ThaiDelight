@@ -8,6 +8,7 @@ import net.firemuffin303.thaidelight.common.block.cauldron.FermentedFishCauldron
 import net.firemuffin303.thaidelight.common.entity.DragonflyEntity;
 import net.firemuffin303.thaidelight.common.item.DragonflyBottleItem;
 import net.firemuffin303.thaidelight.common.item.SackItem;
+import net.firemuffin303.thaidelight.common.menu.MortarMenu;
 import net.firemuffin303.thaidelight.common.recipe.mortar.MortarRecipe;
 import net.firemuffin303.thaidelight.common.recipe.mortar.MortarRecipeBookTab;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
@@ -30,6 +31,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.RecipeBookType;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -47,6 +49,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 @Mod.EventBusSubscriber(modid = ThaiDelightCommon.MOD_ID,value = Dist.CLIENT,bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ThaiDelightForgeClient {
@@ -61,7 +64,8 @@ public class ThaiDelightForgeClient {
     public static void clientSetup(FMLClientSetupEvent event){
         event.enqueueWork(() -> {
             ThaiDelightCommonClient.registerCustomEffectRenderer();
-            MenuScreens.register(ModMenuType.MORTAR.get(), MortarScreen::new);
+            Supplier<MenuType<MortarMenu>> menuTypeSupplier = (Supplier<MenuType<MortarMenu>>) (Supplier<?>) ModMenuType.MORTAR;
+            MenuScreens.register(menuTypeSupplier.get(), MortarScreen::new);
             ItemProperties.register(ModItems.SACK.get(), ThaiDelightCommon.modid("fullness"), new ClampedItemPropertyFunction() {
                 @Override
                 public float unclampedCall(ItemStack arg, @Nullable ClientLevel arg2, @Nullable LivingEntity arg3, int i) {

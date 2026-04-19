@@ -2,6 +2,8 @@ package net.firemuffin303.thaidelight.util;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.effect.MobEffect;
@@ -11,6 +13,7 @@ import net.minecraft.world.inventory.RecipeBookType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.Map;
 import java.util.function.Supplier;
@@ -129,6 +132,11 @@ public class PlatformUtil {
 
     @ExpectPlatform
     public static void registerStrippable(Map<Block, Block> map){
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static void playDurianCatchSound(ServerLevel serverLevel, Vec3 vec3, BlockPos blockPos){
         throw new AssertionError();
     }
 

@@ -40,11 +40,15 @@ public class ModFoods{
 
     public static final FoodProperties FISH_SAUCE = new FoodProperties.Builder().alwaysEat()
             .effect(new MobEffectInstance(MobEffects.HUNGER,200,0),1.0f).build();
+
+    /*
     public static final FoodProperties FERMENTED_FISH = addEffects(new FoodProperties.Builder().alwaysEat(),
             List.of(
                 new FoodEffectSupplier(() -> new MobEffectInstance(ModMobEffects.STINKY.get(),10*20),1f),
                 new FoodEffectSupplier(() -> new MobEffectInstance(ModMobEffects.APPETITE_LOSS.get(),10*20),1f)
             )).build();
+
+     */
 
     public static final FoodProperties PAPAYA_JUICE = new FoodProperties.Builder().alwaysEat().build();
     public static final FoodProperties LIME_JUICE = new FoodProperties.Builder().alwaysEat().build();

@@ -10,9 +10,5 @@ import net.minecraftforge.registries.DeferredRegister;
 import java.util.function.Supplier;
 
 public class ModTreeDecoratorTypesImpl {
-    public static final DeferredRegister<TreeDecoratorType<?>> TREE_DECORATOR_TYPE = DeferredRegister.create(Registries.TREE_DECORATOR_TYPE, ThaiDelightCommon.MOD_ID);
 
-    public static <T extends TreeDecorator> Supplier<TreeDecoratorType<T>> registerTreeDecorator(String id, Codec<T> codec) {
-        return TREE_DECORATOR_TYPE.register(id,() -> new TreeDecoratorType<>(codec));
-    }
 }

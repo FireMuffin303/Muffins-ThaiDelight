@@ -56,10 +56,7 @@ public class ModUtils {
     }
 
     public static void playDurianCatchingSound(ServerLevel serverLevel, Vec3 vec3, BlockPos blockPos){
-        for(ServerPlayer player : serverLevel.getServer().getPlayerList().getPlayers()){
-            if(player.level().dimension() != serverLevel.dimension() || player.position().distanceTo(vec3) > 64f) continue;
-            //ServerPlayNetworking.send(player,new ModLevelEventPacket((byte) 1,blockPos));
-        }
+        PlatformUtil.playDurianCatchSound(serverLevel, vec3, blockPos);
     }
 
     public static void durianHelmetThorns(LivingEntity victim, Entity attacker){

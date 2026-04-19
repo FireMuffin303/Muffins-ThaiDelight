@@ -1,10 +1,12 @@
 package net.firemuffin303.thaidelight.common.registry.forge;
 
 import net.firemuffin303.thaidelight.ThaiDelightCommon;
+import net.firemuffin303.thaidelight.common.registry.ModMobEffects;
 import net.firemuffin303.thaidelight.forge.common.item.drinks.*;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.vehicle.Boat;
@@ -72,11 +74,19 @@ public class ModItemsImpl {
         return ModItems.bowlFoodItem(foodProperties);
     }
 
-    public static <T extends Mob> Supplier<Item> createSpawnEgg(Supplier<EntityType<T>> entityTypeSupplier, int primaryColor, int secondaryColor, Item.Properties properties) {
-        return () -> new ForgeSpawnEggItem(entityTypeSupplier,primaryColor,secondaryColor,properties);
+    public static Supplier<Item> createSpawnEgg(Supplier<EntityType<?>> entityTypeSupplier, int primaryColor, int secondaryColor, Item.Properties properties) {
+        Supplier<EntityType<? extends Mob>> mob = (Supplier<EntityType<? extends Mob>>) ((Supplier<?>) entityTypeSupplier);
+        return () -> new ForgeSpawnEggItem(mob,primaryColor,secondaryColor,properties);
     }
 
-    public static <T extends Mob> Supplier<Item> createMobBucket(Supplier<EntityType<T>> entitySupplier, Supplier<? extends Fluid> fluidSupplier, Supplier<? extends SoundEvent> soundSupplier, Item.Properties properties){
+    public static Supplier<Item> createMobBucket(Supplier<EntityType<?>> entitySupplier, Supplier<? extends Fluid> fluidSupplier, Supplier<? extends SoundEvent> soundSupplier, Item.Properties properties){
         return () -> new MobBucketItem(entitySupplier,fluidSupplier,soundSupplier,properties);
+    }
+
+    public static Supplier<Item> createFermentedFish() {
+        return () -> new ConsumableItem(bowlItem(new FoodProperties.Builder().alwaysEat()
+                .effect(() -> new MobEffectInstance(ModMobEffects.STINKY.get(),10*20),1f)
+                .effect(() -> new MobEffectInstance(ModMobEffects.APPETITE_LOSS.get(),10*20),1f)
+                .build()),false,false);
     }
 }

@@ -32,5 +32,13 @@ public class ThaiDelightPacketHandler {
                 DurianHeatPacket::new,
                 DurianHeatPacket::handle,
                 Optional.of(NetworkDirection.PLAY_TO_CLIENT));
+
+        INSTANCE.registerMessage(3,
+                ModLevelPacket.class,
+                ModLevelPacket::encode,
+                ModLevelPacket::new,
+                ModLevelPacket::handle,
+                Optional.of(NetworkDirection.PLAY_TO_CLIENT));
+
     }
 }

@@ -1,15 +1,12 @@
 package net.firemuffin303.thaidelight.common.registry.fabric;
 
-import com.terraformersmc.terraform.boat.api.TerraformBoatType;
-import com.terraformersmc.terraform.boat.api.TerraformBoatTypeRegistry;
-import com.terraformersmc.terraform.boat.impl.item.TerraformBoatItem;
 import net.firemuffin303.thaidelight.ThaiDelightCommon;
 import net.firemuffin303.thaidelight.common.item.*;
+import net.firemuffin303.thaidelight.common.registry.ModMobEffects;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.food.FoodProperties;
@@ -73,12 +70,19 @@ public class ModItemsImpl {
     }
 
 
-    public static <T extends Mob> Supplier<Item> createSpawnEgg(Supplier<EntityType<T>> entityTypeSupplier, int primaryColor, int secondaryColor, Item.Properties properties) {
-        return () -> new SpawnEggItem(entityTypeSupplier.get(),primaryColor,secondaryColor,properties);
+    public static Supplier<Item> createSpawnEgg(Supplier<EntityType<?>> entityTypeSupplier, int primaryColor, int secondaryColor, Item.Properties properties) {
+        return () -> new SpawnEggItem((EntityType<? extends Mob>) entityTypeSupplier.get(),primaryColor,secondaryColor,properties);
     }
 
-    public static <T extends Mob>  Supplier<Item> createMobBucket(Supplier<EntityType<T>> entitySupplier, Supplier<? extends Fluid> fluidSupplier, Supplier<? extends SoundEvent> soundSupplier, Item.Properties properties) {
+    public static Supplier<Item> createMobBucket(Supplier<EntityType<?>> entitySupplier, Supplier<? extends Fluid> fluidSupplier, Supplier<? extends SoundEvent> soundSupplier, Item.Properties properties) {
         return () -> new MobBucketItem(entitySupplier.get(),fluidSupplier.get(),soundSupplier.get(),properties);
+    }
+
+    public static Supplier<Item> createFermentedFish() {
+        return () -> new ConsumableItem(bowlItem(new FoodProperties.Builder().alwaysEat()
+                .effect(new MobEffectInstance(ModMobEffects.STINKY.get(),10*20),1f)
+                .effect(new MobEffectInstance(ModMobEffects.APPETITE_LOSS.get(),10*20),1f)
+                .build()),false,false);
     }
 
 

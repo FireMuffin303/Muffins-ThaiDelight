@@ -1,11 +1,10 @@
 package net.firemuffin303.thaidelight.client;
 
-import com.terraformersmc.terraform.boat.api.client.TerraformBoatClientHelper;
-import com.terraformersmc.terraform.sign.SpriteIdentifierRegistry;
 import io.github.fabricators_of_create.porting_lib.recipe_book_categories.RecipeBookRegistry;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.model.loading.v1.ModelLoadingPlugin;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.*;
 import net.firemuffin303.thaidelight.ThaiDelightCommon;
 import net.firemuffin303.thaidelight.client.renderer.DurianHeatRendererLayer;
@@ -17,12 +16,14 @@ import net.firemuffin303.thaidelight.common.block.cauldron.FermentedFishCauldron
 import net.firemuffin303.thaidelight.common.entity.DragonflyEntity;
 import net.firemuffin303.thaidelight.common.item.DragonflyBottleItem;
 import net.firemuffin303.thaidelight.common.item.SackItem;
+import net.firemuffin303.thaidelight.common.menu.MortarMenu;
 import net.firemuffin303.thaidelight.common.recipe.mortar.MortarRecipe;
 import net.firemuffin303.thaidelight.common.recipe.mortar.MortarRecipeBookTab;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.firemuffin303.thaidelight.common.registry.ModMenuType;
 import net.firemuffin303.thaidelight.common.registry.ModRecipes;
+import net.firemuffin303.thaidelight.network.ModLevelEventPacket;
 import net.firemuffin303.thaidelight.util.ModUtils;
 import net.minecraft.client.RecipeBookCategories;
 import net.minecraft.client.gui.screens.MenuScreens;
@@ -30,31 +31,24 @@ import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
 import net.minecraft.client.renderer.item.ItemProperties;
-import net.minecraft.client.resources.model.Material;
-import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.RecipeBookType;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
-import net.minecraft.world.item.DyeableLeatherItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.FoliageColor;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.function.Supplier;
-
-import static net.firemuffin303.thaidelight.client.ThaiDelightCommonClient.CUTOUT;
 
 public class ThaiDelightClientFabric implements ClientModInitializer {
 
@@ -75,7 +69,8 @@ public class ThaiDelightClientFabric implements ClientModInitializer {
 
         ThaiDelightCommonClient.registerCustomEffectRenderer();
 
-        MenuScreens.register(ModMenuType.MORTAR.get(), MortarScreen::new);
+        Supplier<MenuType<MortarMenu>> menuTypeSupplier = (Supplier<MenuType<MortarMenu>>) (Supplier<?>) ModMenuType.MORTAR;
+        MenuScreens.register(menuTypeSupplier.get(), MortarScreen::new);
 
         registerRecipe();
 
@@ -157,6 +152,8 @@ public class ThaiDelightClientFabric implements ClientModInitializer {
                 return SackItem.isFull(itemStack) ? 1f : 0f;
             }
         });
+
+        ClientPlayNetworking.registerGlobalReceiver(ModLevelEventPacket.TYPE, ModLevelEventPacket::receive);
     }
 
 

@@ -2,6 +2,7 @@ package net.firemuffin303.thaidelight.common.registry;
 
 import com.google.common.collect.ImmutableList;
 import dev.architectury.injectables.annotations.ExpectPlatform;
+import net.firemuffin303.muffinsmcapi.impl.registration.ResourceRegistry;
 import net.firemuffin303.thaidelight.ThaiDelightCommon;
 import net.firemuffin303.thaidelight.common.block.vegetations.durian.DurianFlowerBlock;
 import net.firemuffin303.thaidelight.common.block.vegetations.mango.HangingMangoBlock;
@@ -49,15 +50,18 @@ import java.util.OptionalInt;
 import java.util.function.Supplier;
 
 public class ModFeatures {
-    public static final Supplier<TrunkPlacerType<LimeTreeTrunkPlacer>> LIME_TRUNK_PLACER = registerTrunkPlacer("lime_trunk_placer",() ->TrunkPlacerTypeAccessor.init(LimeTreeTrunkPlacer.CODEC));
-    public static final Supplier<TrunkPlacerType<DurianTreeTrunkPlacer>> DURIAN_TRUNK_PLACER = registerTrunkPlacer("durian_trunk_placer",() -> TrunkPlacerTypeAccessor.init(DurianTreeTrunkPlacer.CODEC));
-    public static final Supplier<TrunkPlacerType<CoconutTreeTrunkPlacer>> COCONUT_TRUNK_PLACER = registerTrunkPlacer("coconut_trunk_placer",() -> TrunkPlacerTypeAccessor.init(CoconutTreeTrunkPlacer.CODEC));
-    public static final Supplier<TrunkPlacerType<MegaDurianTrunkPlacer>> MEGA_DURIAN_TRUNK_PLACER = registerTrunkPlacer("mega_durian_trunk_placer",() -> TrunkPlacerTypeAccessor.init(MegaDurianTrunkPlacer.CODEC));
+    public static final ResourceRegistry<TrunkPlacerType<?>> TRUNK_PLACER_REGISTRY = ResourceRegistry.create(Registries.TRUNK_PLACER_TYPE,ThaiDelightCommon.MOD_ID);
+    public static final ResourceRegistry<FoliagePlacerType<?>> FOLIAGE_PLACER_REGISTRY = ResourceRegistry.create(Registries.FOLIAGE_PLACER_TYPE,ThaiDelightCommon.MOD_ID);
 
-    public static final Supplier<FoliagePlacerType<DurianTreeFoliagePlacer>> DURIAN_FOLIAGE_PLACER = registerFoliagePlacer("durian_foliage_placer",() ->FoliagePlacerTypeAccessor.init(DurianTreeFoliagePlacer.CODEC));
-    public static final Supplier<FoliagePlacerType<HangingBlobFoliagePlacer>> HANGING_BLOB_FOLIAGE_PLACER = registerFoliagePlacer("hanging_blob_foliage_placer", () -> FoliagePlacerTypeAccessor.init(HangingBlobFoliagePlacer.CODEC));
-    public static final Supplier<FoliagePlacerType<CoconutLeavesFoliagePlacer>> COCONUT_FOLIAGE_PLACER = registerFoliagePlacer("coconut_foliage_placer",() -> FoliagePlacerTypeAccessor.init(CoconutLeavesFoliagePlacer.CODEC));
-    public static final Supplier<FoliagePlacerType<PapayaLeavesFoliagePlacer>> PAPAYA_FOLIAGE_PLACER = registerFoliagePlacer("papaya_foliage_placer",() -> FoliagePlacerTypeAccessor.init(PapayaLeavesFoliagePlacer.CODEC));
+    public static final Supplier<TrunkPlacerType<?>> LIME_TRUNK_PLACER = TRUNK_PLACER_REGISTRY.register("lime_trunk_placer",() ->TrunkPlacerTypeAccessor.init(LimeTreeTrunkPlacer.CODEC));
+    public static final Supplier<TrunkPlacerType<?>> DURIAN_TRUNK_PLACER = TRUNK_PLACER_REGISTRY.register("durian_trunk_placer",() -> TrunkPlacerTypeAccessor.init(DurianTreeTrunkPlacer.CODEC));
+    public static final Supplier<TrunkPlacerType<?>> COCONUT_TRUNK_PLACER = TRUNK_PLACER_REGISTRY.register("coconut_trunk_placer",() -> TrunkPlacerTypeAccessor.init(CoconutTreeTrunkPlacer.CODEC));
+    public static final Supplier<TrunkPlacerType<?>> MEGA_DURIAN_TRUNK_PLACER = TRUNK_PLACER_REGISTRY.register("mega_durian_trunk_placer",() -> TrunkPlacerTypeAccessor.init(MegaDurianTrunkPlacer.CODEC));
+
+    public static final Supplier<FoliagePlacerType<?>> DURIAN_FOLIAGE_PLACER = FOLIAGE_PLACER_REGISTRY.register("durian_foliage_placer",() ->FoliagePlacerTypeAccessor.init(DurianTreeFoliagePlacer.CODEC));
+    public static final Supplier<FoliagePlacerType<?>> HANGING_BLOB_FOLIAGE_PLACER = FOLIAGE_PLACER_REGISTRY.register("hanging_blob_foliage_placer", () -> FoliagePlacerTypeAccessor.init(HangingBlobFoliagePlacer.CODEC));
+    public static final Supplier<FoliagePlacerType<?>> COCONUT_FOLIAGE_PLACER = FOLIAGE_PLACER_REGISTRY.register("coconut_foliage_placer",() -> FoliagePlacerTypeAccessor.init(CoconutLeavesFoliagePlacer.CODEC));
+    public static final Supplier<FoliagePlacerType<?>> PAPAYA_FOLIAGE_PLACER = FOLIAGE_PLACER_REGISTRY.register("papaya_foliage_placer",() -> FoliagePlacerTypeAccessor.init(PapayaLeavesFoliagePlacer.CODEC));
 
     public static final ResourceKey<ConfiguredFeature<?,?>> FEATURE_PATCH_LIME_BUSH;
     public static final ResourceKey<ConfiguredFeature<?,?>> FEATURE_PATCH_WILD_PEPPER;
@@ -102,18 +106,10 @@ public class ModFeatures {
     public static final ResourceKey<PlacedFeature> TREES_MANGO = ResourceKey.create(Registries.PLACED_FEATURE,ThaiDelightCommon.modid("trees_mango"));
     public static final ResourceKey<PlacedFeature> TREES_COCONUT = ResourceKey.create(Registries.PLACED_FEATURE,ThaiDelightCommon.modid("trees_coconut"));
 
-    public static void init(){}
-
-    @ExpectPlatform
-    public static <P extends TrunkPlacer> Supplier<TrunkPlacerType<P>> registerTrunkPlacer(String id,Supplier<TrunkPlacerType<P>> supplier){
-        throw new AssertionError();
+    public static void init(){
+        TRUNK_PLACER_REGISTRY.init();
+        FOLIAGE_PLACER_REGISTRY.init();
     }
-
-    @ExpectPlatform
-    public static <P extends FoliagePlacer> Supplier<FoliagePlacerType<P>> registerFoliagePlacer(String id,Supplier<FoliagePlacerType<P>> supplier){
-        throw new AssertionError();
-    }
-
 
 
     public static void bootstrapPlacedFeature(BootstapContext<PlacedFeature> bootstapContext){

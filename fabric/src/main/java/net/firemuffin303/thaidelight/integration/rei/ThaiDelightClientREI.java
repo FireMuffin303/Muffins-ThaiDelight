@@ -33,12 +33,14 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.LayeredCauldronBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Quaternionf;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 public class ThaiDelightClientREI implements REIClientPlugin {
     public static final CategoryIdentifier<MortarREIDisplay> MORTAR_ID = CategoryIdentifier.of(ThaiDelightCommon.modid("plugin/mortar"));
@@ -46,7 +48,8 @@ public class ThaiDelightClientREI implements REIClientPlugin {
 
     @Override
     public void registerDisplays(DisplayRegistry registry) {
-        registry.registerRecipeFiller(MortarRecipe.class, ModRecipes.MORTAR.get(),MortarREIDisplay::new);
+        Supplier<RecipeType<MortarRecipe>> f = (Supplier<RecipeType<MortarRecipe>>) (Supplier<?>)ModRecipes.MORTAR;
+        registry.registerRecipeFiller(MortarRecipe.class, f.get(),MortarREIDisplay::new);
         registry.add(new CauldronCraftingREIDisplay(
                 List.of(EntryIngredients.ofItemTag(ModTags.COMMON_RAW_FISHES)),
                 List.of(EntryIngredients.of(ModItems.FERMENTED_FISH.get())),

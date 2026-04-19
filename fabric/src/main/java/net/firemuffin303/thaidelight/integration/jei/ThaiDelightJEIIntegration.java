@@ -11,6 +11,7 @@ import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import net.firemuffin303.thaidelight.ThaiDelightCommon;
 import net.firemuffin303.thaidelight.client.sceens.MortarScreen;
+import net.firemuffin303.thaidelight.common.recipe.mortar.MortarRecipe;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.firemuffin303.thaidelight.common.registry.ModRecipes;
@@ -25,6 +26,7 @@ import net.minecraft.world.item.Items;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Supplier;
 
 import static net.firemuffin303.thaidelight.integration.jei.FermentedFishRecipeCategory.translateKey;
 
@@ -47,7 +49,8 @@ public class ThaiDelightJEIIntegration implements IModPlugin {
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
         ClientLevel level = Objects.requireNonNull(Minecraft.getInstance().level);
-        registration.addRecipes(MortarJEI.MORTAR,level.getRecipeManager().getAllRecipesFor(ModRecipes.MORTAR.get()));
+        Supplier<net.minecraft.world.item.crafting.RecipeType<MortarRecipe>> f = (Supplier<net.minecraft.world.item.crafting.RecipeType<MortarRecipe>>) (Supplier<?>)ModRecipes.MORTAR;
+        registration.addRecipes(MortarJEI.MORTAR,level.getRecipeManager().getAllRecipesFor(f.get()));
         registration.addRecipes(FERMENTED_FISH, List.of(
                 new FermentedFishRecipeCategory.FermentedFishDummy(ModTags.COMMON_RAW_FISHES,Items.BOWL, ModItems.FERMENTED_FISH.get(),new FermentedFishRecipeCategory.FermentedFishCauldronDrawable()){
                     @Override

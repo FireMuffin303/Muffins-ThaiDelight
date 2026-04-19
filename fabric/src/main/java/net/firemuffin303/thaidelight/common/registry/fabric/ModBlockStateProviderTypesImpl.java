@@ -10,8 +10,5 @@ import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvi
 import java.util.function.Supplier;
 
 public class ModBlockStateProviderTypesImpl {
-    public static <P extends BlockStateProvider> Supplier<BlockStateProviderType<P>> register(String id, Codec<P> codec) {
-        BlockStateProviderType<P> blockStateProviderType = Registry.register(BuiltInRegistries.BLOCKSTATE_PROVIDER_TYPE, ThaiDelightCommon.modid(id),new BlockStateProviderType<>(codec));
-        return () -> blockStateProviderType;
-    }
+
 }

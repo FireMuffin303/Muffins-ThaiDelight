@@ -55,7 +55,8 @@
     "fabricloader": ">=${loader_version}",
     "fabric": "*",
     "minecraft": "${minecraft_version}",
-    "farmersdelight": ">=${farmersdelight_refabricated_version}"
+    "farmersdelight": ">=${farmersdelight_refabricated_version}",
+    "muffins_ovenapi": ">=0.1.0-snapshot-3a"
   },
   "custom": {
     "cardinal-components": [

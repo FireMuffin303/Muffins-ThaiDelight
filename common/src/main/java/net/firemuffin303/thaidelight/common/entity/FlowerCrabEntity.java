@@ -176,7 +176,7 @@ public class FlowerCrabEntity extends Animal implements Bucketable {
     @Nullable
     @Override
     public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
-        return ModEntityTypes.FLOWER_CRAB.get().create(serverLevel);
+        return (AgeableMob) ModEntityTypes.FLOWER_CRAB.get().create(serverLevel);
 
     }
 

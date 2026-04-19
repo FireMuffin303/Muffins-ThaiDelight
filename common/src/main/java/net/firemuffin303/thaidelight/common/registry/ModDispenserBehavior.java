@@ -16,27 +16,28 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class ModDispenserBehavior {
 
-    public static void init(){
-        DefaultDispenseItemBehavior fishBehavior = new DefaultDispenseItemBehavior(){
+    public static void init() {
+        DefaultDispenseItemBehavior fishBehavior = new DefaultDispenseItemBehavior() {
             @Override
             protected ItemStack execute(BlockSource blockSource, ItemStack itemStack) {
                 Direction direction = blockSource.getBlockState().getValue(DispenserBlock.FACING);
                 BlockState blockState = blockSource.getLevel().getBlockState(blockSource.getPos().relative(direction));
-                if(blockState.is(Blocks.WATER_CAULDRON) && blockState.getValue(LayeredCauldronBlock.LEVEL) == 3){
-                    blockSource.getLevel().setBlock(blockSource.getPos().relative(direction),ModBlocks.FERMENTED_FISH_CAULDRON.get().defaultBlockState().setValue(FermentedFishCauldronBlock.LEVEL,3), 3);
+                if (blockState.is(Blocks.WATER_CAULDRON) && blockState.getValue(LayeredCauldronBlock.LEVEL) == 3) {
+                    blockSource.getLevel().setBlock(blockSource.getPos().relative(direction), ModBlocks.FERMENTED_FISH_CAULDRON.get().defaultBlockState().setValue(FermentedFishCauldronBlock.LEVEL, 3), 3);
                     itemStack.shrink(1);
                     return itemStack;
                 }
 
 
-                return super.execute(blockSource,itemStack);
+                return super.execute(blockSource, itemStack);
             }
         };
 
-        DispenserBlock.registerBehavior(Items.COD,fishBehavior);
-        DispenserBlock.registerBehavior(Items.SALMON,fishBehavior);
-        DispenserBlock.registerBehavior(Items.TROPICAL_FISH,fishBehavior);
+        DispenserBlock.registerBehavior(Items.COD, fishBehavior);
+        DispenserBlock.registerBehavior(Items.SALMON, fishBehavior);
+        DispenserBlock.registerBehavior(Items.TROPICAL_FISH, fishBehavior);
 
+        /*
         DispenserBlock.registerBehavior(ModItems.COCONUT_SLICE.get(),new DefaultDispenseItemBehavior(){
             private final DefaultDispenseItemBehavior defaultDispenseItemBehavior = new DefaultDispenseItemBehavior();
             @Override
@@ -62,5 +63,7 @@ public class ModDispenserBehavior {
                 return super.execute(blockSource, itemStack);
             }
         });
+
+         */
     }
 }

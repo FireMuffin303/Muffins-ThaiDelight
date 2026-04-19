@@ -1,13 +1,20 @@
 package net.firemuffin303.thaidelight.util.fabric;
 
+import com.mojang.logging.LogUtils;
 import io.github.fabricators_of_create.porting_lib.tags.Tags;
+import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.firemuffin303.thaidelight.asm.ModASMEarlyRiser;
 import net.firemuffin303.thaidelight.client.ThaiDelightClientFabric;
 import net.firemuffin303.thaidelight.common.cardinalcomponents.DurianHeatComponent;
 import net.firemuffin303.thaidelight.common.registry.ModCardinalComponents;
+import net.firemuffin303.thaidelight.network.ModLevelEventPacket;
 import net.firemuffin303.thaidelight.util.ModUtils;
 import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.effect.MobEffect;
@@ -17,6 +24,7 @@ import net.minecraft.world.inventory.RecipeBookType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.phys.Vec3;
 import vectorwing.farmersdelight.common.Configuration;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModEffects;
@@ -120,6 +128,12 @@ public class PlatformUtilImpl {
 
     public static void registerStrippable(Map<Block, Block> map) {
         map.forEach(StrippableBlockRegistry::register);
+    }
+
+    public static void playDurianCatchSound(ServerLevel serverLevel, Vec3 vec3, BlockPos blockPos) {
+        for(ServerPlayer serverPlayer : PlayerLookup.around(serverLevel,vec3,32)){
+            ServerPlayNetworking.send(serverPlayer,new ModLevelEventPacket((byte) 1,blockPos));
+        }
     }
 
 

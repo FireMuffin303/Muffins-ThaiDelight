@@ -10,9 +10,4 @@ import net.minecraft.sounds.SoundEvent;
 import java.util.function.Supplier;
 
 public class ModSoundEventsImpl {
-    public static Supplier<SoundEvent> register(String id) {
-        ResourceLocation resourceID = ThaiDelightCommon.modid(id);
-        SoundEvent soundEvent = Registry.register(BuiltInRegistries.SOUND_EVENT,resourceID,SoundEvent.createVariableRangeEvent(resourceID));
-        return () -> soundEvent;
-    }
 }

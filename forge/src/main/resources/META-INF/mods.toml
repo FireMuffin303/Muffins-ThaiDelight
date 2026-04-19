@@ -28,3 +28,18 @@ versionRange = "[1.20.1,)"
 ordering = "NONE"
 side = "BOTH"
 
+[[dependencies.muffins_thaidelight]]
+modId = "farmersdelight"
+mandatory = true
+type = "required"
+versionRange = "[1.20.1-1.2.8,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.muffins_thaidelight]]
+modId = "muffins_ovenapi"
+mandatory = true
+type = "required"
+versionRange = "[0.1.0-snapshot-3a,)"
+ordering = "NONE"
+side = "BOTH"

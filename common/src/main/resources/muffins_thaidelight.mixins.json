@@ -15,6 +15,7 @@
     "accessor.block.BlockStateProviderTypeAccessor",
     "accessor.block.WoodSetTypeAccessor",
     "accessor.feature.FoliagePlacerTypeAccessor",
+    "accessor.feature.TreeDecoratorTypeAccessor",
     "accessor.feature.TrunkPlacerTypeAccessor",
     "anorexia.LivingEntityMixin",
     "bambooShoot.PandaMixin",

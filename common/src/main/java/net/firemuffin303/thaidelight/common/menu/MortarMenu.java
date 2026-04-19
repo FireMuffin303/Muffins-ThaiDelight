@@ -19,9 +19,11 @@ import net.minecraft.world.entity.player.StackedContents;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 
 import java.util.Optional;
+import java.util.function.Supplier;
 
 public class MortarMenu extends RecipeBookMenu<Container> {
     private final ResultContainer resultContainer = new ResultContainer();
@@ -84,7 +86,8 @@ public class MortarMenu extends RecipeBookMenu<Container> {
         if (!arg2.isClientSide) {
             ServerPlayer serverPlayer = (ServerPlayer)arg3;
             ItemStack itemStack = ItemStack.EMPTY;
-            Optional<MortarRecipe> optional = arg2.getServer().getRecipeManager().getRecipeFor(ModRecipes.MORTAR.get(), arg4, arg2);
+            Supplier<RecipeType<MortarRecipe>> f = (Supplier<RecipeType<MortarRecipe>>) (Supplier<?>)ModRecipes.MORTAR;
+            Optional<MortarRecipe> optional = arg2.getServer().getRecipeManager().getRecipeFor(f.get(), arg4, arg2);
             if (optional.isPresent()) {
                 MortarRecipe mortarRecipe = optional.get();
                 if (arg5.setRecipeUsed(arg2, serverPlayer, mortarRecipe)) {
@@ -221,7 +224,8 @@ public class MortarMenu extends RecipeBookMenu<Container> {
         public void onTake(Player player, ItemStack itemStack) {
 
             this.checkTakeAchievements(itemStack);
-            NonNullList<ItemStack> nonNullList = player.level().getRecipeManager().getRemainingItemsFor(ModRecipes.MORTAR.get(), this.craftSlots, player.level());
+            Supplier<RecipeType<MortarRecipe>> m = (Supplier<RecipeType<MortarRecipe>>) (Supplier<?>) ModRecipes.MORTAR;
+            NonNullList<ItemStack> nonNullList = player.level().getRecipeManager().getRemainingItemsFor(m.get(), this.craftSlots, player.level());
 
             for(int i = 0; i < nonNullList.size(); ++i) {
                 ItemStack itemStack2 = this.craftSlots.getItem(i);
