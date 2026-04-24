@@ -140,4 +140,8 @@ public class PlatformUtil {
         throw new AssertionError();
     }
 
+    @ExpectPlatform
+    public static boolean stinkyShouldTriggerNeutralConfig(){
+        throw new AssertionError();
+    }
 }

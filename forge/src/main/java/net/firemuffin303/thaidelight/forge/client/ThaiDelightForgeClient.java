@@ -1,7 +1,9 @@
 package net.firemuffin303.thaidelight.forge.client;
 
+import com.mojang.logging.LogUtils;
 import net.firemuffin303.thaidelight.ThaiDelightCommon;
 import net.firemuffin303.thaidelight.client.ThaiDelightCommonClient;
+import net.firemuffin303.thaidelight.client.renderer.DurianHeatRendererLayer;
 import net.firemuffin303.thaidelight.client.renderer.component.SackTooltipComponent;
 import net.firemuffin303.thaidelight.client.sceens.MortarScreen;
 import net.firemuffin303.thaidelight.common.block.cauldron.FermentedFishCauldronBlock;
@@ -17,32 +19,27 @@ import net.firemuffin303.thaidelight.common.registry.ModMenuType;
 import net.firemuffin303.thaidelight.common.registry.ModRecipes;
 import net.firemuffin303.thaidelight.util.ModUtils;
 import net.minecraft.client.RecipeBookCategories;
-import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.client.gui.screens.MenuScreens;
-import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.model.HeadedModel;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.BiomeColors;
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.LivingEntityRenderer;
+import net.minecraft.client.renderer.entity.RenderLayerParent;
+import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
 import net.minecraft.client.renderer.item.ItemProperties;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.world.entity.HumanoidArm;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.RecipeBookType;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.UseAnim;
-import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.FoliageColor;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.IArmPoseTransformer;
 import net.minecraftforge.client.event.*;
-import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -155,5 +152,15 @@ public class ThaiDelightForgeClient {
         event.register(ThaiDelightCommonClient.FILLED_SACK_MODEL);
         event.register(ThaiDelightCommonClient.SACK_MODEL_IN_HAND);
         event.register(ThaiDelightCommonClient.FULL_SACK_MODEL_IN_HAND);
+    }
+
+    @SubscribeEvent
+    public static void registerAddLayer(EntityRenderersEvent.AddLayers event){
+        event.getSkins().forEach(skinType -> {
+            var playerRenderer = event.getSkin(skinType);
+            if(playerRenderer != null){
+                playerRenderer.addLayer(new DurianHeatRendererLayer(playerRenderer));
+            }
+        });
     }
 }

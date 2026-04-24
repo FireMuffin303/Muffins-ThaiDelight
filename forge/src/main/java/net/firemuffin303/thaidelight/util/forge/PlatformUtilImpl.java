@@ -7,6 +7,7 @@ import net.firemuffin303.thaidelight.forge.client.ThaiDelightForgeClient;
 import net.firemuffin303.thaidelight.forge.common.capabilities.DurianHeatProvider;
 import net.firemuffin303.thaidelight.forge.common.capabilities.ISpicy;
 import net.firemuffin303.thaidelight.forge.common.capabilities.SpicyProvider;
+import net.firemuffin303.thaidelight.forge.config.ThaiDelightConfig;
 import net.firemuffin303.thaidelight.forge.mixin.accessor.AxeItemAccessor;
 import net.firemuffin303.thaidelight.forge.network.DurianHeatPacket;
 import net.firemuffin303.thaidelight.forge.network.ModLevelPacket;
@@ -171,6 +172,10 @@ public class PlatformUtilImpl {
             }
         }),new ModLevelPacket((byte) 1,blockPos));
 
+    }
+
+    public static boolean stinkyShouldTriggerNeutralConfig() {
+        return ThaiDelightConfig.STINKY_SHOULD_TRIGGER_NEUTRAL.get();
     }
 
 

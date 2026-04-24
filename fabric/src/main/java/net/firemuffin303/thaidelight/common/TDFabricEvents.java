@@ -13,6 +13,7 @@ import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.firemuffin303.thaidelight.ThaiDelightCommon;
 import net.firemuffin303.thaidelight.common.entity.ai.NearestMobStinkyTargetGoal;
 import net.firemuffin303.thaidelight.common.registry.*;
+import net.firemuffin303.thaidelight.integration.midnightLib.ThaiDelightConfig;
 import net.firemuffin303.thaidelight.mixin.accessor.MobAccessor;
 import net.firemuffin303.thaidelight.mixin.accessor.StructurePoolAccessor;
 import net.firemuffin303.thaidelight.mixin.accessor.VillagerAccessor;
@@ -311,17 +312,22 @@ public class TDFabricEvents {
     }
 
     public static void addVillagersTrades(){
-        ModVillagerTrades.trades().forEach(modVillagerTrade -> {
-            TradeOfferHelper.registerVillagerOffers(modVillagerTrade.villagerProfession(), modVillagerTrade.level(), (factories) ->{
-                factories.add((entity, randomSource) -> modVillagerTrade.merchantOffer());
+        if(ThaiDelightConfig.villagerShouldTradeTDItem){
+            ModVillagerTrades.trades().forEach(modVillagerTrade -> {
+                TradeOfferHelper.registerVillagerOffers(modVillagerTrade.villagerProfession(), modVillagerTrade.level(), (factories) ->{
+                    factories.add((entity, randomSource) -> modVillagerTrade.merchantOffer());
+                });
             });
-        });
+        }
 
-        TradeOfferHelper.registerWanderingTraderOffers(1, (factories) -> {
-            ModVillagerTrades.wanderTrade().forEach(integerMerchantOfferPair -> {
-                factories.add((entity, randomSource) -> integerMerchantOfferPair);
+
+        if(ThaiDelightConfig.wanderingTraderShouldTradeTDItem){
+            TradeOfferHelper.registerWanderingTraderOffers(1, (factories) -> {
+                ModVillagerTrades.wanderTrade().forEach(integerMerchantOfferPair -> {
+                    factories.add((entity, randomSource) -> integerMerchantOfferPair);
+                });
             });
-        });
+        }
 
     }
 }

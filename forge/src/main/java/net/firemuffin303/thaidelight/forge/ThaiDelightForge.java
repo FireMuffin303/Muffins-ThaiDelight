@@ -16,6 +16,7 @@ import net.firemuffin303.thaidelight.forge.common.capabilities.DurianHeatProvide
 import net.firemuffin303.thaidelight.forge.common.capabilities.IDurianHeat;
 import net.firemuffin303.thaidelight.forge.common.capabilities.ISpicy;
 import net.firemuffin303.thaidelight.forge.common.capabilities.SpicyProvider;
+import net.firemuffin303.thaidelight.forge.config.ThaiDelightConfig;
 import net.firemuffin303.thaidelight.forge.mixin.accessor.PotionBrewingAccessor;
 import net.firemuffin303.thaidelight.forge.network.DurianHeatPacket;
 import net.firemuffin303.thaidelight.forge.network.SpicyPacket;
@@ -54,7 +55,9 @@ import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.event.village.WandererTradesEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.network.PacketDistributor;
@@ -83,6 +86,7 @@ public class ThaiDelightForge {
 
 
     public ThaiDelightForge(){
+        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, ThaiDelightConfig.SPEC);
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
         ThaiDelightCommon.init();
         Arrays.stream(REGISTERS).forEach(deferredRegister -> deferredRegister.register(eventBus));
@@ -151,13 +155,16 @@ public class ThaiDelightForge {
     }
 
     public void registerVillagerTrade(VillagerTradesEvent event){
-        ModVillagerTrades.trades().stream().forEach(modVillagerTrade -> {
-            if(event.getType() == modVillagerTrade.villagerProfession()){
-                List<VillagerTrades.ItemListing> list = event.getTrades().get(modVillagerTrade.level());
-                MerchantOffer merchantOffer = modVillagerTrade.merchantOffer();
-                list.add(new BasicItemListing(merchantOffer.getCostA(),merchantOffer.getCostB(),merchantOffer.getResult(),merchantOffer.getMaxUses(),merchantOffer.getXp(),merchantOffer.getPriceMultiplier()));
-            }
-        });
+        if(ThaiDelightConfig.VILLAGER_SHOULD_TRADE_TD_ITEM.get()){
+            ModVillagerTrades.trades().stream().forEach(modVillagerTrade -> {
+                if(event.getType() == modVillagerTrade.villagerProfession()){
+                    List<VillagerTrades.ItemListing> list = event.getTrades().get(modVillagerTrade.level());
+                    MerchantOffer merchantOffer = modVillagerTrade.merchantOffer();
+                    list.add(new BasicItemListing(merchantOffer.getCostA(),merchantOffer.getCostB(),merchantOffer.getResult(),merchantOffer.getMaxUses(),merchantOffer.getXp(),merchantOffer.getPriceMultiplier()));
+                }
+            });
+        }
+
     }
 
     public void registerWanderingTraderOffers(WandererTradesEvent event){
@@ -168,7 +175,9 @@ public class ThaiDelightForge {
                 merchantOffer.getPriceMultiplier()
                 )).collect(Collectors.toSet());
 
-        event.getGenericTrades().addAll(set);
+        if(ThaiDelightConfig.WANDERING_TRADER_SHOULD_TRADE_TD_ITEM.get()){
+            event.getGenericTrades().addAll(set);
+        }
     }
 
     public void attachCapability(AttachCapabilitiesEvent<Entity> event){

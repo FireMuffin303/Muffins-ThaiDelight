@@ -9,6 +9,7 @@ import net.firemuffin303.thaidelight.asm.ModASMEarlyRiser;
 import net.firemuffin303.thaidelight.client.ThaiDelightClientFabric;
 import net.firemuffin303.thaidelight.common.cardinalcomponents.DurianHeatComponent;
 import net.firemuffin303.thaidelight.common.registry.ModCardinalComponents;
+import net.firemuffin303.thaidelight.integration.midnightLib.ThaiDelightConfig;
 import net.firemuffin303.thaidelight.network.ModLevelEventPacket;
 import net.firemuffin303.thaidelight.util.ModUtils;
 import net.minecraft.client.model.HumanoidModel;
@@ -134,6 +135,10 @@ public class PlatformUtilImpl {
         for(ServerPlayer serverPlayer : PlayerLookup.around(serverLevel,vec3,32)){
             ServerPlayNetworking.send(serverPlayer,new ModLevelEventPacket((byte) 1,blockPos));
         }
+    }
+
+    public static boolean stinkyShouldTriggerNeutralConfig() {
+        return ThaiDelightConfig.stinkyShouldTriggerNeutral;
     }
 
 

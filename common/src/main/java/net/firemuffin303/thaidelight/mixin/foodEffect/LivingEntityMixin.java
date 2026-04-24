@@ -23,14 +23,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(LivingEntity.class)
-public abstract class LivingEntityMixin{
+public abstract class LivingEntityMixin {
 
-    @ModifyReturnValue(method = "canFreeze",at = @At(value = "RETURN",ordinal = 1))
-    public boolean muffins$canFreezeCheck(boolean original){
+    @ModifyReturnValue(method = "canFreeze", at = @At(value = "RETURN", ordinal = 1))
+    public boolean muffins$canFreezeCheck(boolean original) {
         LivingEntity livingEntity = (LivingEntity) (Object) this;
 
         boolean bl = true;
-        if(livingEntity instanceof Player){
+        if (livingEntity instanceof Player) {
             bl = !PlatformUtil.getDurianHeatComponent(livingEntity).isHeatUp();
         }
 
@@ -54,22 +54,4 @@ public abstract class LivingEntityMixin{
         return value;
     }
 
-    @Inject(method = "addEffect(Lnet/minecraft/world/effect/MobEffectInstance;Lnet/minecraft/world/entity/Entity;)Z",at = @At("HEAD"))
-    public void muffins$setPlayer(MobEffectInstance mobEffectInstance, Entity entity, CallbackInfoReturnable<Boolean> cir, @Share("player") LocalRef<Player> localRef){
-        LivingEntity livingEntity = (LivingEntity)(Object)this;
-        if(livingEntity instanceof Player player1){
-            localRef.set(player1);
-        }
-    }
-
-    @Inject(method = "addEffect(Lnet/minecraft/world/effect/MobEffectInstance;Lnet/minecraft/world/entity/Entity;)Z",
-            at = @At(value = "INVOKE", target = "Ljava/util/Map;get(Ljava/lang/Object;)Ljava/lang/Object;"))
-    public void muffins$reduceIfSpicy(MobEffectInstance mobEffectInstance, Entity entity, CallbackInfoReturnable<Boolean> cir,
-                                      @Local(argsOnly = true)LocalRef<MobEffectInstance> mobEffectInstanceLocalRef, @Share("player") LocalRef<Player> localRef){
-        if(!mobEffectInstanceLocalRef.get().isAmbient()){
-            if(PlatformUtil.getSpicyTime(localRef.get()) > 0){
-                mobEffectInstanceLocalRef.set(new MobEffectInstance(mobEffectInstance.getEffect(),mobEffectInstance.getDuration() - mobEffectInstance.getDuration()/3));
-            }
-        }
-    }
 }
