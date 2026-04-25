@@ -32,6 +32,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
@@ -175,7 +176,6 @@ public class LimePlantBlock extends DoublePlantBlock implements BonemealableBloc
                             .setValue(HALF, DoubleBlockHalf.UPPER)), 3);
         }
     }
-
 
     private static boolean isLower(BlockState blockState){
         return blockState.getValue(HALF) == DoubleBlockHalf.LOWER && blockState.is(ModBlocks.LIME_PLANT.get());

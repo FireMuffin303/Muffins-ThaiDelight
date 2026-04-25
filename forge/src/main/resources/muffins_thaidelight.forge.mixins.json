@@ -8,6 +8,7 @@
     "BlockFamiliesAccessor",
     "DurianHelmetItemMixin",
     "FireBlockMixin",
+    "LimePlantMixin",
     "SackItemMixin",
     "accessor.AxeItemAccessor",
     "accessor.PotionBrewingAccessor",

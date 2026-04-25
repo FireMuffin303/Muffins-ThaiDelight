@@ -11,6 +11,7 @@ import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
+import net.fabricmc.fabric.api.registry.LandPathNodeTypesRegistry;
 import net.fabricmc.fabric.api.registry.TillableBlockRegistry;
 import net.fabricmc.loader.api.FabricLoader;
 import net.firemuffin303.thaidelight.common.TDFabricEvents;
@@ -35,7 +36,10 @@ import net.minecraft.world.item.alchemy.PotionBrewing;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.level.pathfinder.BlockPathTypes;
+import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 
 public class ThaiDelightFabric implements ModInitializer {
@@ -80,6 +84,7 @@ public class ThaiDelightFabric implements ModInitializer {
 
         CommandRegistrationCallback.EVENT.register(ThaiDelightFabric::modCommand);
         ThaiDelightCommon.BURN_MAP.forEach((block, burnEntry) -> FlammableBlockRegistry.getDefaultInstance().add(block,burnEntry.burn(), burnEntry.spread()));
+        LandPathNodeTypesRegistry.register(ModBlocks.LIME_PLANT.get(),BlockPathTypes.DAMAGE_OTHER,BlockPathTypes.DANGER_OTHER);
     }
 
     public static void modCommand(CommandDispatcher<CommandSourceStack> commandDispatcher, CommandBuildContext commandBuildContext, Commands.CommandSelection commandSelection){

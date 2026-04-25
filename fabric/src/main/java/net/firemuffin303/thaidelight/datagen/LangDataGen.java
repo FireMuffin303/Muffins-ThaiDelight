@@ -68,7 +68,7 @@ public class LangDataGen extends FabricLanguageProvider {
         translationBuilder.add(ModItems.PAPAYA_CRATE.get(),"Papaya Crate");
         translationBuilder.add(ModItems.MANGO_CRATE.get(),"Mango Crate");
         translationBuilder.add(ModItems.HOLY_BASIL_CRATE.get(),"Holy Basil Crate");
-        translationBuilder.add(ModItems.BASIL_CRATE.get(),"Basil Crate");
+        translationBuilder.add(ModItems.BASIL_CRATE.get(),"Thai Basil Crate");
         translationBuilder.add(ModItems.BAMBOO_SHOOT_CRATE.get(),"Bamboo Shoot Crate");
         translationBuilder.add(ModItems.BUTTERFLY_PEA_CRATE.get(),"Butterfly Pea Crate");
         translationBuilder.add(ModItems.CRAB_SPAWN_EGG.get(),"Flower Crab Spawn Egg");
@@ -183,8 +183,8 @@ public class LangDataGen extends FabricLanguageProvider {
         translationBuilder.add(ModItems.PAPAYA_SEEDS.get(),"Papaya Seeds");
         translationBuilder.add(ModItems.WILD_HOLY_BASIL.get(),"Wild Holy Basil");
         translationBuilder.add(ModItems.HOLY_BASIL.get(),"Holy Basil");
-        translationBuilder.add(ModItems.WILD_BASIL.get(),"Wild Basil");
-        translationBuilder.add(ModItems.BASIL.get(),"Basil");
+        translationBuilder.add(ModItems.WILD_BASIL.get(),"Wild Thai Basil");
+        translationBuilder.add(ModItems.BASIL.get(),"Thai Basil");
 
         translationBuilder.add(ModItems.BUTTERFLY_PEA.get(),"Butterfly Pea");
         translationBuilder.add(ModItems.BUTTERFLY_PEA_SEEDS.get(),"Butterfly Pea Seeds");

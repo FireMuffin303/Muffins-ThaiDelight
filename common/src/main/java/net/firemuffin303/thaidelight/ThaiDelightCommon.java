@@ -202,6 +202,7 @@ public class ThaiDelightCommon {
         BURN_MAP.put(ModBlocks.STRIPPED_PAPAYA_WOOD.get(),new BurnEntry(5,5));
 
         BURN_MAP.put(ModBlocks.BUTTERFLY_PEA_WALL.get(),new BurnEntry(60,100));
+        BURN_MAP.put(ModBlocks.LIME_PLANT.get(),new BurnEntry(60,100));
     }
 
     public static record BurnEntry(int burn,int spread){ }
