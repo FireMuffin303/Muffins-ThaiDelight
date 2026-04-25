@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:crafting/durian_fence_gate"
+        "recipe": "muffins_thaidelight:crafting/durian_fence_gate"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:crafting/durian_fence_gate"
+      "muffins_thaidelight:crafting/durian_fence_gate"
     ]
   },
   "sends_telemetry_event": false

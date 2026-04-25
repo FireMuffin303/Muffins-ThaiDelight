@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:crafting/coconut_button"
+        "recipe": "muffins_thaidelight:crafting/coconut_button"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:crafting/coconut_button"
+      "muffins_thaidelight:crafting/coconut_button"
     ]
   },
   "sends_telemetry_event": false

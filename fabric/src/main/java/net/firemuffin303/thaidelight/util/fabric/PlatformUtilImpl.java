@@ -4,6 +4,7 @@ import com.mojang.logging.LogUtils;
 import io.github.fabricators_of_create.porting_lib.tags.Tags;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.firemuffin303.thaidelight.asm.ModASMEarlyRiser;
 import net.firemuffin303.thaidelight.client.ThaiDelightClientFabric;
@@ -139,6 +140,10 @@ public class PlatformUtilImpl {
 
     public static boolean stinkyShouldTriggerNeutralConfig() {
         return ThaiDelightConfig.stinkyShouldTriggerNeutral;
+    }
+
+    public static void registerBlockBurn(Supplier<Block> blockSupplier, int burn, int spread) {
+        FlammableBlockRegistry.getDefaultInstance().add(blockSupplier.get(),burn,spread);
     }
 
 

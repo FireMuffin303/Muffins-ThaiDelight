@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:crafting/coconut_pressure_plate"
+        "recipe": "muffins_thaidelight:crafting/coconut_pressure_plate"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:crafting/coconut_pressure_plate"
+      "muffins_thaidelight:crafting/coconut_pressure_plate"
     ]
   },
   "sends_telemetry_event": false

@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:crafting/mango_door"
+        "recipe": "muffins_thaidelight:crafting/mango_door"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:crafting/mango_door"
+      "muffins_thaidelight:crafting/mango_door"
     ]
   },
   "sends_telemetry_event": false

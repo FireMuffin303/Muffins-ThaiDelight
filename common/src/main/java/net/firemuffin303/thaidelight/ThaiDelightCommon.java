@@ -1,6 +1,5 @@
 package net.firemuffin303.thaidelight;
 
-import com.mojang.logging.LogUtils;
 import net.firemuffin303.thaidelight.common.registry.*;
 import net.firemuffin303.thaidelight.mixin.accessor.VillagerAccessor;
 import net.firemuffin303.thaidelight.mixin.food.ChickenFoodAccessor;
@@ -20,6 +19,7 @@ public class ThaiDelightCommon {
     public static final String MOD_ID = "muffins_thaidelight";
 
     public static final Map<Item,Integer> FUEL_MAP = new HashMap<>();
+    public static final Map<Block,BurnEntry> BURN_MAP = new HashMap<>();
 
     public static void init(){
         ModSoundEvents.init();
@@ -42,10 +42,6 @@ public class ThaiDelightCommon {
 
         ModRecipes.init();
         ModBoatVariants.init();
-
-
-
-
     }
 
     public static void postInit(){
@@ -56,6 +52,8 @@ public class ThaiDelightCommon {
         registerStrippable();
         registerAnimalFood();
         setVillagerItem();
+        registerBurnBlock();
+
     }
 
     public static ResourceLocation modid(String id){
@@ -85,8 +83,6 @@ public class ThaiDelightCommon {
         FUEL_MAP.put(ModItems.DURIAN_CABINET.get(),300);
         FUEL_MAP.put(ModItems.MANGO_CABINET.get(),300);
         FUEL_MAP.put(ModItems.COCONUT_CABINET.get(),300);
-
-
     }
 
     public static void registerAnimalFood(){
@@ -148,4 +144,65 @@ public class ThaiDelightCommon {
         VillagerAccessor.setWantedItems(villagerWantedItems);
     }
 
+
+    public static void registerBurnBlock(){
+        BURN_MAP.put(ModBlocks.DURIAN_LOG.get(),new BurnEntry(5,5));
+        BURN_MAP.put(ModBlocks.STRIPPED_DURIAN_LOG.get(),new BurnEntry(5,5));
+        BURN_MAP.put(ModBlocks.DURIAN_WOOD.get(),new BurnEntry(5,5));
+        BURN_MAP.put(ModBlocks.STRIPPED_DURIAN_WOOD.get(),new BurnEntry(5,5));
+        BURN_MAP.put(ModBlocks.DURIAN_LEAVES.get(),new BurnEntry(30,60));
+        BURN_MAP.put(ModBlocks.DURIAN_FLOWER.get(),new BurnEntry(60,100));
+        BURN_MAP.put(ModBlocks.DURIAN_PEEL_BLOCK.get(),new BurnEntry(5,20));
+        BURN_MAP.put(ModBlocks.DURIAN_PLANKS.get(),new BurnEntry(5,20));
+        BURN_MAP.put(ModBlocks.DURIAN_STAIRS.get(),new BurnEntry(5,20));
+        BURN_MAP.put(ModBlocks.DURIAN_SLAB.get(),new BurnEntry(5,20));
+        BURN_MAP.put(ModBlocks.DURIAN_FENCE.get(),new BurnEntry(5,20));
+        BURN_MAP.put(ModBlocks.DURIAN_FENCE_GATE.get(),new BurnEntry(5,20));
+
+        BURN_MAP.put(ModBlocks.MANGO_LOG.get(),new BurnEntry(5,5));
+        BURN_MAP.put(ModBlocks.STRIPPED_MANGO_LOG.get(),new BurnEntry(5,5));
+        BURN_MAP.put(ModBlocks.MANGO_WOOD.get(),new BurnEntry(5,5));
+        BURN_MAP.put(ModBlocks.STRIPPED_MANGO_WOOD.get(),new BurnEntry(5,5));
+        BURN_MAP.put(ModBlocks.MANGO_LEAVES.get(),new BurnEntry(30,60));
+        BURN_MAP.put(ModBlocks.MANGO_PLANKS.get(),new BurnEntry(5,20));
+        BURN_MAP.put(ModBlocks.MANGO_STAIRS.get(),new BurnEntry(5,20));
+        BURN_MAP.put(ModBlocks.MANGO_SLAB.get(),new BurnEntry(5,20));
+        BURN_MAP.put(ModBlocks.MANGO_FENCE.get(),new BurnEntry(5,20));
+        BURN_MAP.put(ModBlocks.MANGO_FENCE_GATE.get(),new BurnEntry(5,20));
+
+        BURN_MAP.put(ModBlocks.COCONUT_LOG.get(),new BurnEntry(5,5));
+        BURN_MAP.put(ModBlocks.STRIPPED_COCONUT_LOG.get(),new BurnEntry(5,5));
+        BURN_MAP.put(ModBlocks.COCONUT_WOOD.get(),new BurnEntry(5,5));
+        BURN_MAP.put(ModBlocks.STRIPPED_COCONUT_WOOD.get(),new BurnEntry(5,5));
+        BURN_MAP.put(ModBlocks.BUDDING_COCONUT_LEAF.get(),new BurnEntry(30,60));
+        BURN_MAP.put(ModBlocks.COCONUT_LEAF.get(),new BurnEntry(30,60));
+        BURN_MAP.put(ModBlocks.COCONUT_LEAF_END.get(),new BurnEntry(30,60));
+        BURN_MAP.put(ModBlocks.COCONUT_LEAF_BLOCK.get(),new BurnEntry(30,60));
+        BURN_MAP.put(ModBlocks.COCONUT_LEAF_CARPET.get(),new BurnEntry(60,20));
+        BURN_MAP.put(ModBlocks.COCONUT_PLANKS.get(),new BurnEntry(5,20));
+        BURN_MAP.put(ModBlocks.COCONUT_STAIRS.get(),new BurnEntry(5,20));
+        BURN_MAP.put(ModBlocks.COCONUT_SLAB.get(),new BurnEntry(5,20));
+        BURN_MAP.put(ModBlocks.COCONUT_FENCE.get(),new BurnEntry(5,20));
+        BURN_MAP.put(ModBlocks.COCONUT_FENCE_GATE.get(),new BurnEntry(5,20));
+
+        BURN_MAP.put(ModBlocks.PAPAYA_LOG.get(),new BurnEntry(5,5));
+        BURN_MAP.put(ModBlocks.STRIPPED_PAPAYA_LOG.get(),new BurnEntry(5,5));
+        BURN_MAP.put(ModBlocks.PAPAYA_WOOD.get(),new BurnEntry(5,5));
+        BURN_MAP.put(ModBlocks.STRIPPED_PAPAYA_WOOD.get(),new BurnEntry(5,5));
+        BURN_MAP.put(ModBlocks.PAPAYA_FLOWER.get(),new BurnEntry(60,100));
+        BURN_MAP.put(ModBlocks.WALL_PAPAYA_FLOWER.get(),new BurnEntry(60,100));
+        BURN_MAP.put(ModBlocks.BUDDING_PAPAYA_FLOWER.get(),new BurnEntry(60,100));
+        BURN_MAP.put(ModBlocks.PAPAYA_LEAVES.get(),new BurnEntry(30,60));
+        BURN_MAP.put(ModBlocks.WALL_PAPAYA_LEAVES.get(),new BurnEntry(30,60));
+        BURN_MAP.put(ModBlocks.PAPAYA_LEAVES_STEM.get(),new BurnEntry(30,60));
+
+        BURN_MAP.put(ModBlocks.PAPAYA_LOG.get(),new BurnEntry(5,5));
+        BURN_MAP.put(ModBlocks.STRIPPED_PAPAYA_LOG.get(),new BurnEntry(5,5));
+        BURN_MAP.put(ModBlocks.PAPAYA_WOOD.get(),new BurnEntry(5,5));
+        BURN_MAP.put(ModBlocks.STRIPPED_PAPAYA_WOOD.get(),new BurnEntry(5,5));
+
+        BURN_MAP.put(ModBlocks.BUTTERFLY_PEA_WALL.get(),new BurnEntry(60,100));
+    }
+
+    public static record BurnEntry(int burn,int spread){ }
 }

@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:crafting/mango_boat"
+        "recipe": "muffins_thaidelight:crafting/mango_boat"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
@@ -22,7 +22,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:crafting/mango_boat"
+      "muffins_thaidelight:crafting/mango_boat"
     ]
   },
   "sends_telemetry_event": false

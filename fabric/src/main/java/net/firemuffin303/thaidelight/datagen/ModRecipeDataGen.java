@@ -154,7 +154,7 @@ public class ModRecipeDataGen extends FabricRecipeProvider {
                 .pattern("##")
                 .group("bark")
                 .unlockedBy("has_log", RecipeProvider.has(ModItems.PAPAYA_LOG.get()))
-                .save(exporter,"crafting/"+getItemName(ModItems.PAPAYA_WOOD.get()));
+                .save(exporter,ThaiDelightCommon.modid("crafting/"+getItemName(ModItems.PAPAYA_WOOD.get())));
 
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModItems.STRIPPED_PAPAYA_WOOD.get(), 3)
                 .define('#', ModItems.STRIPPED_PAPAYA_LOG.get())
@@ -162,7 +162,7 @@ public class ModRecipeDataGen extends FabricRecipeProvider {
                 .pattern("##")
                 .group("bark")
                 .unlockedBy("has_log", RecipeProvider.has(ModItems.STRIPPED_PAPAYA_LOG.get()))
-                .save(exporter,"crafting/"+getItemName(ModItems.STRIPPED_PAPAYA_WOOD.get()));
+                .save(exporter,ThaiDelightCommon.modid("crafting/"+getItemName(ModItems.STRIPPED_PAPAYA_WOOD.get())));
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD,ModItems.MANGO_STICKY_RICE_FEAST.get(),1)
                 .requires(ModTags.MANGO)
@@ -171,7 +171,7 @@ public class ModRecipeDataGen extends FabricRecipeProvider {
                 .requires(Items.HONEY_BOTTLE)
                 .requires(Items.BOWL)
                 .unlockedBy("has_mango",RecipeProvider.has(ModTags.MANGO))
-                .save(exporter,"crafting/"+RecipeProvider.getItemName(ModItems.MANGO_STICKY_RICE_FEAST.get()));
+                .save(exporter,ThaiDelightCommon.modid("crafting/"+RecipeProvider.getItemName(ModItems.MANGO_STICKY_RICE_FEAST.get())));
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, ModItems.STIR_FRIED_NOODLE.get())
                 .requires(vectorwing.farmersdelight.common.registry.ModItems.ONION.get())
@@ -352,20 +352,22 @@ public class ModRecipeDataGen extends FabricRecipeProvider {
                 .pattern("##")
                 .pattern("##")
                 .group("bark")
-                .unlockedBy("has_log", RecipeProvider.has(log)).save(exporter,"crafting/"+getItemName(wood));
+                .unlockedBy("has_log", RecipeProvider.has(log))
+                .save(exporter,ThaiDelightCommon.modid("crafting/"+getItemName(wood)));
 
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, stripped_wood, 3)
                 .define('#', stripped_log)
                 .pattern("##")
                 .pattern("##")
                 .group("bark")
-                .unlockedBy("has_log", RecipeProvider.has(stripped_log)).save(exporter,"crafting/"+getItemName(stripped_wood));
+                .unlockedBy("has_log", RecipeProvider.has(stripped_log))
+                .save(exporter,ThaiDelightCommon.modid("crafting/"+getItemName(stripped_wood)));
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, blockFamily.getBaseBlock(), 4)
                 .requires(log_item_tag)
                 .group("planks")
                 .unlockedBy("has_log", RecipeProvider.has(log_item_tag))
-                .save(exporter,"crafting/"+getItemName(blockFamily.getBaseBlock()));
+                .save(exporter,ThaiDelightCommon.modid("crafting/"+getItemName(blockFamily.getBaseBlock())));
 
 
         RecipeProvider.stairBuilder(blockFamily.get(BlockFamily.Variant.STAIRS),
@@ -379,31 +381,31 @@ public class ModRecipeDataGen extends FabricRecipeProvider {
 
         RecipeProvider.fenceBuilder(blockFamily.get(BlockFamily.Variant.FENCE),Ingredient.of(blockFamily.getBaseBlock()))
                 .unlockedBy(getHasName(blockFamily.getBaseBlock()),has(blockFamily.getBaseBlock()))
-                .save(exporter,"crafting/"+getItemName(blockFamily.get(BlockFamily.Variant.FENCE)));
+                .save(exporter,ThaiDelightCommon.modid("crafting/"+getItemName(blockFamily.get(BlockFamily.Variant.FENCE))));
 
         RecipeProvider.fenceGateBuilder(blockFamily.get(BlockFamily.Variant.FENCE_GATE),Ingredient.of(blockFamily.getBaseBlock()))
                 .unlockedBy(getHasName(blockFamily.getBaseBlock()),has(blockFamily.getBaseBlock()))
-                .save(exporter,"crafting/"+getItemName(blockFamily.get(BlockFamily.Variant.FENCE_GATE)));
+                .save(exporter,ThaiDelightCommon.modid("crafting/"+getItemName(blockFamily.get(BlockFamily.Variant.FENCE_GATE))));
 
         RecipeProvider.doorBuilder(blockFamily.get(BlockFamily.Variant.DOOR),Ingredient.of(blockFamily.getBaseBlock()))
                 .unlockedBy(getHasName(blockFamily.getBaseBlock()),has(blockFamily.getBaseBlock()))
-                .save(exporter,"crafting/"+getItemName(blockFamily.get(BlockFamily.Variant.DOOR)));
+                .save(exporter,ThaiDelightCommon.modid("crafting/"+getItemName(blockFamily.get(BlockFamily.Variant.DOOR))));
 
         RecipeProvider.trapdoorBuilder(blockFamily.get(BlockFamily.Variant.TRAPDOOR),Ingredient.of(blockFamily.getBaseBlock()))
                 .unlockedBy(getHasName(blockFamily.getBaseBlock()),has(blockFamily.getBaseBlock()))
-                .save(exporter,"crafting/"+getItemName(blockFamily.get(BlockFamily.Variant.TRAPDOOR)));
+                .save(exporter,ThaiDelightCommon.modid("crafting/"+getItemName(blockFamily.get(BlockFamily.Variant.TRAPDOOR))));
 
         RecipeProvider.pressurePlateBuilder(RecipeCategory.REDSTONE, blockFamily.get(BlockFamily.Variant.PRESSURE_PLATE),Ingredient.of(blockFamily.getBaseBlock()))
                 .unlockedBy(getHasName(blockFamily.getBaseBlock()),has(blockFamily.getBaseBlock()))
-                .save(exporter,"crafting/"+getItemName(blockFamily.get(BlockFamily.Variant.PRESSURE_PLATE)));
+                .save(exporter,ThaiDelightCommon.modid("crafting/"+getItemName(blockFamily.get(BlockFamily.Variant.PRESSURE_PLATE))));
 
         RecipeProvider.buttonBuilder(blockFamily.get(BlockFamily.Variant.BUTTON),Ingredient.of(blockFamily.getBaseBlock()))
                 .unlockedBy(getHasName(blockFamily.getBaseBlock()),has(blockFamily.getBaseBlock()))
-                .save(exporter,"crafting/"+getItemName(blockFamily.get(BlockFamily.Variant.BUTTON)));
+                .save(exporter,ThaiDelightCommon.modid("crafting/"+getItemName(blockFamily.get(BlockFamily.Variant.BUTTON))));
 
         RecipeProvider.signBuilder(blockFamily.get(BlockFamily.Variant.SIGN),Ingredient.of(blockFamily.getBaseBlock()))
                 .unlockedBy(getHasName(blockFamily.getBaseBlock()),has(blockFamily.getBaseBlock()))
-                .save(exporter,"crafting/"+getItemName(blockFamily.get(BlockFamily.Variant.SIGN)));
+                .save(exporter,ThaiDelightCommon.modid("crafting/"+getItemName(blockFamily.get(BlockFamily.Variant.SIGN))));
 
         ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, hanging_sign, 6)
                 .group("hanging_sign")
@@ -413,7 +415,7 @@ public class ModRecipeDataGen extends FabricRecipeProvider {
                 .pattern("###")
                 .pattern("###")
                 .unlockedBy("has_stripped_logs", RecipeProvider.has(stripped_log))
-                .save(exporter,"crafting/"+getItemName(hanging_sign));
+                .save(exporter,ThaiDelightCommon.modid("crafting/"+getItemName(hanging_sign)));
 
 
 
@@ -422,14 +424,14 @@ public class ModRecipeDataGen extends FabricRecipeProvider {
                 .pattern("# #").pattern("###")
                 .group("boat")
                 .unlockedBy("in_water", RecipeProvider.insideOf(Blocks.WATER))
-                .save(exporter,"crafting/"+getItemName(boat));
+                .save(exporter,ThaiDelightCommon.modid("crafting/"+getItemName(boat)));
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.TRANSPORTATION, chest_boat)
                 .requires(Blocks.CHEST)
                 .requires(boat)
                 .group("chest_boat")
                 .unlockedBy("has_boat", RecipeProvider.has(ItemTags.BOATS))
-                .save(exporter,"crafting/"+getItemName(chest_boat));
+                .save(exporter,ThaiDelightCommon.modid("crafting/"+getItemName(chest_boat)));
 
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC,cabinet)

@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:crafting/coconut_wood"
+        "recipe": "muffins_thaidelight:crafting/coconut_wood"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:crafting/coconut_wood"
+      "muffins_thaidelight:crafting/coconut_wood"
     ]
   },
   "sends_telemetry_event": false

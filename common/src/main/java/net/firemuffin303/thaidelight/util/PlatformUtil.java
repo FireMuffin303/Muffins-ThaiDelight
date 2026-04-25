@@ -96,6 +96,11 @@ public class PlatformUtil {
     }
 
     @ExpectPlatform
+    public static void registerBlockBurn(Supplier<Block> blockSupplier,int burn,int spread){
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
     public static ModUtils.DurianComponentSupplier getDurianHeatComponent(LivingEntity livingEntity){
         throw new AssertionError();
     }

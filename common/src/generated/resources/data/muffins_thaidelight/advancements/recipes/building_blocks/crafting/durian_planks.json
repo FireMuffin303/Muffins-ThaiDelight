@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:crafting/durian_planks"
+        "recipe": "muffins_thaidelight:crafting/durian_planks"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:crafting/durian_planks"
+      "muffins_thaidelight:crafting/durian_planks"
     ]
   },
   "sends_telemetry_event": false

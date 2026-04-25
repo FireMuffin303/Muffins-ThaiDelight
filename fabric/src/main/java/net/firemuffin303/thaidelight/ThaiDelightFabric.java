@@ -10,6 +10,7 @@ import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
+import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.TillableBlockRegistry;
 import net.fabricmc.loader.api.FabricLoader;
 import net.firemuffin303.thaidelight.common.TDFabricEvents;
@@ -78,6 +79,7 @@ public class ThaiDelightFabric implements ModInitializer {
         TDFabricEvents.addVillagersTrades();
 
         CommandRegistrationCallback.EVENT.register(ThaiDelightFabric::modCommand);
+        ThaiDelightCommon.BURN_MAP.forEach((block, burnEntry) -> FlammableBlockRegistry.getDefaultInstance().add(block,burnEntry.burn(), burnEntry.spread()));
     }
 
     public static void modCommand(CommandDispatcher<CommandSourceStack> commandDispatcher, CommandBuildContext commandBuildContext, Commands.CommandSelection commandSelection){

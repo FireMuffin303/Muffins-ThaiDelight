@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:crafting/stripped_mango_wood"
+        "recipe": "muffins_thaidelight:crafting/stripped_mango_wood"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:crafting/stripped_mango_wood"
+      "muffins_thaidelight:crafting/stripped_mango_wood"
     ]
   },
   "sends_telemetry_event": false

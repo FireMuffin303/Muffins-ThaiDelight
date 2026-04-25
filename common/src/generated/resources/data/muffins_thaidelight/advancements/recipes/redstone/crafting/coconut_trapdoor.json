@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:crafting/coconut_trapdoor"
+        "recipe": "muffins_thaidelight:crafting/coconut_trapdoor"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:crafting/coconut_trapdoor"
+      "muffins_thaidelight:crafting/coconut_trapdoor"
     ]
   },
   "sends_telemetry_event": false
