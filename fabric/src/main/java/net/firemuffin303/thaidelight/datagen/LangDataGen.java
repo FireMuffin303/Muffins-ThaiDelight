@@ -181,8 +181,6 @@ public class LangDataGen extends FabricLanguageProvider {
         translationBuilder.add(ModItems.PAPAYA_LEAVES.get(),"Papaya Leaves");
         translationBuilder.add(ModItems.PAPAYA_SAPLING.get(),"Papaya Sapling");
         translationBuilder.add(ModItems.PAPAYA_SEEDS.get(),"Papaya Seeds");
-        translationBuilder.add(ModItems.WILD_HOLY_BASIL.get(),"Wild Holy Basil");
-        translationBuilder.add(ModItems.HOLY_BASIL.get(),"Holy Basil");
         translationBuilder.add(ModItems.WILD_BASIL.get(),"Wild Thai Basil");
         translationBuilder.add(ModItems.BASIL.get(),"Thai Basil");
 
@@ -485,8 +483,6 @@ public class LangDataGen extends FabricLanguageProvider {
             translationBuilder.add(ModItems.PAPAYA_LEAVES.get(),"ใบไม้มะละกอ");
             translationBuilder.add(ModItems.PAPAYA_SAPLING.get(),"ต้นอ่อนมะละกอ");
             translationBuilder.add(ModItems.PAPAYA_SEEDS.get(),"เมล็ดมะละกอ");
-            translationBuilder.add(ModItems.WILD_HOLY_BASIL.get(),"ต้นกะเพราป่า");
-            translationBuilder.add(ModItems.HOLY_BASIL.get(),"กะเพรา");
             translationBuilder.add(ModItems.WILD_BASIL.get(),"ต้นโหระพาป่า");
             translationBuilder.add(ModItems.BASIL.get(),"โหระพา");
             translationBuilder.add(ModItems.BUTTERFLY_PEA.get(),"ดอกอัญชัญ");

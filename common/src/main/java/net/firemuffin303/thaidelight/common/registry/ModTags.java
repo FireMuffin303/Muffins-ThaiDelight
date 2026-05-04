@@ -59,9 +59,7 @@ public class ModTags {
     public static final TagKey<Biome> MANGO_TREE_BIOMES = TagKey.create(Registries.BIOME, ThaiDelightCommon.modid("mango_tree_biomes"));
     public static final TagKey<Biome> COCONUT_TREE_BIOMES = TagKey.create(Registries.BIOME, ThaiDelightCommon.modid("coconut_tree_biomes"));
 
-    public static final TagKey<Biome> WILD_HOLY_BASIL_BIOMES = TagKey.create(Registries.BIOME,ThaiDelightCommon.modid("wild_holy_basil_biomes"));
     public static final TagKey<Biome> WILD_BASIL_BIOMES = TagKey.create(Registries.BIOME,ThaiDelightCommon.modid("wild_basil_biomes"));
-    public static final TagKey<Biome> WILD_ALL_BASIL_BIOMES = TagKey.create(Registries.BIOME,ThaiDelightCommon.modid("wild_all_basil_biomes"));
     public static final TagKey<Biome> BUTTERFLY_PEA_BIOMES = TagKey.create(Registries.BIOME,ThaiDelightCommon.modid("butterfly_peas_biomes"));
 
     //----- Farmers Delight --------

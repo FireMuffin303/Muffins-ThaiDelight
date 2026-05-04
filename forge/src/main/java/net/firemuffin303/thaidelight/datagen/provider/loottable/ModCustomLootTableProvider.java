@@ -45,34 +45,6 @@ public class ModCustomLootTableProvider implements LootTableSubProvider {
                         .apply(LimitCount.limitCount(IntRange.upperBound(6)))
                 ));
 
-        /*
-        biConsumer.accept(ModLootTables.BASIL_SHEARS,
-                new LootTable.Builder().withPool(LootPool.lootPool()
-                        .add(LootItem.lootTableItem(ModItems.BASIL_SAPLING))
-                        .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))
-                        .apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE))
-                        .apply(LimitCount.limitCount(IntRange.upperBound(2)))
-                ));
-         */
-
-        biConsumer.accept(ModLootTables.HOLY_BASIL_HARVEST,
-                new LootTable.Builder().withPool(LootPool.lootPool()
-                        .add(LootItem.lootTableItem(ModItems.HOLY_BASIL.get()))
-                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(1,3)))
-                        .apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE))
-                        .apply(LimitCount.limitCount(IntRange.upperBound(6)))
-                ));
-
-        /*
-        biConsumer.accept(ModLootTables.HOLY_BASIL_SHEARS,
-                new LootTable.Builder().withPool(LootPool.lootPool()
-                        .add(LootItem.lootTableItem(ModItems.HOLY_BASIL_SAPLING))
-                        .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))
-                        .apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE))
-                        .apply(LimitCount.limitCount(IntRange.upperBound(2)))
-                ));
-
-         */
 
         biConsumer.accept(ModLootTables.BUTTERFLY_PEA_HARVEST,
                 new LootTable.Builder().withPool(LootPool.lootPool()

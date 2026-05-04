@@ -173,7 +173,6 @@ public class ModTagDataGen {
             );
 
             getOrCreateTagBuilder(ItemTags.VILLAGER_PLANTABLE_SEEDS).add(
-                    ModItems.HOLY_BASIL.get(),
                     ModItems.BASIL.get(),
                     ModItems.PEPPER_SEED.get()
             );
@@ -237,18 +236,16 @@ public class ModTagDataGen {
                     .add(ModItems.DURIAN_CABINET.get(),ModItems.MANGO_CABINET.get(),ModItems.COCONUT_CABINET.get());
 
             getOrCreateTagBuilder(vectorwing.farmersdelight.common.tag.ModTags.WILD_CROPS_ITEM)
-                    .add(ModItems.WILD_PEPPER_CROP.get(),ModItems.WILD_BASIL.get(),ModItems.WILD_HOLY_BASIL.get());
+                    .add(ModItems.WILD_PEPPER_CROP.get(),ModItems.WILD_BASIL.get());
 
             getOrCreateTagBuilder(CROPS).add(
                     ModItems.PEPPER.get(),
                     ModItems.LIME.get(),
-                    ModItems.HOLY_BASIL.get(),
                     ModItems.BASIL.get()
             );
 
             getOrCreateTagBuilder(VEGETABLES).add(
                     ModItems.PEPPER.get(),
-                    ModItems.HOLY_BASIL.get(),
                     ModItems.BASIL.get(),
                     ModItems.BAMBOO_SHOOT.get()
             );
@@ -269,7 +266,6 @@ public class ModTagDataGen {
                     ModItems.PEPPER_SEED.get(),
                     ModItems.DURIAN_SAPLING.get(),
                     ModItems.PAPAYA_SAPLING.get(),
-                    ModItems.HOLY_BASIL.get(),
                     ModItems.BASIL.get(),
                     ModItems.BUTTERFLY_PEA_SEEDS.get()
             );
@@ -282,7 +278,6 @@ public class ModTagDataGen {
                     ModItems.COCONUT.get(),
                     ModItems.COCONUT_SAPLING.get(),
                     ModItems.PAPAYA_SAPLING.get(),
-                    ModItems.HOLY_BASIL.get(),
                     ModItems.BASIL.get(),
                     ModItems.BUTTERFLY_PEA_SEEDS.get()
             );
@@ -321,9 +316,7 @@ public class ModTagDataGen {
             getOrCreateTagBuilder(MANGO_TREE_BIOMES).add(Biomes.FLOWER_FOREST,Biomes.FOREST);
             getOrCreateTagBuilder(COCONUT_TREE_BIOMES).add(Biomes.BEACH);
 
-            getOrCreateTagBuilder(WILD_HOLY_BASIL_BIOMES).forceAddTag(BiomeTags.IS_FOREST);
-            getOrCreateTagBuilder(WILD_BASIL_BIOMES).forceAddTag(BiomeTags.IS_FOREST);
-            getOrCreateTagBuilder(WILD_ALL_BASIL_BIOMES).forceAddTag(BiomeTags.IS_JUNGLE);
+            getOrCreateTagBuilder(WILD_BASIL_BIOMES).forceAddTag(BiomeTags.IS_FOREST).forceAddTag(BiomeTags.IS_JUNGLE);
             getOrCreateTagBuilder(BUTTERFLY_PEA_BIOMES).forceAddTag(BiomeTags.IS_FOREST);
 
         }

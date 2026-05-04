@@ -126,8 +126,6 @@ public class RegistryUtils {
         output.accept(ModItems.PAPAYA_SAPLING.get());
         output.accept(ModItems.PAPAYA_SEEDS.get());
 
-        output.accept(ModItems.WILD_HOLY_BASIL.get());
-        output.accept(ModItems.HOLY_BASIL.get());
         output.accept(ModItems.WILD_BASIL.get());
         output.accept(ModItems.BASIL.get());
 

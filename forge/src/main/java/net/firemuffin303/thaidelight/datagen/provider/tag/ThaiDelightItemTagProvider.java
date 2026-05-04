@@ -191,7 +191,6 @@ public class ThaiDelightItemTagProvider extends ItemTagsProvider {
         );
 
         this.tag(ItemTags.VILLAGER_PLANTABLE_SEEDS).add(
-                ModItems.HOLY_BASIL.get(),
                 ModItems.BASIL.get(),
                 ModItems.PEPPER_SEED.get()
         );
@@ -255,18 +254,16 @@ public class ThaiDelightItemTagProvider extends ItemTagsProvider {
                 .add(ModItems.DURIAN_CABINET.get(),ModItems.MANGO_CABINET.get(),ModItems.COCONUT_CABINET.get());
 
         this.tag(vectorwing.farmersdelight.common.tag.ModTags.WILD_CROPS_ITEM)
-                .add(ModItems.WILD_PEPPER_CROP.get(),ModItems.WILD_BASIL.get(),ModItems.WILD_HOLY_BASIL.get());
+                .add(ModItems.WILD_PEPPER_CROP.get(),ModItems.WILD_BASIL.get());
 
         this.tag(CROPS).add(
                 ModItems.PEPPER.get(),
                 ModItems.LIME.get(),
-                ModItems.HOLY_BASIL.get(),
                 ModItems.BASIL.get()
         );
 
         this.tag(VEGETABLES).add(
                 ModItems.PEPPER.get(),
-                ModItems.HOLY_BASIL.get(),
                 ModItems.BASIL.get(),
                 ModItems.BAMBOO_SHOOT.get()
         );
@@ -287,7 +284,6 @@ public class ThaiDelightItemTagProvider extends ItemTagsProvider {
                 ModItems.PEPPER_SEED.get(),
                 ModItems.DURIAN_SAPLING.get(),
                 ModItems.PAPAYA_SAPLING.get(),
-                ModItems.HOLY_BASIL.get(),
                 ModItems.BASIL.get(),
                 ModItems.BUTTERFLY_PEA_SEEDS.get()
         );
@@ -300,7 +296,6 @@ public class ThaiDelightItemTagProvider extends ItemTagsProvider {
                 ModItems.COCONUT.get(),
                 ModItems.COCONUT_SAPLING.get(),
                 ModItems.PAPAYA_SAPLING.get(),
-                ModItems.HOLY_BASIL.get(),
                 ModItems.BASIL.get(),
                 ModItems.BUTTERFLY_PEA_SEEDS.get()
         );

@@ -101,16 +101,8 @@ public class TDFabricEvents {
                     GenerationStep.Decoration.VEGETAL_DECORATION,ModFeatures.TREES_COCONUT);
         }
 
-
-        BiomeModifications.addFeature(context -> BiomeSelectors.tag(ModTags.WILD_HOLY_BASIL_BIOMES).test(context),
-                GenerationStep.Decoration.VEGETAL_DECORATION,ModFeatures.PATCH_WILD_HOLY_BASIL);
-
         BiomeModifications.addFeature(context -> BiomeSelectors.tag(ModTags.WILD_BASIL_BIOMES).test(context),
                 GenerationStep.Decoration.VEGETAL_DECORATION,ModFeatures.PATCH_WILD_BASIL);
-
-        BiomeModifications.addFeature(context -> BiomeSelectors.tag(ModTags.WILD_ALL_BASIL_BIOMES).test(context),
-                GenerationStep.Decoration.VEGETAL_DECORATION,ModFeatures.PATCH_WILD_ALL_BASIL);
-
 
         BiomeModifications.addFeature(context -> BiomeSelectors.tag(ModTags.BUTTERFLY_PEA_BIOMES).test(context),
                 GenerationStep.Decoration.VEGETAL_DECORATION,ModFeatures.PATCH_BUTTERFLY_PEA
@@ -218,97 +210,6 @@ public class TDFabricEvents {
                 }
             }
         });
-    }
-
-    public static void setVillagerItem(){
-        Map<Item,Integer> villagerFoodPoint = new HashMap<>(VillagerAccessor.getFoodPoints());
-        villagerFoodPoint.put(ModItems.LIME.get(),1);
-        villagerFoodPoint.put(ModItems.PEPPER.get(),1);
-        villagerFoodPoint.put(ModItems.PAPAYA.get(),1);
-        villagerFoodPoint.put(ModItems.RAW_PAPAYA.get(),1);
-        villagerFoodPoint.put(ModItems.DURIAN_PULP.get(),1);
-        villagerFoodPoint.put(ModItems.BASIL.get(),1);
-        villagerFoodPoint.put(ModItems.HOLY_BASIL.get(),1);
-        villagerFoodPoint.put(ModItems.MANGO.get(),1);
-        villagerFoodPoint.put(ModItems.COCONUT_SLICE.get(),1);
-
-        VillagerAccessor.setFoodPoints(villagerFoodPoint);
-
-        Set<Item> villagerWantedItems = new HashSet<>(VillagerAccessor.getWantedItems());
-        villagerWantedItems.add(ModItems.LIME.get());
-        villagerWantedItems.add(ModItems.PEPPER.get());
-        villagerWantedItems.add(ModItems.PAPAYA.get());
-        villagerWantedItems.add(ModItems.RAW_PAPAYA.get());
-        villagerWantedItems.add(ModItems.DURIAN_PULP.get());
-        villagerWantedItems.add(ModItems.BASIL.get());
-        villagerWantedItems.add(ModItems.HOLY_BASIL.get());
-        villagerWantedItems.add(ModItems.MANGO.get());
-        villagerWantedItems.add(ModItems.COCONUT_SLICE.get());
-        VillagerAccessor.setWantedItems(villagerWantedItems);
-    }
-
-    public static void registerAnimalFood(){
-        ParrotTameFoodAccessor.getTameFood().add(Item.byBlock(ModBlocks.PAPAYA_SAPLING.get()));
-        ParrotTameFoodAccessor.getTameFood().add(ModItems.PEPPER_SEED.get());
-        ParrotTameFoodAccessor.getTameFood().add(ModItems.BUTTERFLY_PEA_SEEDS.get());
-
-        Ingredient newPigFoods = Ingredient.of(
-                ModItems.RAW_PAPAYA.get(),
-                ModItems.PAPAYA.get(),
-                ModItems.SLICED_PAPAYA.get(),
-                ModItems.RAW_PAPAYA_SLICE.get(),
-                ModItems.LIME.get(),
-                ModItems.SLICED_LIME.get(),
-                ModItems.BAMBOO_SHOOT.get()
-        );
-        Ingredient newChickenFoods = Ingredient.of(ModItems.PAPAYA_SEEDS.get(),ModItems.PEPPER_SEED.get(),ModItems.BUTTERFLY_PEA_SEEDS.get());
-
-        Ingredient newFrogFoods = Ingredient.of(ModItems.DRAGONFLY.get(),ModItems.COOKED_DRAGONFLY.get());
-
-        PigFoodAccessor.setFoodItems(Ingredient.of(
-                Stream.concat(Arrays.stream(PigFoodAccessor.getFoodItems().getItems()),Arrays.stream(newPigFoods.getItems()))
-        ));
-
-        ChickenFoodAccessor.setFoodItems(Ingredient.of(
-                Stream.concat(Arrays.stream(ChickenFoodAccessor.getFoodItems().getItems()),Arrays.stream(newChickenFoods.getItems()))
-        ));
-
-        FrogFoodAccessor.setFoodItems(Ingredient.of(
-                Stream.concat(Arrays.stream(FrogFoodAccessor.getFoodItems().getItems()),Arrays.stream(newFrogFoods.getItems()))
-        ));
-
-    }
-
-    public static void registerComposter(){
-        ComposterBlock.COMPOSTABLES.put(ModItems.PEPPER_SEED.get(),0.3f);
-        ComposterBlock.COMPOSTABLES.put(ModItems.PAPAYA_LEAVES.get(),0.3f);
-        ComposterBlock.COMPOSTABLES.put(ModItems.LIME_SAPLING.get(),0.3f);
-        ComposterBlock.COMPOSTABLES.put(ModItems.PAPAYA_SAPLING.get(),0.3f);
-        ComposterBlock.COMPOSTABLES.put(ModItems.PEPPER.get(),0.65f);
-        ComposterBlock.COMPOSTABLES.put(ModItems.LIME.get(),0.65f);
-        ComposterBlock.COMPOSTABLES.put(ModItems.RAW_PAPAYA.get(),0.65f);
-        ComposterBlock.COMPOSTABLES.put(ModItems.PAPAYA.get(),0.65f);
-
-        ComposterBlock.COMPOSTABLES.put(ModItems.SLICED_LIME.get(),0.4f);
-        ComposterBlock.COMPOSTABLES.put(ModItems.RAW_PAPAYA_SLICE.get(),0.4f);
-        ComposterBlock.COMPOSTABLES.put(ModItems.SLICED_PAPAYA.get(),0.4f);
-
-        ComposterBlock.COMPOSTABLES.put(Item.byBlock(ModBlocks.PAPAYA_LOG.get()),0.8f);
-        ComposterBlock.COMPOSTABLES.put(Item.byBlock(ModBlocks.STRIPPED_PAPAYA_LOG.get()),0.8f);
-        ComposterBlock.COMPOSTABLES.put(Item.byBlock(ModBlocks.PAPAYA_WOOD.get()),0.8f);
-        ComposterBlock.COMPOSTABLES.put(Item.byBlock(ModBlocks.STRIPPED_PAPAYA_WOOD.get()),0.8f);
-        ComposterBlock.COMPOSTABLES.put(ModItems.DURIAN_PEEL.get(),0.8f);
-    }
-
-    public static void registerStrippable(){
-        StrippableBlockRegistry.register(ModBlocks.PAPAYA_LOG.get(),ModBlocks.STRIPPED_PAPAYA_LOG.get());
-        StrippableBlockRegistry.register(ModBlocks.PAPAYA_WOOD.get(),ModBlocks.STRIPPED_PAPAYA_WOOD.get());
-        StrippableBlockRegistry.register(ModBlocks.DURIAN_LOG.get(),ModBlocks.STRIPPED_DURIAN_LOG.get());
-        StrippableBlockRegistry.register(ModBlocks.DURIAN_WOOD.get(),ModBlocks.STRIPPED_DURIAN_WOOD.get());
-        StrippableBlockRegistry.register(ModBlocks.MANGO_LOG.get(),ModBlocks.STRIPPED_MANGO_LOG.get());
-        StrippableBlockRegistry.register(ModBlocks.MANGO_WOOD.get(),ModBlocks.STRIPPED_MANGO_WOOD.get());
-        StrippableBlockRegistry.register(ModBlocks.COCONUT_LOG.get(),ModBlocks.STRIPPED_COCONUT_LOG.get());
-        StrippableBlockRegistry.register(ModBlocks.COCONUT_WOOD.get(),ModBlocks.STRIPPED_COCONUT_WOOD.get());
     }
 
     public static void addVillagersTrades(){

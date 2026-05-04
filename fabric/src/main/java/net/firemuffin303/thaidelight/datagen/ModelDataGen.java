@@ -266,7 +266,6 @@ public class ModelDataGen extends FabricModelProvider {
         createDurianBlocks(blockStateModelGenerator);
         createPepperCrop(blockStateModelGenerator);
         createLimeCrop(blockStateModelGenerator);
-        createBasil(blockStateModelGenerator,ModBlocks.HOLY_BASIL.get(),ModBlocks.WILD_HOLY_BASIL.get(),ModBlocks.POTTED_HOLY_BASIL.get());
         createBasil(blockStateModelGenerator,ModBlocks.BASIL.get(),ModBlocks.WILD_BASIL.get(),ModBlocks.POTTED_BASIL.get());
         createButterflyPeaBlocks(blockStateModelGenerator);
 

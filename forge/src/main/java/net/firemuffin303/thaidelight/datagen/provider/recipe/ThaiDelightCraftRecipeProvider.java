@@ -91,7 +91,6 @@ public class ThaiDelightCraftRecipeProvider implements IRecipeProvider {
         bigPackingCraft(ModItems.RAW_PAPAYA_CRATE.get(),1,ModItems.RAW_PAPAYA.get(),exporter);
         bigPackingCraft(ModItems.PAPAYA_CRATE.get(),1,ModItems.PAPAYA.get(),exporter);
         bigPackingCraft(ModItems.MANGO_CRATE.get(),1,ModItems.MANGO.get(),exporter);
-        bigPackingCraft(ModItems.HOLY_BASIL_CRATE.get(),1,ModItems.HOLY_BASIL.get(),exporter);
         bigPackingCraft(ModItems.BASIL_CRATE.get(),1,ModItems.BASIL.get(),exporter);
         bigPackingCraft(ModItems.BAMBOO_SHOOT_CRATE.get(),1,ModItems.BAMBOO_SHOOT.get(),exporter);
         bigPackingCraft(ModItems.BUTTERFLY_PEA_CRATE.get(),1,ModItems.BUTTERFLY_PEA.get(),exporter);
@@ -271,7 +270,6 @@ public class ThaiDelightCraftRecipeProvider implements IRecipeProvider {
         unPacking(ModItems.RAW_PAPAYA,ModItems.RAW_PAPAYA_CRATE,exporter);
         unPacking(ModItems.PAPAYA,ModItems.PAPAYA_CRATE,exporter);
         unPacking(ModItems.MANGO,ModItems.MANGO_CRATE,exporter);
-        unPacking(ModItems.HOLY_BASIL,ModItems.HOLY_BASIL_CRATE,exporter);
         unPacking(ModItems.BASIL,ModItems.BASIL_CRATE,exporter);
         unPacking(ModItems.BAMBOO_SHOOT,ModItems.BAMBOO_SHOOT_CRATE,exporter);
         unPacking(ModItems.BUTTERFLY_PEA,ModItems.BUTTERFLY_PEA_CRATE,exporter);

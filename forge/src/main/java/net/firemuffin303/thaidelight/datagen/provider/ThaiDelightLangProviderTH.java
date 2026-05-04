@@ -183,8 +183,6 @@ public class ThaiDelightLangProviderTH extends LanguageProvider {
         addItem(ModItems.PAPAYA_LEAVES,"ใบไม้มะละกอ");
         addItem(ModItems.PAPAYA_SAPLING,"ต้นอ่อนมะละกอ");
         addItem(ModItems.PAPAYA_SEEDS,"เมล็ดมะละกอ");
-        addItem(ModItems.WILD_HOLY_BASIL,"ต้นกะเพราป่า");
-        addItem(ModItems.HOLY_BASIL,"กะเพรา");
         addItem(ModItems.WILD_BASIL,"ต้นโหระพาป่า");
         addItem(ModItems.BASIL,"โหระพา");
         addItem(ModItems.BUTTERFLY_PEA,"ดอกอัญชัญ");

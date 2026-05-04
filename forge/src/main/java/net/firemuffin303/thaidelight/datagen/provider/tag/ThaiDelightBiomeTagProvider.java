@@ -27,9 +27,7 @@ public class ThaiDelightBiomeTagProvider extends BiomeTagsProvider {
         this.tag(MANGO_TREE_BIOMES).add(Biomes.FLOWER_FOREST,Biomes.FOREST);
         this.tag(COCONUT_TREE_BIOMES).add(Biomes.BEACH);
 
-        this.tag(WILD_HOLY_BASIL_BIOMES).addTag(BiomeTags.IS_FOREST);
-        this.tag(WILD_BASIL_BIOMES).addTag(BiomeTags.IS_FOREST);
-        this.tag(WILD_ALL_BASIL_BIOMES).addTag(BiomeTags.IS_JUNGLE);
+        this.tag(WILD_BASIL_BIOMES).addTag(BiomeTags.IS_FOREST).addTag(BiomeTags.IS_JUNGLE);
         this.tag(BUTTERFLY_PEA_BIOMES).addTag(BiomeTags.IS_FOREST);
     }
 }

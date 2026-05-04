@@ -125,7 +125,6 @@ public class ThaiDelightCommon {
         villagerFoodPoint.put(ModItems.RAW_PAPAYA.get(),1);
         villagerFoodPoint.put(ModItems.DURIAN_PULP.get(),1);
         villagerFoodPoint.put(ModItems.BASIL.get(),1);
-        villagerFoodPoint.put(ModItems.HOLY_BASIL.get(),1);
         villagerFoodPoint.put(ModItems.MANGO.get(),1);
         villagerFoodPoint.put(ModItems.COCONUT_SLICE.get(),1);
 
@@ -138,7 +137,6 @@ public class ThaiDelightCommon {
         villagerWantedItems.add(ModItems.RAW_PAPAYA.get());
         villagerWantedItems.add(ModItems.DURIAN_PULP.get());
         villagerWantedItems.add(ModItems.BASIL.get());
-        villagerWantedItems.add(ModItems.HOLY_BASIL.get());
         villagerWantedItems.add(ModItems.MANGO.get());
         villagerWantedItems.add(ModItems.COCONUT_SLICE.get());
         VillagerAccessor.setWantedItems(villagerWantedItems);

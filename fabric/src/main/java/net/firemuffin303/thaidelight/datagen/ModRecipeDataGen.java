@@ -83,7 +83,6 @@ public class ModRecipeDataGen extends FabricRecipeProvider {
         bigPackingCraft(ModItems.RAW_PAPAYA_CRATE.get(),1,ModItems.RAW_PAPAYA.get(),exporter);
         bigPackingCraft(ModItems.PAPAYA_CRATE.get(),1,ModItems.PAPAYA.get(),exporter);
         bigPackingCraft(ModItems.MANGO_CRATE.get(),1,ModItems.MANGO.get(),exporter);
-        bigPackingCraft(ModItems.HOLY_BASIL_CRATE.get(),1,ModItems.HOLY_BASIL.get(),exporter);
         bigPackingCraft(ModItems.BASIL_CRATE.get(),1,ModItems.BASIL.get(),exporter);
         bigPackingCraft(ModItems.BAMBOO_SHOOT_CRATE.get(),1,ModItems.BAMBOO_SHOOT.get(),exporter);
         bigPackingCraft(ModItems.BUTTERFLY_PEA_CRATE.get(),1,ModItems.BUTTERFLY_PEA.get(),exporter);
@@ -264,7 +263,6 @@ public class ModRecipeDataGen extends FabricRecipeProvider {
         unPacking(ModItems.RAW_PAPAYA.get(),ModItems.RAW_PAPAYA_CRATE.get(),exporter);
         unPacking(ModItems.PAPAYA.get(),ModItems.PAPAYA_CRATE.get(),exporter);
         unPacking(ModItems.MANGO.get(),ModItems.MANGO_CRATE.get(),exporter);
-        unPacking(ModItems.HOLY_BASIL.get(),ModItems.HOLY_BASIL_CRATE.get(),exporter);
         unPacking(ModItems.BASIL.get(),ModItems.BASIL_CRATE.get(),exporter);
         unPacking(ModItems.BAMBOO_SHOOT.get(),ModItems.BAMBOO_SHOOT_CRATE.get(),exporter);
         unPacking(ModItems.BUTTERFLY_PEA.get(),ModItems.BUTTERFLY_PEA_CRATE.get(),exporter);
@@ -696,13 +694,13 @@ public class ModRecipeDataGen extends FabricRecipeProvider {
 
         CookingPotRecipeBuilder.cookingPot(ModItems.PHAT_KAPHRAO_FEAST.get(),1)
                 .requires(ModTags.COMMON_COOKED_MEATS)
-                .requires(ModItems.HOLY_BASIL.get())
+                .requires(ModItems.BASIL.get())
                 .requires(ModTags.PEPPER)
                 .requires(ModItems.FISH_SAUCE_BOTTLE.get())
                 .requires(Items.EGG)
                 .container(Items.BOWL)
                 .recipeTab(CookingPotRecipeBookTab.MEALS)
-                .unlockedBy("has_holy_basil",RecipeProvider.has(ModItems.HOLY_BASIL.get()))
+                .unlockedBy("has_basil",RecipeProvider.has(ModItems.BASIL.get()))
                 .save(exporter,ThaiDelightCommon.modid("cooking_pot/phat_khaphrao_feast"));
 
         CookingPotRecipeBuilder.cookingPot(ModItems.DURIAN_CURRY.get(),1)

@@ -307,22 +307,6 @@ public class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
         this.add(ModBlocks.WALL_PAPAYA_FLOWER.get(),block -> this.createStackableBlockDrop(ModBlocks.PAPAYA_FLOWER.get(),List.of(1,2,3), PapayaFlowerBlock.FLOWERS));
         this.dropOther(ModBlocks.BUDDING_PAPAYA_FLOWER.get(),ModBlocks.PAPAYA_FLOWER.get());
 
-        this.add(ModBlocks.WILD_HOLY_BASIL.get(),block ->  this.applyExplosionDecay(block,
-                LootTable.lootTable()
-                        .withPool(LootPool.lootPool()
-                                .when(HAS_SHEARS)
-                                .add(LootItem.lootTableItem(block))
-
-                        )
-
-                        .withPool(LootPool.lootPool()
-                                .when(HAS_SHEARS.invert())
-                                .add(LootItem.lootTableItem(ModItems.HOLY_BASIL.get())
-                                        .apply(ApplyBonusCount.addBonusBinomialDistributionCount(Enchantments.BLOCK_FORTUNE, 0.5714286F, 3)))
-
-                        )
-        ));
-
         this.add(ModBlocks.WILD_BASIL.get(),block ->  this.applyExplosionDecay(block,
                 LootTable.lootTable()
                         .withPool(LootPool.lootPool()
@@ -417,21 +401,6 @@ public class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
                                 )
                         )
                 ))
-        );
-
-        this.add(ModBlocks.HOLY_BASIL.get(),block ->  this.applyExplosionDecay(block, LootTable.lootTable()
-                        .withPool(LootPool.lootPool()
-                                .add(LootItem.lootTableItem(ModItems.HOLY_BASIL.get())
-                                        .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
-                                                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(BasilCropBlock.AGE,3)))
-                                        .apply(ApplyBonusCount.addBonusBinomialDistributionCount(Enchantments.BLOCK_FORTUNE, 0.5714286F, 3))
-                                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(2,4)))
-                                        .otherwise(
-                                                LootItem.lootTableItem(ModItems.HOLY_BASIL.get())
-                                        )
-                                )
-                        )
-                )
         );
 
 

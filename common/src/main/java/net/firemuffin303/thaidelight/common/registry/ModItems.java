@@ -209,8 +209,6 @@ public class ModItems {
         }
     });
 
-    public static final Supplier<Item> HOLY_BASIL = registerFlatItem("holy_basil",() ->new BlockItem(ModBlocks.HOLY_BASIL.get() ,new Item.Properties()));
-    public static final Supplier<Item> WILD_HOLY_BASIL = register("wild_holy_basil",() ->new BlockItem(ModBlocks.WILD_HOLY_BASIL.get(),new Item.Properties()));
 
     public static final Supplier<Item> BASIL = registerFlatItem("basil",() ->new BlockItem(ModBlocks.BASIL.get(),new Item.Properties()));
     public static final Supplier<Item> WILD_BASIL = register("wild_basil",() ->new BlockItem(ModBlocks.WILD_BASIL.get(),new Item.Properties()));

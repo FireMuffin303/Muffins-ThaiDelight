@@ -64,12 +64,6 @@ public class ModBiomeModifiers {
         Holder.Reference<PlacedFeature> basilPlaceFeature = context.lookup(Registries.PLACED_FEATURE).getOrThrow(ModFeatures.PATCH_WILD_BASIL);
         HolderSet<Biome> basilPeaBiomeTag = context.lookup(Registries.BIOME).getOrThrow(ModTags.WILD_BASIL_BIOMES);
 
-        Holder.Reference<PlacedFeature> holyBasilPlaceFeature = context.lookup(Registries.PLACED_FEATURE).getOrThrow(ModFeatures.PATCH_WILD_HOLY_BASIL);
-        HolderSet<Biome> holyBasilPeaBiomeTag = context.lookup(Registries.BIOME).getOrThrow(ModTags.WILD_HOLY_BASIL_BIOMES);
-
-        Holder.Reference<PlacedFeature> allBasilPlaceFeature = context.lookup(Registries.PLACED_FEATURE).getOrThrow(ModFeatures.PATCH_WILD_ALL_BASIL);
-        HolderSet<Biome> allBasilPeaBiomeTag = context.lookup(Registries.BIOME).getOrThrow(ModTags.WILD_ALL_BASIL_BIOMES);
-
         Holder.Reference<Biome> flowerCrabBiomeTag = context.lookup(Registries.BIOME).getOrThrow(Biomes.BEACH);
         HolderSet<Biome> dragonflyBiomeTag = HolderSet.direct(context.lookup(Registries.BIOME).getOrThrow(Biomes.MANGROVE_SWAMP),context.lookup(Registries.BIOME).getOrThrow(Biomes.SWAMP));
 
@@ -83,8 +77,6 @@ public class ModBiomeModifiers {
         context.register(COCONUT_TREE_MODIFIER,new ForgeBiomeModifiers.AddFeaturesBiomeModifier(coconutBiomeTag,HolderSet.direct(coconutPlaceFeature), GenerationStep.Decoration.VEGETAL_DECORATION));
         context.register(BUTTERFLY_PEA_MODIFIER,new ForgeBiomeModifiers.AddFeaturesBiomeModifier(butterflyPeaBiomeTag,HolderSet.direct(butterflyPeaPlaceFeature), GenerationStep.Decoration.VEGETAL_DECORATION));
         context.register(BASIL_MODIFIER,new ForgeBiomeModifiers.AddFeaturesBiomeModifier(basilPeaBiomeTag,HolderSet.direct(basilPlaceFeature), GenerationStep.Decoration.VEGETAL_DECORATION));
-        context.register(HOLY_BASIL_MODIFIER,new ForgeBiomeModifiers.AddFeaturesBiomeModifier(holyBasilPeaBiomeTag,HolderSet.direct(holyBasilPlaceFeature), GenerationStep.Decoration.VEGETAL_DECORATION));
-        context.register(ALL_BASIL_MODIFIER,new ForgeBiomeModifiers.AddFeaturesBiomeModifier(allBasilPeaBiomeTag,HolderSet.direct(allBasilPlaceFeature), GenerationStep.Decoration.VEGETAL_DECORATION));
 
         context.register(FLOWER_CRAB_BIOME_MODIFIER,new ForgeBiomeModifiers.AddSpawnsBiomeModifier(HolderSet.direct(flowerCrabBiomeTag), List.of(
                 new MobSpawnSettings.SpawnerData(ModEntityTypes.FLOWER_CRAB.get(),10,3,5)

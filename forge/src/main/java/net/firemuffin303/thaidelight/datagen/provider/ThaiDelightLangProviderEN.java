@@ -178,8 +178,6 @@ public class ThaiDelightLangProviderEN extends LanguageProvider {
         addItem(ModItems.PAPAYA_LEAVES,"Papaya Leaves");
         addItem(ModItems.PAPAYA_SAPLING,"Papaya Sapling");
         addItem(ModItems.PAPAYA_SEEDS,"Papaya Seeds");
-        addItem(ModItems.WILD_HOLY_BASIL,"Wild Holy Basil");
-        addItem(ModItems.HOLY_BASIL,"Holy Basil");
         addItem(ModItems.WILD_BASIL,"Wild Basil");
         addItem(ModItems.BASIL,"Basil");
 

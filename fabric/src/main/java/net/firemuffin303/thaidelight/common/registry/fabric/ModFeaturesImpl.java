@@ -68,19 +68,7 @@ public class ModFeaturesImpl {
 
                 )));
 
-        bootstapContext.register(ModFeatures.FEATURE_PATCH_WILD_HOLY_BASIL,new ConfiguredFeature<>(ModBiomeFeatures.WILD_CROP.get(),
-                new WildCropConfiguration(24,6,3,
-                        PlacementUtils.filtered(Feature.SIMPLE_BLOCK,
-                                new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.WILD_HOLY_BASIL.get().defaultBlockState())),
-                                BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE,BlockPredicate.matchesTag(Direction.DOWN.getNormal(), BlockTags.DIRT))),
-                        PlacementUtils.filtered(Feature.SIMPLE_BLOCK,
-                                new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.GRASS.defaultBlockState())),
-                                BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE,BlockPredicate.matchesTag(Direction.DOWN.getNormal(), BlockTags.DIRT))),
-                        PlacementUtils.filtered(Feature.SIMPLE_BLOCK,
-                                new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.COARSE_DIRT.defaultBlockState())),
-                                BlockPredicate.allOf(BlockPredicate.replaceable(Direction.UP.getNormal()),BlockPredicate.matchesTag(BlockTags.DIRT)))
 
-                )));
 
         bootstapContext.register(ModFeatures.FEATURE_PATCH_WILD_BASIL,new ConfiguredFeature<>(ModBiomeFeatures.WILD_CROP.get(),
                 new WildCropConfiguration(24,6,3,
@@ -89,20 +77,6 @@ public class ModFeaturesImpl {
                                 BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE,BlockPredicate.matchesTag(Direction.DOWN.getNormal(), BlockTags.DIRT))),
                         PlacementUtils.filtered(Feature.SIMPLE_BLOCK,
                                 new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.GRASS.defaultBlockState())),
-                                BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE,BlockPredicate.matchesTag(Direction.DOWN.getNormal(), BlockTags.DIRT))),
-                        PlacementUtils.filtered(Feature.SIMPLE_BLOCK,
-                                new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.COARSE_DIRT.defaultBlockState())),
-                                BlockPredicate.allOf(BlockPredicate.replaceable(Direction.UP.getNormal()),BlockPredicate.matchesTag(BlockTags.DIRT)))
-
-                )));
-
-        bootstapContext.register(ModFeatures.FEATURE_PATCH_WILD_ALL_BASIL,new ConfiguredFeature<>(ModBiomeFeatures.WILD_CROP.get(),
-                new WildCropConfiguration(48,8,3,
-                        PlacementUtils.filtered(Feature.SIMPLE_BLOCK,
-                                new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.WILD_BASIL.get().defaultBlockState())),
-                                BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE,BlockPredicate.matchesTag(Direction.DOWN.getNormal(), BlockTags.DIRT))),
-                        PlacementUtils.filtered(Feature.SIMPLE_BLOCK,
-                                new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.WILD_HOLY_BASIL.get().defaultBlockState())),
                                 BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE,BlockPredicate.matchesTag(Direction.DOWN.getNormal(), BlockTags.DIRT))),
                         PlacementUtils.filtered(Feature.SIMPLE_BLOCK,
                                 new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.COARSE_DIRT.defaultBlockState())),
@@ -161,9 +135,7 @@ public class ModFeaturesImpl {
     public static void dataGen(HolderLookup.Provider provider, FabricDynamicRegistryProvider.Entries entries){
         entries.add(provider.lookupOrThrow(Registries.CONFIGURED_FEATURE),ModFeatures.FEATURE_PATCH_LIME_BUSH);
         entries.add(provider.lookupOrThrow(Registries.CONFIGURED_FEATURE),ModFeatures.FEATURE_PATCH_WILD_PEPPER);
-        entries.add(provider.lookupOrThrow(Registries.CONFIGURED_FEATURE),ModFeatures.FEATURE_PATCH_WILD_HOLY_BASIL);
         entries.add(provider.lookupOrThrow(Registries.CONFIGURED_FEATURE),ModFeatures.FEATURE_PATCH_WILD_BASIL);
-        entries.add(provider.lookupOrThrow(Registries.CONFIGURED_FEATURE),ModFeatures.FEATURE_PATCH_WILD_ALL_BASIL);
         entries.add(provider.lookupOrThrow(Registries.CONFIGURED_FEATURE),ModFeatures.FEATURE_BUTTERFLY_PEA);
 
         //Durian
@@ -187,9 +159,7 @@ public class ModFeaturesImpl {
         entries.add(provider.lookupOrThrow(Registries.CONFIGURED_FEATURE),ModFeatures.FEATURE_LIME_TREE);
         entries.add(provider.lookupOrThrow(Registries.PLACED_FEATURE),ModFeatures.PATCH_LIME_BUSH);
         entries.add(provider.lookupOrThrow(Registries.PLACED_FEATURE),ModFeatures.PATCH_WILD_PEPPER);
-        entries.add(provider.lookupOrThrow(Registries.PLACED_FEATURE), ModFeatures.PATCH_WILD_HOLY_BASIL);
         entries.add(provider.lookupOrThrow(Registries.PLACED_FEATURE), ModFeatures.PATCH_WILD_BASIL);
-        entries.add(provider.lookupOrThrow(Registries.PLACED_FEATURE), ModFeatures.PATCH_WILD_ALL_BASIL);
         entries.add(provider.lookupOrThrow(Registries.PLACED_FEATURE),ModFeatures.PATCH_BUTTERFLY_PEA);
         entries.add(provider.lookupOrThrow(Registries.PLACED_FEATURE),ModFeatures.TREES_DURIAN);
         entries.add(provider.lookupOrThrow(Registries.PLACED_FEATURE),ModFeatures.TREES_DURIAN_SPARSE_JUNGLE);

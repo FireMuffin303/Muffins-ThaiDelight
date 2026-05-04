@@ -65,9 +65,7 @@ public class ModFeatures {
 
     public static final ResourceKey<ConfiguredFeature<?,?>> FEATURE_PATCH_LIME_BUSH;
     public static final ResourceKey<ConfiguredFeature<?,?>> FEATURE_PATCH_WILD_PEPPER;
-    public static final ResourceKey<ConfiguredFeature<?, ?>> FEATURE_PATCH_WILD_HOLY_BASIL = ResourceKey.create(Registries.CONFIGURED_FEATURE,ThaiDelightCommon.modid("patch_wild_holy_basil"));
     public static final ResourceKey<ConfiguredFeature<?, ?>> FEATURE_PATCH_WILD_BASIL = ResourceKey.create(Registries.CONFIGURED_FEATURE,ThaiDelightCommon.modid("patch_wild_basil"));
-    public static final ResourceKey<ConfiguredFeature<?, ?>> FEATURE_PATCH_WILD_ALL_BASIL = ResourceKey.create(Registries.CONFIGURED_FEATURE,ThaiDelightCommon.modid("patch_wild_all_basil"));
 
     //Papaya
     public static final ResourceKey<ConfiguredFeature<?, ?>> FEATURE_PAPAYA_TREE = ResourceKey.create(Registries.CONFIGURED_FEATURE,ThaiDelightCommon.modid("papaya_tree"));
@@ -96,9 +94,7 @@ public class ModFeatures {
 
     public static final ResourceKey<PlacedFeature> PATCH_LIME_BUSH;
     public static final ResourceKey<PlacedFeature> PATCH_WILD_PEPPER;
-    public static final ResourceKey<PlacedFeature> PATCH_WILD_HOLY_BASIL = ResourceKey.create(Registries.PLACED_FEATURE,ThaiDelightCommon.modid("patch_wild_holy_basil"));
     public static final ResourceKey<PlacedFeature> PATCH_WILD_BASIL = ResourceKey.create(Registries.PLACED_FEATURE,ThaiDelightCommon.modid("patch_wild_basil"));
-    public static final ResourceKey<PlacedFeature> PATCH_WILD_ALL_BASIL = ResourceKey.create(Registries.PLACED_FEATURE,ThaiDelightCommon.modid("patch_wild_all_basil"));
     public static final ResourceKey<PlacedFeature> PATCH_BUTTERFLY_PEA = ResourceKey.create(Registries.PLACED_FEATURE,ThaiDelightCommon.modid("patch_butterfly_pea"));
     public static final ResourceKey<PlacedFeature> TREES_PAPAYA = ResourceKey.create(Registries.PLACED_FEATURE,ThaiDelightCommon.modid("trees_papaya"));
     public static final ResourceKey<PlacedFeature> TREES_DURIAN = ResourceKey.create(Registries.PLACED_FEATURE,ThaiDelightCommon.modid("trees_durian"));
@@ -115,10 +111,8 @@ public class ModFeatures {
     public static void bootstrapPlacedFeature(BootstapContext<PlacedFeature> bootstapContext){
         Holder.Reference<ConfiguredFeature<?,?>> config_lime_bush = bootstapContext.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(ModFeatures.FEATURE_PATCH_LIME_BUSH);
         Holder.Reference<ConfiguredFeature<?,?>> config_wild_pepper = bootstapContext.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(ModFeatures.FEATURE_PATCH_WILD_PEPPER);
-        Holder.Reference<ConfiguredFeature<?,?>> config_wild_holy_basil = bootstapContext.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(ModFeatures.FEATURE_PATCH_WILD_HOLY_BASIL);
         Holder.Reference<ConfiguredFeature<?,?>> config_wild_basil = bootstapContext.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(ModFeatures.FEATURE_PATCH_WILD_BASIL);
-        Holder.Reference<ConfiguredFeature<?,?>> config_wild_all_basil = bootstapContext.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(ModFeatures.FEATURE_PATCH_WILD_ALL_BASIL);
-        Holder.Reference<ConfiguredFeature<?,?>> config_butterfly_pea = bootstapContext.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(ModFeatures.FEATURE_BUTTERFLY_PEA);
+       Holder.Reference<ConfiguredFeature<?,?>> config_butterfly_pea = bootstapContext.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(ModFeatures.FEATURE_BUTTERFLY_PEA);
 
         Holder.Reference<ConfiguredFeature<?,?>> durian_tree_checked = bootstapContext.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(ModFeatures.FEATURE_DURIAN_TREE);
         Holder.Reference<ConfiguredFeature<?,?>> tall_durian_tree_checked = bootstapContext.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(ModFeatures.FEATURE_TALL_DURIAN_TREE);
@@ -145,28 +139,10 @@ public class ModFeatures {
                 )
         ));
 
-        bootstapContext.register(ModFeatures.PATCH_WILD_HOLY_BASIL,new PlacedFeature(config_wild_holy_basil,
-                List.of(
-                        HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
-                        RarityFilter.onAverageOnceEvery(32),
-                        InSquarePlacement.spread(),
-                        BiomeFilter.biome()
-                )
-        ));
-
         bootstapContext.register(ModFeatures.PATCH_WILD_BASIL,new PlacedFeature(config_wild_basil,
                 List.of(
                         HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
                         RarityFilter.onAverageOnceEvery(32),
-                        InSquarePlacement.spread(),
-                        BiomeFilter.biome()
-                )
-        ));
-
-        bootstapContext.register(ModFeatures.PATCH_WILD_ALL_BASIL,new PlacedFeature(config_wild_all_basil,
-                List.of(
-                        HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
-                        RarityFilter.onAverageOnceEvery(64),
                         InSquarePlacement.spread(),
                         BiomeFilter.biome()
                 )

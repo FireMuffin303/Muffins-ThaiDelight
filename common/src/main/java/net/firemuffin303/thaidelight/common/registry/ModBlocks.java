@@ -89,10 +89,6 @@ public class ModBlocks {
     public static final Supplier<Block> WILD_PEPPER_CROP = register("wild_pepper", createWildCropBlock(MobEffects.CONFUSION,6,BlockBehaviour.Properties.copy(Blocks.TALL_GRASS)));
     public static final Supplier<Block> WILD_BASIL = register("wild_basil",createWildCropBlock(MobEffects.HUNGER,6,BlockBehaviour.Properties.copy(Blocks.TALL_GRASS)));
     public static final Supplier<Block> POTTED_BASIL = register("potted_basil",() -> BlocksAccessor.flowerPot(ModBlocks.WILD_BASIL.get()));
-    public static final Supplier<Block> WILD_HOLY_BASIL = register("wild_holy_basil",createWildCropBlock(MobEffects.HUNGER,6,BlockBehaviour.Properties.copy(Blocks.TALL_GRASS)));
-    public static final Supplier<Block> POTTED_HOLY_BASIL = register("potted_holy_basil",() -> BlocksAccessor.flowerPot(ModBlocks.WILD_HOLY_BASIL.get()));
-
-
 
     //# Crops
     //## Lime
@@ -539,14 +535,6 @@ public class ModBlocks {
             return ModItems.BASIL.get();
         }
     });
-
-    public static final Supplier<Block> HOLY_BASIL = register("holy_basil",() ->new BasilCropBlock(BlockBehaviour.Properties.copy(Blocks.POTATOES),ModLootTables.HOLY_BASIL_HARVEST,ModLootTables.HOLY_BASIL_SHEARS){
-        @Override
-        protected ItemLike getBaseSeedId() {
-            return ModItems.HOLY_BASIL.get();
-        }
-    });
-
 
     public static final Supplier<Block> BUDDING_BUTTERFLY_PEA_BLOCK = register("budding_butterfly_pea",createButterflyPeaBlock());
     public static final Supplier<Block> BUTTERFLY_PEA_BLOCK = register("butterfly_pea_vine",() ->new ButterflyPeaVineBlock(BlockBehaviour.Properties.copy(WHEAT)));

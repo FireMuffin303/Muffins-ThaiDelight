@@ -46,7 +46,6 @@ public class ThaiDelightBlockTagProvider extends BlockTagsProvider {
                 ModBlocks.HANGING_DURIAN.get(),
                 ModBlocks.HANGING_MANGO_BLOCK.get(),
                 ModBlocks.BUDDING_COCONUT_LEAF.get(),
-                ModBlocks.HOLY_BASIL.get(),
                 ModBlocks.BASIL.get(),
                 ModBlocks.BUDDING_BUTTERFLY_PEA_BLOCK.get(),
                 ModBlocks.BUTTERFLY_PEA_BLOCK.get()
@@ -61,7 +60,6 @@ public class ThaiDelightBlockTagProvider extends BlockTagsProvider {
                 ModBlocks.LIME_CRATE.get(),
                 ModBlocks.RAW_PAPAYA_CRATE.get(),
                 ModBlocks.MANGO_CRATE.get(),
-                ModBlocks.HOLY_BASIL_CRATE.get(),
                 ModBlocks.BASIL_CRATE.get(),
                 ModBlocks.BAMBOO_SHOOT_CRATE.get(),
                 ModBlocks.BUTTERFLY_PEA_CRATE.get(),
@@ -170,7 +168,6 @@ public class ThaiDelightBlockTagProvider extends BlockTagsProvider {
 
         this.tag(vectorwing.farmersdelight.common.tag.ModTags.WILD_CROPS).add(
                 ModBlocks.WILD_BASIL.get(),
-                ModBlocks.WILD_HOLY_BASIL.get(),
                 ModBlocks.WILD_PEPPER_CROP.get()
         );
 
@@ -182,7 +179,6 @@ public class ThaiDelightBlockTagProvider extends BlockTagsProvider {
                 ModBlocks.DURIAN_SAPLING.get(),
                 ModBlocks.PAPAYA_CROP.get(),
                 ModBlocks.PAPAYA_SAPLING.get(),
-                ModBlocks.HOLY_BASIL.get(),
                 ModBlocks.BASIL.get(),
                 ModBlocks.BUDDING_BUTTERFLY_PEA_BLOCK.get(),
                 ModBlocks.BUTTERFLY_PEA_BLOCK.get()
@@ -200,7 +196,6 @@ public class ThaiDelightBlockTagProvider extends BlockTagsProvider {
                 ModBlocks.COCONUT_SAPLING_CROP.get(),
                 ModBlocks.PAPAYA_CROP.get(),
                 ModBlocks.PAPAYA_SAPLING.get(),
-                ModBlocks.HOLY_BASIL.get(),
                 ModBlocks.BASIL.get(),
                 ModBlocks.BUDDING_BUTTERFLY_PEA_BLOCK.get(),
                 ModBlocks.BUTTERFLY_PEA_BLOCK.get()

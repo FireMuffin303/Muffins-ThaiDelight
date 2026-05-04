@@ -97,7 +97,6 @@ public class ThaiDelightCommonClient {
                 ModBlocks.POTTED_COCONUT_SAPLING,
                 ModBlocks.POTTED_DURIAN_SAPLING,
                 ModBlocks.POTTED_MANGO_SAPLING,
-                ModBlocks.HOLY_BASIL,
                 ModBlocks.BASIL,
                 ModBlocks.COCONUT_LEAF,
                 ModBlocks.COCONUT_LEAF_END,
@@ -124,8 +123,6 @@ public class ThaiDelightCommonClient {
                 ModBlocks.STRIPPED_COCONUT,
                 ModBlocks.COCONUT_SAPLING,
                 ModBlocks.WILD_BASIL,
-                ModBlocks.WILD_HOLY_BASIL,
-                ModBlocks.POTTED_HOLY_BASIL,
                 ModBlocks.POTTED_BASIL,
                 ModBlocks.LARB_FEAST
         );

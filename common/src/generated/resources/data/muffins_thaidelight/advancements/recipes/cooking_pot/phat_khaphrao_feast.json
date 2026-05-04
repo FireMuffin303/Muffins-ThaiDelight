@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_holy_basil": {
+    "has_basil": {
       "conditions": {
         "items": [
           {
             "items": [
-              "muffins_thaidelight:holy_basil"
+              "muffins_thaidelight:basil"
             ]
           }
         ]
@@ -22,7 +22,7 @@
   },
   "requirements": [
     [
-      "has_holy_basil",
+      "has_basil",
       "has_the_recipe"
     ]
   ],

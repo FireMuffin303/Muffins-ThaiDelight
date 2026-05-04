@@ -50,12 +50,12 @@ public class ThaiDelightCookingPotRecipeProvider implements IRecipeProvider {
 
         CookingPotRecipeBuilder.cookingPotRecipe(ModItems.PHAT_KAPHRAO_FEAST.get(),1,200,0.35f,Items.BOWL)
                 .addIngredient(ModTags.COMMON_COOKED_MEATS)
-                .addIngredient(ModItems.HOLY_BASIL.get())
+                .addIngredient(ModItems.BASIL.get())
                 .addIngredient(ModTags.PEPPER)
                 .addIngredient(ModItems.FISH_SAUCE_BOTTLE.get())
                 .addIngredient(Items.EGG)
                 .setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
-                .unlockedBy("has_holy_basil",IRecipeProvider.has(ModItems.HOLY_BASIL.get()))
+                .unlockedBy("has_basil",IRecipeProvider.has(ModItems.BASIL.get()))
                 .build(exporter,ThaiDelightCommon.modid("cooking_pot/phat_khaphrao_feast"));
 
         CookingPotRecipeBuilder.cookingPotRecipe(ModItems.DURIAN_CURRY.get(), 1, 200, 0.35f, Items.BOWL)
