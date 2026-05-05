@@ -20,7 +20,10 @@ subprojects {
     }
 
     repositories {
-        mavenLocal()
+        maven {
+            name "firemuffin303RepositorySnapshots"
+            url "https://maven.firemuffin303.com/snapshots"
+        }
 
         maven {
             // location of the maven that hosts JEI files before January 2023
@@ -85,8 +88,6 @@ subprojects {
             name = "Ladysnake Mods"
             url = 'https://maven.ladysnake.org/releases'
         }
-
-
     }
 
     dependencies {
