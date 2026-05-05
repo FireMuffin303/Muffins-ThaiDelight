@@ -20,6 +20,8 @@ subprojects {
     }
 
     repositories {
+        mavenLocal()
+
         maven {
             // location of the maven that hosts JEI files before January 2023
             name = "Progwml6's maven"
@@ -84,7 +86,7 @@ subprojects {
             url = 'https://maven.ladysnake.org/releases'
         }
 
-        mavenLocal()
+
     }
 
     dependencies {

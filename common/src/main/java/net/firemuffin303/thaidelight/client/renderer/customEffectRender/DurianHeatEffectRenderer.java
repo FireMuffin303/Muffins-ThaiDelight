@@ -33,21 +33,6 @@ public class DurianHeatEffectRenderer implements CustomEffectRenderer {
     }
 
     @Override
-    public ResourceLocation backgroundTextureWide(LocalPlayer localPlayer) {
-        return null;
-    }
-
-    @Override
-    public ResourceLocation backgroundTextureShort(LocalPlayer localPlayer) {
-        return null;
-    }
-
-    @Override
-    public ResourceLocation backgroundTextureHUD(LocalPlayer localPlayer) {
-        return null;
-    }
-
-    @Override
     public ResourceLocation iconTexture(LocalPlayer localPlayer) {
         if(PlatformUtil.getDurianHeatComponent(localPlayer).isHeatUp()){
             return HEATED_UP_ICON;

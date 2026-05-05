@@ -25,22 +25,6 @@ public class SpicyEffectRenderer implements CustomEffectRenderer {
     public Component getDetail(LocalPlayer localPlayer) {
         return Component.literal(StringUtil.formatTickDuration(PlatformUtil.getSpicyTime(localPlayer)));
     }
-
-    @Override
-    public ResourceLocation backgroundTextureWide(LocalPlayer localPlayer) {
-        return null;
-    }
-
-    @Override
-    public ResourceLocation backgroundTextureShort(LocalPlayer localPlayer) {
-        return null;
-    }
-
-    @Override
-    public ResourceLocation backgroundTextureHUD(LocalPlayer localPlayer) {
-        return null;
-    }
-
     @Override
     public ResourceLocation iconTexture(LocalPlayer localPlayer) {
         return ICON;
