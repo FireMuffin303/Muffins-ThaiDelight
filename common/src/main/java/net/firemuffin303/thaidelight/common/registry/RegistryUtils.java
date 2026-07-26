@@ -177,6 +177,7 @@ public class RegistryUtils {
         output.accept(ModItems.DURIAN_CURRY.get());
         output.accept(ModItems.DURIAN_CAKE.get());
         output.accept(ModItems.DURIAN_CAKE_SLICE.get());
+        output.accept(ModItems.DURIAN_SLICE_FEAST.get());
         output.accept(ModItems.MANGO_CHEESECAKE.get());
         output.accept(ModItems.MANGO_CHEESECAKE_SLICE.get());
 

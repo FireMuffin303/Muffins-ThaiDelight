@@ -18,7 +18,8 @@
     "foodEffect.LivingEntityMixin",
     "foodEffect.spicy.MilkBottleItemMixin",
     "foodEffect.spicy.MilkBucketItemMixin",
-    "fuel.ItemMixin"
+    "fuel.ItemMixin",
+    "integration.farmersdelight.CuttingBoardRendererMixin"
   ],
   "client": [
   ],

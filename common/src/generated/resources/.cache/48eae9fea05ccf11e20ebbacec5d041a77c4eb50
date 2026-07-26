@@ -1,11 +1,9 @@
-// 1.20.1	2026-02-16T21:41:45.0160731	Muffin's Thai's Delight Refabricated/Tags for minecraft:worldgen/biome
+// 1.20.1	2026-07-26T08:56:35.0589188	Muffin's Thai's Delight Refabricated/Tags for minecraft:worldgen/biome
 2409d92ac4d4431d56a6bc5ba9f61b12c3b3c7f5 data\muffins_thaidelight\tags\worldgen\biome\durian_tree_biomes.json
-299511d580cba2aa05424d41720a18c976020477 data\muffins_thaidelight\tags\worldgen\biome\lime_tree_biomes.json
-88d24d1d57733e57a6e831f2c1a84894831e40ca data\muffins_thaidelight\tags\worldgen\biome\wild_basil_biomes.json
-edb9bc26e3aeb7acfc470f97a80d47c7bb64dc37 data\muffins_thaidelight\tags\worldgen\biome\pepper_tree_biomes.json
-7cb3711fe351f91d9402aa23dd5d772d875f2405 data\muffins_thaidelight\tags\worldgen\biome\mango_tree_biomes.json
-88d24d1d57733e57a6e831f2c1a84894831e40ca data\muffins_thaidelight\tags\worldgen\biome\wild_holy_basil_biomes.json
-d24d22c18e736bef7d1b6580f8fea45f149f6ed7 data\muffins_thaidelight\tags\worldgen\biome\wild_all_basil_biomes.json
+a39df8ee4af8579d265da38124d604f405fd5b21 data\muffins_thaidelight\tags\worldgen\biome\wild_basil_biomes.json
 edb9bc26e3aeb7acfc470f97a80d47c7bb64dc37 data\muffins_thaidelight\tags\worldgen\biome\papaya_tree_biomes.json
 88d24d1d57733e57a6e831f2c1a84894831e40ca data\muffins_thaidelight\tags\worldgen\biome\butterfly_peas_biomes.json
+299511d580cba2aa05424d41720a18c976020477 data\muffins_thaidelight\tags\worldgen\biome\lime_tree_biomes.json
 7ce7349d7c80674a127060744fac7035409330e9 data\muffins_thaidelight\tags\worldgen\biome\coconut_tree_biomes.json
+7cb3711fe351f91d9402aa23dd5d772d875f2405 data\muffins_thaidelight\tags\worldgen\biome\mango_tree_biomes.json
+edb9bc26e3aeb7acfc470f97a80d47c7bb64dc37 data\muffins_thaidelight\tags\worldgen\biome\pepper_tree_biomes.json

@@ -241,6 +241,8 @@ public class ModItems {
     public static final Supplier<Item> DURIAN_CURRY = registerFlatItem("durian_curry",createConsumeableItem(bowlFoodItem(ModFoods.DURIAN_CURRY)));
     public static final Supplier<Item> DURIAN_CAKE = registerFlatItem("durian_cake",() -> new BlockItem(ModBlocks.DURIAN_CAKE.get(),new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> DURIAN_CAKE_SLICE = registerFlatItem("durian_cake_slice",() -> new Item(new Item.Properties().food(ModFoods.DURIAN_CAKE)));
+    public static final Supplier<Item> DURIAN_SLICE_FEAST = registerFlatItem("durian_slice_feast",() -> new BlockItem(ModBlocks.DURIAN_SLICE_FEAST.get(),new Item.Properties() ));
+
 
     public static final Supplier<Item> MANGO_STICKY_RICE_FEAST = registerFlatItem("mango_sticky_rice_feast",() -> new BlockItem(ModBlocks.MANGO_STICKY_RICE_FEAST.get(),new Item.Properties()));
     public static final Supplier<Item> MANGO_STICKY_RICE = registerFlatItem("mango_sticky_rice",createConsumeableItem(bowlFoodItem(ModFoods.MANGO_STICKY_RICE)));

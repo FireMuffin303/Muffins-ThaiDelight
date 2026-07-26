@@ -62,55 +62,8 @@
       ],
       "entries": [
         {
-          "type": "minecraft:alternatives",
-          "children": [
-            {
-              "type": "minecraft:item",
-              "conditions": [
-                {
-                  "condition": "minecraft:match_tool",
-                  "predicate": {
-                    "enchantments": [
-                      {
-                        "enchantment": "minecraft:silk_touch",
-                        "levels": {
-                          "min": 1
-                        }
-                      }
-                    ]
-                  }
-                }
-              ],
-              "name": "muffins_thaidelight:durian"
-            },
-            {
-              "type": "minecraft:item",
-              "functions": [
-                {
-                  "add": false,
-                  "count": {
-                    "type": "minecraft:uniform",
-                    "max": 3.0,
-                    "min": 2.0
-                  },
-                  "function": "minecraft:set_count"
-                },
-                {
-                  "enchantment": "minecraft:fortune",
-                  "formula": "minecraft:binomial_with_bonus_count",
-                  "function": "minecraft:apply_bonus",
-                  "parameters": {
-                    "extra": 2,
-                    "probability": 0.5714286
-                  }
-                },
-                {
-                  "function": "minecraft:explosion_decay"
-                }
-              ],
-              "name": "muffins_thaidelight:durian_pulp"
-            }
-          ]
+          "type": "minecraft:item",
+          "name": "muffins_thaidelight:durian"
         }
       ],
       "rolls": 1.0

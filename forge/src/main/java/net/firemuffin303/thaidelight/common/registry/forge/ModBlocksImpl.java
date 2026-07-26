@@ -90,5 +90,9 @@ public class ModBlocksImpl {
         return BlockBehaviour.Properties.of().lootFrom(blockSupplier);
     }
 
+    public static Supplier<Block> createDurianSliceFeastBlock() {
+        return DurianSliceFeastBlock::new;
+    }
+
 
 }

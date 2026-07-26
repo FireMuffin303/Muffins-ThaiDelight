@@ -574,6 +574,7 @@ public class ModBlocks {
     public static final Supplier<Block> OMELETTE_FEAST = register("omelette",createOmeletteBlock(ModItems.OMELETTE));
     public static final Supplier<Block> BASIL_OMELETTE_FEAST = register("basil_omelette",createOmeletteBlock(ModItems.BASIL_OMELETTE));
     public static final Supplier<Block> PINEAPPLE_FRIED_RICE_FEAST = register("pineapple_fried_rice_feast",createPineappleFeastBlock());
+    public static final Supplier<Block> DURIAN_SLICE_FEAST = register("durian_slice_feast",createDurianSliceFeastBlock());
 
     public static void init(){
         BLOCK.init();
@@ -633,6 +634,11 @@ public class ModBlocks {
 
     @ExpectPlatform
     public static Supplier<Block> createPineappleFeastBlock(){
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static Supplier<Block> createDurianSliceFeastBlock(){
         throw new AssertionError();
     }
 

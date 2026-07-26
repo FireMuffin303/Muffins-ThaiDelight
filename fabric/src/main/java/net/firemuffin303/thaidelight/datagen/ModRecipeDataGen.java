@@ -865,13 +865,13 @@ public class ModRecipeDataGen extends FabricRecipeProvider {
         CuttingBoardRecipeBuilder.cutting(ModItems.SLICED_PAPAYA.get(),2,Ingredient.of(ModItems.PAPAYA.get()),knivesTag)
                 .save(exporter,ThaiDelightCommon.modid("cutting/papaya_slice"));
 
-        CuttingBoardRecipeBuilder.cutting(ModItems.DURIAN_PULP.get(),1,Ingredient.of(ModItems.SMALL_DURIAN.get()),knivesTag)
-                .addResults(new ItemStack(ModItems.DURIAN_PEEL.get(),1))
+        CuttingBoardRecipeBuilder.cutting(ModItems.DURIAN_PULP.get(),2,Ingredient.of(ModItems.SMALL_DURIAN.get()),knivesTag)
+                .addResults(new ItemStack(ModItems.DURIAN_PEEL.get(),2))
                 .save(exporter,ThaiDelightCommon.modid("cutting/durian_pulp_from_small_durian"));
 
-        CuttingBoardRecipeBuilder.cutting(ModItems.DURIAN_PULP.get(),2,Ingredient.of(ModItems.DURIAN.get()),knivesTag)
-                .addResults(new ItemStack(ModItems.DURIAN_PEEL.get(),2))
-                .save(exporter,ThaiDelightCommon.modid("cutting/durian_pulp_from_durian"));
+        CuttingBoardRecipeBuilder.cutting(ModItems.DURIAN_SLICE_FEAST.get(),1,Ingredient.of(ModItems.DURIAN.get()),knivesTag)
+                .addResults(new ItemStack(ModItems.DURIAN_PEEL.get(),3))
+                .save(exporter,ThaiDelightCommon.modid("cutting/durian_feast_from_durian"));
 
         CuttingBoardRecipeBuilder.cutting(ModItems.MANGO_SLICE.get(),2,Ingredient.of(ModItems.MANGO.get()),knivesTag)
                 .save(exporter,ThaiDelightCommon.modid("cutting/mango_slice"));

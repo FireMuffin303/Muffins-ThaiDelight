@@ -353,6 +353,7 @@ public class ModelDataGen extends FabricModelProvider {
         createCommonFeastState(ModBlocks.PHAT_KAPHRAO_FEAST.get(),blockModelGenerators);
         createMangoStickRice(blockModelGenerators);
         createCommonFeastState(ModBlocks.PINEAPPLE_FRIED_RICE_FEAST.get(),blockModelGenerators);
+        createCommonFeastState(ModBlocks.DURIAN_SLICE_FEAST.get(),blockModelGenerators);
         createMangoCheesecake(blockModelGenerators);
         createDurianCake(blockModelGenerators);
         createCoconutPies(blockModelGenerators);

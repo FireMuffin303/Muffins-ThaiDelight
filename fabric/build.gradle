@@ -9,6 +9,8 @@ architectury {
 
 loom{
     accessWidenerPath = project(":common").loom.accessWidenerPath
+
+
 }
 
 configurations {
@@ -88,7 +90,7 @@ dependencies {
     modCompileOnly "me.shedaniel:RoughlyEnoughItems-api-fabric:12.1.785"
     //modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:12.1.785"
 
-    modCompileOnly "dev.emi:emi-fabric:${emi_version}:api"
+    //modCompileOnly "dev.emi:emi-fabric:${emi_version}:api"
     //modLocalRuntime "dev.emi:emi-fabric:${emi_version}"
 
 }
@@ -145,5 +147,7 @@ fabricApi {
     configureDataGeneration(){
         client = true
         modId = "muffins_thaidelight"
+        outputDirectory = project(":common").file("src/generated/resources/")
+
     }
 }

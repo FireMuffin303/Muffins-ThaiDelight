@@ -120,6 +120,7 @@ public class ThaiDelightCommonClient {
                 ModBlocks.COCONUT_TRAPDOOR,
                 ModBlocks.BUDDING_COCONUT_LEAF,
                 ModBlocks.PINEAPPLE_FRIED_RICE_FEAST,
+                ModBlocks.DURIAN_SLICE_FEAST,
                 ModBlocks.STRIPPED_COCONUT,
                 ModBlocks.COCONUT_SAPLING,
                 ModBlocks.WILD_BASIL,

@@ -84,5 +84,9 @@ public class ModBlocksImpl {
         return BlockBehaviour.Properties.of().dropsLike(blockSupplier.get());
     }
 
+    public static Supplier<Block> createDurianSliceFeastBlock() {
+        return DurianSliceFeastBlock::new;
+    }
+
 
 }

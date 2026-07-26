@@ -144,14 +144,7 @@ public class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
                                         .hasProperty(HangingDurianBlock.AGE,1)
                                 )
                         )
-                        .add(LootItem.lootTableItem(ModItems.DURIAN.get())
-                                .when(VanillaBlockLoot.HAS_SILK_TOUCH)
-                                .otherwise(this.applyExplosionDecay(block,
-                                        LootItem.lootTableItem(ModItems.DURIAN_PULP.get())
-                                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(2,3)))
-                                                .apply(ApplyBonusCount.addBonusBinomialDistributionCount(Enchantments.BLOCK_FORTUNE, 0.5714286F, 2))
-                                ))
-                        )
+                        .add(LootItem.lootTableItem(ModItems.DURIAN.get()))
                 )
 
         );
@@ -463,6 +456,16 @@ public class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
                                         .hasProperty(FeastBlock.SERVINGS,4)
                                 )
                         ).add(LootItem.lootTableItem(ModItems.PINEAPPLE_FRIED_RICE_FEAST.get()))
+                )
+        ));
+
+        this.add(ModBlocks.DURIAN_SLICE_FEAST.get(),block -> this.applyExplosionDecay(block,LootTable.lootTable()
+                .withPool(LootPool.lootPool()
+                        .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
+                                .setProperties(StatePropertiesPredicate.Builder.properties()
+                                        .hasProperty(FeastBlock.SERVINGS,4)
+                                )
+                        ).add(LootItem.lootTableItem(ModItems.DURIAN_SLICE_FEAST.get()))
                 )
         ));
     }

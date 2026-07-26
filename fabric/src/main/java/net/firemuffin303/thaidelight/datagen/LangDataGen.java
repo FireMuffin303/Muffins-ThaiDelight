@@ -206,6 +206,7 @@ public class LangDataGen extends FabricLanguageProvider {
         translationBuilder.add(ModItems.DURIAN_CURRY.get(),"Durian Curry");
         translationBuilder.add(ModItems.DURIAN_CAKE.get(),"Durian Cake");
         translationBuilder.add(ModItems.DURIAN_CAKE_SLICE.get(),"Durian Cake Slice");
+        translationBuilder.add(ModItems.DURIAN_SLICE_FEAST.get(),"Durian Slice Feast");
         translationBuilder.add(ModItems.MANGO_CHEESECAKE.get(),"Mango Cheesecake");
         translationBuilder.add(ModItems.MANGO_CHEESECAKE_SLICE.get(),"Mango Cheesecake Slice");
         translationBuilder.add(ModItems.COCONUT_JELLY.get(),"Coconut Jelly");
@@ -507,6 +508,7 @@ public class LangDataGen extends FabricLanguageProvider {
             translationBuilder.add(ModItems.DURIAN_CURRY.get(),"แกงทุเรียน");
             translationBuilder.add(ModItems.DURIAN_CAKE.get(),"เค้กทุเรียน");
             translationBuilder.add(ModItems.DURIAN_CAKE_SLICE.get(),"สไลด์เค้กทุเรียน");
+            translationBuilder.add(ModItems.DURIAN_SLICE_FEAST.get(),"ทุเรียนหั่น");
             translationBuilder.add(ModItems.MANGO_CHEESECAKE.get(),"ชีสเค้กมะม่วง");
             translationBuilder.add(ModItems.MANGO_CHEESECAKE_SLICE.get(),"สไลด์ชีสเค้กมะม่วง");
             translationBuilder.add(ModItems.COCONUT_JELLY.get(),"วุ้นมะพร้าว");
