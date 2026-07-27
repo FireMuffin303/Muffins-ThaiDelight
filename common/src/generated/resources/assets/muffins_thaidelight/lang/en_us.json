@@ -254,5 +254,9 @@
   "muffins_thaidelight.midnightconfig.wanderingTraderShouldTradeTDItem": "Enable Wandering Traders Trades Thai's Delight Items",
   "muffins_thaidelight.midnightconfig.wanderingTraderShouldTradeTDItem.tooltip": "Require Game/Server Restart",
   "muffins_thaidelight.midnightconfig.worldGen": "World Generation",
-  "muffins_thaidelight.midnightconfig.zh_cn": "--- Simplified Chinese ---"
+  "muffins_thaidelight.midnightconfig.zh_cn": "--- Simplified Chinese ---",
+  "text.autoconfig.muffins_thaidelight.option.stinkyShouldTriggerNeutral": "Stinky Effect should trigger Neutral Mobs",
+  "text.autoconfig.muffins_thaidelight.option.villagerShouldTradeTDItem": "Enable Villagers Trades Thai's Delight Items",
+  "text.autoconfig.muffins_thaidelight.option.wanderingTraderShouldTradeTDItem": "Enable Wandering Traders Trades Thai's Delight Items",
+  "text.autoconfig.muffins_thaidelight.title": "Muffin's Thai's Delight Config"
 }

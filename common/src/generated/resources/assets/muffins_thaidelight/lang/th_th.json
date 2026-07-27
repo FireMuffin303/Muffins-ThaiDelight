@@ -250,5 +250,9 @@
   "muffins_thaidelight.midnightconfig.wanderingTraderShouldTradeTDItem": "อนุญาตให้พ่อค้าเร่ร่อนขายของ Thai's Delight",
   "muffins_thaidelight.midnightconfig.wanderingTraderShouldTradeTDItem.tooltip": "จำเป็นต้องเริ่มเกม/เซิฟเวอร์ใหม่เพื่อเห็นผล",
   "muffins_thaidelight.midnightconfig.worldGen": "การเกิดโลก",
-  "muffins_thaidelight.midnightconfig.zh_cn": "--- ภาษาจีนตัวย่อ ---"
+  "muffins_thaidelight.midnightconfig.zh_cn": "--- ภาษาจีนตัวย่อ ---",
+  "text.autoconfig.muffins_thaidelight.option.stinkyShouldTriggerNeutral": "เอฟเฟคเหม็นควรให้ม็อบเป็นกลางโกรธ",
+  "text.autoconfig.muffins_thaidelight.option.villagerShouldTradeTDItem": "อนุญาตให้ชาวบ้านขายของ Thai's Delight",
+  "text.autoconfig.muffins_thaidelight.option.wanderingTraderShouldTradeTDItem": "อนุญาตให้พ่อค้าเร่ร่อนขายของ Thai's Delight",
+  "text.autoconfig.muffins_thaidelight.title": "ตั้งค่า Muffin's Thai's Delight"
 }

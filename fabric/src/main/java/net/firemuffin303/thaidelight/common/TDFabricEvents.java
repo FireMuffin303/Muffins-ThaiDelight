@@ -9,18 +9,12 @@ import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.fabricmc.fabric.api.loot.v2.LootTableSource;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
-import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.firemuffin303.thaidelight.ThaiDelightCommon;
 import net.firemuffin303.thaidelight.common.entity.ai.NearestMobStinkyTargetGoal;
 import net.firemuffin303.thaidelight.common.registry.*;
-import net.firemuffin303.thaidelight.integration.midnightLib.ThaiDelightConfig;
+import net.firemuffin303.thaidelight.config.ModConfig;
 import net.firemuffin303.thaidelight.mixin.accessor.MobAccessor;
 import net.firemuffin303.thaidelight.mixin.accessor.StructurePoolAccessor;
-import net.firemuffin303.thaidelight.mixin.accessor.VillagerAccessor;
-import net.firemuffin303.thaidelight.mixin.food.ChickenFoodAccessor;
-import net.firemuffin303.thaidelight.mixin.food.FrogFoodAccessor;
-import net.firemuffin303.thaidelight.mixin.food.ParrotTameFoodAccessor;
-import net.firemuffin303.thaidelight.mixin.food.PigFoodAccessor;
 import net.firemuffin303.thaidelight.mixin.fabric.loot.LootPoolBuilderAccessor;
 import net.firemuffin303.thaidelight.mixin.fabric.loot.LootTableAccessor;
 import net.firemuffin303.thaidelight.util.BlockEntityTypeAdder;
@@ -33,6 +27,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.NeutralMob;
 import net.minecraft.world.entity.ai.goal.GoalSelector;
@@ -40,11 +35,9 @@ import net.minecraft.world.entity.animal.AbstractGolem;
 import net.minecraft.world.entity.animal.Dolphin;
 import net.minecraft.world.entity.animal.Panda;
 import net.minecraft.world.entity.animal.horse.Llama;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.entity.monster.Creeper;
+import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.biome.Biomes;
-import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.structure.pools.SinglePoolElement;
@@ -58,7 +51,6 @@ import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
 
 import java.util.*;
-import java.util.stream.Stream;
 
 public class TDFabricEvents {
     public static void worldGeneration(){
@@ -199,12 +191,15 @@ public class TDFabricEvents {
 
         ServerEntityEvents.ENTITY_LOAD.register((entity, serverLevel) -> {
             if(entity instanceof Mob mob){
-                GoalSelector goalSelector = ((MobAccessor)mob).getGoalSelector();
+                GoalSelector goalSelector = ((MobAccessor)mob).getTargetSelector();
                 if(!goalSelector.getAvailableGoals().isEmpty()){
-                    if(mob instanceof NeutralMob && !(mob instanceof AbstractGolem)){
-                        goalSelector.addGoal(map.getOrDefault(entity.getType(), 3), new NearestMobStinkyTargetGoal<>(mob, Player.class, true));
+                    if(entity instanceof NeutralMob && !(mob instanceof AbstractGolem)){
+                        goalSelector.addGoal(map.getOrDefault(entity.getType(), 3), new NearestMobStinkyTargetGoal<>(mob, LivingEntity.class, true));
                     } else if(mob instanceof Panda || mob instanceof Llama || mob instanceof Dolphin){
-                        goalSelector.addGoal(2, new NearestMobStinkyTargetGoal<>(mob, Player.class, true));
+                        goalSelector.addGoal(2, new NearestMobStinkyTargetGoal<>(mob, LivingEntity.class, true));
+                    }else if(mob instanceof Monster && !(mob instanceof Creeper)){
+                        goalSelector.addGoal(1, new NearestMobStinkyTargetGoal<>(mob, LivingEntity.class, true));
+
                     }
 
                 }
@@ -213,7 +208,7 @@ public class TDFabricEvents {
     }
 
     public static void addVillagersTrades(){
-        if(ThaiDelightConfig.villagerShouldTradeTDItem){
+        if(ModConfig.villagerShouldTradeTDItem){
             ModVillagerTrades.trades().forEach(modVillagerTrade -> {
                 TradeOfferHelper.registerVillagerOffers(modVillagerTrade.villagerProfession(), modVillagerTrade.level(), (factories) ->{
                     factories.add((entity, randomSource) -> modVillagerTrade.merchantOffer());
@@ -222,7 +217,7 @@ public class TDFabricEvents {
         }
 
 
-        if(ThaiDelightConfig.wanderingTraderShouldTradeTDItem){
+        if(ModConfig.wanderingTraderShouldTradeTDItem){
             TradeOfferHelper.registerWanderingTraderOffers(1, (factories) -> {
                 ModVillagerTrades.wanderTrade().forEach(integerMerchantOfferPair -> {
                     factories.add((entity, randomSource) -> integerMerchantOfferPair);

@@ -295,6 +295,12 @@ public class LangDataGen extends FabricLanguageProvider {
         translationBuilder.add("muffins_thaidelight.midnightconfig.zh_cn","--- Simplified Chinese ---");
         translationBuilder.add("muffins_thaidelight.midnightconfig.huantanhua","Huantanhua");
 
+        translationBuilder.add("text.autoconfig.muffins_thaidelight.title","Muffin's Thai's Delight Config");
+        translationBuilder.add("text.autoconfig.muffins_thaidelight.option.wanderingTraderShouldTradeTDItem","Enable Wandering Traders Trades Thai's Delight Items");
+        translationBuilder.add("text.autoconfig.muffins_thaidelight.option.villagerShouldTradeTDItem","Enable Villagers Trades Thai's Delight Items");
+        translationBuilder.add("text.autoconfig.muffins_thaidelight.option.stinkyShouldTriggerNeutral","Stinky Effect should trigger Neutral Mobs");
+
+
         translationBuilder.add("muffins_thaidelight.consume.durian_fermented_drinks","Your body heated up.");
         translationBuilder.add("muffins_thaidelight.custom_effect_render.durian_consumed","Durian Consumed");
         translationBuilder.add("muffins_thaidelight.custom_effect_render.heated_up","Heated Up");
@@ -592,6 +598,11 @@ public class LangDataGen extends FabricLanguageProvider {
             translationBuilder.add("muffins_thaidelight.midnightconfig.peaenka","P34enKa");
             translationBuilder.add("muffins_thaidelight.midnightconfig.zh_cn","--- ภาษาจีนตัวย่อ ---");
             translationBuilder.add("muffins_thaidelight.midnightconfig.huantanhua","Huantanhua");
+
+            translationBuilder.add("text.autoconfig.muffins_thaidelight.title","ตั้งค่า Muffin's Thai's Delight");
+            translationBuilder.add("text.autoconfig.muffins_thaidelight.option.wanderingTraderShouldTradeTDItem","อนุญาตให้พ่อค้าเร่ร่อนขายของ Thai's Delight");
+            translationBuilder.add("text.autoconfig.muffins_thaidelight.option.villagerShouldTradeTDItem","อนุญาตให้ชาวบ้านขายของ Thai's Delight");
+            translationBuilder.add("text.autoconfig.muffins_thaidelight.option.stinkyShouldTriggerNeutral","เอฟเฟคเหม็นควรให้ม็อบเป็นกลางโกรธ");
 
             translationBuilder.add("muffins_thaidelight.consume.durian_fermented_drinks","ร่างกายของคุณร้อนขึ้น");
 

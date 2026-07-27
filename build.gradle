@@ -21,7 +21,7 @@ subprojects {
 
     repositories {
         mavenLocal()
-
+        maven { url "https://maven.shedaniel.me/" }
         /*
         maven {
             name "firemuffin303RepositorySnapshots"

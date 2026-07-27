@@ -174,9 +174,6 @@ public class PlatformUtilImpl {
 
     }
 
-    public static boolean stinkyShouldTriggerNeutralConfig() {
-        return ThaiDelightConfig.STINKY_SHOULD_TRIGGER_NEUTRAL.get();
-    }
 
 
 }

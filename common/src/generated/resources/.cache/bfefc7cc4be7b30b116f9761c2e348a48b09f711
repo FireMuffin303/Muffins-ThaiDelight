@@ -1,4 +1,4 @@
-// 1.20.1	2026-07-26T08:56:35.0609205	Muffin's Thai's Delight Refabricated/Tags for minecraft:item
+// 1.20.1	2026-07-27T14:40:54.8190952	Muffin's Thai's Delight Refabricated/Tags for minecraft:item
 d22951dd62f6f7b8873b40679152ee8ec7ce66f4 data\minecraft\tags\items\wooden_trapdoors.json
 55b420e80886bff5abc10011ddaaa4d128588605 data\c\tags\items\foods\fermented_drinks.json
 5dbe4ac6ac645c069c524832f9909774b22a80b0 data\c\tags\items\foods\ripe_papaya.json
@@ -46,8 +46,8 @@ d0f4b1cf7b69c665ce0aecd48640a94dbf55e9bc data\sereneseasons\tags\items\spring_cr
 e18ee9232ec6405eab98dfbbc48a018ca8af85f7 data\minecraft\tags\items\wooden_stairs.json
 81dd85d651f0a0e9b4b4762e7d264117f16a05c8 data\c\tags\items\foods\cooked_meats.json
 e8cd343c1eae9bbc4e7b6cfaa37c084399044234 data\minecraft\tags\items\hanging_signs.json
-d026fec16e02d7258ea497364a9ac91670a3fd4f data\minecraft\tags\items\wooden_doors.json
 b86b5ed44294037342281f19ad8b9335f128e089 data\muffins_thaidelight\tags\items\mango_logs.json
+d026fec16e02d7258ea497364a9ac91670a3fd4f data\minecraft\tags\items\wooden_doors.json
 d45f8e77edd3c6d47aa78e691f604e8f91834423 data\c\tags\items\foods\lime.json
 4e52cdb5e76f2551f2119d4801802d527470f327 data\muffins_thaidelight\tags\items\flower_crab_meat.json
 e47099cc79d74a686639d32e7b8a96140ade72aa data\minecraft\tags\items\saplings.json

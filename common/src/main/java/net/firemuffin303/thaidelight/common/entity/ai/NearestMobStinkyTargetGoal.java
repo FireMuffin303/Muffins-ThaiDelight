@@ -1,6 +1,7 @@
 package net.firemuffin303.thaidelight.common.entity.ai;
 
 import net.firemuffin303.thaidelight.common.registry.ModMobEffects;
+import net.firemuffin303.thaidelight.config.ModConfig;
 import net.firemuffin303.thaidelight.util.PlatformUtil;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.world.entity.AgeableMob;
@@ -11,7 +12,7 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 public class NearestMobStinkyTargetGoal<T extends LivingEntity> extends NearestAttackableTargetGoal<T> {
 
     public NearestMobStinkyTargetGoal(Mob mob, Class<T> class_, boolean bl) {
-        super(mob, class_, bl,livingEntity -> livingEntity.hasEffect(ModMobEffects.STINKY.get()) && PlatformUtil.stinkyShouldTriggerNeutralConfig());
+        super(mob, class_, bl,livingEntity -> livingEntity.hasEffect(ModMobEffects.STINKY.get()) && ModConfig.stinkyShouldTriggerNeutral);
     }
 
     @Override

@@ -138,9 +138,6 @@ public class PlatformUtilImpl {
         }
     }
 
-    public static boolean stinkyShouldTriggerNeutralConfig() {
-        return ThaiDelightConfig.stinkyShouldTriggerNeutral;
-    }
 
     public static void registerBlockBurn(Supplier<Block> blockSupplier, int burn, int spread) {
         FlammableBlockRegistry.getDefaultInstance().add(blockSupplier.get(),burn,spread);

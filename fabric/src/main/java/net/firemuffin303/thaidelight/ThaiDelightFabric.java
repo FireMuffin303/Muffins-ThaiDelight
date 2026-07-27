@@ -5,6 +5,8 @@ import com.mojang.brigadier.arguments.BoolArgumentType;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.logging.LogUtils;
 import eu.midnightdust.lib.config.MidnightConfig;
+import me.shedaniel.autoconfig.AutoConfig;
+import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
@@ -20,6 +22,7 @@ import net.firemuffin303.thaidelight.common.cardinalcomponents.SpicyComponent;
 import net.firemuffin303.thaidelight.common.entity.DragonflyEntity;
 import net.firemuffin303.thaidelight.common.entity.FlowerCrabEntity;
 import net.firemuffin303.thaidelight.common.registry.*;
+import net.firemuffin303.thaidelight.config.ModConfig;
 import net.firemuffin303.thaidelight.integration.midnightLib.ThaiDelightConfig;
 import net.firemuffin303.thaidelight.integration.toughasnail.ToughAsNailIntegration;
 import net.minecraft.commands.CommandBuildContext;
@@ -50,9 +53,9 @@ public class ThaiDelightFabric implements ModInitializer {
 
     @Override
     public void onInitialize() {
-
         IS_TOUGH_AS_NAIL_INSTALLED = FabricLoader.getInstance().isModLoaded("toughasnails");
-        MidnightConfig.init(ThaiDelightCommon.MOD_ID, ThaiDelightConfig.class);
+        //MidnightConfig.init(ThaiDelightCommon.MOD_ID, ThaiDelightConfig.class);
+        AutoConfig.register(ModConfig.class, GsonConfigSerializer::new);
         ThaiDelightCommon.init();
 
         ThaiDelightCommon.postInit();

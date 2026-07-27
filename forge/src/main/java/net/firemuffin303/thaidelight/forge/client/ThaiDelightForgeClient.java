@@ -1,6 +1,7 @@
 package net.firemuffin303.thaidelight.forge.client;
 
 import com.mojang.logging.LogUtils;
+import me.shedaniel.autoconfig.AutoConfig;
 import net.firemuffin303.thaidelight.ThaiDelightCommon;
 import net.firemuffin303.thaidelight.client.ThaiDelightCommonClient;
 import net.firemuffin303.thaidelight.client.renderer.DurianHeatRendererLayer;
@@ -17,6 +18,7 @@ import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.firemuffin303.thaidelight.common.registry.ModMenuType;
 import net.firemuffin303.thaidelight.common.registry.ModRecipes;
+import net.firemuffin303.thaidelight.config.ModConfig;
 import net.firemuffin303.thaidelight.util.ModUtils;
 import net.minecraft.client.RecipeBookCategories;
 import net.minecraft.client.gui.screens.MenuScreens;
@@ -80,8 +82,9 @@ public class ThaiDelightForgeClient {
             });
 
             ModLoadingContext.get().registerExtensionPoint(ConfigScreenHandler.ConfigScreenFactory.class,() -> new ConfigScreenHandler.ConfigScreenFactory((minecraft, screen) -> {
-                return
+                return AutoConfig.getConfigScreen(ModConfig.class,screen).get();
             }));
+
 
         });
 
