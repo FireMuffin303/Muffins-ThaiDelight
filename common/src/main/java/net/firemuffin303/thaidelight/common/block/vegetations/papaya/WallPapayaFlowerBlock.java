@@ -9,11 +9,13 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.component.SuspiciousStewEffects;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -39,6 +41,8 @@ public class WallPapayaFlowerBlock extends Block implements SimpleWaterloggedBlo
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
+    private final SuspiciousStewEffects suspiciousStewEffects;
+
     public WallPapayaFlowerBlock(Properties properties) {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any()
@@ -47,17 +51,18 @@ public class WallPapayaFlowerBlock extends Block implements SimpleWaterloggedBlo
                 .setValue(FLOWERS,1)
                 .setValue(LIT,false)
         );
+        this.suspiciousStewEffects = FlowerBlock.makeEffectList(MobEffects.REGENERATION,3);
     }
 
     @Override
-    public InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
-        if(player.getItemInHand(interactionHand).is(Items.GLOW_INK_SAC) && !blockState.getValue(LIT)){
+    protected ItemInteractionResult useItemOn(ItemStack itemStack, BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
+        if(itemStack.is(Items.GLOW_INK_SAC) && !blockState.getValue(LIT)){
             level.setBlock(blockPos,blockState.setValue(LIT,true),2);
             level.playSound(null, blockPos, SoundEvents.GLOW_INK_SAC_USE, SoundSource.BLOCKS, 1.0F, 1.0F);
-            return InteractionResult.SUCCESS;
+            return ItemInteractionResult.SUCCESS;
         }
 
-        return super.use(blockState, level, blockPos, player, interactionHand, blockHitResult);
+        return super.useItemOn(itemStack, blockState, level, blockPos, player, interactionHand, blockHitResult);
     }
 
     @Override
@@ -142,18 +147,9 @@ public class WallPapayaFlowerBlock extends Block implements SimpleWaterloggedBlo
         builder.add(WATERLOGGED, FACING, FLOWERS,LIT);
     }
 
-    @Override
-    public MobEffect getSuspiciousEffect() {
-        return MobEffects.REGENERATION;
-    }
 
     @Override
-    public int getEffectDuration() {
-        return 3*20;
-    }
-
-    @Override
-    public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState, boolean bl) {
+    public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState) {
         return true;
     }
 
@@ -170,5 +166,10 @@ public class WallPapayaFlowerBlock extends Block implements SimpleWaterloggedBlo
             return;
         }
         popResource(serverLevel,blockPos,new ItemStack(ModItems.PAPAYA_FLOWER.get()));
+    }
+
+    @Override
+    public SuspiciousStewEffects getSuspiciousEffects() {
+        return this.suspiciousStewEffects;
     }
 }

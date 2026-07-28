@@ -1,5 +1,7 @@
 package net.firemuffin303.thaidelight.common.block.vegetations.papaya;
 
+import com.mojang.serialization.MapCodec;
+import net.firemuffin303.thaidelight.common.block.stations.MortarBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -21,6 +23,8 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 public class WallPapayaLeavesBlock extends HorizontalDirectionalBlock implements SimpleWaterloggedBlock, BonemealableBlock {
+    public static final MapCodec<WallPapayaLeavesBlock> CODEC = simpleCodec(WallPapayaLeavesBlock::new);
+
     private static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     private static final BooleanProperty IS_LEAVES = BooleanProperty.create("is_leaves");
     protected static final VoxelShape TOP_AABB = Block.box(0.0, 14.0, 0.0, 16.0, 16.0, 16.0);
@@ -31,6 +35,11 @@ public class WallPapayaLeavesBlock extends HorizontalDirectionalBlock implements
                 .setValue(WATERLOGGED,false)
                 .setValue(IS_LEAVES,true)
         );
+    }
+
+    @Override
+    protected MapCodec<? extends HorizontalDirectionalBlock> codec() {
+        return CODEC;
     }
 
     @Override
@@ -85,7 +94,7 @@ public class WallPapayaLeavesBlock extends HorizontalDirectionalBlock implements
     }
 
     @Override
-    public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState, boolean bl) {
+    public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState) {
         return true;
     }
 

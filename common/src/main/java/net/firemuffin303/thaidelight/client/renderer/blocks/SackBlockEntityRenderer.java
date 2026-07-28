@@ -61,7 +61,7 @@ public class SackBlockEntityRenderer implements BlockEntityRenderer<SackBlockEnt
         }
 
         poseStack.scale(0.6f,0.6f,0.6f);
-        poseStack.mulPoseMatrix(new Matrix4f().scale(1, 1, 0.001f));
+        poseStack.mulPose(new Matrix4f().scale(1, 1, 0.001f));
 
         this.itemRenderer.render(itemStack,ItemDisplayContext.GUI,false,poseStack,multiBufferSource,i,OverlayTexture.NO_OVERLAY,bakedModel);
 

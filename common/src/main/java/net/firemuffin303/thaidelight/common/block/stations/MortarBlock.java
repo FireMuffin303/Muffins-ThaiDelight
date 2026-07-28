@@ -1,5 +1,6 @@
 package net.firemuffin303.thaidelight.common.block.stations;
 
+import com.mojang.serialization.MapCodec;
 import net.firemuffin303.thaidelight.common.menu.MortarMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -13,6 +14,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.FurnaceBlock;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -30,10 +32,16 @@ public class MortarBlock extends HorizontalDirectionalBlock implements SimpleWat
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     private static final VoxelShape SHAPE;
     private static final Component CONTAINER_TITLE = Component.translatable("container.muffins_thaidelight.mortar");
+    public static final MapCodec<MortarBlock> CODEC = simpleCodec(MortarBlock::new);
 
     public MortarBlock(Properties properties) {
         super(properties);
         this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(WATERLOGGED,false);
+    }
+
+    @Override
+    protected MapCodec<? extends HorizontalDirectionalBlock> codec() {
+        return CODEC;
     }
 
     @Override

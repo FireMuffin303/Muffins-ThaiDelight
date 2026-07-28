@@ -28,14 +28,14 @@ public abstract class AbstractStackableBlock extends Block implements SimpleWate
     }
 
     @Override
-    public InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
+    protected InteractionResult useWithoutItem(BlockState blockState, Level level, BlockPos blockPos, Player player, BlockHitResult blockHitResult) {
         if(level.isClientSide){
-            if(takeItem(level, blockPos, blockState, player, interactionHand).consumesAction()){
+            if(takeItem(level, blockPos, blockState, player).consumesAction()){
                 return InteractionResult.SUCCESS;
             }
         }
 
-        return takeItem(level, blockPos, blockState, player, interactionHand);
+        return takeItem(level, blockPos, blockState, player);
     }
 
     @Override

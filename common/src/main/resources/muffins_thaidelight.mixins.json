@@ -33,6 +33,7 @@
     "food.PigFoodAccessor",
     "foodEffect.LivingEntityMixin",
     "foodEffect.heatedup.PowderSnowBlockMixin",
+    "level.treegrower.TreeGrowerMixin",
     "stinky.LivingEntityMixin",
     "stinky.SniffingMixin",
     "stinky.VillagerMixin"

@@ -1,27 +1,21 @@
 package net.firemuffin303.thaidelight.forge.network;
 
-import com.mojang.logging.LogUtils;
+import io.netty.buffer.ByteBuf;
+import net.firemuffin303.thaidelight.ThaiDelightCommon;
 import net.firemuffin303.thaidelight.forge.common.capabilities.SpicyProvider;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.network.NetworkEvent;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 
 import java.util.function.Supplier;
 
-public class SpicyPacket  {
-    int timer;
+public record SpicyPacket(int timer) implements CustomPacketPayload {
+    public static final CustomPacketPayload.Type<SpicyPacket> TYPE = new CustomPacketPayload.Type<>(ThaiDelightCommon.modid("spicy"));
+    public static final StreamCodec<ByteBuf,SpicyPacket> STREAM_CODEC = StreamCodec.composite(ByteBufCodecs.VAR_INT,SpicyPacket::timer,SpicyPacket::new);
 
-    public SpicyPacket(int timer){
-        this.timer = timer;
-    }
-
-    public SpicyPacket(FriendlyByteBuf friendlyByteBuf){
-        this.timer = friendlyByteBuf.readInt();
-    }
 
     public void encode(FriendlyByteBuf friendlyByteBuf){
         friendlyByteBuf.writeInt(this.timer);
@@ -39,5 +33,10 @@ public class SpicyPacket  {
             });
         });
         context.setPacketHandled(true);
+    }
+
+    @Override
+    public Type<? extends CustomPacketPayload> type() {
+        return TYPE;
     }
 }

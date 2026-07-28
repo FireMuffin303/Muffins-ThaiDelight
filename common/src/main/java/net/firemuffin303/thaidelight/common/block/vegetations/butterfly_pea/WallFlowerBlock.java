@@ -2,12 +2,15 @@ package net.firemuffin303.thaidelight.common.block.vegetations.butterfly_pea;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
+import com.mojang.serialization.MapCodec;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.item.component.SuspiciousStewEffects;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -27,8 +30,7 @@ public class WallFlowerBlock extends MultifaceBlock implements SimpleWaterlogged
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     private final MultifaceSpreader spreader = new MultifaceSpreader(this);
 
-    private final MobEffect suspiciousStewEffect;
-    private final int effectDuration;
+    private final SuspiciousStewEffects suspiciousStewEffect;
     private static final Map<Direction, VoxelShape> AABBS = Maps.newEnumMap(ImmutableMap.of(
             Direction.NORTH, Block.box(0f, 0.0f, 14.0f, 16f, 16.0f, 16.0f),
             Direction.SOUTH, Block.box(0f, 0.0f, 0.0f, 16f, 16.0f, 2.0f),
@@ -37,15 +39,10 @@ public class WallFlowerBlock extends MultifaceBlock implements SimpleWaterlogged
     );
 
 
-    public WallFlowerBlock(Properties properties,MobEffect mobEffect,int effectDuration) {
+    public WallFlowerBlock(Properties properties,Holder<MobEffect> mobEffect,int effectDuration) {
         super(properties);
         this.registerDefaultState(this.defaultBlockState().setValue(WATERLOGGED, false));
-        this.suspiciousStewEffect = mobEffect;
-        if (mobEffect.isInstantenous()) {
-            this.effectDuration = effectDuration;
-        } else {
-            this.effectDuration = effectDuration * 20;
-        }
+        this.suspiciousStewEffect = FlowerBlock.makeEffectList(mobEffect,effectDuration);
     }
 
     @Override
@@ -75,23 +72,17 @@ public class WallFlowerBlock extends MultifaceBlock implements SimpleWaterlogged
     }
 
     @Override
+    protected MapCodec<? extends MultifaceBlock> codec() {
+        return null;
+    }
+
+    @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
         builder.add(WATERLOGGED);
     }
-
     @Override
-    public MobEffect getSuspiciousEffect() {
-        return this.suspiciousStewEffect;
-    }
-
-    @Override
-    public int getEffectDuration() {
-        return this.effectDuration;
-    }
-
-    @Override
-    public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState, boolean bl) {
+    public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState) {
         return Direction.stream().anyMatch((direction) -> {
             return this.spreader.canSpreadInAnyDirection(blockState, levelReader, blockPos, direction.getOpposite());
         });
@@ -105,5 +96,10 @@ public class WallFlowerBlock extends MultifaceBlock implements SimpleWaterlogged
     @Override
     public void performBonemeal(ServerLevel serverLevel, RandomSource randomSource, BlockPos blockPos, BlockState blockState) {
         this.spreader.spreadFromRandomFaceTowardRandomDirection(blockState,serverLevel,blockPos,randomSource);
+    }
+
+    @Override
+    public SuspiciousStewEffects getSuspiciousEffects() {
+        return this.suspiciousStewEffect;
     }
 }

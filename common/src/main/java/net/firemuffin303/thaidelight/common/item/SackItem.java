@@ -27,8 +27,9 @@ public class SackItem extends BlockItem {
         super(ModBlocks.SACK.get(),properties);
     }
 
+
     @Override
-    public int getUseDuration(ItemStack itemStack) {
+    public int getUseDuration(ItemStack itemStack, LivingEntity livingEntity) {
         return 1200;
     }
 

@@ -12,17 +12,14 @@ import net.firemuffin303.thaidelight.mixin.accessor.feature.FoliagePlacerTypeAcc
 import net.firemuffin303.thaidelight.mixin.accessor.feature.TrunkPlacerTypeAccessor;
 import net.minecraft.core.*;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.util.valueproviders.ClampedInt;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformInt;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.MultifaceBlock;
+import net.minecraft.world.level.block.grower.TreeGrower;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
@@ -30,22 +27,19 @@ import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.*;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
-import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
-import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.RandomizedIntStateProvider;
 import net.minecraft.world.level.levelgen.feature.treedecorators.AttachedToLeavesDecorator;
-import net.minecraft.world.level.levelgen.feature.treedecorators.BeehiveDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.FancyTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
-import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
 import net.minecraft.world.level.levelgen.placement.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.OptionalInt;
 import java.util.function.Supplier;
 
@@ -102,13 +96,18 @@ public class ModFeatures {
     public static final ResourceKey<PlacedFeature> TREES_MANGO = ResourceKey.create(Registries.PLACED_FEATURE,ThaiDelightCommon.modid("trees_mango"));
     public static final ResourceKey<PlacedFeature> TREES_COCONUT = ResourceKey.create(Registries.PLACED_FEATURE,ThaiDelightCommon.modid("trees_coconut"));
 
+    public static final TreeGrower DURIAN = new TreeGrower("durian",Optional.of(ModFeatures.FEATURE_TALL_DURIAN_TREE),Optional.of(ModFeatures.FEATURE_DURIAN_TREE),Optional.of(ModFeatures.FEATURE_DURAIN_TREE_BEE));
+    public static final TreeGrower MANGO = new TreeGrower("mango",0.1f, Optional.empty(),Optional.empty(),Optional.of(ModFeatures.FEATURE_MANGO_TREE),Optional.of(ModFeatures.FEATURE_FANCY_MANGO_TREE),Optional.of(ModFeatures.FEATURE_MANGO_TREE_BEE),Optional.of(ModFeatures.FEATURE_FANCY_MANGO_TREE_BEE));
+    public static final TreeGrower COCONUT = new TreeGrower("coconut",Optional.empty(),Optional.of(ModFeatures.FEATURE_COCONUT_TREE),Optional.of(ModFeatures.FEATURE_COCONUT_TREE_BEE));
+    public static final TreeGrower PAPAYA = new TreeGrower("papaya",Optional.empty(),Optional.of(ModFeatures.FEATURE_PAPAYA_TREE),Optional.empty());
+
     public static void init(){
         TRUNK_PLACER_REGISTRY.init();
         FOLIAGE_PLACER_REGISTRY.init();
     }
 
 
-    public static void bootstrapPlacedFeature(BootstapContext<PlacedFeature> bootstapContext){
+    public static void bootstrapPlacedFeature(BootstrapContext<PlacedFeature> bootstapContext){
         Holder.Reference<ConfiguredFeature<?,?>> config_lime_bush = bootstapContext.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(ModFeatures.FEATURE_PATCH_LIME_BUSH);
         Holder.Reference<ConfiguredFeature<?,?>> config_wild_pepper = bootstapContext.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(ModFeatures.FEATURE_PATCH_WILD_PEPPER);
         Holder.Reference<ConfiguredFeature<?,?>> config_wild_basil = bootstapContext.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(ModFeatures.FEATURE_PATCH_WILD_BASIL);

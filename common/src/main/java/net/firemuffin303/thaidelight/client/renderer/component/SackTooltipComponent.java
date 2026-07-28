@@ -22,7 +22,7 @@ public class SackTooltipComponent implements ClientTooltipComponent {
 
         ItemStack showedItem = ItemStack.EMPTY;
         for(ItemStack itemStack : this.items){
-            if (ItemStack.isSameItemSameTags(itemStack, showedItem) || itemStack.isEmpty()) continue;
+            if (ItemStack.isSameItemSameComponents(itemStack, showedItem) || itemStack.isEmpty()) continue;
             showedItem = itemStack;
             itemTypes.add(itemStack);
         }

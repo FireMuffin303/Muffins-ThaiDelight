@@ -1,12 +1,9 @@
 package net.firemuffin303.thaidelight.common.registry;
 
-import net.firemuffin303.thaidelight.common.block.cauldron.CoconutCauldron;
 import net.firemuffin303.thaidelight.common.block.cauldron.FermentedFishCauldronBlock;
-import net.firemuffin303.thaidelight.util.ModUtils;
-import net.minecraft.core.BlockSource;
 import net.minecraft.core.Direction;
+import net.minecraft.core.dispenser.BlockSource;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
-import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
@@ -20,10 +17,10 @@ public class ModDispenserBehavior {
         DefaultDispenseItemBehavior fishBehavior = new DefaultDispenseItemBehavior() {
             @Override
             protected ItemStack execute(BlockSource blockSource, ItemStack itemStack) {
-                Direction direction = blockSource.getBlockState().getValue(DispenserBlock.FACING);
-                BlockState blockState = blockSource.getLevel().getBlockState(blockSource.getPos().relative(direction));
+                Direction direction = blockSource.state().getValue(DispenserBlock.FACING);
+                BlockState blockState = blockSource.level().getBlockState(blockSource.pos().relative(direction));
                 if (blockState.is(Blocks.WATER_CAULDRON) && blockState.getValue(LayeredCauldronBlock.LEVEL) == 3) {
-                    blockSource.getLevel().setBlock(blockSource.getPos().relative(direction), ModBlocks.FERMENTED_FISH_CAULDRON.get().defaultBlockState().setValue(FermentedFishCauldronBlock.LEVEL, 3), 3);
+                    blockSource.level().setBlock(blockSource.pos().relative(direction), ModBlocks.FERMENTED_FISH_CAULDRON.get().defaultBlockState().setValue(FermentedFishCauldronBlock.LEVEL, 3), 3);
                     itemStack.shrink(1);
                     return itemStack;
                 }

@@ -8,6 +8,7 @@ import net.firemuffin303.thaidelight.mixin.cauldron.LayeredCauldronAccessor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -24,16 +25,16 @@ import net.minecraft.world.phys.BlockHitResult;
 public class CoconutCauldron extends LayeredCauldronBlock {
 
     public CoconutCauldron(Properties properties) {
-        super(properties, LayeredCauldronBlock.RAIN, ModCauldronInteraction.COCONUT);
+        super(Biome.Precipitation.RAIN,ModCauldronInteraction.COCONUT,properties);
     }
 
     @Override
-    public InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
-        ItemStack itemStack = player.getItemInHand(interactionHand);
-        if(itemStack.is(ModTags.COCONUT) && !ModCauldronInteraction.COCONUT.containsKey(itemStack.getItem()) && !isFull(blockState)){
+    protected ItemInteractionResult useItemOn(ItemStack itemStack, BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
+        if(itemStack.is(ModTags.COCONUT) && !ModCauldronInteraction.COCONUT.map().containsKey(itemStack.getItem()) && !isFull(blockState)){
             return ModCauldronInteraction.INSERT_COCONUT.interact(blockState, level, blockPos, player, interactionHand, itemStack);
         }
-        return super.use(blockState, level, blockPos, player, interactionHand, blockHitResult);
+
+        return super.useItemOn(itemStack, blockState, level, blockPos, player, interactionHand, blockHitResult);
     }
 
     @Override

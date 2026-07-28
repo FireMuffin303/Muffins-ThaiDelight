@@ -1,5 +1,6 @@
 package net.firemuffin303.thaidelight.common.block.cauldron;
 
+import com.mojang.serialization.MapCodec;
 import net.firemuffin303.thaidelight.common.registry.ModMobEffects;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.cauldron.CauldronInteraction;
@@ -18,6 +19,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.AbstractCauldronBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.CauldronBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -28,13 +30,19 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import java.util.Map;
 
 public class FermentedFishCauldronBlock extends AbstractCauldronBlock {
+    public static final MapCodec<CauldronBlock> CODEC = simpleCodec(CauldronBlock::new);
     public static final IntegerProperty FERMENT;
     public static final IntegerProperty LEVEL;
     public static final int MAX_FERMENT_LEVEL = 2;
     private static final int MAX_FERMENTING_TIME = 6000; // 5 Min
     private static final int MIN_FERMENTING_TIME = 2400; // 5 Min
 
-    public FermentedFishCauldronBlock(Properties properties, Map<Item, CauldronInteraction> map) {
+    @Override
+    protected MapCodec<? extends AbstractCauldronBlock> codec() {
+        return CODEC;
+    }
+
+    public FermentedFishCauldronBlock(Properties properties, CauldronInteraction.InteractionMap map) {
         super(properties, map);
         this.registerDefaultState((BlockState) this.stateDefinition.any().setValue(FERMENT,0));
         this.registerDefaultState(this.stateDefinition.any().setValue(LEVEL,1));
@@ -77,8 +85,8 @@ public class FermentedFishCauldronBlock extends AbstractCauldronBlock {
                     case 2 -> duration = 30*20;
                 }
 
-                livingEntity.addEffect(new MobEffectInstance(ModMobEffects.STINKY.get(), duration));
-                livingEntity.addEffect(new MobEffectInstance(ModMobEffects.APPETITE_LOSS.get(), duration));
+                livingEntity.addEffect(new MobEffectInstance(ModMobEffects.STINKY, duration));
+                livingEntity.addEffect(new MobEffectInstance(ModMobEffects.APPETITE_LOSS, duration));
             }
 
             if(entity.isOnFire()){
@@ -123,7 +131,7 @@ public class FermentedFishCauldronBlock extends AbstractCauldronBlock {
             double f = (double)blockPos.getZ() + 0.5;
 
             double[] color = {0.596078431372549f,0.3607843137254902f,0.2705882352941176f};
-            level.addParticle(ParticleTypes.AMBIENT_ENTITY_EFFECT,d, e,f,color[0],color[1],color[2]);
+            level.addParticle(ParticleTypes.CLOUD,d, e,f,color[0],color[1],color[2]);
         }
     }
 

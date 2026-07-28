@@ -52,20 +52,16 @@ dependencies {
 
     modImplementation  "net.firemuffin303:muffins_ovenapi-fabric:${rootProject.muffins_api_version}"
 
+    /*
     Collection<String> porting_lib_modules = rootProject.poritinglib_modules.split(',');
     for(x in porting_lib_modules){
         modImplementation(include("io.github.fabricators_of_create.Porting-Lib:${x}:${rootProject.portinglib_version}"))
     }
-
-
-    modImplementation ("eu.midnightdust:midnightlib:${project.midnightlib_version}")
-
+     */
     //Non Needed Dependency
     modImplementation("com.terraformersmc:modmenu:${project.modmenu_version}")
 
     modRuntimeOnly("maven.modrinth:appleskin:${project.apple_skin_version}")
-
-    modRuntimeOnly("maven.modrinth:cloth-config:2xQdCMyG")
 
     if (fot.toBoolean()){
         modRuntimeOnly("maven.modrinth:fish-of-thieves:hI4gvof3")
@@ -79,15 +75,15 @@ dependencies {
     if(expanded_delight.toBoolean()){
         modLocalRuntime("maven.modrinth:expanded-delight:4KEfJPHI")
     }
-    modLocalRuntime("maven.modrinth:brewin-and-chewin-fabric:KPe7wpZQ")
-    modCompileOnly("maven.modrinth:tough-as-nails:VaFrDMPi")
-    modCompileOnly("maven.modrinth:glitchcore:25HLOiOl")
+    //modLocalRuntime("maven.modrinth:brewin-and-chewin-fabric:KPe7wpZQ")
+    modCompileOnly("maven.modrinth:tough-as-nails:OunEN33z")
+    modCompileOnly("maven.modrinth:glitchcore:2zGz6n4Q")
 
-    modCompileOnly("maven.modrinth:fish-of-thieves:hI4gvof3")
+    modCompileOnly("maven.modrinth:fish-of-thieves:4.0.1-fabric")
     modCompileOnlyApi("mezz.jei:jei-${minecraft_version}-fabric-api:${project.jei_version}")
     modRuntimeOnly("mezz.jei:jei-${minecraft_version}-fabric:${project.jei_version}")
 
-    modCompileOnly "me.shedaniel:RoughlyEnoughItems-api-fabric:12.1.785"
+    modCompileOnly "me.shedaniel:RoughlyEnoughItems-api-fabric:16.0.799"
     //modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:12.1.785"
 
     //modCompileOnly "dev.emi:emi-fabric:${emi_version}:api"

@@ -10,6 +10,7 @@ import net.firemuffin303.thaidelight.common.item.DragonflyBottleItem;
 import net.firemuffin303.thaidelight.common.item.DyeableItem;
 import net.firemuffin303.thaidelight.common.item.SackItem;
 import net.firemuffin303.thaidelight.common.item.vegetations.papaya.PapayaFlowerItem;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -281,7 +282,7 @@ public class ModItems {
     public static final Supplier<Item> BUTTERFLY_PEA_TEA = registerFlatItem("butterfly_pea_tea", createButterflyPeaTeaItem());
 
     public static final Supplier<Item> KHANOM_CHAN = registerFlatItem("khanom_chan",() -> new DyeableItem(new Item.Properties().food(ModFoods.KHANOM_CHAN)));
-    public static final Supplier<Item> COCONUT_MILK_ICE_CREAM = register("coconut_milk_ice_cream",() -> new DyeableItem(bowlFoodItem(ModFoods.COCONUT_MILK_ICE_CREAM)));
+    public static final Supplier<Item> COCONUT_MILK_ICE_CREAM = register("coconut_milk_ice_cream",() -> new Item(bowlFoodItem(ModFoods.COCONUT_MILK_ICE_CREAM)));
 
     public static final Supplier<Item> BANANA_IN_COCONUT_MILK = registerFlatItem("banana_in_coconut_milk",() -> new Item(bowlFoodItem(ModFoods.BANANA_IN_COCONUT_MILK)));
 

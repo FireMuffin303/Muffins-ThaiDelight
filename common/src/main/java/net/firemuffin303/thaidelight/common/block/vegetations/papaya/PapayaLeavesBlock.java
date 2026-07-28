@@ -1,5 +1,6 @@
 package net.firemuffin303.thaidelight.common.block.vegetations.papaya;
 
+import com.mojang.serialization.MapCodec;
 import net.firemuffin303.thaidelight.common.block.ModBlockStateProperties;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.minecraft.core.BlockPos;
@@ -27,12 +28,19 @@ public class PapayaLeavesBlock extends BushBlock implements SimpleWaterloggedBlo
     private static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static final DirectionProperty PAPAYA_LEAVES_FACING = ModBlockStateProperties.PAPAYA_LEAVES_FACING;
 
+    public static final MapCodec<PapayaLeavesBlock> CODEC = simpleCodec(PapayaLeavesBlock::new);
+
     public PapayaLeavesBlock(Properties properties) {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(WATERLOGGED,false)
                 .setValue(PAPAYA_LEAVES_FACING,Direction.UP)
         );
+    }
+
+    @Override
+    protected MapCodec<? extends BushBlock> codec() {
+        return CODEC;
     }
 
     @Override
@@ -104,7 +112,7 @@ public class PapayaLeavesBlock extends BushBlock implements SimpleWaterloggedBlo
     }
 
     @Override
-    public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState, boolean isClient) {
+    public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState) {
         Direction direction = blockState.getValue(PapayaLeavesBlock.PAPAYA_LEAVES_FACING);
         return levelReader.getBlockState(blockPos.relative(direction)).is(Blocks.AIR);
     }

@@ -1,5 +1,7 @@
 package net.firemuffin303.thaidelight.common.block.vegetations.durian;
 
+import com.mojang.serialization.MapCodec;
+import net.firemuffin303.thaidelight.common.block.vegetations.lime.LimeSaplingBlock;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.firemuffin303.thaidelight.common.registry.ModMobEffects;
 import net.minecraft.core.BlockPos;
@@ -8,6 +10,8 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.item.component.SuspiciousStewEffects;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -29,12 +33,16 @@ public class DurianFlowerBlock extends Block implements SimpleWaterloggedBlock, 
     public static final BooleanProperty HANGING = BlockStateProperties.HANGING;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
+    private final SuspiciousStewEffects suspiciousStewEffects;
+
     public DurianFlowerBlock(Properties properties) {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(HANGING,false)
                 .setValue(WATERLOGGED,false)
         );
+
+        this.suspiciousStewEffects = FlowerBlock.makeEffectList(ModMobEffects.STINKY,11);
     }
 
     @Override
@@ -104,7 +112,7 @@ public class DurianFlowerBlock extends Block implements SimpleWaterloggedBlock, 
 
     // ------------- Bone meal -----------
     @Override
-    public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState, boolean bl) {
+    public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState) {
         return isHanging(blockState) && levelReader.getBlockState(blockPos.above()).is(ModBlocks.DURIAN_LEAVES.get());
     }
 
@@ -119,12 +127,7 @@ public class DurianFlowerBlock extends Block implements SimpleWaterloggedBlock, 
     }
 
     @Override
-    public MobEffect getSuspiciousEffect() {
-        return ModMobEffects.STINKY.get();
-    }
-
-    @Override
-    public int getEffectDuration() {
-        return 11*20;
+    public SuspiciousStewEffects getSuspiciousEffects() {
+        return this.suspiciousStewEffects;
     }
 }

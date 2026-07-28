@@ -1,5 +1,6 @@
 package net.firemuffin303.thaidelight.common.block.vegetations.durian;
 
+import com.mojang.serialization.MapCodec;
 import net.firemuffin303.muffinsmcapi.api.extension.Stackable;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.minecraft.core.BlockPos;
@@ -28,6 +29,7 @@ import org.jetbrains.annotations.Nullable;
 public class SmallDurianBlock extends HorizontalDirectionalBlock implements SimpleWaterloggedBlock, Stackable {
     public static IntegerProperty STACKS = IntegerProperty.create("durians",1,3);
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+    public static final MapCodec<SmallDurianBlock> CODEC = simpleCodec(SmallDurianBlock::new);
 
     public SmallDurianBlock(Properties properties) {
         super(properties);
@@ -39,7 +41,12 @@ public class SmallDurianBlock extends HorizontalDirectionalBlock implements Simp
     }
 
     @Override
-    public InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
+    protected MapCodec<? extends HorizontalDirectionalBlock> codec() {
+        return CODEC;
+    }
+
+    @Override
+    protected InteractionResult useWithoutItem(BlockState blockState, Level level, BlockPos blockPos, Player player, BlockHitResult blockHitResult) {
         if(level.isClientSide){
             if(takeItem(level, blockPos, blockState, player, interactionHand).consumesAction()){
                 return InteractionResult.SUCCESS;

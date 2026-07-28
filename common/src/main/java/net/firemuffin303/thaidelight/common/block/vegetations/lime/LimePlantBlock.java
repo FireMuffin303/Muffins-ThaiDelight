@@ -5,6 +5,8 @@ import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.firemuffin303.thaidelight.common.registry.ModLootTables;
 import net.firemuffin303.thaidelight.util.PlatformUtil;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -12,6 +14,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -59,35 +62,46 @@ public class LimePlantBlock extends DoublePlantBlock implements BonemealableBloc
     }
 
     @Override
-    public ItemStack getCloneItemStack(BlockGetter blockGetter, BlockPos blockPos, BlockState blockState) {
+    public ItemStack getCloneItemStack(LevelReader levelReader, BlockPos blockPos, BlockState blockState) {
         return new ItemStack(ModItems.LIME_SAPLING.get());
     }
 
     @Override
-    public InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
+    protected InteractionResult useWithoutItem(BlockState blockState, Level level, BlockPos blockPos, Player player, BlockHitResult blockHitResult) {
+        BlockPos lowerPos = isLower(blockState) ? blockPos : blockPos.below();
+        if(!level.isClientSide){
+            if(blockState.getValue(AGE) >= MAX_AGE) {
+                drop(ModLootTables.LIME_HARVEST, (ServerLevel) level,player,ItemStack.EMPTY,blockState,lowerPos);
+                return InteractionResult.SUCCESS;
+            }
+        }
+
+        return super.useWithoutItem(blockState, level, blockPos, player, blockHitResult);
+    }
+
+    @Override
+    protected ItemInteractionResult useItemOn(ItemStack itemStack, BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
         if(!level.isClientSide){
             BlockPos lowerPos = isLower(blockState) ? blockPos : blockPos.below();
-            ItemStack handStack = player.getItemInHand(interactionHand);
-            InteractionResult result = InteractionResult.FAIL;
-
-            if (handStack.is(PlatformUtil.shearTag()) && blockState.getValue(AGE) >= 1) {
-                drop(ModLootTables.LIME_SHEARS, (ServerLevel) level, player, handStack, blockState, lowerPos);
-                result = InteractionResult.SUCCESS;
+            ItemInteractionResult result = ItemInteractionResult.FAIL;
+            if (itemStack.is(PlatformUtil.shearTag()) && blockState.getValue(AGE) >= 1) {
+                drop(ModLootTables.LIME_SHEARS, (ServerLevel) level, player, itemStack, blockState, lowerPos);
+                result = ItemInteractionResult.SUCCESS;
             }
 
             if(blockState.getValue(AGE) >= MAX_AGE) {
-                drop(ModLootTables.LIME_HARVEST, (ServerLevel) level,player,handStack,blockState,lowerPos);
-                result = InteractionResult.SUCCESS;
+                drop(ModLootTables.LIME_HARVEST, (ServerLevel) level,player,itemStack,blockState,lowerPos);
+                result = ItemInteractionResult.SUCCESS;
             }
 
             return result;
         }
 
-        return super.use(blockState, level, blockPos, player, interactionHand, blockHitResult);
+        return super.useItemOn(itemStack, blockState, level, blockPos, player, interactionHand, blockHitResult);
     }
 
     private void drop(ResourceLocation resourceLocation, ServerLevel serverLevel, Player player, ItemStack itemStack, BlockState blockState, BlockPos blockPos){
-        LootTable lootTable = serverLevel.getServer().getLootData().getLootTable(resourceLocation);
+        LootTable lootTable = serverLevel.getServer().reloadableRegistries().getLootTable(ResourceKey.create(Registries.LOOT_TABLE, resourceLocation));
         LootParams params = new LootParams.Builder(serverLevel)
                 .withParameter(LootContextParams.BLOCK_STATE,blockState)
                 .withParameter(LootContextParams.ORIGIN,blockPos.getCenter())
@@ -182,7 +196,7 @@ public class LimePlantBlock extends DoublePlantBlock implements BonemealableBloc
     }
 
     @Override
-    public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState, boolean bl) {
+    public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState) {
         return blockState.getValue(AGE) < MAX_AGE;
     }
 

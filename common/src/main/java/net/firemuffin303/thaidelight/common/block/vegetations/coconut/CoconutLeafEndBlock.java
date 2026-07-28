@@ -100,7 +100,7 @@ public class CoconutLeafEndBlock extends Block implements SimpleWaterloggedBlock
     }
 
     @Override
-    public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState, boolean bl) {
+    public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState) {
         BlockState blockState2 = levelReader.getBlockState(blockPos.above());
         return canReplace(blockState2);
     }

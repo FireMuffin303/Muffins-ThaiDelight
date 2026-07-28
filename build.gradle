@@ -31,6 +31,11 @@ subprojects {
          */
 
         maven {
+            name = 'NeoForged'
+            url = 'https://maven.neoforged.net/releases'
+        }
+
+        maven {
             // location of the maven that hosts JEI files before January 2023
             name = "Progwml6's maven"
             url = "https://dvs1.progwml6.com/files/maven/"
@@ -55,7 +60,7 @@ subprojects {
 
         maven {
             name = 'TerraformersMC'
-            url = 'https://maven.terraformersmc.com/'
+            url = "https://maven.gnomecraft.net/repository/maven-public/"
         }
 
         // Refabricated REPO -------------------

@@ -1,5 +1,6 @@
 package net.firemuffin303.thaidelight.common.block.vegetations.papaya;
 
+import com.mojang.serialization.MapCodec;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -9,11 +10,13 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.component.SuspiciousStewEffects;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -38,6 +41,9 @@ public class PapayaFlowerBlock extends HorizontalDirectionalBlock implements Sim
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
     private static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
+    public static final MapCodec<PapayaFlowerBlock> CODEC = simpleCodec(PapayaFlowerBlock::new);
+    private final SuspiciousStewEffects suspeciousEffect;
+
     public PapayaFlowerBlock(Properties properties) {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any()
@@ -47,17 +53,23 @@ public class PapayaFlowerBlock extends HorizontalDirectionalBlock implements Sim
                 .setValue(HANGING,false)
                 .setValue(LIT,false)
         );
+        this.suspeciousEffect = FlowerBlock.makeEffectList(MobEffects.REGENERATION,3);
     }
 
     @Override
-    public InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
-        if(player.getItemInHand(interactionHand).is(Items.GLOW_INK_SAC) && !blockState.getValue(LIT)){
+    protected MapCodec<? extends HorizontalDirectionalBlock> codec() {
+        return CODEC;
+    }
+
+    @Override
+    protected ItemInteractionResult useItemOn(ItemStack itemStack, BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
+        if(itemStack.is(Items.GLOW_INK_SAC) && !blockState.getValue(LIT)){
             level.setBlock(blockPos,blockState.setValue(LIT,true),2);
             level.playSound(null, blockPos, SoundEvents.GLOW_INK_SAC_USE, SoundSource.BLOCKS, 1.0F, 1.0F);
-            return InteractionResult.SUCCESS;
+            return ItemInteractionResult.SUCCESS;
         }
 
-        return super.use(blockState, level, blockPos, player, interactionHand, blockHitResult);
+        return super.useItemOn(itemStack, blockState, level, blockPos, player, interactionHand, blockHitResult);
     }
 
     @Override
@@ -129,7 +141,7 @@ public class PapayaFlowerBlock extends HorizontalDirectionalBlock implements Sim
     }
 
     @Override
-    public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState, boolean bl) {
+    public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState) {
         return true;
     }
 
@@ -149,12 +161,7 @@ public class PapayaFlowerBlock extends HorizontalDirectionalBlock implements Sim
     }
 
     @Override
-    public MobEffect getSuspiciousEffect() {
-        return MobEffects.REGENERATION;
-    }
-
-    @Override
-    public int getEffectDuration() {
-        return 3*20;
+    public SuspiciousStewEffects getSuspiciousEffects() {
+        return this.suspeciousEffect;
     }
 }

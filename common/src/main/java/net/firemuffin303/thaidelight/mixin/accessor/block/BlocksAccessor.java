@@ -15,17 +15,17 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 public interface BlocksAccessor {
 
     @Invoker("flowerPot")
-    static FlowerPotBlock flowerPot(Block block, FeatureFlag... featureFlags){
+    static Block flowerPot(Block block){
         throw new AssertionError();
     }
 
     @Invoker("log")
-    static RotatedPillarBlock log(MapColor mapColor, MapColor mapColor2){
+    static Block log(MapColor mapColor, MapColor mapColor2){
         throw new AssertionError();
     }
 
     @Invoker("woodenButton")
-    static ButtonBlock woodenButton(BlockSetType blockSetType, FeatureFlag... featureFlags){
+    static Block woodenButton(BlockSetType blockSetType){
         throw new AssertionError();
     }
 

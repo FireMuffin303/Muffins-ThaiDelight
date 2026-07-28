@@ -1,12 +1,9 @@
 package net.firemuffin303.thaidelight.common.registry.forge;
 
 import net.firemuffin303.muffinsmcapi.api.BoatRegistry;
-import net.firemuffin303.muffinsmcapi.forge.api.registry.ForgeOvenRegistry;
-import net.firemuffin303.muffinsmcapi.forge.common.ModBoatVariants;
 import net.firemuffin303.muffinsmcapi.impl.entity.boat.OvenBoatVariant;
 import net.firemuffin303.thaidelight.ThaiDelightCommon;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Supplier;
 

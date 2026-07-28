@@ -27,10 +27,13 @@ public class ForgeBuddingPepperBlock extends BuddingBushBlock implements Bonemea
         this.registerDefaultState(this.stateDefinition.any().setValue(PEPPER_AGE,0));
     }
 
+    /*
     @Override
     public BlockState getPlant(BlockGetter world, BlockPos pos) {
         return ModBlocks.BUDDING_PEPPER_CROP.get().defaultBlockState();
     }
+
+     */
 
     @Override
     public boolean mayPlaceOn(BlockState pState, BlockGetter pLevel, BlockPos pPos) {
@@ -71,7 +74,7 @@ public class ForgeBuddingPepperBlock extends BuddingBushBlock implements Bonemea
     }
 
     @Override
-    public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState, boolean bl) {
+    public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState) {
         return true;
     }
 

@@ -4,30 +4,13 @@ plugins {
 
 architectury {
     platformSetupLoomIde()
-    forge()
+    neoForge(){
+        platformPackage = "forge"
+    }
 }
 
 loom {
     accessWidenerPath = project(":common").loom.accessWidenerPath
-
-    forge {
-        convertAccessWideners = true
-        extraAccessWideners.add loom.accessWidenerPath.get().asFile.name
-
-        mixinConfig "muffins_thaidelight.mixins.json"
-        mixinConfig "muffins_thaidelight.forge.mixins.json"
-
-        dataGen {
-            mod("muffins_thaidelight")
-        }
-    }
-
-    sourceSets.main {
-        resources {
-            srcDirs += "src/generated/resources/"
-        }
-    }
-
 }
 
 configurations {
@@ -35,24 +18,19 @@ configurations {
     shadowCommon // Don't use shadow from the shadow plugin since it *excludes* files.
     compileClasspath.extendsFrom common
     runtimeClasspath.extendsFrom common
-    developmentForge.extendsFrom common
+    developmentNeoForge.extendsFrom common
 }
 
 dependencies {
-    forge "net.minecraftforge:forge:${rootProject.minecraft_version}-${rootProject.forge_version}"
+    neoForge "net.neoforged:neoforge:$rootProject.neoforge_version"
 
     modImplementation("maven.modrinth:farmers-delight:${rootProject.farmersdelight_forge_version}")
-    modImplementation("maven.modrinth:mixinbooster:rOaAYvPZ")
+    modImplementation "net.firemuffin303:muffins_ovenapi-neoforge:${rootProject.muffins_api_version}"
 
-    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.5.3"))
-    implementation(include("io.github.llamalad7:mixinextras-forge:0.5.3"))
-
-    modImplementation "net.firemuffin303:muffins_ovenapi-forge:${rootProject.muffins_api_version}"
-
-    modApi("me.shedaniel.cloth:cloth-config-forge:$rootProject.cloth_config_version")
+    modApi("me.shedaniel.cloth:cloth-config-neoforge:$rootProject.cloth_config_version")
 
     common(project(path: ':common', configuration: 'namedElements')) { transitive false }
-    shadowCommon project(path: ':common', configuration: 'transformProductionForge')
+    shadowCommon project(path: ':common', configuration: 'transformProductionNeoForge')
 }
 
 processResources {

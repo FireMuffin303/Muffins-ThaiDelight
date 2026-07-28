@@ -55,7 +55,7 @@ public class BuddingCoconutLeafBlock extends Block implements SimpleWaterloggedB
     }
 
     @Override
-    public InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
+    protected InteractionResult useWithoutItem(BlockState blockState, Level level, BlockPos blockPos, Player player, BlockHitResult blockHitResult) {
         if(!level.isClientSide){
             if(blockState.getValue(COCONUT)){
                 level.playSound(null,blockPos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS);
@@ -68,8 +68,7 @@ public class BuddingCoconutLeafBlock extends Block implements SimpleWaterloggedB
                 return InteractionResult.SUCCESS;
             }
         }
-
-        return super.use(blockState, level, blockPos, player, interactionHand, blockHitResult);
+        return super.useWithoutItem(blockState, level, blockPos, player, blockHitResult);
     }
 
     @Override
@@ -170,7 +169,7 @@ public class BuddingCoconutLeafBlock extends Block implements SimpleWaterloggedB
 
 
     @Override
-    public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState, boolean bl) {
+    public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState) {
         return !blockState.getValue(COCONUT);
     }
 

@@ -1,9 +1,8 @@
 package net.firemuffin303.thaidelight.common.registry;
 
 import net.firemuffin303.thaidelight.ThaiDelightCommon;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.damagesource.DamageType;
 
@@ -12,7 +11,7 @@ public class ModDamageTypes {
 
     public static void init(){}
 
-    public static void bootstrap(BootstapContext<DamageType> damageTypeBootstapContext) {
+    public static void bootstrap(BootstrapContext<DamageType> damageTypeBootstapContext) {
         damageTypeBootstapContext.register(FALLING_DURIAN,new DamageType("durian",0.1f));
     }
 

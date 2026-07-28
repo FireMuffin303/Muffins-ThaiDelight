@@ -1,5 +1,6 @@
 package net.firemuffin303.thaidelight.common.block.vegetations.papaya;
 
+import com.mojang.serialization.MapCodec;
 import net.firemuffin303.muffinsmcapi.api.CommonEvents;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.minecraft.core.BlockPos;
@@ -19,11 +20,17 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 public class BuddingPapayaFlowerBlock extends HorizontalDirectionalBlock implements BonemealableBlock {
+    public static final MapCodec<BuddingPapayaFlowerBlock> CODEC = simpleCodec(BuddingPapayaFlowerBlock::new);
     public BuddingPapayaFlowerBlock(Properties properties) {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(FACING, Direction.NORTH)
         );
+    }
+
+    @Override
+    protected MapCodec<? extends HorizontalDirectionalBlock> codec() {
+        return CODEC;
     }
 
     @Override
@@ -75,7 +82,7 @@ public class BuddingPapayaFlowerBlock extends HorizontalDirectionalBlock impleme
     }
 
     @Override
-    public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState, boolean bl) {
+    public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState) {
         return true;
     }
 

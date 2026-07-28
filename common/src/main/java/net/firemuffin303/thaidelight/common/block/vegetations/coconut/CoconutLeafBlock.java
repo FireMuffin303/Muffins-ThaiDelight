@@ -120,7 +120,7 @@ public class CoconutLeafBlock extends Block implements SimpleWaterloggedBlock,Bo
     }
 
     @Override
-    public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState, boolean bl) {
+    public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState) {
         Direction direction = blockState.getValue(FACING);
         if(!blockState.getValue(END)){
             Optional<BlockPos> optional = ModUtils.getTopConnectedBlock(

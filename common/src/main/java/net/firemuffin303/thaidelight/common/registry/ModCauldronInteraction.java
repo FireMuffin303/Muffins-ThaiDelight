@@ -8,6 +8,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUtils;
@@ -21,9 +22,9 @@ import java.util.Map;
 import static net.minecraft.core.cauldron.CauldronInteraction.*;
 
 public class ModCauldronInteraction {
-    static Map<Item, CauldronInteraction> FERMENTED_FISH = CauldronInteraction.newInteractionMap();
-    public static Map<Item, CauldronInteraction> COCONUT = CauldronInteraction.newInteractionMap();
-    public static Map<Item, CauldronInteraction> COCONUT_MILK = CauldronInteraction.newInteractionMap();
+    static InteractionMap FERMENTED_FISH = CauldronInteraction.newInteractionMap("fermented_fish");
+    public static InteractionMap COCONUT = CauldronInteraction.newInteractionMap("coconut");
+    public static InteractionMap COCONUT_MILK = CauldronInteraction.newInteractionMap("coconut_milk");
 
     public static CauldronInteraction MAKE_FERMENTED_FISH = ((blockState, level, blockPos, player, interactionHand, itemStack) -> {
         if(!level.isClientSide) {
@@ -36,7 +37,7 @@ public class ModCauldronInteraction {
             level.playSound(null,blockPos, SoundEvents.BREWING_STAND_BREW, SoundSource.BLOCKS,1.0f,1.0f);
             level.gameEvent(null, GameEvent.FLUID_PLACE,blockPos);
         }
-        return InteractionResult.sidedSuccess(level.isClientSide);
+        return ItemInteractionResult.sidedSuccess(level.isClientSide);
     });
 
     public static CauldronInteraction SET_COCONUT_CAULDRON = (blockState, level, blockPos, player, interactionHand, itemStack) -> {
@@ -51,7 +52,7 @@ public class ModCauldronInteraction {
         level.setBlockAndUpdate(blockPos,ModBlocks.COCONUT_CAULDRON.get().defaultBlockState());
         level.playSound(null,blockPos,SoundEvents.COMPOSTER_FILL,SoundSource.BLOCKS,0.5f,1.0f);
         level.gameEvent(null,GameEvent.BLOCK_CHANGE,blockPos);
-        return InteractionResult.sidedSuccess(level.isClientSide);
+        return ItemInteractionResult.sidedSuccess(level.isClientSide);
     };
 
     public static CauldronInteraction INSERT_COCONUT = (blockState, level, blockPos, player, interactionHand, itemStack) -> {
@@ -70,10 +71,10 @@ public class ModCauldronInteraction {
             level.playSound(null,blockPos,SoundEvents.COMPOSTER_FILL,SoundSource.BLOCKS,0.8f,1.0f);
             level.gameEvent(null,GameEvent.BLOCK_CHANGE,blockPos);
 
-            return InteractionResult.sidedSuccess(level.isClientSide);
+            return ItemInteractionResult.sidedSuccess(level.isClientSide);
         }
 
-        return InteractionResult.PASS;
+        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     };
 
     public static CauldronInteraction MAKE_COCONUT_MILK = ((blockState, level, blockPos, player, interactionHand, itemStack) ->{
@@ -82,7 +83,7 @@ public class ModCauldronInteraction {
                     ModBlocks.COCONUT_MILK_CAULDRON.get().defaultBlockState().setValue(CoconutMilkCauldron.LEVEL, 3),
                     SoundEvents.BUCKET_EMPTY);
         }
-        return InteractionResult.PASS;
+        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     });
 
 
@@ -94,7 +95,7 @@ public class ModCauldronInteraction {
 
             }
         }
-        return InteractionResult.sidedSuccess(level.isClientSide);
+        return ItemInteractionResult.sidedSuccess(level.isClientSide);
     };
 
     public static void init(){
@@ -114,10 +115,10 @@ public class ModCauldronInteraction {
                     level.gameEvent(null,GameEvent.FLUID_PICKUP,blockPos);
 
                 }
-                return InteractionResult.sidedSuccess(level.isClientSide);
+                return ItemInteractionResult.sidedSuccess(level.isClientSide);
             }
 
-            return InteractionResult.PASS;
+            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         });
 
         COCONUT.put(Items.BOWL,(blockState, level, blockPos, player, interactionHand, itemStack) -> {
@@ -130,7 +131,7 @@ public class ModCauldronInteraction {
                 level.playSound(null,blockPos,SoundEvents.COMPOSTER_FILL,SoundSource.BLOCKS,1.0f,1.0f);
                 level.gameEvent(null,GameEvent.FLUID_PICKUP,blockPos);
             }
-            return InteractionResult.sidedSuccess(level.isClientSide);
+            return ItemInteractionResult.sidedSuccess(level.isClientSide);
         });
         COCONUT.put(Items.WATER_BUCKET,MAKE_COCONUT_MILK);
 
@@ -145,7 +146,7 @@ public class ModCauldronInteraction {
                 level.playSound(null,blockPos,SoundEvents.BOTTLE_FILL,SoundSource.BLOCKS,1.0f,1.0f);
                 level.gameEvent(null,GameEvent.FLUID_PICKUP,blockPos);
             }
-            return InteractionResult.sidedSuccess(level.isClientSide);
+            return ItemInteractionResult.sidedSuccess(level.isClientSide);
         });
 
     }

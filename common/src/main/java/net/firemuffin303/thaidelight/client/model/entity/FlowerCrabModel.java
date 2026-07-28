@@ -23,7 +23,7 @@ public class FlowerCrabModel<T extends FlowerCrabEntity> extends HierarchicalMod
         this.body = body;
     }
 
-    public static final ModelLayerLocation LAYER = new ModelLayerLocation(new ResourceLocation(ThaiDelightCommon.MOD_ID,"crab"),"main");
+    public static final ModelLayerLocation LAYER = new ModelLayerLocation(ThaiDelightCommon.modid("crab"),"main");
 
 
     public static LayerDefinition createBodyLayer() {

@@ -4,6 +4,7 @@ import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.firemuffin303.thaidelight.common.registry.ModMobEffects;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -18,7 +19,6 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
-import net.minecraft.world.item.enchantment.ThornsEnchantment;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -50,7 +50,7 @@ public class ModUtils {
     }
 
     public static int calculateEatingWithAnorexiaEffect(LivingEntity livingEntity, int original){
-        float amp = ( Objects.requireNonNull(livingEntity.getEffect(ModMobEffects.APPETITE_LOSS.get())).getAmplifier() + 1);
+        float amp = ( Objects.requireNonNull(livingEntity.getEffect(ModMobEffects.APPETITE_LOSS)).getAmplifier() + 1);
         float rate = 1.2f;
         return (int) ((float)original * (rate + (rate * (0.6 * amp))  ) );
     }
@@ -61,6 +61,7 @@ public class ModUtils {
 
     public static void durianHelmetThorns(LivingEntity victim, Entity attacker){
         ItemStack helmet = victim.getItemBySlot(EquipmentSlot.HEAD);
+
         if(helmet.is(ModItems.DURIAN_HELMET.get()) && EnchantmentHelper.getEnchantmentLevel(Enchantments.THORNS,victim) <= 0){
             RandomSource randomSource = victim.getRandom();
             if(ThornsEnchantment.shouldHit(1,randomSource)){
@@ -86,11 +87,11 @@ public class ModUtils {
 
 
         int i = 1200;
-        if(itemStack.getItem().isEdible()){
-            FoodProperties foodProperties = itemStack.getItem().getFoodProperties();
+        if(itemStack.has(DataComponents.FOOD)){
+            FoodProperties foodProperties = itemStack.get(DataComponents.FOOD);
             if(foodProperties != null){
-                float nutrition = foodProperties.getNutrition();
-                float modifier = foodProperties.getSaturationModifier();
+                float nutrition = foodProperties.nutrition();
+                float modifier = foodProperties.saturation();
                 i = (int)Math.max( ((nutrition + (nutrition * modifier) ) / 6f) * (60f * 20f), 1200) ;
             }
         }
@@ -100,11 +101,11 @@ public class ModUtils {
 
     public static void onEatDurian(ItemStack itemStack,LivingEntity livingEntity){
         int i = 2400;
-        if(itemStack.getItem().isEdible()){
-            FoodProperties foodProperties = itemStack.getItem().getFoodProperties();
+        if(itemStack.has(DataComponents.FOOD)){
+            FoodProperties foodProperties = itemStack.get(DataComponents.FOOD);
             if(foodProperties != null){
-                float nutrition = foodProperties.getNutrition();
-                float modifier = foodProperties.getSaturationModifier();
+                float nutrition = foodProperties.nutrition();
+                float modifier = foodProperties.saturation();
                 i = (int)Math.max( ((nutrition + (nutrition * modifier) ) / 4f) * (60f * 20f), 2400f) ;
             }
         }

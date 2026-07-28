@@ -1,9 +1,12 @@
 package net.firemuffin303.thaidelight.common.block;
 
+import com.mojang.serialization.MapCodec;
 import net.firemuffin303.thaidelight.common.block.blockentity.SackBlockEntity;
+import net.firemuffin303.thaidelight.common.block.stations.MortarBlock;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.resources.ResourceLocation;
@@ -11,6 +14,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.piglin.PiglinAi;
 import net.minecraft.world.entity.player.Player;
@@ -18,6 +22,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -47,7 +52,10 @@ public class SackBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
     public static final DirectionProperty HORIZONTAL_FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static final BooleanProperty FILLED = BooleanProperty.create("filled");
-    public static final ResourceLocation CONTENTS = new ResourceLocation("contents");
+    public static final ResourceLocation CONTENTS = ResourceLocation.parse("contents");
+
+    public static final MapCodec<SackBlock> CODEC = simpleCodec(SackBlock::new);
+
     public SackBlock(Properties properties) {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any()
@@ -58,13 +66,27 @@ public class SackBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
     }
 
     @Override
-    public InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
-        BlockEntity block = level.getBlockEntity(blockPos);
-        if(block instanceof SackBlockEntity sackBlockEntity){
-            ItemStack itemStack = player.getItemInHand(interactionHand);
-            if(itemStack.isEmpty()){
-                this.removeItem(level,player,blockPos,sackBlockEntity);
-            }else if(sackBlockEntity.canInsertItem(itemStack)){
+    protected MapCodec<? extends BaseEntityBlock> codec() {
+        return CODEC;
+    }
+
+    @Override
+    protected InteractionResult useWithoutItem(BlockState blockState, Level level, BlockPos blockPos, Player player, BlockHitResult blockHitResult) {
+        BlockEntity blockEntity = level.getBlockEntity(blockPos);
+        if(blockEntity instanceof SackBlockEntity sackBlockEntity){
+            if(this.removeItem(level,player,blockPos,sackBlockEntity)){
+                return InteractionResult.sidedSuccess(level.isClientSide);
+            }
+        }
+
+        return super.useWithoutItem(blockState, level, blockPos, player, blockHitResult);
+    }
+
+    @Override
+    protected ItemInteractionResult useItemOn(ItemStack itemStack, BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
+        BlockEntity blockEntity = level.getBlockEntity(blockPos);
+        if(blockEntity instanceof SackBlockEntity sackBlockEntity){
+            if(sackBlockEntity.canInsertItem(itemStack)){
                 if(!level.isClientSide){
                     ItemStack excessItem = sackBlockEntity.addItem(itemStack.copy());
                     if(!player.getAbilities().instabuild){
@@ -72,18 +94,20 @@ public class SackBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
                     }
                     this.playCatchFallingBlockEffect(level, blockPos);
                 }
+                return ItemInteractionResult.sidedSuccess(level.isClientSide);
             }
         }
-        return InteractionResult.sidedSuccess(level.isClientSide);
+
+        return super.useItemOn(itemStack, blockState, level, blockPos, player, interactionHand, blockHitResult);
     }
 
-    public void removeItem(Level level,Player player,BlockPos blockPos,SackBlockEntity sackBlockEntity){
+    public boolean removeItem(Level level,Player player,BlockPos blockPos,SackBlockEntity sackBlockEntity){
         if(level.isClientSide){
-            return;
+            return false;
         }
         ItemStack itemStack = sackBlockEntity.popItem();
         if(itemStack.isEmpty()){
-            return;
+            return false;
         }
         if(!player.getInventory().add(itemStack)){
             player.drop(itemStack,false);
@@ -91,6 +115,7 @@ public class SackBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
         this.playCatchFallingBlockEffect(level, blockPos);
         level.gameEvent(player, GameEvent.BLOCK_CHANGE,blockPos);
         PiglinAi.angerNearbyPiglins(player,true);
+        return true;
     }
 
     @Override
@@ -99,21 +124,18 @@ public class SackBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
     }
 
     @Override
-    public void playerWillDestroy(Level level, BlockPos blockPos, BlockState blockState, Player player) {
+    public BlockState playerWillDestroy(Level level, BlockPos blockPos, BlockState blockState, Player player) {
         BlockEntity blockEntity = level.getBlockEntity(blockPos);
         if (blockEntity instanceof SackBlockEntity sackBlockEntity) {
             if (!level.isClientSide && player.isCreative() && !sackBlockEntity.isEmpty()) {
                 ItemStack itemStack = new ItemStack(ModItems.SACK.get());
-                blockEntity.saveToItem(itemStack);
-                if (sackBlockEntity.hasCustomName()) {
-                    itemStack.setHoverName(sackBlockEntity.getCustomName());
-                }
+                itemStack.applyComponents(blockEntity.collectComponents());
                 ItemEntity itemEntity = new ItemEntity(level, (double)blockPos.getX() + 0.5, (double)blockPos.getY() + 0.5, (double)blockPos.getZ() + 0.5, itemStack);
                 itemEntity.setDefaultPickUpDelay();
                 level.addFreshEntity(itemEntity);
             }
         }
-        super.playerWillDestroy(level, blockPos, blockState, player);
+        return super.playerWillDestroy(level, blockPos, blockState, player);
     }
 
     public List<ItemStack> getDrops(BlockState blockState, LootParams.Builder builder) {
@@ -148,17 +170,13 @@ public class SackBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
         LevelAccessor levelAccessor = blockPlaceContext.getLevel();
         BlockPos blockPos = blockPlaceContext.getClickedPos();
 
-        CompoundTag compoundTag = BlockItem.getBlockEntityData(blockPlaceContext.getItemInHand());
+        ItemContainerContents itemContainerContents = blockPlaceContext.getItemInHand().get(DataComponents.CONTAINER);
         int amount = 0;
 
-        if(compoundTag != null){
-            ListTag itemListTag = compoundTag.getList("Items",10);
-            if(!itemListTag.isEmpty()){
-                for(int i = 0; i < itemListTag.size(); i++){
-                    ItemStack itemStack = ItemStack.of(itemListTag.getCompound(i));
-                    if(itemStack.getCount() >= itemStack.getMaxStackSize()){
-                        amount++;
-                    }
+        if(itemContainerContents != null){
+            for(ItemStack itemStack : itemContainerContents.stream().toList()){
+                if(itemStack.getCount() >= itemStack.getMaxStackSize()){
+                    amount++;
                 }
             }
         }

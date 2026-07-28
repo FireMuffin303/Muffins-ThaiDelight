@@ -1,6 +1,8 @@
 package net.firemuffin303.thaidelight.common.block.vegetations.papaya;
 
+import com.mojang.serialization.MapCodec;
 import net.firemuffin303.thaidelight.common.block.ModBlockStateProperties;
+import net.firemuffin303.thaidelight.common.block.vegetations.durian.SmallDurianBlock;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.firemuffin303.thaidelight.common.registry.ModTags;
 import net.minecraft.BlockUtil;
@@ -31,6 +33,8 @@ public class PapayaLeavesStemBlock extends BushBlock implements SimpleWaterlogge
     public static final DirectionProperty PAPAYA_LEAVES_FACING = ModBlockStateProperties.PAPAYA_LEAVES_FACING;
     private static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
+    public static final MapCodec<PapayaLeavesStemBlock> CODEC = simpleCodec(PapayaLeavesStemBlock::new);
+
     protected static final VoxelShape Y_AXIS_AABB = Block.box(6, 0.0, 6, 10, 16.0, 10);
     protected static final VoxelShape Z_AXIS_AABB = Block.box(6, 6, 0.0, 10, 10, 16.0);
     protected static final VoxelShape X_AXIS_AABB = Block.box(0.0, 6, 6, 16.0, 10, 10);
@@ -41,6 +45,11 @@ public class PapayaLeavesStemBlock extends BushBlock implements SimpleWaterlogge
                 .setValue(WATERLOGGED,false)
                 .setValue(PAPAYA_LEAVES_FACING,Direction.UP)
         );
+    }
+
+    @Override
+    protected MapCodec<? extends BushBlock> codec() {
+        return CODEC;
     }
 
     @Override
@@ -98,7 +107,7 @@ public class PapayaLeavesStemBlock extends BushBlock implements SimpleWaterlogge
     }
 
     @Override
-    public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState, boolean bl) {
+    public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState) {
         Direction direction = blockState.getValue(PAPAYA_LEAVES_FACING);
         Optional<BlockPos> optional = BlockUtil.getTopConnectedBlock(levelReader, blockPos, blockState.getBlock(), direction, ModBlocks.PAPAYA_LEAVES.get());
         if (optional.isEmpty()) {

@@ -7,12 +7,10 @@ import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.firemuffin303.thaidelight.ThaiDelightCommon;
 import net.firemuffin303.thaidelight.common.entity.ai.NearestMobStinkyTargetGoal;
-import net.firemuffin303.thaidelight.common.registry.ModEntityTypes;
-import net.firemuffin303.thaidelight.common.registry.ModItems;
-import net.firemuffin303.thaidelight.common.registry.ModMobEffects;
-import net.firemuffin303.thaidelight.common.registry.ModVillagerTrades;
+import net.firemuffin303.thaidelight.common.registry.*;
 import net.firemuffin303.thaidelight.common.registry.forge.*;
 import net.firemuffin303.thaidelight.config.ModConfig;
+import net.firemuffin303.thaidelight.forge.common.attachment.ModAttachments;
 import net.firemuffin303.thaidelight.forge.common.capabilities.DurianHeatProvider;
 import net.firemuffin303.thaidelight.forge.common.capabilities.IDurianHeat;
 import net.firemuffin303.thaidelight.forge.common.capabilities.ISpicy;
@@ -26,6 +24,8 @@ import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.EntityArgument;
+import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.*;
@@ -41,29 +41,32 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.trading.MerchantOffer;
-import net.minecraftforge.common.BasicItemListing;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
-import net.minecraftforge.event.AttachCapabilitiesEvent;
-import net.minecraftforge.event.RegisterCommandsEvent;
-import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
-import net.minecraftforge.event.entity.EntityJoinLevelEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.event.village.VillagerTradesEvent;
-import net.minecraftforge.event.village.WandererTradesEvent;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.network.PacketDistributor;
-import net.minecraftforge.registries.DeferredRegister;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.common.BasicItemListing;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.BlockEntityTypeAddBlocksEvent;
+import net.neoforged.neoforge.event.RegisterCommandsEvent;
+import net.neoforged.neoforge.event.brewing.RegisterBrewingRecipesEvent;
+import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
+import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
+import net.neoforged.neoforge.event.tick.PlayerTickEvent;
+import net.neoforged.neoforge.event.village.VillagerTradesEvent;
+import net.neoforged.neoforge.event.village.WandererTradesEvent;
+import net.neoforged.neoforge.network.PacketDistributor;
+import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
+import net.neoforged.neoforge.network.handling.IPayloadHandler;
+import net.neoforged.neoforge.network.registration.PayloadRegistrar;
+import net.neoforged.neoforge.registries.DeferredRegister;
+import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-@Mod.EventBusSubscriber(modid = ThaiDelightCommon.MOD_ID,bus = Mod.EventBusSubscriber.Bus.MOD)
 @Mod(ThaiDelightCommon.MOD_ID)
 public class ThaiDelightForge {
     private static final DeferredRegister<?>[] REGISTERS = {
@@ -75,54 +78,57 @@ public class ThaiDelightForge {
             ModItemsImpl.CREATIVE_TAB,
             ModItemsImpl.ITEMS,
             ModRecipesImpl.RECIPE_TYPE,
-            ModRecipesImpl.RECIPE_SERIALIZER
+            ModRecipesImpl.RECIPE_SERIALIZER,
+            ModAttachments.ATTACHMENT_TYPES
     };
 
 
 
-    public ThaiDelightForge(){
+    public ThaiDelightForge(IEventBus eventBus){
         AutoConfig.register(ModConfig.class, GsonConfigSerializer::new);
-        IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
         ThaiDelightCommon.init();
         Arrays.stream(REGISTERS).forEach(deferredRegister -> deferredRegister.register(eventBus));
 
-        MinecraftForge.EVENT_BUS.register(this);
-        MinecraftForge.EVENT_BUS.addGenericListener(Entity.class,this::attachCapability);
-        MinecraftForge.EVENT_BUS.addListener(this::onPlayerTick);
-        MinecraftForge.EVENT_BUS.addListener(this::onPlayerJoin);
-        MinecraftForge.EVENT_BUS.addListener(this::registerCommand);
-        MinecraftForge.EVENT_BUS.addListener(this::registerWanderingTraderOffers);
-        MinecraftForge.EVENT_BUS.addListener(this::registerVillagerTrade);
-        MinecraftForge.EVENT_BUS.addListener(this::registerGoalSelector);
-        eventBus.register(this);
+        NeoForge.EVENT_BUS.register(this);
+        NeoForge.EVENT_BUS.addListener(this::onPlayerTick);
+        NeoForge.EVENT_BUS.addListener(this::onPlayerJoin);
+        NeoForge.EVENT_BUS.addListener(this::registerCommand);
+        NeoForge.EVENT_BUS.addListener(this::registerWanderingTraderOffers);
+        NeoForge.EVENT_BUS.addListener(this::registerVillagerTrade);
+        NeoForge.EVENT_BUS.addListener(this::registerGoalSelector);
+        NeoForge.EVENT_BUS.addListener(this::registerBrewingRecipeEvent);
+
+        eventBus.addListener(this::commonSetup);
+        eventBus.addListener(this::registerEntityAttribute);
+        eventBus.addListener(this::registerPayloadEvent);
+        eventBus.addListener(this::addBlockEntityType);
 
     }
 
-    @SubscribeEvent
-    public static void commonSetup(FMLCommonSetupEvent event){
+    public void commonSetup(FMLCommonSetupEvent event){
         event.enqueueWork(() -> {
             ThaiDelightCommon.postInit();
             ThaiDelightPacketHandler.registerSpicyPacket();
-
-            PotionBrewingAccessor.addMix(Potions.AWKWARD, ModItems.FERMENTED_FISH.get(), ModMobEffects.STENCH_POTION.get());
-            PotionBrewingAccessor.addMix(ModMobEffects.STENCH_POTION.get(), Items.REDSTONE,ModMobEffects.LONG_STENCH_POTION.get());
-            PotionBrewingAccessor.addMix(ModMobEffects.STENCH_POTION.get(), Items.GLOWSTONE_DUST,ModMobEffects.STRONG_STENCH_POTION.get());
         });
     }
 
+    public void registerBrewingRecipeEvent(RegisterBrewingRecipesEvent event){
+        event.getBuilder().addMix(Potions.AWKWARD, ModItems.FERMENTED_FISH.get(), ModMobEffects.STENCH_POTION);
+        event.getBuilder().addMix(ModMobEffects.STENCH_POTION, Items.REDSTONE,ModMobEffects.LONG_STENCH_POTION);
+        event.getBuilder().addMix(ModMobEffects.STENCH_POTION, Items.GLOWSTONE_DUST,ModMobEffects.STRONG_STENCH_POTION);
+    }
 
 
-    @SubscribeEvent
-    public static void registerEntityAttribute(EntityAttributeCreationEvent event){
+    public void addBlockEntityType(BlockEntityTypeAddBlocksEvent event){
+        ModBlocks.CABINET.forEach(blockSupplier -> {
+            event.modify(ModBlockEntityTypes.CABINET.get(),blockSupplier.get());
+        });
+    }
+
+    public void registerEntityAttribute(EntityAttributeCreationEvent event){
         ModEntityTypes.registerAttribute((entity,attribute) -> {
             event.put(entity,attribute.build());
         });
-    }
-
-    @SubscribeEvent
-    public static void registerCapabilities(RegisterCapabilitiesEvent event){
-        event.register(ISpicy.class);
-        event.register(IDurianHeat.class);
     }
 
     public void registerGoalSelector(EntityJoinLevelEvent event){
@@ -178,32 +184,34 @@ public class ThaiDelightForge {
         }
     }
 
-    public void attachCapability(AttachCapabilitiesEvent<Entity> event){
-        if(event.getObject() instanceof LivingEntity){
-            event.addCapability(ThaiDelightCommon.modid("spicy"),new SpicyProvider());
-            event.addCapability(ThaiDelightCommon.modid("durian_heat"),new DurianHeatProvider());
-        }
-    }
-
-    public void onPlayerTick(TickEvent.PlayerTickEvent event){
-        Player player = event.player;
-        if(event.phase == TickEvent.Phase.END){
-            player.getCapability(SpicyProvider.SPICY_CAPABILITY).ifPresent(spicy -> spicy.tick(player));
-            player.getCapability(DurianHeatProvider.DURIAN_CAPABILITY).ifPresent(durian -> durian.tick(player));
-
-        }
+    public void onPlayerTick(PlayerTickEvent.Post event){
+        Player player = event.getEntity();
+        player.getCapability(SpicyProvider.SPICY_CAPABILITY).ifPresent(spicy -> spicy.tick(player));
+        player.getCapability(DurianHeatProvider.DURIAN_CAPABILITY).ifPresent(durian -> durian.tick(player));
     }
 
     public void onPlayerJoin(PlayerEvent.PlayerLoggedInEvent event){
         if(event.getEntity() instanceof  ServerPlayer serverPlayer){
-            serverPlayer.getCapability(DurianHeatProvider.DURIAN_CAPABILITY).ifPresent(durian -> {
-                ThaiDelightPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> serverPlayer),new DurianHeatPacket(durian.getTimer(),durian.isHeatUp()) );
-            });
-
-            serverPlayer.getCapability(SpicyProvider.SPICY_CAPABILITY).ifPresent(spicy -> {
-                ThaiDelightPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> serverPlayer),new SpicyPacket(spicy.getTimer()));
-            });
+            PacketDistributor.sendToPlayer(serverPlayer,new DurianHeatPacket());
+            PacketDistributor.sendToPlayer(serverPlayer,new SpicyPacket(serverPlayer.getData(ModAttachments.SPICY)));
         }
+    }
+
+    public void registerPayloadEvent(RegisterPayloadHandlersEvent event){
+        final PayloadRegistrar registrar = event.registrar("1");
+        registrar.playToClient(DurianHeatPacket.TYPE, DurianHeatPacket.STREAM_CODEC, new IPayloadHandler<DurianHeatPacket>() {
+            @Override
+            public void handle(DurianHeatPacket arg, IPayloadContext iPayloadContext) {
+
+            }
+        });
+
+        registrar.playToClient(SpicyPacket.TYPE, SpicyPacket.STREAM_CODEC, new IPayloadHandler<SpicyPacket>() {
+            @Override
+            public void handle(SpicyPacket arg, IPayloadContext iPayloadContext) {
+
+            }
+        });
     }
 
     public void registerCommand(RegisterCommandsEvent event){
@@ -220,7 +228,7 @@ public class ThaiDelightForge {
                                         .then(Commands.argument("amount", IntegerArgumentType.integer(1))
                                                 .executes(commandContext -> {
                                                     ServerPlayer serverPlayer = EntityArgument.getPlayer(commandContext,"player");
-                                                    serverPlayer.getCapability(DurianHeatProvider.DURIAN_CAPABILITY).ifPresent(durian -> {
+                                                    serverPlayer.getData(ModAttachments.DURIAN_HEAT).ifPresent(durian -> {
                                                         durian.setTimer(IntegerArgumentType.getInteger(commandContext,"amount"));
                                                         ThaiDelightPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> serverPlayer),new DurianHeatPacket(durian.getTimer(),durian.isHeatUp()));
 
@@ -271,10 +279,7 @@ public class ThaiDelightForge {
                                         .then(Commands.argument("amount",IntegerArgumentType.integer(0))
                                                 .executes(commandContext -> {
                                                     ServerPlayer serverPlayer = EntityArgument.getPlayer(commandContext,"player");
-                                                    serverPlayer.getCapability(SpicyProvider.SPICY_CAPABILITY).ifPresent(spicy -> {
-                                                        spicy.addTimer(IntegerArgumentType.getInteger(commandContext,"amount"),serverPlayer);
-                                                    });
-
+                                                    serverPlayer.setData(ModAttachments.SPICY,serverPlayer.getData(ModAttachments.SPICY) + IntegerArgumentType.getInteger(commandContext,"amount"));
                                                     commandContext.getSource().sendSuccess(() -> Component.literal("Apply Spicy to Player for amount."),false);
                                                     return 1;
                                                 })
@@ -285,10 +290,7 @@ public class ThaiDelightForge {
                                         .then(Commands.argument("amount",IntegerArgumentType.integer(0))
                                                 .executes(commandContext -> {
                                                     ServerPlayer serverPlayer = EntityArgument.getPlayer(commandContext,"player");
-                                                    serverPlayer.getCapability(SpicyProvider.SPICY_CAPABILITY).ifPresent(spicy -> {
-                                                        spicy.setTimer(IntegerArgumentType.getInteger(commandContext,"amount"),serverPlayer);
-                                                    });
-
+                                                    serverPlayer.setData(ModAttachments.SPICY,IntegerArgumentType.getInteger(commandContext,"amount"));
                                                     commandContext.getSource().sendSuccess(() -> Component.literal("Apply Spicy to Player for amount."),false);
                                                     return 1;
                                                 })
@@ -300,9 +302,7 @@ public class ThaiDelightForge {
                                 .then(Commands.literal("clear")
                                         .executes(commandContext -> {
                                             ServerPlayer serverPlayer = EntityArgument.getPlayer(commandContext,"player");
-                                            serverPlayer.getCapability(SpicyProvider.SPICY_CAPABILITY).ifPresent(spicy -> {
-                                                spicy.setTimer(0,serverPlayer);
-                                            });
+                                            serverPlayer.setData(ModAttachments.SPICY,0);
                                             commandContext.getSource().sendSuccess(() -> Component.literal("Cleared Spicy from Player."),false);
                                             return 1;
                                         })

@@ -1,5 +1,6 @@
 package net.firemuffin303.thaidelight.common.block.vegetations.papaya;
 
+import com.mojang.serialization.MapCodec;
 import net.firemuffin303.muffinsmcapi.api.CommonEvents;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
@@ -40,9 +41,16 @@ public class PapayaBlock extends HorizontalDirectionalBlock implements Bonemeala
     protected static final VoxelShape[] NORTH_AABB;
     protected static final VoxelShape[] SOUTH_AABB;
 
+    public static final MapCodec<PapayaBlock> CODEC = simpleCodec(PapayaBlock::new);
+
     public PapayaBlock(Properties properties) {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(AGE, 1));
+    }
+
+    @Override
+    protected MapCodec<? extends HorizontalDirectionalBlock> codec() {
+        return CODEC;
     }
 
     public boolean isRandomlyTicking(BlockState blockState) {
@@ -63,20 +71,16 @@ public class PapayaBlock extends HorizontalDirectionalBlock implements Bonemeala
     }
 
     @Override
-    public InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
+    protected InteractionResult useWithoutItem(BlockState blockState, Level level, BlockPos blockPos, Player player, BlockHitResult blockHitResult) {
         int i = (Integer)blockState.getValue(AGE);
         boolean flag = i == 2;
-        if (!flag && player.getItemInHand(interactionHand).is(Items.BONE_MEAL)) {
-            return InteractionResult.PASS;
-        } else {
-            popResource(level, blockPos, new ItemStack(flag ? ModItems.PAPAYA.get() : ModItems.RAW_PAPAYA.get(), 1));
-            level.playSound(null, blockPos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
+        popResource(level, blockPos, new ItemStack(flag ? ModItems.PAPAYA.get() : ModItems.RAW_PAPAYA.get(), 1));
+        level.playSound(null, blockPos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
 
-            BlockState afterHarvestState = ModBlocks.BUDDING_PAPAYA_FLOWER.get().defaultBlockState().setValue(FACING,blockState.getValue(FACING));
-            level.setBlock(blockPos, afterHarvestState, 2);
-            level.gameEvent(GameEvent.BLOCK_CHANGE, blockPos, GameEvent.Context.of(player, afterHarvestState));
-            return InteractionResult.sidedSuccess(level.isClientSide);
-        }
+        BlockState afterHarvestState = ModBlocks.BUDDING_PAPAYA_FLOWER.get().defaultBlockState().setValue(FACING,blockState.getValue(FACING));
+        level.setBlock(blockPos, afterHarvestState, 2);
+        level.gameEvent(GameEvent.BLOCK_CHANGE, blockPos, GameEvent.Context.of(player, afterHarvestState));
+        return InteractionResult.sidedSuccess(level.isClientSide);
     }
 
     public boolean canSurvive(BlockState blockState, LevelReader levelReader, BlockPos blockPos) {
@@ -124,7 +128,7 @@ public class PapayaBlock extends HorizontalDirectionalBlock implements Bonemeala
         return direction == blockState.getValue(FACING) && !blockState.canSurvive(levelAccessor, blockPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(blockState, direction, blockState2, levelAccessor, blockPos, blockPos2);
     }
 
-    public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState, boolean bl) {
+    public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState) {
         return (Integer)blockState.getValue(AGE) < 2;
     }
 
@@ -140,12 +144,13 @@ public class PapayaBlock extends HorizontalDirectionalBlock implements Bonemeala
         builder.add(new Property[]{FACING, AGE});
     }
 
-    public boolean isPathfindable(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, PathComputationType pathComputationType) {
+    @Override
+    protected boolean isPathfindable(BlockState blockState, PathComputationType pathComputationType) {
         return false;
     }
 
     @Override
-    public ItemStack getCloneItemStack(BlockGetter blockGetter, BlockPos blockPos, BlockState blockState) {
+    public ItemStack getCloneItemStack(LevelReader levelReader, BlockPos blockPos, BlockState blockState) {
         return switch (blockState.getValue(AGE)){
             case 2 -> new ItemStack(ModItems.PAPAYA.get());
             default -> new ItemStack(ModItems.RAW_PAPAYA.get());

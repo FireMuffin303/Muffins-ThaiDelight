@@ -23,13 +23,16 @@ import static net.minecraft.world.level.block.Blocks.WHEAT;
 public class ForgeBuddingButterflyPeaBlock extends BuddingBushBlock implements BonemealableBlock {
     public static final IntegerProperty BUDDING_AGE = BlockStateProperties.AGE_2;
     public ForgeBuddingButterflyPeaBlock() {
-        super(Properties.copy(WHEAT));
+        super(Properties.ofFullCopy(WHEAT));
     }
 
+    /*
     @Override
     public BlockState getPlant(BlockGetter world, BlockPos pos) {
         return ModBlocks.BUDDING_BUTTERFLY_PEA_BLOCK.get().defaultBlockState();
     }
+
+     */
 
     @Override
     public IntegerProperty getAgeProperty() {
@@ -62,7 +65,7 @@ public class ForgeBuddingButterflyPeaBlock extends BuddingBushBlock implements B
     }
 
     @Override
-    public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state, boolean isClient) {
+    public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state) {
         return true;
     }
 

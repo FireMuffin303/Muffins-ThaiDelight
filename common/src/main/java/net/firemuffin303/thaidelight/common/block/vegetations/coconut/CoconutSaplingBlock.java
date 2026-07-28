@@ -1,6 +1,6 @@
 package net.firemuffin303.thaidelight.common.block.vegetations.coconut;
 
-import net.firemuffin303.thaidelight.common.world.trees.CoconutTreeGrower;
+import net.firemuffin303.thaidelight.common.registry.ModFeatures;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
@@ -11,7 +11,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class CoconutSaplingBlock extends SaplingBlock {
     public CoconutSaplingBlock(Properties properties) {
-        super(new CoconutTreeGrower(), properties);
+        super(ModFeatures.COCONUT, properties);
     }
 
     @Override

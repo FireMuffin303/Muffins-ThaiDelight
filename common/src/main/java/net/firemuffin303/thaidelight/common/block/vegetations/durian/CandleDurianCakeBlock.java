@@ -2,11 +2,16 @@ package net.firemuffin303.thaidelight.common.block.vegetations.durian;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.firemuffin303.thaidelight.common.block.vegetations.papaya.PapayaFlowerBlock;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -34,11 +39,29 @@ public class CandleDurianCakeBlock extends AbstractCandleBlock {
     protected static final VoxelShape SHAPE = Shapes.or(CAKE_SHAPE, CANDLE_SHAPE);
     private static final Map<Block, CandleDurianCakeBlock> BY_CANDLE = Maps.newHashMap();
     private static final Iterable<Vec3> PARTICLE_OFFSETS = ImmutableList.of(new Vec3(0.5, 1.0, 0.5));
+    private final CandleBlock candleBlock;
+
+    public static final MapCodec<CandleDurianCakeBlock> CODEC = RecordCodecBuilder.mapCodec((instance) -> {
+        return instance.group(BuiltInRegistries.BLOCK.byNameCodec().fieldOf("candle").forGetter((candleCakeBlock) -> {
+            return candleCakeBlock.candleBlock;
+        }), propertiesCodec()).apply(instance, CandleDurianCakeBlock::new);
+    });
 
     public CandleDurianCakeBlock(Block block,Properties properties) {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(LIT, false));
-        BY_CANDLE.put(block, this);
+        if (block instanceof CandleBlock candleBlock) {
+            BY_CANDLE.put(candleBlock, this);
+            this.candleBlock = candleBlock;
+        } else {
+            String var10002 = String.valueOf(CandleBlock.class);
+            throw new IllegalArgumentException("Expected block to be of " + var10002 + " was " + String.valueOf(block.getClass()));
+        }
+    }
+
+    @Override
+    protected MapCodec<? extends AbstractCandleBlock> codec() {
+        return null;
     }
 
     @Override
@@ -52,13 +75,8 @@ public class CandleDurianCakeBlock extends AbstractCandleBlock {
     }
 
     @Override
-    public InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
-        ItemStack itemStack = player.getItemInHand(interactionHand);
-        if (itemStack.is(Items.FLINT_AND_STEEL) || itemStack.is(Items.FIRE_CHARGE)) {
-            return InteractionResult.PASS;
-        }
-
-        if (!(CandleDurianCakeBlock.candleHit(blockHitResult) && player.getItemInHand(interactionHand).isEmpty() && blockState.getValue(LIT).booleanValue())) {
+    protected InteractionResult useWithoutItem(BlockState blockState, Level level, BlockPos blockPos, Player player, BlockHitResult blockHitResult) {
+        if (!(CandleDurianCakeBlock.candleHit(blockHitResult) && blockState.getValue(LIT).booleanValue())) {
             InteractionResult interactionResult = DurianCakeBlock.eat(level, blockPos, ModBlocks.DURIAN_CAKE.get().defaultBlockState(), player);
             if (interactionResult.consumesAction()) {
                 CandleCakeBlock.dropResources(blockState, level, blockPos);
@@ -66,7 +84,16 @@ public class CandleDurianCakeBlock extends AbstractCandleBlock {
             return interactionResult;
         }
         CandleCakeBlock.extinguish(player, blockState, level, blockPos);
-        return InteractionResult.sidedSuccess(level.isClientSide);
+
+        return super.useWithoutItem(blockState, level, blockPos, player, blockHitResult);
+    }
+
+    @Override
+    protected ItemInteractionResult useItemOn(ItemStack itemStack, BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
+        if (itemStack.is(Items.FLINT_AND_STEEL) || itemStack.is(Items.FIRE_CHARGE)) {
+            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        }
+        return super.useItemOn(itemStack, blockState, level, blockPos, player, interactionHand, blockHitResult);
     }
 
     private static boolean candleHit(BlockHitResult blockHitResult) {
@@ -79,7 +106,7 @@ public class CandleDurianCakeBlock extends AbstractCandleBlock {
     }
 
     @Override
-    public ItemStack getCloneItemStack(BlockGetter blockGetter, BlockPos blockPos, BlockState blockState) {
+    public ItemStack getCloneItemStack(LevelReader levelReader, BlockPos blockPos, BlockState blockState) {
         return new ItemStack(ModBlocks.DURIAN_CAKE.get());
     }
 
@@ -107,7 +134,7 @@ public class CandleDurianCakeBlock extends AbstractCandleBlock {
     }
 
     @Override
-    public boolean isPathfindable(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, PathComputationType pathComputationType) {
+    protected boolean isPathfindable(BlockState blockState, PathComputationType pathComputationType) {
         return false;
     }
 

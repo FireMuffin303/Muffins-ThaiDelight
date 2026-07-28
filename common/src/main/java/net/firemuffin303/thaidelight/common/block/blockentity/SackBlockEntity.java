@@ -3,6 +3,7 @@ package net.firemuffin303.thaidelight.common.block.blockentity;
 import net.firemuffin303.thaidelight.common.block.SackBlock;
 import net.firemuffin303.thaidelight.common.registry.ModBlockEntityTypes;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -12,15 +13,18 @@ import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.Nameable;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
-public class SackBlockEntity extends BlockEntity implements Container, Nameable {
+public class SackBlockEntity extends RandomizableContainerBlockEntity implements Container, Nameable {
     private NonNullList<ItemStack> items = NonNullList.withSize(5,ItemStack.EMPTY);
     private ItemStack currentItem = ItemStack.EMPTY;
     @Nullable
@@ -32,34 +36,38 @@ public class SackBlockEntity extends BlockEntity implements Container, Nameable 
 
 
     @Override
-    protected void saveAdditional(CompoundTag compoundTag) {
-        super.saveAdditional(compoundTag);
-        ContainerHelper.saveAllItems(compoundTag, this.items);
-        if (this.name != null) {
-            compoundTag.putString("CustomName", Component.Serializer.toJson(this.name));
-        }
+    protected void saveAdditional(CompoundTag compoundTag,HolderLookup.Provider provider) {
+        super.saveAdditional(compoundTag,provider);
+        ContainerHelper.saveAllItems(compoundTag, this.items,provider);
     }
 
     @Override
-    public void load(CompoundTag compoundTag) {
-        super.load(compoundTag);
-        this.items.clear();
-        ContainerHelper.loadAllItems(compoundTag, this.items);
-
-        if (compoundTag.contains("CustomName", 8)) {
-            this.name = Component.Serializer.fromJson(compoundTag.getString("CustomName"));
-        }
-
-        for(ItemStack itemStack:this.items){
-            if(itemStack.isEmpty()) continue;
-            this.currentItem = itemStack;
-            break;
+    protected void loadAdditional(CompoundTag compoundTag, HolderLookup.Provider provider) {
+        super.loadAdditional(compoundTag, provider);
+        this.items = NonNullList.withSize(5,ItemStack.EMPTY);
+        if (!this.tryLoadLootTable(compoundTag) && compoundTag.contains("Items", 9)) {
+            ContainerHelper.loadAllItems(compoundTag, this.items, provider);
         }
     }
 
     @Override
     public @Nullable Component getCustomName() {
         return this.name;
+    }
+
+    @Override
+    protected Component getDefaultName() {
+        return null;
+    }
+
+    @Override
+    protected NonNullList<ItemStack> getItems() {
+        return this.items;
+    }
+
+    @Override
+    protected void setItems(NonNullList<ItemStack> nonNullList) {
+        this.items = nonNullList;
     }
 
     @Override
@@ -110,6 +118,11 @@ public class SackBlockEntity extends BlockEntity implements Container, Nameable 
     }
 
     @Override
+    protected AbstractContainerMenu createMenu(int i, Inventory inventory) {
+        return null;
+    }
+
+    @Override
     public boolean canPlaceItem(int i, ItemStack itemStack) {
         ItemStack sackItemSlot = this.items.get(i);
         return this.items.stream().anyMatch(sackItem -> sackItem.is(itemStack.getItem())) && sackItemSlot.getCount() < sackItemSlot.getMaxStackSize();
@@ -121,7 +134,7 @@ public class SackBlockEntity extends BlockEntity implements Container, Nameable 
             if (itemStack2.isEmpty()) {
                 return true;
             }
-            return ItemStack.isSameItemSameTags(itemStack, itemStack2) && itemStack2.getCount() + itemStack.getCount() <= Math.min(itemStack2.getMaxStackSize(), container.getMaxStackSize());
+            return ItemStack.isSameItemSameComponents(itemStack, itemStack2) && itemStack2.getCount() + itemStack.getCount() <= Math.min(itemStack2.getMaxStackSize(), container.getMaxStackSize());
         });
     }
 
@@ -131,8 +144,8 @@ public class SackBlockEntity extends BlockEntity implements Container, Nameable 
     }
 
     @Override
-    public CompoundTag getUpdateTag() {
-        return this.saveWithoutMetadata();
+    public CompoundTag getUpdateTag(HolderLookup.Provider provider) {
+        return this.saveWithoutMetadata(provider);
     }
 
     public ItemStack getCurrentItem(){
@@ -159,7 +172,7 @@ public class SackBlockEntity extends BlockEntity implements Container, Nameable 
         }
 
 
-        return this.items.stream().anyMatch(sackItem -> sackItem.is(itemStack.getItem()) && ItemStack.isSameItemSameTags(sackItem,itemStack)) && itemStack.getItem().canFitInsideContainerItems();
+        return this.items.stream().anyMatch(sackItem -> sackItem.is(itemStack.getItem()) && ItemStack.isSameItemSameComponents(sackItem,itemStack)) && itemStack.getItem().canFitInsideContainerItems();
     }
 
     public ItemStack addItem(ItemStack itemStack){
@@ -232,7 +245,7 @@ public class SackBlockEntity extends BlockEntity implements Container, Nameable 
     }
 
     private static boolean canMergeItems(ItemStack itemStack, ItemStack itemStack2) {
-        return itemStack.getCount() < itemStack.getMaxStackSize() && ItemStack.isSameItemSameTags(itemStack, itemStack2);
+        return itemStack.getCount() < itemStack.getMaxStackSize() && ItemStack.isSameItemSameComponents(itemStack, itemStack2);
     }
 
 

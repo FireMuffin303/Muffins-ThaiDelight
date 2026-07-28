@@ -1,5 +1,6 @@
 package net.firemuffin303.thaidelight.common.block.vegetations.durian;
 
+import com.mojang.serialization.MapCodec;
 import net.firemuffin303.thaidelight.common.registry.ModDamageTypes;
 import net.firemuffin303.thaidelight.mixin.accessor.DamageSourcesAccessor;
 import net.minecraft.core.BlockPos;
@@ -18,8 +19,14 @@ import org.jetbrains.annotations.NotNull;
 
 public class DurianBlock extends FallingBlock {
     private static final VoxelShape BOX = Block.box(1.0,0.0,1.0,15.0,16.0,15.0);
+    public static final MapCodec<DurianBlock> CODEC = simpleCodec(DurianBlock::new);
     public DurianBlock(Properties properties) {
         super(properties);
+    }
+
+    @Override
+    protected MapCodec<? extends FallingBlock> codec() {
+        return CODEC;
     }
 
     @Override
