@@ -64,7 +64,7 @@ public class MobBottleItem extends Item {
     private void spawn(ServerLevel serverLevel, ItemStack itemStack, BlockPos blockPos) {
         Entity entity = this.entityType.get().spawn(serverLevel, itemStack, (Player)null, blockPos, MobSpawnType.BUCKET, true, false);
         if (entity instanceof Bottleable bottleable) {
-            bottleable.copyDataFromNbt(itemStack.getOrCreateTag());
+            bottleable.saveToBucketTag(itemStack);
             bottleable.setFromBottle(true);
         }
 

@@ -10,6 +10,7 @@ import net.firemuffin303.thaidelight.common.entity.ai.NearestMobStinkyTargetGoal
 import net.firemuffin303.thaidelight.common.registry.*;
 import net.firemuffin303.thaidelight.common.registry.forge.*;
 import net.firemuffin303.thaidelight.config.ModConfig;
+import net.firemuffin303.thaidelight.forge.common.attachment.DurianHeatAttachment;
 import net.firemuffin303.thaidelight.forge.common.attachment.ModAttachments;
 import net.firemuffin303.thaidelight.forge.common.capabilities.DurianHeatProvider;
 import net.firemuffin303.thaidelight.forge.common.capabilities.IDurianHeat;
@@ -187,12 +188,13 @@ public class ThaiDelightForge {
     public void onPlayerTick(PlayerTickEvent.Post event){
         Player player = event.getEntity();
         player.getCapability(SpicyProvider.SPICY_CAPABILITY).ifPresent(spicy -> spicy.tick(player));
-        player.getCapability(DurianHeatProvider.DURIAN_CAPABILITY).ifPresent(durian -> durian.tick(player));
+        player.getData(ModAttachments.DURIAN_HEAT).tick(player);
     }
 
     public void onPlayerJoin(PlayerEvent.PlayerLoggedInEvent event){
         if(event.getEntity() instanceof  ServerPlayer serverPlayer){
-            PacketDistributor.sendToPlayer(serverPlayer,new DurianHeatPacket());
+            DurianHeatAttachment durianHeatAttachment = serverPlayer.getData(ModAttachments.DURIAN_HEAT);
+            PacketDistributor.sendToPlayer(serverPlayer,new DurianHeatPacket(durianHeatAttachment.getTimer(),durianHeatAttachment.isHeatUp()));
             PacketDistributor.sendToPlayer(serverPlayer,new SpicyPacket(serverPlayer.getData(ModAttachments.SPICY)));
         }
     }
@@ -228,11 +230,9 @@ public class ThaiDelightForge {
                                         .then(Commands.argument("amount", IntegerArgumentType.integer(1))
                                                 .executes(commandContext -> {
                                                     ServerPlayer serverPlayer = EntityArgument.getPlayer(commandContext,"player");
-                                                    serverPlayer.getData(ModAttachments.DURIAN_HEAT).ifPresent(durian -> {
-                                                        durian.setTimer(IntegerArgumentType.getInteger(commandContext,"amount"));
-                                                        ThaiDelightPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> serverPlayer),new DurianHeatPacket(durian.getTimer(),durian.isHeatUp()));
-
-                                                    });
+                                                    DurianHeatAttachment durianHeatAttachment = serverPlayer.getData(ModAttachments.DURIAN_HEAT);
+                                                    durianHeatAttachment.setTimer(IntegerArgumentType.getInteger(commandContext,"amount"));
+                                                    PacketDistributor.sendToPlayer(serverPlayer,new DurianHeatPacket(durianHeatAttachment.getTimer(),durianHeatAttachment.isHeatUp()));
                                                     commandContext.getSource().sendSuccess(() -> Component.literal("Apply Durian Heat to Player for amount."),false);
                                                     return 1;
                                                 })
@@ -242,11 +242,9 @@ public class ThaiDelightForge {
                                 .then(Commands.literal("clear")
                                         .executes(commandContext -> {
                                             ServerPlayer serverPlayer = EntityArgument.getPlayer(commandContext,"player");
-                                            serverPlayer.getCapability(DurianHeatProvider.DURIAN_CAPABILITY).ifPresent(durian -> {
-                                                durian.setTimer(0);
-                                                ThaiDelightPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> serverPlayer),new DurianHeatPacket(durian.getTimer(),durian.isHeatUp()));
-
-                                            });
+                                            DurianHeatAttachment durianHeatAttachment = serverPlayer.getData(ModAttachments.DURIAN_HEAT);
+                                            durianHeatAttachment.setTimer(0);
+                                            PacketDistributor.sendToPlayer(serverPlayer,new DurianHeatPacket(durianHeatAttachment.getTimer(),durianHeatAttachment.isHeatUp()));
                                             commandContext.getSource().sendSuccess(() -> Component.literal("Apply Durian Heat to Player for amount."),false);
                                             return 1;
                                         })
@@ -256,11 +254,9 @@ public class ThaiDelightForge {
                                         .then(Commands.argument("isHeatedUp", BoolArgumentType.bool())
                                                 .executes(commandContext -> {
                                                     ServerPlayer serverPlayer = EntityArgument.getPlayer(commandContext,"player");
-                                                    serverPlayer.getCapability(DurianHeatProvider.DURIAN_CAPABILITY).ifPresent(durian -> {
-                                                        durian.setHeat(BoolArgumentType.getBool(commandContext,"isHeatedUp"));
-                                                        ThaiDelightPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> serverPlayer),new DurianHeatPacket(durian.getTimer(),durian.isHeatUp()));
-
-                                                    });
+                                                    DurianHeatAttachment durianHeatAttachment = serverPlayer.getData(ModAttachments.DURIAN_HEAT);
+                                                    durianHeatAttachment.setHeat(BoolArgumentType.getBool(commandContext,"isHeatedUp"));
+                                                    PacketDistributor.sendToPlayer(serverPlayer,new DurianHeatPacket(durianHeatAttachment.getTimer(),durianHeatAttachment.isHeatUp()));
                                                     commandContext.getSource().sendSuccess(() -> Component.literal("Apply Durian Heat to Player for amount."),false);
                                                     return 1;
                                                 })

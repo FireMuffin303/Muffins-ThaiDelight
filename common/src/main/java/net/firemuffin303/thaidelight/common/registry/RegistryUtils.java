@@ -206,14 +206,20 @@ public class RegistryUtils {
         };
 
         output.accept(ModItems.KHANOM_CHAN.get());
+        /*
         for(Item dyeItem: dyeItems){
             output.accept(DyeableLeatherItem.dyeArmor(new ItemStack(ModItems.KHANOM_CHAN.get()),List.of((DyeItem) dyeItem)));
         }
 
+         */
+
 
         output.accept(ModItems.COCONUT_MILK_ICE_CREAM.get());
+        /*
         for(Item dyeItem: dyeItems){
             output.accept(DyeableLeatherItem.dyeArmor(new ItemStack(ModItems.COCONUT_MILK_ICE_CREAM.get()), List.of((DyeItem) dyeItem)));
         }
+
+         */
     }
 }

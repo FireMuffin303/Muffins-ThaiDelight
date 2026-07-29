@@ -1,0 +1,64 @@
+{
+  "entries": [
+    {
+      "enum": "net/minecraft/world/inventory/RecipeBookType",
+      "name": "MUFFINS_THAIDELIGHT_MORTAR_RECIPE_BOOK_TYPE",
+      "constructor": "()V",
+      "parameters": []
+    },
+    {
+      "enum" : "net/minecraft/client/RecipeBookCategories",
+      "name" : "MUFFINS_THAIDELIGHT_MORTAR_SEARCH",
+      "constructor": "(Ljava/util/function/Supplier;)V",
+      "parameters": {
+        "class": "net/firemuffin303/thaidelight/forge/client/ThaiDelightForgeClient",
+        "field": "PROXY_MORTAR_SEARCH"
+      }
+    },
+    {
+      "enum" : "net/minecraft/client/RecipeBookCategories",
+      "name" : "MUFFINS_THAIDELIGHT_MORTAR_SEARCH",
+      "constructor": "(Ljava/util/function/Supplier;)V",
+      "parameters": {
+        "class": "net/firemuffin303/thaidelight/forge/client/ThaiDelightForgeClient",
+        "field": "PROXY_MORTAR_MEALS"
+      }
+    },
+    {
+      "enum" : "net/minecraft/client/RecipeBookCategories",
+      "name" : "MUFFINS_THAIDELIGHT_MORTAR_SEARCH",
+      "constructor": "(Ljava/util/function/Supplier;)V",
+      "parameters": {
+        "class": "net/firemuffin303/thaidelight/forge/client/ThaiDelightForgeClient",
+        "field": "PROXY_MORTAR_MISC"
+      }
+    },
+    {
+      "enum" : "net/minecraft/client/model/HumanoidModel/ArmPose",
+      "name" : "MUFFINS_THAIDELIGHT_CATCHING_BAG_HOLD",
+      "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
+      "parameters": {
+        "class": "net/firemuffin303/thaidelight/forge/client/ThaiDelightForgeClient",
+        "field": "PROXY_SACK_HOLD"
+      }
+    },
+    {
+      "enum" : "net/minecraft/client/model/HumanoidModel/ArmPose",
+      "name" : "MUFFINS_THAIDELIGHT_SACK_SHOULDER_HOLD",
+      "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
+      "parameters": {
+        "class": "net/firemuffin303/thaidelight/forge/client/ThaiDelightForgeClient",
+        "field": "PROXY_SACK_SHOULDER_HOLD"
+      }
+    },
+    {
+      "enum" : "net/minecraft/client/model/HumanoidModel/ArmPose",
+      "name" : "MUFFINS_THAIDELIGHT_CATCHING_BAG_SWING",
+      "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
+      "parameters": {
+        "class": "net/firemuffin303/thaidelight/forge/client/ThaiDelightForgeClient",
+        "field": "PROXY_SACK_SWING"
+      }
+    }
+  ]
+}

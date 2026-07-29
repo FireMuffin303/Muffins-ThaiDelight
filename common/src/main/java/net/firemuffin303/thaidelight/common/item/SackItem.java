@@ -1,6 +1,7 @@
 package net.firemuffin303.thaidelight.common.item;
 
 import net.firemuffin303.thaidelight.client.renderer.component.SackTooltipComponent;
+import net.firemuffin303.thaidelight.common.advancement.SackCatchTrigger;
 import net.firemuffin303.thaidelight.common.registry.ModBlockEntityTypes;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.firemuffin303.thaidelight.common.registry.ModCriteriaTriggers;
@@ -20,7 +21,9 @@ import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 
+import java.util.Objects;
 import java.util.Optional;
+import java.util.function.Supplier;
 
 public class SackItem extends BlockItem {
     public SackItem(Properties properties) {
@@ -97,6 +100,7 @@ public class SackItem extends BlockItem {
         );
     }
 
+    @SuppressWarnings("unchecked")
     public static boolean onCatchingFallingBlock(ItemStack sackItem, Item item, ServerPlayer serverPlayer){
         CompoundTag compoundTag = BlockItem.getBlockEntityData(sackItem);
         ItemStack newStack = new ItemStack(item);
@@ -133,13 +137,13 @@ public class SackItem extends BlockItem {
             }
 
             BlockItem.setBlockEntityData(sackItem, ModBlockEntityTypes.SACK_BLOCK_ENTITY.get(),ContainerHelper.saveAllItems(compoundTag,itemStacks));
-            ModCriteriaTriggers.SACK_CATCH.trigger(serverPlayer,newStack);
+            ModCriteriaTriggers.SACK_CATCH.get().trigger(serverPlayer,newStack);
             return true;
         }
 
         itemStacks.set(0,newStack);
         BlockItem.setBlockEntityData(sackItem,ModBlockEntityTypes.SACK_BLOCK_ENTITY.get(),ContainerHelper.saveAllItems(compoundTag,itemStacks));
-        ModCriteriaTriggers.SACK_CATCH.trigger(serverPlayer,newStack);
+        ModCriteriaTriggers.SACK_CATCH.get().trigger(serverPlayer,newStack);
         return true;
     }
 }

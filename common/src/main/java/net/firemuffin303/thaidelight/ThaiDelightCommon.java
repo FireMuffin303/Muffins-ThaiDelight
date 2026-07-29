@@ -43,6 +43,8 @@ public class ThaiDelightCommon {
 
         ModMenuType.init();
 
+        ModArmorMaterials.init();
+
         ModBlockSetTypes.init();
         ModBlocks.init();
         ModBlockEntityTypes.init();

@@ -48,12 +48,12 @@ public class SmallDurianBlock extends HorizontalDirectionalBlock implements Simp
     @Override
     protected InteractionResult useWithoutItem(BlockState blockState, Level level, BlockPos blockPos, Player player, BlockHitResult blockHitResult) {
         if(level.isClientSide){
-            if(takeItem(level, blockPos, blockState, player, interactionHand).consumesAction()){
+            if(takeItem(level, blockPos, blockState, player).consumesAction()){
                 return InteractionResult.SUCCESS;
             }
         }
 
-        return takeItem(level, blockPos, blockState, player, interactionHand);
+        return takeItem(level, blockPos, blockState, player);
     }
 
     @Override

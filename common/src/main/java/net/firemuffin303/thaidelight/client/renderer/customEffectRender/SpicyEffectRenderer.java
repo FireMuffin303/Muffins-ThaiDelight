@@ -23,7 +23,7 @@ public class SpicyEffectRenderer implements CustomEffectRenderer {
 
     @Override
     public Component getDetail(LocalPlayer localPlayer) {
-        return Component.literal(StringUtil.formatTickDuration(PlatformUtil.getSpicyTime(localPlayer)));
+        return Component.literal(StringUtil.formatTickDuration(PlatformUtil.getSpicyTime(localPlayer),20));
     }
     @Override
     public ResourceLocation iconTexture(LocalPlayer localPlayer) {

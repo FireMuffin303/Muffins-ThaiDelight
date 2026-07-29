@@ -226,7 +226,7 @@ public class MortarMenu extends RecipeBookMenu<MortarInput,MortarRecipe> {
         public void onTake(Player player, ItemStack itemStack) {
 
             this.checkTakeAchievements(itemStack);
-            Supplier<RecipeType<MortarRecipe>> m = (Supplier<RecipeType<MortarRecipe>>) (Supplier<?>) ModRecipes.MORTAR;
+            Supplier<RecipeType<MortarRecipe>> m = ModRecipes.MORTAR;
             NonNullList<ItemStack> nonNullList = player.level().getRecipeManager().getRemainingItemsFor(m.get(), new MortarInput(this.craftSlots), player.level());
 
             for(int i = 0; i < nonNullList.size(); ++i) {

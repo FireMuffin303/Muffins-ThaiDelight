@@ -29,7 +29,7 @@ public class DurianHeatEffectRenderer implements CustomEffectRenderer {
 
     @Override
     public Component getDetail(LocalPlayer localPlayer) {
-        return Component.literal(StringUtil.formatTickDuration(PlatformUtil.getDurianHeatComponent(localPlayer).timer()));
+        return Component.literal(StringUtil.formatTickDuration(PlatformUtil.getDurianHeatComponent(localPlayer).timer(),20));
     }
 
     @Override

@@ -11,5 +11,5 @@ public class ModAttachments {
     public static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, ThaiDelightCommon.MOD_ID);
 
     public static final Supplier<AttachmentType<Integer>> SPICY = ATTACHMENT_TYPES.register("spicy",() -> AttachmentType.<Integer>builder(() -> 0).build());
-    public static final Supplier<AttachmentType<Integer>> DURIAN_HEAT = ATTACHMENT_TYPES.register("durian_heat",() -> AttachmentType.<Integer>builder(() -> 0).build());
+    public static final Supplier<AttachmentType<DurianHeatAttachment>> DURIAN_HEAT = ATTACHMENT_TYPES.register("durian_heat",() -> AttachmentType.builder(DurianHeatAttachment::new).build());
 }

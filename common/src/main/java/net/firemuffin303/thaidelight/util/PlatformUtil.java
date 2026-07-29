@@ -3,6 +3,7 @@ package net.firemuffin303.thaidelight.util;
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.TagKey;
@@ -66,12 +67,12 @@ public class PlatformUtil {
     }
 
     @ExpectPlatform
-    public static Supplier<MobEffect> getComfort(){
+    public static Holder<MobEffect> getComfort(){
         throw new AssertionError();
     }
 
     @ExpectPlatform
-    public static Supplier<MobEffect> getNourishmentEffect(){
+    public static Holder<MobEffect> getNourishmentEffect(){
         throw new AssertionError();
     }
 

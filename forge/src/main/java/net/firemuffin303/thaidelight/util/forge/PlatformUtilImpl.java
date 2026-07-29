@@ -1,25 +1,17 @@
 package net.firemuffin303.thaidelight.util.forge;
 
-import com.mojang.logging.LogUtils;
-import net.firemuffin303.thaidelight.ThaiDelightCommon;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.firemuffin303.thaidelight.forge.client.ThaiDelightForgeClient;
-import net.firemuffin303.thaidelight.forge.common.capabilities.DurianHeatProvider;
-import net.firemuffin303.thaidelight.forge.common.capabilities.ISpicy;
-import net.firemuffin303.thaidelight.forge.common.capabilities.SpicyProvider;
-import net.firemuffin303.thaidelight.forge.config.ThaiDelightConfig;
+import net.firemuffin303.thaidelight.forge.common.attachment.DurianHeatAttachment;
+import net.firemuffin303.thaidelight.forge.common.attachment.ModAttachments;
 import net.firemuffin303.thaidelight.forge.mixin.accessor.AxeItemAccessor;
-import net.firemuffin303.thaidelight.forge.network.DurianHeatPacket;
-import net.firemuffin303.thaidelight.forge.network.ModLevelPacket;
-import net.firemuffin303.thaidelight.forge.network.SpicyPacket;
-import net.firemuffin303.thaidelight.forge.network.ThaiDelightPacketHandler;
 import net.firemuffin303.thaidelight.util.ModUtils;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.registries.Registries;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.effect.MobEffect;
@@ -32,11 +24,7 @@ import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.common.Tags;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.network.PacketDistributor;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.common.Tags;
 import vectorwing.farmersdelight.common.Configuration;
 import vectorwing.farmersdelight.common.block.CabinetBlock;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
@@ -44,13 +32,12 @@ import vectorwing.farmersdelight.common.registry.ModSounds;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 import java.util.function.Supplier;
 
 public class PlatformUtilImpl {
 
     public static TagKey<Item> shearTag() {
-        return Tags.Items.SHEARS;
+        return Tags.Items.TOOLS_SHEAR;
     }
 
     public static Block richSoilBlock() {
@@ -89,16 +76,16 @@ public class PlatformUtilImpl {
         return RecipeBookType.valueOf("MORTAR_RECIPE_BOOK_TYPE");
     }
 
-    public static Supplier<MobEffect> getComfort() {
-        return RegistryObject.create(new ResourceLocation("farmersdelight", "comfort"),ForgeRegistries.MOB_EFFECTS);
+    public static Holder<MobEffect> getComfort() {
+        return BuiltInRegistries.MOB_EFFECT.getHolder(ResourceLocation.fromNamespaceAndPath("farmersdelight", "comfort")).orElseThrow();
     }
 
-    public static Supplier<MobEffect> getNourishmentEffect() {
-        return RegistryObject.create(new ResourceLocation("farmersdelight","nourishment"),ForgeRegistries.MOB_EFFECTS);
+    public static Holder<MobEffect> getNourishmentEffect() {
+        return BuiltInRegistries.MOB_EFFECT.getHolder(ResourceLocation.fromNamespaceAndPath("farmersdelight","nourishment")).orElseThrow();
     }
 
     public static Supplier<Item> getTreeBarkItem() {
-        return RegistryObject.create(new ResourceLocation("farmersdelight","tree_bark"),ForgeRegistries.ITEMS);
+        return () -> BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath("farmersdelight","tree_bark"));
     }
 
     public static UseAnim getDurianCatcherUseAnim() {
@@ -106,55 +93,44 @@ public class PlatformUtilImpl {
     }
 
     public static HumanoidModel.ArmPose getSackShoulderPose() {
-        return ThaiDelightForgeClient.SACK_SHOULDER_HOLD;
+        return ThaiDelightForgeClient.PROXY_SACK_SHOULDER_HOLD.getValue();
     }
 
     public static HumanoidModel.ArmPose getDurianCatcherHoldArmPose() {
-        return ThaiDelightForgeClient.SACK_HOLD;
+        return ThaiDelightForgeClient.PROXY_SACK_HOLD.getValue();
     }
 
     public static HumanoidModel.ArmPose getDurianCatcherSwingArmPose() {
-        return ThaiDelightForgeClient.SACK_SWING;
+        return ThaiDelightForgeClient.PROXY_SACK_SWING.getValue();
     }
 
     public static void setSpicyTime(int value, LivingEntity livingEntity) {
-        livingEntity.getCapability(SpicyProvider.SPICY_CAPABILITY).ifPresent(spicy -> spicy.setTimer(value,livingEntity));
+        livingEntity.setData(ModAttachments.SPICY,value);
     }
 
     public static void addSpicyTime(int value, LivingEntity livingEntity) {
-        livingEntity.getCapability(SpicyProvider.SPICY_CAPABILITY).ifPresent(spicy -> spicy.addTimer(value,livingEntity));
+        livingEntity.setData(ModAttachments.SPICY,livingEntity.getData(ModAttachments.SPICY) + value);
     }
 
     public static int getSpicyTime(LivingEntity livingEntity) {
         if(livingEntity instanceof Player){
-            LazyOptional<ISpicy> optionalSpicyProvider = livingEntity.getCapability(SpicyProvider.SPICY_CAPABILITY);
-            return optionalSpicyProvider.map(ISpicy::getTimer).orElse(0);
+            return livingEntity.getData(ModAttachments.SPICY);
         }
         return 0;
     }
 
     public static ModUtils.DurianComponentSupplier getDurianHeatComponent(LivingEntity livingEntity) {
-        return livingEntity.getCapability(DurianHeatProvider.DURIAN_CAPABILITY)
-                .map((iDurianHeat -> new ModUtils.DurianComponentSupplier(iDurianHeat.getTimer(),iDurianHeat.isHeatUp())))
-                .orElse(new ModUtils.DurianComponentSupplier(0,false));
+        DurianHeatAttachment durianHeatAttachment = livingEntity.getData(ModAttachments.DURIAN_HEAT);
+        return new ModUtils.DurianComponentSupplier(durianHeatAttachment.getTimer(),durianHeatAttachment.isHeatUp());
     }
 
     public static void setDurianHeat(boolean value, LivingEntity livingEntity) {
-        livingEntity.getCapability(DurianHeatProvider.DURIAN_CAPABILITY).ifPresent(durianHeat -> {
-            durianHeat.setHeat(value);
-            if(livingEntity instanceof ServerPlayer serverPlayer){
-                ThaiDelightPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> serverPlayer),new DurianHeatPacket(durianHeat.getTimer(),durianHeat.isHeatUp()));
-            }
-        });
+        livingEntity.getData(ModAttachments.DURIAN_HEAT).setHeat(value);
     }
 
     public static void addDurianHeatTime(int i, LivingEntity livingEntity) {
-        livingEntity.getCapability(DurianHeatProvider.DURIAN_CAPABILITY).ifPresent(durianHeat -> {
-            durianHeat.addTimer(i);
-            if(livingEntity instanceof ServerPlayer serverPlayer){
-                ThaiDelightPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> serverPlayer),new DurianHeatPacket(durianHeat.getTimer(),durianHeat.isHeatUp()));
-            }
-        });
+       DurianHeatAttachment durianHeatAttachment = livingEntity.getData(ModAttachments.DURIAN_HEAT);
+       durianHeatAttachment.setTimer(durianHeatAttachment.getTimer() + i);
     }
 
     public static void registerStrippable(Map<Block, Block> map) {
@@ -165,6 +141,7 @@ public class PlatformUtilImpl {
     }
 
     public static void playDurianCatchSound(ServerLevel serverLevel, Vec3 vec3, BlockPos blockPos) {
+        /*
         ThaiDelightPacketHandler.INSTANCE.send(PacketDistributor.NEAR.with(new Supplier<PacketDistributor.TargetPoint>() {
             @Override
             public PacketDistributor.TargetPoint get() {
@@ -172,6 +149,8 @@ public class PlatformUtilImpl {
             }
         }),new ModLevelPacket((byte) 1,blockPos));
 
+
+         */
     }
 
 

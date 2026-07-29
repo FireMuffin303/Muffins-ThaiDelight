@@ -14,18 +14,18 @@ public class ModTags {
 
     public static final TagKey<Item> SPICY_FOODS = TagKey.create(Registries.ITEM,ThaiDelightCommon.modid("spicy_foods"));
 
-    public static final TagKey<Item> LIME = TagKey.create(Registries.ITEM, new ResourceLocation("c","foods/lime"));
-    public static final TagKey<Item> PAPAYA = TagKey.create(Registries.ITEM, new ResourceLocation("c","foods/papaya"));
-    public static final TagKey<Item> RIPE_PAPAYA = TagKey.create(Registries.ITEM, new ResourceLocation("c","foods/ripe_papaya"));
-    public static final TagKey<Item> RAW_PAPAYA = TagKey.create(Registries.ITEM, new ResourceLocation("c","foods/raw_papaya"));
-    public static final TagKey<Item> DURIAN = TagKey.create(Registries.ITEM,new ResourceLocation("c","foods/durian"));
+    public static final TagKey<Item> LIME = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c","foods/lime"));
+    public static final TagKey<Item> PAPAYA = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c","foods/papaya"));
+    public static final TagKey<Item> RIPE_PAPAYA = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c","foods/ripe_papaya"));
+    public static final TagKey<Item> RAW_PAPAYA = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c","foods/raw_papaya"));
+    public static final TagKey<Item> DURIAN = TagKey.create(Registries.ITEM,ResourceLocation.fromNamespaceAndPath("c","foods/durian"));
     public static final TagKey<Item> DURIAN_FOOD = TagKey.create(Registries.ITEM,ThaiDelightCommon.modid("durian_foods"));
-    public static final TagKey<Item> MANGO = TagKey.create(Registries.ITEM,new ResourceLocation("c","foods/mango"));
-    public static final TagKey<Item> COCONUT = TagKey.create(Registries.ITEM,new ResourceLocation("c","foods/coconut"));
-    public static final TagKey<Item> PINEAPPLE = TagKey.create(Registries.ITEM,new ResourceLocation("c","foods/pineapple"));
-    public static final TagKey<Item> BANANA = TagKey.create(Registries.ITEM,new ResourceLocation("c","foods/banana"));
+    public static final TagKey<Item> MANGO = TagKey.create(Registries.ITEM,ResourceLocation.fromNamespaceAndPath("c","foods/mango"));
+    public static final TagKey<Item> COCONUT = TagKey.create(Registries.ITEM,ResourceLocation.fromNamespaceAndPath("c","foods/coconut"));
+    public static final TagKey<Item> PINEAPPLE = TagKey.create(Registries.ITEM,ResourceLocation.fromNamespaceAndPath("c","foods/pineapple"));
+    public static final TagKey<Item> BANANA = TagKey.create(Registries.ITEM,ResourceLocation.fromNamespaceAndPath("c","foods/banana"));
 
-    public static final TagKey<Item> FERMENTED_DRINKS = TagKey.create(Registries.ITEM,new ResourceLocation("c","foods/fermented_drinks"));
+    public static final TagKey<Item> FERMENTED_DRINKS = TagKey.create(Registries.ITEM,ResourceLocation.fromNamespaceAndPath("c","foods/fermented_drinks"));
 
     public static final TagKey<Item> FLOWER_CRAB_MEAT = TagKey.create(Registries.ITEM, ThaiDelightCommon.modid("flower_crab_meat"));
 
@@ -63,29 +63,29 @@ public class ModTags {
     public static final TagKey<Biome> BUTTERFLY_PEA_BIOMES = TagKey.create(Registries.BIOME,ThaiDelightCommon.modid("butterfly_peas_biomes"));
 
     //----- Farmers Delight --------
-    public static final TagKey<Block> FARMER_DELIGHT_ROPE = TagKey.create(Registries.BLOCK,new ResourceLocation("farmersdelight","ropes"));
+    public static final TagKey<Block> FARMER_DELIGHT_ROPE = TagKey.create(Registries.BLOCK,ResourceLocation.fromNamespaceAndPath("farmersdelight","ropes"));
 
     //----- Covenience Tag ----
-    public static final TagKey<Item> COMMON_MILKS = TagKey.create(Registries.ITEM,new ResourceLocation("c","milks"));
-    public static final TagKey<Item> COMMON_COOKED_MEATS =  TagKey.create(Registries.ITEM,new ResourceLocation("c","foods/cooked_meats"));
-    public static final TagKey<Item> KNIVES = TagKey.create(Registries.ITEM,new ResourceLocation("c","tools/knives"));
-    public static final TagKey<Item> COMMON_EGGS = TagKey.create(Registries.ITEM,new ResourceLocation("c","eggs"));
-    public static final TagKey<Item> COMMON_RAW_FISHES = TagKey.create(Registries.ITEM,new ResourceLocation("c","foods/raw_fishes"));
+    public static final TagKey<Item> COMMON_MILKS = TagKey.create(Registries.ITEM,ResourceLocation.fromNamespaceAndPath("c","milks"));
+    public static final TagKey<Item> COMMON_COOKED_MEATS =  TagKey.create(Registries.ITEM,ResourceLocation.fromNamespaceAndPath("c","foods/cooked_meats"));
+    public static final TagKey<Item> KNIVES = TagKey.create(Registries.ITEM,ResourceLocation.fromNamespaceAndPath("c","tools/knives"));
+    public static final TagKey<Item> COMMON_EGGS = TagKey.create(Registries.ITEM,ResourceLocation.fromNamespaceAndPath("c","eggs"));
+    public static final TagKey<Item> COMMON_RAW_FISHES = TagKey.create(Registries.ITEM,ResourceLocation.fromNamespaceAndPath("c","foods/raw_fishes"));
 
-    public static final TagKey<Item> CROPS = TagKey.create(Registries.ITEM,new ResourceLocation("c","crops"));
-    public static final TagKey<Item> VEGETABLES = TagKey.create(Registries.ITEM,new ResourceLocation("c","foods/vegetables"));
-    public static final TagKey<Item> PEPPER = TagKey.create(Registries.ITEM,new ResourceLocation("c","foods/vegetables/chili_pepper"));
+    public static final TagKey<Item> CROPS = TagKey.create(Registries.ITEM,ResourceLocation.fromNamespaceAndPath("c","crops"));
+    public static final TagKey<Item> VEGETABLES = TagKey.create(Registries.ITEM,ResourceLocation.fromNamespaceAndPath("c","foods/vegetables"));
+    public static final TagKey<Item> PEPPER = TagKey.create(Registries.ITEM,ResourceLocation.fromNamespaceAndPath("c","foods/vegetables/chili_pepper"));
 
     //----- SereneSeason -----
-    public static final TagKey<Block> AUTUMN_CROPS = TagKey.create(Registries.BLOCK,new ResourceLocation("sereneseasons","autumn_crops"));
-    public static final TagKey<Block> SPRING_CROPS = TagKey.create(Registries.BLOCK,new ResourceLocation("sereneseasons","spring_crops"));
-    public static final TagKey<Block> SUMMER_CROPS = TagKey.create(Registries.BLOCK,new ResourceLocation("sereneseasons","summer_crops"));
-    public static final TagKey<Block> WINTER_CROPS = TagKey.create(Registries.BLOCK,new ResourceLocation("sereneseasons","winter_crops"));
+    public static final TagKey<Block> AUTUMN_CROPS = TagKey.create(Registries.BLOCK,ResourceLocation.fromNamespaceAndPath("sereneseasons","autumn_crops"));
+    public static final TagKey<Block> SPRING_CROPS = TagKey.create(Registries.BLOCK,ResourceLocation.fromNamespaceAndPath("sereneseasons","spring_crops"));
+    public static final TagKey<Block> SUMMER_CROPS = TagKey.create(Registries.BLOCK,ResourceLocation.fromNamespaceAndPath("sereneseasons","summer_crops"));
+    public static final TagKey<Block> WINTER_CROPS = TagKey.create(Registries.BLOCK,ResourceLocation.fromNamespaceAndPath("sereneseasons","winter_crops"));
 
-    public static final TagKey<Item> AUTUMN_CROPS_ITEM = TagKey.create(Registries.ITEM,new ResourceLocation("sereneseasons","autumn_crops"));
-    public static final TagKey<Item> SPRING_CROPS_ITEM = TagKey.create(Registries.ITEM,new ResourceLocation("sereneseasons","spring_crops"));
-    public static final TagKey<Item> SUMMER_CROPS_ITEM = TagKey.create(Registries.ITEM,new ResourceLocation("sereneseasons","summer_crops"));
-    public static final TagKey<Item> WINTER_CROPS_ITEM = TagKey.create(Registries.ITEM,new ResourceLocation("sereneseasons","winter_crops"));
+    public static final TagKey<Item> AUTUMN_CROPS_ITEM = TagKey.create(Registries.ITEM,ResourceLocation.fromNamespaceAndPath("sereneseasons","autumn_crops"));
+    public static final TagKey<Item> SPRING_CROPS_ITEM = TagKey.create(Registries.ITEM,ResourceLocation.fromNamespaceAndPath("sereneseasons","spring_crops"));
+    public static final TagKey<Item> SUMMER_CROPS_ITEM = TagKey.create(Registries.ITEM,ResourceLocation.fromNamespaceAndPath("sereneseasons","summer_crops"));
+    public static final TagKey<Item> WINTER_CROPS_ITEM = TagKey.create(Registries.ITEM,ResourceLocation.fromNamespaceAndPath("sereneseasons","winter_crops"));
 
 
     //Damage Types

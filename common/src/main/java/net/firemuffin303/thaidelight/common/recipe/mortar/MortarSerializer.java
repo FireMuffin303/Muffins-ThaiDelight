@@ -1,8 +1,11 @@
 package net.firemuffin303.thaidelight.common.recipe.mortar;
 
 import com.google.gson.*;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.ItemStack;
@@ -74,5 +77,15 @@ public class MortarSerializer implements RecipeSerializer<RegularMortarRecipe> {
         friendlyByteBuf.writeItem(recipe.getResult());
         friendlyByteBuf.writeUtf(recipe.getRecipeBookTab().name);
 
+    }
+
+    @Override
+    public MapCodec<RegularMortarRecipe> codec() {
+        return null;
+    }
+
+    @Override
+    public StreamCodec<RegistryFriendlyByteBuf, RegularMortarRecipe> streamCodec() {
+        return null;
     }
 }

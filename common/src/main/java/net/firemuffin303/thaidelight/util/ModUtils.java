@@ -62,6 +62,7 @@ public class ModUtils {
     public static void durianHelmetThorns(LivingEntity victim, Entity attacker){
         ItemStack helmet = victim.getItemBySlot(EquipmentSlot.HEAD);
 
+        /*
         if(helmet.is(ModItems.DURIAN_HELMET.get()) && EnchantmentHelper.getEnchantmentLevel(Enchantments.THORNS,victim) <= 0){
             RandomSource randomSource = victim.getRandom();
             if(ThornsEnchantment.shouldHit(1,randomSource)){
@@ -74,6 +75,8 @@ public class ModUtils {
                 }
             }
         }
+
+         */
     }
 
     public static void spawnItemEntity(Level level, ItemStack stack, double x, double y, double z, double xMotion, double yMotion, double zMotion) {

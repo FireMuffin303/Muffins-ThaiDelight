@@ -26,7 +26,6 @@
     "dispenser.DispenseItemBehaviorMixin",
     "durianHelmet.EnchantmentHelperMixin",
     "durianHelmet.LivingEntityMixin",
-    "durianHelmet.ThornsEnchantmentMixin",
     "food.ChickenFoodAccessor",
     "food.FrogFoodAccessor",
     "food.ParrotTameFoodAccessor",

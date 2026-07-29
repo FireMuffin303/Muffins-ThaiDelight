@@ -16,7 +16,7 @@ import net.minecraft.world.inventory.Slot;
 
 public class MortarScreen extends AbstractContainerScreen<MortarMenu> implements RecipeUpdateListener {
     public static final ResourceLocation CRAFTING_TABLE_LOCATION = ThaiDelightCommon.modid("textures/gui/mortar.png");
-    private static final ResourceLocation RECIPE_BUTTON_LOCATION = new ResourceLocation("textures/gui/recipe_button.png");
+    private static final ResourceLocation RECIPE_BUTTON_LOCATION = ResourceLocation.withDefaultNamespace("textures/gui/recipe_button.png");
 
     private final MortarRecipeBookComponent recipeBookComponent = new MortarRecipeBookComponent();
     public static final Rect2i CLICK_AREA = new Rect2i(41, 25, 26, 25);
@@ -33,7 +33,7 @@ public class MortarScreen extends AbstractContainerScreen<MortarMenu> implements
 
         this.recipeBookComponent.init(this.width, this.height, this.minecraft, this.widthTooNarrow, this.menu);
         this.leftPos = this.recipeBookComponent.updateScreenPosition(this.width, this.imageWidth);
-        this.addRenderableWidget(new ImageButton(this.leftPos + 5, this.height / 2 - 49, 20, 18, 0, 0, 19, RECIPE_BUTTON_LOCATION, (button) -> {
+        this.addRenderableWidget(new ImageButton(this.leftPos + 5, this.height / 2 - 49, 20, 18, RecipeBookComponent.RECIPE_BUTTON_SPRITES, (button) -> {
             this.recipeBookComponent.toggleVisibility();
             this.leftPos = this.recipeBookComponent.updateScreenPosition(this.width, this.imageWidth);
             button.setPosition(this.leftPos + 5, this.height / 2 - 49);
@@ -55,7 +55,7 @@ public class MortarScreen extends AbstractContainerScreen<MortarMenu> implements
     }
 
     public void render(GuiGraphics guiGraphics, int i, int j, float f) {
-        this.renderBackground(guiGraphics);
+        this.renderBackground(guiGraphics,i,j,f);
         if(this.recipeBookComponent.isVisible() && this.widthTooNarrow){
             this.renderBg(guiGraphics, f, i, j);
             this.recipeBookComponent.render(guiGraphics, i, j, f);

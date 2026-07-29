@@ -13,6 +13,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemDisplayContext;
@@ -29,15 +30,12 @@ public class SackItemRenderer extends BlockEntityWithoutLevelRenderer {
         boolean thirdPerson = mode == ItemDisplayContext.THIRD_PERSON_LEFT_HAND ||
                 mode == ItemDisplayContext.THIRD_PERSON_RIGHT_HAND ||
                 mode == ItemDisplayContext.HEAD;
-        boolean gui = mode == ItemDisplayContext.GUI || mode == ItemDisplayContext.FIXED || mode == ItemDisplayContext.GROUND;
+
         boolean isLeftHand = false;
-        Item item = stack.getItem();
-        SackBlock sackBlock = (SackBlock) ((BlockItem)item).getBlock();
         if(mode == ItemDisplayContext.THIRD_PERSON_LEFT_HAND){
             isLeftHand = true;
         }
-        boolean bl = BlockItem.getBlockEntityData(stack) != null;
-        this.sackBlockEntity.load(BlockItem.getBlockEntityData(stack));
+        //this.sackBlockEntity.load(stack.get(DataComponents.BLOCK_ENTITY_DATA));
 
         matrices.pushPose();
 
@@ -58,9 +56,6 @@ public class SackItemRenderer extends BlockEntityWithoutLevelRenderer {
             Minecraft.getInstance().getBlockEntityRenderDispatcher().renderItem(this.sackBlockEntity,matrices,vertexConsumers,light,overlay);
             matrices.popPose();
         }
-
         matrices.popPose();
-
-
     }
 }

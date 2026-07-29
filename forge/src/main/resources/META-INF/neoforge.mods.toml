@@ -11,6 +11,7 @@ description = '''
 
 '''
 #logoFile = ""
+enumExtensions="META-INF/enumextensions.json"
 
 [[dependencies.muffins_thaidelight]]
 modId = "forge"

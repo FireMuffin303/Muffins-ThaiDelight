@@ -46,10 +46,10 @@ public abstract class SackItemMixin extends Item {
             @Override
             public HumanoidModel.@Nullable ArmPose getArmPose(LivingEntity entityLiving, InteractionHand hand, ItemStack itemStack) {
                 if(SackItem.isFull(itemStack)){
-                    return ThaiDelightForgeClient.SACK_SHOULDER_HOLD;
+                    return ThaiDelightForgeClient.PROXY_SACK_SHOULDER_HOLD.getValue();
                 }
 
-                return ThaiDelightForgeClient.SACK_HOLD;
+                return ThaiDelightForgeClient.PROXY_SACK_HOLD.getValue();
             }
         });
     }

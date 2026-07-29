@@ -15,6 +15,7 @@ import net.firemuffin303.thaidelight.network.ModLevelEventPacket;
 import net.firemuffin303.thaidelight.util.ModUtils;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
@@ -74,11 +75,11 @@ public class PlatformUtilImpl {
         return ThaiDelightClientFabric.MORTAR_RECIPE_BOOK_TYPE;
     }
 
-    public static Supplier<MobEffect> getComfort() {
+    public static Holder<MobEffect> getComfort() {
         return ModEffects.COMFORT;
     }
 
-    public static Supplier<MobEffect> getNourishmentEffect() {
+    public static Holder<MobEffect> getNourishmentEffect() {
         return ModEffects.NOURISHMENT;
     }
 

@@ -11,6 +11,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.ItemStack;
@@ -54,9 +55,7 @@ public class CoconutBlock extends Block implements SimpleWaterloggedBlock {
 
             level.gameEvent(GameEvent.BLOCK_CHANGE, blockPos, GameEvent.Context.of(player, blockState1));
             if (player != null) {
-                itemStack.hurtAndBreak(1, player, (playerx) -> {
-                    playerx.broadcastBreakEvent(interactionHand);
-                });
+                itemStack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(interactionHand));
             }
 
             return ItemInteractionResult.sidedSuccess(level.isClientSide);

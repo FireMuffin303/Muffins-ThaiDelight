@@ -21,7 +21,8 @@ import java.util.function.Supplier;
 
 public class ModMenuType {
     public static final ResourceRegistry<MenuType<?>> MENU_TYPE = ResourceRegistry.create(Registries.MENU,ThaiDelightCommon.MOD_ID);
-    public static Supplier<MenuType<?>> MORTAR = MENU_TYPE.register("mortar",() -> new MenuType<>(MortarMenu::new, FeatureFlags.VANILLA_SET));
+    @SuppressWarnings("unchecked")
+    public static Supplier<MenuType<MortarMenu>> MORTAR = (Supplier<MenuType<MortarMenu>>)(Supplier<?>) MENU_TYPE.register("mortar",() -> new MenuType<>(MortarMenu::new, FeatureFlags.VANILLA_SET));
 
     @ExpectPlatform
     public static <T extends AbstractContainerMenu> Supplier<MenuType<T>> register(String id, MenuTypeSupplier<T> menuType){
