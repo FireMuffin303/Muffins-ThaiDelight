@@ -3,7 +3,6 @@ package net.firemuffin303.thaidelight.common.registry;
 import net.firemuffin303.muffinsmcapi.impl.registration.ResourceRegistry;
 import net.firemuffin303.thaidelight.ThaiDelightCommon;
 import net.firemuffin303.thaidelight.common.advancement.SackCatchTrigger;
-import net.firemuffin303.thaidelight.mixin.accessor.CriteriaTriggersAccessor;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.advancements.CriterionTrigger;
 import net.minecraft.core.registries.Registries;

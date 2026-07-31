@@ -4,14 +4,18 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.firemuffin303.thaidelight.common.registry.ModMobEffects;
+import net.minecraft.core.HolderLookup;
+
+import java.util.concurrent.CompletableFuture;
 
 public class LangDataGen extends FabricLanguageProvider {
-    protected LangDataGen(FabricDataOutput dataOutput) {
-        super(dataOutput);
+
+    protected LangDataGen(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
+        super(dataOutput, registryLookup);
     }
 
     @Override
-    public void generateTranslations(TranslationBuilder translationBuilder) {
+    public void generateTranslations(HolderLookup.Provider provider, TranslationBuilder translationBuilder) {
         //Advancement
         translationBuilder.add("advancement.muffins_thaidelight.got_mortar","Thai's Delight");
         translationBuilder.add("advancement.muffins_thaidelight.got_mortar.description","It's time to taste Thai Food!");
@@ -232,8 +236,8 @@ public class LangDataGen extends FabricLanguageProvider {
         translationBuilder.add("dragonfly.variant.muffins_thaidelight.blue","Blue");
         translationBuilder.add("container.muffins_thaidelight.mortar","Mortar");
 
-        translationBuilder.add(ModMobEffects.STINKY.get(),"Stinky");
-        translationBuilder.add(ModMobEffects.APPETITE_LOSS.get(),"Appetite Loss");
+        translationBuilder.add(ModMobEffects.STINKY.value(),"Stinky");
+        translationBuilder.add(ModMobEffects.APPETITE_LOSS.value(),"Appetite Loss");
         translationBuilder.add("item.minecraft.potion.effect.stench","Potion of Stench");
         translationBuilder.add("item.minecraft.potion.effect.long_stench","Potion of Stench");
         translationBuilder.add("item.minecraft.potion.effect.strong_stench","Potion of Stench");
@@ -312,12 +316,12 @@ public class LangDataGen extends FabricLanguageProvider {
 
     public static class ThaiLangData extends FabricLanguageProvider{
 
-        protected ThaiLangData(FabricDataOutput dataOutput) {
-            super(dataOutput,"th_th");
+        protected ThaiLangData(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
+            super(dataOutput,"th_th",registryLookup);
         }
 
         @Override
-        public void generateTranslations(TranslationBuilder translationBuilder) {
+        public void generateTranslations(HolderLookup.Provider provider, TranslationBuilder translationBuilder) {
             //Advancement
             translationBuilder.add("advancement.muffins_thaidelight.got_mortar","Thai's Delight");
             translationBuilder.add("advancement.muffins_thaidelight.got_mortar.description","ได้เวลาลิ้มรสชาติของอาหารไทยแล้ว!");
@@ -542,8 +546,8 @@ public class LangDataGen extends FabricLanguageProvider {
             translationBuilder.add("dragonfly.variant.muffins_thaidelight.blue","สีฟ้า");
             translationBuilder.add("container.muffins_thaidelight.mortar","ครก");
 
-            translationBuilder.add(ModMobEffects.STINKY.get(),"เหม็น");
-            translationBuilder.add(ModMobEffects.APPETITE_LOSS.get(),"เบื่ออาหาร");
+            translationBuilder.add(ModMobEffects.STINKY.value(),"เหม็น");
+            translationBuilder.add(ModMobEffects.APPETITE_LOSS.value(),"เบื่ออาหาร");
             translationBuilder.add("item.minecraft.potion.effect.stench","น้ำยาเหม็น");
             translationBuilder.add("item.minecraft.potion.effect.long_stench","น้ำยาเหม็น");
             translationBuilder.add("item.minecraft.potion.effect.strong_stench","น้ำยาเหม็น");

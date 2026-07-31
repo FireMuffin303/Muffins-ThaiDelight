@@ -1,16 +1,14 @@
 package net.firemuffin303.thaidelight.util.fabric;
 
-import com.mojang.logging.LogUtils;
-import io.github.fabricators_of_create.porting_lib.tags.Tags;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
+import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
 import net.firemuffin303.thaidelight.asm.ModASMEarlyRiser;
 import net.firemuffin303.thaidelight.client.ThaiDelightClientFabric;
 import net.firemuffin303.thaidelight.common.cardinalcomponents.DurianHeatComponent;
 import net.firemuffin303.thaidelight.common.registry.ModCardinalComponents;
-import net.firemuffin303.thaidelight.integration.midnightLib.ThaiDelightConfig;
 import net.firemuffin303.thaidelight.network.ModLevelEventPacket;
 import net.firemuffin303.thaidelight.util.ModUtils;
 import net.minecraft.client.model.HumanoidModel;
@@ -33,6 +31,7 @@ import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModEffects;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.registry.ModSounds;
+import vectorwing.farmersdelight.common.tag.CommonTags;
 
 import java.util.Map;
 import java.util.function.Supplier;
@@ -44,7 +43,7 @@ public class PlatformUtilImpl {
     }
 
     public static TagKey<Item> shearTag() {
-        return Tags.Items.SHEARS;
+        return ConventionalItemTags.SHEAR_TOOLS;
     }
 
     public static Block richSoilBlock() {
@@ -135,7 +134,7 @@ public class PlatformUtilImpl {
 
     public static void playDurianCatchSound(ServerLevel serverLevel, Vec3 vec3, BlockPos blockPos) {
         for(ServerPlayer serverPlayer : PlayerLookup.around(serverLevel,vec3,32)){
-            ServerPlayNetworking.send(serverPlayer,new ModLevelEventPacket((byte) 1,blockPos));
+            //ServerPlayNetworking.send(serverPlayer,new ModLevelEventPacket((byte) 1,blockPos));
         }
     }
 

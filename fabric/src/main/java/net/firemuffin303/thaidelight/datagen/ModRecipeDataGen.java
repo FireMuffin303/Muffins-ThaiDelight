@@ -2,7 +2,8 @@ package net.firemuffin303.thaidelight.datagen;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
-import net.fabricmc.fabric.api.resource.conditions.v1.DefaultResourceConditions;
+import net.fabricmc.fabric.impl.resource.conditions.DefaultResourceConditionTypes;
+import net.fabricmc.fabric.impl.resource.conditions.conditions.TagsPopulatedResourceCondition;
 import net.firemuffin303.thaidelight.ThaiDelightCommon;
 import net.firemuffin303.thaidelight.common.recipe.mortar.MortarRecipeBookTab;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
@@ -11,6 +12,7 @@ import net.firemuffin303.thaidelight.common.registry.ModTags;
 import net.firemuffin303.thaidelight.datagen.builder.CookingPotRecipeBuilder;
 import net.firemuffin303.thaidelight.datagen.builder.CuttingBoardRecipeBuilder;
 import net.firemuffin303.thaidelight.datagen.builder.MortarRecipeBuilder;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.data.recipes.*;
@@ -25,15 +27,17 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 import vectorwing.farmersdelight.client.recipebook.CookingPotRecipeBookTab;
 
+import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 
 public class ModRecipeDataGen extends FabricRecipeProvider {
-    public ModRecipeDataGen(FabricDataOutput output) {
-        super(output);
+    public ModRecipeDataGen(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+        super(output, registriesFuture);
     }
 
     @Override
-    public void buildRecipes(Consumer<FinishedRecipe> exporter) {
+    public void buildRecipes(RecipeOutput exporter) {
+
         craft(exporter);
         furnace(exporter);
         smithing(exporter);
@@ -46,7 +50,7 @@ public class ModRecipeDataGen extends FabricRecipeProvider {
         cuttingBoard(exporter);
     }
 
-    private void cook(ItemLike ingredient, Item result, float exp, int cookTicks, Consumer<FinishedRecipe> exporter) {
+    private void cook(ItemLike ingredient, Item result, float exp, int cookTicks, RecipeOutput exporter) {
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(ingredient), RecipeCategory.FOOD, result, exp, cookTicks)
                 .unlockedBy(getHasName(ingredient), has(ingredient))
                 .save(exporter, ThaiDelightCommon.modid( "smelting/"+getItemName(result) + "_from_smelting" ));
@@ -60,7 +64,7 @@ public class ModRecipeDataGen extends FabricRecipeProvider {
                 .save(exporter, ThaiDelightCommon.modid("campfire/"+getItemName(result) + "_from_campfire"));
     }
 
-    private void craft(Consumer<FinishedRecipe> exporter){
+    private void craft(RecipeOutput exporter){
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModBlocks.MORTAR.get())
                 .define('A',Items.BRICK)
                 .define('B',Items.STICK)
@@ -308,17 +312,17 @@ public class ModRecipeDataGen extends FabricRecipeProvider {
 
     }
 
-    private void furnace(Consumer<FinishedRecipe> exporter){
+    private void furnace(RecipeOutput exporter){
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModItems.DURIAN_PEEL.get()),RecipeCategory.MISC,Items.CHARCOAL,0.15f,200)
                 .unlockedBy("has_durian_peel",RecipeProvider.has(ModItems.DURIAN_PEEL.get()))
                 .save(exporter,ThaiDelightCommon.modid("smelting/charcoal_from_durian_peel"));
     }
 
-    private void smithing(Consumer<FinishedRecipe> exporter){
+    private void smithing(RecipeOutput exporter){
         //SmithingTransformRecipeBuilder.smithing(Ingredient.of(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE),Ingredient.of(ModItems.DIAMOND_PASTLE),Ingredient.of(Items.NETHERITE_INGOT),RecipeCategory.TOOLS,ModItems.NETHERITE_PASTLE).unlocks(getHasName(Items.NETHERITE_INGOT),has(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE)).save(exporter,"smithing/"+getItemName(ModItems.NETHERITE_PASTLE)+"_from_smithing");
     }
 
-    private void bigPackingCraft(Item result,int resultAmount,ItemLike ingredient,Consumer<FinishedRecipe> exporter){
+    private void bigPackingCraft(Item result,int resultAmount,ItemLike ingredient,RecipeOutput exporter){
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS,result,resultAmount)
                 .define('A',ingredient)
                 .pattern("AAA")
@@ -328,7 +332,7 @@ public class ModRecipeDataGen extends FabricRecipeProvider {
                 .save(exporter,ThaiDelightCommon.modid("crafting/"+getItemName(result)+"_from_crafting"));
     }
 
-    private void unPacking(Item result,Item unpackedItem,Consumer<FinishedRecipe> exporter){
+    private void unPacking(Item result,Item unpackedItem,RecipeOutput exporter){
         ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD,result,9)
                 .requires(unpackedItem).unlockedBy(getHasName(unpackedItem),has(unpackedItem))
                 .save(exporter,ThaiDelightCommon.modid("crafting/"+getItemName(result)+"_from_crafting"));
@@ -344,7 +348,7 @@ public class ModRecipeDataGen extends FabricRecipeProvider {
                                  Item chest_boat,
                                  Item cabinet,
                                  TagKey<Item> log_item_tag,
-                                 Consumer<FinishedRecipe> exporter){
+                                 RecipeOutput exporter){
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, wood, 3)
                 .define('#', log)
                 .pattern("##")
@@ -442,7 +446,7 @@ public class ModRecipeDataGen extends FabricRecipeProvider {
                 .save(exporter,ThaiDelightCommon.modid("crafting/"+getItemName(cabinet)));
     }
 
-    private void mortar(Consumer<FinishedRecipe> exporter){
+    private void mortar(RecipeOutput exporter){
         MortarRecipeBuilder.mortar(ModBlocks.SOMTAM_FEAST.get())
                 .requires(ModTags.PEPPER)
                 .requires(vectorwing.farmersdelight.common.registry.ModItems.TOMATO.get())
@@ -654,7 +658,7 @@ public class ModRecipeDataGen extends FabricRecipeProvider {
                 .save(exporter,ThaiDelightCommon.modid("mortar/steamed_bamboo_shoot"));
     }
 
-    private void cookingPot(Consumer<FinishedRecipe> exporter){
+    private void cookingPot(RecipeOutput exporter){
         CookingPotRecipeBuilder.cookingPot(ModItems.CRAB_FRIED_RICE_FEAST.get(),1,200,0.35f)
                 .requires(ModTags.FLOWER_CRAB_MEAT)
                 .requires(vectorwing.farmersdelight.common.registry.ModItems.RICE.get())
@@ -761,7 +765,7 @@ public class ModRecipeDataGen extends FabricRecipeProvider {
                 .requires(vectorwing.farmersdelight.common.registry.ModItems.ONION.get())
                 .container(Items.BOWL)
                 .recipeTab(CookingPotRecipeBookTab.MEALS)
-                .conditions(DefaultResourceConditions.tagsPopulated(ModTags.PINEAPPLE))
+                .conditions(new TagsPopulatedResourceCondition(ModTags.PINEAPPLE))
                 .unlockedBy("has_pineapple",RecipeProvider.has(ModTags.PINEAPPLE))
                 .save(exporter,ThaiDelightCommon.modid("cooking_pot/pineapple_fried_rice_feast"));
 
@@ -783,7 +787,7 @@ public class ModRecipeDataGen extends FabricRecipeProvider {
                 .requires(Items.SUGAR)
                 .container(Items.BOWL)
                 .recipeTab(CookingPotRecipeBookTab.MEALS)
-                .conditions(DefaultResourceConditions.tagsPopulated(ModTags.BANANA))
+                .conditions(new TagsPopulatedResourceCondition(ModTags.BANANA))
                 .unlockedBy("has_banana",RecipeProvider.has(ModTags.BANANA))
                 .save(exporter,ThaiDelightCommon.modid("cooking_pot/banana_in_coconut_milk"));
 
@@ -853,7 +857,7 @@ public class ModRecipeDataGen extends FabricRecipeProvider {
                 .save(exporter,ThaiDelightCommon.modid("cooking_pot/butterfly_pea_tea"));
     }
 
-    private void cuttingBoard(Consumer<FinishedRecipe> exporter){
+    private void cuttingBoard(RecipeOutput exporter){
         Ingredient knivesTag = Ingredient.of(ModTags.KNIVES);
 
         CuttingBoardRecipeBuilder.cutting(ModItems.SLICED_LIME.get(),2,Ingredient.of(ModItems.LIME.get()),knivesTag)

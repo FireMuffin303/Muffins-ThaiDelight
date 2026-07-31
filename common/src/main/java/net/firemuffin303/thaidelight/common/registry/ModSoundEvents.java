@@ -1,12 +1,8 @@
 package net.firemuffin303.thaidelight.common.registry;
 
-import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.firemuffin303.muffinsmcapi.impl.registration.ResourceRegistry;
 import net.firemuffin303.thaidelight.ThaiDelightCommon;
-import net.firemuffin303.thaidelight.util.PlatformUtil;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 
 import java.util.function.Supplier;

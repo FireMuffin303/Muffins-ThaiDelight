@@ -10,6 +10,6 @@ import java.util.function.Predicate;
 @Mixin(LayeredCauldronBlock.class)
 public interface LayeredCauldronAccessor {
 
-    @Accessor("fillPredicate")
-    Predicate<Biome.Precipitation> getFillPredicate();
+    @Accessor("precipitationType")
+    Biome.Precipitation getFillPredicate();
 }

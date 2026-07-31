@@ -1,6 +1,7 @@
 package net.firemuffin303.thaidelight.common.world.feature;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.firemuffin303.thaidelight.common.block.vegetations.coconut.CoconutLeafBlock;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
@@ -23,7 +24,7 @@ public class CoconutLeavesFoliagePlacer extends FoliagePlacer {
     protected final int rand_radius_a;
     protected final int rand_radius_b;
 
-    public static final Codec<CoconutLeavesFoliagePlacer> CODEC = RecordCodecBuilder.create(instance ->
+    public static final MapCodec<CoconutLeavesFoliagePlacer> CODEC = RecordCodecBuilder.mapCodec(instance ->
             foliagePlacerParts(instance).and(
                     instance.group(
                             Codec.intRange(0,16).fieldOf("height").forGetter(placer -> placer.height),

@@ -1,27 +1,13 @@
 package net.firemuffin303.thaidelight;
 
 import net.firemuffin303.thaidelight.common.registry.*;
-import net.firemuffin303.thaidelight.common.world.trees.DurianTreeGrower;
 import net.firemuffin303.thaidelight.mixin.accessor.VillagerAccessor;
-import net.firemuffin303.thaidelight.mixin.food.ChickenFoodAccessor;
-import net.firemuffin303.thaidelight.mixin.food.FrogFoodAccessor;
-import net.firemuffin303.thaidelight.mixin.food.ParrotTameFoodAccessor;
-import net.firemuffin303.thaidelight.mixin.food.PigFoodAccessor;
 import net.firemuffin303.thaidelight.util.PlatformUtil;
-import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.grower.TreeGrower;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.pattern.BlockPattern;
-import net.minecraft.world.level.chunk.ChunkGenerator;
 
 import java.util.*;
-import java.util.stream.Stream;
 
 public class ThaiDelightCommon {
     public static final String MOD_ID = "muffins_thaidelight";
@@ -96,6 +82,7 @@ public class ThaiDelightCommon {
     }
 
     public static void registerAnimalFood(){
+        /*
         ParrotTameFoodAccessor.getTameFood().add(Item.byBlock(ModBlocks.PAPAYA_SAPLING.get()));
         ParrotTameFoodAccessor.getTameFood().add(ModItems.PEPPER_SEED.get());
         ParrotTameFoodAccessor.getTameFood().add(ModItems.BUTTERFLY_PEA_SEEDS.get());
@@ -125,6 +112,8 @@ public class ThaiDelightCommon {
                 Stream.concat(Arrays.stream(FrogFoodAccessor.getFoodItems().getItems()),Arrays.stream(newFrogFoods.getItems()))
         ));
 
+
+         */
     }
 
     public static void setVillagerItem(){

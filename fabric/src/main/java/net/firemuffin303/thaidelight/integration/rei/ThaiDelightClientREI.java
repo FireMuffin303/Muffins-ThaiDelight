@@ -48,8 +48,7 @@ public class ThaiDelightClientREI implements REIClientPlugin {
 
     @Override
     public void registerDisplays(DisplayRegistry registry) {
-        Supplier<RecipeType<MortarRecipe>> f = (Supplier<RecipeType<MortarRecipe>>) (Supplier<?>)ModRecipes.MORTAR;
-        registry.registerRecipeFiller(MortarRecipe.class, f.get(),MortarREIDisplay::new);
+        registry.registerRecipeFiller(MortarRecipe.class, ModRecipes.MORTAR.get(), MortarREIDisplay::new);
         registry.add(new CauldronCraftingREIDisplay(
                 List.of(EntryIngredients.ofItemTag(ModTags.COMMON_RAW_FISHES)),
                 List.of(EntryIngredients.of(ModItems.FERMENTED_FISH.get())),

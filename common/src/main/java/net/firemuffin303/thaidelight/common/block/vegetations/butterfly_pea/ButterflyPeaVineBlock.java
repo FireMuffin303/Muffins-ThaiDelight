@@ -78,8 +78,8 @@ public class ButterflyPeaVineBlock extends CropBlock {
         return super.useItemOn(itemStack, blockState, level, blockPos, player, interactionHand, blockHitResult);
     }
 
-    private void drop(ResourceLocation resourceLocation, ServerLevel serverLevel, ItemStack itemStack, BlockState blockState, BlockPos blockPos){
-        LootTable lootTable = serverLevel.getServer().reloadableRegistries().getLootTable(ResourceKey.create(Registries.LOOT_TABLE,resourceLocation));
+    private void drop(ResourceKey<LootTable> resourceLocation, ServerLevel serverLevel, ItemStack itemStack, BlockState blockState, BlockPos blockPos){
+        LootTable lootTable = serverLevel.getServer().reloadableRegistries().getLootTable(resourceLocation);
         LootParams params = new LootParams.Builder(serverLevel)
                 .withParameter(LootContextParams.BLOCK_STATE,blockState)
                 .withParameter(LootContextParams.ORIGIN,blockPos.getCenter())

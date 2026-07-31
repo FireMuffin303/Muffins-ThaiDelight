@@ -24,12 +24,7 @@ import static net.minecraft.world.level.block.Blocks.WHEAT;
 public class FabricBuddingButterflyPeaBlock extends BuddingBushBlock implements BonemealableBlock {
     public static final IntegerProperty BUDDING_AGE = BlockStateProperties.AGE_2;
     public FabricBuddingButterflyPeaBlock() {
-        super(BlockBehaviour.Properties.copy(WHEAT));
-    }
-
-    @Override
-    public BlockState getPlant(BlockGetter world, BlockPos pos) {
-        return ModBlocks.BUDDING_BUTTERFLY_PEA_BLOCK.get().defaultBlockState();
+        super(BlockBehaviour.Properties.ofFullCopy(WHEAT));
     }
 
     @Override
@@ -63,7 +58,7 @@ public class FabricBuddingButterflyPeaBlock extends BuddingBushBlock implements 
     }
 
     @Override
-    public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state, boolean isClient) {
+    public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state) {
         return true;
     }
 

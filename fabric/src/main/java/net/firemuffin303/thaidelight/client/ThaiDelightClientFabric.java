@@ -1,6 +1,5 @@
 package net.firemuffin303.thaidelight.client;
 
-import io.github.fabricators_of_create.porting_lib.recipe_book_categories.RecipeBookRegistry;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.model.loading.v1.ModelLoadingPlugin;
@@ -91,12 +90,13 @@ public class ThaiDelightClientFabric implements ClientModInitializer {
         ModelLoadingPlugin.register(new ModelLoadingPlugin() {
             @Override
             public void onInitializeModelLoader(Context context) {
+                /*
                 context.addModels(ThaiDelightCommonClient.SACK_MODEL,
                         ThaiDelightCommonClient.FILLED_SACK_MODEL,
                         ThaiDelightCommonClient.SACK_MODEL_IN_HAND,
                         ThaiDelightCommonClient.FULL_SACK_MODEL_IN_HAND
                 );
-
+                 */
             }
         });
 
@@ -153,11 +153,12 @@ public class ThaiDelightClientFabric implements ClientModInitializer {
             }
         });
 
-        ClientPlayNetworking.registerGlobalReceiver(ModLevelEventPacket.TYPE, ModLevelEventPacket::receive);
+        //ClientPlayNetworking.registerGlobalReceiver(ModLevelEventPacket.TYPE, ModLevelEventPacket::receive);
     }
 
 
     public static void registerRecipe(){
+        /*
         RecipeBookRegistry.registerBookCategories(MORTAR_RECIPE_BOOK_TYPE, List.of(MORTAR_SEARCH,MORTAR_MEALS,MORTAR_MISC));
         RecipeBookRegistry.registerAggregateCategory(MORTAR_SEARCH,List.of(MORTAR_MEALS,MORTAR_MISC));
         RecipeBookRegistry.registerRecipeCategoryFinder(ModRecipes.MORTAR.get(), recipe -> {
@@ -174,6 +175,8 @@ public class ThaiDelightClientFabric implements ClientModInitializer {
             return MORTAR_MISC;
         });
 
+
+         */
 
     }
 }

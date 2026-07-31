@@ -21,9 +21,9 @@ import static net.firemuffin303.thaidelight.common.registry.ModTags.*;
 
 public class ModTagDataGen {
     public static class ModItemTagDataGen extends FabricTagProvider.ItemTagProvider {
-        TagKey<Item> INSECT_ITEMS = TagKey.create(Registries.ITEM, new ResourceLocation("alexsmobs", "insect_items"));
-        TagKey<Item> FORGE_RAW_FISHES = TagKey.create(Registries.ITEM, new ResourceLocation("forge", "raw_fishes"));
-        TagKey<Item> C_RAW_FISHES = TagKey.create(Registries.ITEM, new ResourceLocation("c", "raw_fishes"));
+        TagKey<Item> INSECT_ITEMS = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("alexsmobs", "insect_items"));
+        TagKey<Item> FORGE_RAW_FISHES = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("forge", "raw_fishes"));
+        TagKey<Item> C_RAW_FISHES = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "raw_fishes"));
 
         public ModItemTagDataGen(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> completableFuture) {
             super(output, completableFuture, null);
@@ -43,14 +43,14 @@ public class ModTagDataGen {
                     ModItems.STEAMED_BAMBOO_SHOOT.get()
             );
 
-            getOrCreateTagBuilder(TagKey.create(Registries.ITEM, new ResourceLocation("origins", "meat")))
+            getOrCreateTagBuilder(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("origins", "meat")))
                     .add(ModItems.CRAB_MEAT.get())
                     .add(ModItems.COOKED_CRAB_MEAT.get())
                     .add(ModItems.DRAGONFLY.get())
                     .add(ModItems.COOKED_DRAGONFLY.get())
                     .add(ModItems.LARB.get());
 
-            getOrCreateTagBuilder(TagKey.create(Registries.ITEM, new ResourceLocation("create", "upright_on_belt")))
+            getOrCreateTagBuilder(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("create", "upright_on_belt")))
                     .add(
                             ModItems.FISH_SAUCE_BOTTLE.get(),
                             ModItems.LIME_JUICE.get(),
@@ -89,34 +89,34 @@ public class ModTagDataGen {
 
 
             getOrCreateTagBuilder(FERMENTED_DRINKS)
-                    .addOptional(new ResourceLocation("brewinandchewin","beer"))
-                    .addOptional(new ResourceLocation("brewinandchewin","vodka"))
-                    .addOptional(new ResourceLocation("brewinandchewin","mead"))
-                    .addOptional(new ResourceLocation("brewinandchewin","rice_wine"))
-                    .addOptional(new ResourceLocation("brewinandchewin","egg_grog"))
-                    .addOptional(new ResourceLocation("brewinandchewin","strongroot_ale"))
-                    .addOptional(new ResourceLocation("brewinandchewin","saccharine_rum"))
-                    .addOptional(new ResourceLocation("brewinandchewin","pale_jane"))
-                    .addOptional(new ResourceLocation("brewinandchewin","dread_nog"))
-                    .addOptional(new ResourceLocation("brewinandchewin","salty_folly"))
-                    .addOptional(new ResourceLocation("brewinandchewin","steel_toe_stout"))
-                    .addOptional(new ResourceLocation("brewinandchewin","glittering_grenadine"))
-                    .addOptional(new ResourceLocation("brewinandchewin","bloody_mary"))
-                    .addOptional(new ResourceLocation("brewinandchewin","red_rum"))
-                    .addOptional(new ResourceLocation("brewinandchewin","withering_dross"))
-                    .addOptional(new ResourceLocation("brewinandchewin","kombucha"))
-                    .addOptionalTag(new ResourceLocation("vinery","red_wine"))
-                    .addOptionalTag(new ResourceLocation("vinery","white_wine"));
+                    .addOptional(ResourceLocation.fromNamespaceAndPath("brewinandchewin","beer"))
+                    .addOptional(ResourceLocation.fromNamespaceAndPath("brewinandchewin","vodka"))
+                    .addOptional(ResourceLocation.fromNamespaceAndPath("brewinandchewin","mead"))
+                    .addOptional(ResourceLocation.fromNamespaceAndPath("brewinandchewin","rice_wine"))
+                    .addOptional(ResourceLocation.fromNamespaceAndPath("brewinandchewin","egg_grog"))
+                    .addOptional(ResourceLocation.fromNamespaceAndPath("brewinandchewin","strongroot_ale"))
+                    .addOptional(ResourceLocation.fromNamespaceAndPath("brewinandchewin","saccharine_rum"))
+                    .addOptional(ResourceLocation.fromNamespaceAndPath("brewinandchewin","pale_jane"))
+                    .addOptional(ResourceLocation.fromNamespaceAndPath("brewinandchewin","dread_nog"))
+                    .addOptional(ResourceLocation.fromNamespaceAndPath("brewinandchewin","salty_folly"))
+                    .addOptional(ResourceLocation.fromNamespaceAndPath("brewinandchewin","steel_toe_stout"))
+                    .addOptional(ResourceLocation.fromNamespaceAndPath("brewinandchewin","glittering_grenadine"))
+                    .addOptional(ResourceLocation.fromNamespaceAndPath("brewinandchewin","bloody_mary"))
+                    .addOptional(ResourceLocation.fromNamespaceAndPath("brewinandchewin","red_rum"))
+                    .addOptional(ResourceLocation.fromNamespaceAndPath("brewinandchewin","withering_dross"))
+                    .addOptional(ResourceLocation.fromNamespaceAndPath("brewinandchewin","kombucha"))
+                    .addOptionalTag(ResourceLocation.fromNamespaceAndPath("vinery","red_wine"))
+                    .addOptionalTag(ResourceLocation.fromNamespaceAndPath("vinery","white_wine"));
 
 
 
             getOrCreateTagBuilder(MANGO)
                     .add(ModItems.MANGO.get(),ModItems.MANGO_SLICE.get())
-                    .addOptional(new ResourceLocation("fishofthieves","mango"));
+                    .addOptional(ResourceLocation.fromNamespaceAndPath("fishofthieves","mango"));
 
             getOrCreateTagBuilder(COCONUT)
                     .add(ModItems.COCONUT.get(),ModItems.STRIPPED_COCONUT.get(),ModItems.COCONUT_SLICE.get())
-                    .addOptional(new ResourceLocation("fishofthieves","coconut"));
+                    .addOptional(ResourceLocation.fromNamespaceAndPath("fishofthieves","coconut"));
 
 
             getOrCreateTagBuilder(ModTags.FLOWER_CRAB_MEAT)
@@ -146,17 +146,17 @@ public class ModTagDataGen {
                     .add(ModItems.DRAGONFLY.get())
                     .add(ModItems.COOKED_DRAGONFLY.get());
 
-            getOrCreateTagBuilder(TagKey.create(Registries.ITEM, new ResourceLocation("crabbersdelight", "cooked_seafood")))
+            getOrCreateTagBuilder(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("crabbersdelight", "cooked_seafood")))
                     .add(ModItems.COOKED_CRAB_MEAT.get());
 
-            getOrCreateTagBuilder(TagKey.create(Registries.ITEM, new ResourceLocation("crabbersdelight", "raw_seafood")))
+            getOrCreateTagBuilder(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("crabbersdelight", "raw_seafood")))
                     .add(ModItems.CRAB_MEAT.get());
 
-            getOrCreateTagBuilder(TagKey.create(Registries.ITEM, new ResourceLocation("forge", "seeds")))
+            getOrCreateTagBuilder(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("forge", "seeds")))
                     .add(ModItems.PEPPER_SEED.get())
                     .add(ModItems.PAPAYA_SEEDS.get());
 
-            getOrCreateTagBuilder(TagKey.create(Registries.ITEM, new ResourceLocation("c","foods/cooked_meats")))
+            getOrCreateTagBuilder(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c","foods/cooked_meats")))
                     .add(ModItems.COOKED_CRAB_MEAT.get())
                     .add(ModItems.COOKED_DRAGONFLY.get());
 
@@ -252,13 +252,13 @@ public class ModTagDataGen {
 
 
             getOrCreateTagBuilder(PINEAPPLE).addOptional(
-                    new ResourceLocation("fishofthieves","crownless_pineapple")
+                    ResourceLocation.fromNamespaceAndPath("fishofthieves","crownless_pineapple")
             ).addOptional(
-                    new ResourceLocation("fishofthieves","pineapple")
+                    ResourceLocation.fromNamespaceAndPath("fishofthieves","pineapple")
             );
 
             getOrCreateTagBuilder(BANANA).addOptional(
-                    new ResourceLocation("fishofthieves","banana")
+                    ResourceLocation.fromNamespaceAndPath("fishofthieves","banana")
             );
 
             getOrCreateTagBuilder(SPRING_CROPS_ITEM).add(
@@ -283,7 +283,7 @@ public class ModTagDataGen {
             );
 
             getOrCreateTagBuilder(COMMON_RAW_FISHES).addOptionalTag(
-                    TagKey.create(Registries.ITEM,new ResourceLocation("forge","raw_fishes"))
+                    TagKey.create(Registries.ITEM,ResourceLocation.fromNamespaceAndPath("forge","raw_fishes"))
             );
         }
     }

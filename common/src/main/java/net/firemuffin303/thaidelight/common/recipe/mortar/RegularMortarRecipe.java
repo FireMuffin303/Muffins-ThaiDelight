@@ -1,6 +1,8 @@
 package net.firemuffin303.thaidelight.common.recipe.mortar;
 
+import net.firemuffin303.thaidelight.common.menu.MortarInput;
 import net.firemuffin303.thaidelight.common.registry.ModRecipes;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
@@ -12,15 +14,13 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 
 public class RegularMortarRecipe implements MortarRecipe{
-    private final ResourceLocation id;
-    private final String group;
-    private final NonNullList<Ingredient> ingredients;
-    private final ItemStack container;
-    private final ItemStack result;
-    private MortarRecipeBookTab mortarRecipeBookTab;
+    protected final String group;
+    protected final NonNullList<Ingredient> ingredients;
+    protected final ItemStack container;
+    protected final ItemStack result;
+    protected MortarRecipeBookTab mortarRecipeBookTab;
 
-    public RegularMortarRecipe(ResourceLocation id, String group, NonNullList<Ingredient> ingredients,ItemStack container, ItemStack result,MortarRecipeBookTab mortarRecipeBookTab) {
-        this.id = id;
+    public RegularMortarRecipe(String group, NonNullList<Ingredient> ingredients,ItemStack container, ItemStack result,MortarRecipeBookTab mortarRecipeBookTab) {
         this.group = group;
         this.ingredients = ingredients;
         this.container = container;
@@ -28,10 +28,6 @@ public class RegularMortarRecipe implements MortarRecipe{
         this.mortarRecipeBookTab = mortarRecipeBookTab;
     }
 
-    @Override
-    public ResourceLocation getId() {
-        return this.id;
-    }
 
     @Override
     public String getGroup() {
@@ -39,7 +35,7 @@ public class RegularMortarRecipe implements MortarRecipe{
     }
 
     @Override
-    public ItemStack getResultItem(RegistryAccess registryAccess) {
+    public ItemStack getResultItem(HolderLookup.Provider provider) {
         return this.result;
     }
 
@@ -57,29 +53,34 @@ public class RegularMortarRecipe implements MortarRecipe{
     }
 
     @Override
-    public boolean matches(Container container, Level level) {
+    public boolean matches(MortarInput recipeInput, Level level) {
+        if(recipeInput.itemStacks().size() != this.ingredients.size()){
+            return false;
+        }
+
         StackedContents stackedContents = new StackedContents();
         int i =0;
-        for(int j = 1; j < 5; j++){
-            ItemStack itemStack = container.getItem(j);
+        for(int j = 0; j < 4; j++){
+            ItemStack itemStack = recipeInput.getItem(j);
             if(!itemStack.isEmpty()){
                 stackedContents.accountStack(itemStack,1);
                 ++i;
             }
         }
 
-        return i == this.ingredients.size() && stackedContents.canCraft(this,null) && this.container.is(container.getItem(5).getItem());
+        return i == this.ingredients.size() && stackedContents.canCraft(this,null) && this.container.is(recipeInput.getItem(4).getItem());
     }
 
     @Override
-    public ItemStack assemble(Container container, RegistryAccess registryAccess) {
-        return this.getResultItem(registryAccess).copy();
+    public ItemStack assemble(MortarInput recipeInput, HolderLookup.Provider provider) {
+        return this.result.copy();
     }
 
     @Override
     public boolean canCraftInDimensions(int i, int j) {
         return i * j >= this.ingredients.size();
     }
+
 
     @Override
     public RecipeSerializer<?> getSerializer() {

@@ -15,13 +15,13 @@ public abstract class LivingEntityMixin {
     @ModifyReturnValue(method = "getVisibilityPercent",at = @At("RETURN"))
     public double muffins$modifyVisibilityPercent(double original){
         LivingEntity livingEntity = ((LivingEntity)(Object)this);
-        if( livingEntity.hasEffect(ModMobEffects.STINKY.get()) ){
+        if( livingEntity.hasEffect(ModMobEffects.STINKY) ){
             float decreaseScentRate = 1.0f;
             if(livingEntity.isUnderWater()){
                 decreaseScentRate = 0.8f;
             }
 
-            MobEffectInstance effect = livingEntity.getEffect(ModMobEffects.STINKY.get());
+            MobEffectInstance effect = livingEntity.getEffect(ModMobEffects.STINKY);
             return original * ((1.5f * (Objects.requireNonNull(effect).getAmplifier()+1) ) * decreaseScentRate);
         }
 

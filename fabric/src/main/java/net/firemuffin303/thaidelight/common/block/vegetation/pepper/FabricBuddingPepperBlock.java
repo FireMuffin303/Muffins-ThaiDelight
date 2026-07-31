@@ -28,11 +28,6 @@ public class FabricBuddingPepperBlock extends BuddingBushBlock implements Boneme
     }
 
     @Override
-    public BlockState getPlant(BlockGetter world, BlockPos pos) {
-        return ModBlocks.BUDDING_PEPPER_CROP.get().defaultBlockState();
-    }
-
-    @Override
     public boolean mayPlaceOn(BlockState pState, BlockGetter pLevel, BlockPos pPos) {
         return pState.is(vectorwing.farmersdelight.common.registry.ModBlocks.RICH_SOIL_FARMLAND.get()) || pState.is(Blocks.FARMLAND);
     }
@@ -71,7 +66,7 @@ public class FabricBuddingPepperBlock extends BuddingBushBlock implements Boneme
     }
 
     @Override
-    public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState, boolean bl) {
+    public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState) {
         return true;
     }
 

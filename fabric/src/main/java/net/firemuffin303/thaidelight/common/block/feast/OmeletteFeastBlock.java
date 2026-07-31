@@ -20,7 +20,7 @@ public class OmeletteFeastBlock extends FeastBlock {
 
 
     public OmeletteFeastBlock(Supplier<Item> servingItem) {
-        super(Properties.copy(Blocks.CAKE), servingItem, false);
+        super(Properties.ofFullCopy(Blocks.CAKE), servingItem, false);
     }
 
     @Override

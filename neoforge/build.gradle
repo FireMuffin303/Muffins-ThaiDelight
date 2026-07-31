@@ -1,0 +1,72 @@
+plugins {
+    id "com.github.johnrengelman.shadow"
+}
+
+architectury {
+    platformSetupLoomIde()
+    neoForge(){
+        platformPackage = "forge"
+    }
+}
+
+loom {
+    accessWidenerPath = project(":common").loom.accessWidenerPath
+}
+
+configurations {
+    common
+    shadowCommon // Don't use shadow from the shadow plugin since it *excludes* files.
+    compileClasspath.extendsFrom common
+    runtimeClasspath.extendsFrom common
+    developmentNeoForge.extendsFrom common
+}
+
+dependencies {
+    neoForge "net.neoforged:neoforge:$rootProject.neoforge_version"
+
+    modImplementation("maven.modrinth:farmers-delight:${rootProject.farmersdelight_forge_version}")
+    modImplementation "net.firemuffin303:muffins_ovenapi-neoforge:${rootProject.muffins_api_version}"
+
+    modApi("me.shedaniel.cloth:cloth-config-neoforge:$rootProject.cloth_config_version")
+
+    common(project(path: ':common', configuration: 'namedElements')) { transitive false }
+    shadowCommon project(path: ':common', configuration: 'transformProductionNeoForge')
+}
+
+processResources {
+    inputs.property "version", project.version
+    inputs.property "mod_id" , rootProject.mod_id
+    inputs.property "farmersdelight_version", rootProject.farmersdelight_forge_version
+
+    filesMatching("META-INF/neoforge.mods.toml") {
+        expand "version": project.version,
+        "mod_id":rootProject.mod_id,
+        "farmersdelight_version": rootProject.farmersdelight_forge_version
+    }
+}
+
+shadowJar {
+    exclude "fabric.mod.json"
+    exclude "architectury.common.json"
+
+    configurations = [project.configurations.shadowCommon]
+}
+
+remapJar {
+    input.set shadowJar.archiveFile
+    dependsOn shadowJar
+}
+
+
+sourcesJar {
+    def commonSources = project(":common").sourcesJar
+    dependsOn commonSources
+    from commonSources.archiveFile.map { zipTree(it) }
+}
+
+components.java {
+    withVariantsFromConfiguration(project.configurations.shadowRuntimeElements) {
+        skip()
+    }
+}
+

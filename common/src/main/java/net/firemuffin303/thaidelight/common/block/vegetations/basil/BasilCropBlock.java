@@ -31,10 +31,10 @@ import java.util.List;
 
 public class BasilCropBlock extends CropBlock {
     public static final IntegerProperty AGE = BlockStateProperties.AGE_3;
-    private final ResourceLocation harvestLoot;
-    private final ResourceLocation shearsLoot;
+    private final ResourceKey<LootTable> harvestLoot;
+    private final ResourceKey<LootTable> shearsLoot;
 
-    public BasilCropBlock(Properties properties,ResourceLocation harvestLoot,ResourceLocation shearsLoot) {
+    public BasilCropBlock(Properties properties,ResourceKey<LootTable> harvestLoot,ResourceKey<LootTable> shearsLoot) {
         super(properties);
         this.harvestLoot = harvestLoot;
         this.shearsLoot = shearsLoot;
@@ -55,8 +55,8 @@ public class BasilCropBlock extends CropBlock {
     }
 
 
-    private void drop(ResourceLocation resourceLocation, ServerLevel serverLevel, ItemStack itemStack, BlockState blockState, BlockPos blockPos){
-        LootTable lootTable = serverLevel.getServer().reloadableRegistries().getLootTable(ResourceKey.create(Registries.LOOT_TABLE,resourceLocation));
+    private void drop(ResourceKey<LootTable> resourceLocation, ServerLevel serverLevel, ItemStack itemStack, BlockState blockState, BlockPos blockPos){
+        LootTable lootTable = serverLevel.getServer().reloadableRegistries().getLootTable(resourceLocation);
         LootParams params = new LootParams.Builder(serverLevel)
                 .withParameter(LootContextParams.BLOCK_STATE,blockState)
                 .withParameter(LootContextParams.ORIGIN,blockPos.getCenter())

@@ -17,7 +17,7 @@ public class PhatKaphraoFeastBlock extends FeastBlock {
     final VoxelShape PIE_SHAPE = Shapes.joinUnoptimized(PLATE_SHAPE, Block.box(2.0D, 2.0D, 2.0D, 14.0D, 4.0D, 14.0D), BooleanOp.OR);
 
     public PhatKaphraoFeastBlock() {
-        super(Properties.copy(Blocks.CAKE),ModItems.PHAT_KAPHRAO, false);
+        super(Properties.ofFullCopy(Blocks.CAKE),ModItems.PHAT_KAPHRAO, false);
     }
 
     @Override

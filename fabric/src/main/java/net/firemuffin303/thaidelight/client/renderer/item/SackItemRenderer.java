@@ -21,8 +21,8 @@ import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 
 public class SackItemRenderer implements BuiltinItemRendererRegistry.DynamicItemRenderer {
-    public static final ModelResourceLocation CATCHER_IN_HAND_MODEL = new ModelResourceLocation(ThaiDelightCommon.MOD_ID,"catcher_bag_in_hand","inventory");
-    public static final ModelResourceLocation CATCHER_MODEL = new ModelResourceLocation(ThaiDelightCommon.MOD_ID,"catcher_bag_inventory","inventory");
+    public static final ModelResourceLocation CATCHER_IN_HAND_MODEL = new ModelResourceLocation(ThaiDelightCommon.modid("catcher_bag_in_hand"),"inventory");
+    public static final ModelResourceLocation CATCHER_MODEL = new ModelResourceLocation(ThaiDelightCommon.modid("catcher_bag_inventory"),"inventory");
     private ModelManager modelManager;
     private final SackBlockEntity sackBlockEntity = new SackBlockEntity(BlockPos.ZERO, ModBlocks.SACK.get().defaultBlockState());
 
@@ -39,8 +39,7 @@ public class SackItemRenderer implements BuiltinItemRendererRegistry.DynamicItem
         if(mode == ItemDisplayContext.THIRD_PERSON_LEFT_HAND){
             isLeftHand = true;
         }
-        boolean bl = BlockItem.getBlockEntityData(stack) != null;
-        this.sackBlockEntity.load(BlockItem.getBlockEntityData(stack));
+        //this.sackBlockEntity.load(BlockItem.getBlockEntityData(stack));
 
         matrices.pushPose();
 

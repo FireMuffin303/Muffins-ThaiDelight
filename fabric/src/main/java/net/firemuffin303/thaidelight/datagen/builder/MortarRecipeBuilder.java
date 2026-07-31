@@ -5,24 +5,28 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.firemuffin303.thaidelight.ThaiDelightCommon;
 import net.firemuffin303.thaidelight.common.recipe.mortar.MortarRecipeBookTab;
+import net.firemuffin303.thaidelight.common.recipe.mortar.RegularMortarRecipe;
 import net.firemuffin303.thaidelight.common.registry.ModRecipes;
-import net.minecraft.advancements.Advancement;
-import net.minecraft.advancements.CriterionTriggerInstance;
-import net.minecraft.advancements.RequirementsStrategy;
+import net.minecraft.advancements.*;
 import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
+import net.minecraft.core.NonNullList;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeBuilder;
+import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.function.Consumer;
 
 public class MortarRecipeBuilder implements RecipeBuilder {
@@ -33,7 +37,7 @@ public class MortarRecipeBuilder implements RecipeBuilder {
     private String modid = ThaiDelightCommon.MOD_ID;
     private MortarRecipeBookTab mortarRecipeBookTab = MortarRecipeBookTab.MISC;
 
-    private final Advancement.Builder advancement = Advancement.Builder.recipeAdvancement();
+    private final Map<String, Criterion<?>> criteria = new LinkedHashMap();
     @Nullable
     private String group;
 
@@ -52,8 +56,8 @@ public class MortarRecipeBuilder implements RecipeBuilder {
     }
 
     @Override
-    public RecipeBuilder unlockedBy(String string, CriterionTriggerInstance criterionTriggerInstance) {
-        this.advancement.addCriterion(string,criterionTriggerInstance);
+    public RecipeBuilder unlockedBy(String string, Criterion<?> criterion) {
+        this.criteria.put(string,criterion);
         return this;
     }
 
@@ -107,107 +111,25 @@ public class MortarRecipeBuilder implements RecipeBuilder {
     }
 
     @Override
-    public void save(Consumer<FinishedRecipe> consumer, ResourceLocation resourceLocation) {
+    public void save(RecipeOutput recipeOutput, ResourceLocation resourceLocation) {
         this.ensureValid(resourceLocation);
-        this.advancement.parent(ROOT_RECIPE_ADVANCEMENT)
-                .addCriterion("has_the_recipe",
-                        RecipeUnlockedTrigger.unlocked(resourceLocation))
-                .rewards(net.minecraft.advancements.AdvancementRewards.Builder.recipe(resourceLocation))
-                .requirements(RequirementsStrategy.OR);
-        consumer.accept(new Result(resourceLocation,
-                this.group == null ? "":this.group,
-                this.ingredients,
-                this.container,
-                this.result,
-                this.count,
-                this.mortarRecipeBookTab,
-                this.advancement,
-                resourceLocation.withPrefix("recipes/")));
+        Advancement.Builder builder = recipeOutput.advancement()
+                .addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(resourceLocation))
+                .rewards(AdvancementRewards.Builder.recipe(resourceLocation))
+                .requirements(AdvancementRequirements.Strategy.OR);
+
+        NonNullList<Ingredient> ingredients1 = NonNullList.create();
+        ingredients1.addAll(this.ingredients);
+
+        RegularMortarRecipe recipe = new RegularMortarRecipe(Objects.requireNonNull(this.group,""),ingredients1,new ItemStack(this.container),new ItemStack(this.result,this.count),this.mortarRecipeBookTab);
+
+        recipeOutput.accept(resourceLocation,recipe,builder.build(resourceLocation.withPrefix("recipes/")));
+
     }
 
     private void ensureValid(ResourceLocation arg) {
-        if (this.advancement.getCriteria().isEmpty()) {
+        if (this.criteria.isEmpty()) {
             throw new IllegalStateException("No way of obtaining recipe " + arg);
-        }
-    }
-
-    static class Result implements FinishedRecipe{
-        private final ResourceLocation id;
-        private final String group;
-        private final List<Ingredient> ingredients;
-        private final Item container;
-        private final Item result;
-        private final int count;
-        private final MortarRecipeBookTab mortarRecipeBookTab;
-        private final Advancement.Builder advancement;
-        private final ResourceLocation advancementId;
-
-
-        public Result(ResourceLocation resourceLocation, String group, List<Ingredient> ingredients,Item container, Item itemStack, int count,MortarRecipeBookTab mortarRecipeBookTab, Advancement.Builder builder,ResourceLocation advancementId){
-            this.id = resourceLocation;
-            this.group = group;
-            this.ingredients = ingredients;
-            this.container = container;
-            this.result = itemStack;
-            this.count = count;
-            this.advancement = builder;
-            this.advancementId = advancementId;
-            this.mortarRecipeBookTab = mortarRecipeBookTab;
-        }
-
-        @Override
-        public void serializeRecipeData(JsonObject jsonObject) {
-            if(!this.group.isEmpty()){
-                jsonObject.addProperty("group",this.group);
-            }
-
-            JsonArray jsonArray = new JsonArray();
-
-            for (Ingredient ingredient : this.ingredients) {
-                jsonArray.add(ingredient.toJson());
-            }
-
-            jsonObject.add("ingredients", jsonArray);
-
-            if(this.container != Items.AIR){
-                JsonObject container = new JsonObject();
-                container.addProperty("item",BuiltInRegistries.ITEM.getKey(this.container).toString());
-                jsonObject.add("container", container);
-            }
-
-
-            JsonObject jsonObject2 = new JsonObject();
-            jsonObject2.addProperty("item", BuiltInRegistries.ITEM.getKey(this.result).toString());
-            if (this.count > 1) {
-                jsonObject2.addProperty("count", this.count);
-            }
-
-            jsonObject.add("result", jsonObject2);
-
-            jsonObject.addProperty("recipe_book_tab",this.mortarRecipeBookTab.name);
-
-        }
-
-        @Override
-        public ResourceLocation getId() {
-            return this.id;
-        }
-
-        @Override
-        public RecipeSerializer<?> getType() {
-            return ModRecipes.MORTAR_SERIALIZER.get();
-        }
-
-        @Nullable
-        @Override
-        public JsonObject serializeAdvancement() {
-            return this.advancement.serializeToJson();
-        }
-
-        @Nullable
-        @Override
-        public ResourceLocation getAdvancementId() {
-            return this.advancementId;
         }
     }
 }

@@ -19,11 +19,16 @@ import net.firemuffin303.thaidelight.common.registry.ModBlockEntityTypes;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
+import net.minecraft.core.Holder;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.loot.packs.VanillaBlockLoot;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.storage.loot.IntRange;
@@ -40,34 +45,35 @@ import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import vectorwing.farmersdelight.common.block.FeastBlock;
 
+import java.lang.ref.Reference;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 public class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
-    private static final LootItemCondition.Builder HAS_NO_SHEARS_OR_SILK_TOUCH = HAS_SHEARS.or(HAS_SILK_TOUCH).invert();
-    private static final float[] NORMAL_LEAVES_STICK_CHANCES = new float[]{0.02F, 0.022222223F, 0.025F, 0.033333335F, 0.1F};
-
-    public ModBlockLootTableProvider(FabricDataOutput dataOutput) {
-        super(dataOutput);
+    public ModBlockLootTableProvider(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
+        super(dataOutput, registryLookup);
     }
 
 
     @Override
     public void generate() {
+        HolderLookup.RegistryLookup<Enchantment> registryLookup = this.registries.lookupOrThrow(Registries.ENCHANTMENT);
+
         this.createSimpleLoot(ModBlocks.MORTAR.get());
 
         this.add(ModBlocks.SACK.get(),block -> LootTable.lootTable().withPool(
                 this.applyExplosionCondition(block,
                         LootPool.lootPool().setRolls(ConstantValue.exactly(1.0f))
                                 .add(((
-                                        LootItem.lootTableItem(block).apply(CopyNameFunction.copyName(CopyNameFunction.NameSource.BLOCK_ENTITY))
-                                ).apply(
-                                        CopyNbtFunction.copyData(ContextNbtProvider.BLOCK_ENTITY)
-                                                .copy("Lock", "BlockEntityTag.Lock")
-                                                .copy("LootTable", "BlockEntityTag.LootTable")
-                                                .copy("LootTableSeed", "BlockEntityTag.LootTableSeed"))
-                                ).apply(
-                                        SetContainerContents.setContents(ModBlockEntityTypes.SACK_BLOCK_ENTITY.get())
-                                                .withEntry(DynamicLoot.dynamicEntry(SackBlock.CONTENTS)))))));
+                                        LootItem.lootTableItem(block).apply(CopyComponentsFunction.copyComponents(
+                                                CopyComponentsFunction.Source.BLOCK_ENTITY
+                                        )
+                                                .include(DataComponents.CUSTOM_NAME)
+                                                        .include(DataComponents.CONTAINER)
+                                                        .include(DataComponents.LOCK)
+                                                        .include(DataComponents.CONTAINER_LOOT)
+                                        )
+                                ))))));
 
         this.createSimpleLoot(ModBlocks.LIME_CRATE.get());
         this.createSimpleLoot(ModBlocks.PEPPER_CRATE.get());
@@ -95,7 +101,8 @@ public class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
                                                 )
                                         )
                                         .add(LootItem.lootTableItem(ModItems.LIME.get())
-                                                .apply(ApplyBonusCount.addBonusBinomialDistributionCount(Enchantments.BLOCK_FORTUNE,0.5714286F, 3))
+                                                .apply(ApplyBonusCount.addBonusBinomialDistributionCount(
+                                                        registryLookup.getOrThrow(Enchantments.FORTUNE),0.5714286F, 3))
                                         )
                                 )
                 )
@@ -114,13 +121,15 @@ public class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
                         .withPool(LootPool.lootPool()
                                 .when(HAS_SHEARS.invert())
                                 .add(LootItem.lootTableItem(ModItems.PEPPER.get())
-                                        .apply(ApplyBonusCount.addBonusBinomialDistributionCount(Enchantments.BLOCK_FORTUNE, 0.5714286F, 3)))
+                                        .apply(ApplyBonusCount.addBonusBinomialDistributionCount(
+                                                registryLookup.getOrThrow(Enchantments.FORTUNE), 0.5714286F, 3)))
 
                         )
                         .withPool(LootPool.lootPool()
                                 .when(HAS_SHEARS.invert())
                                 .add(LootItem.lootTableItem(ModItems.PEPPER_SEED.get())
-                                        .apply(ApplyBonusCount.addBonusBinomialDistributionCount(Enchantments.BLOCK_FORTUNE, 0.5714286F, 3)))
+                                        .apply(ApplyBonusCount.addBonusBinomialDistributionCount(
+                                                registryLookup.getOrThrow(Enchantments.FORTUNE), 0.5714286F, 3)))
                         )
         ));
 
@@ -134,7 +143,7 @@ public class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
                                         .hasProperty(HangingDurianBlock.AGE,0)
                                 ))
                         .add(LootItem.lootTableItem(ModItems.SMALL_DURIAN.get())
-                                .when(VanillaBlockLoot.HAS_SILK_TOUCH)
+                                .when(this.hasSilkTouch())
                                 .otherwise(this.applyExplosionDecay(block,LootItem.lootTableItem(ModItems.DURIAN_PULP.get())))
                         )
                 )
@@ -153,7 +162,7 @@ public class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
                 LootTable.lootTable().withPool(
                         LootPool.lootPool().setRolls(ConstantValue.exactly(1.0f))
                                 .add(LootItem.lootTableItem(block)
-                                        .when(VanillaBlockLoot.HAS_SILK_TOUCH)
+                                        .when(this.hasSilkTouch())
                                         .apply(List.of(2,3),
                                                 integer -> SetItemCountFunction.setCount(ConstantValue.exactly(integer))
 
@@ -174,16 +183,18 @@ public class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
                                                                                 )
                                                                 )
                                                         )
-                                                        .apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE))
+                                                        .apply(ApplyBonusCount.addUniformBonusCount(
+                                                                registryLookup.getOrThrow(Enchantments.FORTUNE)
+                                                        ))
                                                         .apply(LimitCount.limitCount(IntRange.upperBound(2)))
                                         )))
                 )
         );
 
-        this.add(ModBlocks.DURIAN_BLOCK.get(),block -> VanillaBlockLoot.createSilkTouchDispatchTable(block,this.applyExplosionDecay(block,
+        this.add(ModBlocks.DURIAN_BLOCK.get(),block -> this.createSilkTouchDispatchTable(block,this.applyExplosionDecay(block,
                 LootItem.lootTableItem(ModItems.DURIAN_PULP.get())
                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(2,3)))
-                        .apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE))
+                        .apply(ApplyBonusCount.addUniformBonusCount(registryLookup.getOrThrow(Enchantments.FORTUNE)))
                         .apply(LimitCount.limitCount(IntRange.upperBound(4)))
         )));
 
@@ -311,7 +322,7 @@ public class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
                         .withPool(LootPool.lootPool()
                                 .when(HAS_SHEARS.invert())
                                 .add(LootItem.lootTableItem(ModItems.BASIL.get())
-                                        .apply(ApplyBonusCount.addBonusBinomialDistributionCount(Enchantments.BLOCK_FORTUNE, 0.5714286F, 3)))
+                                        .apply(ApplyBonusCount.addBonusBinomialDistributionCount(registryLookup.getOrThrow(Enchantments.FORTUNE), 0.5714286F, 3)))
                         )
         ));
 
@@ -328,7 +339,7 @@ public class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
                             .withPool(LootPool.lootPool()
                                     .add(LootItem.lootTableItem(ModItems.BUTTERFLY_PEA.get())
                                             .when(condition)
-                                            .apply(ApplyBonusCount.addBonusBinomialDistributionCount(Enchantments.BLOCK_FORTUNE,0.5714286F, 3))
+                                            .apply(ApplyBonusCount.addBonusBinomialDistributionCount(registryLookup.getOrThrow(Enchantments.FORTUNE),0.5714286F, 3))
                                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(3,4)))
                                             .apply(LimitCount.limitCount(IntRange.exact(4)))
                                             .otherwise(LootItem.lootTableItem(ModItems.BUTTERFLY_PEA_SEEDS.get()))
@@ -336,7 +347,7 @@ public class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
                             ).withPool(LootPool.lootPool()
                                     .when(condition)
                                     .add(LootItem.lootTableItem(ModItems.BUTTERFLY_PEA_SEEDS.get())
-                                            .apply(ApplyBonusCount.addBonusBinomialDistributionCount(Enchantments.BLOCK_FORTUNE,0.5714286F, 3))
+                                            .apply(ApplyBonusCount.addBonusBinomialDistributionCount(registryLookup.getOrThrow(Enchantments.FORTUNE),0.5714286F, 3))
                                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(3)))
                                             .apply(LimitCount.limitCount(IntRange.exact(5)))
                                     )
@@ -362,7 +373,7 @@ public class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
                                     .withPool(LootPool.lootPool()
                                             .add(LootItem.lootTableItem(ModItems.PEPPER.get())
                                                     .apply(ApplyBonusCount.addBonusBinomialDistributionCount(
-                                                            Enchantments.BLOCK_FORTUNE,0.5714286F, 3))
+                                                            registryLookup.getOrThrow(Enchantments.FORTUNE),0.5714286F, 3))
                                                     .apply(LimitCount.limitCount(IntRange.upperBound(4)))
                                                     .when(pepperCropBuilder)
                                                     .otherwise(
@@ -387,7 +398,7 @@ public class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
                         .add(LootItem.lootTableItem(ModItems.BASIL.get())
                                 .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
                                         .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(BasilCropBlock.AGE,3)))
-                                .apply(ApplyBonusCount.addBonusBinomialDistributionCount(Enchantments.BLOCK_FORTUNE, 0.5714286F, 3))
+                                .apply(ApplyBonusCount.addBonusBinomialDistributionCount(registryLookup.getOrThrow(Enchantments.FORTUNE), 0.5714286F, 3))
                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(2,4)))
                                 .otherwise(
                                         LootItem.lootTableItem(ModItems.BASIL.get())
@@ -494,8 +505,6 @@ public class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
         );
     }
 
-    public LootTable.Builder createLeavesDrops(Block block, Block block2, float... fs) {
-        return createSilkTouchOrShearsDispatchTable(block, ((net.minecraft.world.level.storage.loot.entries.LootPoolSingletonContainer.Builder)this.applyExplosionCondition(block, LootItem.lootTableItem(block2))).when(BonusLevelTableCondition.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, fs))).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).when(HAS_NO_SHEARS_OR_SILK_TOUCH).add(((net.minecraft.world.level.storage.loot.entries.LootPoolSingletonContainer.Builder)this.applyExplosionDecay(block, LootItem.lootTableItem(Items.STICK).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))).when(BonusLevelTableCondition.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, NORMAL_LEAVES_STICK_CHANCES))));
-    }
+
 
 }

@@ -17,7 +17,7 @@ public class CrabFriedRiceFeastBlock extends FeastBlock {
     final VoxelShape PIE_SHAPE = Shapes.joinUnoptimized(PLATE_SHAPE, Block.box(3.0D, 2.0D, 3.0D, 13.0D, 5.0D, 13.0D), BooleanOp.OR);
 
     public CrabFriedRiceFeastBlock() {
-        super(Properties.copy(Blocks.CAKE), ModItems.CRAB_FRIED_RICE, true);
+        super(Properties.ofFullCopy(Blocks.CAKE), ModItems.CRAB_FRIED_RICE, true);
     }
 
     @Override

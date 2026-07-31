@@ -17,7 +17,7 @@ public class LarbFeastBlock extends FeastBlock {
     final VoxelShape PIE_SHAPE = Shapes.joinUnoptimized(PLATE_SHAPE, Block.box(3.0D, 2.0D, 3.0D, 13.0D, 5.0D, 13.0D), BooleanOp.OR);
 
     public LarbFeastBlock() {
-        super(Properties.copy(Blocks.CAKE), ModItems.LARB, true);
+        super(Properties.ofFullCopy(Blocks.CAKE), ModItems.LARB, true);
     }
 
     @Override

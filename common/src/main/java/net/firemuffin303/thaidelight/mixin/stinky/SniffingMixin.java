@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class SniffingMixin {
     @Inject(method = "method_42159" , at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/monster/warden/Warden;increaseAngerAt(Lnet/minecraft/world/entity/Entity;)V",shift = At.Shift.AFTER))
     private static void muffinsThaiDelight$stop(Warden warden, LivingEntity livingEntity, CallbackInfo ci){
-        if(livingEntity.hasEffect(ModMobEffects.STINKY.get())){
+        if(livingEntity.hasEffect(ModMobEffects.STINKY)){
             warden.increaseAngerAt(livingEntity,150,false);
         }
     }

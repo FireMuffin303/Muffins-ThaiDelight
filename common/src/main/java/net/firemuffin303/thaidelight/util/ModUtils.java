@@ -131,8 +131,7 @@ public class ModUtils {
     }
 
     public static int getColor(ItemStack itemStack) {
-        CompoundTag compoundTag = itemStack.getTagElement("display");
-        return compoundTag != null && compoundTag.contains("color", 99) ? compoundTag.getInt("color") : 0xFFFFFF;
+        return itemStack.has(DataComponents.DYED_COLOR) ? itemStack.get(DataComponents.DYED_COLOR).rgb() : 0xFFFFFF;
     }
 
 

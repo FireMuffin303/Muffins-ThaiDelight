@@ -39,11 +39,8 @@ import net.minecraft.world.item.alchemy.PotionBrewing;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.Heightmap;
-import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.level.pathfinder.PathType;
-import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 
 public class ThaiDelightFabric implements ModInitializer {
@@ -77,9 +74,9 @@ public class ThaiDelightFabric implements ModInitializer {
         FabricBrewingRecipeRegistryBuilder.BUILD.register(new FabricBrewingRecipeRegistryBuilder.BuildCallback() {
             @Override
             public void build(PotionBrewing.Builder builder) {
-                builder.addMix(Potions.AWKWARD,ModItems.FERMENTED_FISH.get(), ModMobEffects.STENCH_POTION.get());
-                builder.addMix(ModMobEffects.STENCH_POTION.get(), Items.REDSTONE,ModMobEffects.LONG_STENCH_POTION.get());
-                builder.addMix(ModMobEffects.STENCH_POTION.get(), Items.GLOWSTONE_DUST,ModMobEffects.STRONG_STENCH_POTION.get());
+                builder.addMix(Potions.AWKWARD,ModItems.FERMENTED_FISH.get(), ModMobEffects.STENCH_POTION);
+                builder.addMix(ModMobEffects.STENCH_POTION, Items.REDSTONE,ModMobEffects.LONG_STENCH_POTION);
+                builder.addMix(ModMobEffects.STENCH_POTION, Items.GLOWSTONE_DUST,ModMobEffects.STRONG_STENCH_POTION);
             }
         });
 

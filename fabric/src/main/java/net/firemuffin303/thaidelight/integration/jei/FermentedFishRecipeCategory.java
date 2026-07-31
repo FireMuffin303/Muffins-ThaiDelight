@@ -3,6 +3,7 @@ package net.firemuffin303.thaidelight.integration.jei;
 import com.mojang.blaze3d.vertex.PoseStack;
 import mezz.jei.api.gui.ITickTimer;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
+import mezz.jei.api.gui.builder.ITooltipBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.drawable.IDrawableAnimated;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
@@ -89,12 +90,11 @@ public class FermentedFishRecipeCategory implements IRecipeCategory<FermentedFis
     }
 
     @Override
-    public List<Component> getTooltipStrings(FermentedFishDummy recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
+    public void getTooltip(ITooltipBuilder tooltip, FermentedFishDummy recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
+        IRecipeCategory.super.getTooltip(tooltip, recipe, recipeSlotsView, mouseX, mouseY);
         if(ClientRenderUtils.isCursorInsideBounds(60,27,34,29,mouseX,mouseY)){
-            return recipe.tooltip();
+            tooltip.addAll(recipe.tooltip());
         }
-
-        return IRecipeCategory.super.getTooltipStrings(recipe, recipeSlotsView, mouseX, mouseY);
     }
 
     public static MutableComponent translateKey(@NotNull String suffix) {

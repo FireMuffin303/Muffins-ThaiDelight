@@ -100,8 +100,8 @@ public class LimePlantBlock extends DoublePlantBlock implements BonemealableBloc
         return super.useItemOn(itemStack, blockState, level, blockPos, player, interactionHand, blockHitResult);
     }
 
-    private void drop(ResourceLocation resourceLocation, ServerLevel serverLevel, Player player, ItemStack itemStack, BlockState blockState, BlockPos blockPos){
-        LootTable lootTable = serverLevel.getServer().reloadableRegistries().getLootTable(ResourceKey.create(Registries.LOOT_TABLE, resourceLocation));
+    private void drop(ResourceKey<LootTable> resourceLocation, ServerLevel serverLevel, Player player, ItemStack itemStack, BlockState blockState, BlockPos blockPos){
+        LootTable lootTable = serverLevel.getServer().reloadableRegistries().getLootTable(resourceLocation);
         LootParams params = new LootParams.Builder(serverLevel)
                 .withParameter(LootContextParams.BLOCK_STATE,blockState)
                 .withParameter(LootContextParams.ORIGIN,blockPos.getCenter())
@@ -172,6 +172,7 @@ public class LimePlantBlock extends DoublePlantBlock implements BonemealableBloc
             }
         }
     }
+
 
     public boolean canGrow(LevelReader levelReader, BlockState blockState, BlockPos blockPos){
         return blockState.getValue(AGE) < MAX_AGE  && sufficientLight(levelReader, blockPos);

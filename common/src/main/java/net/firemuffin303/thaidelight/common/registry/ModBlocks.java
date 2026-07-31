@@ -673,11 +673,6 @@ public class ModBlocks {
     }
 
     @ExpectPlatform
-    public static Supplier<Block> getThaiDelightBlock(String id, Supplier<Block> blockSupplier){
-        throw new AssertionError();
-    }
-
-    @ExpectPlatform
     public static BlockBehaviour.Properties dropLike(Supplier<Block> blockSupplier){
         throw new AssertionError();
     }

@@ -1,0 +1,51 @@
+modLoader = "javafml"
+loaderVersion = "[2,)"
+license = "MIT"
+
+[[mods]]
+modId = "muffins_thaidelight"
+version = "${version}"
+displayName = "Muffin's Thai's Delight"
+authors = "FireMuffin303"
+description = '''
+
+'''
+#logoFile = ""
+enumExtensions="META-INF/enumextensions.json"
+
+[[dependencies.muffins_thaidelight]]
+modId = "neoforge"
+type = "required"
+versionRange = "[21,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.muffins_thaidelight]]
+modId = "minecraft"
+mandatory = true
+type = "required"
+versionRange = "[1.21,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.muffins_thaidelight]]
+modId = "farmersdelight"
+mandatory = true
+type = "required"
+versionRange = "[1.2.4,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.muffins_thaidelight]]
+modId = "muffins_ovenapi"
+mandatory = true
+type = "required"
+versionRange = "[1.21-0.1.0-snapshot-8b,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[mixins]]
+config = "muffins_thaidelight.mixins.json"
+
+[[mixins]]
+config = "muffins_thaidelight.neoforge.mixins.json"

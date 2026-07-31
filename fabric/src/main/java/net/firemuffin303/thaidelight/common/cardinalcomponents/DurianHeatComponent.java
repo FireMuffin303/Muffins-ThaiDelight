@@ -1,6 +1,7 @@
 package net.firemuffin303.thaidelight.common.cardinalcomponents;
 
 import net.firemuffin303.thaidelight.common.registry.ModCardinalComponents;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -27,13 +28,13 @@ public class DurianHeatComponent implements AutoSyncedComponent, CommonTickingCo
     }
 
     @Override
-    public void readFromNbt(CompoundTag compoundTag) {
+    public void readFromNbt(CompoundTag compoundTag, HolderLookup.Provider provider) {
         this.isHeatedUp = compoundTag.getBoolean("is_heat_up");
         this.timer = compoundTag.getInt("timer");
     }
 
     @Override
-    public void writeToNbt(CompoundTag compoundTag) {
+    public void writeToNbt(CompoundTag compoundTag, HolderLookup.Provider provider) {
         compoundTag.putInt("timer",this.timer);
         compoundTag.putBoolean("is_heat_up",this.isHeatedUp);
     }
@@ -47,7 +48,7 @@ public class DurianHeatComponent implements AutoSyncedComponent, CommonTickingCo
 
                     SpicyComponent spicyAttachment = ModCardinalComponents.SPICY_HEAT.get(this.livingEntity);
                     if(spicyAttachment.timer > 0 && !(this.livingEntity.fireImmune() || this.livingEntity.hasEffect(MobEffects.FIRE_RESISTANCE))){
-                        this.livingEntity.setSecondsOnFire(5);
+                        this.livingEntity.setRemainingFireTicks(5);
                     }
                 }
             }

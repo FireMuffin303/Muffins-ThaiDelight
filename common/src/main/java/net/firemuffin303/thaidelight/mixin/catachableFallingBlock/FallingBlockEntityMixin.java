@@ -64,7 +64,7 @@ public abstract class FallingBlockEntityMixin extends Entity {
         return original;
     }
 
-    @Inject(method = "tick",at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/item/FallingBlockEntity;isNoGravity()Z"))
+    @Inject(method = "tick",at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/item/FallingBlockEntity;applyGravity()V"))
     public void muffins$shareBlock(CallbackInfo ci,@Local Block block,@Share("shareBlock") LocalRef<Block> blockLocalRef){
         blockLocalRef.set(block);
     }

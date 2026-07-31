@@ -6,14 +6,15 @@ import me.shedaniel.rei.api.common.entry.EntryIngredient;
 import me.shedaniel.rei.api.common.util.EntryIngredients;
 import net.firemuffin303.thaidelight.common.recipe.mortar.MortarRecipe;
 import net.firemuffin303.thaidelight.integration.rei.ThaiDelightClientREI;
+import net.minecraft.world.item.crafting.RecipeHolder;
 
 import java.util.List;
 
 public class MortarREIDisplay extends BasicDisplay {
     private EntryIngredient container;
 
-    public MortarREIDisplay(MortarRecipe mortarRecipe) {
-        this(EntryIngredients.ofIngredients(mortarRecipe.getIngredients()), List.of(EntryIngredients.of(mortarRecipe.getResult())),EntryIngredients.of(mortarRecipe.getContainer()));
+    public MortarREIDisplay(RecipeHolder<MortarRecipe> mortarRecipe) {
+        this(EntryIngredients.ofIngredients(mortarRecipe.value().getIngredients()), List.of(EntryIngredients.of(mortarRecipe.value().getResult())),EntryIngredients.of(mortarRecipe.value().getContainer()));
     }
 
     public MortarREIDisplay(List<EntryIngredient> inputs, List<EntryIngredient> outputs,EntryIngredient container){

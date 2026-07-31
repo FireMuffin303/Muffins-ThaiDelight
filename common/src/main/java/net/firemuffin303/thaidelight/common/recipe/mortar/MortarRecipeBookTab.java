@@ -1,10 +1,15 @@
 package net.firemuffin303.thaidelight.common.recipe.mortar;
 
-public enum MortarRecipeBookTab {
+import com.mojang.serialization.Codec;
+import net.minecraft.util.StringRepresentable;
+import net.minecraft.world.item.crafting.CraftingBookCategory;
+
+public enum MortarRecipeBookTab implements StringRepresentable {
     MEALS("meals"),
     MISC("misc");
 
     public final String name;
+    public static final Codec<MortarRecipeBookTab> CODEC = StringRepresentable.fromEnum(MortarRecipeBookTab::values);
 
     MortarRecipeBookTab(String name){this.name = name;}
 
@@ -19,6 +24,11 @@ public enum MortarRecipeBookTab {
 
     @Override
     public String toString() {
+        return this.name;
+    }
+
+    @Override
+    public String getSerializedName() {
         return this.name;
     }
 }

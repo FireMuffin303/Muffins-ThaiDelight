@@ -5,6 +5,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
@@ -29,11 +30,11 @@ public class DurianSliceFeastBlock extends FeastBlock {
 
 
     public DurianSliceFeastBlock() {
-        super(Properties.copy(Blocks.CAKE), ModItems.DURIAN_PULP, true);
+        super(Properties.ofFullCopy(Blocks.CAKE), ModItems.DURIAN_PULP, true);
     }
 
     @Override
-    protected InteractionResult takeServing(LevelAccessor level, BlockPos pos, BlockState state, Player player, InteractionHand hand) {
+    protected ItemInteractionResult takeServing(LevelAccessor level, BlockPos pos, BlockState state, Player player, InteractionHand hand) {
         int servings = state.getValue(this.getServingsProperty());
         if(servings == 0){
             popResource((Level) level,pos,new ItemStack(ModItems.DURIAN_PEEL.get(),4));

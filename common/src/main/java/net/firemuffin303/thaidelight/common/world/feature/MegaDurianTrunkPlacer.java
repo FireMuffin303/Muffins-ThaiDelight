@@ -3,6 +3,7 @@ package net.firemuffin303.thaidelight.common.world.feature;
 import com.mojang.logging.LogUtils;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.firemuffin303.thaidelight.common.registry.ModFeatures;
 import net.minecraft.core.BlockPos;
@@ -27,18 +28,15 @@ import java.util.function.BiConsumer;
 
 public class MegaDurianTrunkPlacer extends TrunkPlacer {
 
-    private static final Codec<UniformInt> BRANCH_START_CODEC = ExtraCodecs.validate(
-            UniformInt.CODEC,
-            uniformInt -> uniformInt.getMaxValue() - uniformInt.getMinValue() < 1
-                    ? DataResult.error(() -> "Need at least 2 blocks variation for the branch starts to fit both branches")
-                    : DataResult.success(uniformInt)
-    );
+    private static final Codec<UniformInt> BRANCH_START_CODEC = UniformInt.CODEC.codec().validate(uniformInt -> uniformInt.getMaxValue() - uniformInt.getMinValue() < 1
+            ? DataResult.error(() -> "Need at least 2 blocks variation for the branch starts to fit both branches")
+            : DataResult.success(uniformInt));
 
-    public static final Codec<MegaDurianTrunkPlacer> CODEC = RecordCodecBuilder.create(instance ->{
+    public static final MapCodec<MegaDurianTrunkPlacer> CODEC = RecordCodecBuilder.mapCodec(instance ->{
         return trunkPlacerParts(instance)
                 .and(instance.group(
                                 Codec.INT.fieldOf("branch_sections").forGetter(placer -> placer.branchSections),
-                                IntProvider.codec(-16,0,BRANCH_START_CODEC).fieldOf("branch_start_offset_from_top").forGetter(durianTreeTrunkPlacer -> durianTreeTrunkPlacer.branchSectionOffset),
+                                IntProvider.validateCodec(-16,0,BRANCH_START_CODEC).fieldOf("branch_start_offset_from_top").forGetter(durianTreeTrunkPlacer -> durianTreeTrunkPlacer.branchSectionOffset),
                                 IntProvider.codec(2,16).fieldOf("branch_horizontal_length").forGetter(placer -> placer.branchLength),
                                 IntProvider.codec(1,5).fieldOf("branch_count").forGetter(placer -> placer.branchCountPerSection)
                         )

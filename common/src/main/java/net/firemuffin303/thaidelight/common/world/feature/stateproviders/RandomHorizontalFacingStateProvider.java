@@ -1,6 +1,7 @@
 package net.firemuffin303.thaidelight.common.world.feature.stateproviders;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import net.firemuffin303.thaidelight.common.registry.ModBlockStateProviderTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -13,10 +14,9 @@ import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvi
 public class RandomHorizontalFacingStateProvider extends BlockStateProvider {
     final BlockState block;
 
-    public static final Codec<RandomHorizontalFacingStateProvider> CODEC = BlockState.CODEC
+    public static final MapCodec<RandomHorizontalFacingStateProvider> CODEC = BlockState.CODEC
             .fieldOf("block")
-            .xmap(RandomHorizontalFacingStateProvider::new, simpleStateProvider -> simpleStateProvider.block)
-            .codec();
+            .xmap(RandomHorizontalFacingStateProvider::new, simpleStateProvider -> simpleStateProvider.block);
 
     public RandomHorizontalFacingStateProvider(BlockState block){
         this.block = block;

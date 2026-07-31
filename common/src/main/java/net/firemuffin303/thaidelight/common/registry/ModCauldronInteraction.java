@@ -99,11 +99,11 @@ public class ModCauldronInteraction {
     };
 
     public static void init(){
-        CauldronInteraction.addDefaultInteractions(FERMENTED_FISH);
-        CauldronInteraction.addDefaultInteractions(COCONUT);
-        CauldronInteraction.addDefaultInteractions(COCONUT_MILK);
+        CauldronInteraction.addDefaultInteractions(FERMENTED_FISH.map());
+        CauldronInteraction.addDefaultInteractions(COCONUT.map());
+        CauldronInteraction.addDefaultInteractions(COCONUT_MILK.map());
 
-        FERMENTED_FISH.put(Items.BOWL,(blockState, level, blockPos, player, interactionHand, itemStack) -> {
+        FERMENTED_FISH.map().put(Items.BOWL,(blockState, level, blockPos, player, interactionHand, itemStack) -> {
             if(blockState.getValue(FermentedFishCauldronBlock.FERMENT) == 2){
                 if(!level.isClientSide){
                     Item item = itemStack.getItem();
@@ -121,7 +121,7 @@ public class ModCauldronInteraction {
             return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         });
 
-        COCONUT.put(Items.BOWL,(blockState, level, blockPos, player, interactionHand, itemStack) -> {
+        COCONUT.map().put(Items.BOWL,(blockState, level, blockPos, player, interactionHand, itemStack) -> {
             if(!level.isClientSide){
                 Item item = itemStack.getItem();
                 player.setItemInHand(interactionHand, ItemUtils.createFilledResult(itemStack,player,new ItemStack(ModItems.COCONUT_SLICE.get(),1)));
@@ -133,10 +133,10 @@ public class ModCauldronInteraction {
             }
             return ItemInteractionResult.sidedSuccess(level.isClientSide);
         });
-        COCONUT.put(Items.WATER_BUCKET,MAKE_COCONUT_MILK);
+        COCONUT.map().put(Items.WATER_BUCKET,MAKE_COCONUT_MILK);
 
 
-        COCONUT_MILK.put(Items.GLASS_BOTTLE, (blockState, level, blockPos, player, interactionHand, itemStack) -> {
+        COCONUT_MILK.map().put(Items.GLASS_BOTTLE, (blockState, level, blockPos, player, interactionHand, itemStack) -> {
             if(!level.isClientSide){
                 Item item = itemStack.getItem();
                 player.setItemInHand(interactionHand, ItemUtils.createFilledResult(itemStack,player,new ItemStack(ModItems.COCONUT_MILK_BOTTLE.get(),1)));

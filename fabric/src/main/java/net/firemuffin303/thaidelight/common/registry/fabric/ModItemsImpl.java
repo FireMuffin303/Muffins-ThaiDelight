@@ -79,9 +79,9 @@ public class ModItemsImpl {
     }
 
     public static Supplier<Item> createFermentedFish() {
-        return () -> new ConsumableItem(bowlItem(new FoodProperties.Builder().alwaysEat()
-                .effect(new MobEffectInstance(ModMobEffects.STINKY.get(),10*20),1f)
-                .effect(new MobEffectInstance(ModMobEffects.APPETITE_LOSS.get(),10*20),1f)
+        return () -> new ConsumableItem(bowlItem(new FoodProperties.Builder().alwaysEdible()
+                .effect(new MobEffectInstance(ModMobEffects.STINKY,10*20),1f)
+                .effect(new MobEffectInstance(ModMobEffects.APPETITE_LOSS,10*20),1f)
                 .build()),false,false);
     }
 

@@ -4,7 +4,6 @@
   "package": "net.firemuffin303.thaidelight.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "accessor.CriteriaTriggersAccessor",
     "accessor.DamageSourcesAccessor",
     "accessor.MobAccessor",
     "accessor.StructurePoolAccessor",
@@ -26,10 +25,6 @@
     "dispenser.DispenseItemBehaviorMixin",
     "durianHelmet.EnchantmentHelperMixin",
     "durianHelmet.LivingEntityMixin",
-    "food.ChickenFoodAccessor",
-    "food.FrogFoodAccessor",
-    "food.ParrotTameFoodAccessor",
-    "food.PigFoodAccessor",
     "foodEffect.LivingEntityMixin",
     "foodEffect.heatedup.PowderSnowBlockMixin",
     "level.treegrower.TreeGrowerMixin",

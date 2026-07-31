@@ -23,6 +23,8 @@ import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
 
@@ -41,7 +43,7 @@ public class MortarMenu extends RecipeBookMenu<MortarInput,MortarRecipe> {
         super(ModMenuType.MORTAR.get(), i);
         this.player = inventory.player;
         this.access = containerLevelAccess;
-        this.craftSlots = new SimpleContainer(6){
+        this.craftSlots = new SimpleContainer(5){
             @Override
             public void setChanged() {
                 super.setChanged();
@@ -49,14 +51,14 @@ public class MortarMenu extends RecipeBookMenu<MortarInput,MortarRecipe> {
             }
         };
 
-        this.addSlot(new MortarResultSlot(this.player, this.craftSlots, this.resultContainer, 0, 124, 35));
 
-        this.addSlot(new Slot(this.craftSlots, 1, 39, 26));
-        this.addSlot(new Slot(this.craftSlots, 2, 57, 26));
-        this.addSlot(new Slot(this.craftSlots, 3, 39, 44));
-        this.addSlot(new Slot(this.craftSlots, 4, 57, 44));
+        this.addSlot(new Slot(this.craftSlots, 0, 39, 26));
+        this.addSlot(new Slot(this.craftSlots, 1, 57, 26));
+        this.addSlot(new Slot(this.craftSlots, 2, 39, 44));
+        this.addSlot(new Slot(this.craftSlots, 3, 57, 44));
 
-        this.addSlot(new Slot(this.craftSlots, 5, 84, 54));
+        this.addSlot(new Slot(this.craftSlots, 4, 84, 54));
+        this.addSlot(new MortarResultSlot(this.player, this.craftSlots, this.resultContainer, 5, 124, 35));
 
 
         for(int j = 0; j < 3; ++j) {
@@ -79,7 +81,7 @@ public class MortarMenu extends RecipeBookMenu<MortarInput,MortarRecipe> {
 
     public void slotsChanged(Container arg) {
         this.access.execute((level, blockPos) -> {
-            MortarInput mortarInput = new MortarInput(this.getItems());
+            MortarInput mortarInput = createRecipeInput(this.craftSlots);
             slotChangedCraftingGrid(this, level, this.player,mortarInput, this.resultContainer);
         });
     }
@@ -88,8 +90,7 @@ public class MortarMenu extends RecipeBookMenu<MortarInput,MortarRecipe> {
         if (!level.isClientSide) {
             ServerPlayer serverPlayer = (ServerPlayer)player;
             ItemStack itemStack = ItemStack.EMPTY;
-            Supplier<RecipeType<MortarRecipe>> f = (Supplier<RecipeType<MortarRecipe>>) (Supplier<?>)ModRecipes.MORTAR;
-            Optional<RecipeHolder<MortarRecipe>> optional = level.getServer().getRecipeManager().getRecipeFor(f.get(), container, level);
+            Optional<RecipeHolder<MortarRecipe>> optional = level.getServer().getRecipeManager().getRecipeFor(ModRecipes.MORTAR.get(), container, level);
             if (optional.isPresent()) {
                 MortarRecipe mortarRecipe = optional.get().value();
                 if (resultContainer.setRecipeUsed(level, serverPlayer, optional.get())) {
@@ -104,6 +105,14 @@ public class MortarMenu extends RecipeBookMenu<MortarInput,MortarRecipe> {
             arg.setRemoteSlot(0, itemStack);
             serverPlayer.connection.send(new ClientboundContainerSetSlotPacket(arg.containerId, arg.incrementStateId(), 0, itemStack));
         }
+    }
+
+    private static MortarInput createRecipeInput(Container container){
+        List<ItemStack> itemStacks = new ArrayList<>();
+        for(int i = 0; i < 4; i ++){
+            itemStacks.add(container.getItem(i));
+        }
+        return new MortarInput(itemStacks,container.getItem(4));
     }
 
     @Override
@@ -121,7 +130,7 @@ public class MortarMenu extends RecipeBookMenu<MortarInput,MortarRecipe> {
 
     @Override
     public boolean recipeMatches(RecipeHolder recipeHolder) {
-        return ((MortarRecipe)recipeHolder.value()).matches(new MortarInput(this.getItems()),this.player.level());
+        return ((MortarRecipe)recipeHolder.value()).matches(createRecipeInput(this.craftSlots),this.player.level());
     }
 
     @Override
@@ -227,7 +236,7 @@ public class MortarMenu extends RecipeBookMenu<MortarInput,MortarRecipe> {
 
             this.checkTakeAchievements(itemStack);
             Supplier<RecipeType<MortarRecipe>> m = ModRecipes.MORTAR;
-            NonNullList<ItemStack> nonNullList = player.level().getRecipeManager().getRemainingItemsFor(m.get(), new MortarInput(this.craftSlots), player.level());
+            NonNullList<ItemStack> nonNullList = player.level().getRecipeManager().getRemainingItemsFor(m.get(), createRecipeInput(this.craftSlots), player.level());
 
             for(int i = 0; i < nonNullList.size(); ++i) {
                 ItemStack itemStack2 = this.craftSlots.getItem(i);

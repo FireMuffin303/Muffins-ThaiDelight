@@ -8,6 +8,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUtils;
@@ -20,15 +21,15 @@ import vectorwing.farmersdelight.common.block.PieBlock;
 
 public class CoconutPieBlock extends PieBlock {
     public CoconutPieBlock() {
-        super(Properties.copy(Blocks.CAKE), ModItems.COCONUT_PIE_SLICE);
+        super(Properties.ofFullCopy(Blocks.CAKE), ModItems.COCONUT_PIE_SLICE);
     }
 
+
     @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        ItemStack itemStack = player.getItemInHand(hand);
+    public ItemInteractionResult useItemOn(ItemStack itemStack,BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         if(level.isClientSide){
             if(itemStack.is(Items.HONEY_BOTTLE)){
-                return InteractionResult.SUCCESS;
+                return ItemInteractionResult.SUCCESS;
             }
         }
 
@@ -38,9 +39,9 @@ public class CoconutPieBlock extends PieBlock {
             player.awardStat(Stats.ITEM_USED.get(itemStack.getItem()));
             player.setItemInHand(hand, ItemUtils.createFilledResult(itemStack,player,new ItemStack(Items.GLASS_BOTTLE)));
 
-            return InteractionResult.SUCCESS;
+            return ItemInteractionResult.SUCCESS;
         }
 
-        return super.use(state, level, pos, player, hand, hit);
+        return super.useItemOn(itemStack,state, level, pos, player, hand, hit);
     }
 }

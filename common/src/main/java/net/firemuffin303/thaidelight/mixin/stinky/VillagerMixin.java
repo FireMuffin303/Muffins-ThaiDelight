@@ -18,7 +18,7 @@ public abstract class VillagerMixin {
 
     @Inject(method = "mobInteract",at = @At("HEAD"),cancellable = true)
     public void muffinsThaiDelight$mobInteract(Player player, InteractionHand interactionHand, CallbackInfoReturnable<InteractionResult> cir){
-        if(player.hasEffect(ModMobEffects.STINKY.get())){
+        if(player.hasEffect(ModMobEffects.STINKY)){
             if(!player.level().isClientSide){
                 this.setUnhappy();
             }

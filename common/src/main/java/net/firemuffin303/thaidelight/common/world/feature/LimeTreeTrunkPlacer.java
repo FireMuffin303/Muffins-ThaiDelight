@@ -1,6 +1,7 @@
 package net.firemuffin303.thaidelight.common.world.feature;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.firemuffin303.thaidelight.common.registry.ModFeatures;
 import net.minecraft.core.BlockPos;
@@ -16,7 +17,7 @@ import java.util.List;
 import java.util.function.BiConsumer;
 
 public class LimeTreeTrunkPlacer extends TrunkPlacer {
-    public static final Codec<LimeTreeTrunkPlacer> CODEC = RecordCodecBuilder.create(instance ->{
+    public static final MapCodec<LimeTreeTrunkPlacer> CODEC = RecordCodecBuilder.mapCodec(instance ->{
         return trunkPlacerParts(instance)
                 .apply(instance,LimeTreeTrunkPlacer::new);
     });

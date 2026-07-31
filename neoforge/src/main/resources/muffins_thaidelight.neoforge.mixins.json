@@ -1,0 +1,24 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.firemuffin303.thaidelight.neoforge.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "BlockFamiliesAccessor",
+    "FireBlockMixin",
+    "LimePlantMixin",
+    "accessor.AxeItemAccessor",
+    "accessor.PotionBrewingAccessor",
+    "dispenser.BucketItemMixin",
+    "dyeableItem.RecipeMixin",
+    "fallingBlock.FallingBlockEntityMixin",
+    "foodEffect.LivingEntityMixin",
+    "fuel.ItemMixin",
+    "integration.farmersdelight.CuttingBoardRendererMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

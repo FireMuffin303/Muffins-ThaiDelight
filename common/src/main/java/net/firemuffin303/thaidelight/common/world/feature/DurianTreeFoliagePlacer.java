@@ -1,6 +1,7 @@
 package net.firemuffin303.thaidelight.common.world.feature;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.firemuffin303.thaidelight.common.registry.ModFeatures;
 import net.minecraft.util.RandomSource;
@@ -11,7 +12,7 @@ import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
 
 public class DurianTreeFoliagePlacer extends FoliagePlacer {
-    public static final Codec<DurianTreeFoliagePlacer> CODEC = RecordCodecBuilder.create( instance ->
+    public static final MapCodec<DurianTreeFoliagePlacer> CODEC = RecordCodecBuilder.mapCodec(instance ->
             foliagePlacerParts(instance).and(
                     instance.group(
                             Codec.floatRange(0.0f,1.0f).fieldOf("hanging_leaves_chance").forGetter(placer -> placer.hangingLeavesChance),

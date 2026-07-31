@@ -49,8 +49,7 @@ public class ThaiDelightJEIIntegration implements IModPlugin {
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
         ClientLevel level = Objects.requireNonNull(Minecraft.getInstance().level);
-        Supplier<net.minecraft.world.item.crafting.RecipeType<MortarRecipe>> f = (Supplier<net.minecraft.world.item.crafting.RecipeType<MortarRecipe>>) (Supplier<?>)ModRecipes.MORTAR;
-        registration.addRecipes(MortarJEI.MORTAR,level.getRecipeManager().getAllRecipesFor(f.get()));
+        registration.addRecipes(MortarJEI.MORTAR,level.getRecipeManager().getAllRecipesFor(ModRecipes.MORTAR.get()));
         registration.addRecipes(FERMENTED_FISH, List.of(
                 new FermentedFishRecipeCategory.FermentedFishDummy(ModTags.COMMON_RAW_FISHES,Items.BOWL, ModItems.FERMENTED_FISH.get(),new FermentedFishRecipeCategory.FermentedFishCauldronDrawable()){
                     @Override

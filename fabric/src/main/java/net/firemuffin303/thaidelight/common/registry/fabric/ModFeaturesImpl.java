@@ -1,16 +1,13 @@
 package net.firemuffin303.thaidelight.common.registry.fabric;
 
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
-import net.firemuffin303.thaidelight.ThaiDelightCommon;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.firemuffin303.thaidelight.common.registry.ModFeatures;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.HolderSet;
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.valueproviders.ConstantInt;
@@ -26,24 +23,19 @@ import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConf
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
-import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
-import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.treedecorators.BeehiveDecorator;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
-import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacer;
-import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
 import vectorwing.farmersdelight.common.registry.ModBiomeFeatures;
 import vectorwing.farmersdelight.common.world.configuration.WildCropConfiguration;
 
 import java.util.List;
-import java.util.function.Supplier;
 
 import static net.firemuffin303.thaidelight.common.registry.ModFeatures.*;
 
 public class ModFeaturesImpl {
 
-    public static void bootstrapConfiguredFeature(BootstapContext<ConfiguredFeature<?, ?>> bootstapContext){
+    public static void bootstrapConfiguredFeature(BootstrapContext<ConfiguredFeature<?, ?>> bootstapContext){
 
         bootstapContext.register(ModFeatures.FEATURE_PATCH_LIME_BUSH,
                 new ConfiguredFeature<>(Feature.RANDOM_PATCH,
@@ -60,7 +52,7 @@ public class ModFeaturesImpl {
                                 new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.WILD_PEPPER_CROP.get().defaultBlockState())),
                                 BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE,BlockPredicate.matchesTag(Direction.DOWN.getNormal(), BlockTags.DIRT))),
                         PlacementUtils.filtered(Feature.SIMPLE_BLOCK,
-                                new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.GRASS.defaultBlockState())),
+                                new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.SHORT_GRASS.defaultBlockState())),
                                 BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE,BlockPredicate.matchesTag(Direction.DOWN.getNormal(), BlockTags.DIRT))),
                         PlacementUtils.filtered(Feature.SIMPLE_BLOCK,
                                 new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.COARSE_DIRT.defaultBlockState())),
@@ -76,7 +68,7 @@ public class ModFeaturesImpl {
                                 new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.WILD_BASIL.get().defaultBlockState())),
                                 BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE,BlockPredicate.matchesTag(Direction.DOWN.getNormal(), BlockTags.DIRT))),
                         PlacementUtils.filtered(Feature.SIMPLE_BLOCK,
-                                new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.GRASS.defaultBlockState())),
+                                new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.SHORT_GRASS.defaultBlockState())),
                                 BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE,BlockPredicate.matchesTag(Direction.DOWN.getNormal(), BlockTags.DIRT))),
                         PlacementUtils.filtered(Feature.SIMPLE_BLOCK,
                                 new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.COARSE_DIRT.defaultBlockState())),

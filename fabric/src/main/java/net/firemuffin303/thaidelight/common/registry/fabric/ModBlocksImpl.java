@@ -4,6 +4,7 @@ import net.firemuffin303.thaidelight.ThaiDelightCommon;
 import net.firemuffin303.thaidelight.common.block.vegetation.FabricBuddingButterflyPeaBlock;
 import net.firemuffin303.thaidelight.common.block.feast.*;
 import net.firemuffin303.thaidelight.common.block.vegetation.pepper.FabricBuddingPepperBlock;
+import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.effect.MobEffect;
@@ -49,7 +50,7 @@ public class ModBlocksImpl {
         return PineappleFriedRiceFeastBlock::new;
     }
 
-    public static Supplier<Block> createWildCropBlock(MobEffect stewEffect, int effectDuration, BlockBehaviour.Properties properties) {
+    public static Supplier<Block> createWildCropBlock(Holder<MobEffect> stewEffect, int effectDuration, BlockBehaviour.Properties properties) {
         return () -> new WildCropBlock(stewEffect,effectDuration,properties);
     }
 
@@ -75,10 +76,6 @@ public class ModBlocksImpl {
         return () -> new PieBlock(properties,supplier);
     }
 
-
-    public static Supplier<Block> getThaiDelightBlock(String id, Supplier<Block> blockSupplier) {
-        return blockSupplier;
-    }
 
     public static BlockBehaviour.Properties dropLike(Supplier<Block> blockSupplier) {
         return BlockBehaviour.Properties.of().dropsLike(blockSupplier.get());

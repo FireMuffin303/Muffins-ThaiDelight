@@ -1,6 +1,7 @@
 package net.firemuffin303.thaidelight.common.cardinalcomponents;
 
 import net.firemuffin303.thaidelight.common.registry.ModCardinalComponents;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
@@ -16,12 +17,12 @@ public class SpicyComponent implements AutoSyncedComponent, CommonTickingCompone
     }
 
     @Override
-    public void readFromNbt(CompoundTag compoundTag) {
+    public void readFromNbt(CompoundTag compoundTag, HolderLookup.Provider provider) {
         this.timer = compoundTag.getInt("timer");
     }
 
     @Override
-    public void writeToNbt(CompoundTag compoundTag) {
+    public void writeToNbt(CompoundTag compoundTag, HolderLookup.Provider provider) {
         compoundTag.putInt("timer",this.timer);
     }
 

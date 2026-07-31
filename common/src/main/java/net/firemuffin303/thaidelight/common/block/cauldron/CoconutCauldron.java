@@ -42,7 +42,7 @@ public class CoconutCauldron extends LayeredCauldronBlock {
 
     @Override
     public void handlePrecipitation(BlockState blockState, Level level, BlockPos blockPos, Biome.Precipitation precipitation) {
-        if(shouldHandlePrecipitation(level, precipitation) && isFull(blockState) && ((LayeredCauldronAccessor)this).getFillPredicate().test(precipitation) ){
+        if(shouldHandlePrecipitation(level, precipitation) && isFull(blockState) && ((LayeredCauldronAccessor)this).getFillPredicate() == precipitation ){
             BlockState coconutMilkState = ModBlocks.COCONUT_MILK_CAULDRON.get().defaultBlockState().setValue(LEVEL,3);
             level.setBlockAndUpdate(blockPos,coconutMilkState);
             level.gameEvent(GameEvent.BLOCK_CHANGE,blockPos,GameEvent.Context.of(coconutMilkState));

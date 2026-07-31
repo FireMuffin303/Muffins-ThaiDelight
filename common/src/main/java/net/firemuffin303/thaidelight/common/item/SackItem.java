@@ -8,6 +8,7 @@ import net.firemuffin303.thaidelight.common.registry.ModCriteriaTriggers;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.firemuffin303.thaidelight.util.PlatformUtil;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.server.level.ServerPlayer;
@@ -21,6 +22,7 @@ import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Supplier;
@@ -60,10 +62,8 @@ public class SackItem extends BlockItem {
     public Optional<TooltipComponent> getTooltipImage(ItemStack itemStack) {
         NonNullList<ItemStack> nonNullList = NonNullList.withSize(5,ItemStack.EMPTY);
 
-
-        CompoundTag compoundTag = BlockItem.getBlockEntityData(itemStack);
-        if(compoundTag != null){
-            ContainerHelper.loadAllItems(compoundTag,nonNullList);
+        for(ItemStack itemStack1 : itemStack.get(DataComponents.CONTAINER).nonEmptyItems()){
+            nonNullList.add(itemStack1);
         }
 
         return Optional.of(new SackTooltipComponent.SackToolTip(nonNullList));
@@ -84,24 +84,25 @@ public class SackItem extends BlockItem {
             return false;
         }
 
-        CompoundTag compoundTag = BlockItem.getBlockEntityData(itemStack);
-        if(compoundTag == null){
+        if(!itemStack.has(DataComponents.CONTAINER)){
             return false;
         }
 
-        ListTag listTag = compoundTag.getList("Items",10);
-        if(listTag.isEmpty()){
+        List<ItemStack> itemStackList = itemStack.get(DataComponents.CONTAINER).nonEmptyStream().toList();
+        if(itemStackList.isEmpty()){
             return false;
         }
 
-        return listTag.size() >= 5 && listTag.stream().map(CompoundTag.class::cast).map(ItemStack::of).allMatch(itemStack1 -> {
+        return itemStackList.size() >= 5 && itemStackList.stream().allMatch(itemStack1 -> {
                     return itemStack1.getCount() >= itemStack1.getMaxStackSize() && !itemStack1.isEmpty();
                 }
         );
     }
 
+    //TODO: fix component
     @SuppressWarnings("unchecked")
     public static boolean onCatchingFallingBlock(ItemStack sackItem, Item item, ServerPlayer serverPlayer){
+        /*
         CompoundTag compoundTag = BlockItem.getBlockEntityData(sackItem);
         ItemStack newStack = new ItemStack(item);
         if(compoundTag == null){
@@ -115,7 +116,7 @@ public class SackItem extends BlockItem {
         }
 
         if(!itemStacks.stream().allMatch(ItemStack::isEmpty)){
-            boolean bl = itemStacks.stream().anyMatch(itemStack -> ItemStack.isSameItemSameTags(itemStack,newStack));
+            boolean bl = itemStacks.stream().anyMatch(itemStack -> ItemStack.isSameItemSameComponents(itemStack,newStack));
             if(!bl){
                 return false;
             }
@@ -145,5 +146,9 @@ public class SackItem extends BlockItem {
         BlockItem.setBlockEntityData(sackItem,ModBlockEntityTypes.SACK_BLOCK_ENTITY.get(),ContainerHelper.saveAllItems(compoundTag,itemStacks));
         ModCriteriaTriggers.SACK_CATCH.get().trigger(serverPlayer,newStack);
         return true;
+        */
+
+        return false;
     }
+
 }

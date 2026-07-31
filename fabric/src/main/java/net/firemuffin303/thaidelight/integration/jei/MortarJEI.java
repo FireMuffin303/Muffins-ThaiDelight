@@ -12,16 +12,18 @@ import net.firemuffin303.thaidelight.ThaiDelightCommon;
 import net.firemuffin303.thaidelight.client.sceens.MortarScreen;
 import net.firemuffin303.thaidelight.common.recipe.mortar.MortarRecipe;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
+import net.firemuffin303.thaidelight.common.registry.ModRecipes;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeHolder;
 
-public class MortarJEI implements IRecipeCategory<MortarRecipe> {
+public class MortarJEI implements IRecipeCategory<RecipeHolder<MortarRecipe>> {
     private static final ResourceLocation ID = ThaiDelightCommon.modid("mortar");
-    public static final RecipeType<MortarRecipe> MORTAR = new RecipeType<>(ID,MortarRecipe.class);
+    public static final RecipeType<RecipeHolder<MortarRecipe>> MORTAR = RecipeType.createFromVanilla(ModRecipes.MORTAR.get());
 
     private final IDrawable icon;
     private final IDrawable background;
@@ -32,7 +34,7 @@ public class MortarJEI implements IRecipeCategory<MortarRecipe> {
     }
 
     @Override
-    public RecipeType<MortarRecipe> getRecipeType() {
+    public RecipeType<RecipeHolder<MortarRecipe>> getRecipeType() {
         return MORTAR;
     }
 
@@ -52,19 +54,19 @@ public class MortarJEI implements IRecipeCategory<MortarRecipe> {
     }
 
     @Override
-    public void setRecipe(IRecipeLayoutBuilder builder, MortarRecipe recipe, IFocusGroup focuses) {
+    public void setRecipe(IRecipeLayoutBuilder builder, RecipeHolder<MortarRecipe> recipe, IFocusGroup focuses) {
         builder.addInvisibleIngredients(RecipeIngredientRole.CATALYST).addIngredients(Ingredient.of(ModBlocks.MORTAR.get()));
-        builder.addSlot(RecipeIngredientRole.OUTPUT,120,31).addIngredients(Ingredient.of(recipe.getResult()));
-        for(int i = 0;i < recipe.getIngredients().size();i++){
+        builder.addSlot(RecipeIngredientRole.OUTPUT,120,31).addIngredients(Ingredient.of(recipe.value().getResult()));
+        for(int i = 0;i < recipe.value().getIngredients().size();i++){
 
-            builder.addSlot(RecipeIngredientRole.INPUT,i > 1 ? 35 + Mth.clamp(i-2,0,1) *18 : 35+ i *18,i > 1 ? 22+18: 22).addIngredients(recipe.getIngredients().get(i));
+            builder.addSlot(RecipeIngredientRole.INPUT,i > 1 ? 35 + Mth.clamp(i-2,0,1) *18 : 35+ i *18,i > 1 ? 22+18: 22).addIngredients(recipe.value().getIngredients().get(i));
         }
 
-        builder.addSlot(RecipeIngredientRole.INPUT,80,50).addIngredients(Ingredient.of(recipe.getContainer()));
+        builder.addSlot(RecipeIngredientRole.INPUT,80,50).addIngredients(Ingredient.of(recipe.value().getContainer()));
     }
 
     @Override
-    public void draw(MortarRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
+    public void draw(RecipeHolder<MortarRecipe> recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
         //guiGraphics.blit(MortarScreen.CRAFTING_TABLE_LOCATION,4,4,4,4,169,70);
         IRecipeCategory.super.draw(recipe, recipeSlotsView, guiGraphics, mouseX, mouseY);
     }

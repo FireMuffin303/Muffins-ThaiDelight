@@ -15,8 +15,6 @@ import net.firemuffin303.thaidelight.common.registry.*;
 import net.firemuffin303.thaidelight.config.ModConfig;
 import net.firemuffin303.thaidelight.mixin.accessor.MobAccessor;
 import net.firemuffin303.thaidelight.mixin.accessor.StructurePoolAccessor;
-import net.firemuffin303.thaidelight.mixin.fabric.loot.LootPoolBuilderAccessor;
-import net.firemuffin303.thaidelight.mixin.fabric.loot.LootTableAccessor;
 import net.firemuffin303.thaidelight.util.BlockEntityTypeAdder;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
@@ -45,10 +43,10 @@ import net.minecraft.world.level.levelgen.structure.pools.StructurePoolElement;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorList;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
-import net.minecraft.world.level.storage.loot.LootDataManager;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
+import net.minecraft.world.level.storage.loot.entries.NestedLootTable;
 
 import java.util.*;
 
@@ -102,17 +100,17 @@ public class TDFabricEvents {
 
         ServerLifecycleEvents.SERVER_STARTING.register(minecraftServer -> {
             addToStructurePool(minecraftServer,
-                    new ResourceLocation("minecraft","village/plains/houses"),
+                    ResourceLocation.withDefaultNamespace("village/plains/houses"),
                     ThaiDelightCommon.modid("village/plains/houses/small_thai_house_1"),2);
 
             addToStructurePool(minecraftServer,
-                    new ResourceLocation("minecraft","village/savanna/houses"),
+                    ResourceLocation.withDefaultNamespace("village/savanna/houses"),
                     ThaiDelightCommon.modid("village/savanna/houses/savanna_small_thai_house_1"),2);
 
 
 
             if(minecraftServer.isDedicatedServer()){
-                Optional<BlockEntityType<?>> blockEntityTypeOptional = BuiltInRegistries.BLOCK_ENTITY_TYPE.getOptional(new ResourceLocation("farmersdelight","cabinet"));
+                Optional<BlockEntityType<?>> blockEntityTypeOptional = BuiltInRegistries.BLOCK_ENTITY_TYPE.getOptional(ResourceLocation.fromNamespaceAndPath("farmersdelight","cabinet"));
                 if(blockEntityTypeOptional.isPresent()){
                     BlockEntityTypeAdder cabinetAccessor = (BlockEntityTypeAdder) blockEntityTypeOptional.get();
                     ModBlocks.CABINET.forEach(blockSupplier -> cabinetAccessor.addSupportBlock(blockSupplier.get()));
@@ -126,7 +124,7 @@ public class TDFabricEvents {
     }
 
     public static void modifyLootTable(){
-        Set<ResourceLocation> chestsId = Set.of(
+        Set<ResourceKey<LootTable>> chestsId = Set.of(
                 BuiltInLootTables.VILLAGE_PLAINS_HOUSE,
                 BuiltInLootTables.VILLAGE_SAVANNA_HOUSE,
                 BuiltInLootTables.VILLAGE_SNOWY_HOUSE,
@@ -137,12 +135,10 @@ public class TDFabricEvents {
 
         LootTableEvents.MODIFY.register(new LootTableEvents.Modify() {
             @Override
-            public void modifyLootTable(ResourceManager resourceManager, LootDataManager lootDataManager,
-                                        ResourceLocation resourceLocation, LootTable.Builder builder, LootTableSource lootTableSource) {
-
-                if (chestsId.contains(resourceLocation)) {
-                    ResourceLocation injectId = ThaiDelightCommon.modid("inject/" + resourceLocation.getPath());
-                    LootTable injectingLootTable = lootDataManager.getLootTable(injectId);
+            public void modifyLootTable(ResourceKey<LootTable> resourceKey, LootTable.Builder builder, LootTableSource lootTableSource) {
+                if (chestsId.contains(resourceKey)) {
+                    ResourceLocation injectId = ThaiDelightCommon.modid("inject/" + resourceKey.location());
+                    /*
                     LootTableAccessor accessor = (LootTableAccessor) injectingLootTable;
 
                     LootPool injectingPool = List.of(accessor.getPools()).get(0);
@@ -152,14 +148,20 @@ public class TDFabricEvents {
                             ((LootPoolBuilderAccessor) builder1).getEntries().add(lootPoolEntryContainer);
                         }
                     });
+
+                     */
+                    builder.modifyPools(builder1 -> {
+                        builder1.add(NestedLootTable.lootTableReference(ResourceKey.create(Registries.LOOT_TABLE,injectId)));
+                    });
                 }
             }
+
         });
     }
 
     public static void addToStructurePool(MinecraftServer server, ResourceLocation poolIdentifier, ResourceLocation nbtIdentifier, int weight) {
         Holder<StructureProcessorList> emptyProcessList = server.registryAccess().registryOrThrow(Registries.PROCESSOR_LIST)
-                .getHolderOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, new ResourceLocation("minecraft", "empty")));
+                .getHolderOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, ResourceLocation.fromNamespaceAndPath("minecraft", "empty")));
         Registry<StructureTemplatePool> structureTemplatePools = server.registryAccess().registry(Registries.TEMPLATE_POOL).orElseThrow();
 
         StructureTemplatePool structure = structureTemplatePools.get(poolIdentifier);

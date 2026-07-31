@@ -1,6 +1,7 @@
 package net.firemuffin303.thaidelight.common.world.feature;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.firemuffin303.thaidelight.common.block.ModBlockStateProperties;
 import net.firemuffin303.thaidelight.common.registry.ModFeatures;
@@ -22,7 +23,7 @@ public class PapayaLeavesFoliagePlacer extends FoliagePlacer {
     protected final int height;
     protected final BlockStateProvider stemProvider;
 
-    public static final Codec<PapayaLeavesFoliagePlacer> CODEC = RecordCodecBuilder.create(instance ->
+    public static final MapCodec<PapayaLeavesFoliagePlacer> CODEC = RecordCodecBuilder.mapCodec(instance ->
             foliagePlacerParts(instance).and(
                             instance.group(
                                     Codec.intRange(0,16).fieldOf("height").forGetter(placer -> placer.height),

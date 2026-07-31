@@ -1,7 +1,10 @@
 package net.firemuffin303.thaidelight.common.recipe.mortar;
 
 import com.google.gson.*;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.DataResult;
 import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -9,83 +12,66 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.ShapedRecipe;
+import net.minecraft.world.item.crafting.*;
+
+import java.util.Iterator;
+import java.util.List;
 
 public class MortarSerializer implements RecipeSerializer<RegularMortarRecipe> {
-    @Override
-    public RegularMortarRecipe fromJson(ResourceLocation resourceLocation, JsonObject jsonObject) {
-        String groupIn = GsonHelper.getAsString(jsonObject, "group", "");
-        NonNullList<Ingredient> inputItemsIn = readIngredients(GsonHelper.getAsJsonArray(jsonObject, "ingredients"));
-        ItemStack container = GsonHelper.isValidNode(jsonObject,"container") ? ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(jsonObject,"container")) : ItemStack.EMPTY;
+    private static final MapCodec<RegularMortarRecipe> CODEC = RecordCodecBuilder.mapCodec((instance) -> {
+       return instance.group(
+               Codec.STRING.fieldOf("group").forGetter(recipe -> recipe.group),
+               Ingredient.CODEC_NONEMPTY.listOf().fieldOf("ingredients").flatXmap(list -> {
+                   Ingredient[] ingredients = list.stream().filter(ingredient -> !ingredient.isEmpty()).toArray(Ingredient[]::new);
+                   if(ingredients.length == 0){
+                       return DataResult.error(() -> "No ingredients for Mortar recipe!");
+                   } else if (ingredients.length > 4) {
+                       return DataResult.error(() -> "Too many ingredients for Mortar recipe!");
+                   }
 
-        if (inputItemsIn.isEmpty()) {
-            throw new JsonParseException("No ingredients for mortar recipe");
-        }else if(inputItemsIn.size() > 4){
-            throw new JsonParseException("Too many ingredients for mortar recipe. Maximum at 4");
-        }
+                   return DataResult.success(NonNullList.of(Ingredient.EMPTY,ingredients));
+               },DataResult::success).forGetter(recipe -> recipe.ingredients),
+               ItemStack.CODEC.fieldOf("container").forGetter(recipe -> recipe.container),
+               ItemStack.CODEC.fieldOf("result").forGetter(recipe -> recipe.result),
+               MortarRecipeBookTab.CODEC.fieldOf("category").orElse(MortarRecipeBookTab.MISC).forGetter(recipe -> recipe.mortarRecipeBookTab)
+       ).apply(instance,RegularMortarRecipe::new);
+    });
 
-        String tab = GsonHelper.getAsString(jsonObject,"recipe_book_tab",null);
-        MortarRecipeBookTab mortarRecipeBookTab = MortarRecipeBookTab.findByName(tab);
-
-        ItemStack results = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(jsonObject, "result"));
-        return new RegularMortarRecipe(resourceLocation,groupIn,inputItemsIn,container,results,mortarRecipeBookTab);
-    }
-
-    private static NonNullList<Ingredient> readIngredients(JsonArray ingredientArray) {
-        NonNullList<Ingredient> nonnulllist = NonNullList.create();
-
-        for(int i = 0; i < ingredientArray.size(); ++i) {
-            Ingredient ingredient = Ingredient.fromJson(ingredientArray.get(i),false);
-            if (!ingredient.isEmpty()) {
-                nonnulllist.add(ingredient);
-            }
-        }
-
-        return nonnulllist;
-    }
-
-    @Override
-    public RegularMortarRecipe fromNetwork(ResourceLocation resourceLocation, FriendlyByteBuf friendlyByteBuf) {
-        String group = friendlyByteBuf.readUtf();
-        int i = friendlyByteBuf.readVarInt();
-        NonNullList<Ingredient> ingredients = NonNullList.withSize(i,Ingredient.EMPTY);
-
-        for(int j = 0; j < ingredients.size(); ++j){
-            ingredients.set(j,Ingredient.fromNetwork(friendlyByteBuf));
-        }
-
-        ItemStack container = friendlyByteBuf.readItem();
-        ItemStack resultItem = friendlyByteBuf.readItem();
-        MortarRecipeBookTab mortarRecipeBookTab = MortarRecipeBookTab.findByName(friendlyByteBuf.readUtf());
-
-        return new RegularMortarRecipe(resourceLocation,group,ingredients,container,resultItem,mortarRecipeBookTab);
-    }
-
-
-    @Override
-    public void toNetwork(FriendlyByteBuf friendlyByteBuf, RegularMortarRecipe recipe) {
-        friendlyByteBuf.writeUtf(recipe.getGroup());
-        friendlyByteBuf.writeVarInt(recipe.getIngredients().size());
-
-        for (Ingredient ingredient : recipe.getIngredients()) {
-            ingredient.toNetwork(friendlyByteBuf);
-        }
-
-        friendlyByteBuf.writeItem(recipe.getContainer());
-        friendlyByteBuf.writeItem(recipe.getResult());
-        friendlyByteBuf.writeUtf(recipe.getRecipeBookTab().name);
-
-    }
+    public static final StreamCodec<RegistryFriendlyByteBuf, RegularMortarRecipe> STREAM_CODEC = StreamCodec.of(MortarSerializer::toNetwork, MortarSerializer::fromNetwork);
 
     @Override
     public MapCodec<RegularMortarRecipe> codec() {
-        return null;
+        return CODEC;
     }
 
     @Override
     public StreamCodec<RegistryFriendlyByteBuf, RegularMortarRecipe> streamCodec() {
-        return null;
+        return STREAM_CODEC;
+    }
+
+    private static RegularMortarRecipe fromNetwork(RegistryFriendlyByteBuf registryFriendlyByteBuf) {
+        String group = registryFriendlyByteBuf.readUtf();
+        MortarRecipeBookTab mortarRecipeBookTab = registryFriendlyByteBuf.readEnum(MortarRecipeBookTab.class);
+        int i = registryFriendlyByteBuf.readVarInt();
+        NonNullList<Ingredient> nonNullList = NonNullList.withSize(i, Ingredient.EMPTY);
+        nonNullList.replaceAll((ingredient) -> {
+            return (Ingredient)Ingredient.CONTENTS_STREAM_CODEC.decode(registryFriendlyByteBuf);
+        });
+        ItemStack container = ItemStack.STREAM_CODEC.decode(registryFriendlyByteBuf);
+        ItemStack result = ItemStack.STREAM_CODEC.decode(registryFriendlyByteBuf);
+        return new RegularMortarRecipe(group,nonNullList, container,result,mortarRecipeBookTab);
+    }
+
+    private static void toNetwork(RegistryFriendlyByteBuf registryFriendlyByteBuf, RegularMortarRecipe mortarRecipe) {
+        registryFriendlyByteBuf.writeUtf(mortarRecipe.group);
+        registryFriendlyByteBuf.writeEnum(mortarRecipe.mortarRecipeBookTab);
+        registryFriendlyByteBuf.writeVarInt(mortarRecipe.ingredients.size());
+
+        for (Ingredient ingredient : mortarRecipe.ingredients) {
+            Ingredient.CONTENTS_STREAM_CODEC.encode(registryFriendlyByteBuf, ingredient);
+        }
+
+        ItemStack.STREAM_CODEC.encode(registryFriendlyByteBuf, mortarRecipe.container);
+        ItemStack.STREAM_CODEC.encode(registryFriendlyByteBuf, mortarRecipe.result);
     }
 }

@@ -20,7 +20,7 @@ public class SomtamFeastBlock extends FeastBlock {
     final VoxelShape PIE_SHAPE = Shapes.joinUnoptimized(PLATE_SHAPE, Block.box(3.0D, 2.0D, 3.0D, 13.0D, 5.0D, 13.0D), BooleanOp.OR);
 
     public SomtamFeastBlock() {
-        super(Properties.copy(Blocks.CAKE),ModItems.SOMTAM, true);
+        super(Properties.ofFullCopy(Blocks.CAKE),ModItems.SOMTAM, true);
     }
 
     @Override

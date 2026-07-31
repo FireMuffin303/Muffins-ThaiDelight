@@ -22,7 +22,7 @@ public class MangoStickyRiceFeastBlock extends FeastBlock {
     };
 
     public MangoStickyRiceFeastBlock() {
-        super(Properties.copy(Blocks.CAKE),ModItems.MANGO_STICKY_RICE, false);
+        super(Properties.ofFullCopy(Blocks.CAKE),ModItems.MANGO_STICKY_RICE, false);
     }
 
     @Override

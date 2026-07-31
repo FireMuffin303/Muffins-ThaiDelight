@@ -1,23 +1,21 @@
 package net.firemuffin303.thaidelight.datagen.builder;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import net.minecraft.advancements.Advancement;
-import net.minecraft.advancements.CriterionTriggerInstance;
-import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.advancements.*;
+import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
+import net.minecraft.core.NonNullList;
 import net.minecraft.data.recipes.RecipeBuilder;
+import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.RecipeSerializer;
 import org.jetbrains.annotations.Nullable;
+import vectorwing.farmersdelight.common.crafting.CuttingBoardRecipe;
 import vectorwing.farmersdelight.common.crafting.ingredient.ChanceResult;
-import vectorwing.farmersdelight.common.registry.ModRecipeSerializers;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
+import java.util.Optional;
 
 public class CuttingBoardRecipeBuilder implements RecipeBuilder {
     private final List<ChanceResult> results = new ArrayList<>();
@@ -55,7 +53,7 @@ public class CuttingBoardRecipeBuilder implements RecipeBuilder {
     }
 
     @Override
-    public RecipeBuilder unlockedBy(String string, CriterionTriggerInstance criterionTriggerInstance) {
+    public RecipeBuilder unlockedBy(String string, Criterion<?> criterion) {
         return null;
     }
 
@@ -70,58 +68,16 @@ public class CuttingBoardRecipeBuilder implements RecipeBuilder {
     }
 
     @Override
-    public void save(Consumer<FinishedRecipe> consumer, ResourceLocation resourceLocation) {
-        consumer.accept(new Result(resourceLocation,this.results,this.input,this.tool));
+    public void save(RecipeOutput consumer, ResourceLocation resourceLocation) {
+        Advancement.Builder builder = consumer.advancement()
+                .addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(resourceLocation))
+                .rewards(AdvancementRewards.Builder.recipe(resourceLocation))
+                .requirements(AdvancementRequirements.Strategy.OR);
+
+        NonNullList<ChanceResult> results = NonNullList.create();
+        results.addAll(this.results);
+        CuttingBoardRecipe cuttingBoardRecipe = new CuttingBoardRecipe("",this.input,this.tool,results, Optional.empty());
+        consumer.accept(resourceLocation,cuttingBoardRecipe,builder.build(resourceLocation.withPrefix("recipe/")));
     }
 
-    static class Result implements FinishedRecipe{
-        public final ResourceLocation id;
-        public final List<ChanceResult> results;
-        public final Ingredient tool;
-        public final Ingredient input;
-
-        protected Result(ResourceLocation resourceLocation,List<ChanceResult> results, Ingredient input, Ingredient tool){
-            this.id = resourceLocation;
-            this.results = results;
-            this.tool = tool;
-            this.input = input;
-        }
-
-
-        @Override
-        public void serializeRecipeData(JsonObject jsonObject) {
-            JsonArray resultArray = new JsonArray();
-            for(ChanceResult chanceResult : this.results){
-                resultArray.add(chanceResult.serialize());
-            }
-
-            jsonObject.add("result",resultArray);
-            jsonObject.add("tool",this.tool.toJson());
-
-            JsonArray inputArray = new JsonArray();
-            inputArray.add(this.input.toJson());
-
-            jsonObject.add("ingredients",inputArray);
-        }
-
-        @Override
-        public ResourceLocation getId() {
-            return this.id;
-        }
-
-        @Override
-        public RecipeSerializer<?> getType() {
-            return ModRecipeSerializers.CUTTING.get();
-        }
-
-        @Override
-        public @Nullable JsonObject serializeAdvancement() {
-            return null;
-        }
-
-        @Override
-        public @Nullable ResourceLocation getAdvancementId() {
-            return null;
-        }
-    }
 }

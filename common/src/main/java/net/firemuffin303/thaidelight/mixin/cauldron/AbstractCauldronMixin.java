@@ -7,7 +7,7 @@ import net.firemuffin303.thaidelight.common.registry.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.cauldron.CauldronInteraction;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -25,22 +25,24 @@ import java.util.Map;
 @Mixin(AbstractCauldronBlock.class)
 public abstract class AbstractCauldronMixin {
 
-    @Shadow @Final private Map<Item, CauldronInteraction> interactions;
+    @Shadow @Final
+    protected CauldronInteraction.InteractionMap interactions;
 
-    @ModifyReturnValue(method = "use",at = @At("RETURN"))
-    public InteractionResult muffins$use(InteractionResult original, @Local ItemStack itemStack,
-                                         @Local(argsOnly = true)BlockState blockState,
-                                         @Local(argsOnly = true)Level level,
-                                         @Local(argsOnly = true)BlockPos blockPos,
-                                         @Local(argsOnly = true)Player player,
-                                         @Local(argsOnly = true) InteractionHand interactionHand
-                                         ){
+    @ModifyReturnValue(method = "useItemOn",at = @At("RETURN"))
+    public ItemInteractionResult muffins$use(ItemInteractionResult original,
+                                             @Local(argsOnly = true) ItemStack itemStack,
+                                             @Local(argsOnly = true) BlockState blockState,
+                                             @Local(argsOnly = true) Level level,
+                                             @Local(argsOnly = true) BlockPos blockPos,
+                                             @Local(argsOnly = true) Player player,
+                                             @Local(argsOnly = true) InteractionHand interactionHand
+                                             ){
         if(this.interactions == CauldronInteraction.EMPTY){
-            if(itemStack.is(ModTags.COCONUT) && !CauldronInteraction.EMPTY.containsKey(itemStack.getItem())){
+            if(itemStack.is(ModTags.COCONUT) && !CauldronInteraction.EMPTY.map().containsKey(itemStack.getItem())){
                 return ModCauldronInteraction.SET_COCONUT_CAULDRON.interact(blockState, level, blockPos, player, interactionHand, itemStack);
             }
         } else if((AbstractCauldronBlock)(Object)this instanceof LayeredCauldronBlock && this.interactions == CauldronInteraction.WATER){
-            if(itemStack.is(ModTags.COMMON_RAW_FISHES) && !CauldronInteraction.WATER.containsKey(itemStack.getItem())){
+            if(itemStack.is(ModTags.COMMON_RAW_FISHES) && !CauldronInteraction.WATER.map().containsKey(itemStack.getItem())){
                 return ModCauldronInteraction.MAKE_FERMENTED_FISH.interact(blockState, level, blockPos, player, interactionHand, itemStack);
             }
         }
