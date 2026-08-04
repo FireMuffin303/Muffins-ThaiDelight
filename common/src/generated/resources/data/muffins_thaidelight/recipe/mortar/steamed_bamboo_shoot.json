@@ -1,0 +1,27 @@
+{
+  "type": "muffins_thaidelight:mortar",
+  "category": "misc",
+  "container": {
+    "count": 1,
+    "id": "minecraft:bowl"
+  },
+  "group": "",
+  "ingredients": [
+    {
+      "item": "muffins_thaidelight:bamboo_shoot"
+    },
+    {
+      "tag": "c:foods/vegetables/chili_pepper"
+    },
+    {
+      "item": "muffins_thaidelight:fermented_fish"
+    },
+    {
+      "tag": "c:foods/cooked_meats"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "muffins_thaidelight:steamed_bamboo_shoot"
+  }
+}

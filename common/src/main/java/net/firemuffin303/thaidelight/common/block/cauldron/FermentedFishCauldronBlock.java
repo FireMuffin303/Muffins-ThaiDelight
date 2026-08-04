@@ -4,10 +4,12 @@ import com.mojang.serialization.MapCodec;
 import net.firemuffin303.thaidelight.common.registry.ModMobEffects;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.cauldron.CauldronInteraction;
+import net.minecraft.core.particles.ColorParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.FastColor;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -130,8 +132,8 @@ public class FermentedFishCauldronBlock extends AbstractCauldronBlock {
             double e = (double)blockPos.getY() + 0.8;
             double f = (double)blockPos.getZ() + 0.5;
 
-            double[] color = {0.596078431372549f,0.3607843137254902f,0.2705882352941176f};
-            level.addParticle(ParticleTypes.CLOUD,d, e,f,color[0],color[1],color[2]);
+
+            level.addParticle(ColorParticleOption.create(ParticleTypes.ENTITY_EFFECT, FastColor.ARGB32.color(255, 0xa5997c)),d, e,f,1.0f,1.0f,1.0f);
         }
     }
 

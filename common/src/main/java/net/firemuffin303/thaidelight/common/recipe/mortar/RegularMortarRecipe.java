@@ -13,6 +13,8 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 
+import java.util.Optional;
+
 public class RegularMortarRecipe implements MortarRecipe{
     protected final String group;
     protected final NonNullList<Ingredient> ingredients;
@@ -23,7 +25,12 @@ public class RegularMortarRecipe implements MortarRecipe{
     public RegularMortarRecipe(String group, NonNullList<Ingredient> ingredients,ItemStack container, ItemStack result,MortarRecipeBookTab mortarRecipeBookTab) {
         this.group = group;
         this.ingredients = ingredients;
-        this.container = container;
+
+        if(container.isEmpty()){
+            this.container = ItemStack.EMPTY;
+        }else{
+            this.container = container;
+        }
         this.result = result;
         this.mortarRecipeBookTab = mortarRecipeBookTab;
     }
@@ -44,7 +51,7 @@ public class RegularMortarRecipe implements MortarRecipe{
     }
 
     public ItemStack getContainer() {
-        return container;
+        return this.container;
     }
 
     @Override

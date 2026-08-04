@@ -58,6 +58,7 @@ public class SackItem extends BlockItem {
         return itemStack;
     }
 
+    /*
     @Override
     public Optional<TooltipComponent> getTooltipImage(ItemStack itemStack) {
         NonNullList<ItemStack> nonNullList = NonNullList.withSize(5,ItemStack.EMPTY);
@@ -66,8 +67,10 @@ public class SackItem extends BlockItem {
             nonNullList.add(itemStack1);
         }
 
-        return Optional.of(new SackTooltipComponent.SackToolTip(nonNullList));
+        return !itemStack.has(DataComponents.HIDE_TOOLTIP) && !itemStack.has(DataComponents.HIDE_ADDITIONAL_TOOLTIP) ? Optional.of(new SackTooltipComponent.SackToolTip(nonNullList)) : Optional.empty();
     }
+
+     */
 
     @Override
     public boolean canFitInsideContainerItems() {

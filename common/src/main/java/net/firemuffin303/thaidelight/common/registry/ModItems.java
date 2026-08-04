@@ -24,6 +24,8 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.component.CustomData;
+import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -53,7 +55,7 @@ public class ModItems {
 
 
     public static final Supplier<Item> MORTAR = register("mortar",() -> new BlockItem(ModBlocks.MORTAR.get(),new Item.Properties()));
-    public static final Supplier<Item> SACK = register("sack",() -> new SackItem(new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> SACK = register("sack",() -> new SackItem(new Item.Properties().stacksTo(1).component(DataComponents.CONTAINER, ItemContainerContents.EMPTY)));
 
     //Blocks
     public static final Supplier<Item> LIME_CRATE = register("lime_crate",() -> new BlockItem(ModBlocks.LIME_CRATE.get(),new Item.Properties()));
@@ -76,7 +78,7 @@ public class ModItems {
     //Dragonfly
     public static final Supplier<Item> DRAGONFLY_SPAWN_EGG = register("dragonfly_spawn_egg",createSpawnEgg(ModEntityTypes.DRAGONFLY,0x181d13,0x246011,new Item.Properties()));
     public static final Supplier<Item> DRAGONFLY = registerFlatItem("dragonfly",() -> new Item(new Item.Properties().food(ModFoods.DRAGONFLY)));
-    public static final Supplier<Item> DRAGONFLY_BOTTLE = register("dragonfly_bottle",() -> new DragonflyBottleItem(new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> DRAGONFLY_BOTTLE = register("dragonfly_bottle",() -> new DragonflyBottleItem(new Item.Properties().stacksTo(1).component(DataComponents.BUCKET_ENTITY_DATA, CustomData.EMPTY)));
     public static final Supplier<Item> COOKED_DRAGONFLY = registerFlatItem("cooked_dragonfly",() -> new Item(new Item.Properties().food(ModFoods.COOKED_DRAGONFLY)));
 
     //Bucket

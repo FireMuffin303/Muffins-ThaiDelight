@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "item": "muffins_thaidelight:mango_planks"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "muffins_thaidelight:mango_button"
+  }
+}

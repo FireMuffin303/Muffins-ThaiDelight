@@ -68,7 +68,7 @@ public class ModTags {
     //----- Covenience Tag ----
     public static final TagKey<Item> COMMON_MILKS = TagKey.create(Registries.ITEM,ResourceLocation.fromNamespaceAndPath("c","milks"));
     public static final TagKey<Item> COMMON_COOKED_MEATS =  TagKey.create(Registries.ITEM,ResourceLocation.fromNamespaceAndPath("c","foods/cooked_meats"));
-    public static final TagKey<Item> KNIVES = TagKey.create(Registries.ITEM,ResourceLocation.fromNamespaceAndPath("c","tools/knives"));
+    public static final TagKey<Item> KNIVES = TagKey.create(Registries.ITEM,ResourceLocation.fromNamespaceAndPath("c","tools/knife"));
     public static final TagKey<Item> COMMON_EGGS = TagKey.create(Registries.ITEM,ResourceLocation.fromNamespaceAndPath("c","eggs"));
     public static final TagKey<Item> COMMON_RAW_FISHES = TagKey.create(Registries.ITEM,ResourceLocation.fromNamespaceAndPath("c","foods/raw_fishes"));
 

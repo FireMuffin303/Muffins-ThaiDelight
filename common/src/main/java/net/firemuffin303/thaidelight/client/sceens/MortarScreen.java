@@ -19,7 +19,7 @@ public class MortarScreen extends AbstractContainerScreen<MortarMenu> implements
     private static final ResourceLocation RECIPE_BUTTON_LOCATION = ResourceLocation.withDefaultNamespace("textures/gui/recipe_button.png");
 
     private final MortarRecipeBookComponent recipeBookComponent = new MortarRecipeBookComponent();
-    public static final Rect2i CLICK_AREA = new Rect2i(41, 25, 26, 25);
+    public static final Rect2i CLICK_AREA = new Rect2i(80, 35, 24, 17);
     private boolean widthTooNarrow;
 
     public MortarScreen(MortarMenu abstractContainerMenu, Inventory inventory, Component component) {

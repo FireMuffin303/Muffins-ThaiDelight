@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_durian_flower": {
+      "conditions": {
+        "items": [
+          {
+            "items": "muffins_thaidelight:durian_flower"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "muffins_thaidelight:crafting/yellow_dye_from_durian_flower"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_durian_flower"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "muffins_thaidelight:crafting/yellow_dye_from_durian_flower"
+    ]
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "type": "muffins_thaidelight:mortar",
+  "category": "meals",
+  "container": {
+    "count": 1,
+    "id": "minecraft:bowl"
+  },
+  "group": "",
+  "ingredients": [
+    {
+      "tag": "c:foods/vegetables/chili_pepper"
+    },
+    {
+      "item": "farmersdelight:tomato"
+    },
+    {
+      "tag": "c:foods/raw_papaya"
+    },
+    {
+      "item": "muffins_thaidelight:fermented_fish"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "muffins_thaidelight:somtam_feast"
+  }
+}

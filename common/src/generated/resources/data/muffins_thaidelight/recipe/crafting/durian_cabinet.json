@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "S": {
+      "item": "muffins_thaidelight:durian_slab"
+    },
+    "W": {
+      "item": "muffins_thaidelight:durian_planks"
+    }
+  },
+  "pattern": [
+    "WWW",
+    "S S",
+    "WWW"
+  ],
+  "result": {
+    "count": 1,
+    "id": "muffins_thaidelight:durian_cabinet"
+  }
+}

@@ -23,7 +23,6 @@
     "cauldron.AbstractCauldronMixin",
     "cauldron.LayeredCauldronAccessor",
     "dispenser.DispenseItemBehaviorMixin",
-    "durianHelmet.EnchantmentHelperMixin",
     "durianHelmet.LivingEntityMixin",
     "foodEffect.LivingEntityMixin",
     "foodEffect.heatedup.PowderSnowBlockMixin",

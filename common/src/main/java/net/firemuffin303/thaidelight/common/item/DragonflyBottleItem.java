@@ -38,7 +38,7 @@ public class DragonflyBottleItem extends MobBottleItem {
     }
 
     public static void setVariant(ItemStack itemStack, DragonflyEntity.DragonflyVariant variant){
-        itemStack.get(DataComponents.BUCKET_ENTITY_DATA).update(compoundTag -> {
+        CustomData.update(DataComponents.BUCKET_ENTITY_DATA,itemStack,compoundTag -> {
             compoundTag.putInt("Variant",variant.getId());
         });
     }

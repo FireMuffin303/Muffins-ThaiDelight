@@ -1,0 +1,25 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "muffins_thaidelight:small_durian"
+    }
+  ],
+  "result": [
+    {
+      "item": {
+        "count": 2,
+        "id": "muffins_thaidelight:durian_pulp"
+      }
+    },
+    {
+      "item": {
+        "count": 2,
+        "id": "muffins_thaidelight:durian_peel"
+      }
+    }
+  ],
+  "tool": {
+    "tag": "c:tools/knife"
+  }
+}

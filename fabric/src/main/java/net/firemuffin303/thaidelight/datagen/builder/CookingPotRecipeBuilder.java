@@ -31,7 +31,7 @@ public class CookingPotRecipeBuilder implements RecipeBuilder {
 
     private String group;
     private Item container;
-    private CookingPotRecipeBookTab cookingPotRecipeBookTab;
+    private CookingPotRecipeBookTab cookingPotRecipeBookTab = CookingPotRecipeBookTab.MISC;
     private final Map<String, Criterion<?>> criteria = new LinkedHashMap();
 
     private final List<ResourceCondition> conditions = new ArrayList<>();
@@ -134,7 +134,11 @@ public class CookingPotRecipeBuilder implements RecipeBuilder {
         NonNullList<Ingredient> ingredients1 = NonNullList.create();
         ingredients1.addAll(this.ingredients);
 
-        CookingPotRecipe cookingPotRecipe = new CookingPotRecipe(Objects.requireNonNull(this.group,""),this.cookingPotRecipeBookTab,ingredients1,new ItemStack(this.result,this.count),new ItemStack(this.container),this.experience,this.cookTime);
+
+
+        CookingPotRecipe cookingPotRecipe = new CookingPotRecipe(Objects.requireNonNullElse(this.group,""),this.cookingPotRecipeBookTab,ingredients1,new ItemStack(this.result,this.count),this.container == null ? ItemStack.EMPTY : new ItemStack(this.container),this.experience,this.cookTime);
         recipeOutput.accept(resourceLocation,cookingPotRecipe,builder.build(resourceLocation.withPrefix("recipes/")));
     }
+
+
 }

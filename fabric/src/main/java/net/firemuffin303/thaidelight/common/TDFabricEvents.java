@@ -137,7 +137,7 @@ public class TDFabricEvents {
             @Override
             public void modifyLootTable(ResourceKey<LootTable> resourceKey, LootTable.Builder builder, LootTableSource lootTableSource) {
                 if (chestsId.contains(resourceKey)) {
-                    ResourceLocation injectId = ThaiDelightCommon.modid("inject/" + resourceKey.location());
+                    ResourceLocation injectId = ThaiDelightCommon.modid("inject/" + resourceKey.location().getPath());
                     /*
                     LootTableAccessor accessor = (LootTableAccessor) injectingLootTable;
 

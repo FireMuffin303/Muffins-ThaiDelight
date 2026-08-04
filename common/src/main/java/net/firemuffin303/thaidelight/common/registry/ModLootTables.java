@@ -26,7 +26,7 @@ public class ModLootTables {
     public static final ResourceKey<LootTable> INJECT_VILLAGE_DESERT_HOUSE = create(ThaiDelightCommon.modid("inject/chests/village/village_desert_house"));
     public static final ResourceKey<LootTable> INJECT_VILLAGE_TAIGA_HOUSE = create(ThaiDelightCommon.modid("inject/chests/village/village_taiga_house"));
     public static final ResourceKey<LootTable> INJECT_VILLAGE_SNOWY_HOUSE = create(ThaiDelightCommon.modid("inject/chests/village/village_snowy_house"));
-    public static final ResourceKey<LootTable> INJECT_VILLAGE_SAVANNA_HOUSE = create(ThaiDelightCommon.modid("inject/chests/village/village_snowy_house"));
+    public static final ResourceKey<LootTable> INJECT_VILLAGE_SAVANNA_HOUSE = create(ThaiDelightCommon.modid("inject/chests/village/village_savanna_house"));
     public static final ResourceKey<LootTable> INJECT_ABANDONED_MINESHAFT = create(ThaiDelightCommon.modid("inject/chests/abandoned_mineshaft"));
     public static final ResourceKey<LootTable> INJECT_PILLAGER_OUTPOST = create(ThaiDelightCommon.modid("inject/chests/pillager_outpost"));
 

@@ -1,0 +1,14 @@
+{
+  "type": "muffins_thaidelight:mortar",
+  "category": "misc",
+  "group": "yellow_dye",
+  "ingredients": [
+    {
+      "item": "minecraft:sunflower"
+    }
+  ],
+  "result": {
+    "count": 3,
+    "id": "minecraft:yellow_dye"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "values": [
+    "muffins_thaidelight:mango",
+    "muffins_thaidelight:mango_slice",
+    {
+      "id": "fishofthieves:mango",
+      "required": false
+    }
+  ]
+}

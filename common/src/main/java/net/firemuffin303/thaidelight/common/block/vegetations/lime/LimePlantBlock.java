@@ -1,5 +1,6 @@
 package net.firemuffin303.thaidelight.common.block.vegetations.lime;
 
+import com.mojang.logging.LogUtils;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.firemuffin303.thaidelight.common.registry.ModLootTables;

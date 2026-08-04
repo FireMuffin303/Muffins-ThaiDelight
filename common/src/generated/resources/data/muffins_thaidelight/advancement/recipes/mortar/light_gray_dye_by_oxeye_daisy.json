@@ -1,0 +1,21 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "muffins_thaidelight:mortar/light_gray_dye_by_oxeye_daisy"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "muffins_thaidelight:mortar/light_gray_dye_by_oxeye_daisy"
+    ]
+  }
+}

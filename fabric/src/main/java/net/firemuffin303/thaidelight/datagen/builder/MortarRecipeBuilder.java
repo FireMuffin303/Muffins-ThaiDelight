@@ -3,6 +3,7 @@ package net.firemuffin303.thaidelight.datagen.builder;
 import com.google.common.collect.Lists;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.mojang.logging.LogUtils;
 import net.firemuffin303.thaidelight.ThaiDelightCommon;
 import net.firemuffin303.thaidelight.common.recipe.mortar.MortarRecipeBookTab;
 import net.firemuffin303.thaidelight.common.recipe.mortar.RegularMortarRecipe;
@@ -23,21 +24,17 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.function.Consumer;
 
 public class MortarRecipeBuilder implements RecipeBuilder {
     private final List<Ingredient> ingredients = Lists.newArrayList();
-    private Item container = Items.AIR;
+    private Item container;
     private final Item result;
     private final int count;
-    private String modid = ThaiDelightCommon.MOD_ID;
     private MortarRecipeBookTab mortarRecipeBookTab = MortarRecipeBookTab.MISC;
 
-    private final Map<String, Criterion<?>> criteria = new LinkedHashMap();
+    private final Map<String, Criterion<?>> criteria = new LinkedHashMap<>();
     @Nullable
     private String group;
 
@@ -121,7 +118,7 @@ public class MortarRecipeBuilder implements RecipeBuilder {
         NonNullList<Ingredient> ingredients1 = NonNullList.create();
         ingredients1.addAll(this.ingredients);
 
-        RegularMortarRecipe recipe = new RegularMortarRecipe(Objects.requireNonNull(this.group,""),ingredients1,new ItemStack(this.container),new ItemStack(this.result,this.count),this.mortarRecipeBookTab);
+        RegularMortarRecipe recipe = new RegularMortarRecipe(Objects.requireNonNullElse(this.group,""),ingredients1,this.container == null ? ItemStack.EMPTY : new ItemStack(this.container),new ItemStack(this.result,this.count),this.mortarRecipeBookTab);
 
         recipeOutput.accept(resourceLocation,recipe,builder.build(resourceLocation.withPrefix("recipes/")));
 

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "category": "food",
+  "cookingtime": 450,
+  "experience": 0.35,
+  "ingredient": {
+    "item": "muffins_thaidelight:durian_pulp"
+  },
+  "result": {
+    "id": "muffins_thaidelight:fried_durian"
+  }
+}

@@ -16,6 +16,7 @@ import net.minecraft.world.item.crafting.*;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 public class MortarSerializer implements RecipeSerializer<RegularMortarRecipe> {
     private static final MapCodec<RegularMortarRecipe> CODEC = RecordCodecBuilder.mapCodec((instance) -> {
@@ -31,7 +32,7 @@ public class MortarSerializer implements RecipeSerializer<RegularMortarRecipe> {
 
                    return DataResult.success(NonNullList.of(Ingredient.EMPTY,ingredients));
                },DataResult::success).forGetter(recipe -> recipe.ingredients),
-               ItemStack.CODEC.fieldOf("container").forGetter(recipe -> recipe.container),
+               ItemStack.STRICT_CODEC.optionalFieldOf("container",ItemStack.EMPTY).forGetter(recipe -> recipe.container),
                ItemStack.CODEC.fieldOf("result").forGetter(recipe -> recipe.result),
                MortarRecipeBookTab.CODEC.fieldOf("category").orElse(MortarRecipeBookTab.MISC).forGetter(recipe -> recipe.mortarRecipeBookTab)
        ).apply(instance,RegularMortarRecipe::new);
@@ -57,7 +58,7 @@ public class MortarSerializer implements RecipeSerializer<RegularMortarRecipe> {
         nonNullList.replaceAll((ingredient) -> {
             return (Ingredient)Ingredient.CONTENTS_STREAM_CODEC.decode(registryFriendlyByteBuf);
         });
-        ItemStack container = ItemStack.STREAM_CODEC.decode(registryFriendlyByteBuf);
+        ItemStack container = ItemStack.OPTIONAL_STREAM_CODEC.decode(registryFriendlyByteBuf);
         ItemStack result = ItemStack.STREAM_CODEC.decode(registryFriendlyByteBuf);
         return new RegularMortarRecipe(group,nonNullList, container,result,mortarRecipeBookTab);
     }
@@ -71,7 +72,7 @@ public class MortarSerializer implements RecipeSerializer<RegularMortarRecipe> {
             Ingredient.CONTENTS_STREAM_CODEC.encode(registryFriendlyByteBuf, ingredient);
         }
 
-        ItemStack.STREAM_CODEC.encode(registryFriendlyByteBuf, mortarRecipe.container);
+        ItemStack.OPTIONAL_STREAM_CODEC.encode(registryFriendlyByteBuf, mortarRecipe.container);
         ItemStack.STREAM_CODEC.encode(registryFriendlyByteBuf, mortarRecipe.result);
     }
 }

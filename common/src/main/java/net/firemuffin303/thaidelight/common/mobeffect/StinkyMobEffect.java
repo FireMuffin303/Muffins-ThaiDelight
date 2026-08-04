@@ -33,8 +33,7 @@ public class StinkyMobEffect extends MobEffect {
             }
         }
 
-        super.applyEffectTick(livingEntity, i);
-        return false;
+        return super.applyEffectTick(livingEntity, i);
     }
 
     @Override

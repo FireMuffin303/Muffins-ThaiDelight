@@ -98,7 +98,7 @@ public class PapayaLeavesStemBlock extends BushBlock implements SimpleWaterlogge
 
     @Override
     public boolean mayPlaceOn(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
-        return blockState.is(ModTags.PAPAYA_LOGS) || blockState.is(this) || super.mayPlaceOn(blockState, blockGetter, blockPos);
+        return blockState.is(this) || blockState.isFaceSturdy(blockGetter,blockPos,blockGetter.getBlockState(blockPos).getValue(PAPAYA_LEAVES_FACING));
     }
 
     @Override

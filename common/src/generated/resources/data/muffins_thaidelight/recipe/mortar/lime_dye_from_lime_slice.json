@@ -1,0 +1,14 @@
+{
+  "type": "muffins_thaidelight:mortar",
+  "category": "misc",
+  "group": "lime_dye",
+  "ingredients": [
+    {
+      "item": "muffins_thaidelight:lime_slice"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:lime_dye"
+  }
+}

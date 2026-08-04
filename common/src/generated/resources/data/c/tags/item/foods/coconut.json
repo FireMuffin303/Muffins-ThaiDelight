@@ -1,0 +1,11 @@
+{
+  "values": [
+    "muffins_thaidelight:coconut",
+    "muffins_thaidelight:stripped_coconut",
+    "muffins_thaidelight:coconut_slice",
+    {
+      "id": "fishofthieves:coconut",
+      "required": false
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "type": "farmersdelight:cooking",
+  "container": {
+    "count": 1,
+    "id": "minecraft:bowl"
+  },
+  "experience": 0.35,
+  "ingredients": [
+    {
+      "tag": "c:foods/cooked_meats"
+    },
+    {
+      "tag": "c:foods/cooked_meats"
+    },
+    {
+      "tag": "c:foods/vegetables/chili_pepper"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "item": "muffins_thaidelight:fish_sauce_bottle"
+    },
+    {
+      "item": "farmersdelight:onion"
+    }
+  ],
+  "recipe_book_tab": "meals",
+  "result": {
+    "count": 1,
+    "id": "muffins_thaidelight:larb_feast"
+  }
+}

@@ -9,12 +9,14 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(EnchantmentHelper.class)
 public abstract class EnchantmentHelperMixin {
 
+    /*
     @Inject(method = "doPostHurtEffects",at = @At("HEAD"))
     private static void muffins$durianThorns(LivingEntity livingEntity, Entity entity, CallbackInfo ci){
         ModUtils.durianHelmetThorns(livingEntity,entity);
     }
 
+
+     */
 }

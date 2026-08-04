@@ -68,8 +68,7 @@ public class ThaiDelightClientFabric implements ClientModInitializer {
 
         ThaiDelightCommonClient.registerCustomEffectRenderer();
 
-        Supplier<MenuType<MortarMenu>> menuTypeSupplier = (Supplier<MenuType<MortarMenu>>) (Supplier<?>) ModMenuType.MORTAR;
-        MenuScreens.register(menuTypeSupplier.get(), MortarScreen::new);
+        MenuScreens.register(ModMenuType.MORTAR.get(), MortarScreen::new);
 
         registerRecipe();
 
@@ -90,12 +89,14 @@ public class ThaiDelightClientFabric implements ClientModInitializer {
         ModelLoadingPlugin.register(new ModelLoadingPlugin() {
             @Override
             public void onInitializeModelLoader(Context context) {
+
                 /*
-                context.addModels(ThaiDelightCommonClient.SACK_MODEL,
-                        ThaiDelightCommonClient.FILLED_SACK_MODEL,
-                        ThaiDelightCommonClient.SACK_MODEL_IN_HAND,
-                        ThaiDelightCommonClient.FULL_SACK_MODEL_IN_HAND
+                context.addModels(ThaiDelightCommonClient.SACK_MODEL.id(),
+                        ThaiDelightCommonClient.FILLED_SACK_MODEL.id(),
+                        ThaiDelightCommonClient.SACK_MODEL_IN_HAND.id(),
+                        ThaiDelightCommonClient.FULL_SACK_MODEL_IN_HAND.id()
                 );
+
                  */
             }
         });

@@ -16,7 +16,7 @@ import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import java.util.function.BiConsumer;
 
 public class ModChestLootTableProvider implements LootTableSubProvider {
-    private final ResourceLocation[] VILLAGE_LOOT = {
+    private final ResourceKey<LootTable>[] VILLAGE_LOOT = new ResourceKey[]{
             ModLootTables.INJECT_VILLAGE_PLAINS_HOUSE,
             ModLootTables.INJECT_VILLAGE_DESERT_HOUSE,
             ModLootTables.INJECT_VILLAGE_SAVANNA_HOUSE,

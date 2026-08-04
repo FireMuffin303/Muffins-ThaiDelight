@@ -101,9 +101,9 @@ public class MortarMenu extends RecipeBookMenu<MortarInput,MortarRecipe> {
                 }
             }
 
-            resultContainer.setItem(0, itemStack);
-            arg.setRemoteSlot(0, itemStack);
-            serverPlayer.connection.send(new ClientboundContainerSetSlotPacket(arg.containerId, arg.incrementStateId(), 0, itemStack));
+            resultContainer.setItem(5, itemStack);
+            arg.setRemoteSlot(5, itemStack);
+            serverPlayer.connection.send(new ClientboundContainerSetSlotPacket(arg.containerId, arg.incrementStateId(), 5, itemStack));
         }
     }
 
@@ -135,7 +135,7 @@ public class MortarMenu extends RecipeBookMenu<MortarInput,MortarRecipe> {
 
     @Override
     public int getResultSlotIndex() {
-        return 0;
+        return 5;
     }
 
     @Override
@@ -170,7 +170,7 @@ public class MortarMenu extends RecipeBookMenu<MortarInput,MortarRecipe> {
         if (slot != null && slot.hasItem()) {
             ItemStack itemStack2 = slot.getItem();
             itemStack = itemStack2.copy();
-            if (i == 0) {
+            if (i == 5) {
                 this.access.execute((arg3, arg4) -> {
                     itemStack2.getItem().onCraftedBy(itemStack2, arg3, arg);
                 });
@@ -180,7 +180,7 @@ public class MortarMenu extends RecipeBookMenu<MortarInput,MortarRecipe> {
 
                 slot.onQuickCraft(itemStack2, itemStack);
             } else if (i >= 6 && i < 42) {
-                if (!this.moveItemStackTo(itemStack2, 1, 6, false)) {
+                if (!this.moveItemStackTo(itemStack2, 0, 5, false)) {
                     if (i < 37) {
                         if (!this.moveItemStackTo(itemStack2, 31, 42, false)) {
                             return ItemStack.EMPTY;
@@ -204,7 +204,7 @@ public class MortarMenu extends RecipeBookMenu<MortarInput,MortarRecipe> {
             }
 
             slot.onTake(arg, itemStack2);
-            if (i == 0) {
+            if (i == 5) {
                 arg.drop(itemStack2, false);
             }
         }

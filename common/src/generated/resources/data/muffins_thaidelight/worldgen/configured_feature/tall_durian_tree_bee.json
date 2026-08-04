@@ -64,17 +64,13 @@
       "base_height": 15,
       "branch_count": {
         "type": "minecraft:uniform",
-        "value": {
-          "max_inclusive": 4,
-          "min_inclusive": 2
-        }
+        "max_inclusive": 4,
+        "min_inclusive": 2
       },
       "branch_horizontal_length": {
         "type": "minecraft:uniform",
-        "value": {
-          "max_inclusive": 6,
-          "min_inclusive": 4
-        }
+        "max_inclusive": 6,
+        "min_inclusive": 4
       },
       "branch_sections": 2,
       "branch_start_offset_from_top": {

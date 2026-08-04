@@ -1,0 +1,19 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "muffins_thaidelight:papaya"
+    }
+  ],
+  "result": [
+    {
+      "item": {
+        "count": 2,
+        "id": "muffins_thaidelight:papaya_slice"
+      }
+    }
+  ],
+  "tool": {
+    "tag": "c:tools/knife"
+  }
+}

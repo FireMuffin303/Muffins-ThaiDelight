@@ -34,7 +34,7 @@
       }
     },
     {
-      "enum" : "net/minecraft/client/model/HumanoidModel/ArmPose",
+      "enum" : "net/minecraft/client/model/HumanoidModel$ArmPose",
       "name" : "MUFFINS_THAIDELIGHT_CATCHING_BAG_HOLD",
       "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
       "parameters": {
@@ -43,7 +43,7 @@
       }
     },
     {
-      "enum" : "net/minecraft/client/model/HumanoidModel/ArmPose",
+      "enum" : "net/minecraft/client/model/HumanoidModel$ArmPose",
       "name" : "MUFFINS_THAIDELIGHT_SACK_SHOULDER_HOLD",
       "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
       "parameters": {
@@ -52,7 +52,7 @@
       }
     },
     {
-      "enum" : "net/minecraft/client/model/HumanoidModel/ArmPose",
+      "enum" : "net/minecraft/client/model/HumanoidModel$ArmPose",
       "name" : "MUFFINS_THAIDELIGHT_CATCHING_BAG_SWING",
       "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
       "parameters": {

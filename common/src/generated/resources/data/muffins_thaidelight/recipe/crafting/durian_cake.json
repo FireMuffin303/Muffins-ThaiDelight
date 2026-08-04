@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "D": {
+      "item": "muffins_thaidelight:durian_pulp"
+    },
+    "E": {
+      "item": "minecraft:egg"
+    },
+    "M": {
+      "tag": "c:milks"
+    },
+    "S": {
+      "item": "minecraft:sugar"
+    }
+  },
+  "pattern": [
+    "MMM",
+    "SES",
+    "DDD"
+  ],
+  "result": {
+    "count": 1,
+    "id": "muffins_thaidelight:durian_cake"
+  }
+}

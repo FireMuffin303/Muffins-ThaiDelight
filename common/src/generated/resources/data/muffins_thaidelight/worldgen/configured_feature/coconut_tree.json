@@ -14,10 +14,8 @@
       "offset": 0,
       "radius": {
         "type": "minecraft:uniform",
-        "value": {
-          "max_inclusive": 3,
-          "min_inclusive": 2
-        }
+        "max_inclusive": 3,
+        "min_inclusive": 2
       },
       "rand_radius_a": 1,
       "rand_radius_b": 2
@@ -48,10 +46,8 @@
       "trunk_bend_chance": 0.6,
       "trunk_section_height": {
         "type": "minecraft:uniform",
-        "value": {
-          "max_inclusive": 5,
-          "min_inclusive": 3
-        }
+        "max_inclusive": 5,
+        "min_inclusive": 3
       }
     },
     "trunk_provider": {

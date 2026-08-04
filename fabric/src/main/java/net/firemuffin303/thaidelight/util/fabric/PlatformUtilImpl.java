@@ -3,6 +3,7 @@ package net.firemuffin303.thaidelight.util.fabric;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
+import net.fabricmc.fabric.api.registry.LandPathNodeTypesRegistry;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
 import net.firemuffin303.thaidelight.asm.ModASMEarlyRiser;
@@ -24,7 +25,10 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.inventory.RecipeBookType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.phys.Vec3;
 import vectorwing.farmersdelight.common.Configuration;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
@@ -141,6 +145,10 @@ public class PlatformUtilImpl {
 
     public static void registerBlockBurn(Supplier<Block> blockSupplier, int burn, int spread) {
         FlammableBlockRegistry.getDefaultInstance().add(blockSupplier.get(),burn,spread);
+    }
+
+    public static PathType debugPathType(BlockState state, BlockGetter world, BlockPos pos, boolean neighbor) {
+        return LandPathNodeTypesRegistry.getPathNodeType(state,world,pos,neighbor);
     }
 
 

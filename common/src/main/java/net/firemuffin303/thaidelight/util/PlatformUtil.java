@@ -13,7 +13,10 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.inventory.RecipeBookType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.Map;
@@ -143,6 +146,11 @@ public class PlatformUtil {
 
     @ExpectPlatform
     public static void playDurianCatchSound(ServerLevel serverLevel, Vec3 vec3, BlockPos blockPos){
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static PathType debugPathType(BlockState state, BlockGetter world, BlockPos pos, boolean neighbor){
         throw new AssertionError();
     }
 

@@ -3,6 +3,8 @@ package net.firemuffin303.thaidelight.neoforge;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.minecraft.client.RecipeBookCategories;
 import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.world.entity.HumanoidArm;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.neoforged.fml.common.asm.enumextension.EnumProxy;

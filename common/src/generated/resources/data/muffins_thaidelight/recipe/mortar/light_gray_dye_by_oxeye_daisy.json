@@ -1,0 +1,14 @@
+{
+  "type": "muffins_thaidelight:mortar",
+  "category": "misc",
+  "group": "light_gray_dye",
+  "ingredients": [
+    {
+      "item": "minecraft:oxeye_daisy"
+    }
+  ],
+  "result": {
+    "count": 2,
+    "id": "minecraft:light_gray_dye"
+  }
+}
