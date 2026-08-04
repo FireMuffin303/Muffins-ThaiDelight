@@ -1,4 +1,4 @@
-// 1.21	2026-08-01T13:22:33.2001168	Muffin's Thai's Delight Refabricated/Recipes
+// 1.21	2026-08-04T18:32:17.3311451	Muffin's Thai's Delight Refabricated/Recipes
 1041372033dca2d986d1b543e6bdc318a9e05fc9 data\muffins_thaidelight\advancement\recipes\food\crafting\mango_cheesecake.json
 34ddeaa1c6ca3a4cbcd6f8cebd2bc274eb4c00dc data\muffins_thaidelight\recipe\mortar\pesto_sauce.json
 99e42cdcf97c58196fba3631862b3395550aa3d1 data\muffins_thaidelight\recipe\cooking_pot\crab_fried_rice_feast_from_rice.json
@@ -122,8 +122,8 @@ b836232a25fcaf6de50194bcb8b7418d7d33bc80 data\muffins_thaidelight\recipe\craftin
 03542bc249a9626b831e410c28d27392c36c8d57 data\muffins_thaidelight\advancement\recipes\food\campfire\cooked_flower_crab_from_campfire.json
 80577a6b52848da5ceebbd06c6017c12203ab593 data\muffins_thaidelight\advancement\recipes\food\crafting\lime_from_crafting.json
 ffe2b56922122ec2971baadc882ba6d8040981de data\muffins_thaidelight\recipe\cooking_pot\basil_omelette_feast.json
-8af5f3b243cd648952c96398d9d1a31e83ee849a data\muffins_thaidelight\advancement\recipes\building_blocks\crafting\mango_stairs.json
 e11812dc2568e9ea92ccb79ea0848219e8438774 data\muffins_thaidelight\advancement\recipes\decorations\crafting\durian_fence.json
+8af5f3b243cd648952c96398d9d1a31e83ee849a data\muffins_thaidelight\advancement\recipes\building_blocks\crafting\mango_stairs.json
 bbd5576c0c27a82e8d5a60537d435c43762980b5 data\muffins_thaidelight\advancement\recipes\food\campfire\fried_durian_from_campfire.json
 6b3f538e592b445fbd954e66fba6c8b9e51fd8e6 data\muffins_thaidelight\advancement\recipe\cutting\papaya_slice.json
 bee1426909645694784615365f0b4b7318ac45bd data\muffins_thaidelight\recipe\mortar\black_dye_by_coal.json

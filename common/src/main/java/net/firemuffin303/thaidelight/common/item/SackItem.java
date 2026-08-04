@@ -1,5 +1,6 @@
 package net.firemuffin303.thaidelight.common.item;
 
+import com.mojang.logging.LogUtils;
 import net.firemuffin303.thaidelight.client.renderer.component.SackTooltipComponent;
 import net.firemuffin303.thaidelight.common.advancement.SackCatchTrigger;
 import net.firemuffin303.thaidelight.common.registry.ModBlockEntityTypes;
@@ -108,39 +109,46 @@ public class SackItem extends BlockItem {
     public static boolean onCatchingFallingBlock(ItemStack sackItem, Item item, ServerPlayer serverPlayer){
         ItemStack newStack = new ItemStack(item);
 
-        List<ItemStack> itemStacks = sackItem.get(DataComponents.CONTAINER).nonEmptyStream().toList();
+        List<ItemStack> newList = new ArrayList<>();
+        List<ItemStack> itemStacks = sackItem.get(DataComponents.CONTAINER).stream().toList();
 
-        if(!itemStacks.stream().allMatch(ItemStack::isEmpty)){
-            boolean bl = itemStacks.stream().anyMatch(itemStack -> ItemStack.isSameItemSameComponents(itemStack,newStack));
+        for(int i = 0 ;i < 5;i++){
+            if(i >= itemStacks.size()){
+                newList.add(i,ItemStack.EMPTY);
+                continue;
+            }
+
+            newList.add(i,itemStacks.get(i));
+        }
+
+
+        if(!newList.stream().allMatch(ItemStack::isEmpty)){
+            boolean bl = newList.stream().anyMatch(itemStack -> ItemStack.isSameItemSameComponents(itemStack,newStack));
             if(!bl){
                 return false;
             }
 
             for(int i = 0;i < 5;i++){
-                ItemStack itemStack = itemStacks.get(i);
-                if(itemStacks.size() < i || itemStack.isEmpty()){
-                    itemStacks.set(i,newStack);
+                ItemStack itemStack = newList.get(i);
+                if(itemStack.isEmpty()){
+                    newList.set(i,newStack);
                     break;
                 }
 
-
                 if(itemStack.getCount() < itemStack.getMaxStackSize()){
                     itemStack.grow(1);
-
                     break;
                 }
 
             }
 
-            //sackItem.set(DataComponents.CONTAINER, sackItem.get(DataComponents.CONTAINER).)
-            //BlockItem.setBlockEntityData(sackItem, ModBlockEntityTypes.SACK_BLOCK_ENTITY.get(),ContainerHelper.saveAllItems(compoundTag,itemStacks));
+            sackItem.set(DataComponents.CONTAINER, ItemContainerContents.fromItems(newList));
             ModCriteriaTriggers.SACK_CATCH.get().trigger(serverPlayer,newStack);
             return true;
         }
 
-        //itemStacks.set(0,newStack);
-
-        //BlockItem.setBlockEntityData(sackItem,ModBlockEntityTypes.SACK_BLOCK_ENTITY.get(),ContainerHelper.saveAllItems(compoundTag,itemStacks));
+        newList.set(0,new ItemStack(item));
+        sackItem.set(DataComponents.CONTAINER,ItemContainerContents.fromItems(newList));
         ModCriteriaTriggers.SACK_CATCH.get().trigger(serverPlayer,newStack);
         return true;
     }

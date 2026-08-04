@@ -285,6 +285,34 @@ public class ModTagDataGen {
             getOrCreateTagBuilder(COMMON_RAW_FISHES).addOptionalTag(
                     TagKey.create(Registries.ITEM,ResourceLocation.fromNamespaceAndPath("forge","raw_fishes"))
             );
+
+            getOrCreateTagBuilder(ItemTags.PIG_FOOD).add(
+                    ModItems.RAW_PAPAYA.get(),
+                    ModItems.PAPAYA.get(),
+                    ModItems.SLICED_PAPAYA.get(),
+                    ModItems.RAW_PAPAYA_SLICE.get(),
+                    ModItems.LIME.get(),
+                    ModItems.SLICED_LIME.get(),
+                    ModItems.BAMBOO_SHOOT.get()
+            );
+
+            getOrCreateTagBuilder(ItemTags.PARROT_FOOD).add(
+                    ModItems.PAPAYA_SEEDS.get(),
+                    ModItems.PEPPER_SEED.get(),
+                    ModItems.BUTTERFLY_PEA_SEEDS.get()
+            );
+
+            getOrCreateTagBuilder(ItemTags.CHICKEN_FOOD).add(
+                    ModItems.PAPAYA_SEEDS.get(),
+                    ModItems.PEPPER_SEED.get(),
+                    ModItems.BUTTERFLY_PEA_SEEDS.get()
+            );
+
+            getOrCreateTagBuilder(ItemTags.FROG_FOOD).add(
+                    ModItems.DRAGONFLY.get(),
+                    ModItems.COOKED_DRAGONFLY.get()
+            );
+
         }
     }
 
@@ -298,6 +326,9 @@ public class ModTagDataGen {
         protected void addTags(HolderLookup.Provider provider) {
             getOrCreateTagBuilder(EntityTypeTags.FROG_FOOD)
                     .add(ModEntityTypes.DRAGONFLY.get());
+
+            getOrCreateTagBuilder(EntityTypeTags.CAN_BREATHE_UNDER_WATER)
+                    .add(ModEntityTypes.FLOWER_CRAB.get());
         }
     }
 
