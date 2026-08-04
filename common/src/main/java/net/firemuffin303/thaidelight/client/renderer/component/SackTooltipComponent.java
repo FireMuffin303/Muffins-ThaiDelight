@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SackTooltipComponent implements ClientTooltipComponent {
-    private final NonNullList<ItemStack> items;
+    private final List<ItemStack> items;
     private final List<ItemStack> itemTypes = new ArrayList<>();
 
     public SackTooltipComponent(SackToolTip sackToolTip){
@@ -47,7 +47,7 @@ public class SackTooltipComponent implements ClientTooltipComponent {
         int maxAmount = 0;
         for (ItemStack item : this.items) {
             amount += item.getCount();
-            maxAmount += item.getMaxStackSize();
+            maxAmount += this.items.getFirst().getMaxStackSize();
         }
 
 
@@ -71,7 +71,7 @@ public class SackTooltipComponent implements ClientTooltipComponent {
 
         for (ItemStack item : this.items) {
             amount += item.getCount();
-            maxAmount += item.getMaxStackSize();
+            maxAmount += this.items.getFirst().getMaxStackSize();
         }
 
         int amount_text_y = this.itemTypes.size() <= 1 ? 4 : 18;
@@ -80,7 +80,7 @@ public class SackTooltipComponent implements ClientTooltipComponent {
 
     }
 
-    public static record SackToolTip(NonNullList<ItemStack> itemStacks) implements TooltipComponent{
+    public static record SackToolTip(List<ItemStack> itemStacks) implements TooltipComponent{
 
     }
 }

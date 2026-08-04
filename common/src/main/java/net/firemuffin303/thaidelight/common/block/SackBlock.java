@@ -71,22 +71,12 @@ public class SackBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
     }
 
     @Override
-    protected InteractionResult useWithoutItem(BlockState blockState, Level level, BlockPos blockPos, Player player, BlockHitResult blockHitResult) {
-        BlockEntity blockEntity = level.getBlockEntity(blockPos);
-        if(blockEntity instanceof SackBlockEntity sackBlockEntity){
-            if(this.removeItem(level,player,blockPos,sackBlockEntity)){
-                return InteractionResult.sidedSuccess(level.isClientSide);
-            }
-        }
-
-        return super.useWithoutItem(blockState, level, blockPos, player, blockHitResult);
-    }
-
-    @Override
     protected ItemInteractionResult useItemOn(ItemStack itemStack, BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
         BlockEntity blockEntity = level.getBlockEntity(blockPos);
         if(blockEntity instanceof SackBlockEntity sackBlockEntity){
-            if(sackBlockEntity.canInsertItem(itemStack)){
+            if(itemStack.isEmpty()){
+              this.removeItem(level,player,blockPos,sackBlockEntity);
+            } else if(sackBlockEntity.canInsertItem(itemStack)){
                 if(!level.isClientSide){
                     ItemStack excessItem = sackBlockEntity.addItem(itemStack.copy());
                     if(!player.getAbilities().instabuild){
@@ -94,11 +84,9 @@ public class SackBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
                     }
                     this.playCatchFallingBlockEffect(level, blockPos);
                 }
-                return ItemInteractionResult.sidedSuccess(level.isClientSide);
             }
         }
-
-        return super.useItemOn(itemStack, blockState, level, blockPos, player, interactionHand, blockHitResult);
+        return ItemInteractionResult.sidedSuccess(level.isClientSide);
     }
 
     public boolean removeItem(Level level,Player player,BlockPos blockPos,SackBlockEntity sackBlockEntity){

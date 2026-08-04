@@ -20,11 +20,10 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.level.Level;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Supplier;
 
 public class SackItem extends BlockItem {
@@ -58,19 +57,21 @@ public class SackItem extends BlockItem {
         return itemStack;
     }
 
-    /*
+
     @Override
     public Optional<TooltipComponent> getTooltipImage(ItemStack itemStack) {
-        NonNullList<ItemStack> nonNullList = NonNullList.withSize(5,ItemStack.EMPTY);
-
-        for(ItemStack itemStack1 : itemStack.get(DataComponents.CONTAINER).nonEmptyItems()){
-            nonNullList.add(itemStack1);
+        List<ItemStack> list = new ArrayList<>(5);
+        List<ItemStack> containerList = itemStack.get(DataComponents.CONTAINER).stream().toList();
+        for(int i = 0;i < 5;i++){
+            list.add(i,ItemStack.EMPTY);
         }
 
-        return !itemStack.has(DataComponents.HIDE_TOOLTIP) && !itemStack.has(DataComponents.HIDE_ADDITIONAL_TOOLTIP) ? Optional.of(new SackTooltipComponent.SackToolTip(nonNullList)) : Optional.empty();
-    }
+        for(int i = 0; i < containerList.size(); i++){
+            list.set(i,containerList.get(i));
+        }
 
-     */
+        return !itemStack.has(DataComponents.HIDE_TOOLTIP) && !itemStack.has(DataComponents.HIDE_ADDITIONAL_TOOLTIP) ? Optional.of(new SackTooltipComponent.SackToolTip(list)) : Optional.empty();
+    }
 
     @Override
     public boolean canFitInsideContainerItems() {
@@ -105,18 +106,9 @@ public class SackItem extends BlockItem {
     //TODO: fix component
     @SuppressWarnings("unchecked")
     public static boolean onCatchingFallingBlock(ItemStack sackItem, Item item, ServerPlayer serverPlayer){
-        /*
-        CompoundTag compoundTag = BlockItem.getBlockEntityData(sackItem);
         ItemStack newStack = new ItemStack(item);
-        if(compoundTag == null){
-            compoundTag = new CompoundTag();
-        }
 
-        NonNullList<ItemStack> itemStacks = NonNullList.withSize(5, ItemStack.EMPTY);
-
-        if(compoundTag.contains("Items")){
-            ContainerHelper.loadAllItems(compoundTag,itemStacks);
-        }
+        List<ItemStack> itemStacks = sackItem.get(DataComponents.CONTAINER).nonEmptyStream().toList();
 
         if(!itemStacks.stream().allMatch(ItemStack::isEmpty)){
             boolean bl = itemStacks.stream().anyMatch(itemStack -> ItemStack.isSameItemSameComponents(itemStack,newStack));
@@ -140,18 +132,17 @@ public class SackItem extends BlockItem {
 
             }
 
-            BlockItem.setBlockEntityData(sackItem, ModBlockEntityTypes.SACK_BLOCK_ENTITY.get(),ContainerHelper.saveAllItems(compoundTag,itemStacks));
+            //sackItem.set(DataComponents.CONTAINER, sackItem.get(DataComponents.CONTAINER).)
+            //BlockItem.setBlockEntityData(sackItem, ModBlockEntityTypes.SACK_BLOCK_ENTITY.get(),ContainerHelper.saveAllItems(compoundTag,itemStacks));
             ModCriteriaTriggers.SACK_CATCH.get().trigger(serverPlayer,newStack);
             return true;
         }
 
-        itemStacks.set(0,newStack);
-        BlockItem.setBlockEntityData(sackItem,ModBlockEntityTypes.SACK_BLOCK_ENTITY.get(),ContainerHelper.saveAllItems(compoundTag,itemStacks));
+        //itemStacks.set(0,newStack);
+
+        //BlockItem.setBlockEntityData(sackItem,ModBlockEntityTypes.SACK_BLOCK_ENTITY.get(),ContainerHelper.saveAllItems(compoundTag,itemStacks));
         ModCriteriaTriggers.SACK_CATCH.get().trigger(serverPlayer,newStack);
         return true;
-        */
-
-        return false;
     }
 
 }

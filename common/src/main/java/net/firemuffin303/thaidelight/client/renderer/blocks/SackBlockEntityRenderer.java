@@ -2,11 +2,13 @@ package net.firemuffin303.thaidelight.client.renderer.blocks;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.logging.LogUtils;
 import com.mojang.math.Axis;
 import net.firemuffin303.thaidelight.common.block.SackBlock;
 import net.firemuffin303.thaidelight.common.block.blockentity.SackBlockEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
+import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
@@ -35,7 +37,7 @@ public class SackBlockEntityRenderer implements BlockEntityRenderer<SackBlockEnt
         }
 
         BlockState blockState = blockEntity.getBlockState();
-        ItemStack itemStack = blockEntity.getCurrentItem();
+        ItemStack itemStack = blockEntity.getItem(0);
         String itemAmountText = "%d".formatted(blockEntity.getSackItemAmount());
 
         BakedModel bakedModel = itemRenderer.getModel(itemStack,blockEntity.getLevel(),null,0);
@@ -63,7 +65,8 @@ public class SackBlockEntityRenderer implements BlockEntityRenderer<SackBlockEnt
         poseStack.scale(0.6f,0.6f,0.6f);
         poseStack.mulPose(new Matrix4f().scale(1, 1, 0.001f));
 
-        this.itemRenderer.render(itemStack,ItemDisplayContext.GUI,false,poseStack,multiBufferSource,i,OverlayTexture.NO_OVERLAY,bakedModel);
+        int l = LevelRenderer.getLightColor(blockEntity.getLevel(), blockEntity.getBlockState(), blockEntity.getBlockPos().relative(direction));
+        this.itemRenderer.render(itemStack,ItemDisplayContext.GUI,false,poseStack,multiBufferSource,l,OverlayTexture.NO_OVERLAY,bakedModel);
 
         poseStack.pushPose();
         float textSize = 0.0266667f;
