@@ -138,7 +138,7 @@ public class PlatformUtilImpl {
 
     public static void playDurianCatchSound(ServerLevel serverLevel, Vec3 vec3, BlockPos blockPos) {
         for(ServerPlayer serverPlayer : PlayerLookup.around(serverLevel,vec3,32)){
-            //ServerPlayNetworking.send(serverPlayer,new ModLevelEventPacket((byte) 1,blockPos));
+            ServerPlayNetworking.send(serverPlayer,new ModLevelEventPacket((byte) 1,blockPos));
         }
     }
 

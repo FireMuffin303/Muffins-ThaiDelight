@@ -13,11 +13,13 @@ import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -83,15 +85,23 @@ public class HangingDurianBlock extends FallingBlock implements SimpleWaterlogge
 
     @Override
     protected InteractionResult useWithoutItem(BlockState blockState, Level level, BlockPos blockPos, Player player, BlockHitResult blockHitResult) {
-        if(!level.isClientSide){
-            if(blockState.getValue(AGE) >= 1 && level.getBlockState(blockPos.below()).isAir() && level.getBlockState(blockPos.above()).is(ModBlocks.DURIAN_LEAVES.get())){
+        if(blockState.getValue(AGE) >= 1 && level.getBlockState(blockPos.below()).isAir() && level.getBlockState(blockPos.above()).is(ModBlocks.DURIAN_LEAVES.get())){
+            if(!level.isClientSide){
                 level.playSound(null,blockPos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS);
                 this.harvest((ServerLevel) level,blockPos,blockState,player);
-                return InteractionResult.SUCCESS;
+                return InteractionResult.CONSUME;
             }
+
+            return InteractionResult.SUCCESS;
         }
 
         return super.useWithoutItem(blockState, level, blockPos, player, blockHitResult);
+    }
+
+
+    @Override
+    protected ItemInteractionResult useItemOn(ItemStack itemStack, BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
+        return super.useItemOn(itemStack, blockState, level, blockPos, player, interactionHand, blockHitResult);
     }
 
     @Override

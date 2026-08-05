@@ -12,6 +12,7 @@ import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
+import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.registry.FabricBrewingRecipeRegistryBuilder;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
@@ -26,6 +27,7 @@ import net.firemuffin303.thaidelight.common.entity.FlowerCrabEntity;
 import net.firemuffin303.thaidelight.common.registry.*;
 import net.firemuffin303.thaidelight.config.ModConfig;
 import net.firemuffin303.thaidelight.integration.toughasnail.ToughAsNailIntegration;
+import net.firemuffin303.thaidelight.network.ModLevelEventPacket;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -67,7 +69,6 @@ public class ThaiDelightFabric implements ModInitializer {
         ThaiDelightCommon.postInit();
 
         ModEntityTypes.registerAttribute(FabricDefaultAttributeRegistry::register);
-
 
         SpawnPlacements.register((EntityType<FlowerCrabEntity>) ModEntityTypes.FLOWER_CRAB.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, FlowerCrabEntity::checkSpawnRules);
         SpawnPlacements.register((EntityType<DragonflyEntity>)ModEntityTypes.DRAGONFLY.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, DragonflyEntity::checkSpawnRules);
@@ -118,6 +119,8 @@ public class ThaiDelightFabric implements ModInitializer {
                 return InteractionResult.PASS;
             }
         });
+
+        PayloadTypeRegistry.playS2C().register(ModLevelEventPacket.TYPE,ModLevelEventPacket.STREAM_CODEC);
 
     }
 

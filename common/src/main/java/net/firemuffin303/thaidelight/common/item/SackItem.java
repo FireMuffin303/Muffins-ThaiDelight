@@ -16,13 +16,16 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.ItemContainerContents;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.*;
 import java.util.function.Supplier;
@@ -41,6 +44,14 @@ public class SackItem extends BlockItem {
     @Override
     public UseAnim getUseAnimation(ItemStack itemStack) {
         return PlatformUtil.getDurianCatcherUseAnim();
+    }
+
+    @Override
+    public InteractionResult useOn(UseOnContext useOnContext) {
+        Level level = useOnContext.getLevel();
+        BlockState blockState = level.getBlockState(useOnContext.getClickedPos());
+
+        return super.useOn(useOnContext);
     }
 
     @Override
@@ -104,8 +115,6 @@ public class SackItem extends BlockItem {
         );
     }
 
-    //TODO: fix component
-    @SuppressWarnings("unchecked")
     public static boolean onCatchingFallingBlock(ItemStack sackItem, Item item, ServerPlayer serverPlayer){
         ItemStack newStack = new ItemStack(item);
 
