@@ -101,7 +101,6 @@ public class ThaiDelightFabric implements ModInitializer {
         LandPathNodeTypesRegistry.register(ModBlocks.LIME_PLANT.get(), PathType.DAMAGE_OTHER,PathType.DANGER_OTHER);
 
 
-        //TODO : API Entity check to Entity
         AttackEntityCallback.EVENT.register(new AttackEntityCallback() {
             @Override
             public InteractionResult interact(Player player, Level world, InteractionHand hand, Entity entity, @Nullable EntityHitResult hitResult) {
@@ -114,8 +113,6 @@ public class ThaiDelightFabric implements ModInitializer {
                         float f = Mth.randomBetween(entity.getRandom(), 1, 3);
                         player.hurt(world.damageSources().thorns(entity),f);
                     }
-
-                    LogUtils.getLogger().info("{}",livingEntity.getItemBySlot(EquipmentSlot.HEAD));
                 }
 
                 return InteractionResult.PASS;

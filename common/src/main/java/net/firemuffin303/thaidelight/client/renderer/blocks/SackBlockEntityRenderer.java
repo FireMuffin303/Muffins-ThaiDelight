@@ -65,8 +65,7 @@ public class SackBlockEntityRenderer implements BlockEntityRenderer<SackBlockEnt
         poseStack.scale(0.6f,0.6f,0.6f);
         poseStack.mulPose(new Matrix4f().scale(1, 1, 0.001f));
 
-        int l = LevelRenderer.getLightColor(blockEntity.getLevel(), blockEntity.getBlockState(), blockEntity.getBlockPos().relative(direction));
-        this.itemRenderer.render(itemStack,ItemDisplayContext.GUI,false,poseStack,multiBufferSource,l,OverlayTexture.NO_OVERLAY,bakedModel);
+        this.itemRenderer.render(itemStack,ItemDisplayContext.GUI,false,poseStack,multiBufferSource,i,OverlayTexture.NO_OVERLAY,bakedModel);
 
         poseStack.pushPose();
         float textSize = 0.0266667f;

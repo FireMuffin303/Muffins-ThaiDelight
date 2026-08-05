@@ -16,7 +16,9 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.DyedItemColor;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.BlockGetter;
@@ -131,7 +133,7 @@ public class ModUtils {
     }
 
     public static int getColor(ItemStack itemStack) {
-        return itemStack.has(DataComponents.DYED_COLOR) ? itemStack.get(DataComponents.DYED_COLOR).rgb() : 0xFFFFFF;
+        return DyedItemColor.getOrDefault(itemStack, DyeColor.WHITE.getTextureDiffuseColor());
     }
 
 

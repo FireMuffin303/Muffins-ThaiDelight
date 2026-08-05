@@ -1,8 +1,8 @@
-// 1.21	2026-08-04T18:32:17.3192874	Muffin's Thai's Delight Refabricated/Tags for minecraft:item
+// 1.21	2026-08-05T09:07:50.8430123	Muffin's Thai's Delight Refabricated/Tags for minecraft:item
 9b2fc5fc001573354f52af8809bda1e06ca63063 data\c\tags\item\foods\vegetables\chili_pepper.json
 66738f5f6258ac6f3bd0fc498b5e78629f6d1e88 data\alexsmobs\tags\item\insect_items.json
-d94cd80cd96061121724152df27436e190b438c5 data\minecraft\tags\item\wooden_doors.json
 bc195102699610f385a0de082dad6914301785d1 data\minecraft\tags\item\logs_that_burn.json
+d94cd80cd96061121724152df27436e190b438c5 data\minecraft\tags\item\wooden_doors.json
 18c5419bf77839599de82923e7796642d858b85a data\c\tags\item\foods\raw_papaya.json
 9e6c5a9678931194633040c44971998539b4b4d0 data\minecraft\tags\item\boats.json
 baa54c18cf857583c84a31896b6489a5139a7ceb data\muffins_thaidelight\tags\item\spicy_foods.json
@@ -14,12 +14,13 @@ baa54c18cf857583c84a31896b6489a5139a7ceb data\muffins_thaidelight\tags\item\spic
 3562d551cacaaed6a598e8d85aef557b985b3449 data\minecraft\tags\item\wooden_buttons.json
 b807ad24f4074e54c258548cea9fb2f44eb93873 data\c\tags\item\foods\durian.json
 7815996f143775a1110f53e77829aa11162f0b7f data\minecraft\tags\item\small_flowers.json
+3f37aca5bddf9b77175a48df7a35a1026f89502d data\minecraft\tags\item\dyeable.json
 3988f1cb4f7173d549b8078ca5c46e6f15b5d527 data\c\tags\item\foods\mango.json
 9680a607ca297558b011e3c9dad0f427987bb680 data\muffins_thaidelight\tags\item\flower_crab_food.json
 2de2ec52c61e54d0ba39b4239a12c3dbab442e30 data\minecraft\tags\item\signs.json
 4685a359298f352903a6076ec0e5fdf82cbdc6e3 data\c\tags\item\foods\banana.json
-7821857ab16e98579ca06eb6e0004c505f332061 data\muffins_thaidelight\tags\item\durian_foods.json
 14460cc75adae8d543b3a77cb640c9b40450f0b8 data\c\tags\item\foods\papaya.json
+7821857ab16e98579ca06eb6e0004c505f332061 data\muffins_thaidelight\tags\item\durian_foods.json
 08a6b11ab1b6272548ab952ee202bc9f54e1b2a2 data\origins\tags\item\meat.json
 ece7920067e97a432500b04d49682c6f988ec65d data\c\tags\item\foods\cooked_meats.json
 f9bc7bb455b258c51ffd2999c46e95557b2a71aa data\c\tags\item\foods\pineapple.json

@@ -1,10 +1,12 @@
 package net.firemuffin303.thaidelight.client;
 
+import com.mojang.logging.LogUtils;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.model.loading.v1.ModelLoadingPlugin;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.*;
+import net.fabricmc.fabric.impl.client.model.loading.ModelLoaderHooks;
+import net.fabricmc.fabric.impl.client.model.loading.ModelLoadingEventDispatcher;
 import net.firemuffin303.thaidelight.ThaiDelightCommon;
 import net.firemuffin303.thaidelight.client.renderer.DurianHeatRendererLayer;
 import net.firemuffin303.thaidelight.client.renderer.armor.DurianHelmetRenderer;
@@ -15,14 +17,9 @@ import net.firemuffin303.thaidelight.common.block.cauldron.FermentedFishCauldron
 import net.firemuffin303.thaidelight.common.entity.DragonflyEntity;
 import net.firemuffin303.thaidelight.common.item.DragonflyBottleItem;
 import net.firemuffin303.thaidelight.common.item.SackItem;
-import net.firemuffin303.thaidelight.common.menu.MortarMenu;
-import net.firemuffin303.thaidelight.common.recipe.mortar.MortarRecipe;
-import net.firemuffin303.thaidelight.common.recipe.mortar.MortarRecipeBookTab;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.firemuffin303.thaidelight.common.registry.ModMenuType;
-import net.firemuffin303.thaidelight.common.registry.ModRecipes;
-import net.firemuffin303.thaidelight.network.ModLevelEventPacket;
 import net.firemuffin303.thaidelight.util.ModUtils;
 import net.minecraft.client.RecipeBookCategories;
 import net.minecraft.client.gui.screens.MenuScreens;
@@ -38,7 +35,6 @@ import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.RecipeBookType;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.ItemStack;
@@ -46,7 +42,6 @@ import net.minecraft.world.level.FoliageColor;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
 import java.util.function.Supplier;
 
 public class ThaiDelightClientFabric implements ClientModInitializer {
@@ -90,16 +85,17 @@ public class ThaiDelightClientFabric implements ClientModInitializer {
             @Override
             public void onInitializeModelLoader(Context context) {
 
-                /*
                 context.addModels(ThaiDelightCommonClient.SACK_MODEL.id(),
                         ThaiDelightCommonClient.FILLED_SACK_MODEL.id(),
                         ThaiDelightCommonClient.SACK_MODEL_IN_HAND.id(),
                         ThaiDelightCommonClient.FULL_SACK_MODEL_IN_HAND.id()
                 );
 
-                 */
+
             }
         });
+
+
 
         TooltipComponentCallback.EVENT.register(new TooltipComponentCallback() {
             @Override
@@ -137,20 +133,6 @@ public class ThaiDelightClientFabric implements ClientModInitializer {
                 if(livingEntityRenderer instanceof PlayerRenderer playerRenderer){
                     registrationHelper.register(new DurianHeatRendererLayer<>(playerRenderer));
                 }
-            }
-        });
-
-        ItemProperties.register(ModItems.DRAGONFLY_BOTTLE.get(), ThaiDelightCommon.modid("variant"), new ClampedItemPropertyFunction() {
-            @Override
-            public float unclampedCall(ItemStack itemStack, @Nullable ClientLevel clientLevel, @Nullable LivingEntity livingEntity, int i) {
-                return ((float)DragonflyBottleItem.getVariant(itemStack)) / ((float)DragonflyEntity.DragonflyVariant.values().length);
-            }
-        });
-
-        ItemProperties.register(ModItems.SACK.get(), ThaiDelightCommon.modid("fullness"), new ClampedItemPropertyFunction() {
-            @Override
-            public float unclampedCall(ItemStack itemStack, @Nullable ClientLevel clientLevel, @Nullable LivingEntity livingEntity, int i) {
-                return SackItem.isFull(itemStack) ? 1f : 0f;
             }
         });
 

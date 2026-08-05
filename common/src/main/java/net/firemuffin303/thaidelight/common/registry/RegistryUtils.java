@@ -3,6 +3,7 @@ package net.firemuffin303.thaidelight.common.registry;
 import net.firemuffin303.thaidelight.common.entity.DragonflyEntity;
 import net.firemuffin303.thaidelight.common.item.DragonflyBottleItem;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.component.DyedItemColor;
 
 import java.util.Arrays;
 import java.util.List;
@@ -206,20 +207,19 @@ public class RegistryUtils {
         };
 
         output.accept(ModItems.KHANOM_CHAN.get());
-        /*
-        for(Item dyeItem: dyeItems){
-            output.accept(DyeableLeatherItem.dyeArmor(new ItemStack(ModItems.KHANOM_CHAN.get()),List.of((DyeItem) dyeItem)));
-        }
 
-         */
+        for(Item dyeItem: dyeItems){
+            output.accept(DyedItemColor.applyDyes(new ItemStack(ModItems.KHANOM_CHAN.get()),List.of((DyeItem) dyeItem)));
+
+            //output.accept(DyeableLeatherItem.dyeArmor(new ItemStack(ModItems.KHANOM_CHAN.get()),List.of((DyeItem) dyeItem)));
+        }
 
 
         output.accept(ModItems.COCONUT_MILK_ICE_CREAM.get());
-        /*
-        for(Item dyeItem: dyeItems){
-            output.accept(DyeableLeatherItem.dyeArmor(new ItemStack(ModItems.COCONUT_MILK_ICE_CREAM.get()), List.of((DyeItem) dyeItem)));
-        }
 
-         */
+        for(Item dyeItem: dyeItems){
+            output.accept(DyedItemColor.applyDyes(new ItemStack(ModItems.COCONUT_MILK_ICE_CREAM.get()),List.of((DyeItem) dyeItem)));
+            //output.accept(DyeableLeatherItem.dyeArmor(new ItemStack(ModItems.COCONUT_MILK_ICE_CREAM.get()), List.of((DyeItem) dyeItem)));
+        }
     }
 }

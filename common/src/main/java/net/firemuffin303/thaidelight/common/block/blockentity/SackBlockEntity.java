@@ -66,7 +66,7 @@ public class SackBlockEntity extends RandomizableContainerBlockEntity implements
     }
 
     @Override
-    protected void setItems(NonNullList<ItemStack> nonNullList) {
+    public void setItems(NonNullList<ItemStack> nonNullList) {
         this.items = nonNullList;
     }
 

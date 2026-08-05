@@ -30,10 +30,10 @@ import java.util.function.Supplier;
 public class ThaiDelightCommonClient {
     public static final List<Supplier<Block>> CUTOUT;
 
-    public static final ModelResourceLocation SACK_MODEL_IN_HAND = new ModelResourceLocation(ThaiDelightCommon.modid("sack_in_hand"),"inventory");
-    public static final ModelResourceLocation FULL_SACK_MODEL_IN_HAND = new ModelResourceLocation(ThaiDelightCommon.modid("full_sack_in_hand"),"inventory");
-    public static final ModelResourceLocation SACK_MODEL = new ModelResourceLocation(ThaiDelightCommon.modid("sack"),"inventory");
-    public static final ModelResourceLocation FILLED_SACK_MODEL = new ModelResourceLocation(ThaiDelightCommon.modid("filled_sack"),"inventory");
+    public static final ModelResourceLocation SACK_MODEL_IN_HAND = new ModelResourceLocation(ThaiDelightCommon.modid("item/sack_in_hand"),"fabric_resource");
+    public static final ModelResourceLocation FULL_SACK_MODEL_IN_HAND = new ModelResourceLocation(ThaiDelightCommon.modid("item/full_sack_in_hand"),"fabric_resource");
+    public static final ModelResourceLocation SACK_MODEL = new ModelResourceLocation(ThaiDelightCommon.modid("item/sack"),"fabric_resource");
+    public static final ModelResourceLocation FILLED_SACK_MODEL = new ModelResourceLocation(ThaiDelightCommon.modid("item/filled_sack"),"fabric_resource");
 
 
     public static void registerCustomEffectRenderer(){

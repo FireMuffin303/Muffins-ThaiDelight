@@ -313,6 +313,11 @@ public class ModTagDataGen {
                     ModItems.COOKED_DRAGONFLY.get()
             );
 
+            getOrCreateTagBuilder(ItemTags.DYEABLE).add(
+                    ModItems.KHANOM_CHAN.get(),
+                    ModItems.COCONUT_MILK_ICE_CREAM.get()
+            );
+
         }
     }
 

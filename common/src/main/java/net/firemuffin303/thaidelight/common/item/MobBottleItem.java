@@ -3,6 +3,7 @@ package net.firemuffin303.thaidelight.common.item;
 import net.firemuffin303.muffinsmcapi.api.extension.Bottleable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
@@ -15,6 +16,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -64,7 +66,8 @@ public class MobBottleItem extends Item {
     private void spawn(ServerLevel serverLevel, ItemStack itemStack, BlockPos blockPos) {
         Entity entity = this.entityType.get().spawn(serverLevel, itemStack, (Player)null, blockPos, MobSpawnType.BUCKET, true, false);
         if (entity instanceof Bottleable bottleable) {
-            bottleable.saveToBucketTag(itemStack);
+            CustomData customData = (CustomData)itemStack.getOrDefault(DataComponents.BUCKET_ENTITY_DATA, CustomData.EMPTY);
+            bottleable.loadFromBucketTag(customData.copyTag());
             bottleable.setFromBottle(true);
         }
 
