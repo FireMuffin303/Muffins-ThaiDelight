@@ -10,8 +10,6 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
-import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
-import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.registry.FabricBrewingRecipeRegistryBuilder;
@@ -35,21 +33,15 @@ import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.PotionBrewing;
 import net.minecraft.world.item.alchemy.Potions;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.pathfinder.PathType;
-import net.minecraft.world.phys.EntityHitResult;
-import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 
 public class ThaiDelightFabric implements ModInitializer {
@@ -99,25 +91,6 @@ public class ThaiDelightFabric implements ModInitializer {
         CommandRegistrationCallback.EVENT.register(ThaiDelightFabric::modCommand);
         ThaiDelightCommon.BURN_MAP.forEach((block, burnEntry) -> FlammableBlockRegistry.getDefaultInstance().add(block,burnEntry.burn(), burnEntry.spread()));
         LandPathNodeTypesRegistry.register(ModBlocks.LIME_PLANT.get(), PathType.DAMAGE_OTHER,PathType.DANGER_OTHER);
-
-
-        AttackEntityCallback.EVENT.register(new AttackEntityCallback() {
-            @Override
-            public InteractionResult interact(Player player, Level world, InteractionHand hand, Entity entity, @Nullable EntityHitResult hitResult) {
-                if(player.isSpectator()){
-                    return InteractionResult.PASS;
-                }
-
-                if(entity instanceof LivingEntity livingEntity){
-                    if(livingEntity.getItemBySlot(EquipmentSlot.HEAD).is(ModItems.DURIAN_HELMET.get()) && world.random.nextFloat() < 0.45){
-                        float f = Mth.randomBetween(entity.getRandom(), 1, 3);
-                        player.hurt(world.damageSources().thorns(entity),f);
-                    }
-                }
-
-                return InteractionResult.PASS;
-            }
-        });
 
         PayloadTypeRegistry.playS2C().register(ModLevelEventPacket.TYPE,ModLevelEventPacket.STREAM_CODEC);
 

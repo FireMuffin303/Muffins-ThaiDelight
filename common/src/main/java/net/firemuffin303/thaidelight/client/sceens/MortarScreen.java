@@ -55,14 +55,13 @@ public class MortarScreen extends AbstractContainerScreen<MortarMenu> implements
     }
 
     public void render(GuiGraphics guiGraphics, int i, int j, float f) {
-        this.renderBackground(guiGraphics,i,j,f);
         if(this.recipeBookComponent.isVisible() && this.widthTooNarrow){
-            this.renderBg(guiGraphics, f, i, j);
+            this.renderBackground(guiGraphics,i,j,f);
             this.recipeBookComponent.render(guiGraphics, i, j, f);
         } else{
-            this.recipeBookComponent.render(guiGraphics, i, j, f);
             super.render(guiGraphics, i, j, f);
-            this.recipeBookComponent.renderGhostRecipe(guiGraphics, this.leftPos, this.topPos, true, f);
+            this.recipeBookComponent.render(guiGraphics, i, j, f);
+            this.recipeBookComponent.renderGhostRecipe(guiGraphics, this.leftPos, this.topPos, false, f);
         }
         this.renderTooltip(guiGraphics, i, j);
         this.recipeBookComponent.renderTooltip(guiGraphics,this.leftPos,this.topPos,i,j);

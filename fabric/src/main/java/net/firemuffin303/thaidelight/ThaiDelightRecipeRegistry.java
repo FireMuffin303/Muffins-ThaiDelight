@@ -3,7 +3,6 @@ package net.firemuffin303.thaidelight;
 import net.firemuffin303.muffinsmcapi.fabric.api.IRecipeBookInitializer;
 import net.firemuffin303.muffinsmcapi.impl.recipebooks.OvenRecipeBookRegistry;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
@@ -21,6 +20,7 @@ public class ThaiDelightRecipeRegistry implements IRecipeBookInitializer {
         ovenRecipeBookRegistry.registerRecipeCategories(MORTAR_MEAL, () -> new ItemStack[]{new ItemStack(ModItems.SOMTAM_FEAST.get())});
         ovenRecipeBookRegistry.registerRecipeCategories(MORTAR_MISC, () -> new ItemStack[]{new ItemStack(ModItems.PEPPER.get()),new ItemStack(Items.BONE_MEAL)});
 
+        ovenRecipeBookRegistry.registerAggregateCategory(MORTAR_SEARCH,List.of(MORTAR_MEAL,MORTAR_MISC));
         ovenRecipeBookRegistry.registerRecipeBook(MORTAR_TYPE,List.of(MORTAR_SEARCH,MORTAR_MEAL,MORTAR_MISC));
     }
 }
