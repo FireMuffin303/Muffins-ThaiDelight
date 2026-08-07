@@ -55,9 +55,7 @@ public class ModUtils {
     public static int calculateEatingWithAnorexiaEffect(LivingEntity livingEntity, int original){
         float amp = ( Objects.requireNonNull(livingEntity.getEffect(ModMobEffects.APPETITE_LOSS)).getAmplifier() + 1);
         float rate = 1.2f;
-        int result = (int) ((float)original * (rate + (rate * (0.6 * amp))  ) );
-        LogUtils.getLogger().info("{}",result);
-        return result;
+        return (int) ((float)original * (rate + (rate * (0.6 * amp))  ) );
     }
 
     public static void playDurianCatchingSound(ServerLevel serverLevel, Vec3 vec3, BlockPos blockPos){
