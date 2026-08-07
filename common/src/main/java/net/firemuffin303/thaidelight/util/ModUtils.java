@@ -1,5 +1,6 @@
 package net.firemuffin303.thaidelight.util;
 
+import com.mojang.logging.LogUtils;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.firemuffin303.thaidelight.common.registry.ModMobEffects;
 import net.minecraft.core.BlockPos;
@@ -54,7 +55,9 @@ public class ModUtils {
     public static int calculateEatingWithAnorexiaEffect(LivingEntity livingEntity, int original){
         float amp = ( Objects.requireNonNull(livingEntity.getEffect(ModMobEffects.APPETITE_LOSS)).getAmplifier() + 1);
         float rate = 1.2f;
-        return (int) ((float)original * (rate + (rate * (0.6 * amp))  ) );
+        int result = (int) ((float)original * (rate + (rate * (0.6 * amp))  ) );
+        LogUtils.getLogger().info("{}",result);
+        return result;
     }
 
     public static void playDurianCatchingSound(ServerLevel serverLevel, Vec3 vec3, BlockPos blockPos){

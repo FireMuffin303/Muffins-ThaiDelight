@@ -45,6 +45,9 @@
     ],
     "modmenu": [
       "net.firemuffin303.thaidelight.integration.modmenu.ThaiDelightModMenu"
+    ],
+    "ovenapi_recipe": [
+      "net.firemuffin303.thaidelight.ThaiDelightRecipeRegistry"
     ]
   },
   "mixins": [

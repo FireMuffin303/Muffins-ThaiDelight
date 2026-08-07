@@ -7,18 +7,16 @@
     "fabric.ConsumableItemMixin",
     "fabric.MilkBottleItemMixin",
     "fabric.dispenser.BucketItemMixin",
+    "fabric.durianHelmet.LivingEntityMixin",
     "fabric.dyeableItem.RecipeMixin",
     "fabric.fallingBlock.FallingBlockEntityMixin",
     "fabric.foodEffect.LivingEntityMixin",
     "fabric.foodEffect.spicy.MilkBottleItemMixin",
     "fabric.foodEffect.spicy.MilkBucketItemMixin",
     "fabric.integration.farmersdelight.CuttingBoardRendererMixin",
-    "fabric.model.ModelTemplateMixin",
-    "fabric.recipeBookType.RecipeBlockSettingMixin",
-    "fabric.recipeBookType.RecipeBookTypeMixin"
+    "fabric.model.ModelTemplateMixin"
   ],
   "client": [
-    "fabric.recipeBookType.RecipeBookCategoriesMixin"
   ],
   "injectors": {
     "defaultRequire": 1

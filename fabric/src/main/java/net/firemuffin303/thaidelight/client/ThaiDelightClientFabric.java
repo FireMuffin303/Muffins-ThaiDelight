@@ -8,7 +8,9 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.*;
 import net.fabricmc.fabric.impl.client.model.loading.ModelLoaderHooks;
 import net.fabricmc.fabric.impl.client.model.loading.ModelLoadingEventDispatcher;
+import net.firemuffin303.muffinsmcapi.impl.recipebooks.OvenRecipeBookRegistry;
 import net.firemuffin303.thaidelight.ThaiDelightCommon;
+import net.firemuffin303.thaidelight.ThaiDelightRecipeRegistry;
 import net.firemuffin303.thaidelight.client.renderer.DurianHeatRendererLayer;
 import net.firemuffin303.thaidelight.client.renderer.armor.DurianHelmetRenderer;
 import net.firemuffin303.thaidelight.client.renderer.component.SackTooltipComponent;
@@ -18,9 +20,12 @@ import net.firemuffin303.thaidelight.common.block.cauldron.FermentedFishCauldron
 import net.firemuffin303.thaidelight.common.entity.DragonflyEntity;
 import net.firemuffin303.thaidelight.common.item.DragonflyBottleItem;
 import net.firemuffin303.thaidelight.common.item.SackItem;
+import net.firemuffin303.thaidelight.common.recipe.mortar.MortarRecipe;
+import net.firemuffin303.thaidelight.common.recipe.mortar.MortarRecipeBookTab;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.firemuffin303.thaidelight.common.registry.ModMenuType;
+import net.firemuffin303.thaidelight.common.registry.ModRecipes;
 import net.firemuffin303.thaidelight.network.ModLevelEventPacket;
 import net.firemuffin303.thaidelight.util.ModUtils;
 import net.minecraft.client.RecipeBookCategories;
@@ -40,6 +45,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.inventory.RecipeBookType;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.FoliageColor;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.Nullable;
@@ -48,11 +54,7 @@ import java.util.function.Supplier;
 
 public class ThaiDelightClientFabric implements ClientModInitializer {
 
-    public static final RecipeBookType MORTAR_RECIPE_BOOK_TYPE = RecipeBookType.valueOf("MORTAR_RECIPE_BOOK_TYPE");
-    public static final RecipeBookCategories MORTAR_SEARCH = RecipeBookCategories.valueOf("MORTAR_SEARCH");
-    public static final RecipeBookCategories MORTAR_MEALS = RecipeBookCategories.valueOf("MORTAR_MEALS");
-    public static final RecipeBookCategories MORTAR_MISC = RecipeBookCategories.valueOf("MORTAR_MISC");
-
+    public static final RecipeBookType MORTAR_RECIPE_BOOK_TYPE = RecipeBookType.valueOf("MUFFINS_THAIDELIGHT_MORTAR_RECIPE_BOOK_TYPE");
 
     @Override
     public void onInitializeClient() {
@@ -139,6 +141,24 @@ public class ThaiDelightClientFabric implements ClientModInitializer {
         });
 
         ClientPlayNetworking.registerGlobalReceiver(ModLevelEventPacket.TYPE,ModLevelEventPacket::receive);
+
+
+        OvenRecipeBookRegistry.INSTANCE.registerRecipeCategoryEvent(ModRecipes.MORTAR.get(), new OvenRecipeBookRegistry.RecipeCategoryEvent() {
+            @Override
+            public RecipeBookCategories getCategory(RecipeHolder<?> recipe) {
+                if(recipe.value() instanceof MortarRecipe mortarRecipe){
+                    MortarRecipeBookTab mortarRecipeBookTab = mortarRecipe.getRecipeBookTab();
+                    if(mortarRecipeBookTab != null){
+                        return switch (mortarRecipeBookTab){
+                            case MEALS -> RecipeBookCategories.valueOf(ThaiDelightRecipeRegistry.MORTAR_MEAL);
+                            case MISC -> RecipeBookCategories.valueOf(ThaiDelightRecipeRegistry.MORTAR_MISC);
+                        };
+                    }
+                }
+
+                return RecipeBookCategories.valueOf(ThaiDelightRecipeRegistry.MORTAR_MISC);
+            }
+        });
     }
 
 

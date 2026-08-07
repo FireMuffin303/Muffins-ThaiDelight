@@ -14,7 +14,8 @@ import net.minecraft.world.item.crafting.RecipeHolder;
 import java.util.List;
 
 public class MortarRecipeBookComponent extends RecipeBookComponent {
-    protected static final WidgetSprites RECIPE_BOOK_LOCATION = new WidgetSprites(ThaiDelightCommon.modid("textures/gui/mortar.png"),ThaiDelightCommon.modid("textures/gui/mortar.png"));
+    protected static final WidgetSprites RECIPE_BOOK_LOCATION = new WidgetSprites(ThaiDelightCommon.modid("textures/gui/mortar.png"),
+            ThaiDelightCommon.modid("textures/gui/mortar.png"));
     @Override
     protected void initFilterButtonTextures() {
         this.filterButton.initTextureValues(RECIPE_BOOK_LOCATION);

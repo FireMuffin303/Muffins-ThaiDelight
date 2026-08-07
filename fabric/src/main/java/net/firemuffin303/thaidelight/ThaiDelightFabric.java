@@ -38,7 +38,6 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Items;
@@ -122,6 +121,14 @@ public class ThaiDelightFabric implements ModInitializer {
 
         PayloadTypeRegistry.playS2C().register(ModLevelEventPacket.TYPE,ModLevelEventPacket.STREAM_CODEC);
 
+    }
+
+    public static void onEntityHurt(LivingEntity livingEntity,DamageSource damageSource,boolean blocked){
+        Entity entity = damageSource.getEntity();
+        if(!blocked && livingEntity.getItemBySlot(EquipmentSlot.HEAD).is(ModItems.DURIAN_HELMET.get()) && entity != null && livingEntity.getRandom().nextFloat() < 0.45){
+            float f = Mth.randomBetween(entity.getRandom(), 1, 3);
+            entity.hurt(livingEntity.level().damageSources().thorns(entity),f);
+        }
     }
 
     public static void modCommand(CommandDispatcher<CommandSourceStack> commandDispatcher, CommandBuildContext commandBuildContext, Commands.CommandSelection commandSelection){
