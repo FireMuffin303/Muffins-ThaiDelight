@@ -13,8 +13,10 @@ import net.firemuffin303.thaidelight.common.registry.ModCardinalComponents;
 import net.firemuffin303.thaidelight.network.ModLevelEventPacket;
 import net.firemuffin303.thaidelight.util.ModUtils;
 import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
@@ -149,6 +151,10 @@ public class PlatformUtilImpl {
 
     public static PathType debugPathType(BlockState state, BlockGetter world, BlockPos pos, boolean neighbor) {
         return LandPathNodeTypesRegistry.getPathNodeType(state,world,pos,neighbor);
+    }
+
+    public static ModelResourceLocation createModelResourceLocation(ResourceLocation resourceLocation) {
+        return new ModelResourceLocation(resourceLocation,"fabric_resource");
     }
 
 

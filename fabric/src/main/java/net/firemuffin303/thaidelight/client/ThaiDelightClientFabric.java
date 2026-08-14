@@ -66,8 +66,6 @@ public class ThaiDelightClientFabric implements ClientModInitializer {
 
         MenuScreens.register(ModMenuType.MORTAR.get(), MortarScreen::new);
 
-        registerRecipe();
-
         ItemProperties.register(ModItems.DRAGONFLY_BOTTLE.get(), ThaiDelightCommon.modid("variant"), new ClampedItemPropertyFunction() {
             @Override
             public float unclampedCall(ItemStack itemStack, @Nullable ClientLevel clientLevel, @Nullable LivingEntity livingEntity, int i) {
@@ -137,7 +135,7 @@ public class ThaiDelightClientFabric implements ClientModInitializer {
             }
         });
 
-        ClientPlayNetworking.registerGlobalReceiver(ModLevelEventPacket.TYPE,ModLevelEventPacket::receive);
+        ClientPlayNetworking.registerGlobalReceiver(ModLevelEventPacket.TYPE,(payload, context) -> payload.receive());
 
 
         OvenRecipeBookRegistry.INSTANCE.registerRecipeCategoryEvent(ModRecipes.MORTAR.get(), new OvenRecipeBookRegistry.RecipeCategoryEvent() {
@@ -156,29 +154,5 @@ public class ThaiDelightClientFabric implements ClientModInitializer {
                 return RecipeBookCategories.valueOf(ThaiDelightRecipeRegistry.MORTAR_MISC);
             }
         });
-    }
-
-
-    public static void registerRecipe(){
-        /*
-        RecipeBookRegistry.registerBookCategories(MORTAR_RECIPE_BOOK_TYPE, List.of(MORTAR_SEARCH,MORTAR_MEALS,MORTAR_MISC));
-        RecipeBookRegistry.registerAggregateCategory(MORTAR_SEARCH,List.of(MORTAR_MEALS,MORTAR_MISC));
-        RecipeBookRegistry.registerRecipeCategoryFinder(ModRecipes.MORTAR.get(), recipe -> {
-            if(recipe instanceof MortarRecipe mortarRecipe){
-                MortarRecipeBookTab mortarRecipeBookTab = mortarRecipe.getRecipeBookTab();
-                if(mortarRecipeBookTab != null){
-                    return switch (mortarRecipeBookTab){
-                        case MEALS -> MORTAR_MEALS;
-                        case MISC -> MORTAR_MISC;
-                    };
-                }
-            }
-
-            return MORTAR_MISC;
-        });
-
-
-         */
-
     }
 }

@@ -28,6 +28,8 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.util.Mth;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.goal.GoalSelector;
 import net.minecraft.world.entity.animal.AbstractGolem;
@@ -58,6 +60,7 @@ import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.neoforge.event.brewing.RegisterBrewingRecipesEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
+import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.MobEffectEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
@@ -104,13 +107,11 @@ public class ThaiDelightForge {
         NeoForge.EVENT_BUS.addListener(this::registerBrewingRecipeEvent);
         NeoForge.EVENT_BUS.addListener(this::registerEffectRemoved);
         NeoForge.EVENT_BUS.addListener(this::registerRightClickBlockEvent);
+        NeoForge.EVENT_BUS.addListener(this::registerOnMobHurt);
 
         eventBus.addListener(this::commonSetup);
         eventBus.addListener(this::registerEntityAttribute);
         eventBus.addListener(this::addBlockEntityType);
-
-        LogUtils.getLogger().info("does we have oven_boat_type yet?{}", BuiltInRegistries.REGISTRY.containsKey(MuffinsMcAPI.modid("oven_boat_type")));
-
     }
 
     public void commonSetup(FMLCommonSetupEvent event){
@@ -192,15 +193,15 @@ public class ThaiDelightForge {
 
     public void onPlayerTick(PlayerTickEvent.Post event){
         Player player = event.getEntity();
-        //player.getCapability(SpicyProvider.SPICY_CAPABILITY).ifPresent(spicy -> spicy.tick(player));
         player.getData(ModAttachments.DURIAN_HEAT).tick(player);
+        player.getData(ModAttachments.SPICY).tick(player);
     }
 
     public void onPlayerJoin(PlayerEvent.PlayerLoggedInEvent event){
         if(event.getEntity() instanceof  ServerPlayer serverPlayer){
             DurianHeatAttachment durianHeatAttachment = serverPlayer.getData(ModAttachments.DURIAN_HEAT);
             PacketDistributor.sendToPlayer(serverPlayer,new DurianHeatPacket(durianHeatAttachment.getTimer(),durianHeatAttachment.isHeatUp()));
-            PacketDistributor.sendToPlayer(serverPlayer,new SpicyPacket(serverPlayer.getData(ModAttachments.SPICY)));
+            PacketDistributor.sendToPlayer(serverPlayer,new SpicyPacket(serverPlayer.getData(ModAttachments.SPICY).getTimer()));
         }
     }
 
@@ -220,9 +221,20 @@ public class ThaiDelightForge {
 
     public void registerEffectRemoved(MobEffectEvent.Remove event){
         if(event.getCure() == EffectCures.MILK){
-            if(event.getEntity() instanceof  Player player){
-                PlatformUtil.setSpicyTime(0,player);
+            if(event.getEntity() instanceof ServerPlayer serverPlayer){
+                PlatformUtil.setSpicyTime(0,serverPlayer);
+                PacketDistributor.sendToPlayer(serverPlayer,new SpicyPacket(serverPlayer.getData(ModAttachments.SPICY).getTimer()));
             }
+        }
+    }
+
+    public void registerOnMobHurt(LivingDamageEvent.Post event){
+        DamageSource damageSource = event.getSource();
+        Entity entity = damageSource.getEntity();
+        LivingEntity livingEntity = event.getEntity();
+        if(event.getBlockedDamage() <= 0f && livingEntity.getItemBySlot(EquipmentSlot.HEAD).is(ModItems.DURIAN_HELMET.get()) && entity != null && livingEntity.getRandom().nextFloat() < 0.45){
+            float f = Mth.randomBetween(entity.getRandom(), 1, 3);
+            entity.hurt(livingEntity.level().damageSources().thorns(entity),f);
         }
     }
 
@@ -285,7 +297,8 @@ public class ThaiDelightForge {
                                         .then(Commands.argument("amount",IntegerArgumentType.integer(0))
                                                 .executes(commandContext -> {
                                                     ServerPlayer serverPlayer = EntityArgument.getPlayer(commandContext,"player");
-                                                    serverPlayer.setData(ModAttachments.SPICY,serverPlayer.getData(ModAttachments.SPICY) + IntegerArgumentType.getInteger(commandContext,"amount"));
+                                                    serverPlayer.getData(ModAttachments.SPICY).addTime(IntegerArgumentType.getInteger(commandContext,"amount"));
+                                                    PacketDistributor.sendToPlayer(serverPlayer,new SpicyPacket(serverPlayer.getData(ModAttachments.SPICY).getTimer()));
                                                     commandContext.getSource().sendSuccess(() -> Component.literal("Apply Spicy to Player for amount."),false);
                                                     return 1;
                                                 })
@@ -296,7 +309,8 @@ public class ThaiDelightForge {
                                         .then(Commands.argument("amount",IntegerArgumentType.integer(0))
                                                 .executes(commandContext -> {
                                                     ServerPlayer serverPlayer = EntityArgument.getPlayer(commandContext,"player");
-                                                    serverPlayer.setData(ModAttachments.SPICY,IntegerArgumentType.getInteger(commandContext,"amount"));
+                                                    serverPlayer.getData(ModAttachments.SPICY).setTime(IntegerArgumentType.getInteger(commandContext,"amount"));
+                                                    PacketDistributor.sendToPlayer(serverPlayer,new SpicyPacket(serverPlayer.getData(ModAttachments.SPICY).getTimer()));
                                                     commandContext.getSource().sendSuccess(() -> Component.literal("Apply Spicy to Player for amount."),false);
                                                     return 1;
                                                 })
@@ -308,7 +322,8 @@ public class ThaiDelightForge {
                                 .then(Commands.literal("clear")
                                         .executes(commandContext -> {
                                             ServerPlayer serverPlayer = EntityArgument.getPlayer(commandContext,"player");
-                                            serverPlayer.setData(ModAttachments.SPICY,0);
+                                            serverPlayer.getData(ModAttachments.SPICY).setTime(0);
+                                            PacketDistributor.sendToPlayer(serverPlayer,new SpicyPacket(serverPlayer.getData(ModAttachments.SPICY).getTimer()));
                                             commandContext.getSource().sendSuccess(() -> Component.literal("Cleared Spicy from Player."),false);
                                             return 1;
                                         })

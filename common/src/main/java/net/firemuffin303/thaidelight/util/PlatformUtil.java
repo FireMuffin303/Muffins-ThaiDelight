@@ -2,8 +2,10 @@ package net.firemuffin303.thaidelight.util;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.TagKey;
@@ -154,4 +156,8 @@ public class PlatformUtil {
         throw new AssertionError();
     }
 
+    @ExpectPlatform
+    public static ModelResourceLocation createModelResourceLocation(ResourceLocation resourceLocation){
+        throw new AssertionError();
+    }
 }

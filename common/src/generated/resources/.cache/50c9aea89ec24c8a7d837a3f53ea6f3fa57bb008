@@ -1,4 +1,4 @@
-// 1.21	2026-08-05T09:07:50.8430123	Muffin's Thai's Delight Refabricated/Tags for minecraft:block
+// 1.21	2026-08-14T14:05:49.8506956	Muffin's Thai's Delight Refabricated/Tags for minecraft:block
 2de2ec52c61e54d0ba39b4239a12c3dbab442e30 data\minecraft\tags\block\standing_signs.json
 4b70efb11c4575ecec366954b7b0d56a15343cc7 data\minecraft\tags\block\candle_cakes.json
 6a1d46087dd7cfc1f653771023ba9e1dc152569b data\muffins_thaidelight\tags\block\sack_catchable.json
@@ -18,8 +18,8 @@ a105b646b9bfa891e1a14624f674cdcc2999596a data\minecraft\tags\block\crops.json
 f0f75f576b1f0b23a175f227c2c06c2532448c13 data\minecraft\tags\block\wooden_fences.json
 45ea3593ecd5bbee90095e329953f5fce6fd99b0 data\minecraft\tags\block\cauldrons.json
 1d36516945326f0c067269d342b515f2c6778db8 data\minecraft\tags\block\wall_hanging_signs.json
-dc070a5f4736029e751d14ad133f1d30152693e4 data\minecraft\tags\block\mineable\axe.json
 1cedf13d98a38002533f62052ca4d51c2a1ae273 data\minecraft\tags\block\mineable\hoe.json
+dc070a5f4736029e751d14ad133f1d30152693e4 data\minecraft\tags\block\mineable\axe.json
 4744241465a39ec87fd0948099d2b260c1ce0c2e data\muffins_thaidelight\tags\block\papaya_logs.json
 66cf2d92ec405dbfd373d0c78730059777eaf64b data\minecraft\tags\block\mineable\pickaxe.json
 9dd70b5a7bbc0a1dfb85558823e6660379416642 data\sereneseasons\tags\block\summer_crops.json

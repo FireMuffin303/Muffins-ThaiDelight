@@ -1,6 +1,9 @@
 package net.firemuffin303.thaidelight.neoforge.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.logging.LogUtils;
+import me.shedaniel.autoconfig.AutoConfig;
+import me.shedaniel.autoconfig.gui.ConfigScreenProvider;
 import net.firemuffin303.thaidelight.ThaiDelightCommon;
 import net.firemuffin303.thaidelight.client.ThaiDelightCommonClient;
 import net.firemuffin303.thaidelight.client.model.armor.DurianHelmetModel;
@@ -17,9 +20,11 @@ import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.firemuffin303.thaidelight.common.registry.ModMenuType;
 import net.firemuffin303.thaidelight.common.registry.ModRecipes;
+import net.firemuffin303.thaidelight.config.ModConfig;
 import net.firemuffin303.thaidelight.neoforge.client.renderer.SackItemRenderer;
 import net.firemuffin303.thaidelight.neoforge.network.DurianHeatPacket;
 import net.firemuffin303.thaidelight.neoforge.network.SpicyPacket;
+import net.firemuffin303.thaidelight.network.ModLevelEventPacket;
 import net.firemuffin303.thaidelight.util.ModAnimationUtils;
 import net.firemuffin303.thaidelight.util.ModUtils;
 import net.minecraft.client.Minecraft;
@@ -33,11 +38,13 @@ import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
 import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.inventory.RecipeBookType;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.FoliageColor;
 import net.neoforged.api.distmarker.Dist;
@@ -46,8 +53,11 @@ import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.*;
+import net.neoforged.neoforge.client.extensions.common.IClientBlockExtensions;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
+import net.neoforged.neoforge.client.extensions.common.IClientMobEffectExtensions;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
+import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.handling.MainThreadPayloadHandler;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
@@ -73,6 +83,7 @@ public class ThaiDelightForgeClient {
         iEventBus.addListener(this::registerPacket);
         iEventBus.addListener(this::registerClientExtensions);
 
+        modContainer.registerExtensionPoint(IConfigScreenFactory.class,(modContainer1, arg) -> AutoConfig.getConfigScreen(ModConfig.class,arg).get());
     }
 
     public void clientSetup(FMLClientSetupEvent event){
@@ -91,14 +102,7 @@ public class ThaiDelightForgeClient {
                     return ((float) DragonflyBottleItem.getVariant(itemStack)) / ((float) DragonflyEntity.DragonflyVariant.values().length);
                 }
             });
-
-            //ModLoadingContext.get().registerExtensionPoint(IConfigScreenFactory.class,(screen) -> AutoConfig.getConfigScreen(ModConfig.class,screen).get());
-
-
         });
-
-
-
     }
 
 
@@ -143,7 +147,6 @@ public class ThaiDelightForgeClient {
         final RecipeBookCategories MORTAR_MEALS = RecipeBookCategories.valueOf("MUFFINS_THAIDELIGHT_MORTAR_MEALS");
         final RecipeBookCategories MORTAR_MISC = RecipeBookCategories.valueOf("MUFFINS_THAIDELIGHT_MORTAR_MISC");
 
-
         final RecipeBookType MORTAR_BOOK_TYPE = RecipeBookType.valueOf("MUFFINS_THAIDELIGHT_MORTAR_RECIPE_BOOK_TYPE");
 
         event.registerBookCategories(MORTAR_BOOK_TYPE, List.of(MORTAR_SEARCH,MORTAR_MEALS,MORTAR_MISC));
@@ -168,13 +171,10 @@ public class ThaiDelightForgeClient {
     }
 
     public void registerModel(ModelEvent.RegisterAdditional event){
-        /*
         event.register(ThaiDelightCommonClient.SACK_MODEL);
         event.register(ThaiDelightCommonClient.FILLED_SACK_MODEL);
         event.register(ThaiDelightCommonClient.SACK_MODEL_IN_HAND);
         event.register(ThaiDelightCommonClient.FULL_SACK_MODEL_IN_HAND);
-
-         */
     }
 
     public void registerAddLayer(EntityRenderersEvent.AddLayers event){
@@ -190,6 +190,7 @@ public class ThaiDelightForgeClient {
         final PayloadRegistrar registrar = event.registrar("1");
         registrar.playToClient(DurianHeatPacket.TYPE,DurianHeatPacket.STREAM_CODEC,new MainThreadPayloadHandler<>((arg, iPayloadContext) -> DurianHeatPacket.handle(arg)));
         registrar.playToClient(SpicyPacket.TYPE,SpicyPacket.STREAM_CODEC,new MainThreadPayloadHandler<>((arg, iPayloadContext) -> SpicyPacket.handle(arg)));
+        registrar.playToClient(ModLevelEventPacket.TYPE,ModLevelEventPacket.STREAM_CODEC,new MainThreadPayloadHandler<>((arg, iPayloadContext) -> iPayloadContext.enqueueWork(arg::receive)));
     }
 
     private void registerClientExtensions(RegisterClientExtensionsEvent event){
@@ -209,9 +210,11 @@ public class ThaiDelightForgeClient {
         },ModItems.DURIAN_HELMET.get());
 
         event.registerItem(new IClientItemExtensions() {
+            final BlockEntityWithoutLevelRenderer renderer = new SackItemRenderer();
+
             @Override
             public BlockEntityWithoutLevelRenderer getCustomRenderer() {
-                return new SackItemRenderer();
+                return this.renderer;
             }
 
             @Override
@@ -232,7 +235,7 @@ public class ThaiDelightForgeClient {
 
                 return HumanoidModel.ArmPose.valueOf("MUFFINS_THAIDELIGHT_CATCHING_BAG_HOLD");
             }
-        },ModItems.SACK.get());
+        },new Item[]{ModItems.SACK.get()});
     }
 
 }

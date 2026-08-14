@@ -1,8 +1,8 @@
-// 1.21	2026-08-05T09:07:50.8430123	Muffin's Thai's Delight Refabricated/Tags for minecraft:item
+// 1.21	2026-08-14T14:05:49.8506956	Muffin's Thai's Delight Refabricated/Tags for minecraft:item
 9b2fc5fc001573354f52af8809bda1e06ca63063 data\c\tags\item\foods\vegetables\chili_pepper.json
 66738f5f6258ac6f3bd0fc498b5e78629f6d1e88 data\alexsmobs\tags\item\insect_items.json
-bc195102699610f385a0de082dad6914301785d1 data\minecraft\tags\item\logs_that_burn.json
 d94cd80cd96061121724152df27436e190b438c5 data\minecraft\tags\item\wooden_doors.json
+bc195102699610f385a0de082dad6914301785d1 data\minecraft\tags\item\logs_that_burn.json
 18c5419bf77839599de82923e7796642d858b85a data\c\tags\item\foods\raw_papaya.json
 9e6c5a9678931194633040c44971998539b4b4d0 data\minecraft\tags\item\boats.json
 baa54c18cf857583c84a31896b6489a5139a7ceb data\muffins_thaidelight\tags\item\spicy_foods.json
@@ -19,8 +19,8 @@ b807ad24f4074e54c258548cea9fb2f44eb93873 data\c\tags\item\foods\durian.json
 9680a607ca297558b011e3c9dad0f427987bb680 data\muffins_thaidelight\tags\item\flower_crab_food.json
 2de2ec52c61e54d0ba39b4239a12c3dbab442e30 data\minecraft\tags\item\signs.json
 4685a359298f352903a6076ec0e5fdf82cbdc6e3 data\c\tags\item\foods\banana.json
-14460cc75adae8d543b3a77cb640c9b40450f0b8 data\c\tags\item\foods\papaya.json
 7821857ab16e98579ca06eb6e0004c505f332061 data\muffins_thaidelight\tags\item\durian_foods.json
+14460cc75adae8d543b3a77cb640c9b40450f0b8 data\c\tags\item\foods\papaya.json
 08a6b11ab1b6272548ab952ee202bc9f54e1b2a2 data\origins\tags\item\meat.json
 ece7920067e97a432500b04d49682c6f988ec65d data\c\tags\item\foods\cooked_meats.json
 f9bc7bb455b258c51ffd2999c46e95557b2a71aa data\c\tags\item\foods\pineapple.json
@@ -29,10 +29,10 @@ dd37877308da07869bd77598d8f5a01222f9d58f data\c\tags\item\foods\raw_fishes.json
 a837958faf4f946c775c96dfd710d7454f3f2da4 data\sereneseasons\tags\item\summer_crops.json
 312aeeaf0d8e9a82f78c9d8fafe6d1682c6db25e data\crabbersdelight\tags\item\raw_seafood.json
 f2d596ab6fbcd7c9d4320450cc659af4e088100f data\c\tags\item\foods\lime.json
-877bc59f9207aa6108b343c7cde2e64892b352d2 data\forge\tags\item\seeds.json
 ae517b54fb9583272d4e6f7754c06f24fbd99720 data\c\tags\item\crops.json
 cd4774bc4449ae3c66050af0cef1bedbae3a5550 data\farmersdelight\tags\item\cabinets\wooden.json
 043ea40825ecc79c43cb9629d42b02b29cbed620 data\minecraft\tags\item\wooden_slabs.json
+877bc59f9207aa6108b343c7cde2e64892b352d2 data\c\tags\item\seeds.json
 d05c1f613acfe0309997ed2fdfa76ab2de569910 data\farmersdelight\tags\item\wild_crops.json
 eb06ef808cbee7d473242bac76e1df704b83a409 data\minecraft\tags\item\pig_food.json
 5ec68d717f0658742e2b47f6fc66e893bd2891e8 data\minecraft\tags\item\planks.json
@@ -43,7 +43,6 @@ c3e52d7680b888dc393c0cc8a7c99d788c66928f data\c\tags\item\foods\fermented_drinks
 8941ac8ed60568403e99ca83e9540d2bb3fcc279 data\minecraft\tags\item\chicken_food.json
 66738f5f6258ac6f3bd0fc498b5e78629f6d1e88 data\minecraft\tags\item\frog_food.json
 983fe831821120f0e7db434adaa08454223e88aa data\c\tags\item\foods\ripe_papaya.json
-35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data\forge\tags\item\raw_fishes.json
 c879f4abc22b3f3484e95f22028ce0bd050db438 data\muffins_thaidelight\tags\item\flower_crab_meat.json
 5a317e126044f175fe7d8a4b4b8a7c7fc4739f34 data\create\tags\item\upright_on_belt.json
 82a0edf74a4b1d60784f79ef2bb43c674228d047 data\minecraft\tags\item\saplings.json

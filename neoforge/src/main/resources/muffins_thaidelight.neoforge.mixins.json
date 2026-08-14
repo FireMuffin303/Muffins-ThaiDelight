@@ -12,8 +12,8 @@
     "dyeableItem.RecipeMixin",
     "fallingBlock.FallingBlockEntityMixin",
     "foodEffect.LivingEntityMixin",
-    "fuel.ItemMixin",
-    "integration.farmersdelight.CuttingBoardRendererMixin"
+    "integration.farmersdelight.CuttingBoardRendererMixin",
+    "item.DurianHelmentMixin"
   ],
   "client": [
   ],

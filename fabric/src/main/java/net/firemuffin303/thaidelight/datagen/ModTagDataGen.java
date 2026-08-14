@@ -135,7 +135,6 @@ public class ModTagDataGen {
             ;
 
             getOrCreateTagBuilder(C_RAW_FISHES);
-            getOrCreateTagBuilder(FORGE_RAW_FISHES);
 
 
             getOrCreateTagBuilder(ModTags.DRAGONFLY_FOOD)
@@ -152,7 +151,7 @@ public class ModTagDataGen {
             getOrCreateTagBuilder(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("crabbersdelight", "raw_seafood")))
                     .add(ModItems.CRAB_MEAT.get());
 
-            getOrCreateTagBuilder(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("forge", "seeds")))
+            getOrCreateTagBuilder(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "seeds")))
                     .add(ModItems.PEPPER_SEED.get())
                     .add(ModItems.PAPAYA_SEEDS.get());
 

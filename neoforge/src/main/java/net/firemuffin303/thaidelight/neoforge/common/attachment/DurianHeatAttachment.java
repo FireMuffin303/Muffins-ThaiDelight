@@ -15,7 +15,7 @@ public class DurianHeatAttachment {
                 if(livingEntity.tickCount % 20 == 0 && !livingEntity.level().isClientSide){
                     livingEntity.addEffect(new MobEffectInstance(MobEffects.HUNGER,200,14,true,true));
 
-                    int spicy = livingEntity.getData(ModAttachments.SPICY);
+                    int spicy = livingEntity.getData(ModAttachments.SPICY).getTimer();
 
                     if(spicy > 0 && !(livingEntity.fireImmune() || livingEntity.hasEffect(MobEffects.FIRE_RESISTANCE))){
                         livingEntity.setRemainingFireTicks(5);

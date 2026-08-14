@@ -4,8 +4,10 @@ import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.firemuffin303.thaidelight.neoforge.common.attachment.DurianHeatAttachment;
 import net.firemuffin303.thaidelight.neoforge.common.attachment.ModAttachments;
 import net.firemuffin303.thaidelight.neoforge.mixin.accessor.AxeItemAccessor;
+import net.firemuffin303.thaidelight.network.ModLevelEventPacket;
 import net.firemuffin303.thaidelight.util.ModUtils;
 import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -24,6 +26,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.network.PacketDistributor;
 import vectorwing.farmersdelight.common.Configuration;
 import vectorwing.farmersdelight.common.block.CabinetBlock;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
@@ -72,7 +75,7 @@ public class PlatformUtilImpl {
     }
 
     public static RecipeBookType getMortarBookType() {
-        return RecipeBookType.valueOf("MORTAR_RECIPE_BOOK_TYPE");
+        return RecipeBookType.valueOf("MUFFINS_THAIDELIGHT_MORTAR_RECIPE_BOOK_TYPE");
     }
 
     public static Holder<MobEffect> getComfort() {
@@ -104,16 +107,17 @@ public class PlatformUtilImpl {
     }
 
     public static void setSpicyTime(int value, LivingEntity livingEntity) {
-        livingEntity.setData(ModAttachments.SPICY,value);
+        livingEntity.getData(ModAttachments.SPICY).setTime(value);
+
     }
 
     public static void addSpicyTime(int value, LivingEntity livingEntity) {
-        livingEntity.setData(ModAttachments.SPICY,livingEntity.getData(ModAttachments.SPICY) + value);
+        livingEntity.getData(ModAttachments.SPICY).addTime(value);
     }
 
     public static int getSpicyTime(LivingEntity livingEntity) {
         if(livingEntity instanceof Player){
-            return livingEntity.getData(ModAttachments.SPICY);
+            return livingEntity.getData(ModAttachments.SPICY).getTimer();
         }
         return 0;
     }
@@ -140,18 +144,11 @@ public class PlatformUtilImpl {
     }
 
     public static void playDurianCatchSound(ServerLevel serverLevel, Vec3 vec3, BlockPos blockPos) {
-        /*
-        ThaiDelightPacketHandler.INSTANCE.send(PacketDistributor.NEAR.with(new Supplier<PacketDistributor.TargetPoint>() {
-            @Override
-            public PacketDistributor.TargetPoint get() {
-                return new PacketDistributor.TargetPoint(vec3.x, vec3.y,vec3.z,32,serverLevel.dimension());
-            }
-        }),new ModLevelPacket((byte) 1,blockPos));
-
-
-         */
+        PacketDistributor.sendToPlayersNear(serverLevel,null, vec3.x(), vec3.y(), vec3.z(), 32,new ModLevelEventPacket((byte) 1,blockPos));
     }
 
-
+    public static ModelResourceLocation createModelResourceLocation(ResourceLocation resourceLocation) {
+        return ModelResourceLocation.standalone(resourceLocation);
+    }
 
 }

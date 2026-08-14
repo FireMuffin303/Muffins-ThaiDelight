@@ -13,6 +13,7 @@ import net.firemuffin303.thaidelight.client.renderer.customEffectRender.SpicyEff
 import net.firemuffin303.thaidelight.common.registry.ModBlockEntityTypes;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.firemuffin303.thaidelight.common.registry.ModEntityTypes;
+import net.firemuffin303.thaidelight.util.PlatformUtil;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
@@ -30,10 +31,10 @@ import java.util.function.Supplier;
 public class ThaiDelightCommonClient {
     public static final List<Supplier<Block>> CUTOUT;
 
-    public static final ModelResourceLocation SACK_MODEL_IN_HAND = new ModelResourceLocation(ThaiDelightCommon.modid("item/sack_in_hand"),"fabric_resource");
-    public static final ModelResourceLocation FULL_SACK_MODEL_IN_HAND = new ModelResourceLocation(ThaiDelightCommon.modid("item/full_sack_in_hand"),"fabric_resource");
-    public static final ModelResourceLocation SACK_MODEL = new ModelResourceLocation(ThaiDelightCommon.modid("item/sack"),"fabric_resource");
-    public static final ModelResourceLocation FILLED_SACK_MODEL = new ModelResourceLocation(ThaiDelightCommon.modid("item/filled_sack"),"fabric_resource");
+    public static final ModelResourceLocation SACK_MODEL_IN_HAND = PlatformUtil.createModelResourceLocation(ThaiDelightCommon.modid("item/sack_in_hand"));
+    public static final ModelResourceLocation FULL_SACK_MODEL_IN_HAND = PlatformUtil.createModelResourceLocation(ThaiDelightCommon.modid("item/full_sack_in_hand"));
+    public static final ModelResourceLocation SACK_MODEL = PlatformUtil.createModelResourceLocation(ThaiDelightCommon.modid("item/sack"));
+    public static final ModelResourceLocation FILLED_SACK_MODEL = PlatformUtil.createModelResourceLocation(ThaiDelightCommon.modid("item/filled_sack"));
 
 
     public static void registerCustomEffectRenderer(){

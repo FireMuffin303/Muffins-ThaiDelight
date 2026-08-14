@@ -21,7 +21,7 @@ public record SpicyPacket(int timer) implements CustomPacketPayload {
 
     public static void handle(SpicyPacket spicyPacket){
         LocalPlayer localPlayer = Minecraft.getInstance().player;
-        localPlayer.setData(ModAttachments.SPICY, spicyPacket.timer);
+        localPlayer.getData(ModAttachments.SPICY.get()).setTime(spicyPacket.timer());
     }
 
     @Override
