@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "muffins_thaidelight:item/coconut_milk_ice_cream",
-    "layer1": "muffins_thaidelight:item/coconut_milk_ice_cream_bowl"
-  }
-}

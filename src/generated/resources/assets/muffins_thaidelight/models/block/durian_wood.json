@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column",
-  "textures": {
-    "end": "muffins_thaidelight:block/durian_log",
-    "side": "muffins_thaidelight:block/durian_log"
-  }
-}

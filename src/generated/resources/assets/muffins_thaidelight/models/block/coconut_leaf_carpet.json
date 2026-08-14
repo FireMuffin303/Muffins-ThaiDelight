@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/carpet",
-  "textures": {
-    "wool": "muffins_thaidelight:block/coconut_leaf_block_top"
-  }
-}

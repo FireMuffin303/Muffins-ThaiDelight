@@ -14,9 +14,11 @@ dependencies {
 loom {
     accessWidenerPath = file("src/main/resources/muffinsthaidelight.accesswidener")
 
-    sourceSets.main {
-        resources {
-            srcDirs += "src/generated/resources/"
-        }
+
+}
+
+sourceSets.main {
+    resources {
+        srcDirs += "src/generated/resources/"
     }
 }

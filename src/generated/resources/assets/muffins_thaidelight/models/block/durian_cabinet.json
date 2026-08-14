@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/orientable",
-  "textures": {
-    "front": "muffins_thaidelight:block/durian_cabinet_front",
-    "side": "muffins_thaidelight:block/durian_cabinet_side",
-    "top": "muffins_thaidelight:block/durian_cabinet_top"
-  }
-}

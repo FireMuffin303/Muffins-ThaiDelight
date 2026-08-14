@@ -1,6 +1,0 @@
-{
-  "parent": "muffins_thaidelight:block/feast/template_omelette_3",
-  "textures": {
-    "omelette": "muffins_thaidelight:block/omelette"
-  }
-}

@@ -1,5 +1,0 @@
-accessWidener v2 named
-
-accessible method net/minecraft/world/level/block/CropBlock getGrowthSpeed (Lnet/minecraft/world/level/block/Block;Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;)F
-accessible method net/minecraft/client/renderer/GameRenderer loadEffect (Lnet/minecraft/resources/ResourceLocation;)V
-accessible class net/minecraft/client/renderer/ItemInHandRenderer$HandRenderSelection

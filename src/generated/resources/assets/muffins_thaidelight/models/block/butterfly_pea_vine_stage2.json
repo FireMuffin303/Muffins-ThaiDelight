@@ -1,6 +1,0 @@
-{
-  "parent": "farmersdelight:block/crop_cross",
-  "textures": {
-    "cross": "muffins_thaidelight:block/butterfly_pea/butterfly_pea_vine_stage2"
-  }
-}

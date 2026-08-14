@@ -1,8 +1,0 @@
-{
-  "parent": "muffins_thaidelight:block/feast/template_cake",
-  "textures": {
-    "bottom": "minecraft:block/cake_bottom",
-    "side": "muffins_thaidelight:block/durian_cake_side",
-    "top": "muffins_thaidelight:block/durian_cake_top"
-  }
-}

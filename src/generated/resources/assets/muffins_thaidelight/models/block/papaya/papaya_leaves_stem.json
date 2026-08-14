@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/cross",
-  "textures": {
-    "cross": "muffins_thaidelight:block/papaya/papaya_leaves_stem"
-  }
-}

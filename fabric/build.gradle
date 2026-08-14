@@ -10,7 +10,14 @@ architectury {
 loom{
     accessWidenerPath = project(":common").loom.accessWidenerPath
 
+    fabricApi {
+        configureDataGeneration(){
+            client = true
+            modId = "muffins_thaidelight"
+            outputDirectory = project(":common").file("src/generated/resources/")
 
+        }
+    }
 }
 
 configurations {
@@ -18,16 +25,10 @@ configurations {
         canBeResolved = true
         canBeConsumed = false
     }
+    shadowCommon
     compileClasspath.extendsFrom common
     runtimeClasspath.extendsFrom common
     developmentFabric.extendsFrom common
-
-    // Files in this configuration will be bundled into your mod using the Shadow plugin.
-    // Don't use the `shadow` configuration from the plugin itself as it's meant for excluding files.
-    shadowBundle {
-        canBeResolved = true
-        canBeConsumed = false
-    }
 }
 
 dependencies {
@@ -35,7 +36,7 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
-    shadowBundle (project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
+    shadowCommon (project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
 
     modImplementation include ("com.github.Chocohead:Fabric-ASM:v2.3")
 
@@ -52,12 +53,6 @@ dependencies {
 
     modImplementation  "net.firemuffin303:muffins_ovenapi-fabric:${rootProject.muffins_api_version}"
 
-    /*
-    Collection<String> porting_lib_modules = rootProject.poritinglib_modules.split(',');
-    for(x in porting_lib_modules){
-        modImplementation(include("io.github.fabricators_of_create.Porting-Lib:${x}:${rootProject.portinglib_version}"))
-    }
-     */
     //Non Needed Dependency
     modImplementation("com.terraformersmc:modmenu:${project.modmenu_version}")
 
@@ -115,7 +110,7 @@ shadowJar {
     exclude "architectury.common.json"
     exclude "META-INF"
 
-    configurations = [project.configurations.shadowBundle]
+    configurations = [project.configurations.shadowCommon]
     archiveClassifier = "dev-shadow"
 }
 
@@ -134,6 +129,7 @@ sourcesJar {
     def commonSources = project(":common").sourcesJar
     dependsOn commonSources
     from commonSources.archiveFile.map { zipTree(it) }
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
 components.java {
@@ -142,11 +138,3 @@ components.java {
     }
 }
 
-fabricApi {
-    configureDataGeneration(){
-        client = true
-        modId = "muffins_thaidelight"
-        outputDirectory = project(":common").file("src/generated/resources/")
-
-    }
-}

@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "muffins_thaidelight:item/mango_sticky_rice_feast"
-  }
-}

@@ -1,8 +1,0 @@
-{
-  "parent": "farmersdelight:block/crop_with_rope",
-  "textures": {
-    "crop": "muffins_thaidelight:block/butterfly_pea/butterfly_pea_vine_stage2",
-    "rope_side": "farmersdelight:block/tomatoes_coiled_rope",
-    "rope_top": "farmersdelight:block/rope_top"
-  }
-}

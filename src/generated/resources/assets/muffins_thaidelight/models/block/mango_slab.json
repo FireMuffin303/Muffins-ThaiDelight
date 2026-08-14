@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab",
-  "textures": {
-    "bottom": "muffins_thaidelight:block/mango_planks",
-    "side": "muffins_thaidelight:block/mango_planks",
-    "top": "muffins_thaidelight:block/mango_planks"
-  }
-}
