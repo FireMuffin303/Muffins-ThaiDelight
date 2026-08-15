@@ -22,7 +22,6 @@ import static net.firemuffin303.thaidelight.common.registry.ModTags.*;
 public class ModTagDataGen {
     public static class ModItemTagDataGen extends FabricTagProvider.ItemTagProvider {
         TagKey<Item> INSECT_ITEMS = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("alexsmobs", "insect_items"));
-        TagKey<Item> FORGE_RAW_FISHES = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("forge", "raw_fishes"));
         TagKey<Item> C_RAW_FISHES = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "raw_fishes"));
 
         public ModItemTagDataGen(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> completableFuture) {
@@ -130,7 +129,6 @@ public class ModTagDataGen {
                     .add(Items.TROPICAL_FISH)
                     .add(vectorwing.farmersdelight.common.registry.ModItems.COD_SLICE.get())
                     .add(vectorwing.farmersdelight.common.registry.ModItems.SALMON_SLICE.get())
-                    .forceAddTag(FORGE_RAW_FISHES)
                     .forceAddTag(C_RAW_FISHES)
             ;
 
@@ -231,12 +229,15 @@ public class ModTagDataGen {
             getOrCreateTagBuilder(ItemTags.HANGING_SIGNS)
                     .add(ModItems.DURIAN_HANGING_SIGN.get(),ModItems.MANGO_HANGING_SIGN.get(),ModItems.COCONUT_HANGING_SIGN.get());
 
+            /*
             getOrCreateTagBuilder(vectorwing.farmersdelight.common.tag.ModTags.WOODEN_CABINETS)
                     .add(ModItems.DURIAN_CABINET.get(),ModItems.MANGO_CABINET.get(),ModItems.COCONUT_CABINET.get());
 
+
+
             getOrCreateTagBuilder(vectorwing.farmersdelight.common.tag.ModTags.WILD_CROPS_ITEM)
                     .add(ModItems.WILD_PEPPER_CROP.get(),ModItems.WILD_BASIL.get());
-
+*/
             getOrCreateTagBuilder(CROPS).add(
                     ModItems.PEPPER.get(),
                     ModItems.LIME.get(),
@@ -279,10 +280,6 @@ public class ModTagDataGen {
                     ModItems.PAPAYA_SAPLING.get(),
                     ModItems.BASIL.get(),
                     ModItems.BUTTERFLY_PEA_SEEDS.get()
-            );
-
-            getOrCreateTagBuilder(COMMON_RAW_FISHES).addOptionalTag(
-                    TagKey.create(Registries.ITEM,ResourceLocation.fromNamespaceAndPath("forge","raw_fishes"))
             );
 
             getOrCreateTagBuilder(ItemTags.PIG_FOOD).add(

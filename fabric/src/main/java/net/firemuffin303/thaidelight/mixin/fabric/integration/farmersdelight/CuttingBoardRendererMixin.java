@@ -7,6 +7,7 @@ import net.firemuffin303.thaidelight.client.renderer.integration.ModCuttingBoard
 import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
+import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import vectorwing.farmersdelight.client.renderer.CuttingBoardRenderer;
@@ -15,9 +16,9 @@ import vectorwing.farmersdelight.client.renderer.CuttingBoardRenderer;
 public abstract class CuttingBoardRendererMixin {
 
     @WrapWithCondition(method = "render(Lvectorwing/farmersdelight/common/block/entity/CuttingBoardBlockEntity;FLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;II)V",
-            at = @At(value = "INVOKE", target = "Lvectorwing/farmersdelight/client/renderer/CuttingBoardRenderer;renderBlock(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/core/Direction;)V"))
+            at = @At(value = "INVOKE", target = "Lvectorwing/farmersdelight/client/renderer/CuttingBoardRenderer;renderBlock(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/core/Direction;FIF)V"))
 
-    public boolean muffins$render(CuttingBoardRenderer instance, PoseStack matrixStackIn, Direction direction, @Local ItemStack boardStack){
+    public boolean muffins$render(CuttingBoardRenderer instance, PoseStack matrixStackIn, Direction direction, float xOffset, int yIndex, float zOffset, @Local ItemStack boardStack){
         if(boardStack.is(ModItems.COCONUT.get()) || boardStack.is(ModItems.STRIPPED_COCONUT.get())){
             ModCuttingBoardRenderer.render(matrixStackIn, direction);
             return false;

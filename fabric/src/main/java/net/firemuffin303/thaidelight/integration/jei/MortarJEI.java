@@ -44,11 +44,6 @@ public class MortarJEI implements IRecipeCategory<RecipeHolder<MortarRecipe>> {
     }
 
     @Override
-    public IDrawable getBackground() {
-        return this.background;
-    }
-
-    @Override
     public IDrawable getIcon() {
         return this.icon;
     }

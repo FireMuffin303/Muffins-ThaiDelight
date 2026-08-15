@@ -16,11 +16,14 @@ public class ThaiDelightRecipeRegistry implements IRecipeBookInitializer {
 
     @Override
     public void register(OvenRecipeBookRegistry ovenRecipeBookRegistry) {
+        /*
         ovenRecipeBookRegistry.registerRecipeCategories(MORTAR_SEARCH, () -> new ItemStack[]{new ItemStack(Items.COMPASS)});
         ovenRecipeBookRegistry.registerRecipeCategories(MORTAR_MEAL, () -> new ItemStack[]{new ItemStack(ModItems.SOMTAM_FEAST.get())});
         ovenRecipeBookRegistry.registerRecipeCategories(MORTAR_MISC, () -> new ItemStack[]{new ItemStack(ModItems.PEPPER.get()),new ItemStack(Items.BONE_MEAL)});
 
         ovenRecipeBookRegistry.registerAggregateCategory(MORTAR_SEARCH,List.of(MORTAR_MEAL,MORTAR_MISC));
         ovenRecipeBookRegistry.registerRecipeBook(MORTAR_TYPE,List.of(MORTAR_SEARCH,MORTAR_MEAL,MORTAR_MISC));
+
+         */
     }
 }

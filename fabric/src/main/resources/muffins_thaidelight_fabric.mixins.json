@@ -1,22 +1,26 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "net.firemuffin303.thaidelight.mixin",
-  "compatibilityLevel": "JAVA_17",
+  "package": "net.firemuffin303.thaidelight.mixin.fabric",
+  "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "fabric.ConsumableItemMixin",
-    "fabric.MilkBottleItemMixin",
-    "fabric.dispenser.BucketItemMixin",
-    "fabric.durianHelmet.LivingEntityMixin",
-    "fabric.dyeableItem.RecipeMixin",
-    "fabric.fallingBlock.FallingBlockEntityMixin",
-    "fabric.foodEffect.LivingEntityMixin",
-    "fabric.foodEffect.spicy.MilkBottleItemMixin",
-    "fabric.foodEffect.spicy.MilkBucketItemMixin",
-    "fabric.integration.farmersdelight.CuttingBoardRendererMixin",
-    "fabric.model.ModelTemplateMixin"
+    "ConsumableItemMixin",
+    "MilkBottleItemMixin",
+    "dispenser.BucketItemMixin",
+    "durianHelmet.LivingEntityMixin",
+    "dyeableItem.RecipeMixin",
+    "fallingBlock.FallingBlockEntityMixin",
+    "foodEffect.LivingEntityMixin",
+    "foodEffect.spicy.MilkBottleItemMixin",
+    "foodEffect.spicy.MilkBucketItemMixin",
+    "itemRender.UseAnimMixin",
+    "model.ModelTemplateMixin",
+    "recipebook.RecipeBookTypeMixin"
   ],
   "client": [
+    "integration.farmersdelight.CuttingBoardRendererMixin",
+    "itemRender.ArmPoseMixin",
+    "recipebook.RecipeBookCategoriesMixin"
   ],
   "injectors": {
     "defaultRequire": 1

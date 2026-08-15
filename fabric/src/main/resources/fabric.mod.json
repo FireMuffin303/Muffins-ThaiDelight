@@ -25,9 +25,6 @@
     "main": [
       "net.firemuffin303.thaidelight.ThaiDelightFabric"
     ],
-    "mm:early_risers": [
-      "net.firemuffin303.thaidelight.asm.ModASMEarlyRiser"
-    ],
     "cardinal-components-entity": [
       "net.firemuffin303.thaidelight.common.registry.ModCardinalComponents"
     ],
@@ -45,18 +42,16 @@
     ],
     "modmenu": [
       "net.firemuffin303.thaidelight.integration.modmenu.ThaiDelightModMenu"
-    ],
-    "ovenapi_recipe": [
-      "net.firemuffin303.thaidelight.ThaiDelightRecipeRegistry"
     ]
   },
   "mixins": [
     "muffins_thaidelight.mixins.json",
     "muffins_thaidelight_fabric.mixins.json"
   ],
+  "accessWidener": "muffins_thaidelight.classtweaker",
   "depends": {
     "fabricloader": ">=${loader_version}",
-    "fabric": "*",
+    "fabric-api": "*",
     "minecraft": "${minecraft_version}",
     "farmersdelight": ">=${farmersdelight_refabricated_version}",
     "muffins_ovenapi": ">=0.1.0-snapshot-3a"

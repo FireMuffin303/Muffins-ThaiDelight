@@ -1,0 +1,23 @@
+classTweaker v2 named
+
+extend-enum net/minecraft/world/inventory/RecipeBookType MUFFINS_THAIDELIGHT_MORTAR_RECIPE_BOOK_TYPE
+extend-enum net/minecraft/client/RecipeBookCategories MUFFINS_THAIDELIGHT_MORTAR_SEARCH
+extend-enum net/minecraft/client/RecipeBookCategories MUFFINS_THAIDELIGHT_MORTAR_MEALS
+extend-enum net/minecraft/client/RecipeBookCategories MUFFINS_THAIDELIGHT_MORTAR_MISC
+
+extend-enum net/minecraft/world/item/UseAnim MUFFINS_THAIDELIGHT_SACK_CATCH
+extend-enum net/minecraft/client/model/HumanoidModel$ArmPose MUFFINS_THAIDELIGHT_SACK_SWING
+extend-enum net/minecraft/client/model/HumanoidModel$ArmPose MUFFINS_THAIDELIGHT_SACK_HOLD
+extend-enum net/minecraft/client/model/HumanoidModel$ArmPose MUFFINS_THAIDELIGHT_FULL_SACK_HOLD
+
+accessible class net/minecraft/client/renderer/ItemInHandRenderer$HandRenderSelection
+accessible class net/minecraft/world/level/block/entity/BlockEntityType$BlockEntitySupplier
+accessible class net/minecraft/world/inventory/MenuType$MenuSupplier
+accessible method net/minecraft/world/inventory/MenuType <init> (Lnet/minecraft/world/inventory/MenuType$MenuSupplier;Lnet/minecraft/world/flag/FeatureFlagSet;)V
+accessible method net/minecraft/world/level/block/PressurePlateBlock <init> (Lnet/minecraft/world/level/block/state/properties/BlockSetType;Lnet/minecraft/world/level/block/state/BlockBehaviour$Properties;)V
+accessible method net/minecraft/world/level/block/SaplingBlock <init> (Lnet/minecraft/world/level/block/grower/TreeGrower;Lnet/minecraft/world/level/block/state/BlockBehaviour$Properties;)V
+accessible method net/minecraft/world/level/block/StairBlock <init> (Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/block/state/BlockBehaviour$Properties;)V
+accessible method net/minecraft/world/level/block/DoorBlock <init> (Lnet/minecraft/world/level/block/state/properties/BlockSetType;Lnet/minecraft/world/level/block/state/BlockBehaviour$Properties;)V
+accessible method net/minecraft/world/level/block/TrapDoorBlock <init> (Lnet/minecraft/world/level/block/state/properties/BlockSetType;Lnet/minecraft/world/level/block/state/BlockBehaviour$Properties;)V
+accessible method net/minecraft/world/level/block/FlowerBlock makeEffectList (Lnet/minecraft/core/Holder;F)Lnet/minecraft/world/item/component/SuspiciousStewEffects;
+

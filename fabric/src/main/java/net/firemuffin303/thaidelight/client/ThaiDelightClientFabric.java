@@ -1,5 +1,6 @@
 package net.firemuffin303.thaidelight.client;
 
+import com.mojang.logging.LogUtils;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.model.loading.v1.ModelLoadingPlugin;
@@ -23,6 +24,7 @@ import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.firemuffin303.thaidelight.common.registry.ModMenuType;
 import net.firemuffin303.thaidelight.common.registry.ModRecipes;
+import net.firemuffin303.thaidelight.mixin.fabric.recipebook.RecipeBookCategoriesMixin;
 import net.firemuffin303.thaidelight.network.ModLevelEventPacket;
 import net.firemuffin303.thaidelight.util.ModUtils;
 import net.minecraft.client.RecipeBookCategories;
@@ -47,6 +49,7 @@ import net.minecraft.world.level.FoliageColor;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.function.Supplier;
 
 public class ThaiDelightClientFabric implements ClientModInitializer {
@@ -137,6 +140,12 @@ public class ThaiDelightClientFabric implements ClientModInitializer {
 
         ClientPlayNetworking.registerGlobalReceiver(ModLevelEventPacket.TYPE,(payload, context) -> payload.receive());
 
+        OvenRecipeBookRegistry.INSTANCE.registerRecipeBook(RecipeBookType.MUFFINS_THAIDELIGHT_MORTAR_RECIPE_BOOK_TYPE,
+                List.of(RecipeBookCategories.MUFFINS_THAIDELIGHT_MORTAR_SEARCH,RecipeBookCategories.MUFFINS_THAIDELIGHT_MORTAR_MEALS,RecipeBookCategories.MUFFINS_THAIDELIGHT_MORTAR_MISC));
+        OvenRecipeBookRegistry.INSTANCE.registerAggregateCategory(RecipeBookCategories.MUFFINS_THAIDELIGHT_MORTAR_SEARCH,
+                List.of(RecipeBookCategories.MUFFINS_THAIDELIGHT_MORTAR_MEALS,RecipeBookCategories.MUFFINS_THAIDELIGHT_MORTAR_MISC));
+
+        LogUtils.getLogger().info("{}", RecipeBookCategories.MUFFINS_THAIDELIGHT_MORTAR_MEALS.getIconItems());
 
         OvenRecipeBookRegistry.INSTANCE.registerRecipeCategoryEvent(ModRecipes.MORTAR.get(), new OvenRecipeBookRegistry.RecipeCategoryEvent() {
             @Override
@@ -145,13 +154,13 @@ public class ThaiDelightClientFabric implements ClientModInitializer {
                     MortarRecipeBookTab mortarRecipeBookTab = mortarRecipe.getRecipeBookTab();
                     if(mortarRecipeBookTab != null){
                         return switch (mortarRecipeBookTab){
-                            case MEALS -> RecipeBookCategories.valueOf(ThaiDelightRecipeRegistry.MORTAR_MEAL);
-                            case MISC -> RecipeBookCategories.valueOf(ThaiDelightRecipeRegistry.MORTAR_MISC);
+                            case MEALS -> RecipeBookCategories.MUFFINS_THAIDELIGHT_MORTAR_MEALS;
+                            case MISC -> RecipeBookCategories.MUFFINS_THAIDELIGHT_MORTAR_MISC;
                         };
                     }
                 }
 
-                return RecipeBookCategories.valueOf(ThaiDelightRecipeRegistry.MORTAR_MISC);
+                return RecipeBookCategories.MUFFINS_THAIDELIGHT_MORTAR_MISC;
             }
         });
     }

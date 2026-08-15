@@ -61,11 +61,6 @@ public class FermentedFishRecipeCategory implements IRecipeCategory<FermentedFis
     }
 
     @Override
-    public IDrawable getBackground() {
-        return this.background;
-    }
-
-    @Override
     public IDrawable getIcon() {
         return this.icon;
     }

@@ -6,7 +6,6 @@ import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.LandPathNodeTypesRegistry;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
-import net.firemuffin303.thaidelight.asm.ModASMEarlyRiser;
 import net.firemuffin303.thaidelight.client.ThaiDelightClientFabric;
 import net.firemuffin303.thaidelight.common.cardinalcomponents.DurianHeatComponent;
 import net.firemuffin303.thaidelight.common.registry.ModCardinalComponents;
@@ -37,7 +36,6 @@ import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModEffects;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.registry.ModSounds;
-import vectorwing.farmersdelight.common.tag.CommonTags;
 
 import java.util.Map;
 import java.util.function.Supplier;
@@ -73,11 +71,11 @@ public class PlatformUtilImpl {
     }
 
     public static SoundEvent tomatoPickSound() {
-        return ModSounds.ITEM_TOMATO_PICK_FROM_BUSH.get();
+        return ModSounds.BLOCK_TOMATOES_PICK_TOMATOES.get();
     }
 
     public static RecipeBookType getMortarBookType() {
-        return ThaiDelightClientFabric.MORTAR_RECIPE_BOOK_TYPE;
+        return RecipeBookType.MUFFINS_THAIDELIGHT_MORTAR_RECIPE_BOOK_TYPE;
     }
 
     public static Holder<MobEffect> getComfort() {
@@ -119,19 +117,19 @@ public class PlatformUtilImpl {
     }
 
     public static UseAnim getDurianCatcherUseAnim() {
-        return ModASMEarlyRiser.getDurianCatcherUseAnim();
+        return UseAnim.MUFFINS_THAIDELIGHT_SACK_CATCH;
     }
 
     public static HumanoidModel.ArmPose getSackShoulderPose() {
-        return ModASMEarlyRiser.getSackShoulderArmPose();
+        return HumanoidModel.ArmPose.MUFFINS_THAIDELIGHT_FULL_SACK_HOLD;
     }
 
     public static HumanoidModel.ArmPose getDurianCatcherHoldArmPose() {
-        return ModASMEarlyRiser.getDurianCatcherHoldArmPose();
+        return HumanoidModel.ArmPose.MUFFINS_THAIDELIGHT_SACK_HOLD;
     }
 
     public static HumanoidModel.ArmPose getDurianCatcherSwingArmPose() {
-        return ModASMEarlyRiser.getDurianCatcherSwingArmPose();
+        return HumanoidModel.ArmPose.MUFFINS_THAIDELIGHT_SACK_SWING;
     }
 
     public static void registerStrippable(Map<Block, Block> map) {
