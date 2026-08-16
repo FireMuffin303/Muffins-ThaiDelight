@@ -1,5 +1,6 @@
 package net.firemuffin303.thaidelight.common.registry.fabric;
 
+import com.mojang.logging.LogUtils;
 import net.firemuffin303.thaidelight.ThaiDelightCommon;
 import net.firemuffin303.thaidelight.common.block.vegetation.FabricBuddingButterflyPeaBlock;
 import net.firemuffin303.thaidelight.common.block.feast.*;

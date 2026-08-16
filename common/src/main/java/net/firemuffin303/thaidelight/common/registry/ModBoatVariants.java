@@ -18,9 +18,4 @@ public class ModBoatVariants {
     public static void init(){
         BOAT_VARIANT.init();
     }
-
-    @ExpectPlatform
-    public static Supplier<OvenBoatVariant> register(String id, Supplier<OvenBoatVariant> ovenBoatVariant){
-        throw new AssertionError();
-    }
 }

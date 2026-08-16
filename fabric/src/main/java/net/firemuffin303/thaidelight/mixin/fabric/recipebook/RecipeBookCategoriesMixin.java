@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.Shadow;
 public enum RecipeBookCategoriesMixin {
     MUFFINS_THAIDELIGHT_MORTAR_SEARCH(new ItemStack[]{new ItemStack(Items.COMPASS)}),
     MUFFINS_THAIDELIGHT_MORTAR_MEALS(new ItemStack[]{new ItemStack(ModItems.SOMTAM_FEAST.get())}),
-    MUFFINS_THAIDELIGHT_MORTAR_MISC(new ItemStack[]{new ItemStack(ModItems.PEPPER.get()),new ItemStack(Items.BONE_MEAL)});
+    MUFFINS_THAIDELIGHT_MORTAR_MISC(new ItemStack[]{new ItemStack(ModItems.SOMTAM.get()),new ItemStack(Items.BONE_MEAL)});
 
     @Shadow
     RecipeBookCategoriesMixin(ItemStack... stack){

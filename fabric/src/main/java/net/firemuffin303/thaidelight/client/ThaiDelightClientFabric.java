@@ -1,6 +1,7 @@
 package net.firemuffin303.thaidelight.client;
 
 import com.mojang.logging.LogUtils;
+import com.terraformersmc.modmenu.util.mod.Mod;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.model.loading.v1.ModelLoadingPlugin;
@@ -141,26 +142,27 @@ public class ThaiDelightClientFabric implements ClientModInitializer {
         ClientPlayNetworking.registerGlobalReceiver(ModLevelEventPacket.TYPE,(payload, context) -> payload.receive());
 
         OvenRecipeBookRegistry.INSTANCE.registerRecipeBook(RecipeBookType.MUFFINS_THAIDELIGHT_MORTAR_RECIPE_BOOK_TYPE,
-                List.of(RecipeBookCategories.MUFFINS_THAIDELIGHT_MORTAR_SEARCH,RecipeBookCategories.MUFFINS_THAIDELIGHT_MORTAR_MEALS,RecipeBookCategories.MUFFINS_THAIDELIGHT_MORTAR_MISC));
-        OvenRecipeBookRegistry.INSTANCE.registerAggregateCategory(RecipeBookCategories.MUFFINS_THAIDELIGHT_MORTAR_SEARCH,
-                List.of(RecipeBookCategories.MUFFINS_THAIDELIGHT_MORTAR_MEALS,RecipeBookCategories.MUFFINS_THAIDELIGHT_MORTAR_MISC));
+                () -> List.of(RecipeBookCategories.MUFFINS_THAIDELIGHT_MORTAR_SEARCH,
+                        RecipeBookCategories.MUFFINS_THAIDELIGHT_MORTAR_MEALS,
+                        RecipeBookCategories.MUFFINS_THAIDELIGHT_MORTAR_MISC));
 
-        LogUtils.getLogger().info("{}", RecipeBookCategories.MUFFINS_THAIDELIGHT_MORTAR_MEALS.getIconItems());
+        OvenRecipeBookRegistry.INSTANCE.registerAggregateCategory(() -> RecipeBookCategories.MUFFINS_THAIDELIGHT_MORTAR_SEARCH,
+                () ->  List.of(RecipeBookCategories.MUFFINS_THAIDELIGHT_MORTAR_MEALS,RecipeBookCategories.MUFFINS_THAIDELIGHT_MORTAR_MISC));
 
         OvenRecipeBookRegistry.INSTANCE.registerRecipeCategoryEvent(ModRecipes.MORTAR.get(), new OvenRecipeBookRegistry.RecipeCategoryEvent() {
             @Override
-            public RecipeBookCategories getCategory(RecipeHolder<?> recipe) {
+            public Supplier<RecipeBookCategories> getCategory(RecipeHolder<?> recipe) {
                 if(recipe.value() instanceof MortarRecipe mortarRecipe){
                     MortarRecipeBookTab mortarRecipeBookTab = mortarRecipe.getRecipeBookTab();
                     if(mortarRecipeBookTab != null){
                         return switch (mortarRecipeBookTab){
-                            case MEALS -> RecipeBookCategories.MUFFINS_THAIDELIGHT_MORTAR_MEALS;
-                            case MISC -> RecipeBookCategories.MUFFINS_THAIDELIGHT_MORTAR_MISC;
+                            case MEALS -> () -> RecipeBookCategories.MUFFINS_THAIDELIGHT_MORTAR_MEALS;
+                            case MISC -> () -> RecipeBookCategories.MUFFINS_THAIDELIGHT_MORTAR_MISC;
                         };
                     }
                 }
 
-                return RecipeBookCategories.MUFFINS_THAIDELIGHT_MORTAR_MISC;
+                return () -> RecipeBookCategories.MUFFINS_THAIDELIGHT_MORTAR_MISC;
             }
         });
     }

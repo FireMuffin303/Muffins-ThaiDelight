@@ -71,7 +71,7 @@ public class PlatformUtilImpl {
     }
 
     public static SoundEvent tomatoPickSound() {
-        return ModSounds.ITEM_TOMATO_PICK_FROM_BUSH.get();
+        return ModSounds.BLOCK_TOMATOES_PICK_TOMATOES.get();
     }
 
     public static RecipeBookType getMortarBookType() {
