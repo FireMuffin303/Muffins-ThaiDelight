@@ -68,10 +68,6 @@ public class SpicyProvider implements ICapabilitySerializable<CompoundTag>,ISpic
         int reductionRate = 1;
 
         if(this.timer > 0){
-            if(livingEntity.fireImmune() || livingEntity.hasEffect(MobEffects.FIRE_RESISTANCE)){
-                reductionRate = 6;
-            }
-
             this.timer = Math.max(0,this.timer - reductionRate);
         }
     }

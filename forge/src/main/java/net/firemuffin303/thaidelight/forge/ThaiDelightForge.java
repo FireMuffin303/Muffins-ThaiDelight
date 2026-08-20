@@ -28,6 +28,8 @@ import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.goal.GoalSelector;
 import net.minecraft.world.entity.animal.AbstractGolem;
@@ -49,6 +51,7 @@ import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
+import net.minecraftforge.event.entity.living.MobEffectEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.event.village.WandererTradesEvent;
@@ -94,6 +97,7 @@ public class ThaiDelightForge {
         MinecraftForge.EVENT_BUS.addListener(this::registerWanderingTraderOffers);
         MinecraftForge.EVENT_BUS.addListener(this::registerVillagerTrade);
         MinecraftForge.EVENT_BUS.addListener(this::registerGoalSelector);
+        MinecraftForge.EVENT_BUS.addListener(this::onEffectAdded);
         eventBus.register(this);
 
     }
@@ -210,6 +214,19 @@ public class ThaiDelightForge {
         modCommand(event.getDispatcher(),event.getBuildContext(),event.getCommandSelection());
     }
 
+    public void onEffectAdded(MobEffectEvent.Added event){
+        MobEffectInstance mobEffectInstance = event.getEffectInstance();
+        LivingEntity livingEntity = event.getEntity();
+        if(mobEffectInstance.getEffect() == MobEffects.FIRE_RESISTANCE && livingEntity.getCapability(SpicyProvider.SPICY_CAPABILITY).orElse(new SpicyProvider()).getTimer() > 200){
+            livingEntity.getCapability(SpicyProvider.SPICY_CAPABILITY).ifPresent(spicy -> {
+                spicy.setTimer(200,livingEntity);
+                if(livingEntity instanceof ServerPlayer serverPlayer){
+                    ThaiDelightPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> serverPlayer),new SpicyPacket(spicy.getTimer()) );
+                }
+            });
+        }
+    }
+
     public static void modCommand(CommandDispatcher<CommandSourceStack> commandDispatcher, CommandBuildContext commandBuildContext, Commands.CommandSelection commandSelection){
         commandDispatcher.register(
 
@@ -220,12 +237,13 @@ public class ThaiDelightForge {
                                         .then(Commands.argument("amount", IntegerArgumentType.integer(1))
                                                 .executes(commandContext -> {
                                                     ServerPlayer serverPlayer = EntityArgument.getPlayer(commandContext,"player");
+                                                    int timer = IntegerArgumentType.getInteger(commandContext,"amount");
                                                     serverPlayer.getCapability(DurianHeatProvider.DURIAN_CAPABILITY).ifPresent(durian -> {
-                                                        durian.setTimer(IntegerArgumentType.getInteger(commandContext,"amount"));
+                                                        durian.setTimer(timer);
                                                         ThaiDelightPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> serverPlayer),new DurianHeatPacket(durian.getTimer(),durian.isHeatUp()));
 
                                                     });
-                                                    commandContext.getSource().sendSuccess(() -> Component.literal("Apply Durian Heat to Player for amount."),false);
+                                                    commandContext.getSource().sendSuccess(() -> Component.translatable("commands.muffins_thaidelight.durian_heat.set_timer", serverPlayer.getDisplayName(),timer/20),false);
                                                     return 1;
                                                 })
                                         )
@@ -239,7 +257,7 @@ public class ThaiDelightForge {
                                                 ThaiDelightPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> serverPlayer),new DurianHeatPacket(durian.getTimer(),durian.isHeatUp()));
 
                                             });
-                                            commandContext.getSource().sendSuccess(() -> Component.literal("Apply Durian Heat to Player for amount."),false);
+                                            commandContext.getSource().sendSuccess(() -> Component.translatable("commands.muffins_thaidelight.durian_heat.clear",serverPlayer.getDisplayName()),false);
                                             return 1;
                                         })
                                 )
@@ -253,7 +271,7 @@ public class ThaiDelightForge {
                                                         ThaiDelightPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> serverPlayer),new DurianHeatPacket(durian.getTimer(),durian.isHeatUp()));
 
                                                     });
-                                                    commandContext.getSource().sendSuccess(() -> Component.literal("Apply Durian Heat to Player for amount."),false);
+                                                    commandContext.getSource().sendSuccess(() -> Component.translatable("commands.muffins_thaidelight.durian_heat.set_heat",serverPlayer.getDisplayName()),false);
                                                     return 1;
                                                 })
                                         )
@@ -271,11 +289,12 @@ public class ThaiDelightForge {
                                         .then(Commands.argument("amount",IntegerArgumentType.integer(0))
                                                 .executes(commandContext -> {
                                                     ServerPlayer serverPlayer = EntityArgument.getPlayer(commandContext,"player");
+                                                    int timer = IntegerArgumentType.getInteger(commandContext,"amount");
                                                     serverPlayer.getCapability(SpicyProvider.SPICY_CAPABILITY).ifPresent(spicy -> {
-                                                        spicy.addTimer(IntegerArgumentType.getInteger(commandContext,"amount"),serverPlayer);
+                                                        spicy.addTimer(timer,serverPlayer);
                                                     });
 
-                                                    commandContext.getSource().sendSuccess(() -> Component.literal("Apply Spicy to Player for amount."),false);
+                                                    commandContext.getSource().sendSuccess(() -> Component.translatable("commands.muffins_thaidelight.spicy.set_timer",serverPlayer.getDisplayName(),timer/20),false);
                                                     return 1;
                                                 })
                                         )
@@ -285,11 +304,12 @@ public class ThaiDelightForge {
                                         .then(Commands.argument("amount",IntegerArgumentType.integer(0))
                                                 .executes(commandContext -> {
                                                     ServerPlayer serverPlayer = EntityArgument.getPlayer(commandContext,"player");
+                                                    int timer = IntegerArgumentType.getInteger(commandContext,"amount");
                                                     serverPlayer.getCapability(SpicyProvider.SPICY_CAPABILITY).ifPresent(spicy -> {
-                                                        spicy.setTimer(IntegerArgumentType.getInteger(commandContext,"amount"),serverPlayer);
+                                                        spicy.setTimer(timer,serverPlayer);
                                                     });
 
-                                                    commandContext.getSource().sendSuccess(() -> Component.literal("Apply Spicy to Player for amount."),false);
+                                                    commandContext.getSource().sendSuccess(() -> Component.translatable("commands.muffins_thaidelight.spicy.set_timer",serverPlayer.getDisplayName(),timer/20),false);
                                                     return 1;
                                                 })
                                         )
@@ -303,7 +323,7 @@ public class ThaiDelightForge {
                                             serverPlayer.getCapability(SpicyProvider.SPICY_CAPABILITY).ifPresent(spicy -> {
                                                 spicy.setTimer(0,serverPlayer);
                                             });
-                                            commandContext.getSource().sendSuccess(() -> Component.literal("Cleared Spicy from Player."),false);
+                                            commandContext.getSource().sendSuccess(() -> Component.translatable("commands.muffins_thaidelight.spicy.clear",serverPlayer.getDisplayName()),false);
                                             return 1;
                                         })
                                 )

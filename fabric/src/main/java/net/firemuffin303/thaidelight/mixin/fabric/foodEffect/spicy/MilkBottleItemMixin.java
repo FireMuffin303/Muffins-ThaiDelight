@@ -2,6 +2,7 @@ package net.firemuffin303.thaidelight.mixin.fabric.foodEffect.spicy;
 
 import net.firemuffin303.thaidelight.common.cardinalcomponents.SpicyComponent;
 import net.firemuffin303.thaidelight.common.registry.ModCardinalComponents;
+import net.firemuffin303.thaidelight.util.PlatformUtil;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -20,6 +21,10 @@ public abstract class MilkBottleItemMixin {
         if(consumer instanceof Player player){
             SpicyComponent spicyAttachment = ModCardinalComponents.SPICY_HEAT.get(player);
             spicyAttachment.setTime(0);
+
+            if(!PlatformUtil.getDurianHeatComponent(consumer).isHeatUp()){
+                PlatformUtil.setDurianHeatTime(0,consumer);
+            }
         }
     }
 }

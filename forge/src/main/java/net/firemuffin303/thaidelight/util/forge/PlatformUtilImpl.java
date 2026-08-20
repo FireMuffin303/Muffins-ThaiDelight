@@ -174,6 +174,31 @@ public class PlatformUtilImpl {
 
     }
 
+    public static void setDurianHeatTime(int value, LivingEntity livingEntity) {
+        livingEntity.getCapability(DurianHeatProvider.DURIAN_CAPABILITY).ifPresent(durianHeat -> {
+            durianHeat.setTimer(value);
+            if(livingEntity instanceof ServerPlayer serverPlayer){
+                ThaiDelightPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> serverPlayer),new DurianHeatPacket(durianHeat.getTimer(),durianHeat.isHeatUp()));
+            }
+        });
+    }
+
+    public static void updateSpicy(LivingEntity instance) {
+        instance.getCapability(SpicyProvider.SPICY_CAPABILITY).ifPresent(spicy -> {
+            if(instance instanceof ServerPlayer serverPlayer){
+                ThaiDelightPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> serverPlayer),new SpicyPacket(spicy.getTimer()));
+
+            }
+        });
+    }
+
+    public static void updateDurianHeat(LivingEntity instance) {
+        instance.getCapability(DurianHeatProvider.DURIAN_CAPABILITY).ifPresent(durianHeat -> {
+            if(instance instanceof ServerPlayer serverPlayer){
+                ThaiDelightPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> serverPlayer),new DurianHeatPacket(durianHeat.getTimer(),durianHeat.isHeatUp()));
+            }
+        });
+    }
 
 
 }

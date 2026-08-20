@@ -9,6 +9,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -84,6 +85,9 @@ public class ModUtils {
     public static void onEatSpicyFood(ItemStack itemStack,LivingEntity livingEntity){
         livingEntity.setTicksFrozen(0);
 
+        if(livingEntity.hasEffect(MobEffects.FIRE_RESISTANCE)){
+            return;
+        }
 
         int i = 1200;
         if(itemStack.getItem().isEdible()){

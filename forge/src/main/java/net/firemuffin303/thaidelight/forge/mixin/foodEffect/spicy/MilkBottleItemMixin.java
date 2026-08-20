@@ -1,6 +1,7 @@
 package net.firemuffin303.thaidelight.forge.mixin.foodEffect.spicy;
 
 import net.firemuffin303.thaidelight.forge.common.capabilities.SpicyProvider;
+import net.firemuffin303.thaidelight.util.PlatformUtil;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -20,6 +21,10 @@ public abstract class MilkBottleItemMixin {
             player.getCapability(SpicyProvider.SPICY_CAPABILITY).ifPresent(spicy ->{
                 spicy.setTimer(0,player);
             });
+
+            if(!PlatformUtil.getDurianHeatComponent(consumer).isHeatUp()){
+                PlatformUtil.setDurianHeatTime(0,consumer);
+            }
         }
     }
 }

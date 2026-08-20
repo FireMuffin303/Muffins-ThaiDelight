@@ -17,6 +17,10 @@ public abstract class MilkBucketItemMixin {
     public void muffins$removeSpicy(ItemStack itemStack, Level level, LivingEntity livingEntity, CallbackInfoReturnable<ItemStack> cir){
         if(livingEntity instanceof Player player){
             PlatformUtil.setSpicyTime(0,player);
+
+            if(!PlatformUtil.getDurianHeatComponent(livingEntity).isHeatUp()){
+                PlatformUtil.setDurianHeatTime(0,livingEntity);
+            }
         }
     }
 }

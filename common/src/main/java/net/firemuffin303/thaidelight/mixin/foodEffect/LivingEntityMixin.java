@@ -20,9 +20,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin {
 
-
-
-
     @ModifyReturnValue(method = "canFreeze", at = @At(value = "RETURN", ordinal = 1))
     public boolean muffins$canFreezeCheck(boolean original) {
         LivingEntity livingEntity = (LivingEntity) (Object) this;

@@ -2,10 +2,13 @@ package net.firemuffin303.thaidelight.mixin.fabric.foodEffect;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.ref.LocalRef;
+import net.firemuffin303.thaidelight.common.cardinalcomponents.SpicyComponent;
+import net.firemuffin303.thaidelight.common.registry.ModCardinalComponents;
 import net.firemuffin303.thaidelight.common.registry.ModTags;
 import net.firemuffin303.thaidelight.util.ModUtils;
 import net.firemuffin303.thaidelight.util.PlatformUtil;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -38,10 +41,18 @@ public abstract class LivingEntityMixin {
     public void muffins$reduceIfSpicy(MobEffectInstance mobEffectInstance, Entity entity, CallbackInfoReturnable<Boolean> cir,
                                       @Local(argsOnly = true)LocalRef<MobEffectInstance> mobEffectInstanceLocalRef){
         LivingEntity livingEntity = (LivingEntity)(Object)this;
-        if(!mobEffectInstanceLocalRef.get().isAmbient()){
+        if(!mobEffectInstanceLocalRef.get().isAmbient() && mobEffectInstanceLocalRef.get().getEffect() != MobEffects.FIRE_RESISTANCE){
             if(PlatformUtil.getSpicyTime(livingEntity) > 0){
-                mobEffectInstanceLocalRef.set(new MobEffectInstance(mobEffectInstance.getEffect(),mobEffectInstance.getDuration() - mobEffectInstance.getDuration()/3));
+                mobEffectInstanceLocalRef.set(new MobEffectInstance(mobEffectInstance.getEffect(),mobEffectInstance.getDuration()/2));
             }
+        }
+    }
+
+    @Inject(method = "addEffect(Lnet/minecraft/world/effect/MobEffectInstance;Lnet/minecraft/world/entity/Entity;)Z",at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;onEffectAdded(Lnet/minecraft/world/effect/MobEffectInstance;Lnet/minecraft/world/entity/Entity;)V"))
+    public void muffins$onEffectAdded(MobEffectInstance mobEffectInstance, Entity entity, CallbackInfoReturnable<Boolean> cir){
+        SpicyComponent spicyComponent = ModCardinalComponents.SPICY_HEAT.get((LivingEntity)(Object) this);
+        if(mobEffectInstance.getEffect() == MobEffects.FIRE_RESISTANCE && spicyComponent.timer > 200){
+            spicyComponent.setTime(200);
         }
     }
 }

@@ -111,6 +111,11 @@ public class PlatformUtil {
     }
 
     @ExpectPlatform
+    public static void setDurianHeatTime(int value,LivingEntity livingEntity){
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
     public static void addDurianHeatTime(int i,LivingEntity livingEntity){
         throw new AssertionError();
     }
@@ -145,4 +150,13 @@ public class PlatformUtil {
         throw new AssertionError();
     }
 
+    @ExpectPlatform
+    public static void updateSpicy(LivingEntity instance) {
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static void updateDurianHeat(LivingEntity instance) {
+        throw new AssertionError();
+    }
 }

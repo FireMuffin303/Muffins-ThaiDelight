@@ -23,6 +23,7 @@
     "catachableFallingBlock.FallingBlockEntityMixin",
     "cauldron.AbstractCauldronMixin",
     "cauldron.LayeredCauldronAccessor",
+    "command.EffectCommandMixin",
     "dispenser.DispenseItemBehaviorMixin",
     "durianHelmet.EnchantmentHelperMixin",
     "durianHelmet.LivingEntityMixin",

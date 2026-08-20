@@ -143,6 +143,16 @@ public class PlatformUtilImpl {
         FlammableBlockRegistry.getDefaultInstance().add(blockSupplier.get(),burn,spread);
     }
 
+    public static void setDurianHeatTime(int value,LivingEntity livingEntity) {
+        ModCardinalComponents.DURIAN_HEAT.get(livingEntity).setTimer(value);
+    }
+
+    public static void updateSpicy(LivingEntity instance) {
+    }
+
+    public static void updateDurianHeat(LivingEntity instance) {
+    }
+
 
 }
 
