@@ -120,7 +120,7 @@ public class TDFabricEvents {
     }
 
     public static void registerFuel(){
-        ThaiDelightCommon.FUEL_MAP.forEach(FuelRegistry.INSTANCE::add);
+        ThaiDelightCommon.FUEL_MAP.forEach((itemRegistryHolder, integer) -> FuelRegistry.INSTANCE.add(itemRegistryHolder.get(),integer));
     }
 
     public static void modifyLootTable(){

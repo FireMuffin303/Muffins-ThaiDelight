@@ -20,6 +20,10 @@ public abstract class MilkBottleItemMixin {
         if(consumer instanceof Player player){
             SpicyComponent spicyAttachment = ModCardinalComponents.SPICY_HEAT.get(player);
             spicyAttachment.setTime(0);
+
+            if(!ModCardinalComponents.DURIAN_HEAT.get(player).isHeatedUp){
+                ModCardinalComponents.DURIAN_HEAT.get(player).setTimer(0);
+            }
         }
     }
 }

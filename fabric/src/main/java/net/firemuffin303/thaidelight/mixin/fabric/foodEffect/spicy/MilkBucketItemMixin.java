@@ -1,5 +1,6 @@
 package net.firemuffin303.thaidelight.mixin.fabric.foodEffect.spicy;
 
+import net.firemuffin303.thaidelight.common.registry.ModCardinalComponents;
 import net.firemuffin303.thaidelight.util.PlatformUtil;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -17,6 +18,10 @@ public abstract class MilkBucketItemMixin {
     public void muffins$removeSpicy(ItemStack itemStack, Level level, LivingEntity livingEntity, CallbackInfoReturnable<ItemStack> cir){
         if(livingEntity instanceof Player player){
             PlatformUtil.setSpicyTime(0,player);
+
+            if(!ModCardinalComponents.DURIAN_HEAT.get(player).isHeatedUp){
+                ModCardinalComponents.DURIAN_HEAT.get(player).setTimer(0);
+            }
         }
     }
 }

@@ -107,6 +107,9 @@ public class PlatformUtilImpl {
         ModCardinalComponents.DURIAN_HEAT.get(livingEntity).setHeatedUp(value);
     }
 
+    public static void setDurianHeatTime(int i,LivingEntity livingEntity){
+        ModCardinalComponents.DURIAN_HEAT.get(livingEntity).setTimer(i);
+    }
 
     public static void addSpicyTime(int value, LivingEntity livingEntity) {
         ModCardinalComponents.SPICY_HEAT.get(livingEntity).addTime(value);
@@ -153,6 +156,10 @@ public class PlatformUtilImpl {
 
     public static ModelResourceLocation createModelResourceLocation(ResourceLocation resourceLocation) {
         return new ModelResourceLocation(resourceLocation,"fabric_resource");
+    }
+
+    public static void setSpicyTimeForge(int value, LivingEntity livingEntity) {
+        ModCardinalComponents.SPICY_HEAT.get(livingEntity).setTime(value);
     }
 
 

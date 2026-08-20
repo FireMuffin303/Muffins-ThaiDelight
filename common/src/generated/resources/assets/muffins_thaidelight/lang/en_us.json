@@ -258,5 +258,10 @@
   "text.autoconfig.muffins_thaidelight.option.stinkyShouldTriggerNeutral": "Stinky Effect should trigger Neutral Mobs",
   "text.autoconfig.muffins_thaidelight.option.villagerShouldTradeTDItem": "Enable Villagers Trades Thai's Delight Items",
   "text.autoconfig.muffins_thaidelight.option.wanderingTraderShouldTradeTDItem": "Enable Wandering Traders Trades Thai's Delight Items",
-  "text.autoconfig.muffins_thaidelight.title": "Muffin's Thai's Delight Config"
+  "text.autoconfig.muffins_thaidelight.title": "Muffin's Thai's Delight Config",
+  "commands.muffins_thaidelight.durian_heat.set_timer": "Applied Durian Heat to %s for %s seconds.",
+  "commands.muffins_thaidelight.durian_heat.clear": "Removed Durian Heat from %s.",
+  "commands.muffins_thaidelight.durian_heat.set_heat": "Applied heat to Durian Heat for %s.",
+  "commands.muffins_thaidelight.spicy.set_timer": "Applied Spicy to %s for %s seconds.",
+  "commands.muffins_thaidelight.spicy.clear": "Removed Spicy from %s"
 }

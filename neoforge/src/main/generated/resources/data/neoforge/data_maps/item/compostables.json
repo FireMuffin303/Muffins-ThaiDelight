@@ -1,0 +1,52 @@
+{
+  "values": {
+    "muffins_thaidelight:durian_peel": {
+      "chance": 0.8
+    },
+    "muffins_thaidelight:lime": {
+      "chance": 0.65
+    },
+    "muffins_thaidelight:lime_sapling": {
+      "chance": 0.3
+    },
+    "muffins_thaidelight:lime_slice": {
+      "chance": 0.4
+    },
+    "muffins_thaidelight:papaya": {
+      "chance": 0.65
+    },
+    "muffins_thaidelight:papaya_leaves": {
+      "chance": 0.3
+    },
+    "muffins_thaidelight:papaya_log": {
+      "chance": 0.8
+    },
+    "muffins_thaidelight:papaya_sapling": {
+      "chance": 0.3
+    },
+    "muffins_thaidelight:papaya_slice": {
+      "chance": 0.4
+    },
+    "muffins_thaidelight:papaya_wood": {
+      "chance": 0.8
+    },
+    "muffins_thaidelight:pepper": {
+      "chance": 0.65
+    },
+    "muffins_thaidelight:pepper_seeds": {
+      "chance": 0.3
+    },
+    "muffins_thaidelight:raw_papaya": {
+      "chance": 0.65
+    },
+    "muffins_thaidelight:raw_papaya_slice": {
+      "chance": 0.4
+    },
+    "muffins_thaidelight:stripped_papaya_log": {
+      "chance": 0.8
+    },
+    "muffins_thaidelight:stripped_papaya_wood": {
+      "chance": 0.8
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "values": {
+    "muffins_thaidelight:coconut_cabinet": {
+      "burn_time": 300
+    },
+    "muffins_thaidelight:coconut_leaf_block": {
+      "burn_time": 4001
+    },
+    "muffins_thaidelight:durian_cabinet": {
+      "burn_time": 300
+    },
+    "muffins_thaidelight:durian_peel": {
+      "burn_time": 200
+    },
+    "muffins_thaidelight:durian_peel_block": {
+      "burn_time": 1800
+    },
+    "muffins_thaidelight:mango_cabinet": {
+      "burn_time": 300
+    },
+    "muffins_thaidelight:papaya_leaves": {
+      "burn_time": 100
+    }
+  }
+}

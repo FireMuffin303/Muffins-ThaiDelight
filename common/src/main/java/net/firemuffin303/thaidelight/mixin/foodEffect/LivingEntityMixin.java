@@ -7,6 +7,9 @@ import net.firemuffin303.thaidelight.util.ModUtils;
 import net.firemuffin303.thaidelight.util.PlatformUtil;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -50,6 +53,13 @@ public abstract class LivingEntityMixin {
         }
 
         return value;
+    }
+
+    @Inject(method = "onEffectAdded",at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;sendEffectToPassengers(Lnet/minecraft/world/effect/MobEffectInstance;)V"))
+    public void muffins$onFireResistanceAdded(MobEffectInstance mobEffectInstance, Entity entity, CallbackInfo ci){
+        if(mobEffectInstance.getEffect() == MobEffects.FIRE_RESISTANCE){
+            PlatformUtil.setSpicyTimeForge(200,(LivingEntity) (Object)this);
+        }
     }
 
 }

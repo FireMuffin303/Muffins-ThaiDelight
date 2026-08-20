@@ -3,7 +3,10 @@ package net.firemuffin303.thaidelight.util.forge;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.firemuffin303.thaidelight.neoforge.common.attachment.DurianHeatAttachment;
 import net.firemuffin303.thaidelight.neoforge.common.attachment.ModAttachments;
+import net.firemuffin303.thaidelight.neoforge.common.attachment.SpicyAttachment;
 import net.firemuffin303.thaidelight.neoforge.mixin.accessor.AxeItemAccessor;
+import net.firemuffin303.thaidelight.neoforge.network.DurianHeatPacket;
+import net.firemuffin303.thaidelight.neoforge.network.SpicyPacket;
 import net.firemuffin303.thaidelight.network.ModLevelEventPacket;
 import net.firemuffin303.thaidelight.util.ModUtils;
 import net.minecraft.client.model.HumanoidModel;
@@ -13,6 +16,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.effect.MobEffect;
@@ -108,7 +112,14 @@ public class PlatformUtilImpl {
 
     public static void setSpicyTime(int value, LivingEntity livingEntity) {
         livingEntity.getData(ModAttachments.SPICY).setTime(value);
+    }
 
+    public static void setSpicyTimeForge(int value, LivingEntity livingEntity){
+        SpicyAttachment spicyAttachment = livingEntity.getData(ModAttachments.SPICY);
+        spicyAttachment.setTime(value);
+        if(livingEntity instanceof ServerPlayer player){
+            PacketDistributor.sendToPlayer(player,new SpicyPacket(spicyAttachment.getTimer()));
+        }
     }
 
     public static void addSpicyTime(int value, LivingEntity livingEntity) {
@@ -134,6 +145,14 @@ public class PlatformUtilImpl {
     public static void addDurianHeatTime(int i, LivingEntity livingEntity) {
        DurianHeatAttachment durianHeatAttachment = livingEntity.getData(ModAttachments.DURIAN_HEAT);
        durianHeatAttachment.setTimer(durianHeatAttachment.getTimer() + i);
+    }
+
+    public static void setDurianHeatTime(int i, LivingEntity livingEntity){
+        DurianHeatAttachment durianHeatAttachment = livingEntity.getData(ModAttachments.DURIAN_HEAT);
+        durianHeatAttachment.setTimer(i);
+        if(livingEntity instanceof ServerPlayer player){
+            PacketDistributor.sendToPlayer(player,new DurianHeatPacket(durianHeatAttachment.getTimer(),durianHeatAttachment.isHeatUp()));
+        }
     }
 
     public static void registerStrippable(Map<Block, Block> map) {

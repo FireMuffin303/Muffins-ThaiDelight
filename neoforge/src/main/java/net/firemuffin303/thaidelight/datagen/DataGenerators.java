@@ -1,6 +1,7 @@
 package net.firemuffin303.thaidelight.datagen;
 
 import net.firemuffin303.thaidelight.ThaiDelightCommon;
+import net.firemuffin303.thaidelight.datagen.provider.ThaiDelightDataMap;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -14,6 +15,9 @@ public class DataGenerators {
     public static void gatherData(GatherDataEvent event){
         DataGenerator dataGenerator = event.getGenerator();
         PackOutput packOutput = dataGenerator.getPackOutput();
+
+        dataGenerator.addProvider(event.includeServer(),new ThaiDelightDataMap(packOutput,event.getLookupProvider()));
+
         //dataGenerator.addProvider(event.includeServer(), new ThaiDelightBiomeModifierProvider(packOutput,event.getLookupProvider()));
         /*
         dataGenerator.addProvider(event.includeServer(),new LootTableProvider(packOutput, Set.of(),

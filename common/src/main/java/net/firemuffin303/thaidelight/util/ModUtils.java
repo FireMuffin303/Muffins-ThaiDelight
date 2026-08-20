@@ -11,6 +11,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -91,17 +92,22 @@ public class ModUtils {
     public static void onEatSpicyFood(ItemStack itemStack,LivingEntity livingEntity){
         livingEntity.setTicksFrozen(0);
 
+        if(livingEntity.hasEffect(MobEffects.FIRE_RESISTANCE)){
+            return;
+        }
 
         int i = 1200;
         if(itemStack.has(DataComponents.FOOD)){
             FoodProperties foodProperties = itemStack.get(DataComponents.FOOD);
             if(foodProperties != null){
                 float nutrition = foodProperties.nutrition();
-                float modifier = foodProperties.saturation();
+                float modifier = foodProperties.nutrition() / foodProperties.saturation() / 2;
+
                 i = (int)Math.max( ((nutrition + (nutrition * modifier) ) / 6f) * (60f * 20f), 1200) ;
             }
         }
 
+        LogUtils.getLogger().info("{}",i);
         PlatformUtil.addSpicyTime(i,livingEntity);
     }
 
@@ -111,7 +117,7 @@ public class ModUtils {
             FoodProperties foodProperties = itemStack.get(DataComponents.FOOD);
             if(foodProperties != null){
                 float nutrition = foodProperties.nutrition();
-                float modifier = foodProperties.saturation();
+                float modifier =foodProperties.nutrition() / foodProperties.saturation() / 2;
                 i = (int)Math.max( ((nutrition + (nutrition * modifier) ) / 4f) * (60f * 20f), 2400f) ;
             }
         }

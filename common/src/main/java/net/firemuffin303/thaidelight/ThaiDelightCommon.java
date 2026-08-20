@@ -1,5 +1,6 @@
 package net.firemuffin303.thaidelight;
 
+import net.firemuffin303.muffinsmcapi.impl.registration.RegistryHolder;
 import net.firemuffin303.thaidelight.common.registry.*;
 import net.firemuffin303.thaidelight.mixin.accessor.VillagerAccessor;
 import net.firemuffin303.thaidelight.util.PlatformUtil;
@@ -12,7 +13,7 @@ import java.util.*;
 public class ThaiDelightCommon {
     public static final String MOD_ID = "muffins_thaidelight";
 
-    public static final Map<Item,Integer> FUEL_MAP = new HashMap<>();
+    public static final Map<RegistryHolder<Item>,Integer> FUEL_MAP = new HashMap<>();
     public static final Map<Block,BurnEntry> BURN_MAP = new HashMap<>();
 
     public static void init(){
@@ -72,13 +73,13 @@ public class ThaiDelightCommon {
     }
 
     public static void registerFuel(){
-        FUEL_MAP.put(ModItems.DURIAN_PEEL.get(),200);
-        FUEL_MAP.put(ModItems.DURIAN_PEEL_BLOCK.get(),1800);
-        FUEL_MAP.put(ModItems.COCONUT_LEAF_BLOCK.get(),4001);
-        FUEL_MAP.put(ModItems.PAPAYA_LEAVES.get(),100);
-        FUEL_MAP.put(ModItems.DURIAN_CABINET.get(),300);
-        FUEL_MAP.put(ModItems.MANGO_CABINET.get(),300);
-        FUEL_MAP.put(ModItems.COCONUT_CABINET.get(),300);
+        FUEL_MAP.put(ModItems.DURIAN_PEEL,200);
+        FUEL_MAP.put(ModItems.DURIAN_PEEL_BLOCK,1800);
+        FUEL_MAP.put(ModItems.COCONUT_LEAF_BLOCK,4001);
+        FUEL_MAP.put(ModItems.PAPAYA_LEAVES,100);
+        FUEL_MAP.put(ModItems.DURIAN_CABINET,300);
+        FUEL_MAP.put(ModItems.MANGO_CABINET,300);
+        FUEL_MAP.put(ModItems.COCONUT_CABINET,300);
     }
 
     public static void registerAnimalFood(){

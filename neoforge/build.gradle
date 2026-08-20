@@ -11,6 +11,18 @@ architectury {
 
 loom {
     accessWidenerPath = project(":common").loom.accessWidenerPath
+
+    neoForge {
+        runs{
+            create("data") {
+                data()
+                programArgs("--all","--mod","muffins_thaidelight")
+                programArgs("--output",file("src/main/generated/resources").getAbsolutePath())
+                programArgs("--existing",file("src/main/resources").absolutePath)
+                programArgs("datagen")
+            }
+        }
+    }
 }
 
 configurations {
@@ -70,3 +82,8 @@ components.java {
     }
 }
 
+sourceSets.main {
+    resources {
+        srcDirs += "src/main/generated/resources/"
+    }
+}

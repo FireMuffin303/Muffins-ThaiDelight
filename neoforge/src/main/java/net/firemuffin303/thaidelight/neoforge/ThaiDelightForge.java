@@ -14,6 +14,7 @@ import net.firemuffin303.thaidelight.common.registry.forge.*;
 import net.firemuffin303.thaidelight.config.ModConfig;
 import net.firemuffin303.thaidelight.neoforge.common.attachment.DurianHeatAttachment;
 import net.firemuffin303.thaidelight.neoforge.common.attachment.ModAttachments;
+import net.firemuffin303.thaidelight.neoforge.common.attachment.SpicyAttachment;
 import net.firemuffin303.thaidelight.neoforge.network.DurianHeatPacket;
 import net.firemuffin303.thaidelight.neoforge.network.SpicyPacket;
 import net.firemuffin303.thaidelight.mixin.accessor.MobAccessor;
@@ -29,6 +30,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.Mth;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.goal.GoalSelector;
@@ -45,6 +47,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -54,6 +57,7 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.BasicItemListing;
 import net.neoforged.neoforge.common.EffectCures;
+import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BlockEntityTypeAddBlocksEvent;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
@@ -64,6 +68,7 @@ import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.MobEffectEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.event.village.VillagerTradesEvent;
 import net.neoforged.neoforge.event.village.WandererTradesEvent;
@@ -106,12 +111,13 @@ public class ThaiDelightForge {
         NeoForge.EVENT_BUS.addListener(this::registerGoalSelector);
         NeoForge.EVENT_BUS.addListener(this::registerBrewingRecipeEvent);
         NeoForge.EVENT_BUS.addListener(this::registerEffectRemoved);
-        NeoForge.EVENT_BUS.addListener(this::registerRightClickBlockEvent);
+        //NeoForge.EVENT_BUS.addListener(this::registerRightClickBlockEvent);
         NeoForge.EVENT_BUS.addListener(this::registerOnMobHurt);
 
         eventBus.addListener(this::commonSetup);
         eventBus.addListener(this::registerEntityAttribute);
         eventBus.addListener(this::addBlockEntityType);
+        NeoForge.EVENT_BUS.addListener(this::registerHoeTill);
     }
 
     public void commonSetup(FMLCommonSetupEvent event){
@@ -205,16 +211,15 @@ public class ThaiDelightForge {
         }
     }
 
-    public void registerRightClickBlockEvent(PlayerInteractEvent.RightClickBlock event){
-        ItemStack toolStack = event.getEntity().getItemInHand(event.getHand());
-        if(toolStack.is(ItemTags.HOES)){
-            Level level = event.getLevel();
-            BlockPos pos = event.getPos();
-            BlockState state = event.getLevel().getBlockState(pos);
+    public void registerHoeTill(BlockEvent.BlockToolModificationEvent event){
+        if(event.getItemAbility() == ItemAbilities.HOE_TILL){
+            Level level = (Level) event.getLevel();
+            BlockPos blockPos = event.getPos();
+            BlockState blockState = event.getState();
+            if(blockState.is(Blocks.BAMBOO_SAPLING) && level.getBlockState(blockPos.above()).isAir()){
+                Block.popResource(level,blockPos,new ItemStack(ModItems.BAMBOO_SHOOT.get()));
+                event.setFinalState(Blocks.AIR.defaultBlockState());
 
-            if( level.getBlockState(pos.above()).isAir() && state.is(Blocks.BAMBOO_SAPLING)){
-                Block.popResource(level,pos,new ItemStack(ModItems.BAMBOO_SHOOT.get()));
-                level.setBlock(pos,Blocks.AIR.defaultBlockState(),3);
             }
         }
     }
@@ -224,6 +229,12 @@ public class ThaiDelightForge {
             if(event.getEntity() instanceof ServerPlayer serverPlayer){
                 PlatformUtil.setSpicyTime(0,serverPlayer);
                 PacketDistributor.sendToPlayer(serverPlayer,new SpicyPacket(serverPlayer.getData(ModAttachments.SPICY).getTimer()));
+
+                DurianHeatAttachment durianHeatAttachment = serverPlayer.getData(ModAttachments.DURIAN_HEAT);
+                if(!durianHeatAttachment.isHeatUp()){
+                    durianHeatAttachment.setTimer(0);
+                    PacketDistributor.sendToPlayer(serverPlayer,new DurianHeatPacket(durianHeatAttachment.getTimer(),durianHeatAttachment.isHeatUp()));
+                }
             }
         }
     }
@@ -244,7 +255,6 @@ public class ThaiDelightForge {
 
     public static void modCommand(CommandDispatcher<CommandSourceStack> commandDispatcher, CommandBuildContext commandBuildContext, Commands.CommandSelection commandSelection){
         commandDispatcher.register(
-
                 Commands.literal("durianHeat")
                         .requires(source -> source.hasPermission(4))
                         .then(Commands.argument("player", EntityArgument.player())
@@ -255,7 +265,7 @@ public class ThaiDelightForge {
                                                     DurianHeatAttachment durianHeatAttachment = serverPlayer.getData(ModAttachments.DURIAN_HEAT);
                                                     durianHeatAttachment.setTimer(IntegerArgumentType.getInteger(commandContext,"amount"));
                                                     PacketDistributor.sendToPlayer(serverPlayer,new DurianHeatPacket(durianHeatAttachment.getTimer(),durianHeatAttachment.isHeatUp()));
-                                                    commandContext.getSource().sendSuccess(() -> Component.literal("Apply Durian Heat to Player for amount."),false);
+                                                    commandContext.getSource().sendSuccess(() -> Component.translatable("commands.muffins_thaidelight.durian_heat.set_timer", serverPlayer.getDisplayName(),durianHeatAttachment.getTimer()/20),false);
                                                     return 1;
                                                 })
                                         )
@@ -267,7 +277,7 @@ public class ThaiDelightForge {
                                             DurianHeatAttachment durianHeatAttachment = serverPlayer.getData(ModAttachments.DURIAN_HEAT);
                                             durianHeatAttachment.setTimer(0);
                                             PacketDistributor.sendToPlayer(serverPlayer,new DurianHeatPacket(durianHeatAttachment.getTimer(),durianHeatAttachment.isHeatUp()));
-                                            commandContext.getSource().sendSuccess(() -> Component.literal("Apply Durian Heat to Player for amount."),false);
+                                            commandContext.getSource().sendSuccess(() -> Component.translatable("commands.muffins_thaidelight.durian_heat.clear",serverPlayer.getDisplayName()),false);
                                             return 1;
                                         })
                                 )
@@ -279,7 +289,7 @@ public class ThaiDelightForge {
                                                     DurianHeatAttachment durianHeatAttachment = serverPlayer.getData(ModAttachments.DURIAN_HEAT);
                                                     durianHeatAttachment.setHeat(BoolArgumentType.getBool(commandContext,"isHeatedUp"));
                                                     PacketDistributor.sendToPlayer(serverPlayer,new DurianHeatPacket(durianHeatAttachment.getTimer(),durianHeatAttachment.isHeatUp()));
-                                                    commandContext.getSource().sendSuccess(() -> Component.literal("Apply Durian Heat to Player for amount."),false);
+                                                    commandContext.getSource().sendSuccess(() -> Component.translatable("commands.muffins_thaidelight.durian_heat.set_heat",serverPlayer.getDisplayName()),false);
                                                     return 1;
                                                 })
                                         )
@@ -297,9 +307,10 @@ public class ThaiDelightForge {
                                         .then(Commands.argument("amount",IntegerArgumentType.integer(0))
                                                 .executes(commandContext -> {
                                                     ServerPlayer serverPlayer = EntityArgument.getPlayer(commandContext,"player");
-                                                    serverPlayer.getData(ModAttachments.SPICY).addTime(IntegerArgumentType.getInteger(commandContext,"amount"));
-                                                    PacketDistributor.sendToPlayer(serverPlayer,new SpicyPacket(serverPlayer.getData(ModAttachments.SPICY).getTimer()));
-                                                    commandContext.getSource().sendSuccess(() -> Component.literal("Apply Spicy to Player for amount."),false);
+                                                    SpicyAttachment spicyAttachment = serverPlayer.getData(ModAttachments.SPICY);
+                                                    spicyAttachment.addTime(IntegerArgumentType.getInteger(commandContext,"amount"));
+                                                    PacketDistributor.sendToPlayer(serverPlayer,new SpicyPacket(spicyAttachment.getTimer()));
+                                                    commandContext.getSource().sendSuccess(() -> Component.translatable("commands.muffins_thaidelight.spicy.set_timer",serverPlayer.getDisplayName(),spicyAttachment.getTimer()/20),false);
                                                     return 1;
                                                 })
                                         )
@@ -309,9 +320,10 @@ public class ThaiDelightForge {
                                         .then(Commands.argument("amount",IntegerArgumentType.integer(0))
                                                 .executes(commandContext -> {
                                                     ServerPlayer serverPlayer = EntityArgument.getPlayer(commandContext,"player");
-                                                    serverPlayer.getData(ModAttachments.SPICY).setTime(IntegerArgumentType.getInteger(commandContext,"amount"));
-                                                    PacketDistributor.sendToPlayer(serverPlayer,new SpicyPacket(serverPlayer.getData(ModAttachments.SPICY).getTimer()));
-                                                    commandContext.getSource().sendSuccess(() -> Component.literal("Apply Spicy to Player for amount."),false);
+                                                    SpicyAttachment spicyAttachment = serverPlayer.getData(ModAttachments.SPICY);
+                                                    spicyAttachment.setTime(IntegerArgumentType.getInteger(commandContext,"amount"));
+                                                    PacketDistributor.sendToPlayer(serverPlayer,new SpicyPacket(spicyAttachment.getTimer()));
+                                                    commandContext.getSource().sendSuccess(() -> Component.translatable("commands.muffins_thaidelight.spicy.set_timer",serverPlayer.getDisplayName(),spicyAttachment.getTimer()/20),false);
                                                     return 1;
                                                 })
                                         )
@@ -322,9 +334,10 @@ public class ThaiDelightForge {
                                 .then(Commands.literal("clear")
                                         .executes(commandContext -> {
                                             ServerPlayer serverPlayer = EntityArgument.getPlayer(commandContext,"player");
-                                            serverPlayer.getData(ModAttachments.SPICY).setTime(0);
-                                            PacketDistributor.sendToPlayer(serverPlayer,new SpicyPacket(serverPlayer.getData(ModAttachments.SPICY).getTimer()));
-                                            commandContext.getSource().sendSuccess(() -> Component.literal("Cleared Spicy from Player."),false);
+                                            SpicyAttachment spicyAttachment = serverPlayer.getData(ModAttachments.SPICY);
+                                            spicyAttachment.setTime(0);
+                                            PacketDistributor.sendToPlayer(serverPlayer,new SpicyPacket(spicyAttachment.getTimer()));
+                                            commandContext.getSource().sendSuccess(() -> Component.translatable("commands.muffins_thaidelight.spicy.clear",serverPlayer.getDisplayName()),false);
                                             return 1;
                                         })
                                 )

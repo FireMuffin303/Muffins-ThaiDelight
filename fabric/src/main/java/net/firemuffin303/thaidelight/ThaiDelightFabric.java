@@ -10,7 +10,6 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
-import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.registry.FabricBrewingRecipeRegistryBuilder;
@@ -27,34 +26,23 @@ import net.firemuffin303.thaidelight.common.registry.*;
 import net.firemuffin303.thaidelight.config.ModConfig;
 import net.firemuffin303.thaidelight.integration.toughasnail.ToughAsNailIntegration;
 import net.firemuffin303.thaidelight.network.ModLevelEventPacket;
-import net.minecraft.client.RecipeBookCategories;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.EntityArgument;
-import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.RecipeBookType;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.item.alchemy.PotionBrewing;
 import net.minecraft.world.item.alchemy.Potions;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.pathfinder.PathType;
 import org.slf4j.Logger;
-
-import java.util.List;
 
 public class ThaiDelightFabric implements ModInitializer {
     public static final Logger LOGGER = LogUtils.getLogger();
@@ -108,6 +96,7 @@ public class ThaiDelightFabric implements ModInitializer {
 
         PayloadTypeRegistry.playS2C().register(ModLevelEventPacket.TYPE,ModLevelEventPacket.STREAM_CODEC);
 
+
     }
 
     public static void onEntityHurt(LivingEntity livingEntity,DamageSource damageSource,boolean blocked){
@@ -129,7 +118,8 @@ public class ThaiDelightFabric implements ModInitializer {
                                                     ServerPlayer serverPlayer = EntityArgument.getPlayer(commandContext,"player");
                                                     DurianHeatComponent durianHeatComponent = ModCardinalComponents.DURIAN_HEAT.get(serverPlayer);
                                                     durianHeatComponent.setTimer(IntegerArgumentType.getInteger(commandContext,"amount"));
-                                                    commandContext.getSource().sendSuccess(() -> Component.literal("Apply Durian Heat to Player for amount."),false);
+                                                    commandContext.getSource().sendSuccess(() -> Component.translatable("commands.muffins_thaidelight.durian_heat.set_timer", serverPlayer.getDisplayName(),durianHeatComponent.timer/20),false);
+
                                                     return 1;
                                                 })
                                         )
@@ -140,7 +130,7 @@ public class ThaiDelightFabric implements ModInitializer {
                                             ServerPlayer serverPlayer = EntityArgument.getPlayer(commandContext,"player");
                                             DurianHeatComponent durianHeatComponent = ModCardinalComponents.DURIAN_HEAT.get(serverPlayer);
                                             durianHeatComponent.setTimer(0);
-                                            commandContext.getSource().sendSuccess(() -> Component.literal("Apply Durian Heat to Player for amount."),false);
+                                            commandContext.getSource().sendSuccess(() -> Component.translatable("commands.muffins_thaidelight.durian_heat.clear",serverPlayer.getDisplayName()),false);
                                             return 1;
                                         })
                                 )
@@ -151,7 +141,8 @@ public class ThaiDelightFabric implements ModInitializer {
                                                     ServerPlayer serverPlayer = EntityArgument.getPlayer(commandContext,"player");
                                                     DurianHeatComponent durianHeatComponent = ModCardinalComponents.DURIAN_HEAT.get(serverPlayer);
                                                     durianHeatComponent.setHeatedUp(BoolArgumentType.getBool(commandContext,"isHeatedUp"));
-                                                    commandContext.getSource().sendSuccess(() -> Component.literal("Apply Durian Heat to Player for amount."),false);
+                                                    commandContext.getSource().sendSuccess(() -> Component.translatable("commands.muffins_thaidelight.durian_heat.set_heat",serverPlayer.getDisplayName()),false);
+
                                                     return 1;
                                                 })
                                         )
@@ -171,7 +162,8 @@ public class ThaiDelightFabric implements ModInitializer {
                                                     ServerPlayer serverPlayer = EntityArgument.getPlayer(commandContext,"player");
                                                     SpicyComponent spicyComponent = ModCardinalComponents.SPICY_HEAT.get(serverPlayer);
                                                     spicyComponent.addTime(IntegerArgumentType.getInteger(commandContext,"amount"));
-                                                    commandContext.getSource().sendSuccess(() -> Component.literal("Apply Spicy to Player for amount."),false);
+                                                    commandContext.getSource().sendSuccess(() -> Component.translatable("commands.muffins_thaidelight.spicy.set_timer",serverPlayer.getDisplayName(),spicyComponent.timer/20),false);
+
                                                     return 1;
                                                 })
                                         )
@@ -183,7 +175,7 @@ public class ThaiDelightFabric implements ModInitializer {
                                                     ServerPlayer serverPlayer = EntityArgument.getPlayer(commandContext,"player");
                                                     SpicyComponent spicyComponent = ModCardinalComponents.SPICY_HEAT.get(serverPlayer);
                                                     spicyComponent.setTime(IntegerArgumentType.getInteger(commandContext,"amount"));
-                                                    commandContext.getSource().sendSuccess(() -> Component.literal("Apply Spicy to Player for amount."),false);
+                                                    commandContext.getSource().sendSuccess(() -> Component.translatable("commands.muffins_thaidelight.spicy.set_timer",serverPlayer.getDisplayName(),spicyComponent.timer/20),false);
                                                     return 1;
                                                 })
                                         )
@@ -196,7 +188,7 @@ public class ThaiDelightFabric implements ModInitializer {
                                             ServerPlayer serverPlayer = EntityArgument.getPlayer(commandContext,"player");
                                             SpicyComponent spicyComponent = ModCardinalComponents.SPICY_HEAT.get(serverPlayer);
                                             spicyComponent.setTime(0);
-                                            commandContext.getSource().sendSuccess(() -> Component.literal("Cleared Spicy from Player."),false);
+                                            commandContext.getSource().sendSuccess(() -> Component.translatable("commands.muffins_thaidelight.spicy.clear",serverPlayer.getDisplayName()),false);
                                             return 1;
                                         })
                                 )

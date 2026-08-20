@@ -1,0 +1,28 @@
+{
+  "values": {
+    "muffins_thaidelight:coconut_log": {
+      "stripped_block": "muffins_thaidelight:stripped_coconut_log"
+    },
+    "muffins_thaidelight:coconut_wood": {
+      "stripped_block": "muffins_thaidelight:stripped_coconut_wood"
+    },
+    "muffins_thaidelight:durian_log": {
+      "stripped_block": "muffins_thaidelight:stripped_durian_log"
+    },
+    "muffins_thaidelight:durian_wood": {
+      "stripped_block": "muffins_thaidelight:stripped_durian_wood"
+    },
+    "muffins_thaidelight:mango_log": {
+      "stripped_block": "muffins_thaidelight:stripped_mango_log"
+    },
+    "muffins_thaidelight:mango_wood": {
+      "stripped_block": "muffins_thaidelight:stripped_mango_wood"
+    },
+    "muffins_thaidelight:papaya_log": {
+      "stripped_block": "muffins_thaidelight:stripped_papaya_log"
+    },
+    "muffins_thaidelight:papaya_wood": {
+      "stripped_block": "muffins_thaidelight:stripped_papaya_wood"
+    }
+  }
+}

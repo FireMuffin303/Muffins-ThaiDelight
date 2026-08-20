@@ -91,6 +91,13 @@ public class PlatformUtil {
         throw new AssertionError();
     }
 
+    //Forge update. I dont want to refactor project yet. so this will do.
+    @ExpectPlatform
+    public static void setSpicyTimeForge(int value, LivingEntity livingEntity){
+        throw new AssertionError();
+    }
+
+
     @ExpectPlatform
     public static void addSpicyTime(int value, LivingEntity livingEntity){
         throw new AssertionError();
@@ -118,6 +125,11 @@ public class PlatformUtil {
 
     @ExpectPlatform
     public static void addDurianHeatTime(int i,LivingEntity livingEntity){
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static void setDurianHeatTime(int i, LivingEntity livingEntity){
         throw new AssertionError();
     }
 
