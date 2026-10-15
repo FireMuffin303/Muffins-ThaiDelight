@@ -71,8 +71,8 @@ public class ModelDataGen extends FabricModelProvider {
 
     private static final ModModelTemplate WALL_FLOWER = new ModModelTemplate(Optional.of(ThaiDelightCommon.modid("block/template_wall_flower")),Optional.empty(), CUT_OUT,VINE,FLOWER);
 
-    private static final ModModelTemplate CROP_WITH_ROPE = new ModModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath("farmersdelight","block/crop_with_rope")),Optional.empty(), CUT_OUT,TextureSlot.CROP,ROPE_SIDE,ROPE_TOP);
-    private static final ModModelTemplate CROP_CROSS = new ModModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath("farmersdelight","block/crop_cross")),Optional.empty(), CUT_OUT,TextureSlot.CROSS);
+    private static final ModModelTemplate CROP_WITH_ROPE = new ModModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath("farmersdelight","block/template_crop_with_rope")),Optional.empty(), CUT_OUT,TextureSlot.CROP,ROPE_SIDE,ROPE_TOP);
+    private static final ModModelTemplate CROP_CROSS = new ModModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath("farmersdelight","block/template_crop_cross")),Optional.empty(), CUT_OUT,TextureSlot.CROSS);
 
     private static final ModelTemplate STACKABLE_PAPAYA_1 = new ModelTemplate(Optional.of(ThaiDelightCommon.modid("block/papaya/template_stackable_papaya_1")),Optional.empty(),TextureSlot.ALL);
     private static final ModelTemplate STACKABLE_PAPAYA_2 = new ModelTemplate(Optional.of(ThaiDelightCommon.modid("block/papaya/template_stackable_papaya_2")),Optional.empty(),TextureSlot.ALL);
@@ -91,10 +91,10 @@ public class ModelDataGen extends FabricModelProvider {
     private static final ModelTemplate CAKE_SLICE5 = new ModelTemplate(Optional.of(ThaiDelightCommon.modid("block/feast/template_cake_slice5")),Optional.empty(),TextureSlot.TOP,TextureSlot.SIDE,TextureSlot.BOTTOM,TextureSlot.INSIDE);
     private static final ModelTemplate CAKE_SLICE6 = new ModelTemplate(Optional.of(ThaiDelightCommon.modid("block/feast/template_cake_slice6")),Optional.empty(),TextureSlot.TOP,TextureSlot.SIDE,TextureSlot.BOTTOM,TextureSlot.INSIDE);
 
-    private static final ModelTemplate PIE = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath("farmersdelight","block/pie")),Optional.empty(),TextureSlot.TOP,TextureSlot.SIDE,TextureSlot.BOTTOM,TextureSlot.PARTICLE);
-    private static final ModelTemplate PIE_SLICE1 = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath("farmersdelight","block/pie_slice1")),Optional.empty(),TextureSlot.TOP,TextureSlot.SIDE,TextureSlot.BOTTOM,TextureSlot.PARTICLE,INNER);
-    private static final ModelTemplate PIE_SLICE2 = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath("farmersdelight","block/pie_slice2")),Optional.empty(),TextureSlot.TOP,TextureSlot.SIDE,TextureSlot.BOTTOM,TextureSlot.PARTICLE,INNER);
-    private static final ModelTemplate PIE_SLICE3 = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath("farmersdelight","block/pie_slice3")),Optional.empty(),TextureSlot.TOP,TextureSlot.SIDE,TextureSlot.BOTTOM,TextureSlot.PARTICLE,INNER);
+    private static final ModelTemplate PIE = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath("farmersdelight","block/template_pie")),Optional.empty(),TextureSlot.TOP,TextureSlot.SIDE,TextureSlot.BOTTOM,TextureSlot.PARTICLE);
+    private static final ModelTemplate PIE_SLICE1 = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath("farmersdelight","block/template_pie_slice1")),Optional.empty(),TextureSlot.TOP,TextureSlot.SIDE,TextureSlot.BOTTOM,TextureSlot.PARTICLE,INNER);
+    private static final ModelTemplate PIE_SLICE2 = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath("farmersdelight","block/template_pie_slice2")),Optional.empty(),TextureSlot.TOP,TextureSlot.SIDE,TextureSlot.BOTTOM,TextureSlot.PARTICLE,INNER);
+    private static final ModelTemplate PIE_SLICE3 = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath("farmersdelight","block/template_pie_slice3")),Optional.empty(),TextureSlot.TOP,TextureSlot.SIDE,TextureSlot.BOTTOM,TextureSlot.PARTICLE,INNER);
 
     private static final ModelTemplate TEMPLATE_OMELETTE = new ModelTemplate(Optional.of(ThaiDelightCommon.modid("block/feast/template_omelette")),Optional.empty(),OMELETTE);
     private static final ModelTemplate TEMPLATE_OMELETTE_1 = new ModelTemplate(Optional.of(ThaiDelightCommon.modid("block/feast/template_omelette_1")),Optional.empty(),OMELETTE);

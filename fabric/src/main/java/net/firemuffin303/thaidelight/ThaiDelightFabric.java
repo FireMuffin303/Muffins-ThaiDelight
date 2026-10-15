@@ -17,6 +17,7 @@ import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.LandPathNodeTypesRegistry;
 import net.fabricmc.fabric.api.registry.TillableBlockRegistry;
 import net.fabricmc.loader.api.FabricLoader;
+import net.firemuffin303.muffinsmcapi.api.BlockEntityTypeUtil;
 import net.firemuffin303.thaidelight.common.TDFabricEvents;
 import net.firemuffin303.thaidelight.common.cardinalcomponents.DurianHeatComponent;
 import net.firemuffin303.thaidelight.common.cardinalcomponents.SpicyComponent;
@@ -95,6 +96,10 @@ public class ThaiDelightFabric implements ModInitializer {
         LandPathNodeTypesRegistry.register(ModBlocks.LIME_PLANT.get(), PathType.DAMAGE_OTHER,PathType.DANGER_OTHER);
 
         PayloadTypeRegistry.playS2C().register(ModLevelEventPacket.TYPE,ModLevelEventPacket.STREAM_CODEC);
+
+        ModBlocks.CABINET.forEach(blockRegistryHolder -> {
+            BlockEntityTypeUtil.addBlockEntityType(vectorwing.farmersdelight.common.registry.ModBlockEntityTypes.CABINET.get(),blockRegistryHolder.get());
+        });
 
 
     }

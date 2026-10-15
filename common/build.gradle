@@ -13,8 +13,6 @@ dependencies {
 
 loom {
     accessWidenerPath = file("src/main/resources/muffinsthaidelight.accesswidener")
-
-
 }
 
 sourceSets.main {

@@ -17,7 +17,7 @@ import java.util.function.Supplier;
 public class ModEntityTypes {
     public static final ResourceRegistry<EntityType<?>> ENTITY_TYPE = ResourceRegistry.create(Registries.ENTITY_TYPE, ThaiDelightCommon.MOD_ID);
     public static final Supplier<EntityType<?>> FLOWER_CRAB = ENTITY_TYPE.register("flower_crab",() ->EntityType.Builder.of(FlowerCrabEntity::new, MobCategory.CREATURE).sized(0.8f,0.5f).build("flower_crab"));
-    public static final Supplier<EntityType<?>> DRAGONFLY = ENTITY_TYPE.register("dragonfly",() -> EntityType.Builder.of(DragonflyEntity::new, MobCategory.AMBIENT).sized(0.8f,0.6f).build("flower_crab"));
+    public static final Supplier<EntityType<?>> DRAGONFLY = ENTITY_TYPE.register("dragonfly",() -> EntityType.Builder.of(DragonflyEntity::new, MobCategory.AMBIENT).sized(0.8f,0.6f).build("dragonfly"));
     //public static final EntityType<BuffaloEntity> BUFFALO = register("buffalo",EntityType.Builder.of(BuffaloEntity::new, MobCategory.CREATURE).sized(0.9f,1.4f).build(ThaiDelight.MOD_ID));
 
     @ExpectPlatform

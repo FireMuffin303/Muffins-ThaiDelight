@@ -1,5 +1,5 @@
 {
-  "parent": "farmersdelight:block/pie_slice1",
+  "parent": "farmersdelight:block/template_pie_slice1",
   "textures": {
     "bottom": "farmersdelight:block/pie_bottom",
     "inner": "muffins_thaidelight:block/coconut_pie_inside",
