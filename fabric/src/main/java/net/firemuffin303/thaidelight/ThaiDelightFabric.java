@@ -102,6 +102,7 @@ public class ThaiDelightFabric implements ModInitializer {
         });
 
 
+
     }
 
     public static void onEntityHurt(LivingEntity livingEntity,DamageSource damageSource,boolean blocked){

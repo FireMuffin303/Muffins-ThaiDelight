@@ -18,6 +18,7 @@ import net.firemuffin303.thaidelight.neoforge.common.attachment.SpicyAttachment;
 import net.firemuffin303.thaidelight.neoforge.network.DurianHeatPacket;
 import net.firemuffin303.thaidelight.neoforge.network.SpicyPacket;
 import net.firemuffin303.thaidelight.mixin.accessor.MobAccessor;
+import net.firemuffin303.thaidelight.util.ModUtils;
 import net.firemuffin303.thaidelight.util.PlatformUtil;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
@@ -65,6 +66,7 @@ import net.neoforged.neoforge.event.brewing.RegisterBrewingRecipesEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
+import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
 import net.neoforged.neoforge.event.entity.living.MobEffectEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
@@ -111,7 +113,7 @@ public class ThaiDelightForge {
         NeoForge.EVENT_BUS.addListener(this::registerGoalSelector);
         NeoForge.EVENT_BUS.addListener(this::registerBrewingRecipeEvent);
         NeoForge.EVENT_BUS.addListener(this::registerEffectRemoved);
-        //NeoForge.EVENT_BUS.addListener(this::registerRightClickBlockEvent);
+        NeoForge.EVENT_BUS.addListener(this::onItemFinishUsing);
         NeoForge.EVENT_BUS.addListener(this::registerOnMobHurt);
 
         eventBus.addListener(this::commonSetup);
@@ -247,6 +249,14 @@ public class ThaiDelightForge {
             float f = Mth.randomBetween(entity.getRandom(), 1, 3);
             entity.hurt(livingEntity.level().damageSources().thorns(entity),f);
         }
+    }
+
+    public void onItemFinishUsing(LivingEntityUseItemEvent.Finish event){
+        if(event.getItem().is(ModTags.FERMENTED_DRINKS)){
+            ModUtils.onDrinkFermentedDrinks(event.getEntity().level(), event.getItem(),event.getEntity());
+        }
+
+        event.setResultStack(event.getResultStack());
     }
 
     public void registerCommand(RegisterCommandsEvent event){

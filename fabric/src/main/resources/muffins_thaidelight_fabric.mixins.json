@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "ConsumableItemMixin",
+    "LivingEntityMixin",
     "dispenser.BucketItemMixin",
     "durianHelmet.LivingEntityMixin",
     "dyeableItem.RecipeMixin",
