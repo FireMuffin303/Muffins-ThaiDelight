@@ -1,5 +1,6 @@
 package net.firemuffin303.thaidelight.util;
 
+import com.mojang.logging.LogUtils;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.firemuffin303.thaidelight.common.registry.ModMobEffects;
 import net.minecraft.core.BlockPos;

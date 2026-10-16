@@ -8,9 +8,9 @@ version = "${version}"
 displayName = "Muffin's Thai's Delight"
 authors = "FireMuffin303"
 description = '''
-
+Cooking expansion focus on Thai's Food!
 '''
-#logoFile = ""
+logoFile = "assets/muffins_thaidelight/icon.png"
 
 [[dependencies.muffins_thaidelight]]
 modId = "forge"
@@ -41,5 +41,13 @@ modId = "muffins_ovenapi"
 mandatory = true
 type = "required"
 versionRange = "[1.20.1+0.1.0,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.muffins_thaidelight]]
+modId = "cloth_config"
+mandatory = true
+type = "required"
+versionRange = "[11.1.136,)"
 ordering = "NONE"
 side = "BOTH"

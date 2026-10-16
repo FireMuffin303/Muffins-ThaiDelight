@@ -7,10 +7,7 @@ import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.firemuffin303.thaidelight.ThaiDelightCommon;
 import net.firemuffin303.thaidelight.common.entity.ai.NearestMobStinkyTargetGoal;
-import net.firemuffin303.thaidelight.common.registry.ModEntityTypes;
-import net.firemuffin303.thaidelight.common.registry.ModItems;
-import net.firemuffin303.thaidelight.common.registry.ModMobEffects;
-import net.firemuffin303.thaidelight.common.registry.ModVillagerTrades;
+import net.firemuffin303.thaidelight.common.registry.*;
 import net.firemuffin303.thaidelight.common.registry.forge.*;
 import net.firemuffin303.thaidelight.config.ModConfig;
 import net.firemuffin303.thaidelight.forge.common.capabilities.DurianHeatProvider;
@@ -22,6 +19,8 @@ import net.firemuffin303.thaidelight.forge.network.DurianHeatPacket;
 import net.firemuffin303.thaidelight.forge.network.SpicyPacket;
 import net.firemuffin303.thaidelight.forge.network.ThaiDelightPacketHandler;
 import net.firemuffin303.thaidelight.mixin.accessor.MobAccessor;
+import net.firemuffin303.thaidelight.util.ModUtils;
+import net.firemuffin303.thaidelight.util.PlatformUtil;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -51,6 +50,7 @@ import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
+import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.event.entity.living.MobEffectEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.village.VillagerTradesEvent;
@@ -98,6 +98,7 @@ public class ThaiDelightForge {
         MinecraftForge.EVENT_BUS.addListener(this::registerVillagerTrade);
         MinecraftForge.EVENT_BUS.addListener(this::registerGoalSelector);
         MinecraftForge.EVENT_BUS.addListener(this::onEffectAdded);
+        MinecraftForge.EVENT_BUS.addListener(this::onItemFinishUsing);
         eventBus.register(this);
 
     }
@@ -225,6 +226,14 @@ public class ThaiDelightForge {
                 }
             });
         }
+    }
+
+    public void onItemFinishUsing(LivingEntityUseItemEvent.Finish event){
+        if(event.getItem().is(ModTags.FERMENTED_DRINKS)){
+            ModUtils.onDrinkFermentedDrinks(event.getEntity().level(), event.getItem(),event.getEntity());
+        }
+
+        event.setResultStack(event.getResultStack());
     }
 
     public static void modCommand(CommandDispatcher<CommandSourceStack> commandDispatcher, CommandBuildContext commandBuildContext, Commands.CommandSelection commandSelection){
