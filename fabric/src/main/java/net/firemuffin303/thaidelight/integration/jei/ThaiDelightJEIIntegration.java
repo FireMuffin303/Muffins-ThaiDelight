@@ -1,7 +1,9 @@
 package net.firemuffin303.thaidelight.integration.jei;
 
 import com.google.common.collect.ImmutableList;
+import com.mojang.logging.LogUtils;
 import mezz.jei.api.IModPlugin;
+import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.RecipeType;
@@ -30,6 +32,7 @@ import java.util.function.Supplier;
 
 import static net.firemuffin303.thaidelight.integration.jei.FermentedFishRecipeCategory.translateKey;
 
+@JeiPlugin
 public class ThaiDelightJEIIntegration implements IModPlugin {
     public static final RecipeType<FermentedFishRecipeCategory.FermentedFishDummy> FERMENTED_FISH = new RecipeType<>(ThaiDelightCommon.modid("fermented_fish"), FermentedFishRecipeCategory.FermentedFishDummy.class);
 

@@ -70,7 +70,7 @@ public class ModTags {
     public static final TagKey<Item> COMMON_COOKED_MEATS =  TagKey.create(Registries.ITEM,ResourceLocation.fromNamespaceAndPath("c","foods/cooked_meats"));
     public static final TagKey<Item> KNIVES = TagKey.create(Registries.ITEM,ResourceLocation.fromNamespaceAndPath("c","tools/knife"));
     public static final TagKey<Item> COMMON_EGGS = TagKey.create(Registries.ITEM,ResourceLocation.fromNamespaceAndPath("c","eggs"));
-    public static final TagKey<Item> COMMON_RAW_FISHES = TagKey.create(Registries.ITEM,ResourceLocation.fromNamespaceAndPath("c","foods/raw_fishes"));
+    public static final TagKey<Item> COMMON_RAW_FISHES = TagKey.create(Registries.ITEM,ResourceLocation.fromNamespaceAndPath("c","foods/raw_fish"));
 
     public static final TagKey<Item> CROPS = TagKey.create(Registries.ITEM,ResourceLocation.fromNamespaceAndPath("c","crops"));
     public static final TagKey<Item> VEGETABLES = TagKey.create(Registries.ITEM,ResourceLocation.fromNamespaceAndPath("c","foods/vegetables"));

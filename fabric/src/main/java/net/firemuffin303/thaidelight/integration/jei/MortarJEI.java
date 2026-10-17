@@ -20,6 +20,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeHolder;
+import org.jetbrains.annotations.Nullable;
 
 public class MortarJEI implements IRecipeCategory<RecipeHolder<MortarRecipe>> {
     private static final ResourceLocation ID = ThaiDelightCommon.modid("mortar");
@@ -36,6 +37,16 @@ public class MortarJEI implements IRecipeCategory<RecipeHolder<MortarRecipe>> {
     @Override
     public RecipeType<RecipeHolder<MortarRecipe>> getRecipeType() {
         return MORTAR;
+    }
+
+    @Override
+    public int getWidth() {
+        return 169;
+    }
+
+    @Override
+    public int getHeight() {
+        return 70;
     }
 
     @Override
@@ -62,7 +73,7 @@ public class MortarJEI implements IRecipeCategory<RecipeHolder<MortarRecipe>> {
 
     @Override
     public void draw(RecipeHolder<MortarRecipe> recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
-        //guiGraphics.blit(MortarScreen.CRAFTING_TABLE_LOCATION,4,4,4,4,169,70);
+        guiGraphics.blit(MortarScreen.CRAFTING_TABLE_LOCATION,0,0,4,4,169,70);
         IRecipeCategory.super.draw(recipe, recipeSlotsView, guiGraphics, mouseX, mouseY);
     }
 }

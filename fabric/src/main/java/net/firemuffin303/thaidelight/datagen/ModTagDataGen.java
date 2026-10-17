@@ -13,7 +13,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
-import net.minecraft.world.level.block.Blocks;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -22,7 +21,6 @@ import static net.firemuffin303.thaidelight.common.registry.ModTags.*;
 public class ModTagDataGen {
     public static class ModItemTagDataGen extends FabricTagProvider.ItemTagProvider {
         TagKey<Item> INSECT_ITEMS = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("alexsmobs", "insect_items"));
-        TagKey<Item> C_RAW_FISHES = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "raw_fishes"));
 
         public ModItemTagDataGen(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> completableFuture) {
             super(output, completableFuture, null);
@@ -129,10 +127,8 @@ public class ModTagDataGen {
                     .add(Items.TROPICAL_FISH)
                     .add(vectorwing.farmersdelight.common.registry.ModItems.COD_SLICE.get())
                     .add(vectorwing.farmersdelight.common.registry.ModItems.SALMON_SLICE.get())
-                    .forceAddTag(C_RAW_FISHES)
+                    .forceAddTag(COMMON_RAW_FISHES)
             ;
-
-            getOrCreateTagBuilder(C_RAW_FISHES);
 
 
             getOrCreateTagBuilder(ModTags.DRAGONFLY_FOOD)

@@ -5,6 +5,6 @@
     "minecraft:tropical_fish",
     "farmersdelight:cod_slice",
     "farmersdelight:salmon_slice",
-    "#c:raw_fishes"
+    "#c:foods/raw_fish"
   ]
 }

@@ -115,6 +115,8 @@ public class MortarRecipeBuilder implements RecipeBuilder {
                 .rewards(AdvancementRewards.Builder.recipe(resourceLocation))
                 .requirements(AdvancementRequirements.Strategy.OR);
 
+        this.criteria.forEach(builder::addCriterion);
+
         NonNullList<Ingredient> ingredients1 = NonNullList.create();
         ingredients1.addAll(this.ingredients);
 

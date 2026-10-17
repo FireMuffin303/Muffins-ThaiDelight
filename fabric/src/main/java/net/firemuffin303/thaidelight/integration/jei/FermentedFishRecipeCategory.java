@@ -13,6 +13,7 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.firemuffin303.thaidelight.ThaiDelightCommon;
+import net.firemuffin303.thaidelight.client.sceens.MortarScreen;
 import net.firemuffin303.thaidelight.common.block.cauldron.FermentedFishCauldronBlock;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.minecraft.client.Minecraft;
@@ -78,10 +79,22 @@ public class FermentedFishRecipeCategory implements IRecipeCategory<FermentedFis
 
     @Override
     public void draw(FermentedFishDummy recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
+        guiGraphics.blit(CONTAINER_LOCATION,4,4,4,4,150,65);
+
         this.slot.draw(guiGraphics,97,13);
 
         recipe.renderExtra(guiGraphics,this.time_icon,this.slot);
         recipe.cauldronRender.draw(guiGraphics);
+    }
+
+    @Override
+    public int getHeight() {
+        return background.getHeight();
+    }
+
+    @Override
+    public int getWidth() {
+        return this.background.getWidth();
     }
 
     @Override

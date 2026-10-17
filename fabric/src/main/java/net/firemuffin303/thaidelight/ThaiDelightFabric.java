@@ -60,8 +60,6 @@ public class ThaiDelightFabric implements ModInitializer {
 
         ThaiDelightCommon.postInit();
 
-
-
         ModEntityTypes.registerAttribute(FabricDefaultAttributeRegistry::register);
 
         SpawnPlacements.register((EntityType<FlowerCrabEntity>) ModEntityTypes.FLOWER_CRAB.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, FlowerCrabEntity::checkSpawnRules);
@@ -100,8 +98,6 @@ public class ThaiDelightFabric implements ModInitializer {
         ModBlocks.CABINET.forEach(blockRegistryHolder -> {
             BlockEntityTypeUtil.addBlockEntityType(vectorwing.farmersdelight.common.registry.ModBlockEntityTypes.CABINET.get(),blockRegistryHolder.get());
         });
-
-
 
     }
 

@@ -1,6 +1,16 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
+    "has_rose_bush": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:rose_bush"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
     "has_the_recipe": {
       "conditions": {
         "recipe": "muffins_thaidelight:mortar/red_dye_by_rose_bush"
@@ -10,7 +20,8 @@
   },
   "requirements": [
     [
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_rose_bush"
     ]
   ],
   "rewards": {

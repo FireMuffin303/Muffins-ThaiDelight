@@ -1,6 +1,6 @@
-// 1.21.1	2026-10-15T17:06:06.6459302	Muffin's Thai's Delight Refabricated/Tags for minecraft:item
-66738f5f6258ac6f3bd0fc498b5e78629f6d1e88 data\alexsmobs\tags\item\insect_items.json
+// 1.21.1	2026-10-17T08:46:49.3306905	Muffin's Thai's Delight Refabricated/Tags for minecraft:item
 9b2fc5fc001573354f52af8809bda1e06ca63063 data\c\tags\item\foods\vegetables\chili_pepper.json
+66738f5f6258ac6f3bd0fc498b5e78629f6d1e88 data\alexsmobs\tags\item\insect_items.json
 d94cd80cd96061121724152df27436e190b438c5 data\minecraft\tags\item\wooden_doors.json
 bc195102699610f385a0de082dad6914301785d1 data\minecraft\tags\item\logs_that_burn.json
 18c5419bf77839599de82923e7796642d858b85a data\c\tags\item\foods\raw_papaya.json
@@ -16,11 +16,11 @@ b807ad24f4074e54c258548cea9fb2f44eb93873 data\c\tags\item\foods\durian.json
 7815996f143775a1110f53e77829aa11162f0b7f data\minecraft\tags\item\small_flowers.json
 3f37aca5bddf9b77175a48df7a35a1026f89502d data\minecraft\tags\item\dyeable.json
 3988f1cb4f7173d549b8078ca5c46e6f15b5d527 data\c\tags\item\foods\mango.json
-b086462b5201d34f71b1315aa6cca42b6f3004ee data\muffins_thaidelight\tags\item\flower_crab_food.json
+904b756c8c8201813fe0e8dbb5a0ae57b9b2ea14 data\muffins_thaidelight\tags\item\flower_crab_food.json
 2de2ec52c61e54d0ba39b4239a12c3dbab442e30 data\minecraft\tags\item\signs.json
 4685a359298f352903a6076ec0e5fdf82cbdc6e3 data\c\tags\item\foods\banana.json
-14460cc75adae8d543b3a77cb640c9b40450f0b8 data\c\tags\item\foods\papaya.json
 7821857ab16e98579ca06eb6e0004c505f332061 data\muffins_thaidelight\tags\item\durian_foods.json
+14460cc75adae8d543b3a77cb640c9b40450f0b8 data\c\tags\item\foods\papaya.json
 08a6b11ab1b6272548ab952ee202bc9f54e1b2a2 data\origins\tags\item\meat.json
 ece7920067e97a432500b04d49682c6f988ec65d data\c\tags\item\foods\cooked_meats.json
 f9bc7bb455b258c51ffd2999c46e95557b2a71aa data\c\tags\item\foods\pineapple.json
@@ -49,6 +49,5 @@ ff5a573d6ff3b8be797c79518a76ad69b057daf3 data\minecraft\tags\item\hanging_signs.
 f0f75f576b1f0b23a175f227c2c06c2532448c13 data\minecraft\tags\item\wooden_fences.json
 6b5215e8ddac13ffdaaf093d459d6724cce991f6 data\c\tags\item\foods\coconut.json
 2881abc4fb8b692cf2680fbf1be5b5bc73c94cbe data\minecraft\tags\item\chest_boats.json
-35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data\c\tags\item\raw_fishes.json
 2016a5264fa078562dad1ed8c98bec9864211db1 data\muffins_thaidelight\tags\item\durian_logs.json
 f52bd6c3e2c038d2923b58d5e07f14301bba74e4 data\minecraft\tags\item\wooden_stairs.json

@@ -8,10 +8,9 @@
   "experience": 0.35,
   "ingredients": [
     {
-      "tag": "c:foods/raw_fishes"
+      "tag": "c:foods/raw_fish"
     }
   ],
-  "recipe_book_tab": "misc",
   "result": {
     "count": 1,
     "id": "muffins_thaidelight:fish_sauce_bottle"
