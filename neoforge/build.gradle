@@ -45,7 +45,10 @@ dependencies {
     shadowCommon project(path: ':common', configuration: 'transformProductionNeoForge')
 
     modCompileOnlyApi("mezz.jei:jei-${minecraft_version}-neoforge-api:${project.jei_version}")
-    modRuntimeOnly("mezz.jei:jei-${minecraft_version}-neoforge:${project.jei_version}")
+    //modRuntimeOnly("mezz.jei:jei-${minecraft_version}-neoforge:${project.jei_version}")
+
+    modCompileOnly "dev.emi:emi-neoforge:${emi_version}:api"
+    modLocalRuntime "dev.emi:emi-neoforge:${emi_version}"
 }
 
 processResources {

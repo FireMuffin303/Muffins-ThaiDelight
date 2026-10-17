@@ -60,7 +60,12 @@ subprojects {
 
         maven {
             name = 'TerraformersMC'
-            url = "https://maven.gnomecraft.net/repository/maven-public/"
+            url = "https://maven.gnomecraft.net/repository"
+        }
+
+        maven {
+            name = "Sleeping Town"
+            url = "https://repo.sleeping.town/"
         }
 
         // Refabricated REPO -------------------

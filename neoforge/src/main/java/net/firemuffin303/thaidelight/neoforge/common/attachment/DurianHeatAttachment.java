@@ -1,12 +1,25 @@
 package net.firemuffin303.thaidelight.neoforge.common.attachment;
 
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 
 public class DurianHeatAttachment {
+    public static final Codec<DurianHeatAttachment> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+            Codec.INT.fieldOf("timer").forGetter(DurianHeatAttachment::getTimer),
+            Codec.BOOL.fieldOf("is_heat_up").forGetter(DurianHeatAttachment::isHeatUp)
+    ).apply(instance,DurianHeatAttachment::new));
+
+
     private int timer = 0;
     private boolean isHeatUp = false;
+
+    public DurianHeatAttachment(int timer,boolean isHeatUp){
+        this.timer = timer;
+        this.isHeatUp = isHeatUp;
+    }
 
 
     public void tick(LivingEntity livingEntity){
