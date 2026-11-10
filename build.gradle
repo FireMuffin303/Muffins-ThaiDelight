@@ -93,6 +93,11 @@ subprojects {
             name = "Ladysnake Mods"
             url = 'https://maven.ladysnake.org/releases'
         }
+
+        maven {
+            name = "Cassian's Maven"
+            url = 'https://maven.cassian.cc'
+        }
     }
 
     dependencies {

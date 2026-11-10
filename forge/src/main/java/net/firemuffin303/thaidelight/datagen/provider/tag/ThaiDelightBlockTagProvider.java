@@ -166,7 +166,7 @@ public class ThaiDelightBlockTagProvider extends BlockTagsProvider {
                 ModBlocks.PINK_CANDLE_DURIAN_CAKE.get()
         );
 
-        this.tag(vectorwing.farmersdelight.common.tag.ModTags.WILD_CROPS).add(
+        this.tag(vectorwing.farmersdelight.common.tag.ModTags.Blocks.WILD_CROPS).add(
                 ModBlocks.WILD_BASIL.get(),
                 ModBlocks.WILD_PEPPER_CROP.get()
         );

@@ -164,7 +164,7 @@ public class ModBlockTagDataGen extends FabricTagProvider.BlockTagProvider {
                 ModBlocks.PINK_CANDLE_DURIAN_CAKE.get()
         );
 
-        getOrCreateTagBuilder(vectorwing.farmersdelight.common.tag.ModTags.WILD_CROPS).add(
+        getOrCreateTagBuilder(vectorwing.farmersdelight.common.tag.ModTags.Blocks.WILD_CROPS).add(
                 ModBlocks.WILD_BASIL.get(),
                 ModBlocks.WILD_PEPPER_CROP.get()
         );

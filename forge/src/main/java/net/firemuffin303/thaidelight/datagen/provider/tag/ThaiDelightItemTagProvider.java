@@ -250,10 +250,10 @@ public class ThaiDelightItemTagProvider extends ItemTagsProvider {
         this.tag(ItemTags.HANGING_SIGNS)
                 .add(ModItems.DURIAN_HANGING_SIGN.get(),ModItems.MANGO_HANGING_SIGN.get(),ModItems.COCONUT_HANGING_SIGN.get());
 
-        this.tag(vectorwing.farmersdelight.common.tag.ModTags.WOODEN_CABINETS)
+        this.tag(vectorwing.farmersdelight.common.tag.ModTags.Items.CABINETS_WOODEN)
                 .add(ModItems.DURIAN_CABINET.get(),ModItems.MANGO_CABINET.get(),ModItems.COCONUT_CABINET.get());
 
-        this.tag(vectorwing.farmersdelight.common.tag.ModTags.WILD_CROPS_ITEM)
+        this.tag(vectorwing.farmersdelight.common.tag.ModTags.Items.WILD_CROPS)
                 .add(ModItems.WILD_PEPPER_CROP.get(),ModItems.WILD_BASIL.get());
 
         this.tag(CROPS).add(

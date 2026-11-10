@@ -33,7 +33,7 @@ public class DurianSliceFeastBlock extends FeastBlock {
     }
 
     @Override
-    protected InteractionResult takeServing(LevelAccessor level, BlockPos pos, BlockState state, Player player, InteractionHand hand) {
+    protected InteractionResult takeServing(Level level, BlockPos pos, BlockState state, Player player, InteractionHand hand) {
         int servings = (Integer)state.getValue(this.getServingsProperty());
         if(servings == 0){
             popResource((Level) level,pos,new ItemStack(ModItems.DURIAN_PEEL.get(),4));
