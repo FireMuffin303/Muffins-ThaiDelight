@@ -96,6 +96,10 @@ dependencies {
     modApi("me.shedaniel.cloth:cloth-config-fabric:$rootProject.cloth_config_version") {
         exclude(group: "net.fabricmc.fabric-api")
     }
+
+    //modRuntimeOnly "maven.modrinth:YhmgMVyu:d0gCQ3in"
+    //modRuntimeOnly "maven.modrinth:jtmvUHXj:A7wwzJ0e"
+    //modRuntimeOnly("com.aetherteam.nitrogen:nitrogen_internals:1.20.1-1.0.15-fabric")
 }
 
 processResources {

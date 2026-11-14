@@ -71,7 +71,7 @@ public class PlatformUtilImpl {
     }
 
     public static RecipeBookType getMortarBookType() {
-        return ThaiDelightClientFabric.MORTAR_RECIPE_BOOK_TYPE;
+        return ModASMEarlyRiser.getMortarBookType();
     }
 
     public static Supplier<MobEffect> getComfort() {

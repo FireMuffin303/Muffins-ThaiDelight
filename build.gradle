@@ -98,6 +98,8 @@ subprojects {
             name = "Cassian's Maven"
             url = 'https://maven.cassian.cc'
         }
+
+        maven { url = "https://packages.aether-mod.net/Nitrogen" }
     }
 
     dependencies {

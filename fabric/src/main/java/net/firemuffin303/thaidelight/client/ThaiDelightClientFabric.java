@@ -1,5 +1,6 @@
 package net.firemuffin303.thaidelight.client;
 
+import com.mojang.datafixers.util.Pair;
 import io.github.fabricators_of_create.porting_lib.recipe_book_categories.RecipeBookRegistry;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
@@ -7,6 +8,7 @@ import net.fabricmc.fabric.api.client.model.loading.v1.ModelLoadingPlugin;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.*;
 import net.firemuffin303.thaidelight.ThaiDelightCommon;
+import net.firemuffin303.thaidelight.asm.ModASMEarlyRiser;
 import net.firemuffin303.thaidelight.client.renderer.DurianHeatRendererLayer;
 import net.firemuffin303.thaidelight.client.renderer.armor.DurianHelmetRenderer;
 import net.firemuffin303.thaidelight.client.renderer.component.SackTooltipComponent;
@@ -23,8 +25,10 @@ import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.firemuffin303.thaidelight.common.registry.ModMenuType;
 import net.firemuffin303.thaidelight.common.registry.ModRecipes;
+import net.firemuffin303.thaidelight.mixin.fabric.recipeBookType.RecipeBookSettingsAccessor;
 import net.firemuffin303.thaidelight.network.ModLevelEventPacket;
 import net.firemuffin303.thaidelight.util.ModUtils;
+import net.firemuffin303.thaidelight.util.PlatformUtil;
 import net.minecraft.client.RecipeBookCategories;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
@@ -37,6 +41,7 @@ import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
 import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.stats.RecipeBookSettings;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.inventory.MenuType;
@@ -47,17 +52,12 @@ import net.minecraft.world.level.FoliageColor;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Supplier;
 
 public class ThaiDelightClientFabric implements ClientModInitializer {
-
-    public static final RecipeBookType MORTAR_RECIPE_BOOK_TYPE = RecipeBookType.valueOf("MORTAR_RECIPE_BOOK_TYPE");
-    public static final RecipeBookCategories MORTAR_SEARCH = RecipeBookCategories.valueOf("MORTAR_SEARCH");
-    public static final RecipeBookCategories MORTAR_MEALS = RecipeBookCategories.valueOf("MORTAR_MEALS");
-    public static final RecipeBookCategories MORTAR_MISC = RecipeBookCategories.valueOf("MORTAR_MISC");
-
-
     @Override
     public void onInitializeClient() {
         ThaiDelightCommonClient.entityRendererRegister(EntityRendererRegistry::register);
@@ -158,22 +158,30 @@ public class ThaiDelightClientFabric implements ClientModInitializer {
 
 
     public static void registerRecipe(){
-        RecipeBookRegistry.registerBookCategories(MORTAR_RECIPE_BOOK_TYPE, List.of(MORTAR_SEARCH,MORTAR_MEALS,MORTAR_MISC));
-        RecipeBookRegistry.registerAggregateCategory(MORTAR_SEARCH,List.of(MORTAR_MEALS,MORTAR_MISC));
+        RecipeBookType recipeBookType = ModASMEarlyRiser.getMortarBookType();
+        RecipeBookCategories mortarSearch = ModASMEarlyRiser.getMortarSearchCategory();
+        RecipeBookCategories mortarMeals = ModASMEarlyRiser.getMortarMealsCategory();
+        RecipeBookCategories mortarMisc = ModASMEarlyRiser.getMortarMiscCategory();
+
+        RecipeBookRegistry.registerBookCategories(recipeBookType, List.of(mortarSearch,mortarMeals,mortarMisc));
+        RecipeBookRegistry.registerAggregateCategory(mortarSearch,List.of(mortarMeals,mortarMisc));
         RecipeBookRegistry.registerRecipeCategoryFinder(ModRecipes.MORTAR.get(), recipe -> {
             if(recipe instanceof MortarRecipe mortarRecipe){
                 MortarRecipeBookTab mortarRecipeBookTab = mortarRecipe.getRecipeBookTab();
                 if(mortarRecipeBookTab != null){
                     return switch (mortarRecipeBookTab){
-                        case MEALS -> MORTAR_MEALS;
-                        case MISC -> MORTAR_MISC;
+                        case MEALS -> mortarMeals;
+                        case MISC -> mortarMisc;
                     };
                 }
             }
 
-            return MORTAR_MISC;
+            return mortarMisc;
         });
 
+        Map<RecipeBookType, Pair<String, String>> newMap = new HashMap<>(RecipeBookSettingsAccessor.getTagField());
+        newMap.put(recipeBookType, Pair.of("isMortarBookGuiOpen", "isMortarBookFilteringCraftable"));
+        RecipeBookSettingsAccessor.setTagFields(newMap);
 
     }
 }

@@ -17,11 +17,9 @@
     "fabric.loot.LootPoolBuilderAccessor",
     "fabric.loot.LootTableAccessor",
     "fabric.model.ModelTemplateMixin",
-    "fabric.recipeBookType.RecipeBlockSettingMixin",
-    "fabric.recipeBookType.RecipeBookTypeMixin"
+    "fabric.recipeBookType.RecipeBookSettingsAccessor"
   ],
   "client": [
-    "fabric.recipeBookType.RecipeBookCategoriesMixin"
   ],
   "injectors": {
     "defaultRequire": 1
