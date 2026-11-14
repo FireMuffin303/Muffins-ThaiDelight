@@ -49,3 +49,6 @@ config = "muffins_thaidelight.mixins.json"
 
 [[mixins]]
 config = "muffins_thaidelight.neoforge.mixins.json"
+
+[[accessTransformers]]
+file="META-INF/accesstransformer.cfg"
