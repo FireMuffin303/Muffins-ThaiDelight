@@ -43,7 +43,7 @@ public class CoconutBlock extends Block implements SimpleWaterloggedBlock {
 
     @Override
     protected ItemInteractionResult useItemOn(ItemStack itemStack, BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
-        if(itemStack.getItem() instanceof AxeItem){
+        if(itemStack.getItem() instanceof AxeItem && blockState.is(ModBlocks.COCONUT)){
             BlockState blockState1 = ModBlocks.STRIPPED_COCONUT.get().defaultBlockState().setValue(BlockStateProperties.WATERLOGGED,blockState.getValue(BlockStateProperties.WATERLOGGED));
             level.playSound(player, blockPos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1.0F, 1.0F);
             Block.popResource(level,blockPos,new ItemStack(PlatformUtil.getTreeBarkItem().get()));

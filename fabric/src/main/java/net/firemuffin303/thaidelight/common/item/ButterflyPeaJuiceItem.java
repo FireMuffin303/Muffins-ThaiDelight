@@ -1,6 +1,7 @@
 package net.firemuffin303.thaidelight.common.item;
 
 import net.firemuffin303.thaidelight.common.registry.ModFoods;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -15,5 +16,6 @@ public class ButterflyPeaJuiceItem extends DrinkableItem {
     @Override
     public void affectConsumer(ItemStack stack, Level level, LivingEntity consumer) {
         super.affectConsumer(stack, level, consumer);
+        consumer.removeEffect(MobEffects.MOVEMENT_SLOWDOWN);
     }
 }

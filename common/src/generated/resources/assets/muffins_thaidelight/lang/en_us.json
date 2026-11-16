@@ -131,11 +131,6 @@
   "effect.muffins_thaidelight.stinky": "Stinky",
   "emi.category.muffins_thaidelight.cauldron_crafting": "Cauldron",
   "emi.category.muffins_thaidelight.mortar": "Mortar",
-  "farmersdelight.tooltip.butterfly_pea_tea": "Clear Slowness",
-  "farmersdelight.tooltip.coconut_water": "Clear Weakness Effect",
-  "farmersdelight.tooltip.honey_lime_juice": "Clear Blindness and Poison Effect",
-  "farmersdelight.tooltip.lime_juice": "Clear Blindness Effect",
-  "farmersdelight.tooltip.papaya_juice": "Clear Hunger Effect",
   "item.minecraft.lingering_potion.effect.long_stench": "Lingering Potion of Stench",
   "item.minecraft.lingering_potion.effect.stench": "Lingering Potion of Stench",
   "item.minecraft.lingering_potion.effect.strong_stench": "Lingering Potion of Stench",
@@ -259,9 +254,9 @@
   "text.autoconfig.muffins_thaidelight.option.villagerShouldTradeTDItem": "Enable Villagers Trades Thai's Delight Items",
   "text.autoconfig.muffins_thaidelight.option.wanderingTraderShouldTradeTDItem": "Enable Wandering Traders Trades Thai's Delight Items",
   "text.autoconfig.muffins_thaidelight.title": "Muffin's Thai's Delight Config",
-  "commands.muffins_thaidelight.durian_heat.set_timer": "Applied Durian Heat to %s for %s seconds.",
-  "commands.muffins_thaidelight.durian_heat.clear": "Removed Durian Heat from %s.",
-  "commands.muffins_thaidelight.durian_heat.set_heat": "Applied heat to Durian Heat for %s.",
-  "commands.muffins_thaidelight.spicy.set_timer": "Applied Spicy to %s for %s seconds.",
-  "commands.muffins_thaidelight.spicy.clear": "Removed Spicy from %s"
+  "tooltip.farmersdelight.butterfly_pea_tea": "Clear Slowness",
+  "tooltip.farmersdelight.coconut_water": "Clear Weakness Effect",
+  "tooltip.farmersdelight.honey_lime_juice": "Clear Blindness and Poison Effect",
+  "tooltip.farmersdelight.lime_juice": "Clear Blindness Effect",
+  "tooltip.farmersdelight.papaya_juice": "Clear Hunger Effect"
 }

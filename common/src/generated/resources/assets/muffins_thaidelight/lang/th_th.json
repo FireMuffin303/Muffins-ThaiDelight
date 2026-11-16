@@ -131,11 +131,6 @@
   "effect.muffins_thaidelight.stinky": "เหม็น",
   "emi.category.muffins_thaidelight.cauldron_crafting": "หม้อปรุงยา",
   "emi.category.muffins_thaidelight.mortar": "ครก",
-  "farmersdelight.tooltip.butterfly_pea_tea": "ล้างวิ่งช้า",
-  "farmersdelight.tooltip.coconut_water": "ล้างโจมตีเบา",
-  "farmersdelight.tooltip.honey_lime_juice": "ล้างตาบอดและพิษ",
-  "farmersdelight.tooltip.lime_juice": "ล้างตาบอด",
-  "farmersdelight.tooltip.papaya_juice": "ล้างหิวเร็ว",
   "item.minecraft.lingering_potion.effect.long_stench": "น้ำยาเหม็นแบบระเหย",
   "item.minecraft.lingering_potion.effect.stench": "น้ำยาเหม็นแบบระเหย",
   "item.minecraft.lingering_potion.effect.strong_stench": "น้ำยาเหม็นแบบระเหย",
@@ -255,9 +250,9 @@
   "text.autoconfig.muffins_thaidelight.option.villagerShouldTradeTDItem": "อนุญาตให้ชาวบ้านขายของ Thai's Delight",
   "text.autoconfig.muffins_thaidelight.option.wanderingTraderShouldTradeTDItem": "อนุญาตให้พ่อค้าเร่ร่อนขายของ Thai's Delight",
   "text.autoconfig.muffins_thaidelight.title": "ตั้งค่า Muffin's Thai's Delight",
-  "commands.muffins_thaidelight.durian_heat.set_timer": "ให้ความร้อนทุเรียนแก่ %s แล้ว %s วินาที",
-  "commands.muffins_thaidelight.durian_heat.clear": "ลบความร้อนจากทุเรียนจากเป้าหมาย %s รายการแล้ว",
-  "commands.muffins_thaidelight.durian_heat.set_heat": "ให้ความร้อนต่อความร้อนทุเรียนแก่ %s แล้ว",
-  "commands.muffins_thaidelight.spicy.set_timer": "ให้ความเผ็ดแก่ %s แล้ว %s วินาที",
-  "commands.muffins_thaidelight.spicy.clear": "ลบความเผ็ดจากเป้าหมาย %s รายการแล้ว"
+  "tooltip.farmersdelight.butterfly_pea_tea": "ล้างวิ่งช้า",
+  "tooltip.farmersdelight.coconut_water": "ล้างโจมตีเบา",
+  "tooltip.farmersdelight.honey_lime_juice": "ล้างตาบอดและพิษ",
+  "tooltip.farmersdelight.lime_juice": "ล้างตาบอด",
+  "tooltip.farmersdelight.papaya_juice": "ล้างหิวเร็ว"
 }

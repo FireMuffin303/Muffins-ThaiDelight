@@ -53,11 +53,11 @@ public class LangDataGen extends FabricLanguageProvider {
 
         translationBuilder.add("item.muffins_thaidelight.tasty","Tasty");
 
-        translationBuilder.add("farmersdelight.tooltip.papaya_juice","Clear Hunger Effect");
-        translationBuilder.add("farmersdelight.tooltip.lime_juice","Clear Blindness Effect");
-        translationBuilder.add("farmersdelight.tooltip.honey_lime_juice","Clear Blindness and Poison Effect");
-        translationBuilder.add("farmersdelight.tooltip.coconut_water","Clear Weakness Effect");
-        translationBuilder.add("farmersdelight.tooltip.butterfly_pea_tea","Clear Slowness");
+        translationBuilder.add("tooltip.farmersdelight.papaya_juice","Clear Hunger Effect");
+        translationBuilder.add("tooltip.farmersdelight.lime_juice","Clear Blindness Effect");
+        translationBuilder.add("tooltip.farmersdelight.honey_lime_juice","Clear Blindness and Poison Effect");
+        translationBuilder.add("tooltip.farmersdelight.coconut_water","Clear Weakness Effect");
+        translationBuilder.add("tooltip.farmersdelight.butterfly_pea_tea","Clear Slowness");
         translationBuilder.add("jei.info.papaya_log","Right click with bone meal to grow papayas.");
 
 
@@ -356,11 +356,11 @@ public class LangDataGen extends FabricLanguageProvider {
             translationBuilder.add("advancement.muffins_thaidelight.gravity_not_invent","แรงโน้มถ่วงไม่ถูกคิดค้น");
             translationBuilder.add("advancement.muffins_thaidelight.gravity_not_invent.description","โดนลูกทุเรียนหล่นใส่หัว อันนี้ไม่น่าใช่ต้นแอปเปิ้ลนะ");
 
-            translationBuilder.add("farmersdelight.tooltip.papaya_juice","ล้างหิวเร็ว");
-            translationBuilder.add("farmersdelight.tooltip.lime_juice","ล้างตาบอด");
-            translationBuilder.add("farmersdelight.tooltip.honey_lime_juice","ล้างตาบอดและพิษ");
-            translationBuilder.add("farmersdelight.tooltip.coconut_water","ล้างโจมตีเบา");
-            translationBuilder.add("farmersdelight.tooltip.butterfly_pea_tea","ล้างวิ่งช้า");
+            translationBuilder.add("tooltip.farmersdelight.papaya_juice","ล้างหิวเร็ว");
+            translationBuilder.add("tooltip.farmersdelight.lime_juice","ล้างตาบอด");
+            translationBuilder.add("tooltip.farmersdelight.honey_lime_juice","ล้างตาบอดและพิษ");
+            translationBuilder.add("tooltip.farmersdelight.coconut_water","ล้างโจมตีเบา");
+            translationBuilder.add("tooltip.farmersdelight.butterfly_pea_tea","ล้างวิ่งช้า");
             translationBuilder.add("jei.info.papaya_log","คลิ๊กขวาด้วยผงกระดูกเพื่อโตผลมะละกอ");
 
             translationBuilder.add("item.muffins_thaidelight.tasty","อยากอาหาร");
