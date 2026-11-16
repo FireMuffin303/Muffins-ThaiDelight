@@ -1,4 +1,4 @@
-// 1.21.1	2026-11-16T22:07:33.1703882	Muffin's Thai's Delight Refabricated/Block Loot Tables
+// 1.21.1	2026-11-16T22:33:20.6515697	Muffin's Thai's Delight Refabricated/Block Loot Tables
 4870178538431a780f2c3225651da23b4e5d7e75 data\muffins_thaidelight\loot_table\blocks\raw_papaya_crate.json
 ffd95b859ed3161240448883525a25f9b03b041f data\muffins_thaidelight\loot_table\blocks\coconut_wood.json
 4f7856ad91172dd7d71dc74e6266afaa83522177 data\muffins_thaidelight\loot_table\blocks\coconut_trapdoor.json
@@ -105,5 +105,5 @@ c9461806abc8103f60baaeba312cf9e598b6364f data\muffins_thaidelight\loot_table\blo
 2a6f35912aa2b1ab12ecd0a630c186d864b1abae data\muffins_thaidelight\loot_table\blocks\butterfly_pea_crate.json
 2231617b6c74f9c47307afc27e56413d401aed65 data\muffins_thaidelight\loot_table\blocks\durian_fence.json
 539405b99bd4a76679896e76d13642de5f56d25f data\muffins_thaidelight\loot_table\blocks\stackable_raw_papaya.json
-c10d36307980445c81d8965769adf79934c03fb9 data\muffins_thaidelight\loot_table\blocks\butterfly_pea_wall.json
+baf8f44d6a0bc712ca50198ee3ee4248267cb5bc data\muffins_thaidelight\loot_table\blocks\butterfly_pea_wall.json
 1753462938ca0d71ae1862724b34f8132c487685 data\muffins_thaidelight\loot_table\blocks\durian_button.json
