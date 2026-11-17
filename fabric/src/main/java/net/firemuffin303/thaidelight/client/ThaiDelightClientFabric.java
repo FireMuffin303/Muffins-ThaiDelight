@@ -7,6 +7,8 @@ import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.model.loading.v1.ModelLoadingPlugin;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.*;
+import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.firemuffin303.muffinsmcapi.impl.recipebooks.OvenRecipeBookRegistry;
 import net.firemuffin303.thaidelight.ThaiDelightCommon;
 import net.firemuffin303.thaidelight.ThaiDelightRecipeRegistry;
@@ -139,7 +141,8 @@ public class ThaiDelightClientFabric implements ClientModInitializer {
             }
         });
 
-        ClientPlayNetworking.registerGlobalReceiver(ModLevelEventPacket.TYPE,(payload, context) -> payload.receive());
+        PayloadTypeRegistry.playS2C().register(ModLevelEventPacket.TYPE,ModLevelEventPacket.STREAM_CODEC);
+        ClientPlayNetworking.registerGlobalReceiver(ModLevelEventPacket.TYPE,(payload, context) -> payload.receive(context.player().clientLevel));
 
         OvenRecipeBookRegistry.INSTANCE.registerRecipeBook(RecipeBookType.MUFFINS_THAIDELIGHT_MORTAR_RECIPE_BOOK_TYPE,
                 () -> List.of(RecipeBookCategories.MUFFINS_THAIDELIGHT_MORTAR_SEARCH,

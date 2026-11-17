@@ -67,8 +67,6 @@ import java.util.List;
 
 @Mod(value = ThaiDelightCommon.MOD_ID,dist = Dist.CLIENT)
 public class ThaiDelightForgeClient {
-
-
     public ThaiDelightForgeClient(IEventBus iEventBus, ModContainer modContainer){
         iEventBus.addListener(this::clientSetup);
         iEventBus.addListener(this::registerMenuScreen);
@@ -80,7 +78,6 @@ public class ThaiDelightForgeClient {
         iEventBus.addListener(this::registerTooltipComponent);
         iEventBus.addListener(this::registerModel);
         iEventBus.addListener(this::registerAddLayer);
-        iEventBus.addListener(this::registerPacket);
         iEventBus.addListener(this::registerClientExtensions);
 
         modContainer.registerExtensionPoint(IConfigScreenFactory.class,(modContainer1, arg) -> AutoConfig.getConfigScreen(ModConfig.class,arg).get());
@@ -184,13 +181,6 @@ public class ThaiDelightForgeClient {
                 playerRenderer.addLayer(new DurianHeatRendererLayer<>(playerRenderer));
             }
         });
-    }
-
-    private void registerPacket(RegisterPayloadHandlersEvent event){
-        final PayloadRegistrar registrar = event.registrar("1");
-        registrar.playToClient(DurianHeatPacket.TYPE,DurianHeatPacket.STREAM_CODEC,new MainThreadPayloadHandler<>((arg, iPayloadContext) -> DurianHeatPacket.handle(arg)));
-        registrar.playToClient(SpicyPacket.TYPE,SpicyPacket.STREAM_CODEC,new MainThreadPayloadHandler<>((arg, iPayloadContext) -> SpicyPacket.handle(arg)));
-        registrar.playToClient(ModLevelEventPacket.TYPE,ModLevelEventPacket.STREAM_CODEC,new MainThreadPayloadHandler<>((arg, iPayloadContext) -> iPayloadContext.enqueueWork(arg::receive)));
     }
 
     private void registerClientExtensions(RegisterClientExtensionsEvent event){

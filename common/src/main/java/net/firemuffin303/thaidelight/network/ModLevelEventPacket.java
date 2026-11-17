@@ -27,10 +27,8 @@ public record ModLevelEventPacket(byte id, BlockPos blockPos) implements CustomP
         }
     };
 
-    public void receive() {
+    public void receive(Level level) {
         if (this.id == 1) {
-            Level level = Minecraft.getInstance().level;
-            if (level == null) return;
             level.playLocalSound(this.blockPos, ModSoundEvents.SACK_CATCHING_DURIAN.get(), SoundSource.BLOCKS, 0.6f, level.random.nextFloat() * 0.1f + 0.9f, false);
             level.playSound(null, this.blockPos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS);
         }

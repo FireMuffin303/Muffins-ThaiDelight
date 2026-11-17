@@ -25,6 +25,9 @@
     "main": [
       "net.firemuffin303.thaidelight.ThaiDelightFabric"
     ],
+    "server": [
+      "net.firemuffin303.thaidelight.ThaiDelightDedicatedServerFabric"
+    ],
     "cardinal-components-entity": [
       "net.firemuffin303.thaidelight.common.registry.ModCardinalComponents"
     ],

@@ -18,6 +18,7 @@ import net.firemuffin303.thaidelight.neoforge.common.attachment.SpicyAttachment;
 import net.firemuffin303.thaidelight.neoforge.network.DurianHeatPacket;
 import net.firemuffin303.thaidelight.neoforge.network.SpicyPacket;
 import net.firemuffin303.thaidelight.mixin.accessor.MobAccessor;
+import net.firemuffin303.thaidelight.network.ModLevelEventPacket;
 import net.firemuffin303.thaidelight.util.ModUtils;
 import net.firemuffin303.thaidelight.util.PlatformUtil;
 import net.minecraft.commands.CommandBuildContext;
@@ -78,6 +79,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.neoforged.neoforge.network.handling.IPayloadHandler;
+import net.neoforged.neoforge.network.handling.MainThreadPayloadHandler;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.RegisterEvent;
@@ -119,6 +121,7 @@ public class ThaiDelightForge {
         eventBus.addListener(this::commonSetup);
         eventBus.addListener(this::registerEntityAttribute);
         eventBus.addListener(this::addBlockEntityType);
+        eventBus.addListener(this::registerPacket);
         NeoForge.EVENT_BUS.addListener(this::registerHoeTill);
     }
 
@@ -130,6 +133,13 @@ public class ThaiDelightForge {
         event.getBuilder().addMix(Potions.AWKWARD, ModItems.FERMENTED_FISH.get(), ModMobEffects.STENCH_POTION);
         event.getBuilder().addMix(ModMobEffects.STENCH_POTION, Items.REDSTONE,ModMobEffects.LONG_STENCH_POTION);
         event.getBuilder().addMix(ModMobEffects.STENCH_POTION, Items.GLOWSTONE_DUST,ModMobEffects.STRONG_STENCH_POTION);
+    }
+
+    private void registerPacket(RegisterPayloadHandlersEvent event){
+        final PayloadRegistrar registrar = event.registrar("1");
+        registrar.playToClient(DurianHeatPacket.TYPE,DurianHeatPacket.STREAM_CODEC,new MainThreadPayloadHandler<>((arg, iPayloadContext) -> DurianHeatPacket.handle(arg)));
+        registrar.playToClient(SpicyPacket.TYPE,SpicyPacket.STREAM_CODEC,new MainThreadPayloadHandler<>((arg, iPayloadContext) -> SpicyPacket.handle(arg)));
+        registrar.playToClient(ModLevelEventPacket.TYPE,ModLevelEventPacket.STREAM_CODEC,new MainThreadPayloadHandler<>((arg, iPayloadContext) -> iPayloadContext.enqueueWork(() -> arg.receive(iPayloadContext.player().level()))));
     }
 
 
