@@ -6,6 +6,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.network.NetworkEvent;
@@ -27,16 +28,10 @@ public class SpicyPacket  {
         friendlyByteBuf.writeInt(this.timer);
     }
 
-    public void handle(Supplier<NetworkEvent.Context> supplier){
+    public static void handle(SpicyPacket spicyPacket,Supplier<NetworkEvent.Context> supplier){
         NetworkEvent.Context context = supplier.get();
         context.enqueueWork(() -> {
-            DistExecutor.unsafeCallWhenOn(Dist.CLIENT,() -> () -> {
-                LocalPlayer localPlayer = Minecraft.getInstance().player;
-                localPlayer.getCapability(SpicyProvider.SPICY_CAPABILITY).ifPresent(spicy -> {
-                    spicy.setTimer(this.timer,localPlayer);
-                });
-                return null;
-            });
+            DistExecutor.unsafeRunWhenOn(Dist.CLIENT,() -> () -> ClientPacketHandler.handleSpicy(spicyPacket.timer));
         });
         context.setPacketHandled(true);
     }

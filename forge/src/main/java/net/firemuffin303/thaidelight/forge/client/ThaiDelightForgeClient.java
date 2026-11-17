@@ -19,6 +19,7 @@ import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.firemuffin303.thaidelight.common.registry.ModMenuType;
 import net.firemuffin303.thaidelight.common.registry.ModRecipes;
 import net.firemuffin303.thaidelight.config.ModConfig;
+import net.firemuffin303.thaidelight.forge.ThaiDelightForge;
 import net.firemuffin303.thaidelight.util.ModUtils;
 import net.minecraft.client.RecipeBookCategories;
 import net.minecraft.client.gui.screens.MenuScreens;
@@ -127,14 +128,12 @@ public class ThaiDelightForgeClient {
 
     @SubscribeEvent
     public static void registerRecipeBook(RegisterRecipeBookCategoriesEvent event){
-
-        final RecipeBookType MORTAR_BOOK_TYPE = RecipeBookType.create("MORTAR_RECIPE_BOOK_TYPE");
         final RecipeBookCategories MORTAR_SEARCH = RecipeBookCategories.create("MORTAR_SEARCH",new ItemStack(Items.COMPASS));
         final RecipeBookCategories MORTAR_MEALS = RecipeBookCategories.create("MORTAR_MEALS",new ItemStack(ModItems.SOMTAM_FEAST.get()));
         final RecipeBookCategories MORTAR_MISC = RecipeBookCategories.create("MORTAR_MISC",new ItemStack(ModItems.PEPPER.get()),new ItemStack(Items.BONE_MEAL));
 
 
-        event.registerBookCategories(MORTAR_BOOK_TYPE, List.of(MORTAR_SEARCH,MORTAR_MEALS,MORTAR_MISC));
+        event.registerBookCategories(ThaiDelightForge.MORTAR_BOOK_TYPE, List.of(MORTAR_SEARCH,MORTAR_MEALS,MORTAR_MISC));
         event.registerAggregateCategory(MORTAR_SEARCH,List.of(MORTAR_MEALS,MORTAR_MISC));
         event.registerRecipeCategoryFinder(ModRecipes.MORTAR.get(),recipe -> {
             if(recipe instanceof MortarRecipe mortarRecipe){

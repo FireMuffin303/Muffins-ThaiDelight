@@ -1,5 +1,6 @@
 package net.firemuffin303.thaidelight.forge.network;
 
+import com.mojang.logging.LogUtils;
 import net.firemuffin303.thaidelight.common.registry.ModSoundEvents;
 import net.firemuffin303.thaidelight.forge.common.capabilities.SpicyProvider;
 import net.minecraft.client.Minecraft;
@@ -34,20 +35,10 @@ public class ModLevelPacket {
         friendlyByteBuf.writeBlockPos(this.blockPos);
     }
 
-    public void handle(Supplier<NetworkEvent.Context> supplier){
+    public static void handle(ModLevelPacket modLevelPacket,Supplier<NetworkEvent.Context> supplier){
         NetworkEvent.Context context = supplier.get();
         context.enqueueWork(() -> {
-            DistExecutor.unsafeCallWhenOn(Dist.CLIENT,() -> () -> {
-                if(this.id == 1){
-                    Level level = Minecraft.getInstance().level;
-                    if (level == null) return null;
-                    level.playLocalSound(this.blockPos, ModSoundEvents.SACK_CATCHING_DURIAN.get(), SoundSource.BLOCKS, 1.0f, level.random.nextFloat() * 0.1f + 0.9f, false);
-                    level.playSound(null, this.blockPos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS);
-                }
-
-
-                return null;
-            });
+            DistExecutor.unsafeRunWhenOn(Dist.CLIENT,() -> () -> ClientPacketHandler.handlerLevelEvent(modLevelPacket.id,modLevelPacket.blockPos));
         });
         context.setPacketHandled(true);
     }

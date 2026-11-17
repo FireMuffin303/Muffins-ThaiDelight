@@ -179,9 +179,7 @@ public class ThaiDelightClientFabric implements ClientModInitializer {
             return mortarMisc;
         });
 
-        Map<RecipeBookType, Pair<String, String>> newMap = new HashMap<>(RecipeBookSettingsAccessor.getTagField());
-        newMap.put(recipeBookType, Pair.of("isMortarBookGuiOpen", "isMortarBookFilteringCraftable"));
-        RecipeBookSettingsAccessor.setTagFields(newMap);
+
 
     }
 }

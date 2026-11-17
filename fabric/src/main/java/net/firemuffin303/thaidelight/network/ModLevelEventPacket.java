@@ -33,8 +33,7 @@ public record ModLevelEventPacket(byte id, BlockPos blockPos) implements FabricP
 
     public static void receive(ModLevelEventPacket packet, LocalPlayer player, PacketSender responseSender) {
         if (packet.id == 1) {
-            Level level = Minecraft.getInstance().level;
-            if (level == null) return;
+            Level level = player.level();
             level.playLocalSound(packet.blockPos, ModSoundEvents.SACK_CATCHING_DURIAN.get(), SoundSource.BLOCKS, 1.0f, level.random.nextFloat() * 0.1f + 0.9f, false);
             level.playSound(null, packet.blockPos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS);
         }

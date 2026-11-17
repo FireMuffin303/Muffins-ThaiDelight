@@ -3,6 +3,7 @@ package net.firemuffin303.thaidelight.forge;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.BoolArgumentType;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
+import com.mojang.datafixers.util.Pair;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.firemuffin303.thaidelight.ThaiDelightCommon;
@@ -21,6 +22,7 @@ import net.firemuffin303.thaidelight.forge.network.ThaiDelightPacketHandler;
 import net.firemuffin303.thaidelight.mixin.accessor.MobAccessor;
 import net.firemuffin303.thaidelight.util.ModUtils;
 import net.firemuffin303.thaidelight.util.PlatformUtil;
+import net.minecraft.client.RecipeBookCategories;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -39,15 +41,22 @@ import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.RecipeBookType;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraftforge.common.BasicItemListing;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.brewing.BrewingRecipe;
+import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.brewing.PotionBrewEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
@@ -69,6 +78,8 @@ import java.util.stream.Collectors;
 @Mod.EventBusSubscriber(modid = ThaiDelightCommon.MOD_ID,bus = Mod.EventBusSubscriber.Bus.MOD)
 @Mod(ThaiDelightCommon.MOD_ID)
 public class ThaiDelightForge {
+    public static final RecipeBookType MORTAR_BOOK_TYPE = RecipeBookType.create("MORTAR_RECIPE_BOOK_TYPE");
+
     private static final DeferredRegister<?>[] REGISTERS = {
             ModBoatVariantsImpl.BOAT_VARIANT,
             ModEntityTypesImpl.ENTITY_TYPES,
@@ -114,7 +125,6 @@ public class ThaiDelightForge {
             PotionBrewingAccessor.addMix(ModMobEffects.STENCH_POTION.get(), Items.GLOWSTONE_DUST,ModMobEffects.STRONG_STENCH_POTION.get());
         });
     }
-
 
 
     @SubscribeEvent
@@ -200,6 +210,7 @@ public class ThaiDelightForge {
     }
 
     public void onPlayerJoin(PlayerEvent.PlayerLoggedInEvent event){
+
         if(event.getEntity() instanceof  ServerPlayer serverPlayer){
             serverPlayer.getCapability(DurianHeatProvider.DURIAN_CAPABILITY).ifPresent(durian -> {
                 ThaiDelightPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> serverPlayer),new DurianHeatPacket(durian.getTimer(),durian.isHeatUp()) );

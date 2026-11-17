@@ -5,6 +5,7 @@ import net.firemuffin303.thaidelight.forge.common.capabilities.SpicyProvider;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.network.NetworkEvent;
@@ -30,17 +31,10 @@ public class DurianHeatPacket {
         friendlyByteBuf.writeBoolean(this.isHeatUp);
     }
 
-    public void handle(Supplier<NetworkEvent.Context> supplier){
+    public static void handle(DurianHeatPacket durianHeatPacket,Supplier<NetworkEvent.Context> supplier){
         NetworkEvent.Context context = supplier.get();
         context.enqueueWork(() -> {
-            DistExecutor.unsafeCallWhenOn(Dist.CLIENT,() -> () -> {
-                LocalPlayer localPlayer = Minecraft.getInstance().player;
-                localPlayer.getCapability(DurianHeatProvider.DURIAN_CAPABILITY).ifPresent(spicy -> {
-                    spicy.setTimer(this.timer);
-                    spicy.setHeat(this.isHeatUp);
-                });
-                return null;
-            });
+            DistExecutor.unsafeRunWhenOn(Dist.CLIENT,() -> () -> ClientPacketHandler.handleDurianHeat(durianHeatPacket.timer,durianHeatPacket.isHeatUp));
         });
         context.setPacketHandled(true);
     }

@@ -19,10 +19,12 @@ import net.firemuffin303.thaidelight.common.registry.ModBlockEntityTypes;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
+import net.minecraft.core.Direction;
 import net.minecraft.data.loot.packs.VanillaBlockLoot;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.MultifaceBlock;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
@@ -315,7 +317,9 @@ public class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
                         )
         ));
 
-        this.createSimpleLoot(ModBlocks.BUTTERFLY_PEA_WALL.get());
+        this.add(ModBlocks.BUTTERFLY_PEA_WALL.get(),block -> LootTable.lootTable().withPool(LootPool.lootPool().add(this.applyExplosionDecay(block, (LootItem.lootTableItem(block)).apply(Direction.values(), (direction) -> {
+            return SetItemCountFunction.setCount(ConstantValue.exactly(1.0F), true).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(net.minecraft.advancements.critereon.StatePropertiesPredicate.Builder.properties().hasProperty(MultifaceBlock.getFaceProperty(direction), true)));
+        })).apply(SetItemCountFunction.setCount(ConstantValue.exactly(-1.0F), true)))));
         this.add(ModBlocks.BUDDING_BUTTERFLY_PEA_BLOCK.get(),block -> this.createSingleItemTable(ModItems.BUTTERFLY_PEA_SEEDS.get()));
 
         this.add(ModBlocks.BUTTERFLY_PEA_BLOCK.get(),block -> {

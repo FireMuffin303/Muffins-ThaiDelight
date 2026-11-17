@@ -3,6 +3,7 @@ package net.firemuffin303.thaidelight;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.BoolArgumentType;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
+import com.mojang.datafixers.util.Pair;
 import com.mojang.logging.LogUtils;
 import eu.midnightdust.lib.config.MidnightConfig;
 import me.shedaniel.autoconfig.AutoConfig;
@@ -16,6 +17,7 @@ import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.LandPathNodeTypesRegistry;
 import net.fabricmc.fabric.api.registry.TillableBlockRegistry;
 import net.fabricmc.loader.api.FabricLoader;
+import net.firemuffin303.thaidelight.asm.ModASMEarlyRiser;
 import net.firemuffin303.thaidelight.common.TDFabricEvents;
 import net.firemuffin303.thaidelight.common.cardinalcomponents.DurianHeatComponent;
 import net.firemuffin303.thaidelight.common.cardinalcomponents.SpicyComponent;
@@ -25,6 +27,7 @@ import net.firemuffin303.thaidelight.common.registry.*;
 import net.firemuffin303.thaidelight.config.ModConfig;
 import net.firemuffin303.thaidelight.integration.midnightLib.ThaiDelightConfig;
 import net.firemuffin303.thaidelight.integration.toughasnail.ToughAsNailIntegration;
+import net.firemuffin303.thaidelight.mixin.fabric.recipeBookType.RecipeBookSettingsAccessor;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -34,6 +37,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.SpawnPlacements;
+import net.minecraft.world.inventory.RecipeBookType;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.PotionBrewing;
 import net.minecraft.world.item.alchemy.Potions;
@@ -44,6 +48,9 @@ import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class ThaiDelightFabric implements ModInitializer {
     public static final Logger LOGGER = LogUtils.getLogger();
@@ -88,6 +95,10 @@ public class ThaiDelightFabric implements ModInitializer {
         CommandRegistrationCallback.EVENT.register(ThaiDelightFabric::modCommand);
         ThaiDelightCommon.BURN_MAP.forEach((block, burnEntry) -> FlammableBlockRegistry.getDefaultInstance().add(block,burnEntry.burn(), burnEntry.spread()));
         LandPathNodeTypesRegistry.register(ModBlocks.LIME_PLANT.get(),BlockPathTypes.DAMAGE_OTHER,BlockPathTypes.DANGER_OTHER);
+
+        Map<RecipeBookType, Pair<String, String>> newMap = new HashMap<>(RecipeBookSettingsAccessor.getTagField());
+        newMap.put(ModASMEarlyRiser.getMortarBookType(), Pair.of("isMortarBookGuiOpen", "isMortarBookFilteringCraftable"));
+        RecipeBookSettingsAccessor.setTagFields(newMap);
     }
 
     public static void modCommand(CommandDispatcher<CommandSourceStack> commandDispatcher, CommandBuildContext commandBuildContext, Commands.CommandSelection commandSelection){
