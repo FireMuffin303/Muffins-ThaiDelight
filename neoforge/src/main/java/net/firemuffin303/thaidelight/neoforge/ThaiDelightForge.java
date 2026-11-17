@@ -3,6 +3,7 @@ package net.firemuffin303.thaidelight.neoforge;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.BoolArgumentType;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
+import com.mojang.datafixers.util.Pair;
 import com.mojang.logging.LogUtils;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
@@ -12,6 +13,7 @@ import net.firemuffin303.thaidelight.common.entity.ai.NearestMobStinkyTargetGoal
 import net.firemuffin303.thaidelight.common.registry.*;
 import net.firemuffin303.thaidelight.common.registry.forge.*;
 import net.firemuffin303.thaidelight.config.ModConfig;
+import net.firemuffin303.thaidelight.mixin.recipebook.RecipeBookSettingsAccessor;
 import net.firemuffin303.thaidelight.neoforge.common.attachment.DurianHeatAttachment;
 import net.firemuffin303.thaidelight.neoforge.common.attachment.ModAttachments;
 import net.firemuffin303.thaidelight.neoforge.common.attachment.SpicyAttachment;
@@ -44,6 +46,7 @@ import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.RecipeBookType;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potions;
@@ -127,6 +130,8 @@ public class ThaiDelightForge {
 
     public void commonSetup(FMLCommonSetupEvent event){
         event.enqueueWork(ThaiDelightCommon::postInit);
+
+
     }
 
     public void registerBrewingRecipeEvent(RegisterBrewingRecipesEvent event){
@@ -348,9 +353,6 @@ public class ThaiDelightForge {
                                                 })
                                         )
                                 )
-
-
-
                                 .then(Commands.literal("clear")
                                         .executes(commandContext -> {
                                             ServerPlayer serverPlayer = EntityArgument.getPlayer(commandContext,"player");

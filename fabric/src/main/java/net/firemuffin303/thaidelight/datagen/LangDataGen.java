@@ -312,6 +312,12 @@ public class LangDataGen extends FabricLanguageProvider {
 
         translationBuilder.add("death.attack.durian","%1$s was bonked by a falling durian.");
         translationBuilder.add("death.attack.durian.player","%1$s was bonked by a falling durian whilst fighting %2$s.");
+
+        translationBuilder.add("commands.muffins_thaidelight.durian_heat.set_timer","Applied Durian Heat to %s for %s seconds.");
+        translationBuilder.add("commands.muffins_thaidelight.durian_heat.clear","Removed Durian Heat from %s.");
+        translationBuilder.add("commands.muffins_thaidelight.durian_heat.set_heat","Applied heat to Durian Heat for %s.");
+        translationBuilder.add("commands.muffins_thaidelight.spicy.set_timer","Applied Spicy to %s for %s seconds.");
+        translationBuilder.add("commands.muffins_thaidelight.spicy.clear","Removed Spicy from %s");
     }
 
     public static class ThaiLangData extends FabricLanguageProvider{
@@ -616,6 +622,13 @@ public class LangDataGen extends FabricLanguageProvider {
 
             translationBuilder.add("death.attack.durian","%1$s ถูกลูกทุเรียนหล่นใส่หัว.");
             translationBuilder.add("death.attack.durian.player","%1$s ถูกลูกทุเรียนหล่นใส่หัวขณะสู้กับ %2$s.");
+
+            translationBuilder.add("commands.muffins_thaidelight.durian_heat.set_timer","ให้ความร้อนทุเรียนแก่ %s แล้ว %s วินาที");
+            translationBuilder.add("commands.muffins_thaidelight.durian_heat.clear","ลบความร้อนจากทุเรียนจากเป้าหมาย %s รายการแล้ว");
+            translationBuilder.add("commands.muffins_thaidelight.durian_heat.set_heat","ให้ความร้อนต่อความร้อนทุเรียนแก่ %s แล้ว");
+            translationBuilder.add("commands.muffins_thaidelight.spicy.set_timer","ให้ความเผ็ดแก่ %s แล้ว %s วินาที");
+            translationBuilder.add("commands.muffins_thaidelight.spicy.clear","ลบความเผ็ดจากเป้าหมาย %s รายการแล้ว");
+
         }
     }
 }

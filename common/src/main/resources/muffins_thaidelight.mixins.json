@@ -28,6 +28,7 @@
     "foodEffect.LivingEntityMixin",
     "foodEffect.heatedup.PowderSnowBlockMixin",
     "level.treegrower.TreeGrowerMixin",
+    "recipebook.RecipeBookSettingsAccessor",
     "stinky.LivingEntityMixin",
     "stinky.SniffingMixin",
     "stinky.VillagerMixin"
