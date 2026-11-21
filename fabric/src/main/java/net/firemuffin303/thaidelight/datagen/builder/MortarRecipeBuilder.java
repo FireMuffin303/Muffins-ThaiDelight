@@ -27,7 +27,7 @@ import java.util.function.Consumer;
 
 public class MortarRecipeBuilder implements RecipeBuilder {
     private final List<Ingredient> ingredients = Lists.newArrayList();
-    private Item container = Items.AIR;
+    private Ingredient container = Ingredient.EMPTY;
     private final Item result;
     private final int count;
     private String modid = ThaiDelightCommon.MOD_ID;
@@ -102,7 +102,12 @@ public class MortarRecipeBuilder implements RecipeBuilder {
     }
 
     public MortarRecipeBuilder container(ItemLike itemLike){
-        this.container = itemLike.asItem();
+        this.container = Ingredient.of(itemLike);
+        return this;
+    }
+
+    public MortarRecipeBuilder container(TagKey<Item> itemLike){
+        this.container = Ingredient.of(itemLike);
         return this;
     }
 
@@ -135,7 +140,7 @@ public class MortarRecipeBuilder implements RecipeBuilder {
         private final ResourceLocation id;
         private final String group;
         private final List<Ingredient> ingredients;
-        private final Item container;
+        private final Ingredient container;
         private final Item result;
         private final int count;
         private final MortarRecipeBookTab mortarRecipeBookTab;
@@ -143,7 +148,7 @@ public class MortarRecipeBuilder implements RecipeBuilder {
         private final ResourceLocation advancementId;
 
 
-        public Result(ResourceLocation resourceLocation, String group, List<Ingredient> ingredients,Item container, Item itemStack, int count,MortarRecipeBookTab mortarRecipeBookTab, Advancement.Builder builder,ResourceLocation advancementId){
+        public Result(ResourceLocation resourceLocation, String group, List<Ingredient> ingredients,Ingredient container, Item itemStack, int count,MortarRecipeBookTab mortarRecipeBookTab, Advancement.Builder builder,ResourceLocation advancementId){
             this.id = resourceLocation;
             this.group = group;
             this.ingredients = ingredients;
@@ -169,10 +174,8 @@ public class MortarRecipeBuilder implements RecipeBuilder {
 
             jsonObject.add("ingredients", jsonArray);
 
-            if(this.container != Items.AIR){
-                JsonObject container = new JsonObject();
-                container.addProperty("item",BuiltInRegistries.ITEM.getKey(this.container).toString());
-                jsonObject.add("container", container);
+            if(!this.container.isEmpty()){
+                jsonObject.add("container", this.container.toJson());
             }
 
 

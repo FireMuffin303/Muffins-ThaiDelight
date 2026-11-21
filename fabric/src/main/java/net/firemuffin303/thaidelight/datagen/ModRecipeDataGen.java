@@ -644,12 +644,12 @@ public class ModRecipeDataGen extends FabricRecipeProvider {
                 .group("lime_dye")
                 .save(exporter,ThaiDelightCommon.modid("mortar/"+getItemName(Items.LIME_DYE)+"_from_lime_slice"));
 
-        MortarRecipeBuilder.mortar(ModItems.STEAMED_BAMBOO_SHOOT.get(),1)
+        MortarRecipeBuilder.mortar(ModItems.STEAMED_BAMBOO_SHOOT.get(),3)
                 .requires(ModItems.BAMBOO_SHOOT.get())
                 .requires(ModTags.PEPPER)
                 .requires(ModItems.FERMENTED_FISH.get())
                 .requires(ModTags.COMMON_COOKED_MEATS)
-                .container(Items.BOWL)
+                .container(ItemTags.LEAVES)
                 .unlockedBy(getHasName(ModItems.BAMBOO_SHOOT.get()),has(ModItems.BAMBOO_SHOOT.get()))
                 .save(exporter,ThaiDelightCommon.modid("mortar/steamed_bamboo_shoot"));
     }

@@ -65,7 +65,8 @@ public class ModBlockTagDataGen extends FabricTagProvider.BlockTagProvider {
                 ModBlocks.DURIAN_BLOCK.get(),
                 ModBlocks.DURIAN_PEEL_BLOCK.get(),
                 ModBlocks.COCONUT.get(),
-                ModBlocks.STRIPPED_COCONUT.get()
+                ModBlocks.STRIPPED_COCONUT.get(),
+                ModBlocks.HANGING_DURIAN.get()
         );
 
         getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_PICKAXE)

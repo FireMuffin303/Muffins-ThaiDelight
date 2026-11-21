@@ -146,7 +146,14 @@ public class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
                                         .hasProperty(HangingDurianBlock.AGE,1)
                                 )
                         )
-                        .add(LootItem.lootTableItem(ModItems.DURIAN.get()))
+                        .add(LootItem.lootTableItem(ModItems.DURIAN.get())
+                                .when(VanillaBlockLoot.HAS_SILK_TOUCH)
+                                .otherwise(this.applyExplosionDecay(block,LootItem.lootTableItem(ModItems.DURIAN_PULP.get())
+                                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(2,3)))
+                                        .apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE))
+                                        .apply(LimitCount.limitCount(IntRange.upperBound(4)))
+                                ))
+                        )
                 )
 
         );

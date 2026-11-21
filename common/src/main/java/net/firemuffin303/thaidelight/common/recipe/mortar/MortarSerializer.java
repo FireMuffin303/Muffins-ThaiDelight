@@ -15,7 +15,7 @@ public class MortarSerializer implements RecipeSerializer<RegularMortarRecipe> {
     public RegularMortarRecipe fromJson(ResourceLocation resourceLocation, JsonObject jsonObject) {
         String groupIn = GsonHelper.getAsString(jsonObject, "group", "");
         NonNullList<Ingredient> inputItemsIn = readIngredients(GsonHelper.getAsJsonArray(jsonObject, "ingredients"));
-        ItemStack container = GsonHelper.isValidNode(jsonObject,"container") ? ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(jsonObject,"container")) : ItemStack.EMPTY;
+        Ingredient container = GsonHelper.isValidNode(jsonObject,"container") ? Ingredient.fromJson(GsonHelper.getAsJsonObject(jsonObject,"container")) : Ingredient.EMPTY;
 
         if (inputItemsIn.isEmpty()) {
             throw new JsonParseException("No ingredients for mortar recipe");
@@ -53,7 +53,7 @@ public class MortarSerializer implements RecipeSerializer<RegularMortarRecipe> {
             ingredients.set(j,Ingredient.fromNetwork(friendlyByteBuf));
         }
 
-        ItemStack container = friendlyByteBuf.readItem();
+        Ingredient container = Ingredient.fromNetwork(friendlyByteBuf);
         ItemStack resultItem = friendlyByteBuf.readItem();
         MortarRecipeBookTab mortarRecipeBookTab = MortarRecipeBookTab.findByName(friendlyByteBuf.readUtf());
 
@@ -70,7 +70,7 @@ public class MortarSerializer implements RecipeSerializer<RegularMortarRecipe> {
             ingredient.toNetwork(friendlyByteBuf);
         }
 
-        friendlyByteBuf.writeItem(recipe.getContainer());
+        recipe.getContainer().toNetwork(friendlyByteBuf);
         friendlyByteBuf.writeItem(recipe.getResult());
         friendlyByteBuf.writeUtf(recipe.getRecipeBookTab().name);
 

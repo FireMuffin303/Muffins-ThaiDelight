@@ -1,4 +1,4 @@
-// 1.20.1	2026-11-17T21:31:54.7764493	Muffin's Thai's Delight/Tags for minecraft:block
+// 1.20.1	2026-11-21T16:14:58.5845183	Muffin's Thai's Delight/Tags for minecraft:block
 13738ca5325e1cee5e8dfe846f99054e5262abb3 data\minecraft\tags\blocks\leaves.json
 ea3aea25fe2e387145415905365d873d5c905843 data\muffins_thaidelight\tags\blocks\sack_heavy_catchable.json
 3efa499397141b24686e4248446b671c3c5b96cd data\minecraft\tags\blocks\wooden_slabs.json
@@ -21,13 +21,13 @@ e18ee9232ec6405eab98dfbbc48a018ca8af85f7 data\minecraft\tags\blocks\wooden_stair
 6e29dc0176bf3514228ed6472ddda0fc9b50ee82 data\farmersdelight\tags\blocks\wild_crops.json
 dbd743d02ce42fc855d1ba0eae6172852983951e data\minecraft\tags\blocks\wooden_pressure_plates.json
 d95a9d13a9e123c4b0b4df46b540d8ac6f534c0c data\minecraft\tags\blocks\wooden_buttons.json
-b86b5ed44294037342281f19ad8b9335f128e089 data\muffins_thaidelight\tags\blocks\mango_logs.json
 de3c4dbc11c6afe12b3f3ad2ec4b0e47ddda1d4d data\muffins_thaidelight\tags\blocks\durian_logs.json
+b86b5ed44294037342281f19ad8b9335f128e089 data\muffins_thaidelight\tags\blocks\mango_logs.json
 9fdf3d9bf0b10b6c894a6db33990eb51834eccd2 data\minecraft\tags\blocks\wall_signs.json
 69b31ac2446039f93de4118b0291107243d08e08 data\sereneseasons\tags\blocks\summer_crops.json
 c48962fe61470e7c26bc8fa54e2152c20defb62a data\minecraft\tags\blocks\mineable\pickaxe.json
 19d500096b5e2ec9a64e73826e61bd6b33acd603 data\minecraft\tags\blocks\candle_cakes.json
-2b737a7431e975bcc64f6d5a05ee1f7bdaf7c310 data\minecraft\tags\blocks\mineable\axe.json
+62e61f9300bffa9d7a3107fc9f6e74541d3958f8 data\minecraft\tags\blocks\mineable\axe.json
 6b690d05b8f68e5bb677593efe20e7edcabcae2c data\muffins_thaidelight\tags\blocks\flower_crab_spawnable_on.json
 ae7eb8a3671e3ffc481f0d370af2def02a40edfa data\minecraft\tags\blocks\fence_gates.json
 294c32ecba3ab0daef74a58a7d41fa0bbe4bf0e3 data\muffins_thaidelight\tags\blocks\sack_catchable.json

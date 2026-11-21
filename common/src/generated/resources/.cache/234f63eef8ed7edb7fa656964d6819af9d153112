@@ -1,4 +1,4 @@
-// 1.20.1	2026-11-17T21:31:54.7598951	Muffin's Thai's Delight/Tags for minecraft:item
+// 1.20.1	2026-11-21T16:14:58.5790875	Muffin's Thai's Delight/Tags for minecraft:item
 ea245bcc88673ba87ae5700240886a1010cda139 data\muffins_thaidelight\tags\items\dragonfly_food.json
 e47099cc79d74a686639d32e7b8a96140ade72aa data\minecraft\tags\items\saplings.json
 32b2e80c4f617f2c9d13775b6f03518a19e68ce6 data\crabbersdelight\tags\items\cooked_seafood.json
@@ -26,8 +26,9 @@ d22951dd62f6f7b8873b40679152ee8ec7ce66f4 data\minecraft\tags\items\wooden_trapdo
 8ca610e23e85f8f02d70b2480a0e4e9da6723e94 data\sereneseasons\tags\items\summer_crops.json
 9bab09d149225c8a2e6887a9a1bc333df850aaea data\c\tags\items\foods\banana.json
 da99dc8d812796943adb0b21e571878b1a541fd0 data\origins\tags\items\meat.json
-e8cd343c1eae9bbc4e7b6cfaa37c084399044234 data\minecraft\tags\items\hanging_signs.json
 da3fec6050cac02ed3f60b2153bc34782112f83b data\farmersdelight\tags\items\wild_crops.json
+e8cd343c1eae9bbc4e7b6cfaa37c084399044234 data\minecraft\tags\items\hanging_signs.json
+e02635b052355c6f0ebe66255a2d2dc96e5dee2f data\minecraft\tags\items\leaves.json
 55b420e80886bff5abc10011ddaaa4d128588605 data\c\tags\items\foods\fermented_drinks.json
 91ab8538297ce7467e1a2856c66099e73c66845e data\minecraft\tags\items\planks.json
 7028843ce20d59c4752dd0b702956cec16ee5e3a data\c\tags\items\foods\vegetables\chili_pepper.json

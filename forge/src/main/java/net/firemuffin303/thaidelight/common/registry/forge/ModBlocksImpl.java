@@ -1,6 +1,7 @@
 package net.firemuffin303.thaidelight.common.registry.forge;
 
 import net.firemuffin303.thaidelight.ThaiDelightCommon;
+import net.firemuffin303.thaidelight.forge.common.block.HoneyCoconutPieBlock;
 import net.firemuffin303.thaidelight.forge.common.block.feast.*;
 import net.firemuffin303.thaidelight.forge.common.block.vegetation.ForgeBuddingButterflyPeaBlock;
 import net.firemuffin303.thaidelight.forge.common.block.vegetation.pepper.ForgeBuddingPepperBlock;
@@ -92,6 +93,10 @@ public class ModBlocksImpl {
 
     public static Supplier<Block> createDurianSliceFeastBlock() {
         return DurianSliceFeastBlock::new;
+    }
+
+    public static Supplier<Block> createHoneyCoconutPieBlock(BlockBehaviour.Properties properties) {
+        return () -> new HoneyCoconutPieBlock(properties);
     }
 
 

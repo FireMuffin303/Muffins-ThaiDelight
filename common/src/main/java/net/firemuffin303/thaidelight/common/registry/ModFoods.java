@@ -130,7 +130,8 @@ public class ModFoods{
             .saturationMod(0.3F)
             .fast(),
             List.of(
-                    new FoodEffectSupplier(() ->new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 600, 0, false, false), 1.0F)
+                    new FoodEffectSupplier(() ->new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 600, 0, false, false), 1.0F),
+                    new FoodEffectSupplier(() ->new MobEffectInstance(MobEffects.DIG_SPEED, 300, 0, false, false), 1.0F)
             )).build();
 
     public static final FoodProperties COCONUT_PIE_SLICE = addEffects(new FoodProperties.Builder()
@@ -141,7 +142,7 @@ public class ModFoods{
 
     public static final FoodProperties COCONUT_JELLO = addEffects(new FoodProperties.Builder()
             .nutrition(3)
-            .saturationMod(1F).fast(),
+            .saturationMod(1F).alwaysEat().fast(),
             List.of(
                     new FoodEffectSupplier(() -> new MobEffectInstance(MobEffects.MOVEMENT_SPEED,200,0),1.0f)
             ))
@@ -149,17 +150,17 @@ public class ModFoods{
 
     public static final FoodProperties KHANOM_BABIN = addEffects(new FoodProperties.Builder()
             .nutrition(3)
-            .saturationMod(1F).fast(),List.of(
+            .saturationMod(1F).alwaysEat().fast(),List.of(
                     new FoodEffectSupplier(() -> new MobEffectInstance(MobEffects.MOVEMENT_SPEED,200,0),1.0f)
     )).build();
 
     public static final FoodProperties OMELETTE = addEffects(new FoodProperties.Builder()
-            .nutrition(12).saturationMod(0.75f),List.of(
+            .nutrition(8).saturationMod(0.4f),List.of(
                     new FoodEffectSupplier(() -> new MobEffectInstance(PlatformUtil.getComfort().get(),6000,0),1.0f)
             )).build();
 
     public static final FoodProperties BASIL_OMELETTE = addEffects(new FoodProperties.Builder()
-            .nutrition(12).saturationMod(0.75f),
+            .nutrition(8).saturationMod(0.55f),
             List.of(
                     new FoodEffectSupplier(() -> new MobEffectInstance(PlatformUtil.getComfort().get(),9600,0),1.0f))
             ).build();
@@ -171,7 +172,7 @@ public class ModFoods{
             )).build();
 
     public static final FoodProperties STEAMED_BAMBOO_SHOOT = addEffects(new FoodProperties.Builder()
-            .nutrition(10).saturationMod(0.80f),
+            .nutrition(6).saturationMod(0.60f),
             List.of(
                     new FoodEffectSupplier(() -> new MobEffectInstance(PlatformUtil.getComfort().get(),6000,0),1.0f)
             )).build();

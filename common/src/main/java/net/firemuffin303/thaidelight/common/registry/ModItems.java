@@ -270,7 +270,7 @@ public class ModItems {
     public static final Supplier<Item> BASIL_OMELETTE = registerFlatItem("basil_omelette",() -> new Item(bowlFoodItem(ModFoods.BASIL_OMELETTE)));
 
     public static final Supplier<Item> BAMBOO_SHOOT_SOUP = registerFlatItem("bamboo_shoot_soup",() -> new Item(bowlFoodItem(ModFoods.BAMBOO_SOUP)));
-    public static final Supplier<Item> STEAMED_BAMBOO_SHOOT = registerFlatItem("steamed_bamboo_shoot", () ->new Item(bowlFoodItem(ModFoods.STEAMED_BAMBOO_SHOOT)));
+    public static final Supplier<Item> STEAMED_BAMBOO_SHOOT = registerFlatItem("steamed_bamboo_shoot", () ->new Item(new Item.Properties().food(ModFoods.STEAMED_BAMBOO_SHOOT)));
 
     public static final Supplier<Item> BUTTERFLY_PEA = registerFlatItem("butterfly_pea",() -> new ItemNameBlockItem(ModBlocks.BUTTERFLY_PEA_WALL.get(),new Item.Properties()));
     //I KNOW IT'S NOT THAI. BUT THERE IS MORTAR AND BASIL IN THE SAME MOD. HOW COULD I MISS THIS OPPORTUNITY.

@@ -32,6 +32,14 @@ public class ModTagDataGen {
         @Override
         protected void addTags(HolderLookup.Provider arg) {
             // getOrCreateTagBuilder(ItemTags.PIGLIN_LOVED).add(ModItems.GOLDEN_PASTLE);
+
+            getOrCreateTagBuilder(ItemTags.LEAVES).add(
+                    ModItems.DURIAN_LEAVES.get(),
+                    ModItems.MANGO_LEAVES.get(),
+                    ModItems.PAPAYA_LEAVES.get(),
+                    ModItems.COCONUT_LEAF.get()
+            );
+
             getOrCreateTagBuilder(SPICY_FOODS).add(
                     ModItems.PEPPER.get(),
                     ModItems.SOMTAM.get(),

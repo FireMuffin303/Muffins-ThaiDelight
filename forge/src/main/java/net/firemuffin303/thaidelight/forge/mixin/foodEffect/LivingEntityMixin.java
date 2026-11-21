@@ -6,6 +6,7 @@ import net.firemuffin303.thaidelight.common.registry.ModTags;
 import net.firemuffin303.thaidelight.util.ModUtils;
 import net.firemuffin303.thaidelight.util.PlatformUtil;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -38,8 +39,8 @@ public class LivingEntityMixin {
                                       @Local(argsOnly = true)LocalRef<MobEffectInstance> mobEffectInstanceLocalRef){
         LivingEntity livingEntity = (LivingEntity)(Object)this;
         if(!mobEffectInstanceLocalRef.get().isAmbient()){
-            if(PlatformUtil.getSpicyTime(livingEntity) > 0){
-                mobEffectInstanceLocalRef.set(new MobEffectInstance(mobEffectInstance.getEffect(),mobEffectInstance.getDuration() - mobEffectInstance.getDuration()/3));
+            if(PlatformUtil.getSpicyTime(livingEntity) > 0 && mobEffectInstanceLocalRef.get().getEffect() != MobEffects.FIRE_RESISTANCE && mobEffectInstanceLocalRef.get().getDuration() != -1){
+                mobEffectInstanceLocalRef.set(new MobEffectInstance(mobEffectInstance.getEffect(),mobEffectInstance.getDuration()/2));
             }
         }
     }

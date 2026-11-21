@@ -15,11 +15,11 @@ public class RegularMortarRecipe implements MortarRecipe{
     private final ResourceLocation id;
     private final String group;
     private final NonNullList<Ingredient> ingredients;
-    private final ItemStack container;
+    private final Ingredient container;
     private final ItemStack result;
     private MortarRecipeBookTab mortarRecipeBookTab;
 
-    public RegularMortarRecipe(ResourceLocation id, String group, NonNullList<Ingredient> ingredients,ItemStack container, ItemStack result,MortarRecipeBookTab mortarRecipeBookTab) {
+    public RegularMortarRecipe(ResourceLocation id, String group, NonNullList<Ingredient> ingredients,Ingredient container, ItemStack result,MortarRecipeBookTab mortarRecipeBookTab) {
         this.id = id;
         this.group = group;
         this.ingredients = ingredients;
@@ -47,7 +47,7 @@ public class RegularMortarRecipe implements MortarRecipe{
         return this.result;
     }
 
-    public ItemStack getContainer() {
+    public Ingredient getContainer() {
         return container;
     }
 
@@ -68,7 +68,7 @@ public class RegularMortarRecipe implements MortarRecipe{
             }
         }
 
-        return i == this.ingredients.size() && stackedContents.canCraft(this,null) && this.container.is(container.getItem(5).getItem());
+        return i == this.ingredients.size() && stackedContents.canCraft(this,null) && this.container.test(container.getItem(5));
     }
 
     @Override

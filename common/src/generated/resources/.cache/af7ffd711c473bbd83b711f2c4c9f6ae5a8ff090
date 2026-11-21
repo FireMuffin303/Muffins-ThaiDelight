@@ -1,4 +1,4 @@
-// 1.20.1	2026-11-17T21:31:54.7629146	Muffin's Thai's Delight/Block Loot Tables
+// 1.20.1	2026-11-21T16:14:58.5801	Muffin's Thai's Delight/Block Loot Tables
 baf8f44d6a0bc712ca50198ee3ee4248267cb5bc data\muffins_thaidelight\loot_tables\blocks\butterfly_pea_wall.json
 8816d8efbfad01046830814d18f0c6f7fd1f984e data\muffins_thaidelight\loot_tables\blocks\budding_pepper_crop.json
 ae8f8da1b03c15d78a489435edf93bcc4ab9adb3 data\muffins_thaidelight\loot_tables\blocks\wild_basil.json
@@ -19,9 +19,9 @@ f61190521cb722b48e238b4d0598365fa89dd01b data\muffins_thaidelight\loot_tables\bl
 92c316b540dc27f853c837c931b5bd55212382bf data\muffins_thaidelight\loot_tables\blocks\mango_button.json
 2651cef580ccb99f070ab52aa31b1b75aa6e459d data\muffins_thaidelight\loot_tables\blocks\durian_slice_feast.json
 1753462938ca0d71ae1862724b34f8132c487685 data\muffins_thaidelight\loot_tables\blocks\durian_button.json
-f7ac7d4aedfcd4228bf5892ec5baa708a45b1941 data\muffins_thaidelight\loot_tables\blocks\durian_sapling.json
 11433717c0e653f0efc244c0b95c44e4c81c1ea6 data\muffins_thaidelight\loot_tables\blocks\coconut_fence_gate.json
-b99845e5d36804c5ba9c15439c96935d77fd81a9 data\muffins_thaidelight\loot_tables\blocks\hanging_durian.json
+f7ac7d4aedfcd4228bf5892ec5baa708a45b1941 data\muffins_thaidelight\loot_tables\blocks\durian_sapling.json
+881cff59ab9f1d0c768841881a7df2e7017ccf34 data\muffins_thaidelight\loot_tables\blocks\hanging_durian.json
 55245dd126b1219694eddda79c2e983178a9f9c2 data\muffins_thaidelight\loot_tables\blocks\stackable_mango_block.json
 e7459c37db3ffad0b33a6a3b30266cdcfc01d91b data\muffins_thaidelight\loot_tables\blocks\mango_sign.json
 507a4fc0b91ba1882bc6a6be8d739702ef15ce95 data\muffins_thaidelight\loot_tables\blocks\mango_trapdoor.json

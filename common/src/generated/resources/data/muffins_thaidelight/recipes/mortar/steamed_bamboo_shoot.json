@@ -1,7 +1,7 @@
 {
   "type": "muffins_thaidelight:mortar",
   "container": {
-    "item": "minecraft:bowl"
+    "tag": "minecraft:leaves"
   },
   "ingredients": [
     {
@@ -19,6 +19,7 @@
   ],
   "recipe_book_tab": "misc",
   "result": {
+    "count": 3,
     "item": "muffins_thaidelight:steamed_bamboo_shoot"
   }
 }

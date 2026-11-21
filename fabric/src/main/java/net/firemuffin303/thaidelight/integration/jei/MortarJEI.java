@@ -60,7 +60,7 @@ public class MortarJEI implements IRecipeCategory<MortarRecipe> {
             builder.addSlot(RecipeIngredientRole.INPUT,i > 1 ? 35 + Mth.clamp(i-2,0,1) *18 : 35+ i *18,i > 1 ? 22+18: 22).addIngredients(recipe.getIngredients().get(i));
         }
 
-        builder.addSlot(RecipeIngredientRole.INPUT,80,50).addIngredients(Ingredient.of(recipe.getContainer()));
+        builder.addSlot(RecipeIngredientRole.INPUT,80,50).addIngredients(recipe.getContainer());
     }
 
     @Override

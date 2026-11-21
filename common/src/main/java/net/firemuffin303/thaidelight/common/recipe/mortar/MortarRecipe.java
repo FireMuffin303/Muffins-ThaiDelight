@@ -15,7 +15,7 @@ public interface MortarRecipe extends Recipe<Container> {
 
     ItemStack getResult();
 
-    ItemStack getContainer();
+    Ingredient getContainer();
 
     MortarRecipeBookTab getRecipeBookTab();
 }

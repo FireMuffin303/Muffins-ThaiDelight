@@ -85,7 +85,8 @@ dependencies {
 
     modCompileOnly("maven.modrinth:fish-of-thieves:hI4gvof3")
     modCompileOnlyApi("mezz.jei:jei-${minecraft_version}-fabric-api:${project.jei_version}")
-    modRuntimeOnly("mezz.jei:jei-${minecraft_version}-fabric:${project.jei_version}")
+    modLocalRuntime("mezz.jei:jei-${minecraft_version}-fabric:${project.jei_version}")
+    modLocalRuntime("maven.modrinth:7tEfOcA7:lqHr1TXM")
 
     modCompileOnly "me.shedaniel:RoughlyEnoughItems-api-fabric:12.1.785"
     //modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:12.1.785"
