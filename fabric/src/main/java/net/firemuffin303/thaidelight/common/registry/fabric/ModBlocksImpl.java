@@ -86,5 +86,9 @@ public class ModBlocksImpl {
         return DurianSliceFeastBlock::new;
     }
 
+    public static Supplier<Block> createHoneyCoconutPieBlock(BlockBehaviour.Properties properties) {
+        return () -> new HoneyCoconutPieBlock(properties);
+    }
+
 
 }

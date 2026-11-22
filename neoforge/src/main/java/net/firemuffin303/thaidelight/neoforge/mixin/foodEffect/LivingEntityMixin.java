@@ -38,7 +38,7 @@ public class LivingEntityMixin {
     public void muffins$reduceIfSpicy(MobEffectInstance mobEffectInstance, Entity entity, CallbackInfoReturnable<Boolean> cir,
                                       @Local(argsOnly = true)LocalRef<MobEffectInstance> mobEffectInstanceLocalRef){
         LivingEntity livingEntity = (LivingEntity)(Object)this;
-        if(!mobEffectInstanceLocalRef.get().isAmbient() && mobEffectInstanceLocalRef.get().getEffect() != MobEffects.FIRE_RESISTANCE){
+        if(!mobEffectInstanceLocalRef.get().isAmbient() && mobEffectInstanceLocalRef.get().getEffect() != MobEffects.FIRE_RESISTANCE && mobEffectInstanceLocalRef.get().getDuration() != -1){
             if(PlatformUtil.getSpicyTime(livingEntity) > 0){
                 mobEffectInstanceLocalRef.set(new MobEffectInstance(mobEffectInstance.getEffect(),mobEffectInstance.getDuration()/2));
             }

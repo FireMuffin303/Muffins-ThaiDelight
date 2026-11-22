@@ -21,12 +21,12 @@ import java.util.stream.Stream;
 public class EMIMortarRecipe implements EmiRecipe {
     private final ResourceLocation id;
     private final List<EmiIngredient> ingredients;
-    private final EmiStack container;
+    private final EmiIngredient container;
     private final List<EmiStack> result;
 
     public EMIMortarRecipe(RecipeHolder<MortarRecipe> mortarRecipe){
         this.id = mortarRecipe.id();
-        this.container = EmiStack.of(mortarRecipe.value().getContainer());
+        this.container = EmiIngredient.of(mortarRecipe.value().getContainer());
         this.result = List.of(EmiStack.of(mortarRecipe.value().getResult()));
 
         List<EmiIngredient> list = new ArrayList<>();

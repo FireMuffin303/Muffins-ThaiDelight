@@ -32,7 +32,7 @@ public class MortarSerializer implements RecipeSerializer<RegularMortarRecipe> {
 
                    return DataResult.success(NonNullList.of(Ingredient.EMPTY,ingredients));
                },DataResult::success).forGetter(recipe -> recipe.ingredients),
-               ItemStack.STRICT_CODEC.optionalFieldOf("container",ItemStack.EMPTY).forGetter(recipe -> recipe.container),
+               Ingredient.CODEC.optionalFieldOf("container",Ingredient.EMPTY).forGetter(RegularMortarRecipe::getContainer),
                ItemStack.CODEC.fieldOf("result").forGetter(recipe -> recipe.result),
                MortarRecipeBookTab.CODEC.fieldOf("category").orElse(MortarRecipeBookTab.MISC).forGetter(recipe -> recipe.mortarRecipeBookTab)
        ).apply(instance,RegularMortarRecipe::new);
@@ -55,10 +55,8 @@ public class MortarSerializer implements RecipeSerializer<RegularMortarRecipe> {
         MortarRecipeBookTab mortarRecipeBookTab = registryFriendlyByteBuf.readEnum(MortarRecipeBookTab.class);
         int i = registryFriendlyByteBuf.readVarInt();
         NonNullList<Ingredient> nonNullList = NonNullList.withSize(i, Ingredient.EMPTY);
-        nonNullList.replaceAll((ingredient) -> {
-            return (Ingredient)Ingredient.CONTENTS_STREAM_CODEC.decode(registryFriendlyByteBuf);
-        });
-        ItemStack container = ItemStack.OPTIONAL_STREAM_CODEC.decode(registryFriendlyByteBuf);
+        nonNullList.replaceAll((ingredient) -> Ingredient.CONTENTS_STREAM_CODEC.decode(registryFriendlyByteBuf));
+        Ingredient container = Ingredient.CONTENTS_STREAM_CODEC.decode(registryFriendlyByteBuf);
         ItemStack result = ItemStack.STREAM_CODEC.decode(registryFriendlyByteBuf);
         return new RegularMortarRecipe(group,nonNullList, container,result,mortarRecipeBookTab);
     }
@@ -72,7 +70,7 @@ public class MortarSerializer implements RecipeSerializer<RegularMortarRecipe> {
             Ingredient.CONTENTS_STREAM_CODEC.encode(registryFriendlyByteBuf, ingredient);
         }
 
-        ItemStack.OPTIONAL_STREAM_CODEC.encode(registryFriendlyByteBuf, mortarRecipe.container);
+        Ingredient.CONTENTS_STREAM_CODEC.encode(registryFriendlyByteBuf, mortarRecipe.getContainer());
         ItemStack.STREAM_CODEC.encode(registryFriendlyByteBuf, mortarRecipe.result);
     }
 }

@@ -65,7 +65,8 @@ public class ModBlockTagDataGen extends FabricTagProvider.BlockTagProvider {
                 ModBlocks.DURIAN_BLOCK.get(),
                 ModBlocks.DURIAN_PEEL_BLOCK.get(),
                 ModBlocks.COCONUT.get(),
-                ModBlocks.STRIPPED_COCONUT.get()
+                ModBlocks.STRIPPED_COCONUT.get(),
+                ModBlocks.HANGING_DURIAN.get()
         );
 
         getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_PICKAXE)
@@ -164,13 +165,11 @@ public class ModBlockTagDataGen extends FabricTagProvider.BlockTagProvider {
                 ModBlocks.PINK_CANDLE_DURIAN_CAKE.get()
         );
 
-        /*
-        getOrCreateTagBuilder(vectorwing.farmersdelight.common.tag.ModTags.WILD_CROPS).add(
+
+        getOrCreateTagBuilder(vectorwing.farmersdelight.common.tag.ModTags.Blocks.WILD_CROPS).add(
                 ModBlocks.WILD_BASIL.get(),
                 ModBlocks.WILD_PEPPER_CROP.get()
         );
-
-         */
 
         getOrCreateTagBuilder(SPRING_CROPS).add(
                 ModBlocks.LIME_SAPLING.get(),

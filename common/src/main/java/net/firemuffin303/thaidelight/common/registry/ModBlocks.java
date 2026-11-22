@@ -570,7 +570,7 @@ public class ModBlocks {
 
     public static final RegistryHolder<Block> MANGO_CHEESECAKE = register("mango_cheesecake",createPieBlock(BlockBehaviour.Properties.ofFullCopy(CAKE), ModItems.MANGO_CHEESECAKE_SLICE));
     public static final RegistryHolder<Block> COCONUT_PIE = register("coconut_pie",createCoconutPieBlock());
-    public static final RegistryHolder<Block> HONEY_COCONUT_PIE = register("honey_coconut_pie",createPieBlock(BlockBehaviour.Properties.ofFullCopy(CAKE),ModItems.HONEY_COCONUT_PIE_SLICE));
+    public static final RegistryHolder<Block> HONEY_COCONUT_PIE = register("honey_coconut_pie",createHoneyCoconutPieBlock(BlockBehaviour.Properties.ofFullCopy(CAKE)));
 
     public static final RegistryHolder<Block> PHAT_KAPHRAO_FEAST = register("phat_kaphrao_feast",createPhatKaphraoBlock());
     public static final RegistryHolder<Block> MANGO_STICKY_RICE_FEAST = register("mango_sticky_rice_feast",createMangoStickyRiceBlock());
@@ -670,6 +670,11 @@ public class ModBlocks {
 
     @ExpectPlatform
     public static Supplier<Block> createPieBlock(BlockBehaviour.Properties properties, Supplier<Item> supplier){
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static Supplier<Block> createHoneyCoconutPieBlock(BlockBehaviour.Properties properties){
         throw new AssertionError();
     }
 

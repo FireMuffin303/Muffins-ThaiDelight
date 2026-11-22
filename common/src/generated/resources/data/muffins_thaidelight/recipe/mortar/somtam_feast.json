@@ -2,8 +2,7 @@
   "type": "muffins_thaidelight:mortar",
   "category": "meals",
   "container": {
-    "count": 1,
-    "id": "minecraft:bowl"
+    "item": "minecraft:bowl"
   },
   "group": "",
   "ingredients": [

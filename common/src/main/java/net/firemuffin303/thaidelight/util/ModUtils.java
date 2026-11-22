@@ -107,7 +107,6 @@ public class ModUtils {
             }
         }
 
-        LogUtils.getLogger().info("{}",i);
         PlatformUtil.addSpicyTime(i,livingEntity);
     }
 

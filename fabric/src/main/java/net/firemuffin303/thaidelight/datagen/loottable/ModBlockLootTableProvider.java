@@ -18,12 +18,13 @@ import net.firemuffin303.thaidelight.common.block.vegetations.pepper.PepperCropB
 import net.firemuffin303.thaidelight.common.registry.ModBlockEntityTypes;
 import net.firemuffin303.thaidelight.common.registry.ModBlocks;
 import net.firemuffin303.thaidelight.common.registry.ModItems;
-import net.minecraft.advancements.critereon.StatePropertiesPredicate;
+import net.minecraft.advancements.critereon.*;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.data.loot.packs.VanillaBlockLoot;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Items;
@@ -44,6 +45,7 @@ import net.minecraft.world.level.storage.loot.functions.*;
 import net.minecraft.world.level.storage.loot.predicates.BonusLevelTableCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
+import net.minecraft.world.level.storage.loot.predicates.MatchTool;
 import net.minecraft.world.level.storage.loot.providers.nbt.ContextNbtProvider;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
@@ -157,7 +159,14 @@ public class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
                                         .hasProperty(HangingDurianBlock.AGE,1)
                                 )
                         )
-                        .add(LootItem.lootTableItem(ModItems.DURIAN.get()))
+                        .add(LootItem.lootTableItem(ModItems.DURIAN.get())
+                                .when(this.hasSilkTouch())
+                                .otherwise(this.applyExplosionDecay(block,LootItem.lootTableItem(ModItems.DURIAN_PULP.get())
+                                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(2,3)))
+                                        .apply(ApplyBonusCount.addUniformBonusCount(registryLookup.getOrThrow(Enchantments.FORTUNE)))
+                                        .apply(LimitCount.limitCount(IntRange.upperBound(4)))
+                                ))
+                        )
                 )
 
         );

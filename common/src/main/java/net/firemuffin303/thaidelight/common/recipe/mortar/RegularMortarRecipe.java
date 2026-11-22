@@ -18,19 +18,14 @@ import java.util.Optional;
 public class RegularMortarRecipe implements MortarRecipe{
     protected final String group;
     protected final NonNullList<Ingredient> ingredients;
-    protected final ItemStack container;
+    private final Ingredient container;
     protected final ItemStack result;
     protected MortarRecipeBookTab mortarRecipeBookTab;
 
-    public RegularMortarRecipe(String group, NonNullList<Ingredient> ingredients,ItemStack container, ItemStack result,MortarRecipeBookTab mortarRecipeBookTab) {
+    public RegularMortarRecipe(String group, NonNullList<Ingredient> ingredients,Ingredient container, ItemStack result,MortarRecipeBookTab mortarRecipeBookTab) {
         this.group = group;
         this.ingredients = ingredients;
-
-        if(container.isEmpty()){
-            this.container = ItemStack.EMPTY;
-        }else{
-            this.container = container;
-        }
+        this.container = container;
         this.result = result;
         this.mortarRecipeBookTab = mortarRecipeBookTab;
     }
@@ -50,7 +45,7 @@ public class RegularMortarRecipe implements MortarRecipe{
         return this.result;
     }
 
-    public ItemStack getContainer() {
+    public Ingredient getContainer() {
         return this.container;
     }
 
@@ -75,7 +70,7 @@ public class RegularMortarRecipe implements MortarRecipe{
             }
         }
 
-        return i == this.ingredients.size() && stackedContents.canCraft(this,null) && this.container.is(recipeInput.getItem(4).getItem());
+        return i == this.ingredients.size() && stackedContents.canCraft(this,null) && this.container.test(recipeInput.getItem(4));
     }
 
     @Override

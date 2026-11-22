@@ -38,9 +38,9 @@ public class MortarRecipeBookComponent extends RecipeBookComponent {
         }
 
         if (recipe.value() instanceof MortarRecipe mortarRecipe) {
-            ItemStack containerStack = mortarRecipe.getContainer();
+            Ingredient containerStack = mortarRecipe.getContainer();
             if (!containerStack.isEmpty()) {
-                this.ghostRecipe.addIngredient(Ingredient.of(containerStack), (slots.get(4)).x, (slots.get(4)).y);
+                this.ghostRecipe.addIngredient(containerStack, (slots.get(4)).x, (slots.get(4)).y);
             }
 
         }

@@ -14,7 +14,7 @@ public class MortarREIDisplay extends BasicDisplay {
     private EntryIngredient container;
 
     public MortarREIDisplay(RecipeHolder<MortarRecipe> mortarRecipe) {
-        this(EntryIngredients.ofIngredients(mortarRecipe.value().getIngredients()), List.of(EntryIngredients.of(mortarRecipe.value().getResult())),EntryIngredients.of(mortarRecipe.value().getContainer()));
+        this(EntryIngredients.ofIngredients(mortarRecipe.value().getIngredients()), List.of(EntryIngredients.of(mortarRecipe.value().getResult())),EntryIngredients.ofIngredient(mortarRecipe.value().getContainer()));
     }
 
     public MortarREIDisplay(List<EntryIngredient> inputs, List<EntryIngredient> outputs,EntryIngredient container){

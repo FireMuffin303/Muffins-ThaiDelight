@@ -29,6 +29,14 @@ public class ModTagDataGen {
         @Override
         protected void addTags(HolderLookup.Provider arg) {
             // getOrCreateTagBuilder(ItemTags.PIGLIN_LOVED).add(ModItems.GOLDEN_PASTLE);
+
+            getOrCreateTagBuilder(ItemTags.LEAVES).add(
+                    ModItems.DURIAN_LEAVES.get(),
+                    ModItems.MANGO_LEAVES.get(),
+                    ModItems.PAPAYA_LEAVES.get(),
+                    ModItems.COCONUT_LEAF.get()
+            );
+
             getOrCreateTagBuilder(SPICY_FOODS).add(
                     ModItems.PEPPER.get(),
                     ModItems.SOMTAM.get(),
@@ -225,15 +233,15 @@ public class ModTagDataGen {
             getOrCreateTagBuilder(ItemTags.HANGING_SIGNS)
                     .add(ModItems.DURIAN_HANGING_SIGN.get(),ModItems.MANGO_HANGING_SIGN.get(),ModItems.COCONUT_HANGING_SIGN.get());
 
-            /*
-            getOrCreateTagBuilder(vectorwing.farmersdelight.common.tag.ModTags.WOODEN_CABINETS)
+
+            getOrCreateTagBuilder(vectorwing.farmersdelight.common.tag.ModTags.Items.CABINETS_WOODEN)
                     .add(ModItems.DURIAN_CABINET.get(),ModItems.MANGO_CABINET.get(),ModItems.COCONUT_CABINET.get());
 
 
 
-            getOrCreateTagBuilder(vectorwing.farmersdelight.common.tag.ModTags.WILD_CROPS_ITEM)
+            getOrCreateTagBuilder(vectorwing.farmersdelight.common.tag.ModTags.Items.WILD_CROPS)
                     .add(ModItems.WILD_PEPPER_CROP.get(),ModItems.WILD_BASIL.get());
-*/
+
             getOrCreateTagBuilder(CROPS).add(
                     ModItems.PEPPER.get(),
                     ModItems.LIME.get(),

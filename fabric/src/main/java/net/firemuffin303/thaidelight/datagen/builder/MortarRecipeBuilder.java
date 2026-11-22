@@ -29,7 +29,7 @@ import java.util.function.Consumer;
 
 public class MortarRecipeBuilder implements RecipeBuilder {
     private final List<Ingredient> ingredients = Lists.newArrayList();
-    private Item container;
+    private Ingredient container = Ingredient.EMPTY;
     private final Item result;
     private final int count;
     private MortarRecipeBookTab mortarRecipeBookTab = MortarRecipeBookTab.MISC;
@@ -103,7 +103,11 @@ public class MortarRecipeBuilder implements RecipeBuilder {
     }
 
     public MortarRecipeBuilder container(ItemLike itemLike){
-        this.container = itemLike.asItem();
+        return container(Ingredient.of(itemLike));
+    }
+
+    public MortarRecipeBuilder container(Ingredient ingredient){
+        this.container = ingredient;
         return this;
     }
 
@@ -120,7 +124,7 @@ public class MortarRecipeBuilder implements RecipeBuilder {
         NonNullList<Ingredient> ingredients1 = NonNullList.create();
         ingredients1.addAll(this.ingredients);
 
-        RegularMortarRecipe recipe = new RegularMortarRecipe(Objects.requireNonNullElse(this.group,""),ingredients1,this.container == null ? ItemStack.EMPTY : new ItemStack(this.container),new ItemStack(this.result,this.count),this.mortarRecipeBookTab);
+        RegularMortarRecipe recipe = new RegularMortarRecipe(Objects.requireNonNullElse(this.group,""),ingredients1,this.container,new ItemStack(this.result,this.count),this.mortarRecipeBookTab);
 
         recipeOutput.accept(resourceLocation,recipe,builder.build(resourceLocation.withPrefix("recipes/")));
 
